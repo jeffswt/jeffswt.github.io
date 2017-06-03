@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj3106: [cqoi2013]棋盘游戏&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj3106: [cqoi2013]棋盘游戏
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=CQOI2013" target="_self">
+            <i class="fa fa-tag"></i> CQOI2013
+          </a>
+          <a class="tag" href="/blog/archive/?q=Brute Force Search" target="_self">
+            <i class="fa fa-tag"></i> Brute Force Search
+          </a>
+          <a class="tag" href="/blog/archive/?q=Strategic Theory" target="_self">
+            <i class="fa fa-tag"></i> Strategic Theory
+          </a>
+          <a class="tag" href="/blog/archive/?q=Logic" target="_self">
+            <i class="fa fa-tag"></i> Logic
+          </a>
+        </span>
+        <span class="date" title="19:12:59 | 3 December, 2016">
+          3 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>一个 <span class="math inline">\(n \times n (n \leq 2)\)</span> 棋盘上有黑白棋子各一枚. 游戏者 A 和 B 轮流移动棋子, A 先走.</p>
+<ul>
+<li>A 的移动规则: 只能移动白棋子. 可以往上下左右四个方向之一移动一格.</li>
+<li>B 的移动规则: 只能移动黑棋子. 可以往上下左右四个方向之一移动一格或者两格.</li>
+</ul>
+<p>和通常的 “吃子” 规则一样, 当某游戏者把自己的棋子移动到对方棋子所在的格子时, 他就 赢了. 两个游戏者都很聪明, 当可以获胜时会尽快获胜, 只能输掉的时候会尽量拖延时间. 你的任务是判断谁会赢, 需要多少回合.</p>
+<p>比如 <span class="math inline">\(n=2\)</span>, 白棋子在 <span class="math inline">\((1,1)\)</span>, 黑棋子在 <span class="math inline">\((2,2)\)</span>, 那么虽然 A 有两种走法, 第二个回合 B 总能取胜.</p>
+<h2 id="input">Input</h2>
+<p>输入仅一行, 包含五个整数 <span class="math inline">\(n, r_1, c_1, r_2, c_2\)</span>, 即棋盘大小和棋子位置. 白色棋子 在 <span class="math inline">\((r_1,c_1)\)</span>, 黑色棋子在 <span class="math inline">\((r_2,c_2)\)</span>. 黑白棋子的位置保证不相同.</p>
+<h2 id="output">Output</h2>
+<p>输出仅一行, 即游戏结果. 如果 A 获胜, 输出 <code>WHITE x</code>; 如果 B 获胜, 输出 <code>BLACK x</code>; 如果二者都没有必胜策略, 输出 <code>DRAW</code>.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>2 1 1 2 2</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>BLACK 2</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于 100% 的数据, 保证 <span class="math inline">\(1 \leq r_1, c_1, r_2, c_2 \leq n \leq 20\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>大家是不是觉得 A 很惨......</p>
+<p>首先当两个人开始杠的时候 (就是面对面), B 肯定占优势. 因为如果 A 要往一个方向挪的 时候, B 肯定可以把他挡住, 然后还可以从旁边绕过去. 但是如果 A 可以堵住他的话 (不然 B 就一定赢了), A 肯定会想方设法让游戏无限玩下去</p>
+<p>如果 A 挡不住 B, 则 B 跑的比谁都快, 然后马上就可以窜到 A 的大本营里</p>
+<p>综上总是不会出现平局~</p>
+<p>然后由于 A 比较弱, 所以只有在 A 离 B 一格时 (B 先走, 然后把自己的地方让开, A 见缝插针 赢掉这场比赛), A 才有可能赢, 不然总是 B.</p>
+<p>然后记忆化暴力搜索一下就可以了.</p>
+<p>话说为什么我把这道题一本正经地交到 3107 的位置上去了还 WA 了两次 233~</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">22</span>;
+<span class="dt">const</span> <span class="dt">int</span> infinit = <span class="bn">0x003f3f3f</span>;
+
+<span class="dt">int</span> n, x1, y1, x2, y2;
+<span class="dt">int</span> dp_arr[<span class="dv">2</span>][<span class="dv">3</span> * maxn][maxn][maxn][maxn][maxn];
+
+<span class="ot">#define maximize(__x,__y) __x=max(__x,__y)</span>
+<span class="ot">#define minimize(__x,__y) __x=min(__x,__y)</span>
+<span class="ot">#define maximize_res(__y) maximize(res,__y)</span>
+<span class="ot">#define minimize_res(__y) minimize(res,__y)</span>
+<span class="dt">int</span> dfs(<span class="dt">int</span> x, <span class="dt">int</span> y, <span class="dt">int</span> a, <span class="dt">int</span> b, <span class="dt">int</span> c, <span class="dt">int</span> d)
+{
+    <span class="co">// Too long a distance went, impossible to be determined</span>
+    <span class="kw">if</span> (y &gt; <span class="dv">3</span> * n)
+        <span class="kw">return</span> infinit;
+    <span class="co">// Successive reach / Duplication</span>
+    <span class="kw">if</span> (a == c &amp;&amp; b == d) {
+        <span class="kw">if</span> (x == <span class="dv">1</span>) <span class="co">// White has reached the target, an infinite loop</span>
+            <span class="kw">return</span> infinit;
+        <span class="kw">return</span> <span class="dv">0</span>;
+    }
+    <span class="co">// Lazy evaluation tricks</span>
+    <span class="kw">if</span> (dp_arr[x][y][a][b][c][d])
+        <span class="kw">return</span> dp_arr[x][y][a][b][c][d];
+    <span class="co">// About to check on the states</span>
+    <span class="dt">int</span> res = <span class="dv">0</span>;
+    <span class="kw">if</span> (x == <span class="dv">0</span>) {
+        res = <span class="dv">0</span>; <span class="co">// Finding maximum depth</span>
+        <span class="kw">if</span> (a &gt; <span class="dv">1</span>)     maximize_res( dfs(<span class="dv">1</span>, y + <span class="dv">1</span>, a - <span class="dv">1</span>, b, c, d) );
+        <span class="kw">if</span> (a &lt; n)     maximize_res( dfs(<span class="dv">1</span>, y + <span class="dv">1</span>, a + <span class="dv">1</span>, b, c, d) );
+        <span class="kw">if</span> (b &gt; <span class="dv">1</span>)     maximize_res( dfs(<span class="dv">1</span>, y + <span class="dv">1</span>, a, b - <span class="dv">1</span>, c, d) );
+        <span class="kw">if</span> (b &lt; n)     maximize_res( dfs(<span class="dv">1</span>, y + <span class="dv">1</span>, a, b + <span class="dv">1</span>, c, d) ); <span class="co">// This could have been '&gt;'</span>
+    } <span class="kw">else</span> <span class="kw">if</span> (x == <span class="dv">1</span>) {
+        res = infinit; <span class="co">// Finding minimum depth</span>
+        <span class="kw">if</span> (c &gt; <span class="dv">1</span>)     minimize_res( dfs(<span class="dv">0</span>, y + <span class="dv">1</span>, a, b, c - <span class="dv">1</span>, d) );
+        <span class="kw">if</span> (c &gt; <span class="dv">2</span>)     minimize_res( dfs(<span class="dv">0</span>, y + <span class="dv">1</span>, a, b, c - <span class="dv">2</span>, d) );
+        <span class="kw">if</span> (c &lt; n)     minimize_res( dfs(<span class="dv">0</span>, y + <span class="dv">1</span>, a, b, c + <span class="dv">1</span>, d) );
+        <span class="kw">if</span> (c &lt; n - <span class="dv">1</span>) minimize_res( dfs(<span class="dv">0</span>, y + <span class="dv">1</span>, a, b, c + <span class="dv">2</span>, d) );
+        <span class="kw">if</span> (d &gt; <span class="dv">1</span>)     minimize_res( dfs(<span class="dv">0</span>, y + <span class="dv">1</span>, a, b, c, d - <span class="dv">1</span>) );
+        <span class="kw">if</span> (d &gt; <span class="dv">2</span>)     minimize_res( dfs(<span class="dv">0</span>, y + <span class="dv">1</span>, a, b, c, d - <span class="dv">2</span>) );
+        <span class="kw">if</span> (d &lt; n)     minimize_res( dfs(<span class="dv">0</span>, y + <span class="dv">1</span>, a, b, c, d + <span class="dv">1</span>) );
+        <span class="kw">if</span> (d &lt; n - <span class="dv">1</span>) minimize_res( dfs(<span class="dv">0</span>, y + <span class="dv">1</span>, a, b, c, d + <span class="dv">2</span>) );
+    }
+    <span class="co">// Needs a depth update</span>
+    res++;
+    dp_arr[x][y][a][b][c][d] = res;
+    <span class="kw">return</span> res;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d%d%d%d</span><span class="st">"</span>, &amp;n, &amp;x1, &amp;y1, &amp;x2, &amp;y2);
+    <span class="co">// That is sufficient for a white node to achieve target</span>
+    <span class="kw">if</span> (abs(x2 - x1) + abs(y2 - y1) &lt;= <span class="dv">1</span>)
+        printf(<span class="st">"WHITE 1</span><span class="ch">\n</span><span class="st">"</span>);
+    <span class="kw">else</span>
+        printf(<span class="st">"BLACK </span><span class="ch">%d\n</span><span class="st">"</span>, dfs(<span class="dv">0</span>, <span class="dv">0</span>, x1, y1, x2, y2));
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj3106/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj3106/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj3106/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj3106/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj3106">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

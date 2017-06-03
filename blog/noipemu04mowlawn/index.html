@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NOIP-EMU-140524-mowlawn 修剪草坪&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          NOIP-EMU-140524-mowlawn 修剪草坪
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOIP Emulation" target="_self">
+            <i class="fa fa-tag"></i> NOIP Emulation
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+        </span>
+        <span class="date" title="21:28:00 | 21 November, 2016">
+          21 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="修剪草坪-mowlawn.cppcpas">修剪草坪 (mowlawn. cpp/c/pas)</h2>
+<h3 id="题目描述">题目描述</h3>
+<p>在一年前赢得了小镇的最佳草坪比赛后, FJ 变得很懒, 再也没有修剪过草坪. 现在, 新一轮的最佳草坪比赛又开始了, FJ 希望能够再次夺冠.</p>
+<p>然而, FJ 的草坪非常脏乱, 因此, FJ 只能够让他的奶牛来完成这项工作. FJ 有 <span class="math inline">\(N (1 \leq N \leq 100,000)\)</span> 只排成一排的奶牛, 编号为 1...... N. 每只奶牛的效率是不同的, 奶牛 i 的效率为 <span class="math inline">\(E_i (0 \leq E_i \leq 10^9)\)</span>.</p>
+<p>靠近的奶牛们很熟悉, 因此, 如果 FJ 安排超过 <span class="math inline">\(K (1 \leq K \leq N)\)</span> 只连续的奶牛, 那么, 这些奶牛就会罢工去开派对:) . 因此, 现在 FJ 需要你的帮助, 计算 FJ 可以得到的最大效 率, 并且该方案中没有连续的超过 K 只奶牛.</p>
+<h3 id="输入格式">输入格式</h3>
+<p>第一行: 空格隔开的两个整数 N 和 K</p>
+<p>第二到 N+1 行: 第 i+1 行有一个整数 E_i</p>
+<h3 id="输出格式">输出格式</h3>
+<p>第一行: 一个值, 表示 FJ 可以得到的最大的效率值.</p>
+<!-- More -->
+<h3 id="样例输入">样例输入</h3>
+<pre><code>5 2
+1
+2
+3
+4
+5</code></pre>
+<h3 id="样例输出">样例输出</h3>
+<pre><code>12</code></pre>
+<h3 id="输入解释">输入解释</h3>
+<p>FJ 有 5 只奶牛, 他们的效率为 1, 2, 3, 4, 5. 他们希望选取效率总和最大的奶牛, 但是 他不能选取超过 2 只连续的奶牛</p>
+<p>FJ 可以选择除了第三只以外的其他奶牛, 总的效率为 1+2+4+5=12.</p>
+<h3 id="explanation">Explanation</h3>
+<p>似乎直接 DP 带一下优化就可以过差不多一半的分了.</p>
+<p>更高的解请自行参见 hzwer 的源代码或 Google USACO.</p>
+<p><strong>40 分解法:</strong></p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">100100</span>;
+
+<span class="dt">int</span> n, K;
+lli E[maxn], sum_d[maxn], dp[maxn];
+<span class="ot">#define sum(_l,_r) (sum_d[_r]-sum_d[(_l)-1])</span>
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;K);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;E[i]);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        sum_d[i] = sum_d[i - <span class="dv">1</span>] + E[i];
+    dp[<span class="dv">1</span>] = E[<span class="dv">1</span>];
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>; i &lt;= n; i++) {
+        <span class="kw">if</span> (i &lt;= K)
+            dp[i] = sum(<span class="dv">1</span>, i);
+        <span class="kw">for</span> (<span class="dt">int</span> j = max(<span class="dv">0</span>, i - K - <span class="dv">1</span>); j &lt;= n - <span class="dv">1</span>; j++)
+            dp[i] = max(dp[i], dp[j] + sum(j + <span class="dv">2</span>, i));
+    }
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, dp[n]);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<h3 id="source-code">Source Code</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include&lt;iostream&gt;</span>
+<span class="ot">#include&lt;cstdio&gt;</span>
+<span class="ot">#include&lt;algorithm&gt;</span>
+<span class="ot">#include&lt;cmath&gt;</span>
+<span class="ot">#include&lt;cstring&gt;</span>
+<span class="ot">#define ll long long</span>
+<span class="ot">#define linf 99999999999999LL</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">inline</span> <span class="dt">int</span> read()
+{
+    <span class="dt">int</span> x=<span class="dv">0</span>,f=<span class="dv">1</span>;<span class="dt">char</span> ch=getchar();
+    <span class="kw">while</span>(ch&lt;<span class="st">'0'</span>||ch&gt;<span class="st">'9'</span>){<span class="kw">if</span>(ch==<span class="st">'-'</span>)f=<span class="dv">-1</span>;ch=getchar();}
+    <span class="kw">while</span>(ch&gt;=<span class="st">'0'</span>&amp;&amp;ch&lt;=<span class="st">'9'</span>){x=x*<span class="dv">10</span>+ch-<span class="st">'0'</span>;ch=getchar();}
+    <span class="kw">return</span> x*f;
+}
+<span class="dt">int</span> n,K,l,r;
+ll ans,mn=linf,f[<span class="dv">100005</span>];
+<span class="dt">int</span> e[<span class="dv">100005</span>];
+<span class="kw">struct</span> data{<span class="dt">int</span> num;ll v;}q[<span class="dv">100005</span>];
+<span class="dt">int</span> main()
+{
+    freopen(<span class="st">"mowlawn.in"</span>,<span class="st">"r"</span>,stdin);
+    freopen(<span class="st">"mowlawn.out"</span>,<span class="st">"w"</span>,stdout);
+    n=read();K=read();
+    <span class="kw">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;i++)
+        e[i]=read(),ans+=e[i];
+    <span class="kw">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;i++)
+    {
+        f[i]=e[i]+q[l].v;
+        <span class="kw">while</span>(q[r].v&gt;f[i]&amp;&amp;l&lt;=r)r--;
+        q[++r].v=f[i];
+        q[r].num=i;
+        <span class="kw">while</span>(q[l].num&lt;i-K)l++;
+    }
+    <span class="kw">for</span>(<span class="dt">int</span> i=n-K;i&lt;=n;i++)
+        mn=min(mn,f[i]);
+    printf(<span class="st">"</span><span class="ch">%I64d</span><span class="st">"</span>,ans-mn);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/noipemu04mowlawn/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/noipemu04mowlawn/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/noipemu04mowlawn/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/noipemu04mowlawn/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="noipemu04mowlawn">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

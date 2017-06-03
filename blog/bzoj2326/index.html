@@ -1,0 +1,217 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj2326: [HNOI2011]数学作业&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj2326: [HNOI2011]数学作业
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=HNOI2011" target="_self">
+            <i class="fa fa-tag"></i> HNOI2011
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+          <a class="tag" href="/blog/archive/?q=Matrix Multiplication" target="_self">
+            <i class="fa fa-tag"></i> Matrix Multiplication
+          </a>
+          <a class="tag" href="/blog/archive/?q=Fast Exponentiation" target="_self">
+            <i class="fa fa-tag"></i> Fast Exponentiation
+          </a>
+        </span>
+        <span class="date" title="00:32:31 | 7 April, 2017">
+          7 April, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>小 C 数学成绩优异, 于是老师给小 C 留了一道非常难的数学作业题:</p>
+<p>给定正整数 <span class="math inline">\(n, m\)</span>, 要求计算 <span class="math inline">\(concatenate(1 \ldots n) \bmod m\)</span> 的值, 其中 <span class="math inline">\(concatenate(1 \ldots n)\)</span> 是将所有正整数 <span class="math inline">\(1, 2, \ldots n\)</span> 顺序连接起来得到的数. 例如,<span class="math inline">\(n = 13\)</span>, 则 <span class="math inline">\(concatenate(1 \ldots n) = 12345678910111213\)</span>.</p>
+<p>小 C 想了大半天终于意识到这是一道不可能手算出来的题目, 于是他只好向你求助, 希望你能编写一个程序帮他解决这个问题.</p>
+<h2 id="input">Input</h2>
+<p>输入文件只有一行且为用空格隔开的两个正整数 <span class="math inline">\(n, m\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>输出仅包含一个非负整数, 表示 <span class="math inline">\(concatenate(1 \ldots n) \bmod m\)</span> 的值.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>12345678910 1000000000</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>345678910</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有的数据, 满足:<span class="math inline">\(1 \leq n \leq 10^{18}, 1 \leq m \leq 10^9\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<p>首先考虑 <span class="math inline">\(O(n)\)</span> 的做法, 我们发现这个实在是太有规律了, 因为每一次都可以用上一次的结果来进行动规, 所以完全只依赖于上一个结果. 虽然对于 <span class="math inline">\(10^{18}\)</span> 的数据无法通过, 但是拥有了这个性质,<span class="math inline">\(O(\log n)\)</span> 的做法就比较显然了.</p>
+<p>我们可以构造矩阵来进行优化, 具体地来说, 做法是这样的: 考虑答案矩阵 <span class="math inline">\(A\)</span>, 我们将 <span class="math inline">\(n\)</span> 分成若干段, 这些段上每一段对应的数字在十进制中位数都应该相同. 得到了这个性质, 我们便需要对每一段进行矩阵乘法.</p>
+<p>我们记每一次的位数为 <span class="math inline">\(t\)</span>, 则相应地, 答案矩阵的计算方法为:<span class="math display">\[
+A = \prod_{t=1}^{\left\lfloor \lg n \right\rfloor}
+\begin{bmatrix}
+10^t &amp; 0 &amp; 0\\
+1 &amp; 1 &amp; 0\\
+1 &amp; 1 &amp; 1
+\end{bmatrix}^{9 \times 10^{t-1}}
+\cdot
+\begin{bmatrix}
+10^{\left\lfloor \lg n \right\rfloor + 1} &amp; 0 &amp; 0\\
+1 &amp; 1 &amp; 0\\
+1 &amp; 1 &amp; 1
+\end{bmatrix}^{n - \left\lfloor \lg n \right\rfloor + 1}
+\]</span> 中间可能有一些东西不是特别好推, 但是递推迭代时候比在公式里好写......</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="co">/* const */</span> lli modr = <span class="dv">1000000007</span>;
+
+lli mul(lli a, lli b)
+{
+    lli c = <span class="dv">0</span>;
+    <span class="kw">for</span> (; b &gt; <span class="dv">0</span>; a = (a + a) % modr, b &gt;&gt;= <span class="dv">1</span>)
+        <span class="kw">if</span> (b &amp; <span class="dv">1</span>) c = (c + a) % modr;
+    <span class="kw">return</span> c;
+}
+
+<span class="kw">struct</span> matrix {
+    lli dat[<span class="dv">4</span>][<span class="dv">4</span>];
+    matrix(<span class="dt">void</span>) {
+        memset(dat, <span class="dv">0</span>, <span class="kw">sizeof</span>(dat)); }
+    matrix(lli v) { memset(dat, <span class="dv">0</span>, <span class="kw">sizeof</span>(dat));
+        dat[<span class="dv">1</span>][<span class="dv">1</span>] = dat[<span class="dv">2</span>][<span class="dv">2</span>] = dat[<span class="dv">3</span>][<span class="dv">3</span>] = v; }
+    matrix(lli _1, lli _2, lli _3, lli _4, lli _5, lli _6, lli _7, lli _8, lli _9) {
+        dat[<span class="dv">1</span>][<span class="dv">1</span>] = _1 % modr, dat[<span class="dv">1</span>][<span class="dv">2</span>] = _2 % modr, dat[<span class="dv">1</span>][<span class="dv">3</span>] = _3 % modr;
+        dat[<span class="dv">2</span>][<span class="dv">1</span>] = _4 % modr, dat[<span class="dv">2</span>][<span class="dv">2</span>] = _5 % modr, dat[<span class="dv">2</span>][<span class="dv">3</span>] = _6 % modr;
+        dat[<span class="dv">3</span>][<span class="dv">1</span>] = _7 % modr, dat[<span class="dv">3</span>][<span class="dv">2</span>] = _8 % modr, dat[<span class="dv">3</span>][<span class="dv">3</span>] = _9 % modr; }
+    lli* <span class="kw">operator</span>[] (<span class="dt">int</span> x) {
+        <span class="kw">return</span> dat[x]; }
+    <span class="dt">void</span> print(<span class="dt">void</span>) {
+        printf(<span class="st">"[ </span><span class="ch">%lld\t%lld\t%lld</span><span class="st"> ]</span><span class="ch">\n</span><span class="st">| </span><span class="ch">%lld\t%lld\t%lld</span><span class="st"> |</span><span class="ch">\n</span><span class="st">[ </span><span class="ch">%lld\t%lld\t%lld</span><span class="st"> ]</span><span class="ch">\n\n</span><span class="st">"</span>,
+        dat[<span class="dv">1</span>][<span class="dv">1</span>], dat[<span class="dv">1</span>][<span class="dv">2</span>], dat[<span class="dv">1</span>][<span class="dv">3</span>], dat[<span class="dv">2</span>][<span class="dv">1</span>], dat[<span class="dv">2</span>][<span class="dv">2</span>], dat[<span class="dv">2</span>][<span class="dv">3</span>],
+        dat[<span class="dv">3</span>][<span class="dv">1</span>], dat[<span class="dv">3</span>][<span class="dv">2</span>], dat[<span class="dv">3</span>][<span class="dv">3</span>]); }
+}; matrix <span class="kw">operator</span> * (matrix a, matrix b) {
+    matrix c;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">3</span>; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= <span class="dv">3</span>; j++) {
+            c[i][j] = <span class="dv">0</span>;
+            <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= <span class="dv">3</span>; k++)
+                c[i][j] = (c[i][j] + mul(a[i][k], b[k][j])) % modr;
+        }
+    <span class="kw">return</span> c;
+} matrix <span class="kw">operator</span> + (matrix a, matrix b) {
+    matrix c;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">3</span>; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= <span class="dv">3</span>; j++)
+            c[i][j] = (a[i][j] + b[i][j]) % modr;
+    <span class="kw">return</span> c;
+} matrix qpow(matrix a, lli b) {
+    matrix c(<span class="dv">1</span>);
+    <span class="kw">for</span> (; b &gt; <span class="dv">0</span>; a = a * a, b &gt;&gt;= <span class="dv">1</span>) {
+        <span class="kw">if</span> (b &amp; <span class="dv">1</span>)
+            c = c * a;
+    }
+    <span class="kw">return</span> c;
+}
+
+matrix work(matrix a, lli t, lli n)
+{
+    matrix b(
+        t, <span class="dv">0</span>, <span class="dv">0</span>,
+        <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>,
+        <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>);
+    a = a * qpow(b, n - t/<span class="dv">10</span> + <span class="dv">1</span>);
+    <span class="kw">return</span> a;
+}
+
+lli n;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%lld%lld</span><span class="st">"</span>, &amp;n, &amp;modr);
+    matrix a(<span class="dv">1</span>);
+    lli t = <span class="dv">10</span>;
+    <span class="kw">while</span> (n &gt;= t) {
+        a = work(a, t, t - <span class="dv">1</span>);
+        t *= <span class="dv">10</span>;
+    }
+    a = work(a, t, n);
+    lli res = a[<span class="dv">3</span>][<span class="dv">1</span>];
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj2326/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj2326/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj2326/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj2326/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj2326">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

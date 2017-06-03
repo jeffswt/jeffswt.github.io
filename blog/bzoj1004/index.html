@@ -1,0 +1,214 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1004: [HNOI2008]Cards&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1004: [HNOI2008]Cards
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=HNOI2008" target="_self">
+            <i class="fa fa-tag"></i> HNOI2008
+          </a>
+          <a class="tag" href="/blog/archive/?q=Group Theory" target="_self">
+            <i class="fa fa-tag"></i> Group Theory
+          </a>
+          <a class="tag" href="/blog/archive/?q=Permutation Group" target="_self">
+            <i class="fa fa-tag"></i> Permutation Group
+          </a>
+          <a class="tag" href="/blog/archive/?q=Burnside Theorem" target="_self">
+            <i class="fa fa-tag"></i> Burnside Theorem
+          </a>
+          <a class="tag" href="/blog/archive/?q=Multiplicative Inverse" target="_self">
+            <i class="fa fa-tag"></i> Multiplicative Inverse
+          </a>
+        </span>
+        <span class="date" title="23:48:00 | 4 January, 2017">
+          4 January, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>小春现在很清闲, 面对书桌上的 <span class="math inline">\(n\)</span> 张牌, 他决定给每张染色, 目前小春只有 3 种颜色: 红色, 蓝色, 绿色. 他询问 Sun 有多少种染色方案, Sun 很快就给出了答案. 进一步, 小春要求 染出 <span class="math inline">\(S_r\)</span> 张红色,<span class="math inline">\(S_b\)</span> 张蓝色,<span class="math inline">\(S_g\)</span> 张绿色. 他又询问有多少种方案, Sun 想了一下, 又给出了正确答案. 最后小春发明了 <span class="math inline">\(m\)</span> 种不同的洗牌法, 这里他又问 Sun 有多少种不同 的染色方案.</p>
+<p>两种染色方法相同当且仅当其中一种可以通过任意的洗牌法 (即可以使用多种洗牌法, 而每种方法可以使用多次) 洗成另一种. Sun 发现这个问题有点难度, 决定交给你, 答案可能 很大, 只要求出答案除以 <span class="math inline">\(P\)</span> 的余数 (<span class="math inline">\(P\)</span> 为质数).</p>
+<h2 id="input">Input</h2>
+<p>第一行输入 5 个整数:<span class="math inline">\(S_r, S_b, S_g, m, p (m \leq 60, m+1 \lt p \lt 100), n = S_r + S_b + S_g\)</span>.</p>
+<p>接下来 <span class="math inline">\(m\)</span> 行, 每行描述一种洗牌法, 每行有 <span class="math inline">\(n\)</span> 个用空格隔开的整数 <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span>, 恰为 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 的一个排列, 表示使用这种洗牌法, 第 <span class="math inline">\(i\)</span> 位变为原来的 <span class="math inline">\(X_i\)</span> 位的牌. 输入数据保证任意多次洗牌都可用这 <span class="math inline">\(m\)</span> 种洗牌法中的一种代替, 且对每种洗牌法, 都存在一种洗牌法使得能回到原状态.</p>
+<h2 id="output">Output</h2>
+<p>输出一个整数, 表示不同染法除以 <span class="math inline">\(P\)</span> 的余数.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>1 1 1 2 7
+2 3 1
+3 1 2</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>2</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>100% 数据满足 <span class="math inline">\(max(S_r, S_b, S_g) \leq 20\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<p>Burnside 定理: 有 m 个置换 k 种颜色, 所有本质不同的染色方案数就是每种置换的不变元素的 个数的平均数. 所谓不变元素就是一种染色方案经过置换变换后和没变化之前一样. 所以 现在就是需要求出不变元素, 同时还要满足各种颜色数量的限制. 置换的循环在不变元素中一定是一个颜色, 然后可以求一个三维的 01 背包的方案数. 而最后的除法需要利用扩展 欧几里得求乘法的逆元.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxm = <span class="dv">100</span>, maxn = <span class="dv">100</span>;
+
+<span class="dt">int</span> modr = <span class="dv">0</span>;
+<span class="dt">int</span> s1, s2, s3, n, m, p;
+<span class="dt">int</span> arr[maxm][maxn];
+
+<span class="dt">int</span> dp[maxm][maxn][maxn];
+<span class="dt">int</span> d[maxn];
+<span class="dt">bool</span> vis[maxn];
+<span class="dt">int</span> eval(<span class="dt">int</span> x)
+{
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        vis[i] = <span class="kw">false</span>;
+    <span class="dt">int</span> sum = <span class="dv">0</span>, p;
+    <span class="co">// Iterate through colours 1 ~ n</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) <span class="kw">if</span> (!vis[i]) {
+        <span class="co">// Circulate around the scheme</span>
+        d[++sum] = <span class="dv">1</span>; p = i;
+        vis[p] = <span class="kw">true</span>;
+        <span class="kw">while</span> (!vis[arr[x][p]]) {
+            d[sum] += <span class="dv">1</span>;
+            vis[arr[x][p]] = <span class="dv">1</span>;
+            p = arr[x][p];
+        }
+    }
+    <span class="co">// Clean dp setup</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = s1; i &gt;= <span class="dv">0</span>; i--)
+        <span class="kw">for</span> (<span class="dt">int</span> j = s2; j &gt;= <span class="dv">0</span>; j--)
+            <span class="kw">for</span> (<span class="dt">int</span> k = s3; k &gt;= <span class="dv">0</span>; k--)
+                dp[i][j][k] = <span class="dv">0</span>;
+    dp[<span class="dv">0</span>][<span class="dv">0</span>][<span class="dv">0</span>] = <span class="dv">1</span>;
+    <span class="co">// Dynamic programming</span>
+    <span class="ot">#define modr_add(__x,__y) __x=(__x+__y)%modr</span>
+    <span class="kw">for</span> (<span class="dt">int</span> h = <span class="dv">1</span>; h &lt;= sum; h++)
+        <span class="kw">for</span> (<span class="dt">int</span> i = s1; i &gt;= <span class="dv">0</span>; i--)
+            <span class="kw">for</span> (<span class="dt">int</span> j = s2; j &gt;= <span class="dv">0</span>; j--)
+                <span class="kw">for</span> (<span class="dt">int</span> k = s3; k &gt;= <span class="dv">0</span>; k--) {
+                    <span class="kw">if</span> (i &gt;= d[h])
+                        modr_add(dp[i][j][k], dp[i - d[h]][j][k]);
+                    <span class="kw">if</span> (j &gt;= d[h])
+                        modr_add(dp[i][j][k], dp[i][j - d[h]][k]);
+                    <span class="kw">if</span> (k &gt;= d[h])
+                        modr_add(dp[i][j][k], dp[i][j][k - d[h]]);
+                }
+    <span class="co">// Returning results</span>
+    <span class="kw">return</span> dp[s1][s2][s3];
+}
+
+<span class="dt">void</span> ext_gcd(<span class="dt">int</span> a, <span class="dt">int</span> b, <span class="dt">int</span> &amp;x, <span class="dt">int</span> &amp;y)
+{
+    <span class="kw">if</span> (b == <span class="dv">0</span>) {
+        x = <span class="dv">1</span>, y = <span class="dv">0</span>;
+        <span class="kw">return</span> ;
+    }
+    ext_gcd(b, a % b, x, y);
+    <span class="dt">int</span> t = x; x = y;
+    y = t - a / b * y;
+    <span class="kw">return</span> ;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d%d%d%d</span><span class="st">"</span>, &amp;s1, &amp;s2, &amp;s3, &amp;m, &amp;p);
+    n = s1 + s2 + s3;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++)
+            scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;arr[i][j]);
+    modr = p; <span class="co">// Modulo</span>
+    <span class="co">// This points to itself (retains data)</span>
+    m += <span class="dv">1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++)
+        arr[m][j] = j;
+    <span class="co">// Retrieving results</span>
+    <span class="dt">int</span> res = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+        res = (res + eval(i)) % modr;
+    <span class="co">// modr-base division modulo</span>
+    <span class="dt">int</span> x, y;
+    ext_gcd(m, modr, x, y);
+    <span class="kw">while</span> (x &lt;= <span class="dv">0</span>)
+        x += modr, y -= m;
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res * x % modr);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1004/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1004/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1004/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1004/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1004">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

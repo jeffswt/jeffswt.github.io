@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1258: [CQOI2007]三角形tri&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1258: [CQOI2007]三角形tri
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=CQOI2007" target="_self">
+            <i class="fa fa-tag"></i> CQOI2007
+          </a>
+          <a class="tag" href="/blog/archive/?q=Implementation" target="_self">
+            <i class="fa fa-tag"></i> Implementation
+          </a>
+          <a class="tag" href="/blog/archive/?q=Simulation" target="_self">
+            <i class="fa fa-tag"></i> Simulation
+          </a>
+        </span>
+        <span class="date" title="23:40:20 | 30 November, 2016">
+          30 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>画一个等边三角形, 把三边的中点连接起来, 得到四个三角形, 把它们称为 T1, T2, T3, T4, 如图 1. 把前三个三角形也这样划分, 得到 12 个更小的三角形: T11, T12, T13, T14, T21, T22, T23, T24, T31, T32, T33, T34, 如图 2. 把编号以 1, 2, 3 结尾的三角形又继续划分...... 最后得到的分形称为 <em>Sierpinski</em> 三角形.</p>
+<figure>
+<img class="thumb" data-small="/blog/bzoj1258/bzoj1258-small.jpg" data-src="/blog/bzoj1258/bzoj1258.png" data-thumb="/blog/bzoj1258/bzoj1258-thumb.jpg" src="/blog/bzoj1258/bzoj1258-thumb.jpg" title="" width="645px"/>
+<figcaption>
+</figcaption>
+</figure>
+<p>图 2. 如果 B 不包含 A, 且 A 的某一条完整的边是 B 的某条边的一部分, 则我们说 A 靠在 B 的边上. 例如 T12 靠在 T24 和 T4 上, 但不靠在 T32 上. 给出 <em>Spierpinski</em> 三角形中的一个三角形, 找出它靠着的所有三角形.</p>
+<h2 id="input">Input</h2>
+<p>输入仅一行, 即三角形的编号, 以 T 开头, 后面有 n 个 1 到 4 的数字. 仅最后一个数字可能为 4.</p>
+<h2 id="output">Output</h2>
+<p>输出每行一个三角形编号, 按字典序从小到大排列.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>T312</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>T314
+T34
+T4</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>50% 的数据满足:<span class="math inline">\(1 \leq n \leq 5\)</span></p>
+<p>100% 的数据满足:<span class="math inline">\(1 \leq n \leq 50\)</span></p>
+<h2 id="solution">Solution</h2>
+<p>我们可以发现这一点: 题中所给的三角形一定是所有划分出来的三角形中的最小的一个之一. 所以不会有比这个三角形还小的三角形. 另外由于边都是顶点对顶点, 不会胡乱切出来 (其实 我也不知道我刚才说了些什么, 不要管了), 所以这一个三角形的每一条边最多只会与一个 三角形相邻 (也就是说, 总共最多有三个三角形相邻).</p>
+<p>进一步地, 编号为 1, 2, 3 的三角形不会互相相邻, 如果他们的大小相同且为同一个更大一点 的三角形拆分出来的三角形. 他们只会和相邻的编号为 4 的三角形相邻.</p>
+<p>大概这样推断一下, 就会发现把 <span class="math inline">\(i\)</span> 从 <span class="math inline">\(n\)</span> 开始扫到 <span class="math inline">\(1\)</span> 就可以了, 然后中间经过的三角形一定最多只有 <span class="math inline">\(3\)</span> 个, 然后还是按字典序排布的, 就不用最后比较一下再输出了</p>
+<p>然后就这样 1A 了 233~</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">60</span>;
+
+<span class="dt">void</span> print_triangle(<span class="dt">int</span> dat[]) {
+    <span class="kw">if</span> (dat[<span class="dv">0</span>] &lt;= <span class="dv">0</span>) <span class="kw">return</span> ; printf(<span class="st">"T"</span>);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= dat[<span class="dv">0</span>]; i++) printf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, dat[i]);
+    printf(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>); <span class="kw">return</span> ; }
+
+<span class="dt">int</span> n, arr[maxn];
+<span class="dt">int</span> tri[<span class="dv">4</span>][maxn]; <span class="co">// Guranteed at most 3 of them being used</span>
+
+<span class="dt">char</span> str[maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str);
+    n = strlen(str) - <span class="dv">1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        tri[<span class="dv">1</span>][i] = tri[<span class="dv">2</span>][i] = tri[<span class="dv">3</span>][i] = arr[i] = str[i] - <span class="st">'0'</span>;
+    <span class="co">// Exceptions, only once</span>
+    <span class="kw">if</span> (arr[n] == <span class="dv">4</span>) {
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">3</span>; i++) {
+            tri[i][<span class="dv">0</span>] = n;
+            tri[i][n] = i;
+            print_triangle(tri[i]);
+        }
+        <span class="kw">return</span> <span class="dv">0</span>;
+    }
+    <span class="co">// Initial states of TRI[0]'s adjacency to sides in current triangle</span>
+    <span class="dt">bool</span> left = <span class="kw">true</span>,
+         right = <span class="kw">true</span>,
+         bottom = <span class="kw">true</span>;
+    <span class="co">// The count of triangles, if reached 3 then exit</span>
+    <span class="dt">int</span> tcnt = <span class="dv">0</span>;
+    <span class="co">// Processing from nearest to farthest</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = n; i &gt;= <span class="dv">1</span>; i--) {
+        <span class="dt">int</span> pos = arr[i];
+        <span class="co">// Current set position... triangle always 4.</span>
+        <span class="kw">if</span> ((pos == <span class="dv">1</span> &amp;&amp; bottom)
+         || (pos == <span class="dv">2</span> &amp;&amp; right)
+         || (pos == <span class="dv">3</span> &amp;&amp; left)) {
+            tcnt++;
+            tri[tcnt][<span class="dv">0</span>] = i;
+            tri[tcnt][i] = <span class="dv">4</span>;
+        }
+        <span class="co">// Set adjacency</span>
+        <span class="kw">if</span> (pos == <span class="dv">1</span>)
+            bottom = <span class="kw">false</span>;
+        <span class="kw">else</span> <span class="kw">if</span> (pos == <span class="dv">2</span>)
+            right = <span class="kw">false</span>;
+        <span class="kw">else</span> <span class="kw">if</span> (pos == <span class="dv">3</span>)
+            left = <span class="kw">false</span>;
+    }
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= tcnt; i++)
+        print_triangle(tri[i]);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1258/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1258/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1258/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1258/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1258">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

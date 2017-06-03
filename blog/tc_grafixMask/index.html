@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>TopCoder: grafixMask / 500&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="en">
+      <div class="post-header">
+        <h1 class="title">
+          TopCoder: grafixMask / 500
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=TopCoder" target="_self">
+            <i class="fa fa-tag"></i> TopCoder
+          </a>
+          <a class="tag" href="/blog/archive/?q=Breadth First Search" target="_self">
+            <i class="fa fa-tag"></i> Breadth First Search
+          </a>
+        </span>
+        <span class="date" title="20:57:30 | 9 November, 2016">
+          9 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h3 id="problem-statement">Problem Statement</h3>
+<p>In one mode of the grafix software package, the user blocks off portions of a masking layer using opaque rectangles. The bitmap used as the masking layer is 400 pixels tall and 600 pixels wide. Once the rectangles have been blocked off, the user can perform painting actions through the remaining areas of the masking layer, known as holes. To be precise, each hole is a maximal collection of contiguous pixels that are not covered by any of the opaque rectangles. Two pixels are contiguous if they share an edge, and contiguity is transitive.</p>
+<p>You are given a named rectangles, the elements of which specify the rectangles that have been blocked off in the masking layer. Each in rectangles consists of four integers separated by single spaces, with no additional spaces in the string. The first two integers are the window coordinates of the top left pixel in the given rectangle, and the last two integers are the window coordinates of its bottom right pixel. The window coordinates of a pixel are a pair of integers specifying the row number and column number of the pixel, in that order. Rows are numbered from top to bottom, starting with 0 and ending with 399. Columns are numbered from left to right, starting with 0 and ending with 599. Every pixel within and along the border of the rectangle defined by these opposing corners is blocked off.</p>
+<p>Return a containing the area, in pixels, of every hole in the resulting masking area, sorted from smallest area to greatest.</p>
+<h3 id="definition">Definition</h3>
+<p>Class:<code>grafixMask</code></p>
+<p>Method:<code>sortedAreas</code></p>
+<p>Parameters:<code>vector &lt;string&gt;</code></p>
+<p>Returns:<code>vector &lt;int&gt;</code></p>
+<p>Method signature:<code>vector &lt;int&gt; sortedAreas(vector &lt;string&gt; rectangles)</code></p>
+<h3 id="limits">Limits</h3>
+<p>Time limit (s):<code>840.000</code></p>
+<p>Memory limit (MB):<code>64</code></p>
+<h3 id="notes">Notes</h3>
+<ul>
+<li>Window coordinates are not the same as Cartesian coordinates. Follow the definition given in the second paragraph of the problem statement.</li>
+</ul>
+<h3 id="constraints">Constraints</h3>
+<ul>
+<li>rectangles contains between 1 and 50 elements, inclusive</li>
+<li>each element of rectangles has the form “ROW COL ROW COL”, where: “ROW” is a placeholder for a non-zero-padded integer between 0 and 399, inclusive; “COL” is a placeholder for a non-zero-padded integer between 0 and 599, inclusive; the first row number is no greater than the second row number; the first column number is no greater than the second column number</li>
+</ul>
+<!-- More -->
+<h3 id="examples">Examples</h3>
+<h4 id="section">0</h4>
+<pre><code>{"0 292 399 307"}</code></pre>
+<pre><code>{ 116800, 116800 }</code></pre>
+<p>The masking layer is depicted below in a 1: 4 scale diagram.</p>
+<h4 id="section-1">1</h4>
+<pre><code>{"48 192 351 207", "48 392 351 407", "120 52 135 547", "260 52 275 547"}</code></pre>
+<pre><code>{ 22816, 192608 }</code></pre>
+<h4 id="section-2">2</h4>
+<pre><code>{"0 192 399 207", "0 392 399 407", "120 0 135 599", "260 0 275 599"}</code></pre>
+<pre><code>{ 22080, 22816, 22816, 23040, 23040, 23808, 23808, 23808, 23808 }</code></pre>
+<h4 id="section-3">3</h4>
+<pre><code>{"50 300 199 300", "201 300 350 300", "200 50 200 299", "200 301 200 550"}</code></pre>
+<pre><code>{ 1, 239199 }</code></pre>
+<hr/>
+<h3 id="explanation">Explanation</h3>
+<p>Simply use breadth-first search in order to complete this problem. If you are new to TopCoder, you may need some time to adapt yourself to the new coding style. It uses classes instead of standard input and standard outputs.</p>
+<h3 id="source-code">Source Code</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;vector&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+<span class="ot">#include &lt;sstream&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+
+<span class="kw">class</span> grafixMask
+{
+<span class="kw">public</span>:
+    <span class="dt">static</span> <span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">610</span>, maxm = <span class="dv">410</span>;
+    <span class="dt">bool</span> occupied[maxn][maxm];
+    <span class="dt">bool</span> flagged[maxn][maxm];
+    <span class="dt">int</span> n, m;
+    <span class="dt">int</span> bfs(<span class="dt">int</span> x_, <span class="dt">int</span> y_) {
+        queue&lt; pair&lt;<span class="dt">int</span>, <span class="dt">int</span>&gt; &gt; que;
+        que.push(make_pair(x_, y_));
+        <span class="dt">int</span> res = <span class="dv">0</span>;
+        <span class="kw">while</span> (!que.empty()) {
+            pair&lt;<span class="dt">int</span>, <span class="dt">int</span>&gt; pr = que.front();
+            que.pop();
+            <span class="dt">int</span> x = pr.first, y = pr.second;
+            <span class="kw">if</span> (x &lt; <span class="dv">1</span> || x &gt; n || y &lt; <span class="dv">1</span> || y &gt; m)
+                <span class="kw">continue</span>; <span class="co">// Out of bound</span>
+            <span class="kw">if</span> (occupied[x][y] || flagged[x][y])
+                <span class="kw">continue</span>; <span class="co">// Already flagged as used</span>
+            res++;
+            flagged[x][y] = <span class="kw">true</span>;
+            que.push(make_pair(x - <span class="dv">1</span>, y));
+            que.push(make_pair(x, y + <span class="dv">1</span>));
+            que.push(make_pair(x + <span class="dv">1</span>, y));
+            que.push(make_pair(x, y - <span class="dv">1</span>));
+        }
+        <span class="kw">return</span> res;
+    }
+    vector&lt;<span class="dt">int</span>&gt; sortedAreas(vector&lt;string&gt; rectangles)
+    {
+        n = <span class="dv">600</span>, m = <span class="dv">400</span>;
+        vector&lt;<span class="dt">int</span>&gt; res;
+        <span class="co">// Reading input in an awkward style...</span>
+        stringstream stm;
+        <span class="kw">for</span> (vector&lt;string&gt;::iterator i = rectangles.begin(); i != rectangles.end(); i++) {
+            stm.clear();
+            stm &lt;&lt; *i;
+            <span class="dt">int</span> a, b, c, d;
+            stm &gt;&gt; a &gt;&gt; b &gt;&gt; c &gt;&gt; d;
+            <span class="kw">for</span> (<span class="dt">int</span> j = b; j &lt;= d; j++)
+                <span class="kw">for</span> (<span class="dt">int</span> k = a; k &lt;= c; k++)
+                    occupied[j + <span class="dv">1</span>][k + <span class="dv">1</span>] = <span class="kw">true</span>; <span class="co">// Ranged in (x, y)</span>
+        }
+        <span class="co">// Retrieving output...</span>
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= m; j++)
+                <span class="kw">if</span> (!occupied[i][j] &amp;&amp; !flagged[i][j])
+                    res.push_back(bfs(i, j));
+        sort(res.begin(), res.end());
+        <span class="kw">return</span> res;
+    }
+};</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/tc_grafixMask/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/tc_grafixMask/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/tc_grafixMask/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/tc_grafixMask/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="tc_grafixMask">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

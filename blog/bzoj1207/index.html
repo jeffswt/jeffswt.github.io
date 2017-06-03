@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1207: [HNOI2004]打鼹鼠&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1207: [HNOI2004]打鼹鼠
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=HNOI2004" target="_self">
+            <i class="fa fa-tag"></i> HNOI2004
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+          <a class="tag" href="/blog/archive/?q=Fiddling" target="_self">
+            <i class="fa fa-tag"></i> Fiddling
+          </a>
+        </span>
+        <span class="date" title="02:09:27 | 26 December, 2016">
+          26 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>鼹鼠是一种很喜欢挖洞的动物, 但每过一定的时间, 它还是喜欢把头探出到地面上来透透气的. 根据这个特点阿 Q 编写了一个打鼹鼠的游戏: 在一个 <span class="math inline">\(n \times n\)</span> 的网格中, 在某些时刻鼹鼠会在某一个网格探出头来透透气. 你可以控制一个机器人来打鼹鼠, 如果 <span class="math inline">\(i\)</span> 时刻 鼹鼠在某个网格中出现, 而机器人也处于同一网格的话, 那么这个鼹鼠就会被机器人打死. 而机器人每一时刻只能够移动一格或停留在原地不动. 机器人的移动是指从当前所处的网格 移向相邻的网格, 即从坐标为 <span class="math inline">\((i, j)\)</span> 的网格移向 <span class="math inline">\((i-1, j), (i+1, j), (i, j-1), (i, j+1)\)</span> 四个网格, 机器人不能走出整个 <span class="math inline">\(n \times n\)</span> 的网格. 游戏开始时, 你可以自由选定机器人的初始位置. 现在你知道在一段时间内, 鼹鼠出现的时间和地点, 希望你编写一个程序使机器人在这一段时间内打死尽可能多的鼹鼠.</p>
+<h2 id="input">Input</h2>
+<p>第一行为 <span class="math inline">\(n (n \leq 1000), m (m \leq 10000)\)</span>, 其中 <span class="math inline">\(m\)</span> 表示在这一段时间内出现的 鼹鼠的个数, 接下来的 <span class="math inline">\(m\)</span> 行每行有三个数据 <span class="math inline">\(time, x, y\)</span> 表示有一只鼹鼠在游戏开始后 <span class="math inline">\(time\)</span> 个时刻, 在第 <span class="math inline">\(x\)</span> 行第 <span class="math inline">\(y\)</span> 个网格里出现了一只鼹鼠.<span class="math inline">\(time\)</span> 按递增的顺序给出. 注意同一时刻可能出现多只鼹鼠, 但同一时刻同一地点只可能出现一只鼹鼠.</p>
+<h2 id="output">Output</h2>
+<p>仅包含一个正整数, 表示被打死鼹鼠的最大数目</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>2 2
+1 1 1
+2 2 2</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>1</code></pre>
+<h2 id="explanation">Explanation</h2>
+<p>把这个问题仔细想一想, 一个鼹鼠是突然出现的, 马上消失. 也就是说机器人如果按时走不到 那里就可以滚粗了. 所以就变成了一个最长上升子序列问题 (类型题小结) 或者类上升子序列 问题. 换句话说, 可能这道题上个 <span class="math inline">\(O(m^2)\)</span> 就够了, 如果常数比较小的话~</p>
+<p>黄学长说没有 <span class="math inline">\(O(m \log m)\)</span> 的做法, 但是各种神优化 (设 max) 可以水过时限......</p>
+<p>所以说这道题能不能 <span class="math inline">\(O(m \log m)\)</span> 呢? 这个问题留给读者思考 (雾)</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxm = <span class="dv">10010</span>;
+
+<span class="dt">int</span> n, m;
+<span class="dt">int</span> t[maxm], x[maxm], y[maxm];
+<span class="dt">int</span> dp[maxm], max_dp[maxm];
+
+<span class="dt">int</span> dist(<span class="dt">int</span> i, <span class="dt">int</span> j) {
+    <span class="kw">return</span> abs(x[i] - x[j]) + abs(y[i] - y[j]); }
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+        scanf(<span class="st">"</span><span class="ch">%d%d%d</span><span class="st">"</span>, &amp;t[i], &amp;x[i], &amp;y[i]);
+    <span class="co">// Dynamic programming.</span>
+    dp[<span class="dv">1</span>] = <span class="dv">1</span>, max_dp[<span class="dv">1</span>] = <span class="dv">1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>; i &lt;= m; i++) {
+        dp[i] = <span class="dv">1</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> j = i - <span class="dv">1</span>; j &gt;= <span class="dv">1</span>; j--) {
+            <span class="kw">if</span> (max_dp[j] + <span class="dv">1</span> &lt;= dp[i])
+                <span class="kw">break</span>;
+            <span class="co">// Potentially demands update</span>
+            <span class="kw">if</span> (dp[j] + <span class="dv">1</span> &gt; dp[i])
+                <span class="kw">if</span> (dist(i, j) &lt;= t[i] - t[j])
+                    dp[i] = dp[j] + <span class="dv">1</span>;
+        }
+        max_dp[i] = max(max_dp[i - <span class="dv">1</span>], dp[i]);
+    }
+    <span class="dt">int</span> res = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+        res = max(res, dp[i]);
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1207/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1207/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1207/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1207/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1207">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

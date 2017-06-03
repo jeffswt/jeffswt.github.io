@@ -1,0 +1,275 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>spoj2713: GSS4 - Can you answer these queries IV&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          spoj2713: GSS4 - Can you answer these queries IV
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=SPOJ" target="_self">
+            <i class="fa fa-tag"></i> SPOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=GSS" target="_self">
+            <i class="fa fa-tag"></i> GSS
+          </a>
+          <a class="tag" href="/blog/archive/?q=Segment Tree" target="_self">
+            <i class="fa fa-tag"></i> Segment Tree
+          </a>
+          <a class="tag" href="/blog/archive/?q=Fiddling" target="_self">
+            <i class="fa fa-tag"></i> Fiddling
+          </a>
+        </span>
+        <span class="date" title="20:22:39 | 16 March, 2017">
+          16 March, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="gss4---can-you-answer-these-queries-iv">GSS4-Can you answer these queries IV</h2>
+<h3 id="description">Description</h3>
+<p>You are given a sequence <span class="math inline">\(a\)</span> of <span class="math inline">\(n\)</span> positive integers. Their sum will be less than <span class="math inline">\(10^18\)</span>. On this sequence you have to apply <span class="math inline">\(m\)</span> operations:</p>
+<ul>
+<li>For given <span class="math inline">\(x, y\)</span>, for each elements between the <span class="math inline">\(x-th\)</span> and the <span class="math inline">\(y-th\)</span> ones (inclusively, counting from <span class="math inline">\(1\)</span>) , modify it to its positive square root (rounded down to the nearest integer).</li>
+<li>For given <span class="math inline">\(x, y\)</span>, query the sum of all the elements between the <span class="math inline">\(x-th\)</span> and the <span class="math inline">\(y-th\)</span> ones (inclusively, counting from <span class="math inline">\(1\)</span>) in the sequence.</li>
+</ul>
+<h3 id="input">Input</h3>
+<p>Multiple test cases, please proceed them one by one. Input terminates by <code>EOF</code>.</p>
+<p>For each test case:</p>
+<p>The first line contains an integer <span class="math inline">\(n\)</span>. The following line contains <span class="math inline">\(n\)</span> integers, representing the sequence <span class="math inline">\(a_1 \ldots a_n\)</span>.</p>
+<p>The third line contains an integer <span class="math inline">\(m\)</span>. The next <span class="math inline">\(m\)</span> lines contain the operations in the form <code>i x y</code>.<span class="math inline">\(i = 0\)</span> denotes the modify operation,<span class="math inline">\(i = 1\)</span> denotes the query operation.</p>
+<h3 id="output">Output</h3>
+<p>For each test case:</p>
+<p>Output the case number (counting from <span class="math inline">\(1\)</span>) in the first line of output. Then for each query, print an integer as the problem required.</p>
+<p>Print an blank line after each test case.</p>
+<p>See the sample output for more details.</p>
+<!-- More -->
+<h3 id="sample-input">Sample Input</h3>
+<pre><code>5
+1 2 3 4 5
+5
+1 2 4
+0 2 4
+1 2 4
+0 4 5
+1 1 5
+4
+10 10 10 10
+3
+1 1 4
+0 2 3
+1 1 4</code></pre>
+<h3 id="sample-output">Sample Output</h3>
+<pre><code>Case #1:
+9
+4
+6
+
+Case #2:
+40
+26</code></pre>
+<h3 id="data-range">Data Range</h3>
+<p>All test data are guaranteed that:<span class="math inline">\(n \leq 100000, m \leq 100000\)</span>.</p>
+<h3 id="explanation">Explanation</h3>
+<p>任何一个在 <span class="math inline">\(10^{18}\)</span> 以内的数字, 只要最多对自己进行 <span class="math inline">\(8\)</span> 次根号操作就会变成 <span class="math inline">\(1\)</span>, 并且根号操作不具有区间可合并性, 所以我们需要暴力地进行修改, 不暴力地进行区间查询. 时间复杂度为 <span class="math inline">\(\beta(n) \cdot n \log n\)</span>, 其中 <span class="math inline">\(\beta(n)\)</span> 为不停进行运算 <span class="math inline">\(\left\lfloor\sqrt{x}\right\rfloor\)</span> 得到 <span class="math inline">\(1\)</span> 需要的次数, 在给定数据范围内满足 <span class="math inline">\(\beta(n) \leq 8\)</span>, 可以视作常数.</p>
+<h3 id="source-code">Source Code</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cmath&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">100100</span>;
+
+<span class="kw">class</span> SegmentTree
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> node
+    {
+        node *lc, *rc;
+        <span class="dt">int</span> lb, mb, rb;
+        lli sum;
+    } *root, npool[maxn&lt;&lt;<span class="dv">1</span>];
+    <span class="dt">int</span> n, ncnt;
+    node* make_node(<span class="dt">void</span>)
+    {
+        node *p = &amp;npool[++ncnt];
+        p-&gt;lc = p-&gt;rc = NULL;
+        p-&gt;lb = p-&gt;mb = p-&gt;rb = <span class="dv">0</span>;
+        p-&gt;sum = <span class="dv">0</span>;
+        <span class="kw">return</span> p;
+    }
+    lli query(node *p, <span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="kw">if</span> (p-&gt;lb == l &amp;&amp; p-&gt;rb == r) {
+            <span class="kw">return</span> p-&gt;sum;
+        }
+        <span class="kw">if</span> (r &lt;= p-&gt;mb) {
+            <span class="kw">return</span> query(p-&gt;lc, l, r);
+        } <span class="kw">else</span> <span class="kw">if</span> (l &gt; p-&gt;mb) {
+            <span class="kw">return</span> query(p-&gt;rc, l, r);
+        } <span class="kw">else</span> {
+            <span class="kw">return</span> query(p-&gt;lc, l, p-&gt;mb) +
+                query(p-&gt;rc, p-&gt;mb + <span class="dv">1</span>, r);
+        }
+        <span class="kw">return</span> lli();
+    }
+    lli query(<span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="kw">if</span> (l &gt; r) swap(l, r);
+        <span class="kw">return</span> <span class="kw">this</span>-&gt;query(root, l, r);
+    }
+    <span class="dt">void</span> change(node *p, <span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="kw">if</span> (p-&gt;lb == l &amp;&amp; p-&gt;rb == r) {
+            <span class="kw">if</span> (p-&gt;rb - p-&gt;lb + <span class="dv">1</span> == p-&gt;sum)
+                <span class="kw">return</span> ;
+            <span class="kw">if</span> (p-&gt;lb == p-&gt;rb) {
+                p-&gt;sum = sqrt(p-&gt;sum);
+                <span class="kw">return</span> ;
+            }
+            change(p-&gt;lc, l, p-&gt;mb);
+            change(p-&gt;rc, p-&gt;mb + <span class="dv">1</span>, r);
+            p-&gt;sum = p-&gt;lc-&gt;sum + p-&gt;rc-&gt;sum;
+            <span class="kw">return</span> ;
+        }
+        <span class="kw">if</span> (r &lt;= p-&gt;mb) {
+            change(p-&gt;lc, l, r);
+        } <span class="kw">else</span> <span class="kw">if</span> (l &gt; p-&gt;mb) {
+            change(p-&gt;rc, l, r);
+        } <span class="kw">else</span> {
+            change(p-&gt;lc, l, p-&gt;mb);
+            change(p-&gt;rc, p-&gt;mb + <span class="dv">1</span>, r);
+        }
+        p-&gt;sum = p-&gt;lc-&gt;sum + p-&gt;rc-&gt;sum;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> change(<span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="kw">if</span> (l &gt; r) swap(l, r);
+        <span class="kw">this</span>-&gt;change(root, l, r);
+        <span class="kw">return</span> ;
+    }
+    node* build_tree(<span class="dt">int</span> l, <span class="dt">int</span> r, lli arr[])
+    {
+        node *p = make_node();
+        <span class="dt">int</span> mid = (l + r) &gt;&gt; <span class="dv">1</span>;
+        p-&gt;lb = l; p-&gt;mb = mid; p-&gt;rb = r;
+        <span class="kw">if</span> (p-&gt;lb == p-&gt;rb) {
+            p-&gt;sum = lli(arr[mid]);
+        } <span class="kw">else</span> {
+            p-&gt;lc = build_tree(l, mid, arr);
+            p-&gt;rc = build_tree(mid + <span class="dv">1</span>, r, arr);
+            p-&gt;sum = p-&gt;lc-&gt;sum + p-&gt;rc-&gt;sum;
+        }
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">void</span> build(<span class="dt">int</span> n, lli arr[])
+    {
+        <span class="kw">this</span>-&gt;ncnt = <span class="dv">0</span>;
+        <span class="kw">this</span>-&gt;n = n;
+        <span class="kw">this</span>-&gt;root = <span class="kw">this</span>-&gt;build_tree(<span class="dv">1</span>, n, arr);
+        <span class="kw">return</span> ;
+    }
+} st;
+
+<span class="dt">int</span> n, m;
+lli arr[maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    <span class="dt">int</span> case_id = <span class="dv">0</span>;
+    <span class="kw">while</span> (scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n) != EOF) {
+        case_id += <span class="dv">1</span>;
+        <span class="kw">if</span> (n == <span class="dv">0</span>)
+            <span class="kw">break</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+            scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;arr[i]);
+        st.build(n, arr);
+        <span class="co">// Can you answer these queries</span>
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;m);
+        printf(<span class="st">"Case #</span><span class="ch">%d</span><span class="st">:</span><span class="ch">\n</span><span class="st">"</span>, case_id);
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, x, l, r; i &lt;= m; i++) {
+            scanf(<span class="st">"</span><span class="ch">%d%d%d</span><span class="st">"</span>, &amp;x, &amp;l, &amp;r);
+            <span class="kw">if</span> (x == <span class="dv">1</span>) {
+                lli res = st.query(l, r);
+                printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+            } <span class="kw">else</span> <span class="kw">if</span> (x == <span class="dv">0</span>) {
+                st.change(l, r);
+            }
+        }
+        printf(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>);
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/spoj2713/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/spoj2713/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/spoj2713/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/spoj2713/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="spoj2713">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

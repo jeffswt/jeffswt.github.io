@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj2007: [Noi2010]海拔&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj2007: [Noi2010]海拔
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOI2010" target="_self">
+            <i class="fa fa-tag"></i> NOI2010
+          </a>
+          <a class="tag" href="/blog/archive/?q=Network Flow" target="_self">
+            <i class="fa fa-tag"></i> Network Flow
+          </a>
+          <a class="tag" href="/blog/archive/?q=Shortest Path" target="_self">
+            <i class="fa fa-tag"></i> Shortest Path
+          </a>
+          <a class="tag" href="/blog/archive/?q=Minimum Cut" target="_self">
+            <i class="fa fa-tag"></i> Minimum Cut
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dual Graph" target="_self">
+            <i class="fa fa-tag"></i> Dual Graph
+          </a>
+        </span>
+        <span class="date" title="16:10:52 | 31 January, 2017">
+          31 January, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>YT 市是一个规划良好的城市, 城市被东西向和南北向的主干道划分为 <span class="math inline">\(n \times n\)</span> 个区域. 简单起见, 可以将 YT 市看作一个正方形, 每一个区域也可看作一个正方形. 从而, YT 城市中包括 <span class="math inline">\((n+1) \times (n+1)\)</span> 个交叉路口和 <span class="math inline">\(2n \times (n+1)\)</span> 条双向道路 (简称道路), 每条双向道路连接主干道上两个相邻的交叉路口. 下图为一张 YT 市的地图 <span class="math inline">\((n = 2)\)</span>, 城市 被划分为 <span class="math inline">\(2 \times 2\)</span> 个区域, 包括 <span class="math inline">\(3 \times 3\)</span> 个交叉路口和 <span class="math inline">\(12\)</span> 条双向道路. 小 Z 作为该市的市长, 他根据统计信息得到了每天上班高峰期间 YT 市每条道路两个方向的人流量, 即在高峰期间沿着该方向通过这条道路的人数. 每一个交叉路口都有不同的海拔高度 值, YT 市市民认为爬坡是一件非常累的事情, 每向上爬 <span class="math inline">\(h\)</span> 的高度, 就需要消耗 <span class="math inline">\(h\)</span> 的体力. 如果是下坡的话, 则不需要耗费体力. 因此如果一段道路的终点海拔减去起点海拔的 值为 <span class="math inline">\(h\)</span> (注意 <span class="math inline">\(h\)</span> 可能是负数), 那么一个人经过这段路所消耗的体力是 <span class="math inline">\(max\{0, h\}\)</span> (这里 <span class="math inline">\(max\{a, b\}\)</span> 表示取 <span class="math inline">\(a, b\)</span> 两个值中的较大值). 小 Z 还测量得到这个城市西北角 的交叉路口海拔为 <span class="math inline">\(0\)</span>, 东南角的交叉路口海拔为 <span class="math inline">\(1\)</span> (如上图所示), 但其它交叉路口的 海拔高度都无法得知. 小 Z 想知道在最理想的情况下 (即你可以任意假设其他路口的海拔高度), 每天上班高峰期间所有人爬坡所消耗的总体力和的最小值.</p>
+<h2 id="input">Input</h2>
+<p>第一行包含一个整数 <span class="math inline">\(n\)</span>, 含义如上文所示.</p>
+<p>接下来 <span class="math inline">\(4n(n + 1)\)</span> 行, 每行包含一个非负整数分别表示每一条道路每一个方向的人流量 信息. 输入顺序:<span class="math inline">\(n(n + 1)\)</span> 个数表示所有从西到东方向的人流量, 然后 <span class="math inline">\(n(n + 1)\)</span> 个数 表示所有从北到南方向的人流量,<span class="math inline">\(n(n + 1)\)</span> 个数表示所有从东到西方向的人流量, 最后是 <span class="math inline">\(n(n + 1)\)</span> 个数表示所有从南到北方向的人流量. 对于每一个方向, 输入顺序按照起点 由北向南, 若南北方向相同时由西到东的顺序给出 (参见样例输入).</p>
+<h2 id="output">Output</h2>
+<p>仅包含一个数, 表示在最理想情况下每天上班高峰期间所有人爬坡所消耗的总体力和 (即总 体力和的最小值), 结果四舍五入到整数.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>1
+1
+2
+3
+4
+5
+6
+7
+8</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>3</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于 20% 的数据:<span class="math inline">\(n \leq 3\)</span>;</p>
+<p>对于 50% 的数据:<span class="math inline">\(n \leq 15\)</span>;</p>
+<p>对于 80% 的数据:<span class="math inline">\(n \leq 40\)</span>;</p>
+<p>对于 100% 的数据:<span class="math inline">\(1 \leq n \leq 500, 0 \leq 流量 \leq 10^6\)</span> 且所有流量均为整数.</p>
+<h2 id="explanation">Explanation</h2>
+<p>看一眼就知道, 其实在中间设一个悬崖就可以了, 其他人都不必要多走 (即走平路). 这个 悬崖, 其实换句话说就是这张图的最小割. 怎么想到的呢, 想假设整个图都比较缓, 然后 有的地方人太多太费力气, 就把他们匀到人少的地方 (好像有点不公平). 但是既然匀了 何不把整个高度全都匀掉呢~</p>
+<p>而且下坡路并没有什么意义, 因为还不如让别人少走一点上坡路, 反正下坡路平路都不消耗力气, 何必占那个便宜呢...... 然后最后发现只有一个割上的人需要爬高度为 <span class="math inline">\(1\)</span> 的上坡路.</p>
+<p>然后发现用最小割骗到了 80 分...... 如果是考场上我就直接最小割 Dinic 水过此题了...... 但是这是 BZOJ. 于是我们发现它是一个网格图, 网格图就可以直接转化成对偶图来跑一个 最短路了 (详解参见 bzoj1001 狼抓兔子=w=).</p>
+<p>当然由于 SPFA 最坏复杂度太高 <span class="math inline">\(O(nm)\)</span>, 所以我们只能用堆优化 Dijkstra, 复杂度为 <span class="math inline">\(O((n+m) \log m)\)</span>, 换成网格图就是 <span class="math inline">\(O(2 n^2 \log n)\)</span>, 还可以凑合过去.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+
+<span class="ot">#define rep(_var,_begin,_end) for(int _var=_begin;_var&lt;=_end;_var++)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">10001000</span>, maxm = <span class="dv">10001000</span>;
+<span class="dt">const</span> lli infinit = <span class="bn">0x007f7f7f7f7f7f7fll</span>;
+
+<span class="kw">class</span> DijkstraShortestPath
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v; lli len;
+        edge* next;
+    };
+    <span class="dt">int</span> ecnt, n, s, t;
+    edge *edges[maxn], epool[maxm];
+    lli dist[maxn];
+    <span class="dt">bool</span> vis[maxn];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v, lli len)
+    {
+        edge *p = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;len = len;
+        p-&gt;next = edges[u]; edges[u] = p;
+        <span class="kw">return</span> ;
+    }
+    lli eval(<span class="dt">void</span>)
+    {
+        priority_queue&lt; pair&lt;lli, <span class="dt">int</span>&gt; &gt; que;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++)
+            dist[i] = infinit, vis[i] = <span class="kw">false</span>;
+        dist[s] = <span class="dv">0</span>;
+        que.push(make_pair(-dist[s], s));
+        <span class="kw">while</span> (!que.empty()) {
+            <span class="dt">int</span> p = que.top().second;
+            que.pop();
+            <span class="kw">if</span> (vis[p])
+                <span class="kw">continue</span>;
+            <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+                <span class="kw">if</span> (dist[p] + ep-&gt;len &lt; dist[ep-&gt;v]) {
+                    dist[ep-&gt;v] = dist[p] + ep-&gt;len;
+                    que.push(make_pair(-dist[ep-&gt;v], ep-&gt;v));
+                }
+            vis[p] = <span class="kw">true</span>;
+            <span class="kw">if</span> (p == t)
+                <span class="kw">break</span>;
+        }
+        <span class="kw">return</span> dist[t];
+    }
+} graph;
+
+<span class="dt">int</span> n;
+
+<span class="dt">int</span> nid(<span class="dt">int</span> y, <span class="dt">int</span> x)
+{
+    <span class="kw">if</span> (x &lt;= <span class="dv">0</span> || y &gt;= n<span class="dv">+1</span>)
+        <span class="kw">return</span> graph.s;
+    <span class="kw">else</span> <span class="kw">if</span> (y &lt;= <span class="dv">0</span> || x &gt;= n<span class="dv">+1</span>)
+        <span class="kw">return</span> graph.t;
+    <span class="kw">return</span> (y<span class="dv">-1</span>) * n + x;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    graph.n = n*n + <span class="dv">1</span>;
+    graph.s = <span class="dv">0</span>;
+    graph.t = n*n + <span class="dv">1</span>;
+    rep(i, <span class="dv">0</span>, n) rep(j, <span class="dv">1</span>, n) {
+        <span class="dt">int</span> x = <span class="dv">0</span>; scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;x);
+        graph.add_edge(nid(i<span class="dv">+1</span>,j), nid(i,j), x);
+    }
+    rep(i, <span class="dv">1</span>, n) rep(j, <span class="dv">0</span>, n) {
+        <span class="dt">int</span> x = <span class="dv">0</span>; scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;x);
+        graph.add_edge(nid(i,j), nid(i,j<span class="dv">+1</span>), x);
+    }
+    rep(i, <span class="dv">0</span>, n) rep(j, <span class="dv">1</span>, n) {
+        <span class="dt">int</span> x = <span class="dv">0</span>; scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;x);
+        graph.add_edge(nid(i,j), nid(i<span class="dv">+1</span>,j), x);
+    }
+    rep(i, <span class="dv">1</span>, n) rep(j, <span class="dv">0</span>, n) {
+        <span class="dt">int</span> x = <span class="dv">0</span>; scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;x);
+        graph.add_edge(nid(i,j<span class="dv">+1</span>), nid(i,j), x);
+    }
+    lli res = graph.eval();
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj2007/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj2007/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj2007/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj2007/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj2007">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

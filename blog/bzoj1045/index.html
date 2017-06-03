@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1045: [HAOI2008] 糖果传递&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1045: [HAOI2008] 糖果传递
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=HAOI2008" target="_self">
+            <i class="fa fa-tag"></i> HAOI2008
+          </a>
+          <a class="tag" href="/blog/archive/?q=Mathematics" target="_self">
+            <i class="fa fa-tag"></i> Mathematics
+          </a>
+          <a class="tag" href="/blog/archive/?q=Patterns" target="_self">
+            <i class="fa fa-tag"></i> Patterns
+          </a>
+        </span>
+        <span class="date" title="18:37:40 | 11 December, 2016">
+          11 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>有 <span class="math inline">\(n\)</span> 个小朋友坐成一圈, 每人有 <span class="math inline">\(a_i\)</span> 个糖果. 每人只能给左右两人传递糖果. 每人 每次传递一个糖果代价为 <span class="math inline">\(1\)</span>.</p>
+<h2 id="input">Input</h2>
+<p>第一行一个正整数 <span class="math inline">\(n\)</span>, 表示小朋友的个数．接下来 <span class="math inline">\(n\)</span> 行, 每行一个整数 <span class="math inline">\(a_i\)</span>, 表示 第 <span class="math inline">\(i\)</span> 个小朋友得到的糖果的颗数.</p>
+<h2 id="output">Output</h2>
+<p>求使所有人获得均等糖果的最小代价.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>4
+1
+2
+5
+4</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>4</code></pre>
+<h2 id="explanation">Explanation</h2>
+<p>原题的 <span class="math inline">\(n\)</span> 给成了 <span class="math inline">\(\leq 987654321\)</span>, 但是其实 <span class="math inline">\(1000000\)</span> 就可以了, bzoj 巨坑, 但是 在这里我就给改掉了~</p>
+<p>题解大概是这样的 (引用自黄学长):</p>
+<p>首先, 最终每个小朋友的糖果数量可以计算出来, 等于糖果总数除以 <span class="math inline">\(n\)</span>, 用 <span class="math inline">\(mean\)</span> 表示.</p>
+<p>假设标号为 <span class="math inline">\(i\)</span> 的小朋友开始有 <span class="math inline">\(a_i\)</span> 颗糖果,<span class="math inline">\(x_i\)</span> 表示第 <span class="math inline">\(i\)</span> 个小朋友给了第 <span class="math inline">\(i-1\)</span> 个小朋友 <span class="math inline">\(x_i\)</span> 颗糖果, 如果 <span class="math inline">\(x_i \lt 0\)</span>, 说明第 <span class="math inline">\(i-1\)</span> 个小朋友给了第 <span class="math inline">\(i\)</span> 个小朋友 <span class="math inline">\(x_i\)</span> 颗糖果,<span class="math inline">\(x_1\)</span> 表示第一个小朋友给第 <span class="math inline">\(n\)</span> 个小朋友的糖果数量. 所以最后的答案就是:</p>
+<p><span class="math display">\[res = \sum_{i=1}^{n} |x_i|\]</span></p>
+<p>对于第一个小朋友, 他给了第 <span class="math inline">\(n\)</span> 个小朋友 <span class="math inline">\(x_1\)</span> 颗糖果, 还剩 <span class="math inline">\(a_1 - x_1\)</span> 颗糖果; 但因为第 <span class="math inline">\(2\)</span> 个小朋友给了他 <span class="math inline">\(x_2\)</span> 颗糖果, 所以最后还剩 <span class="math inline">\(a_1 - x_1 + x_2\)</span> 颗糖果. 根据题意, 最后的糖果数量等于 <span class="math inline">\(mean\)</span>, 即得到了一个方程:<span class="math inline">\(a_1 - x_1 + x_2 = mean\)</span>.</p>
+<p>同理, 对于第 <span class="math inline">\(2\)</span> 个小朋友, 有 <span class="math inline">\(a_2 - x_2 + x_3 = mean\)</span>. 最终, 我们可以得到 <span class="math inline">\(n\)</span> 个方程, 一共有 <span class="math inline">\(n\)</span> 个变量, 但是因为从前 <span class="math inline">\(n - 1\)</span> 个方程可以推导出最后一个方程, 所以实际上只有 <span class="math inline">\(n - 1\)</span> 个方程是有用的.</p>
+<p>尽管无法直接解出答案, 但可以用 <span class="math inline">\(x_1\)</span> 表示出其他的 <span class="math inline">\(x_i\)</span>, 那么本题就变成了单变量的极值问题.</p>
+<p>对于第 1 个小朋友,<span class="math inline">\(a_1 - x_1 + x_2 = mean \longrightarrow x_2 = mean - a_1 + x_1 = x_1 - c_1\)</span> (假设 <span class="math inline">\(c_1 = a_1 - mean\)</span>, 下同)</p>
+<p>对于第 2 个小朋友,<span class="math inline">\(a_2 - x_2 + x_3 = mean \longrightarrow x_3 = mean - a_2 + x_2 = 2 \cdot mean - a_1 - a_2 + x_1 = x_1 - c_2\)</span></p>
+<p>对于第 3 个小朋友,<span class="math inline">\(a_3 - x_3 + x_4 = mean \longrightarrow x_4 = mean - a_3 + x_3 = 3 \cdot mean - a_1 - a_2 - a_3 + x_1 = x_1 - c_3\)</span></p>
+<p><span class="math inline">\(\ldots\)</span></p>
+<p>对于第 n 个小朋友,<span class="math inline">\(a_n - x_n + x_1 = mean\)</span>.</p>
+<p>我们希望 <span class="math inline">\(x_i\)</span> 的绝对值之和尽量小, 即 <span class="math inline">\(|x_1| + |x_1 - c_1| + |x_1 - c_2| + \ldots + |x_1 - c_{n-1}|\)</span> 要尽量小. 注意到 <span class="math inline">\(|x_1 - c_i|\)</span> 的几何意义是数轴上的点 <span class="math inline">\(x_1\)</span> 到 <span class="math inline">\(c_i\)</span> 的距离, 所以 问题变成了: 给定数轴上的 <span class="math inline">\(n\)</span> 个点, 找出一个到他们的距离之和尽量小的点, 而这个点 就是这些数中的中位数, 证明略.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">1000100</span>;
+
+<span class="dt">int</span> n;
+lli arr[maxn], sum, mean;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;arr[i]);
+        sum += arr[i];
+    }
+    mean = sum / n;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>; i &lt;= n; i++)
+        arr[i] = arr[i - <span class="dv">1</span>] + arr[i] - mean;
+    sort(arr + <span class="dv">1</span>, arr + <span class="dv">1</span> + n);
+    lli res = <span class="dv">0</span>,
+        mid = arr[n / <span class="dv">2</span> + <span class="dv">1</span>];
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        res += abs(arr[i] - mid);
+    printf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1045/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1045/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1045/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1045/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1045">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

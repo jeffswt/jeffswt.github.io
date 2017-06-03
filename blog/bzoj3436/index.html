@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj3436: 小K的农场&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj3436: 小K的农场
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=Difference Constraint System" target="_self">
+            <i class="fa fa-tag"></i> Difference Constraint System
+          </a>
+          <a class="tag" href="/blog/archive/?q=Shortest Path" target="_self">
+            <i class="fa fa-tag"></i> Shortest Path
+          </a>
+          <a class="tag" href="/blog/archive/?q=SPFA" target="_self">
+            <i class="fa fa-tag"></i> SPFA
+          </a>
+        </span>
+        <span class="date" title="16:06:35 | 1 February, 2017">
+          1 February, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<blockquote>
+<p>小 K 是个特么喜欢玩 MC 的孩纸......</p>
+</blockquote>
+<p>小 K 在 MC 里面建立很多很多的农场, 总共 <span class="math inline">\(n\)</span> 个, 以至于他自己都忘记了每个农场中种植作物的具体数量了, 他只记得一些含糊的信息 (共 <span class="math inline">\(m\)</span> 个), 以下列三种形式描述:</p>
+<ol type="1">
+<li>农场 <span class="math inline">\(a\)</span> 比农场 <span class="math inline">\(b\)</span> 至少多种植了 <span class="math inline">\(c\)</span> 个单位的作物;</li>
+<li>农场 <span class="math inline">\(a\)</span> 比农场 <span class="math inline">\(b\)</span> 至多多种植了 <span class="math inline">\(c\)</span> 个单位的作物;</li>
+<li>农场 <span class="math inline">\(a\)</span> 与农场 <span class="math inline">\(b\)</span> 种植的作物数一样多.</li>
+</ol>
+<p>但是, 由于小 K 的记忆有些偏差, 所以他想要知道存不存在一种情况, 使得农场的种植作物数量与他记忆中的所有信息吻合.</p>
+<h2 id="input">Input</h2>
+<p>第一行包括两个整数 <span class="math inline">\(n\)</span> 和 <span class="math inline">\(m\)</span>, 分别表示农场数目和小 K 记忆中的信息的数目;</p>
+<p>接下来 <span class="math inline">\(m\)</span> 行: 如果每行的第一个数是 <span class="math inline">\(1\)</span>, 接下来有三个整数 <span class="math inline">\(a, b, c\)</span>, 表示农场 <span class="math inline">\(a\)</span> 比农场 <span class="math inline">\(b\)</span> 至少多种植了 <span class="math inline">\(c\)</span> 个单位的作物; 如果每行第一个数是 <span class="math inline">\(2\)</span>, 接下来有三个整数 <span class="math inline">\(a, b, c\)</span>, 表示农场 <span class="math inline">\(a\)</span> 比农场 <span class="math inline">\(b\)</span> 至多多种植了 <span class="math inline">\(c\)</span> 个单位的作物; 如果每行第一个数是 <span class="math inline">\(3\)</span>, 接下来有两个整数 <span class="math inline">\(a, b\)</span>, 表示农场 <span class="math inline">\(a\)</span> 种植的数量与 <span class="math inline">\(b\)</span> 一样多.</p>
+<h2 id="output">Output</h2>
+<p>如果存在某种情况与小 K 的记忆吻合, 输出 <code>Yes</code>, 否则输出 <code>No</code>.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>3 3
+3 1 2
+1 1 3 1
+2 2 3 2</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>Yes</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于 100% 的数据,<span class="math inline">\(1 \leq n, m, a, b, c \leq 10000\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>把 vis 更新写到外面我也是醉了 QwQ</p>
+<p>就是一个差分约束系统模板题, 话说好久没有写判负权回路的模板题我实在是容易写挂......</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="co">// typedef long long lli;</span>
+<span class="kw">typedef</span> <span class="dt">int</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">20100</span>, maxm = <span class="dv">100010</span>;
+<span class="co">// const lli infinit = 0x007f7f7f7f7f7f7fll;</span>
+<span class="dt">const</span> lli infinit = <span class="dv">1000000000</span>;
+
+<span class="kw">class</span> SPFA
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge {
+        <span class="dt">int</span> u, v;
+        lli len;
+        edge *next;
+    };
+    <span class="dt">int</span> n, s, ecnt;
+    edge *edges[maxn], epool[maxm];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v, lli len)
+    {
+        edge *p = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;len = len;
+        p-&gt;next = edges[u]; edges[u] = p;
+        <span class="kw">return</span> ;
+    }
+    lli dist[maxn];
+    <span class="dt">bool</span> inque[maxn];
+    <span class="dt">int</span> vis[maxn];
+    <span class="dt">bool</span> eval(<span class="dt">void</span>)
+    {
+        queue&lt;<span class="dt">int</span>&gt; que;
+        dist[s] = <span class="dv">0</span>;
+        inque[s] = <span class="dv">1</span>;
+        que.push(s);
+        <span class="kw">while</span> (!que.empty()) {
+            <span class="dt">int</span> p = que.front();
+            que.pop();
+            inque[p] = <span class="kw">false</span>;
+            <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+                <span class="kw">if</span> (dist[p] + ep-&gt;len &lt; dist[ep-&gt;v]) {
+                    dist[ep-&gt;v] = dist[p] + ep-&gt;len;
+                    <span class="kw">if</span> (inque[ep-&gt;v] &lt;= <span class="dv">0</span>) {
+                        que.push(ep-&gt;v);
+                        inque[ep-&gt;v] = <span class="kw">true</span>;
+                        vis[ep-&gt;v] = vis[p] + <span class="dv">1</span>;
+                        <span class="kw">if</span> (vis[ep-&gt;v] &gt; n)
+                            <span class="kw">return</span> <span class="kw">false</span>;
+                    }
+                }
+            <span class="kw">continue</span>;
+        }
+        <span class="kw">return</span> <span class="kw">true</span>;
+    }
+    <span class="dt">void</span> init(<span class="dt">void</span>)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+            dist[i] = infinit;
+            inque[i] = <span class="kw">false</span>;
+            vis[i] = <span class="dv">0</span>;
+        }
+        <span class="kw">return</span> ;
+    }
+} graph;
+
+<span class="dt">int</span> n, m;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    graph.n = n;
+    graph.init();
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, t, a, b, c; i &lt;= m; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d%d%d</span><span class="st">"</span>, &amp;t, &amp;a, &amp;b);
+        <span class="kw">if</span> (t == <span class="dv">1</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;c);
+            graph.add_edge(a, b, -c);
+        } <span class="kw">else</span> <span class="kw">if</span> (t == <span class="dv">2</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;c);
+            graph.add_edge(b, a, c);
+        } <span class="kw">else</span> {
+            graph.add_edge(a, b, <span class="dv">0</span>);
+            graph.add_edge(b, a, <span class="dv">0</span>);
+        }
+    }
+    <span class="co">// Evaluating result</span>
+    <span class="dt">bool</span> res = <span class="kw">true</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        graph.s = i;
+        <span class="kw">if</span> (graph.dist[i] &lt; infinit)
+            <span class="kw">continue</span>;
+        <span class="dt">bool</span> tmp = graph.eval();
+        <span class="kw">if</span> (!tmp) {
+            res = <span class="kw">false</span>;
+            <span class="kw">break</span>;
+        }
+    }
+    printf(<span class="st">"</span><span class="ch">%s\n</span><span class="st">"</span>, res ? <span class="st">"Yes"</span> : <span class="st">"No"</span>);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj3436/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj3436/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj3436/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj3436/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj3436">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

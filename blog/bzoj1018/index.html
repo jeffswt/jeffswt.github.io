@@ -1,0 +1,441 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1018: [SHOI2008]堵塞的交通traffic&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1018: [SHOI2008]堵塞的交通traffic
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=SHOI2008" target="_self">
+            <i class="fa fa-tag"></i> SHOI2008
+          </a>
+          <a class="tag" href="/blog/archive/?q=Segment Tree" target="_self">
+            <i class="fa fa-tag"></i> Segment Tree
+          </a>
+          <a class="tag" href="/blog/archive/?q=Fiddling" target="_self">
+            <i class="fa fa-tag"></i> Fiddling
+          </a>
+        </span>
+        <span class="date" title="21:23:50 | 17 December, 2016">
+          17 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>有一天, 由于某种穿越现象作用, 你来到了传说中的小人国. 小人国的布局非常奇特, 整个 国家的交通系统可以被看成是一个 <span class="math inline">\(2\)</span> 行 <span class="math inline">\(C\)</span> 列的矩形网格, 网格上的每个点代表一个城市, 相邻的城市之间有一条道路, 所以总共有 <span class="math inline">\(2C\)</span> 个城市和 <span class="math inline">\(3C-2\)</span> 条道路. 小人国的 交通状况非常槽糕. 有的时候由于交通堵塞, 两座城市之间的道路会变得不连通, 直到拥堵 解决, 道路才会恢复畅通. 初来咋到的你决心毛遂自荐到交通部某份差事, 部长听说你来自一个科技高度发达的世界, 喜出望外地要求你编写一个查询应答系统, 以挽救已经病入膏肓的小人国交通系统. 小人国的交通部将提供一些交通信息给你, 你的任务是根据当前的交通 情况回答查询的问题. 交通信息可以分为以下几种格式:</p>
+<ul>
+<li><code>Close r1 c1 r2 c2</code>: 相邻的两座城市 <span class="math inline">\((r1,c1)\)</span> 和 <span class="math inline">\((r2,c2)\)</span> 之间的道路被堵塞了;</li>
+<li><code>Open r1 c1 r2 c2</code>: 相邻的两座城市 <span class="math inline">\((r1,c1)\)</span> 和 <span class="math inline">\((r2,c2)\)</span> 之间的道路被疏通了;</li>
+<li><code>Ask r1 c1 r2 c2</code>: 询问城市 <span class="math inline">\((r1,c1)\)</span> 和 <span class="math inline">\((r2,c2)\)</span> 是否连通.</li>
+</ul>
+<p>如果存在一条路径使得这两条城市连通, 则返回 <code>Y</code>, 否则返回 <code>N</code>;</p>
+<h2 id="input">Input</h2>
+<p>第一行只有一个整数 <span class="math inline">\(C\)</span>, 表示网格的列数. 接下来若干行, 每行为一条交通信息, 以单独的一行 <code>Exit</code> 作为结束. 我们假设在一开始所有的道路都是堵塞的.</p>
+<h2 id="output">Output</h2>
+<p>对于每个查询, 输出一个 <code>Y</code> 或 <code>N</code>.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>2
+Open 1 1 1 2
+Open 1 2 2 2
+Ask 1 1 2 2
+Ask 2 1 2 2
+Exit</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>Y
+N</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>我们保证 <span class="math inline">\(C\)</span> 小于等于 <span class="math inline">\(100000\)</span>, 信息条数小于等于 <span class="math inline">\(100000\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<p>当然就是一发线段树了...... 维护一段区间内从左上、左下、右上、右下互相到达的连通性, 然后必须要存 6 种情况, 而不仅仅是 4 种 (不然有些情况考虑不到).</p>
+<p>一开始写了一个标记了 4 种状态的线段树, 交上去 WA, 然后不明觉厉找了一个题解一看 发现有 6 种状态然后赶紧改掉...... 结果调了半天还是过不去......</p>
+<p>索性重写一遍, 但是写完还是 pyjudge 过不了, 一看发现我和标解代码建树方式不一样, 直接把自底向上建树改成自顶向下建树, 而且区间一定是 <span class="math inline">\(n\)</span> 而不是 <span class="math inline">\(2^{\lfloor \log n \rfloor}\)</span>, 但是这样还属 pyjudge 不过......</p>
+<p>然后又调了好久发现一个问题: 本来应该是 <code>change(lc(p), x1, y1, x2, y2, val);</code> 的递归我给写成了 <code>change(lc(p), x1, x2, y1, y2, val);</code>. ...... QAQ</p>
+<p>就这一点小问题调了我七个小时...... QAQ</p>
+<p>顺便附带一下原来的 WA 代码:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="ot">#define rep(_var,_begin,_end) for(int _var=_begin;_var&lt;=_end;_var++)</span>
+<span class="ot">#define range(_begin,_end) rep(_,_begin,_end)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">300100</span>;
+
+<span class="kw">class</span> FiddledSegmentTree
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> n, lbnd[maxn], rbnd[maxn],
+        vacc[maxn][<span class="dv">7</span>]; <span class="co">// Accessible: 1 TL-TR, 2 TL-BR, 3 BL-TR, 4 BL-BR, 5 TL-BL, 6 TR-BR</span>
+    <span class="dt">int</span> hor_acc[maxn][<span class="dv">3</span>]; <span class="co">// Top, bottom</span>
+    <span class="ot">#define lc(__x) (2*(__x))</span>
+    <span class="ot">#define rc(__x) (2*(__x)+1)</span>
+    <span class="dt">void</span> build_tree(<span class="dt">int</span> n_)
+    {
+        n = <span class="dv">1</span>; <span class="kw">while</span> (n &lt; n_) n *= <span class="dv">2</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+            lbnd[n + i - <span class="dv">1</span>] = rbnd[n + i - <span class="dv">1</span>] = i;
+            vacc[n + i - <span class="dv">1</span>][<span class="dv">1</span>] = vacc[n + i - <span class="dv">1</span>][<span class="dv">4</span>] = <span class="kw">true</span>;
+            vacc[n + i - <span class="dv">1</span>][<span class="dv">2</span>] = vacc[n + i - <span class="dv">1</span>][<span class="dv">3</span>] = <span class="kw">false</span>;
+            vacc[n + i - <span class="dv">1</span>][<span class="dv">5</span>] = vacc[n + i - <span class="dv">1</span>][<span class="dv">6</span>] = <span class="kw">false</span>;
+        }
+        <span class="kw">for</span> (<span class="dt">int</span> i = n - <span class="dv">1</span>; i &gt;= <span class="dv">1</span>; i--) {
+            lbnd[i] = lbnd[<span class="dv">2</span> * i];
+            rbnd[i] = rbnd[<span class="dv">2</span> * i + <span class="dv">1</span>];
+            range(<span class="dv">1</span>,<span class="dv">6</span>) vacc[i][_] = <span class="kw">false</span>;
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> update_vacc(<span class="dt">int</span> p)
+    {
+        <span class="ot">#define work_change(__x,__y,__z) (vacc[lc(p)][__x] &amp;&amp;</span>\
+<span class="ot">            hor_acc[rbnd[lc(p)]][__y] &amp;&amp; vacc[rc(p)][__z])</span>
+        vacc[p][<span class="dv">1</span>] = work_change(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>) || work_change(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>);
+        vacc[p][<span class="dv">2</span>] = work_change(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>) || work_change(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">4</span>);
+        vacc[p][<span class="dv">3</span>] = work_change(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>) || work_change(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">3</span>);
+        vacc[p][<span class="dv">4</span>] = work_change(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>) || work_change(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">4</span>);
+        <span class="ot">#define work_vchange(__x,__y,__z) (vacc[__y][__x] || (vacc[__y][1]</span>\
+<span class="ot">            &amp;&amp; hor_acc[rbnd[lc(p)]][1] &amp;&amp; vacc[__z][5] &amp;&amp; hor_acc[rbnd[lc(p)]][2]</span>\
+<span class="ot">            &amp;&amp; vacc[__y][4]))</span>
+        <span class="co">// vacc[p][5] = vacc[lc(p)][5] ||</span>
+        <span class="co">//     (vacc[lc(p)][1] &amp;&amp; hor_acc[rbnd[lc(p)]][1] &amp;&amp; vacc[rc(p)][5] &amp;&amp;</span>
+        <span class="co">//     hor_acc[rbnd[lc(p)]][2] &amp;&amp; vacc[lc(p)][4]);</span>
+        <span class="co">// vacc[p][6] = vacc[rc(p)][6] ||</span>
+        <span class="co">//     (vacc[rc(p)][1] &amp;&amp; hor_acc[rbnd[lc(p)]][1] &amp;&amp; vacc[lc(p)][6] &amp;&amp;</span>
+        <span class="co">//     hor_acc[rbnd[lc(p)]][2] &amp;&amp; vacc[rc(p)][4]);</span>
+        vacc[p][<span class="dv">5</span>] = work_vchange(<span class="dv">5</span>, lc(p), rc(p));
+        vacc[p][<span class="dv">6</span>] = work_vchange(<span class="dv">6</span>, rc(p), lc(p));
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> change_vert(<span class="dt">int</span> pos, <span class="dt">bool</span> v)
+    {
+        <span class="dt">int</span> p = n + pos - <span class="dv">1</span>;
+        vacc[p][<span class="dv">1</span>] = vacc[p][<span class="dv">4</span>] = <span class="kw">true</span>;
+        vacc[p][<span class="dv">2</span>] = vacc[p][<span class="dv">3</span>] = v;
+        vacc[p][<span class="dv">5</span>] = vacc[p][<span class="dv">6</span>] = v;
+        <span class="kw">for</span> (p /= <span class="dv">2</span>; p &gt;= <span class="dv">1</span>; p /= <span class="dv">2</span>)
+            update_vacc(p);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> change_horz(<span class="dt">int</span> pos, <span class="dt">int</span> vert, <span class="dt">bool</span> v)
+    {
+        <span class="dt">int</span> p = n + pos - <span class="dv">1</span>,
+            q = n + (pos<span class="dv">+1</span>) - <span class="dv">1</span>;
+        hor_acc[pos][vert] = v;
+        <span class="kw">for</span> (p /= <span class="dv">2</span>, q /= <span class="dv">2</span>; p &gt;= <span class="dv">1</span> &amp;&amp; q &gt;= <span class="dv">1</span>; p /= <span class="dv">2</span>, q /= <span class="dv">2</span>) {
+            update_vacc(p);
+            <span class="kw">if</span> (q != p) update_vacc(q);
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> query__(<span class="dt">int</span> p, <span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">int</span> mode)
+    {
+        <span class="kw">if</span> (l &lt; <span class="dv">0</span> || l &gt; n || r &lt; <span class="dv">0</span> || r &gt; n || l &gt; r)
+            <span class="kw">return</span> <span class="kw">false</span>;
+        <span class="kw">if</span> (l == lbnd[p] &amp;&amp; r == rbnd[p])
+            <span class="kw">return</span> vacc[p][mode];
+        <span class="kw">if</span> (r &lt;= rbnd[lc(p)]) <span class="kw">return</span> query__(lc(p), l, r, mode);
+        <span class="kw">else</span> <span class="kw">if</span> (l &gt;= lbnd[rc(p)]) <span class="kw">return</span> query__(rc(p), l, r, mode);
+        <span class="co">// That would be an excessive amount of querying...</span>
+        <span class="ot">#define work_query(__x,__y,__z) (query__(lc(p),l,rbnd[lc(p)],__x) &amp;&amp;</span>\
+<span class="ot">            hor_acc[rbnd[lc(p)]][__y] &amp;&amp; query__(rc(p),lbnd[rc(p)],r,__z))</span>
+        <span class="co">// Yes. We used macros. That's a lot nicer, isn't it?</span>
+        <span class="kw">if</span> (mode == <span class="dv">1</span>) <span class="kw">return</span> work_query(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>) || work_query(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>);
+        <span class="kw">if</span> (mode == <span class="dv">2</span>) <span class="kw">return</span> work_query(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>) || work_query(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">4</span>);
+        <span class="kw">if</span> (mode == <span class="dv">3</span>) <span class="kw">return</span> work_query(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>) || work_query(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">3</span>);
+        <span class="kw">if</span> (mode == <span class="dv">4</span>) <span class="kw">return</span> work_query(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>) || work_query(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">4</span>);
+        <span class="co">// Another strange aspect of things</span>
+        <span class="kw">if</span> (mode == <span class="dv">5</span>) <span class="kw">return</span> query__(lc(p), l, rbnd[lc(p)], <span class="dv">5</span>) || (
+            query__(lc(p), l, rbnd[lc(p)], <span class="dv">1</span>) &amp;&amp; hor_acc[rbnd[lc(p)]][<span class="dv">1</span>] &amp;&amp;
+            query__(rc(p), lbnd[rc(p)], r, <span class="dv">5</span>) &amp;&amp; hor_acc[rbnd[lc(p)]][<span class="dv">2</span>] &amp;&amp;
+            query__(lc(p), l, rbnd[lc(p)], <span class="dv">4</span>));
+        <span class="kw">if</span> (mode == <span class="dv">6</span>) <span class="kw">return</span> query__(rc(p), lbnd[rc(p)], r, <span class="dv">6</span>) || (
+            query__(rc(p), lbnd[rc(p)], r, <span class="dv">1</span>) &amp;&amp; hor_acc[rbnd[lc(p)]][<span class="dv">1</span>] &amp;&amp;
+            query__(lc(p), l, rbnd[lc(p)], <span class="dv">6</span>) &amp;&amp; hor_acc[rbnd[lc(p)]][<span class="dv">2</span>] &amp;&amp;
+            query__(rc(p), lbnd[rc(p)], r, <span class="dv">4</span>));
+        <span class="kw">return</span> <span class="kw">false</span>;
+    }
+    <span class="dt">void</span> change(<span class="dt">int</span> x1, <span class="dt">int</span> y1, <span class="dt">int</span> x2, <span class="dt">int</span> y2, <span class="dt">bool</span> val)
+    {
+        <span class="co">// Keep arrangement.</span>
+        <span class="kw">if</span> (x1 &gt; x2) swap(x1, x2), swap(y1, y2);
+        <span class="co">// Change vertical data</span>
+        <span class="kw">if</span> (x1 == x2) change_vert(x1, val);
+        <span class="co">// Change horizontal data</span>
+        <span class="kw">else</span> change_horz(x1, y1, val);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> query(<span class="dt">int</span> x1, <span class="dt">int</span> y1, <span class="dt">int</span> x2, <span class="dt">int</span> y2)
+    {
+        <span class="co">// Keep arrangement.</span>
+        <span class="kw">if</span> (x1 &gt; x2) swap(x1, x2), swap(y1, y2);
+        <span class="co">// Same row and same column.</span>
+        <span class="kw">if</span> (x1 == x2 &amp;&amp; y1 == y2) <span class="kw">return</span> <span class="kw">true</span>;
+        <span class="co">// On the same column.</span>
+        <span class="co">// if (x1 == x2) return query__(1, x1, x2, 2);</span>
+        <span class="co">// On the same row (ensured different columns)</span>
+        <span class="kw">if</span> (y1 == <span class="dv">1</span> &amp;&amp; y2 == <span class="dv">1</span>) <span class="kw">return</span> query__(<span class="dv">1</span>, x1, x2, <span class="dv">1</span>) || (
+            query__(<span class="dv">1</span>, <span class="dv">1</span>, x1, <span class="dv">5</span>) &amp;&amp; query__(<span class="dv">1</span>, x1, x2, <span class="dv">4</span>) &amp;&amp; query__(<span class="dv">1</span>, x2, n, <span class="dv">6</span>));
+        <span class="kw">if</span> (y1 == <span class="dv">2</span> &amp;&amp; y2 == <span class="dv">2</span>) <span class="kw">return</span> query__(<span class="dv">1</span>, x1, x2, <span class="dv">4</span>) || (
+            query__(<span class="dv">1</span>, <span class="dv">1</span>, x1, <span class="dv">5</span>) &amp;&amp; query__(<span class="dv">1</span>, x1, x2, <span class="dv">1</span>) &amp;&amp; query__(<span class="dv">1</span>, x2, n, <span class="dv">6</span>));
+        <span class="co">// On different rows (different columns)</span>
+        <span class="kw">if</span> (y1 == <span class="dv">1</span> &amp;&amp; y2 == <span class="dv">2</span>) <span class="kw">return</span> query__(<span class="dv">1</span>, x1, x2, <span class="dv">2</span>) || (
+            query__(<span class="dv">1</span>, <span class="dv">1</span>, x1, <span class="dv">5</span>) &amp;&amp; query__(<span class="dv">1</span>, x1, x2, <span class="dv">4</span>)) || (
+            query__(<span class="dv">1</span>, x1, x2, <span class="dv">1</span>) &amp;&amp; query__(<span class="dv">1</span>, x2, n, <span class="dv">6</span>));
+        <span class="kw">if</span> (y1 == <span class="dv">2</span> &amp;&amp; y2 == <span class="dv">1</span>) <span class="kw">return</span> query__(<span class="dv">1</span>, x1, x2, <span class="dv">3</span>) || (
+            query__(<span class="dv">1</span>, <span class="dv">1</span>, x1, <span class="dv">5</span>) &amp;&amp; query__(<span class="dv">1</span>, x1, x2, <span class="dv">1</span>)) || (
+            query__(<span class="dv">1</span>, x1, x2, <span class="dv">4</span>) &amp;&amp; query__(<span class="dv">1</span>, x2, n, <span class="dv">6</span>));
+        <span class="co">//</span>
+        <span class="co">// int mode = 0;</span>
+        <span class="co">// #define check_query(__x,__y,__z) if(y1==(__x)&amp;&amp;y2==(__y)) mode=(__z)</span>
+        <span class="co">// check_query(1, 1, 1);</span>
+        <span class="co">// check_query(1, 2, 2);</span>
+        <span class="co">// check_query(2, 1, 3);</span>
+        <span class="co">// check_query(2, 2, 4);</span>
+        <span class="co">// // Returning data.</span>
+        <span class="co">// // printf("querying %d %d %d\n", x1, x2, mode);</span>
+        <span class="co">// bool res = query__(1, x1, x2, mode);</span>
+        <span class="co">// return res;</span>
+        <span class="kw">return</span> <span class="kw">false</span>;
+    }
+} st;
+
+<span class="dt">int</span> C;
+<span class="dt">char</span> str[<span class="dv">20</span>];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;C);
+    st.build_tree(C);
+    <span class="kw">while</span> (<span class="kw">true</span>) {
+        scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str);
+        <span class="dt">int</span> r1, c1, r2, c2;
+        <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'O'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d%d%d%d</span><span class="st">"</span>, &amp;r1, &amp;c1, &amp;r2, &amp;c2);
+            st.change(c1, r1, c2, r2, <span class="kw">true</span>);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'C'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d%d%d%d</span><span class="st">"</span>, &amp;r1, &amp;c1, &amp;r2, &amp;c2);
+            st.change(c1, r1, c2, r2, <span class="kw">false</span>);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'A'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d%d%d%d</span><span class="st">"</span>, &amp;r1, &amp;c1, &amp;r2, &amp;c2);
+            <span class="dt">bool</span> res = st.query(c1, r1, c2, r2);
+            printf(<span class="st">"</span><span class="ch">%s\n</span><span class="st">"</span>, res ? <span class="st">"Y"</span> : <span class="st">"N"</span>);
+        } <span class="kw">else</span> {
+            <span class="kw">break</span>;
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="ot">#define rep(_var,_begin,_end) for (int _var=_begin;_var&lt;=_end;_var++)</span>
+<span class="ot">#define range(_begin,_end) rep(_,_begin,_end)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">300100</span>;
+
+<span class="kw">class</span> SegmentTree
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> status {
+        <span class="dt">bool</span> norm[<span class="dv">2</span>][<span class="dv">2</span>]; <span class="co">// TL-&gt;TR, TL-&gt;BR, BL-&gt;TR, BL-&gt;BR</span>
+        <span class="dt">bool</span> rev[<span class="dv">2</span>]; <span class="co">// TL-&gt;BL, TR-&gt;BR</span>
+    };
+    <span class="dt">int</span> n, lbnd[maxn], rbnd[maxn], mid[maxn];
+    <span class="dt">bool</span> hor_acc[maxn][<span class="dv">2</span>];
+    status state[maxn];
+    <span class="ot">#define lc(__x) ((__x)*2)</span>
+    <span class="ot">#define rc(__x) ((__x)*2+1)</span>
+    status join(status s1, status s2, <span class="dt">bool</span> b[])
+    {
+        status res;
+        rep(i, <span class="dv">0</span>, <span class="dv">1</span>) rep(j, <span class="dv">0</span>, <span class="dv">1</span>)
+            res.norm[i][j] = (s1.norm[i][<span class="dv">0</span>] &amp;&amp; b[<span class="dv">0</span>] &amp;&amp; s2.norm[<span class="dv">0</span>][j])
+                || (s1.norm[i][<span class="dv">1</span>] &amp;&amp; b[<span class="dv">1</span>] &amp;&amp; s2.norm[<span class="dv">1</span>][j]);
+        res.rev[<span class="dv">0</span>] = s1.rev[<span class="dv">0</span>] || (s1.norm[<span class="dv">0</span>][<span class="dv">0</span>] &amp;&amp; b[<span class="dv">0</span>] &amp;&amp; s2.rev[<span class="dv">0</span>]
+            &amp;&amp; b[<span class="dv">1</span>] &amp;&amp; s1.norm[<span class="dv">1</span>][<span class="dv">1</span>]);
+        res.rev[<span class="dv">1</span>] = s2.rev[<span class="dv">1</span>] || (s2.norm[<span class="dv">0</span>][<span class="dv">0</span>] &amp;&amp; b[<span class="dv">0</span>] &amp;&amp; s1.rev[<span class="dv">1</span>]
+            &amp;&amp; b[<span class="dv">1</span>] &amp;&amp; s2.norm[<span class="dv">1</span>][<span class="dv">1</span>]);
+        <span class="kw">return</span> res;
+    }
+    <span class="dt">void</span> build(<span class="dt">int</span> p, <span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        lbnd[p] = l, rbnd[p] = r;
+        mid[p] = (lbnd[p] + rbnd[p]) / <span class="dv">2</span>;
+        <span class="kw">if</span> (l == r) { range(<span class="dv">0</span>,<span class="dv">1</span>)
+            state[p].norm[_][_] = <span class="kw">true</span>;
+        } <span class="kw">else</span> {
+            build(lc(p), l, mid[p]);
+            build(rc(p), mid[p] + <span class="dv">1</span>, r);
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> build_tree(<span class="dt">int</span> n_)
+    {
+        n = n_;
+        build(<span class="dv">1</span>, <span class="dv">1</span>, n);
+        <span class="kw">return</span> ;
+    }
+    status query_range(<span class="dt">int</span> p, <span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="kw">if</span> (l &lt;= lbnd[p] &amp;&amp; r &gt;= rbnd[p])
+            <span class="kw">return</span> state[p];
+        <span class="kw">if</span> (r &lt;= mid[p])
+            <span class="kw">return</span> query_range(lc(p), l, r);
+        <span class="kw">else</span> <span class="kw">if</span> (l &gt; mid[p])
+            <span class="kw">return</span> query_range(rc(p), l, r);
+        <span class="kw">return</span> join(query_range(lc(p), l, r),
+            query_range(rc(p), l, r),
+            hor_acc[p]);
+    }
+    <span class="dt">void</span> change(<span class="dt">int</span> p, <span class="dt">int</span> x1, <span class="dt">int</span> y1, <span class="dt">int</span> x2, <span class="dt">int</span> y2, <span class="dt">int</span> val)
+    {
+        <span class="kw">if</span> (x1 == x2 &amp;&amp; y1 == mid[p]) {
+            hor_acc[p][x1] = val;
+            state[p] = join(state[lc(p)], state[rc(p)], hor_acc[p]);
+        } <span class="kw">else</span> <span class="kw">if</span> (lbnd[p] == rbnd[p]) {
+            status&amp; st = state[p];
+            range(<span class="dv">0</span>,<span class="dv">1</span>) st.norm[_][!_] = st.rev[_] = val;
+        } <span class="kw">else</span> {
+            <span class="kw">if</span> (y2 &lt;= mid[p])
+                <span class="co">// change(lc(p), x1, x2, y1, y2, val);</span>
+                change(lc(p), x1, y1, x2, y2, val);
+            <span class="kw">else</span>
+                <span class="co">// change(rc(p), x1, x2, y1, y2, val);</span>
+                change(rc(p), x1, y1, x2, y2, val);
+            state[p] = join(state[lc(p)], state[rc(p)], hor_acc[p]);
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> change(<span class="dt">int</span> x1, <span class="dt">int</span> y1, <span class="dt">int</span> x2, <span class="dt">int</span> y2, <span class="dt">bool</span> val)
+    {
+        <span class="kw">if</span> (y1 &gt; y2) {
+            swap(x1, x2);
+            swap(y1, y2);
+        } x1--; x2--;
+        change(<span class="dv">1</span>, x1, y1, x2, y2, val);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> query(<span class="dt">int</span> x1, <span class="dt">int</span> y1, <span class="dt">int</span> x2, <span class="dt">int</span> y2)
+    {
+        <span class="kw">if</span> (y1 &gt; y2) {
+            swap(x1, x2);
+            swap(y1, y2);
+        } x1--; x2--;
+        status lst = query_range(<span class="dv">1</span>, <span class="dv">1</span>, y1), <span class="co">// Left boundary to interval left</span>
+            rst = query_range(<span class="dv">1</span>, y2, n), <span class="co">// Interval right to right boundary</span>
+            mst = query_range(<span class="dv">1</span>, y1, y2); <span class="co">// Between the Interval</span>
+        <span class="dt">bool</span> res = <span class="kw">false</span>;
+        rep(i, <span class="dv">0</span>, <span class="dv">1</span>) rep(j, <span class="dv">0</span>, <span class="dv">1</span>)
+            <span class="kw">if</span> (mst.norm[i][j] &amp;&amp; (i == x1 || lst.rev[<span class="dv">1</span>]) &amp;&amp; (j == x2 || rst.rev[<span class="dv">0</span>]))
+                res = <span class="kw">true</span>;
+        <span class="kw">return</span> res;
+    }
+} st;
+
+<span class="dt">int</span> n;
+<span class="dt">char</span> str[<span class="dv">20</span>];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    st.build_tree(n);
+    <span class="kw">while</span> (<span class="kw">true</span>) {
+        scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str);
+        <span class="dt">int</span> r1, c1, r2, c2;
+        <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'O'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d%d%d%d</span><span class="st">"</span>, &amp;r1, &amp;c1, &amp;r2, &amp;c2);
+            st.change(r1, c1, r2, c2, <span class="kw">true</span>);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'C'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d%d%d%d</span><span class="st">"</span>, &amp;r1, &amp;c1, &amp;r2, &amp;c2);
+            st.change(r1, c1, r2, c2, <span class="kw">false</span>);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'A'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d%d%d%d</span><span class="st">"</span>, &amp;r1, &amp;c1, &amp;r2, &amp;c2);
+            <span class="dt">bool</span> res = st.query(r1, c1, r2, c2);
+            printf(<span class="st">"</span><span class="ch">%s\n</span><span class="st">"</span>, res ? <span class="st">"Y"</span> : <span class="st">"N"</span>);
+        } <span class="kw">else</span> {
+            <span class="kw">break</span>;
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1018/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1018/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1018/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1018/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1018">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

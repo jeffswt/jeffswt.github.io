@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NOIP-EMU-140510-robot 机器人&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          NOIP-EMU-140510-robot 机器人
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOIP Emulation" target="_self">
+            <i class="fa fa-tag"></i> NOIP Emulation
+          </a>
+          <a class="tag" href="/blog/archive/?q=Implementation" target="_self">
+            <i class="fa fa-tag"></i> Implementation
+          </a>
+        </span>
+        <span class="date" title="20:06:20 | 21 November, 2016">
+          21 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="机器人-robot.cppcpas">机器人 (robot. cpp/c/pas)</h2>
+<h3 id="题目描述">题目描述</h3>
+<p>早苗入手了最新的 Gundam 模型. 最新款自然有着与以往不同的功能, 那就是它能够自动行走, 厉害吧. 早苗的新模型可以按照输入的命令进行移动, 命令包括 ‘E’、‘S’、‘W’、‘N’ 四种, 分别对应东南西北. 执行某个命令时, 它会向对应方向移动一个单位. 作为新型机器人, 它可以执行命令串. 对于输入的命令串, 每一秒它会按命令行动一次. 执行完命令串的最后一个命令后, 会自动从头开始循环. 在 0 时刻时机器人位于 (0, 0). 求 T 秒后机器人所在位置坐标.</p>
+<h3 id="输入格式">输入格式</h3>
+<p>第 1 行: 一个字符串, 表示早苗输入的命令串, 保证至少有 1 个命令</p>
+<p>第 2 行: 一个正整数 T</p>
+<h3 id="输出格式">输出格式</h3>
+<p>2 个整数, 表示 T 秒时, 机器人的坐标.</p>
+<!-- More -->
+<h3 id="样例输入">样例输入</h3>
+<pre><code>NSWWNSNEEWN
+12</code></pre>
+<h3 id="样例输出">样例输出</h3>
+<pre><code>-1 3</code></pre>
+<h3 id="数据范围">数据范围</h3>
+<p>对于 60% 的数据 <span class="math inline">\(T \leq 500000\)</span> 且命令串长度 <span class="math inline">\(\leq 5000\)</span></p>
+<p>对于 100% 的数据 <span class="math inline">\(T \leq 2000000000\)</span> 且命令串长度 <span class="math inline">\(\leq 5000\)</span></p>
+<h3 id="注意">注意</h3>
+<p>向东移动, 坐标改变改变为 (X+1, Y);</p>
+<p>向南移动, 坐标改变改变为 (X, Y-1);</p>
+<p>向西移动, 坐标改变改变为 (X-1, Y);</p>
+<p>向北移动, 坐标改变改变为 (X, Y+1);</p>
+<h3 id="explanation">Explanation</h3>
+<p>预处理一下运动状态然后简单模一下就可以了</p>
+<del>
+水题一枚~
+</del>
+<h3 id="source-code">Source Code</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">5010</span>;
+
+<span class="dt">char</span> str[maxn];
+lli states[maxn][<span class="dv">2</span>];
+<span class="dt">int</span> n, t = <span class="dv">0</span>;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%s%d</span><span class="st">"</span>, str + <span class="dv">1</span>, &amp;t);
+    n = strlen(str + <span class="dv">1</span>);
+    <span class="co">// Set initial X/Y coords</span>
+    states[<span class="dv">0</span>][<span class="dv">0</span>] = <span class="dv">0</span>;
+    states[<span class="dv">0</span>][<span class="dv">1</span>] = <span class="dv">0</span>;
+    <span class="co">// Iterating</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        lli dx = states[i - <span class="dv">1</span>][<span class="dv">0</span>],
+            dy = states[i - <span class="dv">1</span>][<span class="dv">1</span>];
+        <span class="kw">if</span> (str[i] == <span class="st">'E'</span>) dx++;
+        <span class="kw">else</span> <span class="kw">if</span> (str[i] == <span class="st">'W'</span>) dx--;
+        <span class="kw">else</span> <span class="kw">if</span> (str[i] == <span class="st">'N'</span>) dy++;
+        <span class="kw">else</span> <span class="kw">if</span> (str[i] == <span class="st">'S'</span>) dy--;
+        states[i][<span class="dv">0</span>] = dx;
+        states[i][<span class="dv">1</span>] = dy;
+    }
+    lli dx = states[n][<span class="dv">0</span>] * <span class="dt">int</span>(t / n) + states[t % n][<span class="dv">0</span>],
+        dy = states[n][<span class="dv">1</span>] * <span class="dt">int</span>(t / n) + states[t % n][<span class="dv">1</span>];
+    printf(<span class="st">"</span><span class="ch">%lld</span><span class="st"> </span><span class="ch">%lld\n</span><span class="st">"</span>, dx, dy);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/noipemu02robot/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/noipemu02robot/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/noipemu02robot/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/noipemu02robot/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="noipemu02robot">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

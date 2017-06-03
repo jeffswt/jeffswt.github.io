@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1068: [SCOI2007]压缩&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1068: [SCOI2007]压缩
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=SCOI2007" target="_self">
+            <i class="fa fa-tag"></i> SCOI2007
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+          <a class="tag" href="/blog/archive/?q=Interval DP" target="_self">
+            <i class="fa fa-tag"></i> Interval DP
+          </a>
+        </span>
+        <span class="date" title="16:00:00 | 15 August, 2016">
+          15 August, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Problem Specification</th>
+<th style="text-align: left;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Time Limit</td>
+<td style="text-align: left;">1 Sec</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Memory Limit</td>
+<td style="text-align: left;">128 MB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Submit</td>
+<td style="text-align: left;">877</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Solved</td>
+<td style="text-align: left;">549</td>
+</tr>
+</tbody>
+</table>
+<!-- More -->
+<h2 id="description">Description</h2>
+<p>给一个由小写字母组成的字符串, 我们可以用一种简单的方法来压缩其中的重复信息. 压缩后的字符串除了小写字母外还可以 (但不必) 包含大写字母 R 与 M, 其中 M 标记重复串的开始, R 重复从上一个 M (如果当前位置左边没有 M, 则从串的开始算起) 开始的解压结果 (称为缓冲串). bcdcdcdcd 可以压缩为 bMcdRR, 下面是解压缩的过程</p>
+<figure>
+<img class="thumb" data-small="/blog/bzoj1068/bzoj1068_1-small.jpg" data-src="/blog/bzoj1068/bzoj1068_1.jpg" data-thumb="/blog/bzoj1068/bzoj1068_1-thumb.jpg" src="/blog/bzoj1068/bzoj1068_1-thumb.jpg" title="无图片无真相" width="432px"/>
+<figcaption>
+无图片无真相
+</figcaption>
+</figure>
+<p>另一个例子是 abcabcdabcabcdxyxyz 可以被压缩为 abcRdRMxyRz.</p>
+<h2 id="input">Input</h2>
+<p>输入仅一行, 包含待压缩字符串, 仅包含小写字母, 长度为 n.</p>
+<h2 id="output">Output</h2>
+<p>输出仅一行, 即压缩后字符串的最短长度.</p>
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>bcdcdcdcdxcdcdcdcd</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>12</code></pre>
+<h2 id="hint">HINT</h2>
+<p>在第一个例子中, 解为 aaaRa, 在第二个例子中, 解为 bMcdRRxMcdRR.</p>
+<p>【限制】</p>
+<p>100% 的数据满足: 1&lt;=n&lt;=50 100% 的数据满足: 1&lt;=n&lt;=50</p>
+<h2 id="source">Source</h2>
+<hr/>
+<p>区间 DP, 选择一个区间被折半/不对折的成本, 每一次判断 O (n), 需要 O (n<sup>3) 次查询, 故复杂度为 O (n</sup>4).</p>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">100</span>;
+<span class="dt">char</span> str[maxn];
+<span class="dt">int</span> dp_dat[maxn][maxn][<span class="dv">2</span>]; <span class="co">// Not using memorization techniques can be *COSTLY*!</span>
+<span class="dt">bool</span> dp_saved[maxn][maxn][<span class="dv">2</span>];
+
+<span class="co">// Whether the string at [l, r] is foldable, symmetrically</span>
+<span class="dt">bool</span> foldable(<span class="dt">int</span> l, <span class="dt">int</span> r)
+{
+    <span class="dt">int</span> len = r - l + <span class="dv">1</span>,
+        mid = (l + r) &gt;&gt; <span class="dv">1</span>,
+        half_len = len &gt;&gt; <span class="dv">1</span>;
+    <span class="kw">if</span> (len &amp; <span class="dv">1</span>) <span class="co">// Odd length, determined to be incorrect</span>
+        <span class="kw">return</span> <span class="kw">false</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; half_len; i++)
+        <span class="kw">if</span> (str[l + i] != str[mid + <span class="dv">1</span> + i])
+            <span class="kw">return</span> <span class="kw">false</span>;
+    <span class="kw">return</span> <span class="kw">true</span>;
+}
+
+<span class="co">// Dynamic programming in the interval [l, r], and whether there would be</span>
+<span class="co">// 'M' characters inside this interval.</span>
+<span class="dt">int</span> dp(<span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">int</span> has_m)
+{
+    <span class="dt">int</span> len = r - l + <span class="dv">1</span>;
+    <span class="kw">if</span> (len == <span class="dv">1</span>) <span class="co">// Always of the size 1, undoubtedly</span>
+        <span class="kw">return</span> <span class="dv">1</span>;
+    <span class="co">// Memorized searching</span>
+    <span class="kw">if</span> (dp_saved[l][r][has_m])
+        <span class="kw">return</span> dp_dat[l][r][has_m];
+    dp_saved[l][r][has_m] = <span class="kw">true</span>;
+    <span class="co">// The second half can be splittable</span>
+    <span class="kw">if</span> (has_m)
+        <span class="kw">for</span> (<span class="dt">int</span> i = l; i &lt; r; i++)
+            len = min(len, dp(l, i, <span class="kw">true</span>) + dp(i + <span class="dv">1</span>, r, <span class="kw">true</span>) + <span class="dv">1</span>);
+    <span class="co">// The second half not to be splitted</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = l; i &lt; r; i++)
+        len = min(len, dp(l, i, has_m) + (r - i));
+    <span class="co">// If foldable, fold it and see what happens.</span>
+    <span class="kw">if</span> (foldable(l, r))
+        len = min(len, dp(l, (l + r) &gt;&gt; <span class="dv">1</span>, <span class="kw">false</span>) + <span class="dv">1</span>); <span class="co">// +1 -&gt; 'M'</span>
+    dp_dat[l][r][has_m] = len;
+    <span class="kw">return</span> len;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str + <span class="dv">1</span>);
+    <span class="dt">int</span> len = strlen(str + <span class="dv">1</span>);
+    <span class="dt">int</span> res = dp(<span class="dv">1</span>, len, <span class="kw">true</span>);
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<hr/>
+<del>
+无
+</del>
+<hr/>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1068/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1068/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1068/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1068/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1068">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

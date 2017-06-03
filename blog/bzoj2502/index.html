@@ -1,0 +1,269 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj2502: 清理雪道&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj2502: 清理雪道
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=Problems with Privileges" target="_self">
+            <i class="fa fa-tag"></i> Problems with Privileges
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=Network Flow" target="_self">
+            <i class="fa fa-tag"></i> Network Flow
+          </a>
+          <a class="tag" href="/blog/archive/?q=Network Flow with Bounds" target="_self">
+            <i class="fa fa-tag"></i> Network Flow with Bounds
+          </a>
+          <a class="tag" href="/blog/archive/?q=Minimum Flow" target="_self">
+            <i class="fa fa-tag"></i> Minimum Flow
+          </a>
+        </span>
+        <span class="date" title="00:19:44 | 5 January, 2017">
+          5 January, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>滑雪场坐落在 FJ 省西北部的若干座山上.</p>
+<p>从空中鸟瞰, 滑雪场可以看作一个有向无环图, 每条弧代表一个斜坡 (即雪道), 弧的方向 代表斜坡下降的方向.</p>
+<p>你的团队负责每周定时清理雪道. 你们拥有一架直升飞机, 每次飞行可以从总部带一个人降落到滑雪场的某个地点, 然后再飞回总部. 从降落的地点出发, 这个人可以顺着斜坡向下滑行, 并清理他所经过的雪道.</p>
+<p>由于每次飞行的耗费是固定的, 为了最小化耗费, 你想知道如何用最少的飞行次数才能完成 清理雪道的任务.</p>
+<h2 id="input">Input</h2>
+<p>输入文件的第一行包含一个整数 <span class="math inline">\(n (2 \leq n \leq 100)\)</span>----代表滑雪场的地点的数量.</p>
+<p>接下来的 <span class="math inline">\(n\)</span> 行, 描述 <span class="math inline">\(1 \sim n\)</span> 号地点出发的斜坡, 第 <span class="math inline">\(i\)</span> 行的第一个数为 <span class="math inline">\(m_i (0 \leq m_i \lt n)\)</span>, 后面共有 <span class="math inline">\(m_i\)</span> 个整数, 由空格隔开, 每个整数 <span class="math inline">\(a_{i,j}\)</span> 互不相同, 代表从地点 <span class="math inline">\(i\)</span> 下降到地点 <span class="math inline">\(a_{i,j}\)</span> 的斜坡. 每个地点至少有一个斜坡与之相连.</p>
+<h2 id="output">Output</h2>
+<p>输出文件的第一行是一个整数 <span class="math inline">\(k\)</span>----直升飞机的最少飞行次数.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>8
+1 3
+1 7
+2 4 5
+1 8
+1 8
+0
+2 6 5
+0</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>4</code></pre>
+<h2 id="explanation">Explanation</h2>
+<p>每条雪道拆成俩个结点</p>
+<p>就是通过上下界限制每条雪道至少通过 1 次</p>
+<p>可能我的做法不是很正常, 因为 <span class="citation" data-cites="Burst_Zero"> @Burst_Zero</span> 大神告诉我其实这道题用最小流两个方向 各跑一遍就可以出来了~</p>
+<p>话说我为什么调了两天呢...... 因为我每一次跑最大流的时候都会把总流量设成 0, 然后从头 跑一遍一点意思都没有, 所以就不停地死循环加边~ 突然脑洞一开发现了这个 bug</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">int</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">30010</span>, maxm = <span class="dv">500100</span>;
+<span class="co">// const lli infinit = 0x007f7f7f7f7f7f7fll;</span>
+<span class="dt">const</span> <span class="dt">int</span> infinit = <span class="bn">0x7fffffff</span>;
+
+<span class="kw">class</span> Dinic
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v;
+        lli flow;
+        edge *next, *rev;
+    };
+    <span class="dt">int</span> n, s, t, ecnt;
+    edge *edges[maxn], epool[maxm], *edges_bak[maxn];
+    <span class="dt">int</span> level[maxn];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v, lli flow)
+    {
+        edge *p = &amp;epool[++ecnt],
+             *q = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;flow = flow;
+        p-&gt;next = edges[u]; edges[u] = p; p-&gt;rev = q;
+        q-&gt;u = v; q-&gt;v = u; q-&gt;flow = <span class="dv">0</span>;
+        q-&gt;next = edges[v]; edges[v] = q; q-&gt;rev = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> make_level(<span class="dt">void</span>)
+    {
+        memset(level, <span class="dv">0</span>, <span class="kw">sizeof</span>(level));
+        queue&lt;<span class="dt">int</span>&gt; que;
+        que.push(s);
+        level[s] = <span class="dv">1</span>;
+        <span class="kw">while</span> (!que.empty()) {
+            <span class="dt">int</span> p = que.front();
+            que.pop();
+            <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+                <span class="kw">if</span> (ep-&gt;flow &amp;&amp; !level[ep-&gt;v]) {
+                    level[ep-&gt;v] = level[p] + <span class="dv">1</span>;
+                    que.push(ep-&gt;v);
+                }
+        }
+        <span class="kw">if</span> (level[t] &gt; <span class="dv">0</span>)
+            <span class="kw">return</span> <span class="kw">true</span>;
+        <span class="kw">return</span> <span class="kw">false</span>;
+    }
+    lli find(<span class="dt">int</span> p, lli mn)
+    {
+        <span class="kw">if</span> (p == t)
+            <span class="kw">return</span> mn;
+        lli sum = <span class="dv">0</span>;
+        <span class="kw">for</span> (edge *ep = edges[p]; ep &amp;&amp; sum &lt; mn; ep = ep-&gt;next)
+            <span class="kw">if</span> (ep-&gt;flow &amp;&amp; level[ep-&gt;v] == level[p] + <span class="dv">1</span>) {
+                lli tmp = find(ep-&gt;v, min(mn - sum, ep-&gt;flow));
+                <span class="kw">if</span> (tmp &gt; <span class="dv">0</span>) {
+                    ep-&gt;flow -= tmp;
+                    ep-&gt;rev-&gt;flow += tmp;
+                    sum += tmp;
+                }
+            }
+        <span class="kw">if</span> (sum &lt;= <span class="dv">0</span>)
+            level[p] = <span class="dv">0</span>;
+        <span class="kw">return</span> sum;
+    }
+    lli max_flow;
+    lli eval(<span class="dt">void</span>)
+    {
+        <span class="co">// Backing up</span>
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++)
+            edges_bak[i] = edges[i];
+        <span class="co">// Evaluating</span>
+        <span class="kw">while</span> (make_level()) {
+            <span class="co">// Restoring stuff</span>
+            <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++)
+                edges[i] = edges_bak[i];
+            <span class="co">// Deep first searching, literally.</span>
+            lli tmp = find(s, infinit);
+            <span class="kw">if</span> (tmp &lt;= <span class="dv">0</span>)
+                <span class="kw">break</span>;
+            max_flow += tmp;
+        }
+        <span class="kw">return</span> max_flow;
+    }
+} graph;
+
+<span class="dt">int</span> n, m;
+<span class="dt">int</span> degree[maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, x; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;x); <span class="co">// How many linkages</span>
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>, y; j &lt;= x; j++) {
+            scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;y); <span class="co">// Target</span>
+            m += <span class="dv">1</span>;
+            graph.add_edge(i, n + <span class="dv">2</span>*m - <span class="dv">1</span>, infinit);
+            graph.add_edge(n + <span class="dv">2</span>*m, y, infinit);
+        }
+    }
+    graph.n = n + <span class="dv">2</span>*m + <span class="dv">2</span>;<span class="co">//3;</span>
+    <span class="dt">int</span> S =   n + <span class="dv">2</span>*m + <span class="dv">1</span>; <span class="co">// Source</span>
+    graph.s = <span class="dv">0</span>;<span class="co">//2; // Super-source</span>
+    graph.t = n + <span class="dv">2</span>*m + <span class="dv">2</span>;<span class="co">//3; // Sink</span>
+    <span class="co">// Adding connections in edges</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        graph.add_edge(n + <span class="dv">2</span>*i - <span class="dv">1</span>, n + <span class="dv">2</span>*i, infinit);
+        degree[n + <span class="dv">2</span>*i - <span class="dv">1</span>] -= <span class="dv">1</span>;
+        degree[n + <span class="dv">2</span>*i] += <span class="dv">1</span>;
+    }
+    <span class="co">// Begin, from source to arbitrary hilltop</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        graph.add_edge(S, i, infinit);
+    <span class="co">// Limiting flow with degrees</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = n<span class="dv">+1</span>; i &lt;= n + <span class="dv">2</span>*m; i++) {
+        <span class="kw">if</span> (degree[i] &gt; <span class="dv">0</span>)
+            graph.add_edge(graph.s, i, degree[i]);
+        <span class="kw">else</span>
+            graph.add_edge(i, graph.t, -degree[i]);
+    }
+    <span class="co">// Testing and flowing</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &gt;= <span class="dv">1</span>; i++) {
+        <span class="co">// break;</span>
+        graph.add_edge(graph.s, S, <span class="dv">1</span>);
+        lli res = graph.eval();
+        <span class="kw">if</span> (res &gt;= m) {
+            printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, i);
+            <span class="kw">break</span>;
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj2502/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj2502/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj2502/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj2502/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj2502">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

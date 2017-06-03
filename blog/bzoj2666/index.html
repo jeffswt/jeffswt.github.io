@@ -1,0 +1,200 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj2666: [cqoi2012]组装&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj2666: [cqoi2012]组装
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=CQOI2012" target="_self">
+            <i class="fa fa-tag"></i> CQOI2012
+          </a>
+          <a class="tag" href="/blog/archive/?q=Greedy" target="_self">
+            <i class="fa fa-tag"></i> Greedy
+          </a>
+        </span>
+        <span class="date" title="23:18:27 | 29 November, 2016">
+          29 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>数轴上有 m 个生产车间可以生产零件. 一共有 <span class="math inline">\(n\)</span> 种零件, 编号为 <span class="math inline">\(1 - n\)</span>. 第 i 个车间的 坐标为 <span class="math inline">\(x_i\)</span>, 生产第 <span class="math inline">\(p_i\)</span> 种零件 <span class="math inline">\((1 \leq p_i \leq n)\)</span>. 你需要在数轴上的某个位置 修建一个组装车间, 把这些零件组装起来. 为了节约运输成本, 你需要最小化 <span class="math inline">\(cost(1)+cost(2)+...+cost(n)\)</span>, 其中 <span class="math inline">\(cost(x)\)</span> 表示生产第 <span class="math inline">\(x\)</span> 种零件的车间中, 到组装车间距离的平方的最小值.</p>
+<h2 id="input">Input</h2>
+<p>输入第一行为两个整数 <span class="math inline">\(n, m\)</span>, 即零件的种类数和生产车间的个数. 以下 <span class="math inline">\(m\)</span> 行每行两个整数 <span class="math inline">\(x_i\)</span> 和 <span class="math inline">\(p_i (1 \leq p_i \leq n)\)</span>. 输入按照生产车间从左到右的顺序排列 (即 <span class="math inline">\(x_i \leq x_{i+1}\)</span>. 注意车间位置可以重复). 输入保证每种零件都有车间生产.</p>
+<h2 id="output">Output</h2>
+<p>输出仅一行, 即组装车间的最优位置 (可以和某个生产车间重合), 四舍五入保留四位小数. 输入保证最优位置惟一.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>3 5
+-1 3
+0 1
+2 3
+4 2
+5 2</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>2.0000</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对 40% 的数据保证:<span class="math inline">\(n \leq 15, m \leq 25, x_i \leq 100\)</span></p>
+<p>对 100% 的数据保证:<span class="math inline">\(n \leq 10000, m \leq 10^5, x_i \leq 10^5\)</span></p>
+<h2 id="solution">Solution</h2>
+<p>其实是这样的一道贪心题......</p>
+<p>首先当你从左往右扫的时候, 会发现每一次都应该让某一种颜色的下一个位置被 (优先地) 选中, 这样选出来的情况才有意义. 然后只需要讨论一下这些临界点的中点 (在中点处距离 最小) 时候, 其他点的情况.</p>
+<p>这样就大概排一下序, 复杂度是 <span class="math inline">\(O(m \log m)\)</span> 的, 但是应该可以用基数排序优化一下. 考虑到本题用了 0. 5 秒 1A 掉了, 就不管优化的事情了 233</p>
+<p>下面这个题解将我最初的猜想验证了一下, 并且给出了更详细的解 (PoPoQQQ):<a href="">http://blog.csdn.net/PoPoQQQ/article/details/44758407</a></p>
+<blockquote>
+<p>这不是显然么--</p>
+<p>考虑将组装车间从-∞移动到+∞ 初始选择最左侧的点作为最近点</p>
+<p>那么移动的过程中一旦车间离同种颜色的下一个点更近 那么当前点当然要替换了</p>
+<p>所以是按照当前点和同种颜色的下一个点的中点坐标从左到右替换嘛......</p>
+<p>小心爆 long long</p>
+</blockquote>
+<p>注意刚才那个题解是感性证明 (口头 QED), 下面的是理性证明 (本人数学蒟蒻, 看不懂):<a href="">http://www.cnblogs.com/jianglangcaijin/p/4204478.html</a></p>
+<del>
+<strong>只有链接, 中间东西太多了, 不想 Ctrl+C 了</strong>
+</del>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">double</span> llf;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">1010</span>, maxm = <span class="dv">100100</span>;
+
+<span class="co">////////////////////////////////////////////////////////////////////////////////</span>
+<span class="co">// Sorting for actual positions, at first preprocessing</span>
+<span class="kw">struct</span> srtra { lli pos, belong; } srta[maxm];
+<span class="dt">bool</span> <span class="kw">operator</span> &lt; (srtra a, srtra b) {
+    <span class="kw">if</span> (a.belong != b.belong) <span class="kw">return</span> a.belong &lt; b.belong;
+    <span class="kw">return</span> a.pos &lt; b.pos; }
+
+<span class="co">////////////////////////////////////////////////////////////////////////////////</span>
+<span class="co">// Sorting for decision changing points, at second preprocessing</span>
+<span class="kw">struct</span> srtrb { lli prev, next; } srtb[maxm];
+<span class="dt">bool</span> <span class="kw">operator</span> &lt; (srtrb a, srtrb b) {
+    <span class="kw">return</span> a.prev + a.next &lt; b.prev + b.next; }
+
+<span class="dt">int</span> n, m, tot;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+        scanf(<span class="st">"</span><span class="ch">%lld%lld</span><span class="st">"</span>, &amp;srta[i].pos, &amp;srta[i].belong);
+    sort(srta + <span class="dv">1</span>, srta + <span class="dv">1</span> + m);
+    <span class="co">// Assigning positions locators for all colours</span>
+    tot = <span class="dv">0</span>; <span class="co">// Count of to-be-chosen positions, should equal to $m-n$</span>
+    <span class="co">// And the required, preprocessing sum of all data</span>
+    lli pos_sum = <span class="dv">0</span>, <span class="co">// $\sum pos_i$</span>
+        sqr_sum = <span class="dv">0</span>, <span class="co">// $\sum pos_i^2 $</span>
+        res = <span class="fl">1e18</span>; <span class="co">// Corresponding sqr_sum for final result</span>
+    llf res_pos = <span class="fl">0.0</span>; <span class="co">// Final result</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        <span class="kw">if</span> (srta[i].belong != srta[i - <span class="dv">1</span>].belong) {
+            pos_sum += srta[i].pos;
+            sqr_sum += srta[i].pos * srta[i].pos;
+        } <span class="kw">else</span> {
+            srtb[++tot].prev = srta[i - <span class="dv">1</span>].pos;
+            srtb[tot].next = srta[i].pos;
+        }
+    }
+    sort(srtb + <span class="dv">1</span>, srtb + <span class="dv">1</span> + tot);
+    res = sqr_sum - (llf)pos_sum * pos_sum / n;
+    res_pos = (llf)pos_sum / n;
+    <span class="co">// Evaluating through all possibilities</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= tot; i++) {
+        <span class="co">// Updating pos_sum</span>
+        pos_sum -= srtb[i].prev;
+        pos_sum += srtb[i].next;
+        <span class="co">// Updating sqr_sum</span>
+        sqr_sum -= srtb[i].prev * srtb[i].prev;
+        sqr_sum += srtb[i].next * srtb[i].next;
+        <span class="co">// Updating res</span>
+        lli tmp_res = sqr_sum - (llf)pos_sum * pos_sum / n;
+        <span class="kw">if</span> (tmp_res &lt; res) {
+            res = tmp_res;
+            res_pos = (llf)pos_sum / n;
+        }
+    }
+    <span class="co">// Output results</span>
+    printf(<span class="st">"</span><span class="ch">%.4Lf\n</span><span class="st">"</span>, res_pos);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj2666/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj2666/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj2666/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj2666/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj2666">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

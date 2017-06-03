@@ -1,0 +1,200 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj3155: Preprefix sum&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj3155: Preprefix sum
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=Fenwick Tree" target="_self">
+            <i class="fa fa-tag"></i> Fenwick Tree
+          </a>
+          <a class="tag" href="/blog/archive/?q=Segment Tree" target="_self">
+            <i class="fa fa-tag"></i> Segment Tree
+          </a>
+        </span>
+        <span class="date" title="00:27:59 | 14 March, 2017">
+          14 March, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>对于一个长度为 <span class="math inline">\(n\)</span> 的序列 <span class="math inline">\(a_1, a_2, \ldots, a_n\)</span>, 其前缀和 (Prefix Sum)<span class="math inline">\(S_i\)</span> 为前 <span class="math inline">\(i\)</span> 个元素的和, 即 <span class="math inline">\(\sum_{k=1}^{i} a_i\)</span>. 而前缀和的前缀和 (Preprefix sum) 就是把前缀和序列 <span class="math inline">\(S_1, S_2, \ldots, S_n\)</span> 作为原序列, 再求一次前缀和. 记再次求得的前缀和序列的第 <span class="math inline">\(i\)</span> 位为 <span class="math inline">\(SS_i\)</span>.</p>
+<p>现在给定一个长度为 <span class="math inline">\(n\)</span> 的序列 <span class="math inline">\(a_1, a_2, \ldots, a_n\)</span>, 有两种操作:</p>
+<ol type="1">
+<li><code>Modify i x</code> 将 <span class="math inline">\(a_i\)</span> 的值改为 <span class="math inline">\(x\)</span>;</li>
+<li><code>Query i</code> 询问 <span class="math inline">\(SS_i\)</span> 的值.</li>
+</ol>
+<p>请编写一个程序来实现这两种操作.</p>
+<h2 id="input">Input</h2>
+<p>第一行给出两个整数 <span class="math inline">\(n, m\)</span>. 分别表示序列长度和操作个数;</p>
+<p>接下来一行有 <span class="math inline">\(n\)</span> 个数, 即给定的序列 <span class="math inline">\(a_1, a_2, \ldots, a_n\)</span>;</p>
+<p>接下来 <span class="math inline">\(m\)</span> 行, 每行对应一个操作, 格式见题目描述.</p>
+<h2 id="output">Output</h2>
+<p>对于每个询问操作, 输出一行, 表示所询问的 <span class="math inline">\(SS_i\)</span> 的值.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>5 3
+1 2 3 4 5
+Query 5
+Modify 3 2
+Query 5</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>35
+32</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有数据, 满足 <span class="math inline">\(1 \leq n, m \leq 10^5\)</span>, 且在任意时刻 <span class="math inline">\(0 \leq a_i \leq 10^5\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<p>我们考虑这样一个递推公式:</p>
+<p><span class="math display">\[\begin{aligned}
+SS_n &amp;= \sum_{i=1}^{n} S_i\\
+&amp;= \sum_{i=1}^{n} \sum_{j=1}^{i} a_i\\
+&amp;= \sum_{i=1}^{n} (n + 1 - i) \cdot a_i\\
+&amp;= n \cdot \sum_{i=1}^{n} a_i - \sum_{i=1}^{n} (i - 1) \cdot a_i
+\end{aligned}\]</span></p>
+<p>然后发现左边和右边两个都是可以分别用树状数组或线段树维护的, 但是树状数组代码行数 更少, 所以我就写了树状数组.</p>
+<p>所以说这是一道结论题, 随便推一下就可以得到结果了.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">100100</span>;
+
+<span class="kw">class</span> BinaryIndexedTree
+{
+<span class="kw">public</span>:
+    lli dat[maxn];
+    <span class="dt">int</span> n;
+    lli query(<span class="dt">int</span> x)
+    {
+        lli sum = <span class="dv">0</span>;
+        <span class="kw">for</span> (; x &gt; <span class="dv">0</span>; x -= x &amp; -x)
+            sum += dat[x];
+        <span class="kw">return</span> sum;
+    }
+    <span class="dt">void</span> change(<span class="dt">int</span> x, lli v)
+    {
+        <span class="kw">for</span> (; x &lt;= n; x += x &amp; -x)
+            dat[x] += v;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> init(<span class="dt">int</span> n)
+    {
+        <span class="kw">this</span>-&gt;n = n;
+        memset(dat, <span class="dv">0</span>, <span class="kw">sizeof</span>(dat));
+        <span class="kw">return</span> ;
+    }
+} bit1, bit2;
+
+<span class="dt">int</span> n, m;
+lli arr[maxn];
+<span class="dt">char</span> str[<span class="dv">64</span>];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;arr[i]);
+    <span class="co">// Initializing BIT tree.</span>
+    bit1.init(n);
+    bit2.init(n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        bit1.change(i, arr[i]);
+        bit2.change(i, (i<span class="dv">-1</span>) * arr[i]);
+    }
+    <span class="co">// Can you answer these queries?</span>
+    <span class="kw">for</span> (<span class="dt">int</span> idx = <span class="dv">1</span>; idx &lt;= m; idx++) {
+        lli b; lli c;
+        scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str);
+        <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'Q'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;b);
+            lli res = b * bit1.query(b) - bit2.query(b);
+            printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'M'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%lld%lld</span><span class="st">"</span>, &amp;b, &amp;c);
+            lli tmp = c - arr[b];
+            arr[b] += tmp;
+            bit1.change(b, tmp);
+            bit2.change(b, (b<span class="dv">-1</span>) * tmp);
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj3155/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj3155/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj3155/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj3155/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj3155">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

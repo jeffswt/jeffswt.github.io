@@ -1,0 +1,498 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1067: [SCOI2007]降雨量&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1067: [SCOI2007]降雨量
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=SCOI2007" target="_self">
+            <i class="fa fa-tag"></i> SCOI2007
+          </a>
+          <a class="tag" href="/blog/archive/?q=Implementation" target="_self">
+            <i class="fa fa-tag"></i> Implementation
+          </a>
+        </span>
+        <span class="date" title="15:00:00 | 15 August, 2016">
+          15 August, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Problem Specification</th>
+<th style="text-align: left;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Time Limit</td>
+<td style="text-align: left;">1 Sec</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Memory Limit</td>
+<td style="text-align: left;">162 MB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Submit</td>
+<td style="text-align: left;">3535</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Solved</td>
+<td style="text-align: left;">919</td>
+</tr>
+</tbody>
+</table>
+<!-- More -->
+<h2 id="description">Description</h2>
+<p>我们常常会说这样的话: “X 年是自 Y 年以来降雨量最多的”. 它的含义是 X 年的降雨量不超过 Y 年, 且对于任意 Y ＜ Z ＜ X, Z 年的降雨量严格小于 X 年. 例如 2002, 2003, 2004 和 2005 年的降雨量分别为 4920, 5901, 2832 和 3890, 则可以说 “2005 年是自 2003 年以来最多的”, 但不能说 “2005 年是自 2002 年以来最多的” 由于有些年份的降雨量未知, 有的说法是可能正确也可以不正确的.</p>
+<h2 id="input">Input</h2>
+<p>输入仅一行包含一个正整数 n, 为已知的数据. 以下 n 行每行两个整数 yi 和 ri, 为年份和降雨量, 按照年份从小到大排列, 即 yi ＜ yi+1. 下一行包含一个正整数 m, 为询问的次数. 以下 m 行每行包含两个数 Y 和 X, 即询问 “X 年是自 Y 年以来降雨量最多的.” 这句话是必真、必假还是 “有可能”.</p>
+<h2 id="output">Output</h2>
+<p>对于每一个询问, 输出 true, false 或者 maybe.</p>
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>6
+2002 4920
+2003 5901
+2004 2832
+2005 3890
+2007 5609
+2008 3024
+5
+2002 2005
+2003 2005
+2002 2007
+2003 2007
+2005 2008</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>false
+true
+false
+maybe
+false</code></pre>
+<h2 id="hint">HINT</h2>
+<p>100% 的数据满足: 1&lt;=n&lt;=50000, 1&lt;=m&lt;=10000,-10<sup>9&lt;=yi&lt;=10</sup>9, 1&lt;=ri&lt;=10^9</p>
+<h2 id="source">Source</h2>
+<h3 id="poj-2637-worstweather-ever">POJ 2637 WorstWeather Ever</h3>
+<p>一道极其奇怪的特判题...... 一连拍+交了 N 多遍都没有 AC, 但是和 HZW 的代码相比没有 WA.</p>
+<p>有什么可说的呢? 自己看代码吧~</p>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;map&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">131100</span>;
+
+<span class="kw">class</span> SegmentTree
+{
+<span class="kw">public</span>:
+    <span class="co">// Segment tree optimized for maximum values' lookup and **not** modification.</span>
+    <span class="co">// Used for query purposes only.</span>
+    <span class="dt">int</span> n;
+    <span class="dt">int</span> lbnd[maxn], rbnd[maxn];
+    ll  vmx[maxn];
+    <span class="dt">void</span> build_tree(<span class="dt">int</span> _n, ll* arr)
+    {
+        n = <span class="dv">1</span>; <span class="kw">while</span> (n &lt; _n) n *= <span class="dv">2</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+            lbnd[i + n - <span class="dv">1</span>] = rbnd[i + n - <span class="dv">1</span>] = i;
+            vmx[i + n - <span class="dv">1</span>] = arr[i];
+        }
+        <span class="kw">for</span> (<span class="dt">int</span> i = n - <span class="dv">1</span>; i &gt;= <span class="dv">1</span>; i--) {
+            lbnd[i] = lbnd[<span class="dv">2</span> * i];
+            rbnd[i] = rbnd[<span class="dv">2</span> * i + <span class="dv">1</span>];
+            vmx[i] = max(vmx[<span class="dv">2</span> * i], vmx[<span class="dv">2</span> * i + <span class="dv">1</span>]);
+        }
+        <span class="kw">return</span> ;
+    }
+    ll query(<span class="dt">int</span> p, <span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="kw">if</span> (lbnd[p] == l &amp;&amp; rbnd[p] == r)
+            <span class="kw">return</span> vmx[p];
+        <span class="kw">if</span> (l &gt;= lbnd[<span class="dv">2</span> * p + <span class="dv">1</span>])
+            <span class="kw">return</span> query(<span class="dv">2</span> * p + <span class="dv">1</span>, l, r);
+        <span class="kw">else</span> <span class="kw">if</span> (r &lt;= rbnd[<span class="dv">2</span> * p])
+            <span class="kw">return</span> query(<span class="dv">2</span> * p, l, r);
+        <span class="kw">else</span>
+            <span class="kw">return</span> max(query(<span class="dv">2</span> * p, l, rbnd[<span class="dv">2</span> * p]),
+                    query(<span class="dv">2</span> * p + <span class="dv">1</span>, lbnd[<span class="dv">2</span> * p + <span class="dv">1</span>], r));
+    }
+    ll query(<span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="kw">if</span> (l &gt; r) <span class="kw">return</span> <span class="dv">0</span>;
+        <span class="kw">return</span> query(<span class="dv">1</span>, l, r);
+    }
+} st1, st2;
+
+<span class="kw">enum</span> determine { True, False, Maybe };
+
+<span class="dt">int</span> n, m;
+ll  arr1[maxn], arr2[maxn], arr3[maxn];
+map&lt;ll, <span class="dt">int</span>&gt;    fnd;
+
+ll my_upper_bound(ll x)
+{
+    <span class="kw">if</span> (x &lt; arr1[<span class="dv">1</span>])
+        <span class="kw">return</span> <span class="dv">1</span>;
+    <span class="dt">int</span> l = <span class="dv">1</span>, r = n;
+    <span class="kw">while</span> (r &gt; l) {
+        <span class="dt">int</span> m = (l + r) / <span class="dv">2</span>;
+        <span class="kw">if</span> (arr1[m] == x)
+            <span class="kw">return</span> m;
+        <span class="kw">else</span> <span class="kw">if</span> (arr1[m] &lt; x)
+            l = m + <span class="dv">1</span>;
+        <span class="kw">else</span>
+            r = m;
+    }
+    <span class="kw">return</span> l;
+}
+
+ll my_lower_bound(ll x)
+{
+    <span class="kw">if</span> (x &gt; arr1[n])
+        <span class="kw">return</span> n;
+    <span class="dt">int</span> y = my_upper_bound(x);
+    <span class="kw">if</span> (arr1[y] == x)
+        <span class="kw">return</span> y;
+    <span class="kw">else</span> <span class="kw">if</span> (arr1[y] &gt; x)
+        <span class="kw">return</span> y - <span class="dv">1</span>;
+    <span class="kw">return</span> <span class="dv">1</span>;
+}
+
+determine work(<span class="dt">int</span> x, <span class="dt">int</span> y)
+{
+    <span class="kw">if</span> (x &lt;= y)
+        <span class="kw">return</span> False;
+    <span class="co">// Those should have never happened...</span>
+    <span class="dt">int</span> x_in, y_in;
+    ll  dis_1, dis_2;
+    x_in = fnd[x];
+    y_in = fnd[y]; <span class="co">// If equals to 0 then not in index</span>
+    <span class="kw">if</span> (x_in &amp;&amp; y_in) {
+        <span class="co">// Why would there be such nonsense!</span>
+        <span class="kw">if</span> (x_in - y_in &lt;= <span class="dv">0</span>)
+            <span class="kw">return</span> False;
+        <span class="co">// There's definitely an answer...</span>
+        <span class="kw">if</span> (x_in - y_in == <span class="dv">1</span>) {
+            <span class="kw">if</span> (x - y &gt; <span class="dv">1</span>) <span class="co">// Lacks adjacency</span>
+                <span class="kw">return</span> arr2[y_in] &lt;= arr2[x_in] ? False : Maybe;
+            <span class="kw">else</span> <span class="kw">if</span> (x - y == <span class="dv">1</span>) <span class="co">// Adjacent means permanence</span>
+                <span class="kw">return</span> arr2[y_in] &lt;= arr2[x_in] ? False : True;
+            <span class="kw">else</span> <span class="co">// Doesn't even exists...</span>
+                <span class="kw">return</span> False;
+        } <span class="kw">else</span> <span class="kw">if</span> (x_in - y_in &gt; <span class="dv">1</span>) {
+            <span class="kw">if</span> (arr2[y_in] &lt;= arr2[x_in])
+                <span class="kw">return</span> False;
+            dis_1 = st1.query(y_in + <span class="dv">1</span>, x_in - <span class="dv">1</span>);
+            dis_2 = st2.query(y_in, x_in - <span class="dv">1</span>);
+            <span class="kw">if</span> (dis_1 &gt; arr2[x_in])
+                <span class="kw">return</span> False;
+            <span class="kw">if</span> (dis_2 &gt; <span class="dv">1</span>)
+                <span class="kw">return</span> Maybe;
+            <span class="kw">return</span> True;
+        }
+    }
+    <span class="co">// If one of them has missing data...</span>
+    <span class="co">// I'm going to take one of them one at a time, in case I nausea myself</span>
+    <span class="kw">if</span> (x_in &amp;&amp; !y_in) {
+        y_in = my_upper_bound(y);
+        dis_1 = st1.query(y_in, x_in - <span class="dv">1</span>);
+        <span class="kw">if</span> (dis_1 &lt; arr2[x_in])
+            <span class="kw">return</span> Maybe;
+        <span class="kw">else</span>
+            <span class="kw">return</span> False;
+    } <span class="kw">else</span> <span class="kw">if</span> (!x_in &amp;&amp; y_in) {
+        x_in = my_lower_bound(x);
+        dis_1 = st1.query(y_in + <span class="dv">1</span>, x_in);
+        <span class="kw">if</span> (arr2[y_in] &gt; dis_1)
+            <span class="kw">return</span> Maybe;
+        <span class="kw">else</span>
+            <span class="kw">return</span> False;
+    }
+    <span class="co">// Both of them has missing data means we won't be sure of anything.</span>
+    <span class="kw">if</span> (!x_in &amp;&amp; !y_in)
+        <span class="kw">return</span> Maybe;
+    <span class="co">// That's finally final!</span>
+    <span class="kw">return</span> False;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    fnd.clear();
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%lld%lld</span><span class="st">"</span>, &amp;arr1[i], &amp;arr2[i]);
+        fnd[arr1[i]] = i; <span class="co">// Index this year in case of finding things...</span>
+        <span class="kw">if</span> (i &gt;= <span class="dv">2</span>) arr3[i - <span class="dv">1</span>] = arr1[i] - arr1[i - <span class="dv">1</span>];
+    }
+    st1.build_tree(n, arr2);
+    st2.build_tree(n - <span class="dv">1</span>, arr3);
+    <span class="co">// Typically responding to queries...</span>
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        <span class="dt">int</span> x, y;
+        scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;y, &amp;x); <span class="co">// Guranteed that X &gt; Y</span>
+        <span class="kw">switch</span> (work(x, y)) {
+        <span class="kw">case</span> True:
+            printf(<span class="st">"true</span><span class="ch">\n</span><span class="st">"</span>);
+            <span class="kw">break</span>;
+        <span class="kw">case</span> False:
+            printf(<span class="st">"false</span><span class="ch">\n</span><span class="st">"</span>);
+            <span class="kw">break</span>;
+        <span class="kw">case</span> Maybe:
+            printf(<span class="st">"maybe</span><span class="ch">\n</span><span class="st">"</span>);
+            <span class="kw">break</span>;
+        <span class="kw">default</span>:
+            <span class="kw">break</span>;
+        }
+        <span class="kw">continue</span>;
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<del>
+上面是错误的
+</del>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include&lt;iostream&gt;</span>
+<span class="ot">#include&lt;cstdio&gt;</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">struct</span> data{<span class="dt">int</span> ly,ry,mx,know;}<span class="fu">tr</span>[<span class="dv">200001</span>];
+<span class="dt">int</span> n,m;
+<span class="dt">void</span> build(<span class="dt">int</span> k,<span class="dt">int</span> l,<span class="dt">int</span> r)
+{
+     <span class="kw">if</span>(l==r){scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>,&amp;<span class="fu">tr</span>[k].ly,&amp;<span class="fu">tr</span>[k].mx);<span class="fu">tr</span>[k].ry=<span class="fu">tr</span>[k].ly;<span class="fu">tr</span>[k].know=<span class="dv">1</span>;<span class="kw">return</span>;}
+     <span class="dt">int</span> mid=(l+r)&gt;&gt;<span class="dv">1</span>;
+     build(k&lt;&lt;<span class="dv">1</span>,l,mid);build(k&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>,mid<span class="dv">+1</span>,r);
+     <span class="fu">tr</span>[k].know=(<span class="fu">tr</span>[k&lt;&lt;<span class="dv">1</span>].know&amp;&amp;<span class="fu">tr</span>[k&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>].know);
+     <span class="kw">if</span>(<span class="fu">tr</span>[k&lt;&lt;<span class="dv">1</span>].ry<span class="dv">+1</span>!=<span class="fu">tr</span>[k&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>].ly)<span class="fu">tr</span>[k].know=<span class="dv">0</span>;
+     <span class="fu">tr</span>[k].ly=<span class="fu">tr</span>[k&lt;&lt;<span class="dv">1</span>].ly;<span class="fu">tr</span>[k].ry=<span class="fu">tr</span>[k&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>].ry;
+     <span class="fu">tr</span>[k].mx=max(<span class="fu">tr</span>[k&lt;&lt;<span class="dv">1</span>].mx,<span class="fu">tr</span>[k&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>].mx);
+ }
+<span class="dt">int</span> get(<span class="dt">int</span> k,<span class="dt">int</span> x)
+{
+    <span class="kw">if</span>(<span class="fu">tr</span>[k].ly==<span class="fu">tr</span>[k].ry)
+    {
+        <span class="kw">if</span>(<span class="fu">tr</span>[k].ly!=x)<span class="kw">return</span> <span class="dv">0</span>;
+        <span class="kw">else</span> <span class="kw">return</span> <span class="fu">tr</span>[k].mx;
+                        }
+    <span class="kw">if</span>(x&lt;=<span class="fu">tr</span>[k&lt;&lt;<span class="dv">1</span>].ry)<span class="kw">return</span> get(k&lt;&lt;<span class="dv">1</span>,x);
+    <span class="kw">else</span> <span class="kw">if</span>(x&gt;=<span class="fu">tr</span>[k&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>].ly)<span class="kw">return</span> get(k&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>,x);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}
+<span class="dt">int</span> ask(<span class="dt">int</span> k,<span class="dt">int</span> x,<span class="dt">int</span> y,<span class="dt">int</span> num)
+{
+    <span class="dt">bool</span> f=<span class="dv">0</span>;
+    <span class="kw">if</span>(x&lt;<span class="fu">tr</span>[k].ly){f=<span class="dv">1</span>;x=<span class="fu">tr</span>[k].ly;}
+    <span class="kw">if</span>(<span class="fu">tr</span>[k].ly==x&amp;&amp;<span class="fu">tr</span>[k].ry==y)
+    {
+                  <span class="kw">if</span>(<span class="fu">tr</span>[k].mx&gt;=num)<span class="kw">return</span> <span class="dv">0</span>;
+                  <span class="kw">else</span> <span class="kw">if</span>(<span class="fu">tr</span>[k].know&amp;&amp;!f)<span class="kw">return</span> <span class="dv">1</span>;
+                  <span class="kw">else</span> <span class="kw">return</span> <span class="dv">2</span>;
+                  }
+    <span class="kw">if</span>(y&lt;=<span class="fu">tr</span>[k&lt;&lt;<span class="dv">1</span>].ry)
+    {
+         <span class="kw">return</span> ask(k&lt;&lt;<span class="dv">1</span>,x,y,num);
+     }
+    <span class="kw">else</span> <span class="kw">if</span>(x&gt;=<span class="fu">tr</span>[k&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>].ly)
+    {
+         <span class="kw">return</span> ask(k&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>,x,y,num);
+     }
+    <span class="kw">else</span>
+    {
+         <span class="dt">int</span> t1=ask(k&lt;&lt;<span class="dv">1</span>,x,<span class="fu">tr</span>[k&lt;&lt;<span class="dv">1</span>].ry,num);
+         <span class="dt">int</span> t2=ask(k&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>,<span class="fu">tr</span>[k&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>].ly,y,num);
+         <span class="kw">if</span>(!t1||!t2)<span class="kw">return</span> <span class="dv">0</span>;
+         <span class="kw">else</span> <span class="kw">if</span>(<span class="fu">tr</span>[k&lt;&lt;<span class="dv">1</span>].ry<span class="dv">+1</span>!=<span class="fu">tr</span>[k&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>].ly)<span class="kw">return</span> <span class="dv">2</span>;
+         <span class="kw">else</span> <span class="kw">return</span> <span class="dv">1</span>;
+     }
+}
+<span class="dt">int</span> getnext(<span class="dt">int</span> k,<span class="dt">int</span> x)
+{
+    <span class="dt">int</span> l=<span class="fu">tr</span>[k].ly,r=<span class="fu">tr</span>[k].ry;
+    <span class="kw">if</span>(l==r)<span class="kw">return</span> <span class="fu">tr</span>[k].ly;
+    <span class="kw">if</span>(x&lt;<span class="fu">tr</span>[k&lt;&lt;<span class="dv">1</span>].ry)<span class="kw">return</span> getnext(k&lt;&lt;<span class="dv">1</span>,x);
+    <span class="kw">else</span> <span class="kw">return</span> getnext(k&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>,x);
+}
+<span class="dt">int</span> getlast(<span class="dt">int</span> k,<span class="dt">int</span> x)
+{
+    <span class="dt">int</span> l=<span class="fu">tr</span>[k].ly,r=<span class="fu">tr</span>[k].ry;
+    <span class="kw">if</span>(l==r)<span class="kw">return</span> <span class="fu">tr</span>[k].ly;
+    <span class="kw">if</span>(x&gt;<span class="fu">tr</span>[k&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>].ly)<span class="kw">return</span> getlast(k&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>,x);
+    <span class="kw">else</span> <span class="kw">return</span> getlast(k&lt;&lt;<span class="dv">1</span>,x);
+}
+<span class="dt">int</span> main()
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>,&amp;n);
+    build(<span class="dv">1</span>,<span class="dv">1</span>,n);
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>,&amp;m);
+    <span class="kw">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=m;i++)
+    {
+            <span class="dt">int</span> l,r;
+            scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>,&amp;l,&amp;r);
+            <span class="kw">if</span>(r&lt;l){printf(<span class="st">"false</span><span class="ch">\n</span><span class="st">"</span>);<span class="kw">continue</span>;}
+            <span class="dt">int</span> lnum=get(<span class="dv">1</span>,l),rnum=get(<span class="dv">1</span>,r);
+            <span class="kw">if</span>(!lnum&amp;&amp;!rnum)printf(<span class="st">"maybe</span><span class="ch">\n</span><span class="st">"</span>);
+            <span class="kw">else</span>
+            {
+            <span class="dt">int</span> s=getnext(<span class="dv">1</span>,l),t=getlast(<span class="dv">1</span>,r);
+            <span class="kw">if</span>(!lnum)
+            {
+                <span class="kw">if</span>(s&gt;t||r==t){printf(<span class="st">"maybe</span><span class="ch">\n</span><span class="st">"</span>);<span class="kw">continue</span>;}
+                <span class="dt">int</span> f=ask(<span class="dv">1</span>,s,t,rnum);
+                <span class="kw">if</span>(f==<span class="dv">0</span>)printf(<span class="st">"false</span><span class="ch">\n</span><span class="st">"</span>);
+                <span class="kw">else</span> printf(<span class="st">"maybe</span><span class="ch">\n</span><span class="st">"</span>);
+            }
+            <span class="kw">else</span> <span class="kw">if</span>(!rnum)
+            {
+                <span class="kw">if</span>(s&gt;t||l==s){printf(<span class="st">"maybe</span><span class="ch">\n</span><span class="st">"</span>);<span class="kw">continue</span>;}
+                <span class="dt">int</span> f=ask(<span class="dv">1</span>,s,t,lnum);
+                <span class="kw">if</span>(f==<span class="dv">0</span>)printf(<span class="st">"false</span><span class="ch">\n</span><span class="st">"</span>);
+                <span class="kw">else</span> printf(<span class="st">"maybe</span><span class="ch">\n</span><span class="st">"</span>);
+            }
+            <span class="kw">else</span>
+            {
+                <span class="kw">if</span>(rnum&gt;lnum){printf(<span class="st">"false</span><span class="ch">\n</span><span class="st">"</span>);<span class="kw">continue</span>;}
+                <span class="kw">if</span>(s&gt;t){
+                     <span class="kw">if</span>(l<span class="dv">+1</span>==r) printf(<span class="st">"true</span><span class="ch">\n</span><span class="st">"</span>);
+                     <span class="kw">else</span> printf(<span class="st">"maybe</span><span class="ch">\n</span><span class="st">"</span>);
+                     <span class="kw">continue</span>;
+                     }
+                <span class="dt">int</span> f=ask(<span class="dv">1</span>,s,t,rnum);
+                <span class="kw">if</span>(f==<span class="dv">0</span>)printf(<span class="st">"false</span><span class="ch">\n</span><span class="st">"</span>);
+                <span class="kw">else</span> <span class="kw">if</span>(f==<span class="dv">1</span>)
+                {
+                    <span class="kw">if</span>(l<span class="dv">+1</span>==s&amp;&amp;r<span class="dv">-1</span>==t)printf(<span class="st">"true</span><span class="ch">\n</span><span class="st">"</span>);
+                    <span class="kw">else</span> printf(<span class="st">"maybe</span><span class="ch">\n</span><span class="st">"</span>);
+                }
+                <span class="kw">else</span> <span class="kw">if</span>(ask(<span class="dv">1</span>,s,t,rnum)==<span class="dv">2</span>)printf(<span class="st">"maybe</span><span class="ch">\n</span><span class="st">"</span>);
+                <span class="kw">else</span> printf(<span class="st">"false</span><span class="ch">\n</span><span class="st">"</span>);
+            }
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="im">from</span> pydatagen <span class="im">import</span> <span class="op">*</span>
+n <span class="op">=</span> randrange(<span class="dv">100</span>, <span class="dv">500</span>)
+m <span class="op">=</span> randrange(<span class="dv">3000</span>, <span class="dv">10000</span>)
+a1 <span class="op">=</span> randlist(n, <span class="bu">range</span>(<span class="op">-</span><span class="dv">10</span><span class="op">**</span><span class="dv">9</span>, <span class="dv">10</span><span class="op">**</span><span class="dv">9</span>), distinct<span class="op">=</span><span class="va">True</span>)
+a2 <span class="op">=</span> randlist(n, <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">10</span><span class="op">**</span><span class="dv">9</span>))
+a1.sort()
+printf(<span class="st">'</span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> n)
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">0</span>, n):
+    printf(<span class="st">'</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> (a1[i], a2[i]))
+printf(<span class="st">'</span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> m)
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">0</span>, m):
+    <span class="cf">if</span> possibility(<span class="fl">0.6</span>):
+        b1 <span class="op">=</span> randlist(<span class="dv">2</span>, a1, distinct<span class="op">=</span><span class="va">True</span>)
+        x <span class="op">=</span> b1[<span class="dv">0</span>]
+        y <span class="op">=</span> b1[<span class="dv">1</span>]
+        <span class="cf">if</span> x <span class="op">&lt;</span> y:
+            x, y <span class="op">=</span> y, x
+        printf(<span class="st">'</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> (y, x))
+    <span class="cf">else</span>:
+        <span class="cf">if</span> possibility(<span class="fl">0.8</span>):
+            <span class="cf">if</span> possibility(<span class="fl">0.5</span>):
+                x <span class="op">=</span> choice(a1)
+                y <span class="op">=</span> randrange(<span class="bu">min</span>(a1), <span class="bu">max</span>(a1) <span class="op">+</span> <span class="dv">1</span>)
+                <span class="cf">if</span> x <span class="op">==</span> y:
+                    y <span class="op">=</span> x <span class="op">-</span> <span class="dv">1</span>
+                <span class="cf">if</span> x <span class="op">&lt;</span> y:
+                    x, y <span class="op">=</span> y, x
+                printf(<span class="st">'</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> (y, x))
+            <span class="cf">else</span>:
+                y <span class="op">=</span> choice(a1)
+                x <span class="op">=</span> randrange(<span class="bu">min</span>(a1), <span class="bu">max</span>(a1) <span class="op">+</span> <span class="dv">1</span>)
+                <span class="cf">if</span> x <span class="op">==</span> y:
+                    x <span class="op">=</span> y <span class="op">+</span> <span class="dv">1</span>
+                <span class="cf">if</span> x <span class="op">&lt;</span> y:
+                    x, y <span class="op">=</span> y, x
+                printf(<span class="st">'</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> (y, x))
+        <span class="cf">else</span>:
+            x <span class="op">=</span> randrange(<span class="bu">min</span>(a1), <span class="bu">max</span>(a1))
+            y <span class="op">=</span> randrange(<span class="bu">min</span>(a1), <span class="bu">max</span>(a1))
+            <span class="cf">if</span> x <span class="op">==</span> y:
+                x <span class="op">=</span> y <span class="op">+</span> <span class="dv">1</span>
+            <span class="cf">if</span> x <span class="op">&lt;</span> y:
+                x, y <span class="op">=</span> y, x
+            printf(<span class="st">'</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> (y, x))
+    <span class="cf">continue</span></code></pre></div>
+<hr/>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1067/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1067/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1067/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1067/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1067">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

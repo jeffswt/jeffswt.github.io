@@ -1,0 +1,249 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NOIP-EMU-140517-cube 魔方&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          NOIP-EMU-140517-cube 魔方
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOIP Emulation" target="_self">
+            <i class="fa fa-tag"></i> NOIP Emulation
+          </a>
+          <a class="tag" href="/blog/archive/?q=Implementation" target="_self">
+            <i class="fa fa-tag"></i> Implementation
+          </a>
+        </span>
+        <span class="date" title="21:01:17 | 21 November, 2016">
+          21 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="魔方cube.cppcpas">魔方 (cube. cpp/c/pas)</h2>
+<h3 id="题目描述">题目描述</h3>
+<p>ccy (ndsf) 觉得手动复原魔方太慢了, 所以他要借助计算机.</p>
+<p>ccy (ndsf) 家的魔方都是 3<em>3</em>3 的三阶魔方, 大家应该都见过.</p>
+<figure>
+<img class="thumb" data-small="/blog/noipemu03cube/140517-2-small.jpg" data-src="/blog/noipemu03cube/140517-2.jpg" data-thumb="/blog/noipemu03cube/140517-2-thumb.jpg" src="/blog/noipemu03cube/140517-2-thumb.jpg" title="" width="500px"/>
+<figcaption>
+</figcaption>
+</figure>
+<p><strong>(3 的 “顺时针” 改为 “逆时针”, 即 3 4 以图为准.)</strong></p>
+<p>ccy (ndfs) 从网上搜了一篇攻略, 并找人翻译成了他自己会做的方法. 现在告诉你他的魔方情况, 以及他从网上搜到的攻略, 请你求出最后魔方变成什么样子.</p>
+<h3 id="输入格式">输入格式</h3>
+<p>第一行, 一串数字, 表示从网上搜到的攻略.</p>
+<p>下面 6*3 行, 每行 3 个数字, 每三行表示魔方一个面的情况, 六个面的顺序是前、后、左、右、上、下.</p>
+<h3 id="输出格式">输出格式</h3>
+<p>6*3 行, 表示处理后的魔方, 形式同输入.</p>
+<!-- More -->
+<h3 id="样例输入">样例输入</h3>
+<pre><code>23
+121
+221
+111
+123
+321
+111
+123
+321
+132
+132
+231
+132
+121
+112
+233
+332
+111
+333</code></pre>
+<h3 id="样例输出">样例输出</h3>
+<pre><code>123
+222
+113
+212
+321
+113
+122
+321
+132
+121
+333
+121
+211
+312
+113
+331
+111
+331</code></pre>
+<h3 id="样例解释">样例解释</h3>
+<figure>
+<img class="thumb" data-small="/blog/noipemu03cube/140517-3-small.jpg" data-src="/blog/noipemu03cube/140517-3.jpg" data-thumb="/blog/noipemu03cube/140517-3-thumb.jpg" src="/blog/noipemu03cube/140517-3-thumb.jpg" title="" width="353px"/>
+<figcaption>
+</figcaption>
+</figure>
+<figure>
+<img class="thumb" data-small="/blog/noipemu03cube/140517-4-small.jpg" data-src="/blog/noipemu03cube/140517-4.jpg" data-thumb="/blog/noipemu03cube/140517-4-thumb.jpg" src="/blog/noipemu03cube/140517-4-thumb.jpg" title="" width="500px"/>
+<figcaption>
+</figcaption>
+</figure>
+<h3 id="数据范围">数据范围</h3>
+<p>40% 的数据, 攻略的长度小于 5 且仅有 4 种操作的其中一种</p>
+<p>100% 的数据, 攻略的长度小于 100</p>
+<h3 id="explanation">Explanation</h3>
+<p>纯暴力+实现</p>
+<h3 id="source-code">Source Code</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+
+<span class="kw">class</span> RubikCube
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> face[<span class="dv">6</span>][<span class="dv">3</span>][<span class="dv">3</span>]; <span class="co">// Front, Rear, Left, Right, Top, Bottom</span>
+    <span class="ot">#define eax(_a,_b,_c) (this-&gt;face[_a-1][_b-1][_c-1])</span>
+    <span class="dt">void</span> shift(<span class="dt">int</span> a1, <span class="dt">int</span> a2, <span class="dt">int</span> a3, <span class="dt">int</span> b1, <span class="dt">int</span> b2, <span class="dt">int</span> b3, <span class="dt">int</span> c1, <span class="dt">int</span> c2, <span class="dt">int</span> c3, <span class="dt">int</span> d1, <span class="dt">int</span> d2, <span class="dt">int</span> d3, <span class="dt">bool</span> cw) {
+        <span class="kw">if</span> (cw) { <span class="co">// Clockwise</span>
+            <span class="dt">int</span> tmp = eax(d1,d2,d3);
+            eax(d1,d2,d3) = eax(c1,c2,c3);
+            eax(c1,c2,c3) = eax(b1,b2,b3);
+            eax(b1,b2,b3) = eax(a1,a2,a3);
+            eax(a1,a2,a3) = tmp;
+        } <span class="kw">else</span> { <span class="co">// Counterclockwise</span>
+            <span class="dt">int</span> tmp = eax(a1,a2,a3);
+            eax(a1,a2,a3) = eax(b1,b2,b3);
+            eax(b1,b2,b3) = eax(c1,c2,c3);
+            eax(c1,c2,c3) = eax(d1,d2,d3);
+            eax(d1,d2,d3) = tmp;
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> rot_1_2(<span class="dt">bool</span> cw) {
+        shift( <span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">1</span>, <span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">3</span>, <span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">3</span>, <span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">1</span>, cw);
+        shift( <span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">2</span>, <span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">3</span>, <span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>, <span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">1</span>, cw);
+        shift( <span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">3</span>, <span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">3</span>, <span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>, <span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">3</span>, cw);
+        shift( <span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>, <span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">3</span>, <span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>, <span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">3</span>, cw);
+        shift( <span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">3</span>, <span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">3</span>, <span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>, <span class="dv">6</span>,<span class="dv">3</span>,<span class="dv">3</span>, cw);
+    }
+    <span class="dt">void</span> rot_3_4(<span class="dt">bool</span> cw) {
+        shift( <span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>, <span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">3</span>, <span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">3</span>, <span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">1</span>, cw);
+        shift( <span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">2</span>, <span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">3</span>, <span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">2</span>, <span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">1</span>, cw);
+        shift( <span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>, <span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">1</span>, <span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">1</span>, <span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>, cw);
+        shift( <span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>, <span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">2</span>, <span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>, <span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>, cw);
+        shift( <span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">3</span>, <span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">3</span>, <span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>, <span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>, cw);
+    }
+} cube;
+
+<span class="dt">char</span> str[<span class="dv">200</span>];
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">6</span>; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= <span class="dv">3</span>; j++)
+            <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= <span class="dv">3</span>; k++) {
+                <span class="dt">char</span> c = getchar();
+                <span class="kw">while</span> (c &lt; <span class="st">'0'</span> || c &gt; <span class="st">'9'</span>)
+                    c = getchar();
+                cube.face[i<span class="dv">-1</span>][j<span class="dv">-1</span>][k<span class="dv">-1</span>] = c - <span class="st">'0'</span>;
+            }
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>, len = strlen(str); i &lt; len; i++) {
+        <span class="dt">int</span> method = str[i] - <span class="st">'0'</span>;
+        <span class="kw">switch</span> (method) {
+            <span class="kw">case</span> <span class="dv">1</span>:
+                cube.rot_1_2(<span class="kw">true</span>);
+                <span class="kw">break</span>;
+            <span class="kw">case</span> <span class="dv">2</span>:
+                cube.rot_1_2(<span class="kw">false</span>);
+                <span class="kw">break</span>;
+            <span class="kw">case</span> <span class="dv">3</span>:
+                cube.rot_3_4(<span class="kw">true</span>);
+                <span class="kw">break</span>;
+            <span class="kw">case</span> <span class="dv">4</span>:
+                cube.rot_3_4(<span class="kw">false</span>);
+                <span class="kw">break</span>;
+            <span class="kw">default</span>:
+                <span class="kw">break</span>;
+        }
+    }
+    <span class="co">// Done rotation, printing</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">6</span>; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= <span class="dv">3</span>; j++) {
+            <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= <span class="dv">3</span>; k++)
+                printf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, cube.face[i<span class="dv">-1</span>][j<span class="dv">-1</span>][k<span class="dv">-1</span>]);
+            printf(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>);
+        }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/noipemu03cube/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/noipemu03cube/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/noipemu03cube/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/noipemu03cube/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="noipemu03cube">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

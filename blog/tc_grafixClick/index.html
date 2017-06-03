@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>TopCoder: grafixClick / 250&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="en">
+      <div class="post-header">
+        <h1 class="title">
+          TopCoder: grafixClick / 250
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=TopCoder" target="_self">
+            <i class="fa fa-tag"></i> TopCoder
+          </a>
+          <a class="tag" href="/blog/archive/?q=Implementation" target="_self">
+            <i class="fa fa-tag"></i> Implementation
+          </a>
+        </span>
+        <span class="date" title="21:39:08 | 9 November, 2016">
+          9 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h3 id="problem-statement">Problem Statement</h3>
+<p>You have been hired to work on a graphics application called grafix. The interface includes several buttons that the user can click on during a session. One of these is the Save button, which appears in the application window as a rectangle composed of pixels. The location of each pixel is given by a pair of integers that specify the pixel ‘s row number and column number, in that order. Such an integer pair is called the window coordinates of a pixel. Rows are numbered from top to bottom, and columns are numbered from left to right.</p>
+<figure>
+<img class="thumb" data-small="/blog/tc_grafixClick/grafixClick_diagram_1-small.jpg" data-src="/blog/tc_grafixClick/grafixClick_diagram_1.png" data-thumb="/blog/tc_grafixClick/grafixClick_diagram_1-thumb.jpg" src="/blog/tc_grafixClick/grafixClick_diagram_1-thumb.jpg" title="" width="378px"/>
+<figcaption>
+</figcaption>
+</figure>
+<p>The top left corner of the Save button has window coordinates (20, 50), meaning that it is a pixel occupying the 20th row from the top and the 50th column from the left. The bottom right corner of the Save button has window coordinates (39, 99). If the user clicks her mouse on any pixel within or on the border of the rectangle defined by these points, she is considered to have activated the Save button. Below is a magnified image of the Save button, showing the numbers of its rows and columns.</p>
+<p>Given a sequence of mouse clicks, your job is to determine which ones have activated the Save button. For each mouse click, the mouseRows contains the row number of its window coordinates, while the mouseCols contains its column number. The values in each are in corresponding order, so the nth element of mouseRows and the nth element of mouseCols make up the window coordinates of the nth mouse click. You are to return a containing, in ascending order, the zero-based index of each mouse click that activates the Save button.</p>
+<h3 id="definition">Definition</h3>
+<p>Class:<code>grafixClick</code></p>
+<p>Method:<code>checkSaveButton</code></p>
+<p>Parameters:<code>vector &lt;int&gt;, vector &lt;int&gt;</code></p>
+<p>Returns:<code>vector &lt;int&gt;</code></p>
+<p>Method signature:<code>vector &lt;int&gt; checkSaveButton(vector &lt;int&gt; mouseRows, vector &lt;int&gt; mouseCols)</code></p>
+<p>(be sure your method is public)</p>
+<h3 id="limits">Limits</h3>
+<p>Time limit (s):<code>840.000</code></p>
+<p>Memory limit (MB):<code>64</code></p>
+<h3 id="notes">Notes</h3>
+<ul>
+<li>Window coordinates are not the same as Cartesian coordinates. Follow the definition given in the first paragraph of the problem statement.</li>
+</ul>
+<h3 id="constraints">Constraints</h3>
+<ul>
+<li>mouseRows contains between 1 and 50 elements, inclusive</li>
+<li>mouseRows and mouseCols each contain the same number of elements</li>
+<li>each element in mouseRows is between 0 and 399, inclusive</li>
+<li>each element in mouseCols is between 0 and 599, inclusive</li>
+</ul>
+<!-- More -->
+<h3 id="examples">Examples</h3>
+<h4 id="section">0</h4>
+<pre><code>{20, 39, 100}
+{99, 50, 200}</code></pre>
+<pre><code>{ 0, 1 }</code></pre>
+<p>The first click, with window coordinates (20, 99), falls on the top right corner of the Save button. The second click is on the bottom left corner at (39, 50). The third click has window coordinates (100, 200) and falls outside the button.</p>
+<h4 id="section-1">1</h4>
+<pre><code>{0, 100, 399}
+{0, 200, 599}</code></pre>
+<pre><code>{ }</code></pre>
+<p>None of these clicks activate the Save button.</p>
+<h4 id="section-2">2</h4>
+<pre><code>{30}
+{75}</code></pre>
+<pre><code>{ 0 }</code></pre>
+<p>Bull’ s-eye!</p>
+<h4 id="section-3">3</h4>
+<pre><code>{10, 20, 30, 30, 30, 30, 34, 35, 345}
+{10, 20, 30, 50, 60, 80, 34, 35, 345}</code></pre>
+<pre><code>{ 3, 4, 5 }</code></pre>
+<h4 id="section-4">4</h4>
+<pre><code>{57, 28, 18, 25, 36, 12, 33, 44, 13, 32, 32, 51, 11, 27, 8, 51, 17, 34, 10, 16, 47, 57, 20, 57, 32, 14, 13, 37, 10, 16, 49, 37, 52, 8, 18, 44, 50, 43, 11, 1, 21, 22, 17, 35, 28, 53, 56, 16, 11, 44}
+{146, 22, 41, 88, 123, 99, 43, 110, 25, 64, 141, 110, 70, 34, 99, 103, 60, 64, 142, 109, 133, 144, 72, 68, 25, 32, 21, 140, 30, 105, 32, 72, 114, 97, 35, 131, 103, 110, 133, 81, 125, 36, 76, 78, 77, 47, 50, 94, 22, 20}</code></pre>
+<pre><code>{ 3, 9, 17, 22, 31, 43, 44 }</code></pre>
+<h3 id="explanation">Explanation</h3>
+<p>Nothing to say here...... Just to get used to the TopCoder judge interface.</p>
+<h3 id="source-code">Source Code</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;vector&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+
+<span class="kw">class</span> grafixClick
+{
+<span class="kw">public</span>:
+    vector&lt;<span class="dt">int</span>&gt; checkSaveButton(vector&lt;<span class="dt">int</span>&gt; mouseRows, vector&lt;<span class="dt">int</span>&gt; mouseCols)
+    {
+        <span class="dt">int</span> n = min(mouseRows.size(), mouseCols.size());
+        vector&lt;<span class="dt">int</span>&gt; res;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++)
+            <span class="kw">if</span> (<span class="dv">20</span> &lt;= mouseRows[i] &amp;&amp; mouseRows[i] &lt;= <span class="dv">39</span>
+                    &amp;&amp; <span class="dv">50</span> &lt;= mouseCols[i] &amp;&amp; mouseCols[i] &lt;= <span class="dv">99</span>)
+                res.push_back(i);
+        <span class="kw">return</span> res;
+    }
+};</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/tc_grafixClick/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/tc_grafixClick/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/tc_grafixClick/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/tc_grafixClick/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="tc_grafixClick">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

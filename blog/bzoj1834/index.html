@@ -1,0 +1,314 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1834: [ZJOI2010]network 网络扩容&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1834: [ZJOI2010]network 网络扩容
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=ZJOI2010" target="_self">
+            <i class="fa fa-tag"></i> ZJOI2010
+          </a>
+          <a class="tag" href="/blog/archive/?q=Network Flow" target="_self">
+            <i class="fa fa-tag"></i> Network Flow
+          </a>
+          <a class="tag" href="/blog/archive/?q=Maximum Flow Minimum Cost" target="_self">
+            <i class="fa fa-tag"></i> Maximum Flow Minimum Cost
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dinic" target="_self">
+            <i class="fa fa-tag"></i> Dinic
+          </a>
+          <a class="tag" href="/blog/archive/?q=SPFA" target="_self">
+            <i class="fa fa-tag"></i> SPFA
+          </a>
+        </span>
+        <span class="date" title="22:04:55 | 26 December, 2016">
+          26 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>给定一张有向图, 每条边都有一个容量 <span class="math inline">\(C\)</span> 和一个扩容费用 <span class="math inline">\(W\)</span>. 这里扩容费用是指将容量扩大 <span class="math inline">\(1\)</span> 所需的费用. 求:</p>
+<ol type="1">
+<li>在不扩容的情况下,<span class="math inline">\(1\)</span> 到 <span class="math inline">\(N\)</span> 的最大流</li>
+<li>将 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(N\)</span> 的最大流增加 <span class="math inline">\(K\)</span> 所需的最小扩容费用.</li>
+</ol>
+<h2 id="input">Input</h2>
+<p>输入文件的第一行包含三个整数 <span class="math inline">\(N, M, K\)</span>, 表示有向图的点数、边数以及所需要增加的 流量. 接下来的 <span class="math inline">\(M\)</span> 行每行包含四个整数 <span class="math inline">\(u, v, C, W\)</span>, 表示一条从 <span class="math inline">\(u\)</span> 到 <span class="math inline">\(v\)</span>, 容量 为 <span class="math inline">\(C\)</span>, 扩容费用为 <span class="math inline">\(W\)</span> 的边.</p>
+<h2 id="output">Output</h2>
+<p>输出文件一行包含两个整数, 分别表示问题 1 和问题 2 的答案.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>5 8 2
+1 2 5 8
+2 5 9 9
+5 1 6 2
+5 1 1 8
+1 2 8 7
+2 5 4 9
+1 2 1 1
+1 4 2 1</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>13 19</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>30% 的数据中,<span class="math inline">\(N \leq 100\)</span></p>
+<p>100% 的数据中,<span class="math inline">\(N \leq 1000, M \leq 5000, K \leq 10\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>第一问很简单, 按数据建图, 然后一遍最大流算法即可.</p>
+<p>第二问则需要用最小费用最大流算法, 主要是建图, 那么可以从第一问的残留网络上继续 建图, 对残留网络上的每一条边建一条容量是 <span class="math inline">\(\infty\)</span> 费用是 <span class="math inline">\(W\)</span> 的边 (反向弧容量为 <span class="math inline">\(0\)</span>, 费用为 <span class="math inline">\(-W\)</span>) , 然后建一个超级源点, 从超级源向 <span class="math inline">\(1\)</span> 建一条容量为 <span class="math inline">\(K\)</span>, 费用为 <span class="math inline">\(0\)</span> 的边, 对这个图进行最小费用最大流算法.</p>
+<p>最小费用最大流操作:</p>
+<ol type="1">
+<li>首先要对于这道题的图来说, 有的边需要花费费用, 而有的又不用, 而不用扩容的边费用为 <span class="math inline">\(0\)</span>, 需要扩容的边费用为 <span class="math inline">\(W\)</span>, 容量无限, 这就是本题这样建图的原因.</li>
+<li>对于残留网络进行费用最短路 SPFA 算法, 不用扩容的边一定会选费用为 <span class="math inline">\(0\)</span> 的边, 然后记录路径, 找最小容量对可行路进行增流, 更新 <span class="math inline">\(res\)</span></li>
+</ol>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">1010</span>, maxm = <span class="dv">500100</span>;
+<span class="dt">const</span> lli infinit = <span class="bn">0x007f7f7f7f7f7f7fll</span>;
+
+<span class="kw">class</span> MixedMaximumFlow
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v;
+        lli flow, cost, temp_cost;
+        edge *next, *rev;
+    };
+    <span class="dt">int</span> n, s, t, ecnt;
+    edge *edges[maxn], epool[maxm];
+    <span class="co">// Reserved for Dinic</span>
+    <span class="dt">int</span> level[maxn];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v, lli flow, lli cost)
+    {
+        edge *p = &amp;epool[++ecnt],
+             *q = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;flow = flow; p-&gt;temp_cost = cost;
+        p-&gt;next = edges[u]; edges[u] = p; p-&gt;rev = q;
+        q-&gt;u = v; q-&gt;v = u; q-&gt;flow = <span class="dv">0</span>; q-&gt;temp_cost = -cost;
+        q-&gt;next = edges[v]; edges[v] = q; q-&gt;rev = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> add_edge_spfa(<span class="dt">int</span> u, <span class="dt">int</span> v, lli flow, lli cost)
+    {
+        edge *p = &amp;epool[++ecnt],
+             *q = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;flow = flow; p-&gt;cost = cost;
+        p-&gt;next = edges[u]; edges[u] = p; p-&gt;rev = q;
+        q-&gt;u = v; q-&gt;v = u; q-&gt;flow = <span class="dv">0</span>; q-&gt;cost = -cost;
+        q-&gt;next = edges[v]; edges[v] = q; q-&gt;rev = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> make_level(<span class="dt">void</span>)
+    {
+        queue&lt;<span class="dt">int</span>&gt; que;
+        memset(level, <span class="dv">0</span>, <span class="kw">sizeof</span>(level));
+        que.push(s);
+        level[s] = <span class="dv">1</span>;
+        <span class="kw">while</span> (!que.empty()) {
+            <span class="dt">int</span> p = que.front();
+            que.pop();
+            <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+                <span class="kw">if</span> (ep-&gt;flow &amp;&amp; !level[ep-&gt;v]) {
+                    level[ep-&gt;v] = level[p] + <span class="dv">1</span>;
+                    que.push(ep-&gt;v);
+                }
+            <span class="kw">if</span> (level[t] &gt; <span class="dv">0</span>)
+                <span class="kw">return</span> <span class="kw">true</span>;
+        }
+        <span class="kw">return</span> <span class="kw">false</span>;
+    }
+    lli dfs(<span class="dt">int</span> p, lli mn)
+    {
+        <span class="kw">if</span> (p == t)
+            <span class="kw">return</span> mn;
+        lli sum = <span class="dv">0</span>, tmp;
+        <span class="kw">for</span> (edge *ep = edges[p]; ep &amp;&amp; sum &lt; mn; ep = ep-&gt;next)
+            <span class="kw">if</span> (ep-&gt;flow &amp;&amp; level[ep-&gt;v] == level[p] + <span class="dv">1</span>) {
+                tmp = dfs(ep-&gt;v, min(mn - sum, ep-&gt;flow));
+                <span class="kw">if</span> (tmp &gt; <span class="dv">0</span>) {
+                    sum += tmp;
+                    ep-&gt;flow -= tmp;
+                    ep-&gt;rev-&gt;flow += tmp;
+                }
+            }
+        <span class="kw">if</span> (sum &lt;= <span class="dv">0</span>)
+            level[p] = <span class="dv">0</span>;
+        <span class="kw">return</span> sum;
+    }
+    <span class="co">// Reserved for SPFA MCMF</span>
+    lli dist[maxn];
+    <span class="dt">bool</span> inque[maxn];
+    edge *from[maxn];
+    <span class="dt">bool</span> spfa(<span class="dt">void</span>)
+    {
+        queue&lt;<span class="dt">int</span>&gt; que;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+            dist[i] = infinit, inque[i] = <span class="kw">false</span>, from[i] = NULL;
+        que.push(s);
+        dist[s] = <span class="dv">0</span>, inque[s] = <span class="kw">true</span>;
+        <span class="kw">while</span> (!que.empty()) {
+            <span class="dt">int</span> p = que.front();
+            que.pop();
+            <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next) {
+                <span class="kw">if</span> (ep-&gt;flow &amp;&amp; dist[p] + ep-&gt;cost &lt; dist[ep-&gt;v]) {
+                    dist[ep-&gt;v] = dist[p] + ep-&gt;cost;
+                    from[ep-&gt;v] = ep;
+                    <span class="kw">if</span> (!inque[ep-&gt;v]) {
+                        que.push(ep-&gt;v);
+                        inque[ep-&gt;v] = <span class="kw">true</span>;
+                    }
+                }
+            }
+            inque[p] = <span class="kw">false</span>;
+        }
+        <span class="kw">if</span> (dist[t] &lt; infinit)
+            <span class="kw">return</span> <span class="kw">true</span>;
+        <span class="kw">return</span> <span class="kw">false</span>;
+    }
+    <span class="dt">void</span> reload_graph(<span class="dt">int</span> k)
+    {
+        n = n + <span class="dv">1</span>;
+        s = n;
+        <span class="dt">int</span> o_ecnt = ecnt;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= o_ecnt; i += <span class="dv">2</span>)
+            <span class="kw">if</span> (i % <span class="dv">2</span> == <span class="dv">1</span>) {
+                edge *ep = &amp;epool[i];
+                add_edge_spfa(ep-&gt;u, ep-&gt;v, infinit, ep-&gt;temp_cost);
+            }
+        add_edge_spfa(s, <span class="dv">1</span>, k, <span class="dv">0</span>);
+        <span class="kw">return</span> ;
+    }
+    <span class="co">// Global indexing functions</span>
+    lli eval_max_flow(<span class="dt">void</span>)
+    {
+        lli sum = <span class="dv">0</span>;
+        <span class="kw">while</span> (make_level()) {
+            lli tmp = dfs(s, infinit);
+            <span class="kw">if</span> (tmp &lt;= <span class="dv">0</span>)
+                <span class="kw">break</span>;
+            sum += tmp;
+        }
+        <span class="kw">return</span> sum;
+    }
+    lli eval_min_cost(<span class="dt">void</span>)
+    {
+        lli max_flow = <span class="dv">0</span>,
+            min_cost = <span class="dv">0</span>;
+        <span class="kw">while</span> (spfa()) {
+            lli tmp = infinit;
+            <span class="kw">for</span> (edge *ep = from[t]; ep; ep = from[ep-&gt;u])
+                tmp = min(tmp, ep-&gt;flow);
+            <span class="kw">for</span> (edge *ep = from[t]; ep; ep = from[ep-&gt;u])
+                ep-&gt;flow -= tmp,
+                ep-&gt;rev-&gt;flow += tmp;
+            max_flow += tmp;
+            min_cost += tmp * dist[t];
+        }
+        <span class="kw">return</span> min_cost;
+    }
+} graph;
+
+<span class="dt">int</span> n, m, K;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d%d</span><span class="st">"</span>, &amp;n, &amp;m, &amp;K);
+    graph.n = n;
+    graph.s = <span class="dv">1</span>;
+    graph.t = n;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        <span class="dt">int</span> u, v, w, c;
+        scanf(<span class="st">"</span><span class="ch">%d%d%d%d</span><span class="st">"</span>, &amp;u, &amp;v, &amp;w, &amp;c);
+        graph.add_edge(u, v, w, c);
+    }
+    <span class="co">// Subproblem #1</span>
+    lli res_1 = graph.eval_max_flow();
+    <span class="co">// Subproblem #2</span>
+    graph.reload_graph(K);
+    lli res_2 = graph.eval_min_cost();
+    printf(<span class="st">"</span><span class="ch">%lld</span><span class="st"> </span><span class="ch">%lld\n</span><span class="st">"</span>, res_1, res_2);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1834/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1834/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1834/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1834/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1834">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

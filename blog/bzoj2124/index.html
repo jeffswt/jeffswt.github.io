@@ -1,0 +1,185 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj2124: 等差子序列&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj2124: 等差子序列
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=Fenwick Tree" target="_self">
+            <i class="fa fa-tag"></i> Fenwick Tree
+          </a>
+          <a class="tag" href="/blog/archive/?q=Hashing" target="_self">
+            <i class="fa fa-tag"></i> Hashing
+          </a>
+        </span>
+        <span class="date" title="01:17:20 | 23 February, 2017">
+          23 February, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>给一个 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 的排列 <span class="math inline">\(\{A_i\}\)</span>, 询问是否存在 <span class="math inline">\(p_1, p_2, p_3\)</span>, 使得 <span class="math inline">\(A_{p_1}, A_{p_2}, A_{p_3}\)</span> 是一个等差序列.</p>
+<h2 id="input">Input</h2>
+<p>输入的第一行包含一个整数 <span class="math inline">\(T\)</span>, 表示组数.</p>
+<p>下接 <span class="math inline">\(T\)</span> 组数据, 每组第一行一个整数 <span class="math inline">\(n\)</span>, 每组第二行为一个 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 的排列, 数字两两之间用空格隔开.</p>
+<h2 id="output">Output</h2>
+<p>对于每组数据, 如果存在一个等差子序列, 则输出一行 <code>Y</code>, 否则输出一行 <code>N</code>.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>2
+3
+1 3 2
+3
+3 2 1</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>N
+Y</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于 100% 的数据,<span class="math inline">\(n \leq 10000, T \leq 7\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>题目就是求是否存在 <span class="math inline">\(i \lt j \lt k\)</span>, 使得 <span class="math inline">\(A_k - A_j = A_j - A_i\)</span>.</p>
+<p>我们不妨枚举中间那个数为 <span class="math inline">\(x\)</span>, 然后按照输入的顺序对 <span class="math inline">\(x\)</span> 进行操作. 如果 <span class="math inline">\(x\)</span> 满足 条件, 也就是存在两个数 <span class="math inline">\(y\)</span> 和 <span class="math inline">\(z\)</span>,<span class="math inline">\(x - y = z - x\)</span>, 并且 <span class="math inline">\(y\)</span> 已经出现过了而 <span class="math inline">\(z\)</span> 还没有出现, 那么我们就可以直接输出 <code>Y</code> 了.</p>
+<p>然后用一个奇怪的 mod 哈希维护一下基本就过了.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">10010</span>;
+<span class="dt">const</span> lli modr = <span class="dv">1000000007</span>;
+
+lli pwr[maxn];
+<span class="kw">class</span> BinaryIndexedTree
+{
+<span class="kw">public</span>:
+    lli data[maxn];
+    <span class="dt">int</span> n;
+    <span class="dt">void</span> change(<span class="dt">int</span> x) {
+        <span class="kw">for</span> (<span class="dt">int</span> i = x; i &lt;= n; i += i &amp; -i)
+            data[i] = (data[i] + pwr[i - x]) % modr;
+        <span class="kw">return</span> ;
+    }
+    lli query_raw(<span class="dt">int</span> x) {
+        lli res = <span class="dv">0</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = x; i &gt; <span class="dv">0</span>; i ^= i &amp; -i)
+            res = (data[i] * pwr[x - i] + res) % modr;
+        <span class="kw">return</span> res;
+    }
+    <span class="dt">int</span> query(<span class="dt">int</span> x, <span class="dt">int</span> y) {
+        lli p = query_raw(x<span class="dv">-1</span>),
+            q = query_raw(y);
+        <span class="kw">return</span> (q - p * pwr[y-x<span class="dv">+1</span>] % modr + modr) % modr;
+    }
+    <span class="dt">void</span> init(<span class="dt">int</span> n) {
+        <span class="kw">this</span>-&gt;n = n;
+        memset(data, <span class="dv">0</span>, <span class="kw">sizeof</span>(data));
+        <span class="kw">return</span> ;
+    }
+} bit1, bit2;
+
+<span class="dt">int</span> cases, n, arr[maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    <span class="co">// String hashes</span>
+    pwr[<span class="dv">0</span>] = <span class="dv">1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">10000</span>; i++)
+        pwr[i] = pwr[i - <span class="dv">1</span>] * <span class="dv">12347</span> % modr;
+    <span class="co">// Reading cases</span>
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;cases);
+    <span class="kw">for</span> (<span class="dt">int</span> idx = <span class="dv">1</span>; idx &lt;= cases; idx++) {
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+        bit1.init(n);
+        bit2.init(n);
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+            scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;arr[i]);
+        <span class="co">// Whether to query?</span>
+        <span class="dt">int</span> i = <span class="dv">1</span>;
+        <span class="kw">for</span> (; i &lt;= n; i++) {
+            <span class="dt">int</span> x = min(arr[i] - <span class="dv">1</span>, n - arr[i]);
+            <span class="kw">if</span> (x &amp;&amp; bit1.query(arr[i] - x, arr[i] - <span class="dv">1</span>)
+                != bit2.query(n - arr[i] - x + <span class="dv">1</span>, n - arr[i]))
+                <span class="kw">break</span>;
+            bit1.change(arr[i]);
+            bit2.change(n - arr[i] + <span class="dv">1</span>);
+        }
+        printf(<span class="st">"</span><span class="ch">%s\n</span><span class="st">"</span>, i &gt; n ? <span class="st">"N"</span> : <span class="st">"Y"</span>);
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj2124/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj2124/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj2124/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj2124/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj2124">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

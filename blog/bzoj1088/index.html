@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1088: [SCOI2005]扫雷Mine&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1088: [SCOI2005]扫雷Mine
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=SCOI2005" target="_self">
+            <i class="fa fa-tag"></i> SCOI2005
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+        </span>
+        <span class="date" title="20:00:00 | 15 August, 2016">
+          15 August, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Problem Specification</th>
+<th style="text-align: left;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Time Limit</td>
+<td style="text-align: left;">10 Sec</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Memory Limit</td>
+<td style="text-align: left;">162 MB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Submit</td>
+<td style="text-align: left;">2821</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Solved</td>
+<td style="text-align: left;">1670</td>
+</tr>
+</tbody>
+</table>
+<!-- More -->
+<h2 id="description">Description</h2>
+<p>相信大家都玩过扫雷的游戏. 那是在一个 n*m 的矩阵里面有一些雷, 要你根据一些信息找出雷来. 万圣节到了, “余” 人国流行起了一种简单的扫雷游戏, 这个游戏规则和扫雷一样, 如果某个格子没有雷, 那么它里面的数字表示和它 8 连通的格子里面雷的数目. 现在棋盘是 n×2 的, 第一列里面某些格子是雷, 而第二列没有雷, 如下图: 由于第一列的雷可能有多种方案满足第二列的数的限制, 你的任务即根据第二列的信息确定第一列雷有多少种摆放方案.</p>
+<h2 id="input">Input</h2>
+<p>第一行为 N, 第二行有 N 个数, 依次为第二列的格子中的数. (1&lt;=N &lt;=10000)</p>
+<h2 id="output">Output</h2>
+<p>一个数, 即第一列中雷的摆放方案数.</p>
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>2
+1 1</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>2</code></pre>
+<h2 id="hint">HINT</h2>
+<h2 id="source">Source</h2>
+<hr/>
+<p>很简单的一个 DP, 因为并不需要考虑到回溯问题, 所以 DP 可以秒解.</p>
+<p>注意不要写错~ 因为有特判......</p>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">10010</span>;
+
+<span class="dt">int</span> n, res;
+<span class="dt">int</span> arr[maxn];
+<span class="dt">int</span> dp[maxn];
+
+<span class="dt">bool</span> judge_possibility(<span class="dt">void</span>)
+{
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">3</span>; i &lt;= n + <span class="dv">1</span>; i++) {
+        dp[i] = arr[i - <span class="dv">1</span>] - dp[i - <span class="dv">1</span>] - dp[i - <span class="dv">2</span>];
+        <span class="kw">if</span> (dp[i] &lt; <span class="dv">0</span>)
+            <span class="kw">return</span> <span class="kw">false</span>;
+    }
+    <span class="kw">if</span> (arr[n] != dp[n - <span class="dv">1</span>] + dp[n])
+        <span class="kw">return</span> <span class="kw">false</span>; <span class="co">// Even at the end, we still have to check intactness</span>
+    <span class="kw">return</span> <span class="kw">true</span>;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;arr[i]);
+    <span class="co">// Take on every possibility of the first grid and that's it</span>
+    <span class="co">// Meaning the answer would not exceed the range[0, 2]</span>
+    <span class="kw">if</span> (arr[<span class="dv">1</span>] == <span class="dv">0</span>) {
+        memset(dp, <span class="dv">0</span>, <span class="kw">sizeof</span>(dp));
+        dp[<span class="dv">1</span>] = <span class="dv">0</span>, dp[<span class="dv">2</span>] = <span class="dv">0</span>;
+        res += judge_possibility();
+    } <span class="kw">else</span> <span class="kw">if</span> (arr[<span class="dv">1</span>] == <span class="dv">1</span>) {
+        memset(dp, <span class="dv">0</span>, <span class="kw">sizeof</span>(dp));
+        dp[<span class="dv">1</span>] = <span class="dv">1</span>, dp[<span class="dv">2</span>] = <span class="dv">0</span>;
+        res += judge_possibility();
+        memset(dp, <span class="dv">0</span>, <span class="kw">sizeof</span>(dp));
+        dp[<span class="dv">1</span>] = <span class="dv">0</span>, dp[<span class="dv">2</span>] = <span class="dv">1</span>;
+        res += judge_possibility();
+    } <span class="kw">else</span> <span class="kw">if</span> (arr[<span class="dv">1</span>] == <span class="dv">2</span>) {
+        memset(dp, <span class="dv">0</span>, <span class="kw">sizeof</span>(dp));
+        dp[<span class="dv">1</span>] = <span class="dv">1</span>, dp[<span class="dv">2</span>] = <span class="dv">1</span>;
+        res += judge_possibility();
+    } <span class="kw">else</span> {
+        res = <span class="dv">0</span>;
+    }
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="im">from</span> pydatagen <span class="im">import</span> <span class="op">*</span>
+n <span class="op">=</span> randrange(<span class="dv">5000</span>, <span class="dv">10000</span>)
+printf(<span class="st">'</span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> n)
+a <span class="op">=</span> [<span class="dv">0</span>] <span class="op">+</span> randlist(n, [<span class="dv">0</span>, <span class="dv">1</span>]) <span class="op">+</span> [<span class="dv">0</span>]
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n <span class="op">+</span> <span class="dv">1</span>):
+    printf(<span class="st">'</span><span class="sc">%d</span><span class="st"> '</span> <span class="op">%</span> (a[i <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> a[i] <span class="op">+</span> a[i <span class="op">+</span> <span class="dv">1</span>]))</code></pre></div>
+<hr/>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1088/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1088/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1088/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1088/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1088">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

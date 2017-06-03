@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1063: [Noi2008]道路设计&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1063: [Noi2008]道路设计
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOI2008" target="_self">
+            <i class="fa fa-tag"></i> NOI2008
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+          <a class="tag" href="/blog/archive/?q=Tree DP" target="_self">
+            <i class="fa fa-tag"></i> Tree DP
+          </a>
+        </span>
+        <span class="date" title="16:08:21 | 11 April, 2017">
+          11 April, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>Z 国坐落于遥远而又神奇的东方半岛上, 在小 Z 的统治时代公路成为这里主要的交通手段. Z 国共有 <span class="math inline">\(n\)</span> 座城市, 一些城市之间由双向的公路所连接. 非常神奇的是 Z 国的每个城市所处的经度都不相同, 并且<strong>最多只和一个位于它东边的城市直接通过公路相连</strong>. Z 国的首都是 Z 国政治经济文化旅游的中心, 每天都有成千上万的人从 Z 国的其他城市涌向首都.</p>
+<p>为了使 Z 国的交通更加便利顺畅, 小 Z 决定在 Z 国的公路系统中确定若干条<strong>规划路线</strong>, 将其中的公路全部改建为铁路.</p>
+<p>我们定义每条<strong>规划路线</strong>为一个长度大于 <span class="math inline">\(1\)</span> 的城市序列, 每个城市在该序列中最多出现一次, 序列中相邻的城市之间由公路直接相连 (待改建为铁路). 并且, 每个城市<strong>最多只能出现在一条规划路线中</strong>, 也就是说, 任意两条<strong>规划路线</strong>不能有公共部分.</p>
+<p>当然在一般情况下是不可能将所有的公路修建为铁路的, 因此从有些城市出发去往首都依然需要通过乘坐长途汽车, 而<strong>长途汽车只往返于公路连接的相邻的城市之间</strong>, 因此从某个城市出发可能需要不断地换乘长途汽车和火车才能到达首都.</p>
+<p>我们定义一个城市的 “不便利值” 为从它出发到首都需要乘坐的长途汽车的次数, 而 Z 国的交通系统的 “不便利值” 为所有城市的不便利值的最大值, 很明显首都的 “不便利值” 为 <span class="math inline">\(0\)</span>. 小 Z 想知道如何确定<strong>规划路线</strong>修建铁路使得 Z 国的交通系统的 “不便利值” 最小, 以及有多少种不同的<strong>规划路线</strong>的选择方案使得 “不便利值” 达到最小. 当然方案总数可能非常大, 小 Z 只关心这个天文数字 <span class="math inline">\(\bmod Q\)</span> 后的值.</p>
+<p>注意:<strong> 规划路线</strong> <span class="math inline">\(1-2-3\)</span> 和<strong>规划路线</strong> <span class="math inline">\(3-2-1\)</span> 是等价的, 即将一条规划路线翻转依然认为是等价的. 两个方案不同当且仅当其中一个方案中存在一条规划路线不属于另一个方案.</p>
+<h2 id="input">Input</h2>
+<p>第一行包含三个正整数 <span class="math inline">\(n, m, Q\)</span>, 其中 <span class="math inline">\(n\)</span> 表示城市个数,<span class="math inline">\(m\)</span> 表示公路总数,<span class="math inline">\(n\)</span> 个城市从 <span class="math inline">\(1-N\)</span> 编号, 其中编号为 <span class="math inline">\(1\)</span> 的是首都.<span class="math inline">\(Q\)</span> 表示上文提到的设计路线的方法总数的模数.</p>
+<p>接下来 <span class="math inline">\(m\)</span> 行, 每行两个不同的正数 <span class="math inline">\(a_i, b_i (1 \leq a_i, b_i \leq n)\)</span> 表示有一条公路连接城市 <span class="math inline">\(a_i\)</span> 和城市 <span class="math inline">\(b_i\)</span>. 输入数据保证一条公路只出现一次.</p>
+<h2 id="output">Output</h2>
+<p>第一行为一个整数, 表示最小的 “不便利值”.</p>
+<p>第二行为一个整数, 表示使 “不便利值” 达到最小时不同的设计路线的方法总数 <span class="math inline">\(\bmod Q\)</span> 的值. 如果某个城市无法到达首都, 则输出两行 <span class="math inline">\(-1\)</span>.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>5 4 100
+1 2
+4 5
+1 3
+4 1</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>1
+10</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于 100% 的数据, 满足 <span class="math inline">\(1 \leq n, m \leq 10^5, 1 \leq Q \leq 120000000\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<p>首先这棵树需要联通......</p>
+<p>然后膜拜神犇题解:<a href="">http://www.cnblogs.com/jianglangcaijin/archive/2013/12/06/3462328.html</a></p>
+<p>考虑 <span class="math inline">\(dp[i][j][k]\)</span> 表示以 <span class="math inline">\(i\)</span> 为根的子树, 其所有孩子到其的不便利度最大为 <span class="math inline">\(j\)</span>, 向其孩子修建 <span class="math inline">\(k\)</span> 条铁路的方案数, 设 <span class="math inline">\(i\)</span> 的孩子集合为 <span class="math inline">\(S\)</span>, 那么有:<span class="math display">\[
+\begin{aligned}
+dp[i][j][0] &amp;= \prod_{x \in S_i} dp[x][j-1][0] + dp[x][j-1][1] + dp[x][j-1][2]\\
+dp[i][j][1] &amp;= \sum_{x \in S_i} (dp[x][j][0] + dp[x][j][1])\\
+&amp;\cdot \prod_{y \in S_i \land y \neq x} (dp[y][j-1][0] + dp[y][j-1][1] + dp[y][j-1][2])\\
+dp[i][j][2] &amp;= \sum_{x \in S_i} \sum_{y \in S_i \land y \neq x} (dp[x][j][0] + dp[x][j][1]) \cdot (dp[y][j][0] + dp[y][j][1])\\
+&amp;\cdot \prod_{z \in S_i \land z \neq x \land z \neq y} (dp[z][j-1][0] + dp[z][j-1][1] + dp[z][j-1][2])
+\end{aligned}
+\]</span></p>
+<p>然后将这个繁琐的式子化简以后得到:<span class="math display">\[
+\begin{aligned}
+f_1 &amp;= dp[x][j][0] + dp[x][j][1]\\
+f_2 &amp;= dp[x][j-1][0] + dp[x][j-1][1] + dp[x][j-1][2]\\
+dp[i][j][2] &amp;= dp[i][j][2] \cdot f_2 + dp[i][j][1] \cdot f_1\\
+dp[i][j][1] &amp;= dp[i][j][1] \cdot f_2 + dp[i][j][0] \cdot f_1\\
+dp[i][j][0] &amp;= dp[i][j][0] \cdot f_2
+\end{aligned}
+\]</span> 然后带进去即可.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="kw">typedef</span> pair&lt;lli, lli&gt; prll;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">100100</span>, maxm = <span class="dv">400100</span>;
+<span class="co">/* const */</span> lli modr = <span class="dv">1000000007</span>;
+
+lli pmod(lli a) { lli b = a % modr;
+    <span class="kw">if</span> (!a) <span class="kw">return</span> <span class="dv">0</span>;
+    <span class="kw">if</span> (!b) <span class="kw">return</span> modr;
+    <span class="kw">return</span> b;
+} <span class="co">// A peculiar modulo operation, avoids 0 detection</span>
+
+<span class="kw">class</span> TreeDP
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v;
+        edge *next;
+    };
+    <span class="dt">int</span> n, root, ecnt;
+    edge *edges[maxn], epool[maxm];
+    <span class="dt">bool</span> vis[maxn];
+    <span class="dt">int</span> par[maxn];
+    lli dp[maxn][<span class="dv">20</span>][<span class="dv">3</span>];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v)
+    {
+        edge *p = &amp;epool[++ecnt],
+             *q = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v;
+        p-&gt;next = edges[u]; edges[u] = p;
+        q-&gt;u = v; q-&gt;v = u;
+        q-&gt;next = edges[v]; edges[v] = q;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> dfs_forest(<span class="dt">int</span> p)
+    {
+        vis[p] = <span class="kw">true</span>;
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+            <span class="kw">if</span> (!vis[ep-&gt;v]) {
+                dfs_forest(ep-&gt;v);
+                par[ep-&gt;v] = p;
+            }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> dfs(<span class="dt">int</span> p, <span class="dt">int</span> fail)
+    {
+        dp[p][fail][<span class="dv">0</span>] = <span class="dv">1</span>;
+        dp[p][fail][<span class="dv">1</span>] = <span class="dv">0</span>;
+        dp[p][fail][<span class="dv">2</span>] = <span class="dv">0</span>;
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next) <span class="kw">if</span> (par[ep-&gt;v] == p) {
+            dfs(ep-&gt;v, fail);
+            lli f1 = dp[ep-&gt;v][fail][<span class="dv">0</span>] + dp[ep-&gt;v][fail][<span class="dv">1</span>],
+                f2 = (fail &gt; <span class="dv">0</span>) ? (dp[ep-&gt;v][fail<span class="dv">-1</span>][<span class="dv">0</span>] + dp[ep-&gt;v][fail<span class="dv">-1</span>][<span class="dv">1</span>] + dp[ep-&gt;v][fail<span class="dv">-1</span>][<span class="dv">2</span>]) : (<span class="dv">0</span>);
+            dp[p][fail][<span class="dv">2</span>] = pmod(dp[p][fail][<span class="dv">2</span>] * f2 + dp[p][fail][<span class="dv">1</span>] * f1);
+            dp[p][fail][<span class="dv">1</span>] = pmod(dp[p][fail][<span class="dv">1</span>] * f2 + dp[p][fail][<span class="dv">0</span>] * f1);
+            dp[p][fail][<span class="dv">0</span>] = pmod(dp[p][fail][<span class="dv">0</span>] * f2);
+        }
+        <span class="kw">return</span> ;
+    }
+    prll eval(<span class="dt">void</span>)
+    {
+        <span class="co">// In case of error or impossibility, we raise this.</span>
+        prll fallback = make_pair(<span class="dv">-1</span>, <span class="dv">-1</span>);
+        <span class="co">// Checking connectivity to the capital</span>
+        dfs_forest(root);
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+            <span class="kw">if</span> (!vis[i])
+                <span class="kw">return</span> fallback;
+        <span class="co">// Tree is connected, getting dp array</span>
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">20</span>; i++) {
+            dfs(root, i);
+            lli sm = dp[root][i][<span class="dv">0</span>] + dp[root][i][<span class="dv">1</span>] + dp[root][i][<span class="dv">2</span>];
+            <span class="kw">if</span> (sm &lt;= <span class="dv">0</span>)
+                <span class="kw">continue</span>;
+            <span class="kw">return</span> make_pair(i, sm % modr);
+        }
+        <span class="co">// That meant a total failure.</span>
+        <span class="kw">return</span> fallback;
+    }
+} graph;
+
+<span class="dt">int</span> n, m;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d%lld</span><span class="st">"</span>, &amp;n, &amp;m, &amp;modr);
+    graph.n = n;
+    graph.root = <span class="dv">1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, a, b; i &lt;= m; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;a, &amp;b);
+        graph.add_edge(a, b);
+    }
+    <span class="co">// Getting result</span>
+    prll pr = graph.eval();
+    printf(<span class="st">"</span><span class="ch">%lld\n%lld\n</span><span class="st">"</span>, pr.first, pr.second);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1063/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1063/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1063/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1063/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1063">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

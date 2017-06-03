@@ -1,0 +1,329 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj3224: Tyvj 1728 普通平衡树&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj3224: Tyvj 1728 普通平衡树
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=TYVJ" target="_self">
+            <i class="fa fa-tag"></i> TYVJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=Balanced Tree" target="_self">
+            <i class="fa fa-tag"></i> Balanced Tree
+          </a>
+          <a class="tag" href="/blog/archive/?q=Splay Tree" target="_self">
+            <i class="fa fa-tag"></i> Splay Tree
+          </a>
+        </span>
+        <span class="date" title="22:33:05 | 6 December, 2016">
+          6 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>您需要写一种数据结构 (可参考题目标题), 来维护一些数, 其中需要提供以下操作:</p>
+<ol type="1">
+<li>插入 x 数</li>
+<li>删除 x 数 (若有多个相同的数, 因只删除一个)</li>
+<li>查询 x 数的排名 (若有多个相同的数, 因输出最小的排名)</li>
+<li>查询排名为 x 的数</li>
+<li>求 x 的前驱 (前驱定义为小于 x, 且最大的数)</li>
+<li>求 x 的后继 (后继定义为大于 x, 且最小的数)</li>
+</ol>
+<h2 id="input">Input</h2>
+<p>第一行为 <span class="math inline">\(n\)</span>, 表示操作的个数, 下面 n 行每行有两个数 <span class="math inline">\(opt\)</span> 和 <span class="math inline">\(x\)</span>,<span class="math inline">\(opt\)</span> 表示操作的序号 <span class="math inline">\((1 \leq opt \leq 6)\)</span></p>
+<h2 id="output">Output</h2>
+<p>对于操作 <span class="math inline">\(3, 4, 5, 6\)</span> 每行输出一个数, 表示对应答案</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>10
+1 106465
+4 1
+1 317721
+1 460929
+1 644985
+1 84185
+1 89851
+6 81968
+1 492737
+5 493598</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>106465
+84185
+492737</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p><span class="math inline">\(n\)</span> 的数据范围:<span class="math inline">\(n \leq 100000\)</span></p>
+<p>每个数的数据范围:<span class="math inline">\([-10^7,10^7]\)</span></p>
+<p>数据参见:<a href="">http://pan.baidu.com/s/1jHMJwO2</a></p>
+<h2 id="explanation">Explanation</h2>
+<p>这道题调了两个晚上好不好~</p>
+<p>就是一个平衡树, 用 Splay 可以很不水地过掉 (因为本人写 Splay 总是写炸对不对, 不然 怎么会叫 Splay With Trees...... ) . 但是这样的平衡树我们还需要给他一点小 Trick, 比如 在每一个节点上打一个标记记一下这个节点实际出现了几次, 然后就把判重的情况给搞定了.</p>
+<p>其他的还有奇葩的前继后继查询, 像这个搞了半天然后最后实在是没有什么办法了, 在 <code>find_value()</code> 上瞎搞了一发, 加了一堆 <code>return</code>, 然后又添加了一个函数 <code>find_value_indet()</code>, 代表不确定的查询 lower bound, 终于可以过掉样例了......</p>
+<p>结果突然发现过了样例那 1. 6M 的数据就可以直接水过了 (你知道用 pyjudge 测评的时候我都是捂着眼睛测的 233)</p>
+<p>然后交到 BZOJ 上 1A, 算我运气好......<span class="citation" data-cites="Burst_Zero"> @Burst_Zero</span> 直接因为用了 <code>cin</code><code>cout</code> 被奇怪地卡成 RE 不知道为什么 (hustoj 好奇怪)</p>
+<p>居然把 Splay 在 OJ 上过掉了好开心~</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">200100</span>;
+<span class="dt">const</span> <span class="dt">int</span> infinit = <span class="fl">10e8</span>;
+
+<span class="kw">class</span> SplayTree
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> n, root, ncnt;
+    <span class="dt">int</span> ch[maxn][<span class="dv">2</span>], par[maxn];
+    <span class="dt">int</span> val[maxn], vsz[maxn], size[maxn];
+    <span class="ot">#define lc(__x) ch[__x][0]</span>
+    <span class="ot">#define rc(__x) ch[__x][1]</span>
+    <span class="dt">int</span> make_node(<span class="dt">int</span> v)
+    {
+        <span class="dt">int</span> p = ++ncnt;
+        val[p] = v;
+        lc(p) = rc(p) = par[p] = <span class="dv">0</span>;
+        vsz[p] = <span class="dv">1</span>;
+        size[p] = <span class="dv">1</span>;
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">void</span> rotate(<span class="dt">int</span> p)
+    {
+        <span class="dt">int</span> q = par[p], g = par[q];
+        <span class="dt">int</span> x = p == rc(q), y = q == rc(g);
+        ch[q][x] = ch[p][!x]; <span class="kw">if</span> (ch[q][x]) par[ch[q][x]] = q;
+        ch[p][!x] = q; par[q] = p;
+        <span class="kw">if</span> (g) ch[g][y] = p; par[p] = g;
+        <span class="co">// Updating data</span>
+        size[q] = size[lc(q)] + size[rc(q)] + vsz[q];
+        size[p] = size[lc(p)] + size[rc(p)] + vsz[p];
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> splay(<span class="dt">int</span> p, <span class="dt">int</span> t)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> q = <span class="dv">0</span>; (q = par[p]) &amp;&amp; q != t; rotate(p))
+            <span class="kw">if</span> (par[q] &amp;&amp; par[q] != t)
+                rotate((p == lc(q)) == (q == lc(par[q])) ? q : p);
+        <span class="kw">if</span> (t == <span class="dv">0</span>) root = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> suc(<span class="dt">int</span> p)
+    {
+        <span class="kw">if</span> (!rc(p)) { <span class="kw">while</span> (p &amp;&amp; p == rc(par[p])) p = par[p]; p = par[p]; }
+        <span class="kw">else</span> { p = rc(p); <span class="kw">while</span> (p &amp;&amp; lc(p)) p = lc(p); }
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">int</span> pre(<span class="dt">int</span> p)
+    {
+        <span class="kw">if</span> (!lc(p)) { <span class="kw">while</span> (p &amp;&amp; p == lc(par[p])) p = par[p]; p = par[p]; }
+        <span class="kw">else</span> { p = lc(p); <span class="kw">while</span> (p &amp;&amp; rc(p)) p = rc(p); }
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">int</span> find_size(<span class="dt">int</span> sz)
+    {
+        sz += <span class="dv">1</span>; <span class="co">// Hot-fix.</span>
+        <span class="dt">int</span> p = root;
+        <span class="kw">while</span> (p != <span class="dv">0</span>) {
+            <span class="kw">if</span> (sz &lt;= size[lc(p)]) {
+                p = lc(p);
+                <span class="kw">continue</span>;
+            } sz -= size[lc(p)];
+            <span class="kw">if</span> (sz &lt;= vsz[p]) <span class="kw">return</span> p;
+            sz -= vsz[p]; p = rc(p);
+        }
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">int</span> query_rank(<span class="dt">int</span> v)
+    {
+        <span class="dt">int</span> p = root, res = <span class="dv">0</span>;
+        <span class="kw">while</span> (p != <span class="dv">0</span>) {
+            <span class="kw">if</span> (v &lt; val[p]) { p = lc(p); <span class="kw">continue</span>; }
+            res += size[lc(p)];
+            <span class="kw">if</span> (v == val[p]) <span class="kw">return</span> (res + <span class="dv">1</span>) - <span class="dv">1</span>;
+            res += vsz[p];
+            p = rc(p);
+        }
+        <span class="kw">return</span> res - <span class="dv">1</span>;
+    }
+    <span class="dt">int</span> find_value(<span class="dt">int</span> v)
+    {
+        <span class="dt">int</span> p = root;
+        <span class="kw">while</span> (p != <span class="dv">0</span>) {
+            <span class="kw">if</span> (v &lt; val[p]) {
+                <span class="kw">if</span> (lc(p)) p = lc(p);
+                <span class="kw">else</span> <span class="kw">return</span> p;
+                <span class="kw">continue</span>;
+            } <span class="kw">else</span> <span class="kw">if</span> (v == val[p])
+                <span class="kw">return</span> p;
+            <span class="kw">if</span> (rc(p)) p = rc(p);
+            <span class="kw">else</span> <span class="kw">return</span> p;
+        }
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">int</span> find_value_indet(<span class="dt">int</span> v)
+    {
+        <span class="dt">int</span> p = find_value(v);
+        <span class="kw">while</span> (p &amp;&amp; val[p] &gt; v)
+            p = pre(p);
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">void</span> insert(<span class="dt">int</span> v)
+    {
+        <span class="dt">int</span> p = root;
+        <span class="kw">while</span> (lc(p) || rc(p)) {
+            size[p]++;
+            <span class="kw">if</span> (v &lt; val[p]) {
+                <span class="kw">if</span> (lc(p)) p = lc(p);
+                <span class="kw">else</span> <span class="kw">break</span>;
+            } <span class="kw">else</span> <span class="kw">if</span> (v == val[p]) {
+                <span class="kw">break</span>;
+            } <span class="kw">else</span> {
+                <span class="kw">if</span> (rc(p)) p = rc(p);
+                <span class="kw">else</span> <span class="kw">break</span>;
+            }
+        }
+        <span class="kw">if</span> (v == val[p]) {
+            splay(p, <span class="dv">0</span>);
+            vsz[p]++, size[p]++;
+            <span class="kw">return</span> ;
+        }
+        <span class="co">// No existent point to serve as lazy insertion</span>
+        <span class="dt">int</span> q = make_node(v);
+        par[q] = p;
+        <span class="kw">if</span> (v &lt;= val[p]) lc(p) = q;
+        <span class="kw">else</span> rc(p) = q;
+        splay(q, <span class="dv">0</span>);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> remove(<span class="dt">int</span> p)
+    {
+        splay(p, <span class="dv">0</span>);
+        <span class="co">// Large enough so that removal is unnecessary</span>
+        <span class="kw">if</span> (vsz[p] &gt; <span class="dv">1</span>) {
+            vsz[p]--;
+            size[p]--;
+            <span class="kw">return</span> ;
+        }
+        <span class="co">// Removing node from tree</span>
+        <span class="dt">int</span> lp = pre(p), rp = suc(p);
+        splay(lp, <span class="dv">0</span>);
+        splay(rp, root);
+        lc(rp) = <span class="dv">0</span>;
+        size[rp]--; size[lp]--;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> init(<span class="dt">void</span>)
+    {
+        root = make_node(-infinit);
+        rc(root) = make_node(infinit);
+        par[rc(root)] = root;
+        size[root] = <span class="dv">2</span>;
+        <span class="kw">return</span> ;
+    }
+} st;
+
+<span class="dt">int</span> n;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    st.init();
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        <span class="dt">int</span> opt, x;
+        scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;opt, &amp;x);
+        <span class="kw">if</span> (opt == <span class="dv">1</span>)
+            st.insert(x);
+        <span class="kw">else</span> <span class="kw">if</span> (opt == <span class="dv">2</span>)
+            st.remove(st.find_value(x));
+        <span class="kw">else</span> <span class="kw">if</span> (opt == <span class="dv">3</span>)
+            printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, st.query_rank(x));
+        <span class="kw">else</span> <span class="kw">if</span> (opt == <span class="dv">4</span>)
+            printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, st.val[st.find_size(x)]);
+        <span class="kw">else</span> <span class="kw">if</span> (opt == <span class="dv">5</span>) {
+            <span class="dt">int</span> p = st.find_value_indet(x);
+            <span class="kw">if</span> (st.val[p] == x) p = st.pre(p);
+            printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, st.val[p]); }
+        <span class="kw">else</span> <span class="kw">if</span> (opt == <span class="dv">6</span>) {
+            <span class="dt">int</span> p = st.suc(st.find_value_indet(x));
+            printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, st.val[p]); }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj3224/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj3224/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj3224/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj3224/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj3224">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

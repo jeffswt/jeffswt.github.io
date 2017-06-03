@@ -1,0 +1,312 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj2809: [Apio2012]dispatching&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj2809: [Apio2012]dispatching
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=APIO2012" target="_self">
+            <i class="fa fa-tag"></i> APIO2012
+          </a>
+          <a class="tag" href="/blog/archive/?q=Mergable Heap" target="_self">
+            <i class="fa fa-tag"></i> Mergable Heap
+          </a>
+          <a class="tag" href="/blog/archive/?q=Leftist Tree" target="_self">
+            <i class="fa fa-tag"></i> Leftist Tree
+          </a>
+          <a class="tag" href="/blog/archive/?q=Depth First Search" target="_self">
+            <i class="fa fa-tag"></i> Depth First Search
+          </a>
+        </span>
+        <span class="date" title="22:30:07 | 19 February, 2017">
+          19 February, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>在一个忍者的帮派里, 一些忍者们被选中派遣给顾客, 然后依据自己的工作获取报偿. 在这个帮派里, 有一名忍者被称之为 Master. 除了 Master 以外, 每名忍者都有且仅有一个上级. 为保密, 同时增强忍者们的领导力, 所有与他们工作相关的指令总是由上级发送给他的直接 下属, 而不允许通过其他的方式发送. 现在你要招募一批忍者, 并把它们派遣给顾客. 你需要为每个被派遣的忍者 支付一定的薪水, 同时使得支付的薪水总额不超过你的预算. 另外, 为了发送指令, 你需要选择一名忍者作为管理者, 要求这个管理者可以向所有被派遣的忍者 发送指令, 在发送指令时, 任何忍者 (不管是否被派遣) 都可以作为消息的传递人. 管理者自己可以被派遣, 也可以不被派遣. 当然, 如果管理者没有被排遣, 就不需要支付 管理者的薪水. 你的目标是在预算内使顾客的满意度最大. 这里定义顾客的满意度为派遣的 忍者总数乘以管理者的领导力水平, 其中每个忍者的领导力水平也是一定的. 写一个程序, 给定每一个忍者 <span class="math inline">\(i\)</span> 的上级 <span class="math inline">\(B_i\)</span>, 薪水 <span class="math inline">\(C_i\)</span>, 领导力 <span class="math inline">\(L_i\)</span>, 以及支付给忍者们的薪水总预算 <span class="math inline">\(m\)</span>, 输出在预算内满足上述要求时顾客满意度的最大值.</p>
+<h2 id="input">Input</h2>
+<p>从标准输入读入数据.</p>
+<p>第一行包含两个整数 <span class="math inline">\(n, m\)</span>, 其中 <span class="math inline">\(n\)</span> 表示忍者的个数,<span class="math inline">\(m\)</span> 表示薪水的总预算.</p>
+<p>接下来 <span class="math inline">\(n\)</span> 行描述忍者们的上级、薪水以及领导力. 其中的第 <span class="math inline">\(i\)</span> 行包含三个整数 <span class="math inline">\(B_i, C_i, L_i\)</span> 分别表示第 <span class="math inline">\(i\)</span> 个忍者的上级, 薪水以及领导力. Master 满足 <span class="math inline">\(B_i=0\)</span>, 并且每一个忍者的老板的编号一定小于自己的编号 <span class="math inline">\(B_i \lt i\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>输出一个数, 表示在预算内顾客的满意度的最大值.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>
+5 4
+0 3 3
+1 3 5
+2 2 2
+1 2 4
+2 3 1</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>6</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>数据包括这些内容:</p>
+<ul>
+<li><span class="math inline">\(1 \leq n \leq 10^5\)</span>, 代表忍者的个数;</li>
+<li><span class="math inline">\(1 \leq m \leq 10^9\)</span>, 代表薪水的总预算;</li>
+<li><span class="math inline">\(0 \leq B_i \lt i\)</span>, 代表忍者的上级的编号;</li>
+<li><span class="math inline">\(1 \leq C_i \leq m\)</span>, 代表忍者的薪水;</li>
+<li><span class="math inline">\(1 \leq L_i \leq 10^9\)</span>, 代表忍者的领导力水平.</li>
+</ul>
+<h2 id="explanation">Explanation</h2>
+<p>看来不同人对于暴力的概念其实是不同的......</p>
+<p><span class="citation" data-cites="hld67890">@hld67890</span> 说其实 (傻逼的) 暴力做法是 <span class="math inline">\(O(n^2)\)</span> 的, 而暴力做法是 <span class="math inline">\(O(n \log n)\)</span> 的. 然而我只能想到 <span class="math inline">\(O(n m)\)</span> 的做法所以我比傻逼还智障~</p>
+<p>其实本身用 map 水一下就可以过去的, 因为数据实在是比较离散, 根本没必要开一个 <span class="math inline">\(O(m)\)</span> 的大数组用来存东西. 然而在 DFS 的过程中合并这些数据的代价还是太高, 所以我们需要一个 能够在最多 <span class="math inline">\(O(\log n)\)</span> 时间内合并数据的数据结构.</p>
+<p>这个数据结构就是左偏树.</p>
+<p>有关左偏树的文章, 看这里就可以了:<a href="leftist_tree.doc">左偏树的特点及其应用.doc</a></p>
+<p>其他的没有必要多讲了吧, 如果这篇论文都看不懂那可以直接回去学文化课了对吧......</p>
+<hr/>
+<p>顺便吐槽一句, 我的代码实在太 OOP 以至于比黄学长的代码长一倍半.</p>
+<p>数组没有开到 <span class="math inline">\(100100\)</span> 少 <span class="math inline">\(\frac{9}{10}\)</span> 导致我花了三个小时调数据生成器最后无功而返.</p>
+<p>不过如果把生成树这个东西加到 pydatagen 里面会方便不少.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">100100</span>, maxm = <span class="dv">5001000</span>;
+
+<span class="kw">template</span> &lt;<span class="kw">typename</span> _T&gt;
+<span class="kw">struct</span> tnode {
+    tnode *lc, *rc;
+    <span class="dt">int</span> dist;
+    _T val;
+};
+
+<span class="kw">template</span> &lt;<span class="kw">typename</span> _T&gt;
+tnode&lt;_T&gt;* make_tree(_T val)
+{
+    tnode&lt;_T&gt;* p = <span class="kw">new</span> tnode&lt;_T&gt;;
+    p-&gt;lc = p-&gt;rc = NULL;
+    p-&gt;val = val;
+    p-&gt;dist = <span class="dv">0</span>;
+    <span class="kw">return</span> p;
+}
+
+<span class="kw">template</span> &lt;<span class="kw">typename</span> _T&gt;
+tnode&lt;_T&gt;* merge(tnode&lt;_T&gt;* a, tnode&lt;_T&gt;* b)
+{
+    <span class="co">// Nullification of merging</span>
+    <span class="kw">if</span> (a == NULL) <span class="kw">return</span> b;
+    <span class="kw">if</span> (b == NULL) <span class="kw">return</span> a;
+    <span class="co">// Ensure heap properties</span>
+    <span class="kw">if</span> (a-&gt;val &lt; b-&gt;val)
+        swap(a, b);
+    <span class="co">// Recursive merging</span>
+    a-&gt;rc = merge(a-&gt;rc, b);
+    <span class="co">// Maintain Leftist tree properties</span>
+    <span class="kw">if</span> (a-&gt;lc ? a-&gt;lc-&gt;dist : <span class="dv">0</span> &lt; a-&gt;rc ? a-&gt;rc-&gt;dist : <span class="dv">0</span>)
+        swap(a-&gt;lc, a-&gt;rc);
+    <span class="co">// Update distance</span>
+    a-&gt;dist = a-&gt;rc ? a-&gt;rc-&gt;dist + <span class="dv">1</span> : <span class="dv">0</span>;
+    <span class="kw">return</span> a;
+}
+
+<span class="kw">class</span> mergable_heap
+{
+<span class="kw">protected</span>:
+    tnode&lt;<span class="dt">int</span>&gt; *root;
+    lli sum;
+    <span class="dt">int</span> ncnt;
+<span class="kw">public</span>:
+    <span class="dt">void</span> clear(<span class="dt">void</span>)
+    {
+        root = NULL;
+        sum = <span class="dv">0</span>;
+        ncnt = <span class="dv">0</span>;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> empty(<span class="dt">void</span>)
+    {
+        <span class="kw">return</span> ncnt == <span class="dv">0</span>;
+    }
+    size_t size(<span class="dt">void</span>)
+    {
+        <span class="kw">return</span> ncnt;
+    }
+    lli get_sum(<span class="dt">void</span>)
+    {
+        <span class="kw">return</span> sum;
+    }
+    <span class="dt">void</span> push(<span class="dt">int</span> val)
+    {
+        tnode&lt;<span class="dt">int</span>&gt; *nd = make_tree(val);
+        root = merge(root, nd);
+        sum += val;
+        ncnt += <span class="dv">1</span>;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> top(<span class="dt">void</span>)
+    {
+        <span class="kw">if</span> (!root)
+            <span class="kw">return</span> <span class="dv">0</span>;
+        <span class="dt">int</span> val = root-&gt;val;
+        <span class="kw">return</span> val;
+    }
+    <span class="dt">void</span> pop(<span class="dt">void</span>)
+    {
+        <span class="kw">if</span> (!root)
+            <span class="kw">return</span> ;
+        <span class="dt">int</span> val = root-&gt;val;
+        root = merge(root-&gt;lc, root-&gt;rc);
+        sum -= val;
+        ncnt -= <span class="dv">1</span>;
+        <span class="kw">return</span> ;
+    }
+    <span class="kw">friend</span> mergable_heap merge(mergable_heap ha, mergable_heap hb)
+    {
+        tnode&lt;<span class="dt">int</span>&gt; *nroot = merge(ha.root, hb.root);
+        mergable_heap hc;
+        hc.root = nroot;
+        hc.sum = ha.sum + hb.sum;
+        hc.ncnt = ha.ncnt + hb.ncnt;
+        <span class="kw">return</span> hc;
+    }
+    mergable_heap(<span class="dt">void</span>)
+    {
+        <span class="kw">this</span>-&gt;clear();
+        <span class="kw">return</span> ;
+    }
+};
+
+<span class="kw">class</span> TreeDP
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v;
+        edge *next;
+    };
+    <span class="dt">int</span> ecnt, root;
+    lli mx, res;
+    edge *edges[maxn], epool[maxn&lt;&lt;<span class="dv">1</span>];
+    <span class="dt">int</span> C[maxn], L[maxn];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v)
+    {
+        edge *p = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v;
+        p-&gt;next = edges[u]; edges[u] = p;
+        <span class="kw">return</span> ;
+    }
+    mergable_heap dfs(<span class="dt">int</span> p)
+    {
+        mergable_heap hp;
+        hp.push(C[p]);
+        <span class="co">// Joining child heaps</span>
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next) {
+            mergable_heap nhp = dfs(ep-&gt;v);
+            hp = merge(hp, nhp);
+        }
+        <span class="co">// Removing large values</span>
+        <span class="kw">while</span> (hp.get_sum() &gt; mx)
+            hp.pop();
+        <span class="co">// Updating best answer</span>
+        res = max(res, (lli)hp.size() * L[p]);
+        <span class="kw">return</span> hp;
+    }
+    lli eval(<span class="dt">void</span>)
+    {
+        res = <span class="dv">0</span>;
+        dfs(root);
+        <span class="kw">return</span> res;
+    }
+} td;
+
+<span class="dt">int</span> n, m;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    td.mx = m;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, b; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d%d%d</span><span class="st">"</span>, &amp;b, &amp;td.C[i], &amp;td.L[i]);
+        <span class="kw">if</span> (b &gt; <span class="dv">0</span>)
+            td.add_edge(b, i);
+        <span class="kw">else</span>
+            td.root = i;
+    }
+    lli res = td.eval();
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj2809/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj2809/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj2809/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj2809/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj2809">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

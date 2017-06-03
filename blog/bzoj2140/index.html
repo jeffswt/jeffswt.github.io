@@ -1,0 +1,246 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj2140: 稳定婚姻&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj2140: 稳定婚姻
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=Strongly Connected Components" target="_self">
+            <i class="fa fa-tag"></i> Strongly Connected Components
+          </a>
+          <a class="tag" href="/blog/archive/?q=Tarjan" target="_self">
+            <i class="fa fa-tag"></i> Tarjan
+          </a>
+        </span>
+        <span class="date" title="20:16:14 | 9 March, 2017">
+          9 March, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<blockquote>
+<p>我国的离婚率连续 7 年上升, 今年的头两季, 平均每天有近 5000 对夫妇离婚, 大城市的 离婚率上升最快, 有研究婚姻问题的专家认为, 是与简化离婚手续有关. 25 岁的姗姗和男友谈恋爱半年就结婚, 结婚不到两个月就离婚, 是典型的 “闪婚闪离” 例子, 而离婚的 导火线是两个人争玩电脑游戏, 丈夫一气之下, 把电脑炸烂. 有社会工作者就表示, 80 后求助个案越来越多, 有些是与父母过多干预有关. 而根据民政部的统计, 中国离婚 五大城市首位是北京, 其次是上海、深圳, 广州和厦门, 那么到底是什么原因导致我国成为离婚大国呢? 有专家分析说, 中国经济急速发展, 加上女性越来越来越独立, 另外, 近年来简化离婚手续是其中一大原因.----以上内容摘自第一视频门户</p>
+</blockquote>
+<p>现代生活给人们施加的压力越来越大, 离婚率的不断升高已成为现代社会的一大问题. 而其中有许许多多的个案是由婚姻中的 “不安定因素” 引起的. 妻子与丈夫吵架后, 心如绞痛, 于是寻求前男友的安慰, 进而夫妻矛盾激化, 最终以离婚收场, 类似上述的案例数不胜数. 我们已知 <span class="math inline">\(n\)</span> 对夫妻的婚姻状况, 称第 <span class="math inline">\(i\)</span> 对夫妻的男方为 <span class="math inline">\(B_i\)</span>, 女方为 <span class="math inline">\(G_i\)</span>. 若某男 <span class="math inline">\(B_i\)</span> 与某女 <span class="math inline">\(G_j\)</span> 曾经交往过 (无论是大学, 高中, 亦或是幼儿园阶段,<span class="math inline">\(i \neq j\)</span>) , 则当某方与其配偶 (即 <span class="math inline">\(B_i\)</span> 与 <span class="math inline">\(G_i\)</span> 或 <span class="math inline">\(B_j\)</span> 与 <span class="math inline">\(G_j\)</span>) 感情出现问题时, 他们有私奔的可能性. 不妨设 <span class="math inline">\(B_i\)</span> 和其配偶 <span class="math inline">\(G_i\)</span> 感情不和, 于是 <span class="math inline">\(B_i\)</span> 和 <span class="math inline">\(G_j\)</span> 旧情复燃, 进而 <span class="math inline">\(B_j\)</span> 因被戴绿帽而感到不爽, 联系上了他的初恋情人 <span class="math inline">\(G_k\)</span>. ...... 一串串的离婚 事件像多米诺骨牌一般接踵而至. 若在 <span class="math inline">\(B_i\)</span> 和 <span class="math inline">\(G_i\)</span> 离婚的前提下, 这 <span class="math inline">\(2n\)</span> 个人最终 依然能够结合成 <span class="math inline">\(n\)</span> 对情侣, 那么我们称婚姻 <span class="math inline">\(i\)</span> 为不安全的, 否则婚姻 <span class="math inline">\(i\)</span> 就是安全的. 给定所需信息, 你的任务是判断每对婚姻是否安全.</p>
+<h2 id="input">Input</h2>
+<p>第一行为一个正整数 <span class="math inline">\(n\)</span>, 表示夫妻的对数;</p>
+<p>以下 <span class="math inline">\(n\)</span> 行, 每行包含两个字符串, 表示这 <span class="math inline">\(n\)</span> 对夫妻的姓名 (先女后男), 由一个空格隔开;</p>
+<p>第 <span class="math inline">\(n+2\)</span> 行包含一个正整数 <span class="math inline">\(m\)</span>, 表示曾经相互喜欢过的情侣对数;</p>
+<p>以下 <span class="math inline">\(m\)</span> 行, 每行包含两个字符串, 表示这 <span class="math inline">\(m\)</span> 对相互喜欢过的情侣姓名 (先女后男), 由一个空格隔开.</p>
+<h2 id="output">Output</h2>
+<p>输出文件共包含 <span class="math inline">\(n\)</span> 行, 第 <span class="math inline">\(i\)</span> 行为 <code>Safe</code> (如果婚姻 <span class="math inline">\(i\)</span> 是安全的) 或 <code>Unsafe</code> (如果婚姻 <span class="math inline">\(i\)</span> 是不安全的).</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>2
+Melanie Ashley
+Scarlett Charles
+1
+Scarlett Ashley</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>Safe
+Safe</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于 100% 的数据, 所有姓名字符串中只包含英文大小写字母, 大小写敏感, 长度不大于 <span class="math inline">\(8\)</span>, 保证每对关系只在输入文件中出现一次, 输入文件的最后 <span class="math inline">\(m\)</span> 行不会出现未在之前出现过的姓名, 这 <span class="math inline">\(2n\)</span> 个人的姓名各不相同,<span class="math inline">\(1 \leq n \leq 4000, 0 \leq m \leq 20000\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<p>首先先用哈希表把所有字符串都变成数字......</p>
+<p>然后考虑这样的一个强连通分量...... 如果两个情侣是不稳定的那么他们一定在一个强连通分量里, 然后这道题就做出来了......</p>
+<p>吐槽: 为什么把数组大小改成 12 就不会 RE 然后 64 就会 RE...... ; 还有为什么写对拍的时候还想了一个事情就是会把字符串长度搞错调了好久 QwQ</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;stack&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="kw">typedef</span> <span class="dt">unsigned</span> <span class="dt">long</span> <span class="dt">long</span> ull;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">10010</span>, maxm = <span class="dv">50100</span>;
+
+<span class="kw">class</span> StronglyConnectedComponents
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v;
+        edge *next;
+    };
+    edge *edges[maxn], epool[maxm];
+    <span class="dt">int</span> n, ecnt;
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v)
+    {
+        edge *p = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v;
+        p-&gt;next = edges[u]; edges[u] = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> dfn[maxn], low[maxn], instk[maxn], belong[maxn];
+    stack&lt;<span class="dt">int</span>&gt; stk;
+    <span class="dt">int</span> dcnt, bcnt;
+    <span class="dt">void</span> dfs(<span class="dt">int</span> p)
+    {
+        dfn[p] = low[p] = ++dcnt;
+        stk.push(p);
+        instk[p] = <span class="kw">true</span>;
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next) {
+            <span class="dt">int</span> q = ep-&gt;v;
+            <span class="kw">if</span> (!dfn[q]) {
+                dfs(q);
+                low[p] = min(low[p], low[q]);
+            } <span class="kw">else</span> <span class="kw">if</span> (instk[q]) {
+                low[p] = min(low[p], dfn[q]);
+            }
+        }
+        <span class="kw">if</span> (dfn[p] == low[p]) {
+            bcnt += <span class="dv">1</span>;
+            <span class="dt">int</span> q = <span class="dv">0</span>;
+            <span class="kw">do</span> {
+                q = stk.top();
+                stk.pop();
+                instk[q] = <span class="kw">false</span>;
+                belong[q] = bcnt;
+            } <span class="kw">while</span> (q != p);
+        }
+        <span class="kw">return</span> ;
+    }
+} graph;
+
+<span class="kw">inline</span> ull hash(<span class="dt">char</span> str[])
+{
+    ull sum = <span class="dv">0</span>; <span class="dt">int</span> l = strlen(str);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; l; i++)
+        sum = sum * <span class="dv">37</span> + str[i] - <span class="st">'0'</span>;
+    <span class="kw">return</span> sum;
+}
+
+<span class="kw">struct</span> hobj {
+    <span class="dt">char</span> s[<span class="dv">12</span>]; <span class="dt">int</span> next;
+} hsh[maxn];
+<span class="dt">int</span> hh[<span class="dv">100009</span>], hcnt;
+<span class="dt">char</span> str[<span class="dv">12</span>];
+<span class="dt">int</span> get_key(<span class="dt">void</span>)
+{
+    <span class="dt">int</span> key = hash(str) % <span class="dv">100009</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> k = hh[key]; k; k = hsh[k].next) {
+        <span class="kw">if</span> (!strcmp(hsh[k].s, str))
+            <span class="kw">return</span> k;
+    }
+    memmove(hsh[++hcnt].s, str, <span class="kw">sizeof</span> str);
+    hsh[hcnt].next = hh[key];
+    hh[key] = hcnt;
+    <span class="kw">return</span> hcnt;
+}
+
+<span class="dt">int</span> n, m;
+<span class="dt">int</span> edge[maxn][<span class="dv">2</span>];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        <span class="dt">int</span> t1 = <span class="dv">0</span>, t2 = <span class="dv">0</span>;
+        memset(str, <span class="dv">0</span>, <span class="kw">sizeof</span>(str));
+        scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str); t1 = get_key();
+        memset(str, <span class="dv">0</span>, <span class="kw">sizeof</span>(str));
+        scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str); t2 = get_key();
+        edge[i][<span class="dv">0</span>] = t1; edge[i][<span class="dv">1</span>] = t2;
+        graph.add_edge(t1, t2);
+    }
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        <span class="dt">int</span> t1 = <span class="dv">0</span>, t2 = <span class="dv">0</span>;
+        memset(str, <span class="dv">0</span>, <span class="kw">sizeof</span>(str));
+        scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str); t1 = get_key();
+        memset(str, <span class="dv">0</span>, <span class="kw">sizeof</span>(str));
+        scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str); t2 = get_key();
+        graph.add_edge(t2, t1);
+    }
+    <span class="co">// Searching.</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        <span class="kw">if</span> (!graph.belong[edge[i][<span class="dv">0</span>]])
+            graph.dfs(edge[i][<span class="dv">0</span>]);
+    <span class="co">// Results</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        <span class="kw">if</span> (graph.belong[edge[i][<span class="dv">0</span>]] == graph.belong[edge[i][<span class="dv">1</span>]])
+            printf(<span class="st">"Unsafe</span><span class="ch">\n</span><span class="st">"</span>);
+        <span class="kw">else</span>
+            printf(<span class="st">"Safe</span><span class="ch">\n</span><span class="st">"</span>);
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj2140/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj2140/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj2140/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj2140/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj2140">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

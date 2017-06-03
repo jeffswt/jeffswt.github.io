@@ -1,0 +1,246 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj3140: [Hnoi2013]消毒&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj3140: [Hnoi2013]消毒
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=Depth First Search" target="_self">
+            <i class="fa fa-tag"></i> Depth First Search
+          </a>
+          <a class="tag" href="/blog/archive/?q=Bipartite Graph" target="_self">
+            <i class="fa fa-tag"></i> Bipartite Graph
+          </a>
+        </span>
+        <span class="date" title="20:27:45 | 14 March, 2017">
+          14 March, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>最近在生物实验室工作的小 T 遇到了大麻烦.</p>
+<p>由于实验室最近升级的缘故, 他的分格实验皿是一个长方体, 其尺寸为 <span class="math inline">\(a \times b \times c\)</span>, 其中 <span class="math inline">\(a, b, c \in \mathbb{Z}^{+}\)</span>. 为了实验的方便, 它被划分为 <span class="math inline">\(a \times b \times c\)</span> 个单位立方体区域, 每个单位立方体尺寸为 <span class="math inline">\(1 \times 1 \times 1\)</span>. 用 <span class="math inline">\((i, j, k)\)</span> 标识一个单位立方体,<span class="math inline">\(1 \leq i \leq a, 1 \leq j \leq b, q \leq k \leq c\)</span>. 这个 实验皿已经很久没有人用了, 现在, 小 T 被导师要求将其中一些单位立方体区域进行消毒操作 (每个区域可以被重复消毒). 而由于严格的实验要求, 他被要求使用一种特定的 F 试剂来进行消毒. 这种 F 试剂特别奇怪, 每次对尺寸为 <span class="math inline">\(x \times y \times z\)</span> 的长方体区域 (它由 <span class="math inline">\(x \times y \times z\)</span> 个单位立方体组成) 进行消毒时, 只需要使用 <span class="math inline">\(min\{x, y, z\}\)</span> 单位的 F 试剂. F 试剂的价格不菲, 这可难倒了小 T. 现在请你告诉他, 最少要用多少单位的 F 试剂.</p>
+<h2 id="input">Input</h2>
+<p>第一行是一个正整数 <span class="math inline">\(T\)</span>, 表示数据组数.</p>
+<p>接下来是 <span class="math inline">\(T\)</span> 组数据, 每组数据开头是三个数 <span class="math inline">\(a, b, c\)</span> 表示实验皿的尺寸.</p>
+<p>接下来会出现 <span class="math inline">\(a\)</span> 个 <span class="math inline">\(b\)</span> 行 <span class="math inline">\(c\)</span> 列的用空格隔开的 <span class="math inline">\(01\)</span> 矩阵,<span class="math inline">\(0\)</span> 表示对应的单位立方体不要求消毒,<span class="math inline">\(1\)</span> 表示对应的单位立方体需要消毒;</p>
+<h2 id="output">Output</h2>
+<p>仅包含 D 行, 每行一个整数, 表示对应实验皿最少要用多少单位的 F 试剂.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>1
+4 4 4
+1 0 1 1
+0 0 1 1
+0 0 0 0
+0 0 0 0
+0 0 1 1
+1 0 1 1
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+1 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+1 0 0 0</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>3</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>输入保证满足 <span class="math inline">\(a \times b \times c \leq 5000, T \leq 3\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<p>所有那些标记为 <span class="math inline">\(0\)</span> 的方块都是来打酱油的, 无视他们......</p>
+<p>只有 <span class="math inline">\(1\)</span> 有作用, 并且不超过 <span class="math inline">\(5000\)</span> 个, 这暗含了条件 <span class="math inline">\(n \leq 5000\)</span>.</p>
+<p>我们会贪心地希望整个立方体越扁平越好, 因为需要最小化某一条最窄的边. 进一步, 加厚 染色区域对总结果没有更好的影响, 在最好的情形下只会维持原状, 糟糕的情形下会使答案 加大.</p>
+<p>我们按照三个坐标轴排序 (需要预处理 orientation), 然后 dfs 留下还是不留下某一块, 最后用二分图匹配跑一遍寻找最小 (雾) 匹配.</p>
+<p>注意在二分图重置时切记不要使用 <code>memset(...)</code>, 因为这导致了过多的时间浪费, 其实有很大一部分内存是不需要被清理的, 白白增大了常数.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="ot">#define rep(_var,_begin,_end) for(int _var=_begin;_var&lt;=_end;_var++)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">10010</span>, maxm = <span class="dv">100100</span>;
+
+<span class="kw">class</span> HungaryMatch
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v;
+        edge *next;
+    };
+    <span class="dt">int</span> n, ecnt, vis_targ;
+    edge *edges[maxn], epool[maxn];
+    <span class="dt">int</span> vis[maxn], from[maxn];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v)
+    {
+        edge *p = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v;
+        p-&gt;next = edges[u]; edges[u] = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> find(<span class="dt">int</span> p)
+    {
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+            <span class="kw">if</span> (vis[ep-&gt;v] != vis_targ) {
+                vis[ep-&gt;v] = vis_targ;
+                <span class="kw">if</span> (from[ep-&gt;v] == <span class="dv">0</span> || find(from[ep-&gt;v])) {
+                    from[ep-&gt;v] = p;
+                    <span class="kw">return</span> <span class="kw">true</span>;
+                }
+            }
+        <span class="kw">return</span> <span class="kw">false</span>;
+    }
+    <span class="dt">void</span> init(<span class="dt">int</span> n)
+    {
+        <span class="co">// Some fast and non-time-consuming init methods</span>
+        <span class="co">// Never use memset(...) here!</span>
+        <span class="kw">this</span>-&gt;n = n;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++)
+            edges[i] = NULL;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++)
+            from[i] = <span class="dv">0</span>;
+        ecnt = <span class="dv">0</span>;
+        vis_targ += <span class="dv">1</span>;
+        <span class="kw">return</span> ;
+    }
+} graph;
+
+<span class="dt">int</span> T;
+<span class="dt">int</span> a, b, c, tot, res;
+<span class="dt">int</span> used[maxn];
+
+<span class="kw">struct</span> point { <span class="dt">int</span> x, y, z;
+    point(<span class="dt">void</span>) { <span class="kw">return</span> ; }
+    point(<span class="dt">int</span> _1, <span class="dt">int</span> _2, <span class="dt">int</span> _3) {
+        x = _1; y = _2; z = _3;
+        <span class="kw">if</span> (b &lt;= a &amp;&amp; b &lt;= c) swap(x, y);
+        <span class="kw">else</span> <span class="kw">if</span> (c &lt;= a &amp;&amp; c &lt;= b) swap(z, x);
+        <span class="kw">return</span> ; }
+} pnt[maxn];
+
+
+<span class="dt">void</span> dfs(<span class="dt">int</span> pos, <span class="dt">int</span> cnt) <span class="co">// cnt: layers coloured on x-axis</span>
+{
+    <span class="kw">if</span> (cnt &gt;= res) {
+        <span class="kw">return</span> ;
+    } <span class="kw">else</span> <span class="kw">if</span> (pos &gt; a) {
+        graph.init(b);
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= tot; i++)
+            <span class="kw">if</span> (!used[pnt[i].x])
+                graph.add_edge(pnt[i].y, pnt[i].z);
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= b; i++) {
+            graph.vis_targ += <span class="dv">1</span>;
+            cnt += graph.find(i);
+            <span class="kw">if</span> (cnt &gt;= res)
+                <span class="kw">return</span> ;
+        }
+        res = cnt;
+        <span class="kw">return</span> ;
+    }
+    used[pos] = <span class="kw">true</span>;
+    dfs(pos + <span class="dv">1</span>, cnt + <span class="dv">1</span>);
+    used[pos] = <span class="kw">false</span>;
+    dfs(pos + <span class="dv">1</span>, cnt);
+    <span class="kw">return</span> ;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;T);
+    <span class="kw">for</span> (<span class="dt">int</span> idx = <span class="dv">1</span>; idx &lt;= T; idx++) {
+        scanf(<span class="st">"</span><span class="ch">%d%d%d</span><span class="st">"</span>, &amp;a, &amp;b, &amp;c);
+        tot = <span class="dv">0</span>;
+        rep(i, <span class="dv">1</span>, a) rep(j, <span class="dv">1</span>, b) rep(k, <span class="dv">1</span>, c) {
+            <span class="dt">int</span> x; scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;x);
+            <span class="kw">if</span> (x == <span class="dv">1</span>) pnt[++tot] = point(i, j, k);
+        }
+        <span class="kw">if</span> (b &lt;= a &amp;&amp; b &lt;= c) swap(a, b);
+        <span class="kw">else</span> <span class="kw">if</span> (c &lt;= a &amp;&amp; c &lt;= b) swap(c, a);
+        res = a;
+        dfs(<span class="dv">1</span>, <span class="dv">0</span>);
+        printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj3140/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj3140/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj3140/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj3140/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj3140">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1013: [JSOI2008]球形空间产生器sphere&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1013: [JSOI2008]球形空间产生器sphere
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=JSOI2008" target="_self">
+            <i class="fa fa-tag"></i> JSOI2008
+          </a>
+          <a class="tag" href="/blog/archive/?q=Gaussian Elimination" target="_self">
+            <i class="fa fa-tag"></i> Gaussian Elimination
+          </a>
+          <a class="tag" href="/blog/archive/?q=Simulated Annealing" target="_self">
+            <i class="fa fa-tag"></i> Simulated Annealing
+          </a>
+        </span>
+        <span class="date" title="16:15:49 | 30 July, 2016">
+          30 July, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Problem Specification</th>
+<th style="text-align: left;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Time Limit</td>
+<td style="text-align: left;">1 Sec</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Memory Limit</td>
+<td style="text-align: left;">162 MB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Submit</td>
+<td style="text-align: left;">4156</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Solved</td>
+<td style="text-align: left;">2183</td>
+</tr>
+</tbody>
+</table>
+<!-- More -->
+<h2 id="description">Description</h2>
+<p>有一个球形空间产生器能够在 n 维空间中产生一个坚硬的球体. 现在, 你被困在了这个 n 维球体中, 你只知道球面上 n+1 个点的坐标, 你需要以最快的速度确定这个 n 维球体的球心坐标, 以便于摧毁这个球形空间产生器.</p>
+<h2 id="input">Input</h2>
+<p>第一行是一个整数 n (1&lt;=N=10). 接下来的 n+1 行, 每行有 n 个实数, 表示球面上一点的 n 维坐标. 每一个实数精确到小数点后 6 位, 且其绝对值都不超过 20000.</p>
+<h2 id="output">Output</h2>
+<p>有且只有一行, 依次给出球心的 n 维坐标 (n 个实数), 两个实数之间用一个空格隔开. 每个实数精确到小数点后 3 位. 数据保证有解. 你的答案必须和标准输出一模一样才能够得分.</p>
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>2
+0.0 0.0
+-1.0 1.0
+1.0 0.0</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>0.500 1.500</code></pre>
+<h2 id="hint">HINT</h2>
+<p>提示: 给出两个定义: 1、球心: 到球面上任意一点距离都相等的点. 2、距离: 设两个 n 为空间上的点 A, B 的坐标为 (a1, a2,. ...... , an), (b1, b2,. ...... , bn), 则 AB 的距离定义为: dist=sqrt ((a1-b1) ^2+(a2-b2) ^2+...... +(an-bn) ^2)</p>
+<h2 id="source">Source</h2>
+<hr/>
+<p>花了很大功夫写了两个版本, 一个是让人写到吐的模拟退火, 另一个是相对友善的高斯消元法. 模拟 退火调了很久很久但是还有许多 <strong>BUG</strong>, 不过最后还是用高斯消元法 AC 了.</p>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cmath&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">double</span> lf;
+<span class="ot">#define sqr(____x) ((____x) * (____x))</span>
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">20</span>;
+
+<span class="dt">int</span> n;
+lf  coords[maxn][maxn]; <span class="co">// Actual coordinates</span>
+lf  mat[maxn][maxn]; <span class="co">// The matrix of linear equations</span>
+lf  res[maxn]; <span class="co">// The actual results</span>
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    <span class="co">// Read-in data</span>
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++)
+            scanf(<span class="st">"</span><span class="ch">%Lf</span><span class="st">"</span>, &amp;coords[i][j]);
+    <span class="co">// Pre-process coords to create matrix</span>
+    <span class="co">// 2x(a_2-a_1) + 2y(b_2-b_1)=a_1^2+b_1^2-a_2^2-b_2^2</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) { <span class="co">// Iterate through a_1, 2, 3...</span>
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++) <span class="co">// Iterate through x, y, z...</span>
+            mat[i][j] = <span class="fl">2.0</span> * (coords[i][j] - coords[i - <span class="dv">1</span>][j]);
+        <span class="co">// Calculate final coefficient</span>
+        mat[i][n + <span class="dv">1</span>] = <span class="fl">0.0</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++)
+            mat[i][n + <span class="dv">1</span>] += sqr(coords[i - <span class="dv">1</span>][j]) - sqr(coords[i][j]);
+    }
+    <span class="co">// Calculate matrix using Gaussian Elimination</span>
+    <span class="co">// Convert matrix to echelon form</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n - <span class="dv">1</span>; i++) { <span class="co">// The equation to be examined</span>
+        <span class="co">// To ensure that there's no zero on this particular position</span>
+        <span class="kw">if</span> (mat[i][i] == <span class="dv">0</span>) {
+            <span class="co">// Search through the entire matrix in hope of finding one</span>
+            <span class="dt">int</span> found = <span class="dv">0</span>;
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++)
+                <span class="kw">if</span> (mat[j][i] != <span class="dv">0</span>)
+                    found = j;
+            <span class="kw">if</span> (!found)
+                <span class="kw">continue</span>; <span class="co">// We don't need this after all</span>
+            <span class="co">// Copying the specific row and add to this row</span>
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n + <span class="dv">1</span>; j++)
+                mat[i][j] += mat[found][j];
+        }
+        <span class="co">// Now to solve the elimination</span>
+        <span class="kw">for</span> (<span class="dt">int</span> j = i + <span class="dv">1</span>; j &lt;= n; j++) { <span class="co">// The equation to be eliminated</span>
+            lf  elim = - mat[j][i] / mat[i][i];
+            <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= n + <span class="dv">1</span>; k++)
+                mat[j][k] += elim * mat[i][k]; <span class="co">// Eliminate row</span>
+            mat[j][i] = <span class="fl">0.0</span>; <span class="co">// Ensure clearness</span>
+        }
+    }
+    <span class="co">// Process echelon matrix to get answers</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = n; i &gt;= <span class="dv">1</span>; i--) {
+        <span class="co">// Take in known values</span>
+        <span class="kw">for</span> (<span class="dt">int</span> j = i + <span class="dv">1</span>; j &lt;= n; j++) {
+            mat[i][n + <span class="dv">1</span>] -= mat[i][j] * res[j];
+            mat[i][j] = <span class="fl">0.0</span>;
+        }
+        <span class="co">// Resize this value</span>
+        mat[i][n + <span class="dv">1</span>] /= mat[i][i];
+        mat[i][i] = <span class="fl">1.0</span>;
+        <span class="co">// Upload to final result table</span>
+        res[i] = mat[i][n + <span class="dv">1</span>];
+    }
+    <span class="co">// Print values</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt; n; i++)
+        printf(<span class="st">"</span><span class="ch">%.3Lf</span><span class="st"> "</span>, - res[i]);
+    printf(<span class="st">"</span><span class="ch">%.3Lf\n</span><span class="st">"</span>, - res[n]); <span class="co">// Or you will get Presentation Error~ 233</span>
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>这就是写吐了的模拟退火----不要借鉴这份代码, 如果它遇到 x-y 比例严重失调的图形会崩掉</p>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cmath&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">double</span> lf;
+<span class="ot">#define sqr(____x) ((____x) * (____x))</span>
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">20</span>, maxm = <span class="dv">1010</span>;
+
+<span class="dt">int</span> n, spawns = <span class="dv">1</span>, iterts = <span class="dv">32</span>;
+lf  xa[maxn][maxn]; <span class="co">// index, dimension</span>
+lf  mx_x[maxn], mn_x[maxn]; <span class="co">// dimension, representing extreme values</span>
+lf  spx[maxn][maxn]; <span class="co">// spawns: index, dimension</span>
+lf  spv[maxn]; <span class="co">// spawns: the current entropy</span>
+lf  mx_d, mn_d;
+lf  delta, epsilon = <span class="fl">1.0e-6</span>;
+
+lf  calc_entropy(lf* arrx)
+{
+    lf  val[maxn], sum = <span class="fl">0.0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++) {
+        val[i] = <span class="fl">0.0</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++)
+            val[i] += sqr(xa[i][j] - arrx[j]);
+        sum += val[i];
+    }
+    sum /= (lf)(n + <span class="dv">1</span>); <span class="co">// Now sum becomes average / mean</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++)
+        val[i] = sqr(val[i] - sum);
+    sum = <span class="fl">0.0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++)
+        sum += val[i]; <span class="co">// The sum of it's squared distinction</span>
+    sum /= (lf)n; <span class="co">// The final result;</span>
+    <span class="kw">return</span> sum;
+}
+
+lf  myrand(lf range)
+{
+    <span class="kw">return</span> rand() * range * <span class="fl">2.0</span> / RAND_MAX - range;
+}
+
+lf  myrand(lf range_l, lf range_r)
+{
+    <span class="kw">return</span> rand() * (range_r - range_l) / RAND_MAX + range_l;
+}
+
+lf  center[maxn]; <span class="co">// Pre-processing for precision</span>
+
+<span class="dt">int</span> main()
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="co">// Set extreme values</span>
+    <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++) {
+        mx_x[j] = <span class="fl">-40000.0</span>;
+        mn_x[j] = <span class="fl">40000.0</span>;
+    }
+    mx_d = <span class="fl">0.0</span>;
+    mn_d = <span class="fl">80000.0</span>;
+    <span class="co">// Input known coordinates</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++) {
+            scanf(<span class="st">"</span><span class="ch">%Lf</span><span class="st">"</span>, &amp;xa[i][j]);
+            mx_x[j] = max(mx_x[j], xa[i][j]);
+            mn_x[j] = min(mn_x[j], xa[i][j]);
+            center[j] += xa[i][j];
+        }
+    <span class="co">// Pre-processing graph</span>
+    <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++) {
+        mx_d = max(mx_d, mx_x[j] - mn_x[j]);
+        mn_d = min(mx_d, mx_x[j] - mn_x[j]);
+        <span class="co">// Processing side-slipping</span>
+        center[j] /= (lf)(n + <span class="dv">1</span>);
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++)
+            xa[i][j] -= center[j];
+        mx_x[j] -= center[j];
+        mn_x[j] -= center[j];
+    }
+    <span class="kw">if</span> (mn_d &lt; <span class="fl">1.0</span>)
+        epsilon *= mn_d; <span class="co">// .*</span>
+    <span class="kw">else</span>
+        epsilon /= mn_d;
+    <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++) {
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++)
+            xa[i][j] /= mx_d;
+        mx_x[j] /= mx_d;
+        mn_x[j] /= mx_d;
+    }
+    <span class="co">// Defining initial precision</span>
+    delta = <span class="fl">20000.0</span>;
+    <span class="co">// Spawning the initial points</span>
+    <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= spawns; k++)
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+            spx[k][i] = myrand(mn_x[i], mx_x[i]);
+    <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= spawns; k++)
+        spv[k] = <span class="fl">8.9e10</span>;
+    <span class="co">// Simulated annealing</span>
+    <span class="kw">while</span> (delta &gt; epsilon) {
+        <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= spawns; k++) {
+            lf  tstx[maxn]; <span class="co">// The sub-routines of this spawn</span>
+            lf  best = spv[k];
+            <span class="co">// Iterating children on the tree</span>
+            <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= iterts; i++) {
+                lf  nwx[maxn];
+                <span class="co">// Generating new node</span>
+                <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++)
+                    nwx[j] = spx[k][j] + myrand(delta);
+                <span class="co">// calculating entropy</span>
+                lf  curval = calc_entropy(nwx);
+                <span class="co">// cout &lt;&lt; curval &lt;&lt; endl;</span>
+                <span class="co">// If not even better than the original, forget it</span>
+                <span class="kw">if</span> (curval &gt;= best) <span class="kw">continue</span>;
+                <span class="co">// Then we'll copy it to the temporary storage</span>
+                <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++)
+                    tstx[j] = nwx[j];
+                best = curval;
+            }
+            <span class="co">// Done spawning, we shall look over whether to update this spawn</span>
+            <span class="kw">if</span> (best &gt;= spv[k]) <span class="kw">continue</span>;
+            <span class="co">// That was nothing happened, now it's getting better!</span>
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++)
+                spx[k][j] = tstx[j];
+            spv[k] = best;
+        }
+        <span class="kw">if</span> (delta &lt;= <span class="dv">100</span> || spv[<span class="dv">1</span>] &gt; <span class="fl">10.0</span>)
+            delta *= <span class="fl">0.7071</span>; <span class="co">// .*</span>
+    }
+    <span class="co">// Generating average values</span>
+    lf  avr[maxn];
+    <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; avr[j] = <span class="fl">0.0</span>, j++);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= spawns; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; avr[j] += spx[i][j], j++);
+    <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; avr[j] /= (lf)spawns, j++);
+    <span class="co">// Post-processing values</span>
+    <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++) {
+        avr[j] *= mx_d; <span class="co">// .*</span>
+        avr[j] += center[j];
+        <span class="kw">if</span> (avr[j] &gt; <span class="fl">-0.001</span> &amp;&amp; avr[j] &lt; <span class="fl">0.000</span>)
+            avr[j] = <span class="fl">0.0</span>;
+    }
+    <span class="co">// Outputting the result</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        printf(<span class="st">"</span><span class="ch">%.3Lf</span><span class="st"> "</span>, avr[i]);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> pydatagen <span class="im">import</span> <span class="op">*</span>
+n <span class="op">=</span> randrange(<span class="dv">1</span>, <span class="dv">11</span>)
+printf(<span class="st">'</span><span class="sc">%d</span><span class="st"> </span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> n)
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">0</span>, n <span class="op">+</span> <span class="dv">1</span>):
+    <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(<span class="dv">0</span>, n):
+        out <span class="op">=</span> randrange(<span class="op">-</span><span class="dv">5000000</span>, <span class="dv">5000000</span>) <span class="op">*</span> <span class="fl">0.001</span>
+        printf(<span class="st">'</span><span class="sc">%.3f</span><span class="st"> '</span> <span class="op">%</span> out)
+    printf(<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)
+fclose()</code></pre></div>
+<hr/>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1013/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1013/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1013/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1013/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1013">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

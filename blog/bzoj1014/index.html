@@ -1,0 +1,356 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1014: [JSOI2008]火星人prefix&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1014: [JSOI2008]火星人prefix
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=JSOI2008" target="_self">
+            <i class="fa fa-tag"></i> JSOI2008
+          </a>
+          <a class="tag" href="/blog/archive/?q=Splay Tree" target="_self">
+            <i class="fa fa-tag"></i> Splay Tree
+          </a>
+        </span>
+        <span class="date" title="20:53:36 | 14 December, 2016">
+          14 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>火星人最近研究了一种操作: 求一个字串两个后缀的公共前缀. 比方说, 有这样一个字符串:<code>madamimadam</code>, 我们将这个字符串的各个字符予以标号:</p>
+<p><code>序号：1 2 3 4 5 6 7 8 9 10 11</code></p>
+<p><code>字符：m a d a m i m a d a  m</code></p>
+<p>现在, 火星人定义了一个函数 <span class="math inline">\(LCQ(x, y)\)</span>, 表示: 该字符串中第 <span class="math inline">\(x\)</span> 个字符开始的字串, 与该字符串中第 <span class="math inline">\(y\)</span> 个字符开始的字串, 两个字串的公共前缀的长度. 比方说,<span class="math inline">\(LCQ(1, 7) = 5, LCQ(2, 10) = 1, LCQ(4, 7) = 0\)</span>. 在研究 LCQ 函数的过程中, 火星人发现了这样的一个关联: 如果把该字符串的所有后缀排好序, 就可以很快地求出 <span class="math inline">\(LCQ\)</span> 函数的值; 同样, 如果求出了 LCQ 函数的值, 也可以很快地将该字符串的后缀排好序. 尽管火星人聪明地 找到了求取 <span class="math inline">\(LCQ\)</span> 函数的快速算法, 但不甘心认输的地球人又给火星人出了个难题: 在求 取 <span class="math inline">\(LCQ\)</span> 函数的同时, 还可以改变字符串本身. 具体地说, 可以更改字符串中某一个字符的 值, 也可以在字符串中的某一个位置插入一个字符. 地球人想考验一下, 在如此复杂的问题 中, 火星人是否还能够做到很快地求取 <span class="math inline">\(LCQ\)</span> 函数的值.</p>
+<h2 id="input">Input</h2>
+<p>第一行给出初始的字符串. 第二行是一个非负整数 <span class="math inline">\(m\)</span>, 表示操作的个数. 接下来的 <span class="math inline">\(m\)</span> 行, 每行描述一个操作. 操作有 <span class="math inline">\(3\)</span> 种, 如下所示:</p>
+<ol type="1">
+<li>询问. 语法:<code>Q x y</code>,<span class="math inline">\(x, y\)</span> 均为正整数. 功能: 计算 <span class="math inline">\(LCQ(x, y)\)</span>; 限制:<span class="math inline">\(1 \leq x, y \leq 当前字符串长度\)</span>.</li>
+<li>修改. 语法:<code>R x d</code>,<span class="math inline">\(x\)</span> 是正整数,<span class="math inline">\(d\)</span> 是字符. 功能: 将字符串中第 <span class="math inline">\(x\)</span> 个数 修改为字符 <span class="math inline">\(d\)</span>. 限制:<span class="math inline">\(x\)</span> 不超过当前字符串长度.</li>
+<li>插入: 语法:<code>I x d</code>,<span class="math inline">\(x\)</span> 是非负整数,<span class="math inline">\(d\)</span> 是字符. 功能: 在字符串第 <span class="math inline">\(x\)</span> 个字符之后插入字符 <span class="math inline">\(d\)</span>, 如果 <span class="math inline">\(x = 0\)</span>, 则在字符串开头插入. 限制:<span class="math inline">\(x\)</span> 不超过当前字符串长度.</li>
+</ol>
+<h2 id="output">Output</h2>
+<p>对于输入文件中每一个询问操作, 你都应该输出对应的答案. 一个答案一行.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>madamimadam
+7
+Q 1 7
+Q 4 8
+Q 10 11
+R 3 a
+Q 1 7
+I 10 a
+Q 2 11</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>5
+1
+0
+2
+1</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>所有字符串自始至终都只有小写字母构成.</p>
+<p>对于所有数据, 总满足:<span class="math inline">\(m \leq 150000\)</span></p>
+<p>字符串长度 <span class="math inline">\(L\)</span> 自始至终都满足:<span class="math inline">\(L \leq 100000\)</span></p>
+<p>询问操作的个数不超过 <span class="math inline">\(10000\)</span> 个.</p>
+<h2 id="explanation">Explanation</h2>
+<p>在 Splay 上搞高级插入与修改, 然后再搞一个 Hash 函数出来, 来判断两个字符串是否 相等. 最开始我用了一个移位函数, 结果果断被卡 (233), 后来还是参照了黄学长的代码用了乘法加模质数的方法, 结果不停 TLE</p>
+<p>开始以为是像之前那样的卡 long long (雾), 但是改成 int 以后就会不停地 WA, 结果 在本机上用 pyjudge 测了几发以后发现 int 溢出了</p>
+<p>把这堆改完以后就又变回了 TLE. 然后看看本蒟蒻的程序差不多要比黄学长的程序要慢上 60% 左右, 这才意识到是自己的问题. 随即查看了一些不太好的地方, 比如应该二分插入 字符串 (这个可以使初始情况就是最优的), 虽然优化以后并没有性能上的显著提升, 而且 交上去还是会 TLE. 搞完以后突然意识到一件事情:</p>
+<p>我的所有 Hash 值都在 int 以内, 对吧? 我的所有 Hash 都是用 long long 存的, 对吧? 那我为什么还要在乘他们的时候用上模运算呢 (我脑残了)? 所以去掉 Hash 函数里的四个 模操作中的三个, 当然结果还是对的!</p>
+<p>就这样魔改了一发交上去就 AC 了~ 我好弱, Splay 写的常数这么大......</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="ot">#define rep(_var,_begin,_end) for(int _var=_begin;_var&lt;=_end;_var++)</span>
+<span class="ot">#define range(_begin,_end) rep(_,_begin,_end)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">200100</span>;
+<span class="dt">const</span> lli modr = <span class="dv">9875321</span>;
+
+<span class="co">// lli bin_right_rotate(lli dig, lli cnt)</span>
+<span class="co">// {</span>
+<span class="co">//     lli digs = 24;</span>
+<span class="co">//     cnt %= digs;</span>
+<span class="co">//     lli siz = (1ll &lt;&lt; digs) - 1,</span>
+<span class="co">//         cntsiz = (1ll &lt;&lt; cnt) - 1;</span>
+<span class="co">//     dig = dig &amp; siz;</span>
+<span class="co">//     return (dig &gt;&gt; cnt) | ((dig &amp; cntsiz) &lt;&lt; (digs - cnt));</span>
+<span class="co">// }</span>
+<span class="co">//</span>
+<span class="co">// lli concat_hash(lli hash_a, int len_a, lli hash_b, int len_b)</span>
+<span class="co">// {</span>
+<span class="co">//     return bin_right_rotate(hash_a, 3 * len_b) ^ hash_b;</span>
+<span class="co">// }</span>
+
+lli pwr[maxn];
+<span class="kw">inline</span> <span class="dt">void</span> preproc_hash_pwr(<span class="dt">void</span>)
+{
+    pwr[<span class="dv">0</span>] = <span class="dv">1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">150010</span>; i++)
+        pwr[i] = pwr[i - <span class="dv">1</span>] * <span class="dv">27</span> % modr;
+    <span class="kw">return</span> ;
+}
+
+<span class="kw">inline</span> lli concat_hash(lli hash_a, <span class="dt">int</span> len_a, lli hash_b, <span class="dt">int</span> len_b, lli hash_c, <span class="dt">int</span> len_c)
+{
+    lli hsh = (hash_a +
+        hash_b * pwr[len_a] +
+        hash_c * pwr[len_a + len_b]) % modr;
+    <span class="kw">return</span> hsh;
+}
+
+<span class="kw">class</span> SplayTree
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> ch[maxn][<span class="dv">2</span>], par[maxn];
+    <span class="dt">int</span> val[maxn], size[maxn];
+    lli vhash[maxn];
+    <span class="dt">int</span> root, ncnt, n;
+    <span class="ot">#define lc(__x) ch[__x][0]</span>
+    <span class="ot">#define rc(__x) ch[__x][1]</span>
+    <span class="kw">inline</span> <span class="dt">int</span> make_node(<span class="dt">int</span> v, <span class="dt">int</span> p)
+    {
+        lc(p) = rc(p) = par[p] = <span class="dv">0</span>;
+        vhash[p] = val[p] = v;
+        size[p] = <span class="dv">1</span>;
+        <span class="kw">return</span> p;
+    }
+    <span class="kw">inline</span> <span class="dt">int</span> make_node(<span class="dt">int</span> v)
+    {
+        <span class="dt">int</span> p = ++ncnt;
+        <span class="kw">return</span> make_node(v, p);
+    }
+    <span class="kw">inline</span> <span class="dt">void</span> update_data(<span class="dt">int</span> p)
+    {
+        size[p] = size[lc(p)] + size[rc(p)] + <span class="dv">1</span>;
+        <span class="co">// printf("update data %d %d %d :: %lld\n", p, lc(p), rc(p), vhash[p]);</span>
+        vhash[p] = concat_hash(
+            vhash[lc(p)], size[lc(p)],
+            val[p], <span class="dv">1</span>,
+            vhash[rc(p)], size[rc(p)]);
+        <span class="co">// printf("update data %d -&gt; %lld\n", p, vhash[p]);</span>
+        <span class="kw">return</span> ;
+    }
+    <span class="kw">inline</span> <span class="dt">void</span> rotate(<span class="dt">int</span> p)
+    {
+        <span class="dt">int</span> q = par[p], g = par[q];
+        <span class="dt">int</span> x = p == rc(q), y = q == rc(g);
+        ch[q][x] = ch[p][!x]; <span class="kw">if</span> (ch[q][x]) par[ch[q][x]] = q;
+        ch[p][!x] = q; par[q] = p;
+        <span class="kw">if</span> (g) ch[g][y] = p; par[p] = g;
+        update_data(q);
+        update_data(p);
+        <span class="co">// if (g) update_data(g);</span>
+        <span class="kw">return</span> ;
+    }
+    <span class="kw">inline</span> <span class="dt">void</span> splay(<span class="dt">int</span> p, <span class="dt">int</span> t)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> q = <span class="dv">0</span>; (q = par[p]) &amp;&amp; q != t; rotate(p))
+            <span class="kw">if</span> (par[q] &amp;&amp; par[q] != t)
+                rotate((p == rc(q)) == (q == rc(par[q])) ? q : p);
+        <span class="kw">if</span> (t == <span class="dv">0</span>) root = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="kw">inline</span> <span class="dt">int</span> find(<span class="dt">int</span> sz)
+    {
+        <span class="dt">int</span> p = root;
+        <span class="kw">while</span> (p) {
+            <span class="kw">if</span> (sz &lt;= size[lc(p)]) {
+                p = lc(p); <span class="kw">continue</span>; }
+            sz -= size[lc(p)];
+            <span class="kw">if</span> (sz == <span class="dv">1</span>) <span class="kw">return</span> p;
+            sz--; p = rc(p);
+        }
+        <span class="kw">return</span> p;
+    }
+    <span class="kw">inline</span> <span class="dt">void</span> insert(<span class="dt">int</span> l, <span class="dt">int</span> v)
+    {
+        n++; <span class="co">// Addition to the tree</span>
+        <span class="dt">int</span> p = find(l + <span class="dv">1</span>), q = find(l + <span class="dv">2</span>);
+        splay(p, <span class="dv">0</span>);
+        splay(q, root);
+        <span class="dt">int</span> r = make_node(v);
+        par[r] = q; lc(q) = r;
+        size[q]++, size[p]++;
+        update_data(r);
+        update_data(q);
+        update_data(p);
+        <span class="kw">return</span> ;
+    }
+    <span class="kw">inline</span> <span class="dt">void</span> modify(<span class="dt">int</span> pos, <span class="dt">int</span> v)
+    {
+        <span class="dt">int</span> p = find(pos + <span class="dv">1</span>);
+        splay(p, <span class="dv">0</span>);
+        val[p] = v;
+        update_data(p);
+        <span class="kw">return</span> ;
+    }
+    lli get_hash(<span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="dt">int</span> lp = find(l + <span class="dv">1</span> - <span class="dv">1</span>),
+            rp = find(r + <span class="dv">1</span> + <span class="dv">1</span>);
+        splay(lp, <span class="dv">0</span>);
+        splay(rp, root);
+        <span class="co">// printf("get hash %d, %d -&gt; %d, %d : %d\n", l, r, lp, rp,</span>
+        <span class="co">//     size[lc(rp)]);</span>
+        lli hsh = vhash[lc(rp)];
+        <span class="kw">return</span> hsh;
+    }
+    <span class="dt">int</span> query_lcq(<span class="dt">int</span> pos_a, <span class="dt">int</span> pos_b)
+    {
+        <span class="dt">int</span> l = <span class="dv">1</span>, r = min(n - pos_a + <span class="dv">1</span>, n - pos_b + <span class="dv">1</span>), res = <span class="dv">0</span>;
+        <span class="kw">while</span> (l &lt;= r) {
+            <span class="dt">int</span> mid = (l + r) / <span class="dv">2</span>;
+            lli hash_a = get_hash(pos_a, pos_a + mid - <span class="dv">1</span>),
+                hash_b = get_hash(pos_b, pos_b + mid - <span class="dv">1</span>);
+            <span class="co">// printf("lcq %d -&gt; %d : %lli ==== %d -&gt; %d : %lli\n",</span>
+            <span class="co">//     pos_a, pos_a+mid-1, hash_a, pos_b, pos_b+mid-1, hash_b);</span>
+            <span class="kw">if</span> (hash_a == hash_b)
+                res = mid, l = mid + <span class="dv">1</span>;
+            <span class="kw">else</span>
+                r = mid - <span class="dv">1</span>;
+        }
+        <span class="kw">return</span> res;
+    }
+    <span class="dt">int</span> build(<span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">char</span> arr[])
+    {
+        <span class="kw">if</span> (l &gt; r) <span class="kw">return</span> <span class="dv">0</span>;
+        <span class="dt">int</span> mid = (l + r) / <span class="dv">2</span>;
+        <span class="dt">int</span> p = make_node(arr[mid], mid + <span class="dv">2</span>);
+        lc(p) = build(l, mid - <span class="dv">1</span>, arr);
+        <span class="kw">if</span> (lc(p)) par[lc(p)] = p;
+        rc(p) = build(mid + <span class="dv">1</span>, r, arr);
+        <span class="kw">if</span> (rc(p)) par[rc(p)] = p;
+        update_data(p);
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">void</span> init(<span class="dt">int</span> n_, <span class="dt">char</span> arr[])
+    {
+        n = n_;
+        ncnt = n + <span class="dv">2</span>;
+        root = make_node(<span class="dv">0</span>, <span class="dv">1</span>);
+        rc(root) = make_node(<span class="dv">0</span>, <span class="dv">2</span>);
+        par[rc(root)] = root;
+        size[root] = n + <span class="dv">2</span>;
+        size[rc(root)] = n + <span class="dv">1</span>;
+        lc(rc(root)) = build(<span class="dv">1</span>, n, arr);
+        par[lc(rc(root))] = rc(root);
+        splay(<span class="dv">3</span>, <span class="dv">0</span>);
+        <span class="kw">return</span> ;
+    }
+} st;
+
+<span class="dt">int</span> n, m;
+<span class="dt">char</span> str[maxn];
+<span class="dt">char</span> qstr[<span class="dv">32</span>], istr[<span class="dv">32</span>];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%s%d</span><span class="st">"</span>, str + <span class="dv">1</span>, &amp;m);
+    n = strlen(str + <span class="dv">1</span>);
+    preproc_hash_pwr();
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        str[i] = str[i] - <span class="st">'a'</span> + <span class="dv">1</span>;
+    st.init(n, str);
+    <span class="kw">for</span> (<span class="dt">int</span> idx = <span class="dv">1</span>; idx &lt;= m; idx++) {
+        <span class="dt">int</span> l, r;
+        scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, qstr);
+        <span class="kw">if</span> (qstr[<span class="dv">0</span>] == <span class="st">'Q'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;l, &amp;r);
+            <span class="dt">int</span> lcq = st.query_lcq(l, r);
+            printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, lcq);
+        } <span class="kw">else</span> <span class="kw">if</span> (qstr[<span class="dv">0</span>] == <span class="st">'R'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d%s</span><span class="st">"</span>, &amp;l, istr);
+            st.modify(l, istr[<span class="dv">0</span>] - <span class="st">'a'</span> + <span class="dv">1</span>);
+        } <span class="kw">else</span> <span class="kw">if</span> (qstr[<span class="dv">0</span>] == <span class="st">'I'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d%s</span><span class="st">"</span>, &amp;l, istr);
+            st.insert(l, istr[<span class="dv">0</span>] - <span class="st">'a'</span> + <span class="dv">1</span>);
+        } <span class="kw">else</span> <span class="kw">if</span> (qstr[<span class="dv">0</span>] == <span class="st">'A'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;l, &amp;r);
+            lli hsh = st.get_hash(l, r);
+            printf(<span class="st">"</span><span class="ch">%llx\n</span><span class="st">"</span>, hsh);
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1014/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1014/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1014/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1014/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1014">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

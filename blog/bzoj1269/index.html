@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1269: [AHOI2006]文本编辑器editor&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1269: [AHOI2006]文本编辑器editor
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=AHOI2006" target="_self">
+            <i class="fa fa-tag"></i> AHOI2006
+          </a>
+          <a class="tag" href="/blog/archive/?q=STL" target="_self">
+            <i class="fa fa-tag"></i> STL
+          </a>
+          <a class="tag" href="/blog/archive/?q=Balanced Tree" target="_self">
+            <i class="fa fa-tag"></i> Balanced Tree
+          </a>
+        </span>
+        <span class="date" title="02:28:29 | 26 December, 2016">
+          26 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>这些日子, 可可不和卡卡一起玩了, 原来可可正废寝忘食的想做一个简单而高效的文本编辑器. 你能帮助他吗? 为了明确任务目标, 可可对 “文本编辑器” 做了一个抽象的定义:</p>
+<figure>
+<img class="thumb" data-small="/blog/bzoj1269/bzoj1269_1-small.jpg" data-src="/blog/bzoj1269/bzoj1269_1.png" data-thumb="/blog/bzoj1269/bzoj1269_1-thumb.jpg" src="/blog/bzoj1269/bzoj1269_1-thumb.jpg" title="" width="590px"/>
+<figcaption>
+</figcaption>
+</figure>
+<figure>
+<img class="thumb" data-small="/blog/bzoj1269/bzoj1269_2-small.jpg" data-src="/blog/bzoj1269/bzoj1269_2.png" data-thumb="/blog/bzoj1269/bzoj1269_2-thumb.jpg" src="/blog/bzoj1269/bzoj1269_2-thumb.jpg" title="" width="594px"/>
+<figcaption>
+</figcaption>
+</figure>
+<p><strong>文本</strong>: 由 0 个或多个字符构成的序列. 这些字符的 ASCII 码在闭区间 <span class="math inline">\([32, 126]\)</span> 内, 也就是说, 这些字符均为可见字符或空格.</p>
+<p><strong>光标</strong>: 在一段文本中用于指示位置的标记, 可以位于文本的第一个字符之前, 文本的最后一个字符之后或文本的某两个相邻字符之间.</p>
+<p><strong>文本编辑器</strong>: 为一个可以对一段文本和该文本中的一个光标进行如下七条操作的程序. 如果这段文本为空, 我们就说这个文本编辑器是空的.</p>
+<p>编写一个程序: 建立一个空的文本编辑器, 从输入文件中读入一些操作指令并执行. 对所有执行过的 <code>GET</code> 操作, 将指定的内容写入输出文件.</p>
+<h2 id="input">Input</h2>
+<p>输入文件中第一行是指令条数 <span class="math inline">\(n\)</span>, 以下是需要执行的 <span class="math inline">\(n\)</span> 个操作. 除了回车符之外, 输入文件的所有字符的 ASCII 码都在闭区间 <span class="math inline">\([32, 126]\)</span> 内. 且行尾没有空格.</p>
+<h2 id="output">Output</h2>
+<p>依次对应输入文件中每条 <code>GET</code> 指令的输出, 不得有任何多余的字符.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>10
+Insert 13
+Balanced eert
+Move 2
+Delete 5
+Next
+Insert 7
+ editor
+Move 0
+Get
+Move 11
+Rotate 4
+Get</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>B
+t</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对输入数据我们有如下假定:</p>
+<ul>
+<li><code>MOVE</code> 操作不超过 <span class="math inline">\(50000\)</span> 个</li>
+<li><code>INSERT</code>,<code>DELETE</code> 和 <code>ROTATE</code> 操作的总个数不超过 <span class="math inline">\(6000\)</span></li>
+<li><code>GET</code> 操作不超过 <span class="math inline">\(20000\)</span> 个</li>
+<li><code>PREV</code> 和 <code>NEXT</code> 操作的总个数不超过 <span class="math inline">\(20000\)</span></li>
+<li>所有 <code>INSERT</code> 插入的字符数之和不超过 <span class="math inline">\(2^{21}\)</span>, 或 <span class="math inline">\(2097152\)</span></li>
+<li><code>DELETE</code> 操作,<code>ROTATE</code> 操作和 <code>GET</code> 操作执行时光标后必然有足够的字符</li>
+<li><code>MOVE</code>,<code>PREV</code>,<code>NEXT</code> 操作不会把光标移动到非法位置</li>
+</ul>
+<p>输入文件没有错误.</p>
+<h2 id="explanation">Explanation</h2>
+<p>发现黄学长写的 STL Rope 好漂亮</p>
+<p>所以就当了伸手党</p>
+<p>有空学一学</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+<span class="ot">#include &lt;ext/rope&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">using</span> <span class="kw">namespace</span> __gnu_cxx;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">2000100</span>;
+
+<span class="dt">int</span> n;
+<span class="dt">char</span> str[maxn], str_r[maxn]; <span class="co">// String buffer, reversed string buffer</span>
+rope&lt;<span class="dt">char</span>&gt; a, b, tmp;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="dt">int</span> x, pntr = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> idx = <span class="dv">1</span>; idx &lt;= n; idx++) {
+        scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str);
+        <span class="kw">switch</span>(str[<span class="dv">0</span>]) {
+            <span class="kw">case</span> <span class="st">'M'</span>: { <span class="co">// Move cursor -&gt; position</span>
+                scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;pntr);
+                <span class="kw">break</span>;
+            } <span class="kw">case</span> <span class="st">'P'</span>: { <span class="co">// Previous position</span>
+                pntr -= <span class="dv">1</span>;
+                <span class="kw">break</span>;
+            } <span class="kw">case</span> <span class="st">'N'</span>: { <span class="co">// Next position</span>
+                pntr += <span class="dv">1</span>;
+                <span class="kw">break</span>;
+            } <span class="kw">case</span> <span class="st">'G'</span>: { <span class="co">// Get output</span>
+                printf(<span class="st">"</span><span class="ch">%c\n</span><span class="st">"</span>, a[pntr]);
+                <span class="kw">break</span>;
+            } <span class="kw">case</span> <span class="st">'I'</span>: { <span class="co">// Insert string</span>
+                scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;x);
+                <span class="dt">int</span> len = a.length();
+                <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; x; i++) {
+                    str[i] = getchar();
+                    <span class="kw">while</span> (str[i] == <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)
+                        str[i] = getchar();
+                    str_r[x - i - <span class="dv">1</span>] = str[i];
+                }
+                str_r[x] = str[x] = <span class="st">'</span><span class="ch">\0</span><span class="st">'</span>;
+                a.insert(pntr, str);
+                b.insert(len - pntr, str_r);
+                <span class="kw">break</span>;
+            } <span class="kw">case</span> <span class="st">'D'</span>: {
+                scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;x);
+                <span class="dt">int</span> len = a.length();
+                a.erase(pntr, x);
+                b.erase(len - pntr - x, x);
+                <span class="kw">break</span>;
+            } <span class="kw">case</span> <span class="st">'R'</span>: {
+                scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;x);
+                <span class="dt">int</span> len = a.length();
+                tmp = a.substr(pntr, x);
+                a = a.substr(<span class="dv">0</span>, pntr) + b.substr(len - pntr - x, x) +
+                    a.substr(pntr + x, len - pntr - x);
+                b = b.substr(<span class="dv">0</span>, len - pntr - x) + tmp +
+                    b.substr(len - pntr, pntr);
+                <span class="kw">break</span>;
+            } <span class="kw">default</span>: {
+                <span class="kw">break</span>;
+            }
+        }
+        <span class="kw">continue</span>;
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1269/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1269/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1269/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1269/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1269">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1010: [HNOI2008]玩具装箱toy&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1010: [HNOI2008]玩具装箱toy
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=HNOI2008" target="_self">
+            <i class="fa fa-tag"></i> HNOI2008
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+          <a class="tag" href="/blog/archive/?q=Optimized DP" target="_self">
+            <i class="fa fa-tag"></i> Optimized DP
+          </a>
+        </span>
+        <span class="date" title="23:31:58 | 11 December, 2016">
+          11 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>P 教授要去看奥运, 但是他舍不下他的玩具, 于是他决定把所有的玩具运到北京. 他使用自 己的压缩器进行压缩, 其可以将任意物品变成一堆, 再放到一种特殊的一维容器中. P 教授 有编号为 <span class="math inline">\(1, 2, \ldots, n\)</span> 的 <span class="math inline">\(n\)</span> 件玩具, 第 <span class="math inline">\(i\)</span> 件玩具经过压缩后变成一维长度为 <span class="math inline">\(C_i\)</span>. 为了方便整理, P 教授要求在一个一维容器中的玩具编号是连续的. 同时如果一个 一维容器中有多个玩具, 那么两件玩具之间要加入一个单位长度的填充物, 形式地说如果将第 <span class="math inline">\(i\)</span> 件玩具到第 <span class="math inline">\(j\)</span> 个玩具放到一个容器中, 那么容器的长度将为 <span class="math inline">\(x=j-i+\sum_{k=i}^{j} C_k\)</span>.</p>
+<p>制作容器的费用与容器的长度有关, 根据教授研究, 如果容器长度为 <span class="math inline">\(x\)</span>, 其制作费用为 <span class="math inline">\((x-L)^2\)</span>. 其中 <span class="math inline">\(L\)</span> 是一个常量. P 教授不关心容器的数目, 他可以制作出任意长度的容 器, 甚至超过 <span class="math inline">\(L\)</span>, 但他希望费用最小.</p>
+<h2 id="input">Input</h2>
+<p>第一行输入两个整数 <span class="math inline">\(n, L\)</span>. 接下来 <span class="math inline">\(n\)</span> 行输入 <span class="math inline">\(C_i\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>输出一个整数, 表示最小费用.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>5 4
+3
+4
+2
+1
+4</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>1</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有的数据, 满足:<span class="math inline">\(1 \leq n \leq 50000, 1 \leq L, C_i \leq 10^7\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>如果不需要斜率优化直接暴力就可以了...... 但是这道题需要优化, 所以只能膜别人的题解了. 这里先膜一发黄学长的题解:</p>
+<p><span class="math display">\[dp[i] = min(dp[j] + (sum[i] - sum[j] + i - j - 1 - L)^2) (j \lt i)\]</span></p>
+<p>令 <span class="math inline">\(f[i] = sum[i] + i, c = L + 1\)</span></p>
+<p>则 <span class="math inline">\(dp[i] = min(dp[j] + (f[i] - f[j] - c)^2)\)</span></p>
+<h3 id="证明决策单调性">1. 证明决策单调性</h3>
+<p>假设在状态 <span class="math inline">\(i\)</span> 处的 <span class="math inline">\(k\)</span> 决策优于 <span class="math inline">\(j\)</span> 决策, 即:</p>
+<p><span class="math display">\[dp[k] + (f[i] - f[k] - c)^2 \leq dp[j] + (f[i] - f[j] - c)^2\]</span></p>
+<p>则对于 i 后的所有状态 t, 要证明决策单调性, 即证:</p>
+<p><span class="math display">\[dp[k] + (f[t] - f[k] - c)^2 \leq dp[j] + (f[t] - f[j] - c)^2\]</span></p>
+<p><span class="math display">\[\Leftarrow dp[k] + (f[i] + v - f[k] - c)^2 \leq dp[j] + (f[i] + v - f[j] - c)^2\]</span></p>
+<p><span class="math display">\[\Leftarrow dp[k] + (f[i] - f[k] - c)^2 + 2 \cdot v \cdot (f[i] - f[k] - c) + v^2 \leq dp[j] + (f[i] - f[j] - c)^2 + 2 \cdot v \cdot (f[i] - f[j] - c) + v^2\]</span></p>
+<p><span class="math display">\[\Leftarrow 2 \cdot v \cdot (f[i] - f[k] - c) \leq 2 \cdot v \cdot (f[i] - f[j] - c)\]</span></p>
+<p><span class="math display">\[\Leftarrow f[k] \geq f[j]\]</span></p>
+<p>由于以上结论显然, 证毕.</p>
+<h3 id="求斜率方程">2. 求斜率方程</h3>
+<p><span class="math display">\[\because dp[k] + (f[i] - f[k] - c)^2 \leq dp[j] + (f[i] - f[j] - c)^2\]</span></p>
+<p><span class="math display">\[\therefore dp[k] + f[i]^2 - 2 \cdot f[i] \cdot (f[k] + c) + (f[k] + c)^2 \leq dp[j] + f[i]^2 - 2 \cdot f[i] \cdot (f[j] + c) + (f[j] + c)^2\]</span></p>
+<p><span class="math display">\[\therefore dp[k] - 2 \cdot f[i] \cdot (f[k] + c) + (f[k] + c)^2 \leq dp[j] - 2 \cdot f[i] \cdot (f[j] + c) + (f[j] + c)^2\]</span></p>
+<p><span class="math display">\[\therefore \frac{ dp[k] + (f[k] + c)^2 - dp[j] - (f[j] + c)^2 }{ 2 \cdot (f[k] - f[j]) } \leq f[i]\]</span></p>
+<p><span class="math inline">\(f[i]\)</span> 是单调递增的, 我们使用队列维护一个下凸壳, 每次取出队头作为决策</p>
+<p>加入决策 <span class="math inline">\(i\)</span> 时, 令队尾为 <span class="math inline">\(q[r]\)</span>, 前一个为 <span class="math inline">\(q[r - 1]\)</span></p>
+<p>满足 <span class="math inline">\(slope(q[r], i) \lt slope(q[r - 1], q[r])\)</span> 时, 显然队尾是无效的, 将其弹出</p>
+<h3 id="相关论文">3. 相关论文</h3>
+<p>有关斜率优化的论文就看这里了:<a href="用单调性优化动态规划.doc">用单调性优化动态规划</a> (<a href="用单调性优化动态规划.pdf">PDF版本</a>)</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="co">// #define USE_BRUTE_FORCE_CODE</span>
+<span class="ot">#define sqr(__x) ((lli)(__x)*(lli)(__x))</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">double</span> llf;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">50010</span>;
+<span class="dt">const</span> lli infinit = <span class="bn">0x3f3f3f3f3f3f3f3fll</span>;
+
+<span class="dt">int</span> n, L, C[maxn];
+lli sum[maxn], dp[maxn];
+lli que[maxn];
+
+llf slope(<span class="dt">int</span> j, <span class="dt">int</span> k) { <span class="kw">return</span> (dp[k] - dp[j] + sqr(sum[k] + L)
+    - sqr(sum[j] + L)) / (<span class="fl">2.0</span> * (sum[k] - sum[j])); }
+
+<span class="dt">int</span> main()
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;L);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;C[i]);
+        sum[i] = sum[i - <span class="dv">1</span>] + C[i];
+    }
+    <span class="ot">#ifdef USE_BRUTE_FORCE_CODE</span>
+    dp[<span class="dv">0</span>] = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        dp[i] = infinit;
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">0</span>; j &lt; i; j++) {
+            <span class="co">// lli diff = sqr(sum[i] - sum[j] + i - j - 1 - L);</span>
+            lli diff = sqr((sum[i] + i) - (sum[j] + j) - (L + <span class="dv">1</span>));
+            dp[i] = min(dp[i], dp[j] + diff);
+        }
+    }
+    <span class="ot">#else</span>
+    <span class="co">// As though we need them</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        sum[i] += i;
+    L = L + <span class="dv">1</span>; <span class="co">// New constant</span>
+    <span class="co">// Slope-optimized DP</span>
+    <span class="dt">int</span> l = <span class="dv">1</span>, r = <span class="dv">0</span>;
+    que[++r] = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        <span class="kw">while</span> (l &lt; r &amp;&amp; slope(que[l], que[l + <span class="dv">1</span>]) &lt;= sum[i]) l++;
+        <span class="dt">int</span> pos = que[l]; <span class="co">// Best.</span>
+        dp[i] = dp[pos] + sqr(sum[i] - sum[pos] - L);
+        <span class="kw">while</span> (l &lt; r &amp;&amp; slope(que[r], i) &lt; slope(que[r - <span class="dv">1</span>], que[r])) r--;
+        que[++r] = i;
+    }
+    <span class="ot">#endif</span>
+    <span class="co">// Output results</span>
+    lli res = dp[n];
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1010_2/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1010_2/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1010_2/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1010_2/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1010_2">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

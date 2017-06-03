@@ -1,0 +1,295 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj2434: [Noi2011]阿狸的打字机&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj2434: [Noi2011]阿狸的打字机
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOI2011" target="_self">
+            <i class="fa fa-tag"></i> NOI2011
+          </a>
+          <a class="tag" href="/blog/archive/?q=Trie" target="_self">
+            <i class="fa fa-tag"></i> Trie
+          </a>
+          <a class="tag" href="/blog/archive/?q=Aho-Corasick Automaton" target="_self">
+            <i class="fa fa-tag"></i> Aho-Corasick Automaton
+          </a>
+        </span>
+        <span class="date" title="19:49:23 | 29 January, 2017">
+          29 January, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>阿狸喜欢收藏各种稀奇古怪的东西, 最近他淘到一台老式的打字机. 打字机上只有 28 个按键, 分别印有 <span class="math inline">\(26\)</span> 个小写英文字母和 ‘B’、‘P’ 两个字母.</p>
+<p>经阿狸研究发现, 这个打字机是这样工作的:</p>
+<ol type="1">
+<li>输入小写字母, 打字机的一个凹槽中会加入这个字母 (这个字母加在凹槽的最后).</li>
+<li>按一下印有 ‘B’ 的按键, 打字机凹槽中最后一个字母会消失.</li>
+<li>按一下印有 ‘P’ 的按键, 打字机会在纸上打印出凹槽中现有的所有字母并换行, 但凹槽中的字母不会消失.</li>
+</ol>
+<p>例如, 阿狸输入 aPaPBbP, 纸上被打印的字符如下:</p>
+<blockquote>
+<p>a</p>
+<p>aa</p>
+<p>ab</p>
+</blockquote>
+<p>我们把纸上打印出来的字符串从 <span class="math inline">\(1\)</span> 开始顺序编号, 一直到 <span class="math inline">\(n\)</span>. 打字机有一个非常有趣的功能, 在打字机中暗藏一个带数字的小键盘, 在小键盘上输入两个数 <span class="math inline">\((x, y)\)</span> (其中 <span class="math inline">\(1 \leq x, y \leq n\)</span>) , 打字机会显示第 <span class="math inline">\(x\)</span> 个打印的字符串在第 <span class="math inline">\(y\)</span> 个打印的字符串中出现了多少次.</p>
+<p>阿狸发现了这个功能以后很兴奋, 他想写个程序完成同样的功能, 你能帮助他么?</p>
+<h2 id="input">Input</h2>
+<p>输入的第一行包含一个字符串, 按阿狸的输入顺序给出所有阿狸输入的字符.</p>
+<p>第二行包含一个整数 <span class="math inline">\(m\)</span>, 表示询问个数.</p>
+<p>接下来 <span class="math inline">\(m\)</span> 行描述所有由小键盘输入的询问. 其中第 <span class="math inline">\(i\)</span> 行包含两个整数 <span class="math inline">\(x, y\)</span>, 表示 第 <span class="math inline">\(i\)</span> 个询问为 <span class="math inline">\((x, y)\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>输出 <span class="math inline">\(m\)</span> 行, 其中第 <span class="math inline">\(i\)</span> 行包含一个整数, 表示第 <span class="math inline">\(i\)</span> 个询问的答案.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>aPaPBbP
+3
+1 2
+1 3
+2 3</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>2
+1
+0</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有数据, 满足 <span class="math inline">\(1 \leq n, m \leq 10^5\)</span>, 且输入总长 <span class="math inline">\(\leq 10^5\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>这道题可以直接在 AC 自动机上的 Fail 树上瞎搞打标记~</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+<span class="ot">#include &lt;vector&gt;</span>
+<span class="ot">#include &lt;stack&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">100100</span>;
+
+<span class="kw">class</span> AhoCorasickAutomaton
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> node
+    {
+        node *ch[<span class="dv">27</span>], *par, *fail;
+        vector&lt;node*&gt; next;
+        <span class="dt">int</span> val, end, dfn;
+    };
+    node *root, npool[maxn];
+    <span class="dt">int</span> ncnt;
+    node* make_node(<span class="dt">int</span> val)
+    {
+        node *p = &amp;npool[++ncnt];
+        memset(p-&gt;ch, <span class="dv">0</span>, <span class="kw">sizeof</span>(p-&gt;ch));
+        p-&gt;par = p-&gt;fail = NULL;
+        p-&gt;val = val; p-&gt;end = p-&gt;dfn = <span class="dv">0</span>;
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">int</span> m; <span class="co">// How many strings</span>
+    <span class="dt">void</span> build_tree(<span class="dt">int</span> n, <span class="dt">char</span> str[])
+    {
+        root = make_node(<span class="dv">0</span>);
+        <span class="co">// Static-like insertion of strings</span>
+        stack&lt;node*&gt; stk;
+        stk.push(root);
+        <span class="kw">this</span>-&gt;m = <span class="dv">0</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+            <span class="kw">if</span> (str[i] == <span class="st">'B'</span>) {
+                stk.pop();
+            } <span class="kw">else</span> <span class="kw">if</span> (str[i] == <span class="st">'P'</span>) {
+                node *p = stk.top();
+                p-&gt;end = ++m;
+            } <span class="kw">else</span> {
+                <span class="dt">int</span> ch = str[i] - <span class="st">'a'</span>;
+                node *p = stk.top();
+                <span class="kw">if</span> (!p-&gt;ch[ch]) {
+                    p-&gt;ch[ch] = make_node(ch);
+                    p-&gt;ch[ch]-&gt;par = p;
+                }
+                stk.push(p-&gt;ch[ch]);
+            }
+        }
+        <span class="co">// Creating *fail pointers, and its tree</span>
+        queue&lt;node*&gt; que;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">26</span>; i++) <span class="kw">if</span> (root-&gt;ch[i]) {
+            root-&gt;ch[i]-&gt;fail = root;
+            root-&gt;next.push_back(root-&gt;ch[i]);
+            que.push(root-&gt;ch[i]);
+        }
+        <span class="kw">while</span> (!que.empty()) {
+            node *p = que.front();
+            que.pop();
+            <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">26</span>; i++) <span class="kw">if</span> (p-&gt;ch[i]) {
+                node *q = p-&gt;fail;
+                <span class="kw">while</span> (q != root &amp;&amp; !q-&gt;ch[i])
+                    q = q-&gt;fail;
+                <span class="kw">if</span> (q-&gt;ch[i])
+                    q = q-&gt;ch[i];
+                p-&gt;ch[i]-&gt;fail = q;
+                q-&gt;next.push_back(p-&gt;ch[i]);
+                que.push(p-&gt;ch[i]);
+            }
+        }
+        <span class="kw">this</span>-&gt;dfn = <span class="dv">0</span>;
+        <span class="kw">return</span> ;
+    }
+    <span class="co">// Really processing the results below.</span>
+    <span class="dt">int</span> dfn;
+    <span class="dt">int</span> start[maxn], end[maxn]; <span class="co">// DFN begin and end of each node, on fail tree</span>
+    <span class="dt">void</span> dfs(node *p)
+    {
+        vector&lt;node*&gt;::iterator itert;
+        p-&gt;dfn = ++dfn;
+        <span class="kw">if</span> (p-&gt;end &gt; <span class="dv">0</span>)
+            start[p-&gt;end] = dfn;
+        <span class="kw">for</span> (itert = p-&gt;next.begin(); itert != p-&gt;next.end(); itert++)
+            dfs(*itert);
+        <span class="kw">if</span> (p-&gt;end &gt; <span class="dv">0</span>)
+            end[p-&gt;end] = dfn;
+        <span class="kw">return</span> ;
+    }
+    <span class="co">/********** These belong to the the Tree-Style Array **********/</span>
+    <span class="co">/*****/</span> <span class="dt">int</span> tsa[maxn];
+    <span class="co">/*****/</span> <span class="dt">void</span> change(<span class="dt">int</span> x, <span class="dt">int</span> val) {
+    <span class="co">/*****/</span>     <span class="kw">for</span> (; x &lt;= dfn; x += x &amp; -x)
+    <span class="co">/*****/</span>         tsa[x] += val;
+    <span class="co">/*****/</span>     <span class="kw">return</span> ; }
+    <span class="co">/*****/</span> <span class="dt">int</span> query(<span class="dt">int</span> x) {
+    <span class="co">/*****/</span>     <span class="dt">int</span> res = <span class="dv">0</span>;
+    <span class="co">/*****/</span>     <span class="kw">for</span> (; x &gt; <span class="dv">0</span>; x -= x &amp; -x)
+    <span class="co">/*****/</span>         res += tsa[x];
+    <span class="co">/*****/</span>     <span class="kw">return</span> res; }
+    <span class="co">/********** Tree-Style Array finished, continuing queries **********/</span>
+    <span class="co">/*****/</span> <span class="kw">struct</span> q_data {
+    <span class="co">/*****/</span>     <span class="dt">int</span> v, pos;
+    <span class="co">/*****/</span>     q_data* next;
+    <span class="co">/*****/</span> } table[maxn], *head[maxn];
+    <span class="co">/*****/</span> <span class="dt">int</span> q_tot;
+    <span class="co">/*****/</span> <span class="dt">void</span> add_q_data(<span class="dt">int</span> x, <span class="dt">int</span> y, <span class="dt">int</span> z)
+    <span class="co">/*****/</span> {
+    <span class="co">/*****/</span>     q_data *p = &amp;table[++q_tot];
+    <span class="co">/*****/</span>     p-&gt;v = y; p-&gt;pos = z;
+    <span class="co">/*****/</span>     p-&gt;next = head[x]; head[x] = p;
+    <span class="co">/*****/</span>     <span class="kw">return</span> ;
+    <span class="co">/*****/</span> }
+    <span class="co">/********** End of query manager **********/</span>
+    <span class="dt">int</span> res[maxn];
+    <span class="dt">void</span> solve(<span class="dt">int</span> n, <span class="dt">char</span> str[])
+    {
+        stack&lt;node*&gt; stk;
+        stk.push(root);
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++) {
+            <span class="kw">if</span> (str[j] == <span class="st">'B'</span>) {
+                change(stk.top()-&gt;dfn, <span class="dv">-1</span>);
+                stk.pop();
+            } <span class="kw">else</span> <span class="kw">if</span> (str[j] == <span class="st">'P'</span>) {
+                <span class="kw">for</span> (q_data *i = head[stk.top()-&gt;end]; i; i = i-&gt;next)
+                    res[i-&gt;pos] = query(end[i-&gt;v]) - query(start[i-&gt;v] - <span class="dv">1</span>);
+            } <span class="kw">else</span> {
+                stk.push(stk.top()-&gt;ch[str[j] - <span class="st">'a'</span>]);
+                change(stk.top()-&gt;dfn, <span class="dv">1</span>);
+            }
+        }
+        <span class="kw">return</span> ;
+    }
+} ac;
+
+<span class="dt">int</span> n, m;
+<span class="dt">char</span> str[maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str + <span class="dv">1</span>);
+    n = strlen(str + <span class="dv">1</span>);
+    ac.build_tree(n, str);
+    ac.dfs(ac.root);
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, x, y; i &lt;= m; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;x, &amp;y);
+        ac.add_q_data(y, x, i);
+    }
+    ac.solve(n, str);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+        printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, ac.res[i]);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj2434/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj2434/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj2434/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj2434/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj2434">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

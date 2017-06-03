@@ -1,0 +1,259 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1086: [SCOI2005]王室联邦&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1086: [SCOI2005]王室联邦
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=SCOI2005" target="_self">
+            <i class="fa fa-tag"></i> SCOI2005
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+          <a class="tag" href="/blog/archive/?q=Tree DP" target="_self">
+            <i class="fa fa-tag"></i> Tree DP
+          </a>
+        </span>
+        <span class="date" title="18:30:00 | 15 August, 2016">
+          15 August, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Problem Specification</th>
+<th style="text-align: left;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Time Limit</td>
+<td style="text-align: left;">10 Sec</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Memory Limit</td>
+<td style="text-align: left;">162 MB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Special Judge</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Submit</td>
+<td style="text-align: left;">1155</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Solved</td>
+<td style="text-align: left;">695</td>
+</tr>
+</tbody>
+</table>
+<!-- More -->
+<h2 id="description">Description</h2>
+<p>“余” 人国的国王想重新编制他的国家. 他想把他的国家划分成若干个省, 每个省都由他们王室联邦的一个成员来管理. 他的国家有 n 个城市, 编号为 1...... n. 一些城市之间有道路相连, 任意两个不同的城市之间有且仅有一条直接或间接的道路. 为了防止管理太过分散, 每个省至少要有 B 个城市, 为了能有效的管理, 每个省最多只有 3B 个城市. 每个省必须有一个省会, 这个省会可以位于省内, 也可以在该省外. 但是该省的任意一个城市到达省会所经过的道路上的城市 (除了最后一个城市, 即该省省会) 都必须属于该省. 一个城市可以作为多个省的省会. 聪明的你快帮帮这个国王吧!</p>
+<h2 id="input">Input</h2>
+<p>第一行包含两个数 N, B (1&lt;=N&lt;=1000, 1 &lt;=B &lt;=N). 接下来 N － 1 行, 每行描述一条边, 包含两个数, 即这条边连接的两个城市的编号.</p>
+<h2 id="output">Output</h2>
+<p>如果无法满足国王的要求, 输出 0. 否则输出数 K, 表示你给出的划分方案中省的个数, 编号为 1...... K. 第二行输出 N 个数, 第 I 个数表示编号为 I 的城市属于的省的编号, 第三行输出 K 个数, 表示这 K 个省的省会的城市编号, 如果有多种方案, 你可以输出任意一种.</p>
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>8 2
+1 2
+2 3
+1 8
+8 7
+8 6
+4 6
+6 5</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>3
+2 1 1 3 3 3 3 2
+2 1 8</code></pre>
+<h2 id="hint">HINT</h2>
+<h2 id="source">Source</h2>
+<hr/>
+<p>同树形 DP, 需要 Special Judge.</p>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;stack&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">2010</span>, maxm = <span class="dv">8010</span>;
+
+<span class="dt">int</span> n, B;
+
+<span class="kw">class</span> Graph
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge { <span class="dt">int</span> u, v; edge *next; };
+    edge epool[maxm], *edges[maxn];
+    <span class="dt">int</span> cnt, root, par[maxn], size[maxn];
+    <span class="dt">void</span> addedge(<span class="dt">int</span> u, <span class="dt">int</span> v)
+    {
+        edge *p = &amp;epool[++cnt], *q = &amp;epool[++cnt];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;next = edges[u]; edges[u] = p;
+        q-&gt;u = v; q-&gt;v = u; q-&gt;next = edges[v]; edges[v] = q;
+        <span class="kw">return</span> ;
+    }
+    <span class="co">// These are the specific operations which would be applied onto the</span>
+    <span class="co">// province division procedure.</span>
+    stack&lt;<span class="dt">int</span>&gt; cities; <span class="co">// How many cities are pending province division</span>
+    <span class="dt">int</span> city_belong[maxn], <span class="co">// The province ID of the city</span>
+        capital[maxn], <span class="co">// The capital of the province, in city ID</span>
+        provinces; <span class="co">// The count of provinces, ID starting from 1</span>
+    <span class="dt">void</span> dfs(<span class="dt">int</span> p)
+    {
+        size[p] = <span class="dv">0</span>;
+        cities.push(p);
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+            <span class="kw">if</span> (ep-&gt;v != par[p]) {
+                par[ep-&gt;v] = p;
+                dfs(ep-&gt;v);
+                size[p] += size[ep-&gt;v];
+                <span class="co">// If the size is sufficient (n &gt; B), we may consume it and not</span>
+                <span class="co">// count it as a subtree component.</span>
+                <span class="kw">if</span> (size[p] &gt;= B) {
+                    size[p] = <span class="dv">0</span>;
+                    capital[++provinces] = p;
+                    <span class="dt">int</span> cit;
+                    <span class="co">// Pop all children of p that were not popped out before,</span>
+                    <span class="co">// these forms the cities of the new province.</span>
+                    <span class="kw">while</span> ((cit = cities.top()) != p) { <span class="co">// Take all cities</span>
+                        cities.pop();
+                        city_belong[cit] = provinces; <span class="co">// Set province ID</span>
+                    }
+                }
+            }
+        <span class="co">// You must count oneself!</span>
+        size[p]++;
+        <span class="kw">return</span> ;
+    }
+    <span class="co">// After secure investigation of the function dfs(), we may discover that</span>
+    <span class="co">// most capitals do not have belongings, where they are not marked available</span>
+    <span class="co">// as a component. We now format them to belong in at some province.</span>
+    <span class="dt">void</span> format_capitals(<span class="dt">int</span> p, <span class="dt">int</span> province)
+    {
+        <span class="kw">if</span> (city_belong[p])
+            province = city_belong[p];
+        <span class="kw">else</span>
+            city_belong[p] = province;
+        <span class="co">// Iterate children</span>
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+            <span class="kw">if</span> (par[ep-&gt;v] == p)
+                format_capitals(ep-&gt;v, province);
+        <span class="kw">return</span> ;
+    }
+} graph;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;B);
+    <span class="co">// The form is instinctively and factly a tree, according to description.</span>
+    <span class="co">// The capitol of the provinces are either the root of the subtree or the</span>
+    <span class="co">// parent of the root of the subtree. This makes division of the tree</span>
+    <span class="co">// arbitrarily easy. Therefore we may always find a way to satisfy the</span>
+    <span class="co">// range [B, 3B] easily, given n is sufficient.</span>
+    <span class="kw">if</span> (n &lt; B) {
+        printf(<span class="st">"0</span><span class="ch">\n</span><span class="st">"</span>);
+        <span class="kw">return</span> <span class="dv">0</span>;
+    }
+    <span class="co">// Afterwards we read in the data, formally.</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, a, b; i &lt;= n - <span class="dv">1</span>; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;a, &amp;b);
+        graph.addedge(a, b);
+    }
+    <span class="co">// Deep First Search to generate the tree and calculate subtree size.</span>
+    graph.dfs(<span class="dv">1</span>);
+    <span class="co">// Reformat capitals to look right</span>
+    graph.format_capitals(<span class="dv">1</span>, graph.provinces);
+    <span class="co">// Output answer.</span>
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, graph.provinces);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        printf(<span class="st">"</span><span class="ch">%d</span><span class="st"> "</span>, graph.city_belong[i]);
+    printf(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= graph.provinces; i++)
+        printf(<span class="st">"</span><span class="ch">%d</span><span class="st"> "</span>, graph.capital[i]);
+    printf(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<hr/>
+<hr/>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1086/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1086/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1086/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1086/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1086">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

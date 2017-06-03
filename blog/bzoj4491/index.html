@@ -1,0 +1,322 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj4491: 我也不知道题目名字是什么&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj4491: 我也不知道题目名字是什么
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=Segment Tree" target="_self">
+            <i class="fa fa-tag"></i> Segment Tree
+          </a>
+          <a class="tag" href="/blog/archive/?q=Splay Tree" target="_self">
+            <i class="fa fa-tag"></i> Splay Tree
+          </a>
+        </span>
+        <span class="date" title="01:08:01 | 21 February, 2017">
+          21 February, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>给定一个序列 <span class="math inline">\(A[i]\)</span>, 每次询问 <span class="math inline">\(l, r\)</span>, 求 <span class="math inline">\([l, r]\)</span> 内最长子串, 使得该子串为不上升子串或不下降子串.</p>
+<h2 id="input">Input</h2>
+<p>第一行 <span class="math inline">\(n\)</span>, 表示 <span class="math inline">\(A\)</span> 数组有多少元素;</p>
+<p>接下来一行为 <span class="math inline">\(n\)</span> 个整数 <span class="math inline">\(A[i]\)</span>;</p>
+<p>接下来一个整数 <span class="math inline">\(Q\)</span>, 表示询问数量;</p>
+<p>接下来 <span class="math inline">\(Q\)</span> 行, 每行 <span class="math inline">\(2\)</span> 个整数 <span class="math inline">\(l, r\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>对于每个询问, 求 <span class="math inline">\([l, r]\)</span> 内最长子串, 使得该子串为不上升子串或不下降子串.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>9
+1 2 3 4 5 6 5 4 3
+5
+1 6
+1 7
+2 7
+1 9
+5 9</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>6
+6
+5
+6
+4</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有数据, 满足:<span class="math inline">\(n, Q \leq 50000\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>这道题一眼就能看出来是区间维护连通性对不对, 然后可以 <span class="math inline">\(O(1)\)</span> 转移连通性的那种最水 的巨水数据结构题;</p>
+<p>但是怎么写是个问题......</p>
+<p>本蒟蒻作死最开始试图不用 <code>struct status {...}</code> 来写这道题, 结果 Splay 合并的时候简直吐血...... 外面的 Splay 写了 150 多行里面特判就不止 200 行这还只写完了一半......</p>
+<p>于是掀桌子直接翻盘, 用 status 来维护状态 (听取了 <span class="citation" data-cites="hld67890"> @hld67890</span> 大神的指导)</p>
+<p>但是还是厚脸无耻地写 Splay 因为感觉比较好 (因为这道题是静态只查询不修改不插入的 完全完全的裸题所以可以直接 50 行以内写出线段树)</p>
+<p>结果 Splay 分分钟炸掉;</p>
+<p>后来发现还是作死......<code>int build_tree(...)</code> 的时候居然没有更新父亲导致旋转之后整棵树马上炸掉, 根本没法 <code>splay(...)</code>; 所以修好以后简直不能忍;</p>
+<p>又一个晚上调掉了单增单减的维护结果对拍一下分分钟爆掉;</p>
+<p>最后只能用长度来维护, 魔改了几行以后居然就 AC 了......</p>
+<p>这是得有多弱才能写出这样的玩意儿;</p>
+<p><strong>另外给大家一个忠告: 凡是遇到这种状态特别多的数据结构题, 一定要在 struct 里面 维护信息转移, 效果拔群</strong></p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">50010</span>;
+
+<span class="kw">template</span> &lt;<span class="kw">typename</span> _T&gt;
+_T max(_T a, _T b, _T c) { <span class="kw">return</span> max(max(a, b), c); }
+
+<span class="kw">template</span> &lt;<span class="kw">typename</span> _T&gt;
+_T max(_T a, _T b, _T c, _T d) { <span class="kw">return</span> max(max(a, b), max(c, d)); }
+
+<span class="kw">template</span> &lt;<span class="kw">typename</span> _T&gt;
+_T&amp; maximize(_T&amp; a, _T b) { a = max(a, b); <span class="kw">return</span> a; }
+
+<span class="kw">struct</span> status {
+    <span class="dt">int</span> len, lval, rval;
+    <span class="dt">int</span> lseqi, mseqi, rseqi;
+    <span class="dt">int</span> lseqd, mseqd, rseqd;
+    status(<span class="dt">void</span>) {
+        len = <span class="dv">1</span>;
+        lseqi = mseqi = rseqi = <span class="dv">1</span>;
+        lseqd = mseqd = rseqd = <span class="dv">1</span>;
+        <span class="kw">return</span> ;
+    } status(<span class="dt">int</span> val) {
+        lval = rval = val; len = <span class="dv">1</span>;
+        lseqi = mseqi = rseqi = <span class="dv">1</span>;
+        lseqd = mseqd = rseqd = <span class="dv">1</span>;
+        <span class="kw">return</span> ;
+    }
+};
+
+status union_status(status a, status b)
+{
+    status c;
+    c.lval = a.lval;
+    c.rval = b.rval;
+    c.len = a.len + b.len;
+    <span class="co">// Sticking on the left</span>
+    c.lseqi = a.lseqi;
+    <span class="kw">if</span> (a.lseqi == a.len &amp;&amp; a.rval &lt;= b.lval)
+        maximize(c.lseqi, a.len + b.lseqi);
+    c.lseqd = a.lseqd;
+    <span class="kw">if</span> (a.lseqd == a.len &amp;&amp; a.rval &gt;= b.lval)
+        maximize(c.lseqd, a.len + b.lseqd);
+    <span class="co">// Sticking on the right</span>
+    c.rseqi = b.rseqi;
+    <span class="kw">if</span> (b.lseqi == b.len &amp;&amp; b.lval &gt;= a.rval)
+        maximize(c.rseqi, b.len + a.rseqi);
+    c.rseqd = b.rseqd;
+    <span class="kw">if</span> (b.lseqd == b.len &amp;&amp; b.lval &lt;= a.rval)
+        maximize(c.rseqd, b.len + a.rseqd);
+    <span class="co">// In the middle</span>
+    c.mseqi = max(a.mseqi, b.mseqi);
+    <span class="kw">if</span> (a.rval &lt;= b.lval)
+        maximize(c.mseqi, a.rseqi + b.lseqi);
+    c.mseqd = max(a.mseqd, b.mseqd);
+    <span class="kw">if</span> (a.rval &gt;= b.lval)
+        maximize(c.mseqd, a.rseqd + b.lseqd);
+    <span class="co">// Finished</span>
+    <span class="kw">return</span> c;
+}
+
+<span class="kw">class</span> SplayTree
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> arr_i[maxn][<span class="dv">5</span>];
+    <span class="ot">#define lc(_x) arr_i[_x][0]</span>
+    <span class="ot">#define rc(_x) arr_i[_x][1]</span>
+    <span class="ot">#define ch(_x,_y) arr_i[_x][_y]</span>
+    <span class="ot">#define par(_x) arr_i[_x][2]</span>
+    <span class="ot">#define size(_x) arr_i[_x][3]</span>
+    <span class="ot">#define val(_x) arr_i[_x][4]</span>
+    status arr_s[maxn][<span class="dv">1</span>];
+    <span class="ot">#define state(_x) arr_s[_x][0]</span>
+    <span class="dt">int</span> ncnt, root;
+    <span class="dt">int</span> make_node(<span class="dt">int</span> v)
+    {
+        <span class="dt">int</span> p = ++ncnt;
+        lc(p) = rc(p) = par(p) = <span class="dv">0</span>;
+        size(p) = <span class="dv">1</span>;
+        val(p) = v;
+        state(p) = status(v);
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">void</span> update_lazy(<span class="dt">int</span> p)
+    {
+        <span class="co">// Update interval size</span>
+        size(p) = size(lc(p)) + <span class="dv">1</span> + size(rc(p));
+        <span class="co">// Incremental statistics</span>
+        <span class="kw">if</span> (!lc(p) &amp;&amp; !rc(p)) {
+            state(p) = status(val(p));
+        } <span class="kw">else</span> <span class="kw">if</span> (!lc(p) &amp;&amp; rc(p)) {
+            state(p) = union_status(status(val(p)), state(rc(p)));
+        } <span class="kw">else</span> <span class="kw">if</span> (lc(p) &amp;&amp; !rc(p)) {
+            state(p) = union_status(state(lc(p)), status(val(p)));
+        } <span class="kw">else</span> <span class="kw">if</span> (lc(p) &amp;&amp; rc(p)) {
+            state(p) = union_status(state(lc(p)),
+                union_status(status(val(p)), state(rc(p))
+            ));
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> rotate(<span class="dt">int</span> p)
+    {
+        <span class="dt">int</span> q = par(p), g = par(q);
+        <span class="dt">int</span> x = p == rc(q), y = q == rc(g);
+        ch(q, x) = ch(p, !x); <span class="kw">if</span> (ch(q, x)) par(ch(q, x)) = q;
+        ch(p, !x) = q; par(q) = p;
+        <span class="kw">if</span> (g) ch(g, y) = p; par(p) = g;
+        update_lazy(q);
+        update_lazy(p);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> splay(<span class="dt">int</span> p, <span class="dt">int</span> t)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> q = <span class="dv">0</span>; (q = par(p)) &amp;&amp; q != t; rotate(p))
+            <span class="kw">if</span> (par(q) &amp;&amp; par(q) != t)
+                rotate((p == rc(q)) == (q == rc(par(q))) ? q : p);
+        <span class="kw">if</span> (t == <span class="dv">0</span>) root = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> find(<span class="dt">int</span> x)
+    {
+        <span class="dt">int</span> p = root;
+        <span class="kw">while</span> (p) {
+            <span class="kw">if</span> (x &lt;= size(lc(p))) {
+                p = lc(p);
+                <span class="kw">continue</span>;
+            } x -= size(lc(p));
+            <span class="kw">if</span> (x &lt;= <span class="dv">1</span>) {
+                <span class="kw">return</span> p;
+            } x -= <span class="dv">1</span>;
+            p = rc(p);
+        }
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">int</span> query(<span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="dt">int</span> lp = find(l);
+        <span class="dt">int</span> rp = find(r + <span class="dv">2</span>);
+        splay(lp, <span class="dv">0</span>);
+        splay(rp, root);
+        <span class="dt">int</span> p = lc(rp);
+        <span class="dt">int</span> res = max(state(p).mseqi, state(p).mseqd);
+        <span class="kw">return</span> res;
+    }
+    <span class="dt">int</span> build_tree(<span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">int</span> arr[])
+    {
+        <span class="kw">if</span> (l &gt; r) <span class="kw">return</span> <span class="dv">0</span>;
+        <span class="dt">int</span> mid = (l + r) &gt;&gt; <span class="dv">1</span>;
+        <span class="dt">int</span> p = make_node(arr[mid - <span class="dv">1</span>]);
+        lc(p) = build_tree(l, mid - <span class="dv">1</span>, arr);
+        rc(p) = build_tree(mid + <span class="dv">1</span>, r, arr);
+        par(lc(p)) = p;
+        par(rc(p)) = p;
+        update_lazy(p);
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">void</span> init(<span class="dt">int</span> n, <span class="dt">int</span> arr[])
+    {
+        ncnt = <span class="dv">0</span>;
+        root = build_tree(<span class="dv">1</span>, n + <span class="dv">2</span>, arr);
+        <span class="kw">return</span> ;
+    }
+} st;
+
+<span class="dt">int</span> n, Q;
+<span class="dt">int</span> arr[maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;arr[i]);
+    st.init(n, arr);
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;Q);
+    <span class="kw">for</span> (<span class="dt">int</span> idx = <span class="dv">1</span>; idx &lt;= Q; idx++) {
+        <span class="dt">int</span> l, r, res;
+        scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;l, &amp;r);
+        res = st.query(l, r);
+        printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj4491/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj4491/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj4491/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj4491/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj4491">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

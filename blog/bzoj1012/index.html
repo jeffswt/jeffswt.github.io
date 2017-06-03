@@ -1,0 +1,297 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1012: [JSOI2008]最大数maxnumber&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1012: [JSOI2008]最大数maxnumber
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=JSOI2008" target="_self">
+            <i class="fa fa-tag"></i> JSOI2008
+          </a>
+          <a class="tag" href="/blog/archive/?q=Segment Tree" target="_self">
+            <i class="fa fa-tag"></i> Segment Tree
+          </a>
+        </span>
+        <span class="date" title="13:28:07 | 29 July, 2016">
+          29 July, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Problem Specification</th>
+<th style="text-align: left;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Time Limit</td>
+<td style="text-align: left;">3 Sec</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Memory Limit</td>
+<td style="text-align: left;">162 MB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Submit</td>
+<td style="text-align: left;">7661</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Solved</td>
+<td style="text-align: left;">3303</td>
+</tr>
+</tbody>
+</table>
+<!-- More -->
+<h2 id="description">Description</h2>
+<p>现在请求你维护一个数列, 要求提供以下两种操作: 1、查询操作. 语法: Q L 功能: 查询当前数列中末尾 L 个数中的最大的数, 并输出这个数的值. 限制: L 不超过当前数列的长度. 2、插入操作. 语法: A n 功能: 将 n 加上 t, 其中 t 是最近一次查询操作的答案 (如果还未执行过查询操作, 则 t=0), 并将所得结果对一个固定的常数 D 取模, 将所得答案插入到数列的末尾. 限制: n 是非负整数并且在长整范围内. 注意: 初始时数列是空的, 没有一个数.</p>
+<h2 id="input">Input</h2>
+<p>第一行两个整数, M 和 D, 其中 M 表示操作的个数 (M &lt;=200, 000), D 如上文中所述, 满足 D 在 longint 内. 接下来 M 行, 查询操作或者插入操作.</p>
+<h2 id="output">Output</h2>
+<p>对于每一个询问操作, 输出一行. 该行只有一个数, 即序列中最后 L 个数的最大数.</p>
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>5 100
+A 96
+Q 1
+A 97
+Q 1
+Q 2</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>96
+93
+96</code></pre>
+<h2 id="hint">HINT</h2>
+<p>数据如下 http: //pan. baidu. com/s/1i4JxCH3</p>
+<h2 id="source">Source</h2>
+<hr/>
+<p>这道题可以直接用线段树水过......</p>
+<p>而且因为并不需要对整个区间进行操作所以<code>change</code> 函数也可以写成自底向上的线段树...... 同时 <code>change</code> 就不需要写成区间修改了.</p>
+<p>然而为什么我的代码和 hzwer 的代码对拍了很久还是没有 AC (和他的结果一模一样但是就是不能通过 bzoj, 再者百度盘上的也都测过没问题~</p>
+<hr/>
+<p>为了让 Atom 不要把<code>_n, __n, ___n</code> 都识别成斜体和粗体害的我把所有<code>_n</code> 都加上了四个下划线 233</p>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">800100</span>;
+<span class="dt">const</span> ll inf = <span class="bn">0x3f3f3f3f3f3f3f3fll</span>;
+
+<span class="kw">class</span> SegmentTree
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> pwn, n, lb[maxn], rb[maxn];
+    ll mn[maxn];
+    <span class="dt">void</span> build_tree(<span class="dt">int</span> ____n)
+    {
+        <span class="co">// An optimized segment tree which abandons all unused functions in this problem</span>
+        n = <span class="dv">0</span>; pwn = <span class="dv">1</span>; <span class="kw">while</span> (pwn &lt; ____n) pwn &lt;&lt;= <span class="dv">1</span>;
+        ____n = pwn;
+        <span class="kw">for</span> (<span class="dt">int</span> i = ____n; i &lt;= ____n * <span class="dv">2</span> - <span class="dv">1</span>; i++) {
+            lb[i] = rb[i] = i - ____n + <span class="dv">1</span>;
+            mn[i] = inf;
+        }
+        <span class="kw">for</span> (<span class="dt">int</span> i = ____n - <span class="dv">1</span>; i &gt;= <span class="dv">1</span>; i--) {
+            lb[i] = lb[<span class="dv">2</span> * i];
+            rb[i] = rb[<span class="dv">2</span> * i + <span class="dv">1</span>];
+            mn[i] = inf;
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> append(ll v)
+    {
+        <span class="dt">int</span> p = pwn + n;
+        mn[p] = v;
+        p &gt;&gt;= <span class="dv">1</span>;
+        <span class="kw">while</span> (p) {
+            mn[p] = max(mn[<span class="dv">2</span> * p], mn[<span class="dv">2</span> * p + <span class="dv">1</span>]);
+            p &gt;&gt;= <span class="dv">1</span>;
+        }
+        n++;
+        <span class="kw">return</span> ;
+    }
+    ll query(<span class="dt">int</span> p, <span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="kw">if</span> (lb[p] == l &amp;&amp; rb[p] == r)
+            <span class="kw">return</span> mn[p];
+        <span class="kw">if</span> (r &lt;= rb[<span class="dv">2</span> * p])
+            <span class="kw">return</span> query(<span class="dv">2</span> * p, l, r);
+        <span class="kw">if</span> (l &gt;= lb[<span class="dv">2</span> * p + <span class="dv">1</span>])
+            <span class="kw">return</span> query(<span class="dv">2</span> * p + <span class="dv">1</span>, l, r);
+        <span class="kw">return</span> max(query(<span class="dv">2</span> * p, l, rb[<span class="dv">2</span> * p]),
+                query(<span class="dv">2</span> * p + <span class="dv">1</span>, lb[<span class="dv">2</span> * p + <span class="dv">1</span>], r));
+    }
+    ll query(<span class="dt">int</span> d)
+    {
+        <span class="kw">return</span> query(<span class="dv">1</span>, max(<span class="dv">1</span>, n + <span class="dv">1</span> - d), n);
+    }
+} st;
+
+<span class="dt">int</span> m, D, t = <span class="dv">0</span>;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%lld</span><span class="st">"</span>, &amp;m, &amp;D);
+    st.build_tree(m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        <span class="dt">char</span> c[<span class="dv">100</span>];
+        ll v;
+        scanf(<span class="st">"</span><span class="ch">%s%lld</span><span class="st">"</span>, &amp;c, &amp;v);
+        <span class="kw">if</span> (c[<span class="dv">0</span>] == <span class="st">'A'</span>) {
+            st.append((t + v) % D);
+        } <span class="kw">else</span> <span class="kw">if</span> (c[<span class="dv">0</span>] == <span class="st">'Q'</span>) {
+            t = st.query(v);
+            printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, t);
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>这是 hzwer AC 的代码:</p>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp"><span class="ot">#include&lt;iostream&gt;</span>
+<span class="ot">#include&lt;cstdio&gt;</span>
+<span class="ot">#define inf 0x7fffffff</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="dt">int</span> m,mod,last,cnt;
+<span class="kw">struct</span> data{<span class="dt">int</span> l,r,mx;}t[<span class="dv">800005</span>];
+<span class="dt">void</span> build(<span class="dt">int</span> k,<span class="dt">int</span> l,<span class="dt">int</span> r)
+{
+    t[k].l=l;t[k].r=r;t[k].mx=-inf;
+    <span class="kw">if</span>(l==r)<span class="kw">return</span>;
+    <span class="dt">int</span> mid=(l+r)&gt;&gt;<span class="dv">1</span>;
+    build(k&lt;&lt;<span class="dv">1</span>,l,mid);
+    build(k&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>,mid<span class="dv">+1</span>,r);
+}
+<span class="dt">int</span> ask(<span class="dt">int</span> k,<span class="dt">int</span> x,<span class="dt">int</span> y)
+{
+    <span class="dt">int</span> l=t[k].l,r=t[k].r;
+    <span class="kw">if</span>(l==x&amp;&amp;r==y)<span class="kw">return</span> t[k].mx;
+    <span class="dt">int</span> mid=(l+r)&gt;&gt;<span class="dv">1</span>;
+    <span class="kw">if</span>(y&lt;=mid)<span class="kw">return</span> ask(k&lt;&lt;<span class="dv">1</span>,x,y);
+    <span class="kw">else</span> <span class="kw">if</span>(x&gt;mid)<span class="kw">return</span> ask(k&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>,x,y);
+    <span class="kw">else</span> <span class="kw">return</span> max(ask(k&lt;&lt;<span class="dv">1</span>,x,mid),ask(k&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>,mid<span class="dv">+1</span>,y));
+}
+<span class="dt">void</span> insert(<span class="dt">int</span> k,<span class="dt">int</span> x,<span class="dt">int</span> y)
+{
+    <span class="dt">int</span> l=t[k].l,r=t[k].r;
+    <span class="kw">if</span>(l==r){t[k].mx=y;<span class="kw">return</span>;}
+    <span class="dt">int</span> mid=(l+r)&gt;&gt;<span class="dv">1</span>;
+    <span class="kw">if</span>(x&lt;=mid)insert(k&lt;&lt;<span class="dv">1</span>,x,y);
+    <span class="kw">else</span> insert(k&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>,x,y);
+    t[k].mx=max(t[k&lt;&lt;<span class="dv">1</span>].mx,t[k&lt;&lt;<span class="dv">1</span>|<span class="dv">1</span>].mx);
+}
+<span class="dt">int</span> main()
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>,&amp;m,&amp;mod);
+    build(<span class="dv">1</span>,<span class="dv">1</span>,m);
+    <span class="kw">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=m;i++)
+    {
+        <span class="dt">char</span> ch[<span class="dv">5</span>];scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>,ch);
+        <span class="dt">int</span> x;
+        <span class="kw">if</span>(ch[<span class="dv">0</span>]==<span class="st">'A'</span>)
+        {
+            cnt++;
+            scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>,&amp;x);x=(x+last)%mod;
+            insert(<span class="dv">1</span>,cnt,x);
+        }
+        <span class="kw">else</span>
+        {
+            scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>,&amp;x);
+            last=ask(<span class="dv">1</span>,cnt-x<span class="dv">+1</span>,cnt);
+            printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>,last);
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> pydatagen <span class="im">import</span> <span class="op">*</span>
+a <span class="op">=</span> randrange(<span class="dv">3</span>, <span class="dv">200000</span>)
+d <span class="op">=</span> randrange(<span class="dv">964</span>, <span class="dv">1047483000</span>)
+printf(<span class="st">'</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> (a, d))
+printf(<span class="st">'A </span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> randrange(<span class="dv">1</span>, <span class="dv">1047483647</span>))
+sz <span class="op">=</span> <span class="dv">1</span>
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, a):
+    q <span class="op">=</span> choice([<span class="st">'A'</span>, <span class="st">'Q'</span>])
+    <span class="cf">if</span> q <span class="op">==</span> <span class="st">'Q'</span>:
+        printf(<span class="st">'Q </span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> randrange(<span class="dv">1</span>, sz <span class="op">+</span> <span class="dv">1</span>))
+    <span class="cf">elif</span> q <span class="op">==</span> <span class="st">'A'</span>:
+        printf(<span class="st">'A </span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> randrange(<span class="dv">1</span>, <span class="dv">1047483647</span>))
+fclose()</code></pre></div>
+<hr/>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1012/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1012/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1012/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1012/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1012">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj3437: 小P的牧场&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj3437: 小P的牧场
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+          <a class="tag" href="/blog/archive/?q=Optimized DP" target="_self">
+            <i class="fa fa-tag"></i> Optimized DP
+          </a>
+          <a class="tag" href="/blog/archive/?q=Half-Plane Intersection" target="_self">
+            <i class="fa fa-tag"></i> Half-Plane Intersection
+          </a>
+        </span>
+        <span class="date" title="09:58:24 | 8 January, 2017">
+          8 January, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>小 P 是个特么喜欢玩 MC 的孩纸......</p>
+<p>小 P 在 MC 里有 <span class="math inline">\(n\)</span> 个牧场, 自西向东呈一字形排列 (自西向东用 <span class="math inline">\(1 \ldots n\)</span> 编号), 于是他就烦恼了: 为了控制这 <span class="math inline">\(n\)</span> 个牧场, 他需要在某些牧场上面建立控制站, 其中满足 一下几个条件:</p>
+<ol type="1">
+<li>每个牧场上只能建立一个控制站, 每个控制站控制的牧场是它所在的牧场一直到它西边第一个控制站的所有牧场;</li>
+<li>每个控制站西边第一个控制所在的牧场不被控制;</li>
+<li>如果控制站西边不存在控制站, 那么它控制西边所有的牧场;</li>
+<li>每个牧场被控制都需要一定的花费 (毕竟在控制站到牧场间修建道路是需要资源的嘛~) , 而且该花费等于它到控制它的控制站之间的牧场数目 (不包括自身, 但包括控制站所在 牧场) 乘上该牧场的放养量.</li>
+</ol>
+<p>在第 <span class="math inline">\(i\)</span> 个牧场建立控制站的花费是 <span class="math inline">\(a_i\)</span>, 每个牧场 <span class="math inline">\(i\)</span> 的放养量是 <span class="math inline">\(b_i\)</span>, 理所当然, 小 P 需要总花费最小, 但是小 P 的智商有点不够用了, 所以这个最小总花费就由你来算出啦.</p>
+<h2 id="input">Input</h2>
+<p>第一行一个整数 <span class="math inline">\(n\)</span> 表示牧场数目</p>
+<p>第二行包括 <span class="math inline">\(n\)</span> 个整数, 第 <span class="math inline">\(i\)</span> 个整数表示 <span class="math inline">\(a_i\)</span></p>
+<p>第三行包括 <span class="math inline">\(n\)</span> 个整数, 第 <span class="math inline">\(i\)</span> 个整数表示 <span class="math inline">\(b_i\)</span></p>
+<h2 id="output">Output</h2>
+<p>只有一行, 包括一个整数, 表示最小花费</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>4
+2 4 2 4
+3 1 4 2</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>9</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于 100% 的数据,<span class="math inline">\(1 \leq n \leq 1000000\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>首先正着推很麻烦对不对, 所以就反着推, 得到的是能省多少钱</p>
+<p>所以就有:</p>
+<p><span class="math display">\[f_i = f_j + \sum_{k=1}^{i} b_k \cdot (j - i) - a_i\]</span></p>
+<p>然后就是 <span class="math inline">\(O(n^2)\)</span> 的做法:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">1000100</span>;
+
+<span class="dt">int</span> n;
+lli a[maxn], b[maxn], pre_b[maxn];
+lli dp[maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;a[i]);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;b[i]);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        pre_b[i] = pre_b[i - <span class="dv">1</span>] + b[i];
+    dp[n] = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = n - <span class="dv">1</span>; i &gt;= <span class="dv">1</span>; i--)
+        <span class="kw">for</span> (<span class="dt">int</span> j = n; j &gt; i; j--)
+            dp[i]= max(dp[i], dp[j] + pre_b[i] * (j - i) - a[i]);
+    <span class="co">// Deducing dynamic programming result from total result</span>
+    lli sum = a[n], res = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        sum += b[i] * (n - i);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        res = max(res, dp[i]);
+    res = sum - res;
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>现在考虑斜率优化, 我们发现对于任意的 <span class="math inline">\(i\)</span>, 其都可以表达为含有常数的一个式子. 例如 如果令 <span class="math inline">\(c_i = \sum_{k=1}^{i}\)</span>, 则有 <span class="math inline">\(f_i = f_j + c_i \cdot {j-i} - a_i\)</span>. 我们发现 可以构建这样一个平面直角坐标系, 横坐标为 <span class="math inline">\(i, j, \ldots\)</span>, 纵坐标为 <span class="math inline">\(f_i, f_j, \ldots\)</span>.</p>
+<p>这样就一定有 <span class="math inline">\(c_j = \frac{dy}{dx}\)</span>, 对于成立的这样的 <span class="math inline">\(j\)</span>.</p>
+<p>所以我们把不符合条件的点拿掉, 也就是维护一个上凸曲线. 这样维护的曲线可以保证时间复杂度在 <span class="math inline">\(O(n \log n)\)</span> 以内.</p>
+<p>终于有一次自己弄懂了斜率优化~</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">double</span> llf;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">1000100</span>;
+
+<span class="dt">int</span> n;
+lli a[maxn], b[maxn], pre_b[maxn];
+lli dp[maxn];
+<span class="dt">int</span> deque[maxn];
+
+llf slope(<span class="dt">int</span> j, <span class="dt">int</span> k) {
+    <span class="kw">return</span> llf(dp[k] - dp[j]) / llf(j - k); }
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;a[i]);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;b[i]);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        pre_b[i] = pre_b[i - <span class="dv">1</span>] + b[i];
+    <span class="co">// Working with deque</span>
+    dp[n] = <span class="dv">0</span>;
+    <span class="dt">int</span> l = <span class="dv">1</span>, r = <span class="dv">0</span>;
+    deque[++r] = n;
+    <span class="co">// Maintain upper convex hull</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = n - <span class="dv">1</span>; i &gt;= <span class="dv">1</span>; i--) {
+        dp[i] = <span class="dv">0</span>;
+        <span class="kw">while</span> (l &lt; r &amp;&amp; slope(deque[l], deque[l + <span class="dv">1</span>]) &gt; pre_b[i])
+            l += <span class="dv">1</span>; <span class="co">// deque.pop_front();</span>
+        <span class="dt">int</span> j = deque[l];
+        dp[i] = dp[j] + pre_b[i] * (j - i) - a[i];
+        <span class="kw">while</span> (r &gt; l &amp;&amp; slope(deque[r], i) &gt; slope(deque[r - <span class="dv">1</span>], deque[r]))
+            r -= <span class="dv">1</span>; <span class="co">// deque.pop_back();</span>
+        deque[++r] = i;
+    }
+    <span class="co">// Deducing dynamic programming result from total result</span>
+    lli sum = a[n], res = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        sum += b[i] * (n - i);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        res = max(res, dp[i]);
+    res = sum - res;
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj3437/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj3437/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj3437/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj3437/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj3437">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj4196: [Noi2015]软件包管理器&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj4196: [Noi2015]软件包管理器
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOI2015" target="_self">
+            <i class="fa fa-tag"></i> NOI2015
+          </a>
+          <a class="tag" href="/blog/archive/?q=Heavy Light Decomposition" target="_self">
+            <i class="fa fa-tag"></i> Heavy Light Decomposition
+          </a>
+          <a class="tag" href="/blog/archive/?q=Segment Tree" target="_self">
+            <i class="fa fa-tag"></i> Segment Tree
+          </a>
+        </span>
+        <span class="date" title="17:48:53 | 7 March, 2017">
+          7 March, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>Linux 用户和 OSX 用户一定对软件包管理器不会陌生. 通过软件包管理器, 你可以通过一行命令安装某一个软件包, 然后软件包管理器会帮助你从软件源下载软件包, 同时自动解决 所有的依赖 (即下载安装这个软件包的安装所依赖的其它软件包), 完成所有的配置. Debian/Ubuntu 使用的 apt-get, Fedora/CentOS 使用的 yum, 以及 OSX 下可用的 homebrew 都是优秀的软件包管理器.</p>
+<p>你决定设计你自己的软件包管理器. 不可避免地, 你要解决软件包之间的依赖问题. 如果 软件包 A 依赖软件包 B, 那么安装软件包 A 以前, 必须先安装软件包 B. 同时, 如果想要卸载 软件包 B, 则必须卸载软件包 A. 现在你已经获得了所有的软件包之间的依赖关系. 而且, 由于你之前的工作, 除 <span class="math inline">\(0\)</span> 号软件包以外, 在你的管理器当中的软件包都会依赖一个且仅 一个软件包, 而 <span class="math inline">\(0\)</span> 号软件包不依赖任何一个软件包. 依赖关系不存在环 (若有 <span class="math inline">\(m (m \gt 2)\)</span> 个软件包 <span class="math inline">\(A_1, A_2, A_3, \ldots, A_m\)</span>, 其中 <span class="math inline">\(A_1\)</span> 依赖 <span class="math inline">\(A_2\)</span>,<span class="math inline">\(A_2\)</span> 依赖 <span class="math inline">\(A_3\)</span>,<span class="math inline">\(A_3\)</span> 依赖 <span class="math inline">\(A_4\)</span>, ...... ,<span class="math inline">\(A_{m-1}\)</span> 依赖 <span class="math inline">\(A_m\)</span>, 而 <span class="math inline">\(A_m\)</span> 依赖 <span class="math inline">\(A_1\)</span>, 则称这 <span class="math inline">\(m\)</span> 个软件包的依赖关系构成环), 当然也不会有一个软件包依赖自己.</p>
+<p>现在你要为你的软件包管理器写一个依赖解决程序. 根据反馈, 用户希望在安装和卸载某个 软件包时, 快速地知道这个操作实际上会改变多少个软件包的安装状态 (即安装操作会安装 多少个未安装的软件包, 或卸载操作会卸载多少个已安装的软件包), 你的任务就是实现 这个部分. 注意, 安装一个已安装的软件包, 或卸载一个未安装的软件包, 都不会改变任何软件包的安装状态, 即在此情况下, 改变安装状态的软件包数为 <span class="math inline">\(0\)</span>.</p>
+<h2 id="input">Input</h2>
+<p>输入文件的第 <span class="math inline">\(1\)</span> 行包含 <span class="math inline">\(1\)</span> 个正整数 <span class="math inline">\(n\)</span>, 表示软件包的总数. 软件包从 <span class="math inline">\(0\)</span> 开始编号.</p>
+<p>随后一行包含 <span class="math inline">\(n - 1\)</span> 个整数, 相邻整数之间用单个空格隔开, 分别表示 <span class="math inline">\(1, 2, 3, \ldots, n-2, n-1\)</span> 号软件包依赖的软件包的编号.</p>
+<p>接下来一行包含 <span class="math inline">\(1\)</span> 个正整数 <span class="math inline">\(q\)</span>, 表示询问的总数.</p>
+<p>之后 <span class="math inline">\(q\)</span> 行, 每行 <span class="math inline">\(1\)</span> 个询问. 询问分为两种:</p>
+<ul>
+<li><code>install x</code>: 表示安装软件包 <span class="math inline">\(x\)</span>;</li>
+<li><code>uninstall x</code>: 表示卸载软件包 <span class="math inline">\(x\)</span>.</li>
+</ul>
+<p>你需要维护每个软件包的安装状态, 一开始所有的软件包都处于未安装状态. 对于每个操作, 你需要输出这步操作会改变多少个软件包的安装状态, 随后应用这个操作 (即改变你维护的安装状态).</p>
+<h2 id="output">Output</h2>
+<p>输出文件包括 <span class="math inline">\(q\)</span> 行.</p>
+<p>输出文件的第 <span class="math inline">\(i\)</span> 行输出 <span class="math inline">\(1\)</span> 个整数, 为第 <span class="math inline">\(i\)</span> 步操作中改变安装状态的软件包数.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>7
+0 0 0 1 1 5
+5
+install 5
+install 6
+uninstall 1
+install 4
+uninstall 0</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>3
+1
+3
+2
+3</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有数据, 满足:<span class="math inline">\(n \leq 10^5, q \leq 10^5\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>典型树链剖分 (轻重链剖分) 模板题.</p>
+<p>由于树链剖分是一个根据 DFS 序标号的结构, 所以一棵子树的节点编号 (新编的号) 一定是连续的, 为其根节点编号到子树中最大的编号. 这样一来, 在线段树上就可以对整棵子树进行批量操作, 时间复杂度为 <span class="math inline">\(O(\log n)\)</span>.</p>
+<p>进一步地, 线段树应该为 “设置值” 操作而不是 “修改值” 操作, 这一点需要注意一下.</p>
+<p>(把右子写成了左子是什么情况啊...... )</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">200010</span>, maxt = maxn &lt;&lt; <span class="dv">2</span>;
+
+<span class="kw">class</span> SegmentTree { <span class="kw">public</span>:
+    <span class="kw">struct</span> node { node *lc, *rc;
+        <span class="dt">int</span> sum, lazy, lb, mb, rb; } *root, npool[maxt];
+    <span class="dt">int</span> n, ncnt;
+    node* make_node(<span class="dt">void</span>) { node *p = &amp;npool[++ncnt];
+        p-&gt;lc = p-&gt;rc = NULL; p-&gt;sum = <span class="dv">0</span>; p-&gt;lazy = <span class="dv">-1</span>;
+        p-&gt;lb = p-&gt;mb = p-&gt;rb = <span class="dv">0</span>; <span class="kw">return</span> p; }
+    <span class="dt">void</span> dispatch_lazy(node *p) { <span class="kw">if</span> (p-&gt;lazy == <span class="dv">-1</span>) <span class="kw">return</span> ;
+        <span class="kw">if</span> (p-&gt;lc) p-&gt;lc-&gt;sum = (p-&gt;lc-&gt;rb - p-&gt;lc-&gt;lb + <span class="dv">1</span>) * p-&gt;lazy, p-&gt;lc-&gt;lazy = p-&gt;lazy;
+        <span class="kw">if</span> (p-&gt;rc) p-&gt;rc-&gt;sum = (p-&gt;rc-&gt;rb - p-&gt;rc-&gt;lb + <span class="dv">1</span>) * p-&gt;lazy, p-&gt;rc-&gt;lazy = p-&gt;lazy;
+        p-&gt;lazy = <span class="dv">-1</span>; <span class="kw">return</span> ; }
+    <span class="dt">void</span> change(node *p, <span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">int</span> v) {
+        <span class="kw">if</span> (p-&gt;lb == l &amp;&amp; p-&gt;rb == r) { p-&gt;lazy = v;
+            p-&gt;sum = (p-&gt;rb - p-&gt;lb + <span class="dv">1</span>) * v; <span class="kw">return</span> ; }
+        dispatch_lazy(p);
+        <span class="kw">if</span> (r &lt;= p-&gt;mb) change(p-&gt;lc, l, r, v);
+        <span class="kw">else</span> <span class="kw">if</span> (l &gt; p-&gt;mb) change(p-&gt;rc, l, r, v);
+        <span class="kw">else</span> change(p-&gt;lc, l, p-&gt;mb, v), change(p-&gt;rc, p-&gt;mb<span class="dv">+1</span>, r, v);
+        p-&gt;sum = p-&gt;lc-&gt;sum + p-&gt;rc-&gt;sum;
+        <span class="kw">return</span> ; }
+    <span class="dt">void</span> change(<span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">int</span> v) {
+        <span class="kw">return</span> <span class="kw">this</span>-&gt;change(root, l, r, v); }
+    <span class="dt">int</span> query(node *p, <span class="dt">int</span> l, <span class="dt">int</span> r) {
+        <span class="kw">if</span> (p-&gt;lb == l &amp;&amp; p-&gt;rb == r) { <span class="kw">return</span> p-&gt;sum; }
+        dispatch_lazy(p);
+        <span class="kw">if</span> (r &lt;= p-&gt;mb) <span class="kw">return</span> query(p-&gt;lc, l, r);
+        <span class="kw">else</span> <span class="kw">if</span> (l &gt; p-&gt;mb) <span class="kw">return</span> query(p-&gt;rc, l, r);
+        <span class="kw">return</span> query(p-&gt;lc, l, p-&gt;mb) + query(p-&gt;rc, p-&gt;mb<span class="dv">+1</span>, r); }
+    <span class="dt">int</span> query(<span class="dt">int</span> l, <span class="dt">int</span> r) {
+        <span class="kw">return</span> <span class="kw">this</span>-&gt;query(root, l, r); }
+    node* build_tree(<span class="dt">int</span> l, <span class="dt">int</span> r) {
+        <span class="kw">if</span> (l == r) { node *p = make_node();
+            p-&gt;lb = p-&gt;mb = p-&gt;rb = l; <span class="kw">return</span> p; }
+        <span class="dt">int</span> mid = (l + r) &gt;&gt; <span class="dv">1</span>; node *p = make_node();
+        p-&gt;lb = l; p-&gt;mb = mid; p-&gt;rb = r;
+        p-&gt;lc = build_tree(l, mid); p-&gt;rc = build_tree(mid + <span class="dv">1</span>, r);
+        <span class="kw">return</span> p; }
+    <span class="dt">void</span> build_tree(<span class="dt">int</span> n) { <span class="kw">this</span>-&gt;n = n;
+        <span class="kw">this</span>-&gt;root = <span class="kw">this</span>-&gt;build_tree(<span class="dv">1</span>, n);
+        <span class="kw">return</span> ; }
+} st;
+
+<span class="kw">class</span> HeavyLightDecomposition { <span class="kw">public</span>:
+    <span class="kw">struct</span> edge { <span class="dt">int</span> u, v; edge *next;
+        } *edges[maxn], epool[maxn];
+    <span class="dt">int</span> n, root, ecnt, dcnt, size[maxn], par[maxn], depth[maxn],
+        maxch[maxn], ctop[maxn], last[maxn], edgenum[maxn];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v) { edge *p = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;next = edges[u];
+        edges[u] = p; <span class="kw">return</span> ; }
+    <span class="dt">void</span> dfs1(<span class="dt">int</span> p) { size[p] = <span class="dv">1</span>;
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next) <span class="kw">if</span> (ep-&gt;v != par[p]) {
+            par[ep-&gt;v] = p; depth[ep-&gt;v] = depth[p] + <span class="dv">1</span>;
+            dfs1(ep-&gt;v); size[p] += size[ep-&gt;v];
+            <span class="kw">if</span> (size[ep-&gt;v] &gt; size[maxch[p]]) maxch[p] = ep-&gt;v;
+        } <span class="kw">return</span> ; }
+    <span class="dt">void</span> dfs2(<span class="dt">int</span> p, <span class="dt">int</span> chaintop) {
+        edgenum[p] = ++dcnt; ctop[p] = chaintop;
+        <span class="kw">if</span> (maxch[p]) dfs2(maxch[p], chaintop);
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+            <span class="kw">if</span> (ep-&gt;v != par[p] &amp;&amp; ep-&gt;v != maxch[p])
+                dfs2(ep-&gt;v, ep-&gt;v);
+        last[p] = dcnt; <span class="kw">return</span> ; }
+    <span class="dt">void</span> perform_init(<span class="dt">int</span> n) { <span class="kw">this</span>-&gt;n = n;
+        root = <span class="dv">1</span>; dfs1(root); dfs2(root, root);
+        st.build_tree(n); <span class="kw">return</span> ; }
+    <span class="dt">int</span> perform_install(<span class="dt">int</span> x) {
+        <span class="dt">int</span> a = root, b = x, f1 = ctop[a], f2 = ctop[b],
+            res = depth[b] - depth[a] + <span class="dv">1</span>;
+        <span class="kw">while</span> (f1 != f2) {
+            <span class="kw">if</span> (depth[f1] &lt; depth[f2])
+                swap(f1, f2), swap(a, b);
+            res -= st.query(edgenum[f1], edgenum[a]);
+            st.change(edgenum[f1], edgenum[a], <span class="dv">1</span>);
+            a = par[f1], f1 = ctop[a]; }
+        <span class="kw">if</span> (depth[a] &gt; depth[b]) swap(a, b);
+        res -= st.query(edgenum[a], edgenum[b]);
+        st.change(edgenum[a], edgenum[b], <span class="dv">1</span>);
+        <span class="kw">return</span> res; }
+    <span class="dt">int</span> perform_uninstall(<span class="dt">int</span> x) {
+        <span class="dt">int</span> res = st.query(edgenum[x], last[x]);
+        st.change(edgenum[x], last[x], <span class="dv">0</span>);
+                <span class="kw">return</span> res; }
+} hld;
+
+<span class="dt">int</span> n, Q;
+<span class="dt">char</span> str[<span class="dv">32</span>];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>, x; i &lt;= n; i++) scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;x),
+        hld.add_edge(x + <span class="dv">1</span>, i);
+    hld.perform_init(n);
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;Q);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, x; i &lt;= Q; i++) {
+        scanf(<span class="st">"</span><span class="ch">%s%d</span><span class="st">"</span>, str, &amp;x); x += <span class="dv">1</span>;
+        <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'i'</span>)
+            printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, hld.perform_install(x));
+        <span class="kw">else</span>
+            printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, hld.perform_uninstall(x));
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj4196/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj4196/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj4196/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj4196/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj4196">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

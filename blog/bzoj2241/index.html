@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj2241: [SDOI2011]打地鼠&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj2241: [SDOI2011]打地鼠
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=SDOI2011" target="_self">
+            <i class="fa fa-tag"></i> SDOI2011
+          </a>
+          <a class="tag" href="/blog/archive/?q=Brute Force Search" target="_self">
+            <i class="fa fa-tag"></i> Brute Force Search
+          </a>
+          <a class="tag" href="/blog/archive/?q=Fiddling" target="_self">
+            <i class="fa fa-tag"></i> Fiddling
+          </a>
+        </span>
+        <span class="date" title="19:37:26 | 14 March, 2017">
+          14 March, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>打地鼠是这样的一个游戏: 地面上有一些地鼠洞, 地鼠们会不时从洞里探出头来很短时间后 又缩回洞中. 玩家的目标是在地鼠伸出头时, 用锤子砸其头部, 砸到的地鼠越多分数也就越高. 游戏中的锤子每次只能打一只地鼠, 如果多只地鼠同时探出头, 玩家只能通过多次 挥舞锤子的方式打掉所有的地鼠. 你认为这锤子太没用了, 所以你改装了锤子, 增加了锤子与地面的接触面积, 使其每次可以击打一片区域. 如果我们把地面看做 <span class="math inline">\(m \times n\)</span> 的方阵, 其每个元素都代表一个地鼠洞, 那么锤子可以覆盖 <span class="math inline">\(R \times C\)</span> 区域内的所有地鼠洞.</p>
+<p>但是改装后的锤子有一个缺点: 每次挥舞锤子时, 对于这 <span class="math inline">\(R \times C\)</span> 的区域中的所有地洞, 锤子会打掉恰好一只地鼠. 也就是说锤子覆盖的区域中, 每个地洞必须至少有 <span class="math inline">\(1\)</span> 只地鼠, 且如果某个地洞中地鼠的个数大于 <span class="math inline">\(1\)</span>, 那么这个地洞只会有 <span class="math inline">\(1\)</span> 只地鼠被打掉, 因此每次挥舞锤子时, 恰好有 <span class="math inline">\(R \times C\)</span> 只地鼠被打掉.</p>
+<p>由于锤子的内部结构过于精密, 因此在游戏过程中你不能旋转锤子 (即不能互换 <span class="math inline">\(R\)</span> 和 <span class="math inline">\(C\)</span>) . 你可以任意更改锤子的规格 (即你可以任意规定 <span class="math inline">\(R\)</span> 和 <span class="math inline">\(C\)</span> 的大小), 但是改装 锤子的工作只能在打地鼠前进行 (即你不可以打掉一部分地鼠后, 再改变锤子的规格). 你的任务是求出要想打掉所有的地鼠, 至少需要挥舞锤子的次数.</p>
+<p>由于你可以把锤子的大小设置为 <span class="math inline">\(1 \times 1\)</span>, 因此本题总是有解的.</p>
+<h2 id="input">Input</h2>
+<p>第一行包含两个正整数 <span class="math inline">\(m, n\)</span>; 下面 <span class="math inline">\(m\)</span> 行每行 <span class="math inline">\(n\)</span> 个正整数描述地图, 每个数字表示 相应位置的地洞中地鼠的数量.</p>
+<h2 id="output">Output</h2>
+<p>输出一个整数, 表示最少的挥舞次数.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>3 3
+1 2 1
+2 4 2
+1 2 1</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>4</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于 100% 的数据,<span class="math inline">\(1 \leq m, n \leq 100\)</span>, 其他数据不小于 <span class="math inline">\(0\)</span>, 不大于 <span class="math inline">\(10^5\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<p>所有松鼠数量之和一定是某两个正整数的乘积的倍数, 这样就缩短了我们寻找的范围.</p>
+<p>值得一提的是, 如果我们从较大的 <span class="math inline">\((R, C)\)</span> 开始搜寻, 可能能够避免多次搜寻过多浪费 时间, 即时间可能退化到 <span class="math inline">\(O(n^2 m^2)\)</span>, 但是实际均摊接近 <span class="math inline">\(O(mn\sqrt{mn})\)</span>.</p>
+<p>所以每一次枚举锤子的大小, 然后判断是否可以砸完所有地鼠就可以输出结果了.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="ot">#define rep(_var,_begin,_end) for(int _var=_begin;_var&lt;=_end;_var++)</span>
+<span class="ot">#define minimize(__x,__y) __x=min(__x,__y)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">110</span>;
+
+<span class="dt">int</span> n, m;
+lli base[maxn][maxn], tmp[maxn][maxn];
+lli sum;
+
+<span class="dt">bool</span> judge(<span class="dt">int</span> x, <span class="dt">int</span> y)
+{
+    <span class="co">// Copying data to temporary storage</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= m; j++)
+            tmp[i][j] = base[i][j];
+    <span class="co">// Checking result</span>
+    rep(i, <span class="dv">1</span>, n) rep(j, <span class="dv">1</span>, m) <span class="kw">if</span> (tmp[i][j]) {
+        <span class="kw">if</span> (i+x<span class="dv">-1</span> &lt;= n &amp;&amp; j+y<span class="dv">-1</span> &lt;= m) {
+            <span class="co">// Within range, removing data</span>
+            lli orz = tmp[i][j];
+            rep(k, <span class="dv">0</span>, x<span class="dv">-1</span>) rep(l, <span class="dv">0</span>, y<span class="dv">-1</span>) {
+                tmp[i+k][j+l] -= orz;
+                <span class="kw">if</span> (tmp[i+k][j+l] &lt; <span class="dv">0</span>)
+                    <span class="kw">return</span> <span class="kw">false</span>;
+            }
+        } <span class="kw">else</span> {
+            <span class="kw">return</span> <span class="kw">false</span>;
+        }
+    }
+    <span class="kw">return</span> <span class="kw">true</span>;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= m; j++) {
+            scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;base[i][j]);
+            sum += base[i][j];
+        }
+    <span class="co">// Checking all possibilities.</span>
+    lli res = sum;
+    <span class="kw">for</span> (<span class="dt">int</span> i = n; i &gt;= <span class="dv">1</span>; i--)
+        <span class="kw">for</span> (<span class="dt">int</span> j = m; j &gt;= <span class="dv">1</span>; j--)
+            <span class="kw">if</span> (sum % (i * j) == <span class="dv">0</span> &amp;&amp; sum / (i * j) &lt; res)
+                <span class="kw">if</span> (judge(i, j))
+                    minimize(res, sum / (i * j));
+    <span class="co">// Output finale</span>
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj2241/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj2241/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj2241/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj2241/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj2241">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

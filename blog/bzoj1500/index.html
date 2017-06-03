@@ -1,0 +1,447 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1500: [NOI2005]维修数列&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1500: [NOI2005]维修数列
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOI2005" target="_self">
+            <i class="fa fa-tag"></i> NOI2005
+          </a>
+          <a class="tag" href="/blog/archive/?q=Splay Tree" target="_self">
+            <i class="fa fa-tag"></i> Splay Tree
+          </a>
+        </span>
+        <span class="date" title="20:20:20 | 31 March, 2017">
+          31 March, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>请写一个程序, 要求维护一个数列, 支持以下 <span class="math inline">\(6\)</span> 种操作:</p>
+<table>
+<colgroup>
+<col style="width: 11%"></col>
+<col style="width: 20%"></col>
+<col style="width: 68%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">操作编号</th>
+<th style="text-align: left;">输入文件中的格式</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1. 插入</td>
+<td style="text-align: left;"><code>INSERT posi tot c1 c2 ... ctot</code></td>
+<td style="text-align: left;">在当前数列的第 <span class="math inline">\({pos}_i\)</span> 个数字后插入 <span class="math inline">\(tot\)</span> 个数字:<span class="math inline">\(c_1, c_2, \ldots, c_{tot}\)</span>; 若在数列首插入, 则 <span class="math inline">\({pos}_i\)</span> 为 <span class="math inline">\(0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2. 删除</td>
+<td style="text-align: left;"><code>DELETE posi tot</code></td>
+<td style="text-align: left;">从当前数列的第 <span class="math inline">\({pos}_i\)</span> 个数字开始连续删除 <span class="math inline">\(tot\)</span> 个数字</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3. 修改</td>
+<td style="text-align: left;"><code>MAKE-SAME posi tot c</code></td>
+<td style="text-align: left;">将当前数列的第 <span class="math inline">\({pos}_i\)</span> 个数字开始的连续 <span class="math inline">\(tot\)</span> 个数字统一修改为 <span class="math inline">\(c\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4. 翻转</td>
+<td style="text-align: left;"><code>REVERSE posi tot</code></td>
+<td style="text-align: left;">取出从当前数列的第 <span class="math inline">\({pos}_i\)</span> 个数字开始的 <span class="math inline">\(tot\)</span> 个数字, 翻转后放入原来的位置</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5. 求和</td>
+<td style="text-align: left;"><code>GET-SUM posi tot</code></td>
+<td style="text-align: left;">计算从当前数列开始的第 <span class="math inline">\({pos}_i\)</span> 个数字开始的 <span class="math inline">\(tot\)</span> 个数字的和并输出</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6. 求和最大的子列</td>
+<td style="text-align: left;"><code>MAX-SUM</code></td>
+<td style="text-align: left;">求出当前数列中和最大的一段子列, 并输出最大和</td>
+</tr>
+</tbody>
+</table>
+<h2 id="input">Input</h2>
+<p>输入文件的第 <span class="math inline">\(1\)</span> 行包含两个数 <span class="math inline">\(n\)</span> 和 <span class="math inline">\(m\)</span>,<span class="math inline">\(n\)</span> 表示初始时数列中数的个数,<span class="math inline">\(m\)</span> 表示 要进行的操作数目.</p>
+<p>第 <span class="math inline">\(2\)</span> 行包含 <span class="math inline">\(n\)</span> 个数字, 描述初始时的数列.</p>
+<p>以下 <span class="math inline">\(m\)</span> 行, 每行一条命令, 格式参见问题描述中的表格.</p>
+<h2 id="output">Output</h2>
+<p>对于输入数据中的 <code>GET-SUM</code> 和 <code>MAX-SUM</code> 操作, 向输出文件依次打印结果, 每个答案 (数字) 占一行.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>9 8
+2 -6 3 5 1 -5 -3 6 3
+GET-SUM 5 4
+MAX-SUM
+INSERT 8 3 -5 7 2
+DELETE 12 1
+MAKE-SAME 3 3 2
+REVERSE 3 6
+GET-SUM 5 4
+MAX-SUM</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>-1
+10
+1
+10</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>你可以认为在任何时刻, 数列中至少有 <span class="math inline">\(1\)</span> 个数.</p>
+<p>输入数据一定是正确的, 即指定位置的数在数列中一定存在.</p>
+<p>50% 的数据中, 任何时刻数列中最多含有 <span class="math inline">\(30000\)</span> 个数;</p>
+<p>100% 的数据中, 任何时刻数列中最多含有 <span class="math inline">\(500000\)</span> 个数.</p>
+<p>100% 的数据中, 任何时刻数列中任何一个数字均在 <span class="math inline">\([-1000, 1000]\)</span> 内.</p>
+<p>100% 的数据中,<span class="math inline">\(m \leq 20000\)</span>, 插入的数字总数不超过 <span class="math inline">\(4000000\)</span> 个, 输入文件大小不超过 <span class="math inline">\(20\)</span> MB.</p>
+<h2 id="explanation">Explanation</h2>
+<p>遇到这种看起来很像 SuperMemo 的题目就应该果断 Splay......</p>
+<p>但是如果内存只有这么一点那么一定要垃圾回收, 毕竟开的点和删的点都会很多但是如果不 回收就会爆炸 QwQ</p>
+<p>吐槽: 结果写了一遍带上垃圾回收无限 RE, 终于修好 GC 模块以后又开始无限 TLE...... 最终 在 Miloris 大神的指引下选择了用 NOI 的官方数据测评, 结果一个 AC 三个 TLE 两个 WA 剩下全是 RE......</p>
+<p>于是开始了一个星期的紧张调试, 感觉自己突然变成了 Splayed By Trees</p>
+<p>终于有一天把程序调出来了...... 首先 interval 就没写对, 合并好像有点问题; 其次 find 函数会莫名崩溃, 主要原因是没有在向下 traverse 的时候发 lazy; 再然后就是 <code>MAX-SUM</code> 本来是不应该写那么麻烦的, 直接询问 root 的大小就行了; 最后应该把两个端点的 val 值设成 <span class="math inline">\(-\infty\)</span> 才对, 不然分分钟 WA.</p>
+<p>所以说这锅并不该垃圾回收背......</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="ot">#define rep(_var,_begin,_end) for(int _var=_begin;_var&lt;=_end;_var++)</span>
+<span class="ot">#define range(_begin,_end) rep(_,_begin,_end)</span>
+<span class="ot">#define max_3(__x,__y,__z) max(max(__x,__y),__z)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">500100</span>;
+<span class="dt">const</span> lli infinit = <span class="bn">0x3f3f3f3f</span>;
+
+<span class="kw">class</span> SplayTree
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> arr_i[maxn][<span class="dv">6</span>];
+    <span class="ot">#define ch(_x,_y) arr_i[_x][_y]</span>
+    <span class="ot">#define lc(_x) arr_i[_x][0]</span>
+    <span class="ot">#define rc(_x) arr_i[_x][1]</span>
+    <span class="ot">#define par(_x) arr_i[_x][2]</span>
+    <span class="ot">#define size(_x) arr_i[_x][3]</span>
+    <span class="ot">#define lazymod(_x) arr_i[_x][4]</span>
+    <span class="ot">#define lazyrev(_x) arr_i[_x][5]</span>
+    lli arr_l[maxn][<span class="dv">6</span>];
+    <span class="ot">#define val(_x) arr_l[_x][0]</span>
+    <span class="ot">#define sum(_x) arr_l[_x][1]</span>
+    <span class="ot">#define lmx(_x) arr_l[_x][2]</span>
+    <span class="ot">#define mmx(_x) arr_l[_x][3]</span>
+    <span class="ot">#define rmx(_x) arr_l[_x][4]</span>
+    <span class="ot">#define lazyset(_x) arr_l[_x][5]</span>
+    <span class="dt">int</span> n, ncnt, root;
+    queue&lt;<span class="dt">int</span>&gt; npool;
+    <span class="dt">int</span> make_node(<span class="dt">void</span>)
+    {
+        <span class="dt">int</span> p = <span class="dv">0</span>;
+        <span class="kw">if</span> (!npool.empty()) {
+            p = npool.front();
+            npool.pop();
+        } <span class="kw">else</span> {
+            p = ++ncnt;
+        }
+        lc(p) = rc(p) = par(p) = <span class="dv">0</span>;
+        size(p) = <span class="dv">1</span>;
+        lazymod(p) = lazyrev(p) = <span class="kw">false</span>;
+        val(p) = sum(p) = lmx(p) = mmx(p) = rmx(p) = <span class="dv">0ll</span>;
+        lazyset(p) = <span class="dv">0ll</span>;
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">void</span> destroy_node(<span class="dt">int</span> p)
+    {
+        npool.push(p);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> mark_mod(<span class="dt">int</span> p, lli v)
+    {
+        lazymod(p) = <span class="kw">true</span>;
+        lazyset(p) = v;
+        val(p) = v;
+        sum(p) = size(p) * val(p);
+        <span class="kw">if</span> (val(p) &gt;= <span class="dv">0</span>) {
+            lmx(p) = mmx(p) = rmx(p) = sum(p);
+        } <span class="kw">else</span> {
+            lmx(p) = rmx(p) = <span class="dv">0</span>;
+            mmx(p) = val(p);
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> mark_rev(<span class="dt">int</span> p)
+    {
+        lazyrev(p) ^= <span class="dv">1</span>;
+        swap(lc(p), rc(p));
+        swap(lmx(p), rmx(p));
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> update_lazy(<span class="dt">int</span> p)
+    {
+        size(p) = size(lc(p)) + <span class="dv">1</span> + size(rc(p));
+        sum(p) = sum(lc(p)) + val(p) + sum(rc(p));
+        lmx(p) = max(lmx(lc(p)), sum(lc(p)) + val(p) + lmx(rc(p)));
+        mmx(p) = max_3(mmx(lc(p)), rmx(lc(p)) + val(p) + lmx(rc(p)), mmx(rc(p)));
+        rmx(p) = max(rmx(lc(p)) + val(p) + sum(rc(p)), rmx(rc(p)));
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> dispatch_lazy(<span class="dt">int</span> p)
+    {
+        <span class="kw">if</span> (lazymod(p)) {
+            range(<span class="dv">0</span>, <span class="dv">1</span>) <span class="kw">if</span> (ch(p, _))
+                mark_mod(ch(p, _), val(p));
+            lazymod(p) = lazyrev(p) = <span class="kw">false</span>;
+        }
+        <span class="kw">if</span> (lazyrev(p)) {
+            range(<span class="dv">0</span>, <span class="dv">1</span>) <span class="kw">if</span> (ch(p, _))
+                mark_rev(ch(p, _));
+            lazyrev(p) = <span class="kw">false</span>;
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> rotate(<span class="dt">int</span> p)
+    {
+        <span class="dt">int</span> q = par(p), g = par(q);
+        <span class="dt">int</span> x = p == rc(q), y = q == rc(g);
+        dispatch_lazy(q);
+        dispatch_lazy(p);
+        ch(q, x) = ch(p, !x); <span class="kw">if</span> (ch(q, x)) par(ch(q, x)) = q;
+        ch(p, !x) = q; par(q) = p;
+        <span class="kw">if</span> (g) ch(g, y) = p; par(p) = g;
+        update_lazy(q);
+        update_lazy(p);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> splay(<span class="dt">int</span> p, <span class="dt">int</span> t = <span class="dv">0</span>)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> q = <span class="dv">0</span>; (q = par(p)) &amp;&amp; q != t; rotate(p))
+            <span class="kw">if</span> (par(q) &amp;&amp; par(q) != t)
+                rotate((p == lc(q)) == (q == lc(par(q))) ? q : p);
+        <span class="kw">if</span> (t == <span class="dv">0</span>) root = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> find(<span class="dt">int</span> x)
+    {
+        <span class="dt">int</span> p = root;
+        <span class="kw">while</span> (p) {
+            dispatch_lazy(p);
+            <span class="kw">if</span> (x &lt;= size(lc(p))) {
+                p = lc(p);
+                <span class="kw">continue</span>;
+            } x -= size(lc(p));
+            <span class="kw">if</span> (x &lt;= <span class="dv">1</span>) {
+                <span class="kw">return</span> p;
+            } x -= <span class="dv">1</span>;
+            p = rc(p);
+        }
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">int</span> build_tree(<span class="dt">int</span> l, <span class="dt">int</span> r, lli arr[])
+    {
+        <span class="kw">if</span> (l &gt; r) <span class="kw">return</span> <span class="dv">0</span>;
+        <span class="co">// So unless it's null node, we assume it's correct</span>
+        <span class="dt">int</span> p = make_node();
+        <span class="dt">int</span> mid = (l + r) &gt;&gt; <span class="dv">1</span>;
+        val(p) = arr[mid];
+        lc(p) = build_tree(l, mid - <span class="dv">1</span>, arr);
+        rc(p) = build_tree(mid + <span class="dv">1</span>, r, arr);
+        range(<span class="dv">0</span>, <span class="dv">1</span>) <span class="kw">if</span> (ch(p, _)) par(ch(p, _)) = p;
+        update_lazy(p);
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">void</span> insert(<span class="dt">int</span> pos, <span class="dt">int</span> n, lli arr[])
+    {
+        <span class="dt">int</span> lp = find(pos + <span class="dv">1</span>), rp = find(pos + <span class="dv">2</span>);
+        splay(lp, <span class="dv">0</span>);
+        splay(rp, root);
+        <span class="dt">int</span> np = build_tree(<span class="dv">1</span>, n, arr);
+        lc(rp) = np;
+        par(np) = rp;
+        splay(np, <span class="dv">0</span>);
+        <span class="kw">this</span>-&gt;n += n;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> remove(<span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="dt">int</span> lp = find(l), rp = find(r + <span class="dv">2</span>);
+        splay(lp, <span class="dv">0</span>);
+        splay(rp, root);
+        <span class="co">// Recycling subtree</span>
+        queue&lt;<span class="dt">int</span>&gt; que;
+        que.push(lc(rp));
+        <span class="kw">while</span> (!que.empty()) {
+            <span class="dt">int</span> p = que.front();
+            que.pop();
+            range(<span class="dv">0</span>, <span class="dv">1</span>) <span class="kw">if</span> (ch(p, _))
+                que.push(ch(p, _));
+            destroy_node(p);
+        }
+        <span class="co">// Disconnecting</span>
+        lc(rp) = <span class="dv">0</span>;
+        splay(rp, <span class="dv">0</span>);
+        <span class="kw">this</span>-&gt;n -= r - l + <span class="dv">1</span>;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> change(<span class="dt">int</span> l, <span class="dt">int</span> r, lli val)
+    {
+        <span class="dt">int</span> lp = find(l), rp = find(r + <span class="dv">2</span>);
+        splay(lp, <span class="dv">0</span>);
+        splay(rp, root);
+        mark_mod(lc(rp), val);
+        splay(lc(rp), <span class="dv">0</span>);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> reverse(<span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="dt">int</span> lp = find(l), rp = find(r + <span class="dv">2</span>);
+        splay(lp, <span class="dv">0</span>);
+        splay(rp, root);
+        mark_rev(lc(rp));
+        splay(lc(rp), <span class="dv">0</span>);
+        <span class="kw">return</span> ;
+    }
+    lli get_sum(<span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="dt">int</span> lp = find(l), rp = find(r + <span class="dv">2</span>);
+        splay(lp, <span class="dv">0</span>);
+        splay(rp, root);
+        lli res = sum(lc(rp));
+        <span class="kw">return</span> res;
+    }
+    <span class="dt">int</span> get_max_sum(<span class="dt">void</span>)
+    {
+        <span class="kw">return</span> mmx(root);
+    }
+    <span class="dt">void</span> init(<span class="dt">void</span>)
+    {
+        <span class="kw">this</span>-&gt;n = <span class="dv">0</span>;
+        <span class="kw">this</span>-&gt;ncnt = <span class="dv">0</span>;
+        <span class="kw">while</span> (!npool.empty())
+            npool.pop();
+        <span class="kw">this</span>-&gt;root = make_node();
+        rc(root) = make_node();
+        par(rc(root)) = root;
+        size(root) += <span class="dv">1</span>;
+        mmx(<span class="dv">0</span>) = val(root) = val(rc(root)) = -infinit;
+        splay(rc(root), <span class="dv">0</span>);
+        <span class="kw">return</span> ;
+    }
+} st;
+
+<span class="dt">int</span> n, m;
+lli arr[maxn];
+<span class="dt">char</span> str[<span class="dv">64</span>];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;arr[i]);
+    st.init();
+    st.insert(<span class="dv">0</span>, n, arr);
+    <span class="kw">for</span> (<span class="dt">int</span> idx = <span class="dv">1</span>; idx &lt;= m; idx++) {
+        scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str);
+        <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'I'</span>) {
+            <span class="dt">int</span> pos, tot; scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;pos, &amp;tot);
+            <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= tot; i++)
+                scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;arr[i]);
+            st.insert(pos, tot, arr);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'D'</span>) {
+            <span class="dt">int</span> pos, tot; scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;pos, &amp;tot);
+            st.remove(pos, pos + tot - <span class="dv">1</span>);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'M'</span> &amp;&amp; str[<span class="dv">2</span>] == <span class="st">'K'</span>) {
+            <span class="dt">int</span> pos, tot, v; scanf(<span class="st">"</span><span class="ch">%d%d%d</span><span class="st">"</span>, &amp;pos, &amp;tot, &amp;v);
+            st.change(pos, pos + tot - <span class="dv">1</span>, v);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'R'</span>) {
+            <span class="dt">int</span> pos, tot; scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;pos, &amp;tot);
+            st.reverse(pos, pos + tot - <span class="dv">1</span>);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'G'</span>) {
+            <span class="dt">int</span> pos, tot; scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;pos, &amp;tot);
+            lli res = st.get_sum(pos, pos + tot - <span class="dv">1</span>);
+            printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'M'</span> &amp;&amp; str[<span class="dv">2</span>] == <span class="st">'X'</span>) {
+            lli res = st.get_max_sum();
+            printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1500/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1500/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1500/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1500/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1500">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

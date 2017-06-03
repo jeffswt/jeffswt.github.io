@@ -1,0 +1,594 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Retroactive Array&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="en">
+      <div class="post-header">
+        <h1 class="title">
+          Retroactive Array
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Retroactive Data Structures" target="_self">
+            <i class="fa fa-tag"></i> Retroactive Data Structures
+          </a>
+          <a class="tag" href="/blog/archive/?q=Retroactive Segment Tree" target="_self">
+            <i class="fa fa-tag"></i> Retroactive Segment Tree
+          </a>
+          <a class="tag" href="/blog/archive/?q=Retroactive Array" target="_self">
+            <i class="fa fa-tag"></i> Retroactive Array
+          </a>
+          <a class="tag" href="/blog/archive/?q=Templates" target="_self">
+            <i class="fa fa-tag"></i> Templates
+          </a>
+        </span>
+        <span class="date" title="00:59:34 | 7 January, 2017">
+          7 January, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <p>This is a simple container for implementing a retroactive array. It supports modifying data and querying data online, and also creating branches of versions instantly. The time complexity is <span class="math inline">\(O(n \log n)\)</span> as well as its memory complexity.<del> However by submitting this version it seemed to have a constant error, id est failure by allocating too much memory.</del><strong>I updated this version this afternoon, and dramatically improved the memory cost and halved the time cost. Currently it runs for 2. 4s on bzoj3674, about 3 times slower than the fastest implementation.</strong></p>
+<p>It ‘s quite simple to use this template. All you need to do is to initialize the tree, build it and fork it. To initialize, do the following:</p>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp"><span class="dt">int</span> n = <span class="dv">5000</span>;
+<span class="dt">int</span> default_value = <span class="dv">0</span>;
+retroactive_array&lt;<span class="dt">int</span>&gt; array;
+array.init(n, default_value);</code></pre></div>
+<p><strong>Because we’ ve updated this template for performance issues, the initialization function can be specified with a given value, such that while given the position of this element, the function returns a value for this array to insert.</strong></p>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp"><span class="dt">int</span> n = <span class="dv">5000</span>;
+string default_generator(<span class="dt">int</span> position) {
+    <span class="kw">if</span> (position % <span class="dv">2</span> == <span class="dv">0</span>)
+        <span class="kw">return</span> <span class="st">"Even"</span>;
+    <span class="kw">return</span> <span class="st">"Odd"</span>; }
+retroactive_array&lt;string&gt; array;
+array.init(n, default_generator);</code></pre></div>
+<p>To create branches, you need to specify the older version by its version number. The version number could be arbitrary integers, but not floating point numbers or 64 bit integers. To maintain maximum compatibility, we advise you against using timestamps of large values or less than 0. If no version number is set, we default the base version to #0:</p>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp"><span class="dt">int</span> old_time = <span class="dv">3</span>;
+<span class="dt">int</span> new_time = <span class="dv">7</span>;
+array.fork(new_time, old_time);
+<span class="co">// Creating another from base version</span>
+array.fork(new_time);
+<span class="co">// array.fork(new_time, 0);</span></code></pre></div>
+<p>To set values, you could either use the faster way, or use the easier way. The easier way is used to deal with simple data structures, such as default data types like integers. If you are dealing with complex classes, then to avoid compile errors we suggest that you should use the other ones.</p>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp">array.fork(<span class="dv">6</span>, <span class="dv">0</span>);
+<span class="co">// Setting values</span>
+array.set(<span class="dv">0</span>, <span class="dv">666</span>, <span class="dv">2333</span>)
+array[<span class="dv">0</span>][<span class="dv">666</span>] = <span class="dv">2333</span>;
+<span class="co">// Getting values</span>
+std::cout &lt;&lt; array[<span class="dv">0</span>][<span class="dv">666</span>] &lt;&lt; std::endl; <span class="co">// Should output "2333"</span>
+std::cout &lt;&lt; array.get(<span class="dv">6</span>, <span class="dv">666</span>) &lt;&lt; std::endl; <span class="co">// Should output "0"</span></code></pre></div>
+<p>Also, to check if a position had already been used, you may use the <code>empty</code> function to determine an empty timestamp by specifying the only parameter with the designated timestamp.</p>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp"><span class="dt">int</span> tm_stamp = <span class="dv">1</span>;
+<span class="kw">while</span> (!array.empty(tm_stamp))
+    tm_stamp++;
+array.fork(tm_stamp, <span class="dv">0</span>);</code></pre></div>
+<p>We also created an initialization function for users to override the default settings. The memory allocation can be done in one go, by specifying some flags in the code:</p>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp"><span class="co">// Handle exceptions. If you know what you are doing, disable this</span>
+<span class="ot">#define RA_DO_HANDLE_EXCEPTION 1</span>
+<span class="co">// Allocate nodes on demand (new). If you know how much you are allocating,</span>
+<span class="co">// modify the pool sizes in the template and disable this.</span>
+<span class="ot">#define RA_MALLOC_ON_DEMAND 1</span>
+<span class="co">// If you don't need arbitrary timestamps (consecutively assigned) and you</span>
+<span class="co">// know what you are doing, disable this</span>
+<span class="ot">#define RA_UNLIMITED_TIMESTAMPS 1</span></code></pre></div>
+<p>If you are looking for the template, you can find it by expanding the article and look below. This works perfectly well at most places. But if you find a bug, don ‘t ask me. I don’ t know very clearly about this, and it ‘s not very efficient, though.</p>
+<!-- More -->
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;cstring&gt;</span>
+<span class="ot">#include &lt;stdexcept&gt;</span>
+<span class="ot">#include &lt;map&gt;</span>
+
+<span class="ot">#define RA_DO_HANDLE_EXCEPTION 1</span>
+<span class="ot">#define RA_MALLOC_ON_DEMAND 1</span>
+<span class="ot">#define RA_UNLIMITED_TIMESTAMPS 1</span>
+
+<span class="kw">template</span> &lt;<span class="kw">typename</span> _Type&gt;
+<span class="kw">class</span> retroactive_array
+{
+<span class="kw">private</span>:
+    <span class="co">// Constants, only used if required</span>
+    <span class="dt">static</span> <span class="dt">const</span> <span class="dt">int</span> _node_pool_size = <span class="dv">1000100</span>;
+    <span class="dt">static</span> <span class="dt">const</span> <span class="dt">int</span> _timestamp_size = <span class="dv">20100</span>;
+    <span class="co">// Segment tree structural implementation</span>
+    <span class="kw">class</span> ra_node {
+    <span class="kw">public</span>:
+        _Type value;
+        ra_node *lc, *rc;
+    };
+    <span class="dt">int</span> _size;
+    <span class="ot">#ifdef RA_UNLIMITED_TIMESTAMPS</span>
+    std::map&lt;<span class="dt">int</span>, ra_node*&gt; root;
+    <span class="ot">#else</span>
+    ra_node* root[_timestamp_size];
+    <span class="ot">#endif</span>
+    <span class="co">// Node allocation units</span>
+    <span class="ot">#ifdef RA_MALLOC_ON_DEMAND</span>
+    ra_node* alloc_node(<span class="dt">void</span>)
+    {
+        ra_node *p = <span class="kw">new</span> ra_node;
+        <span class="kw">return</span> p;
+    }
+    <span class="ot">#else</span>
+    ra_node _node_pool[_node_pool_size];
+    <span class="dt">int</span> _node_pool_cntr;
+    ra_node* alloc_node(<span class="dt">void</span>)
+    {
+        <span class="ot">#ifdef RA_DO_HANDLE_EXCEPTION</span>
+        <span class="kw">if</span> (_node_pool_cntr &gt;= _node_pool_size)
+            <span class="kw">throw</span> std::out_of_range(<span class="st">"Memory pool overflow"</span>);
+        <span class="ot">#endif</span>
+        ra_node *p = &amp;_node_pool[_node_pool_cntr++];
+        <span class="kw">return</span> p;
+    }
+    <span class="ot">#endif</span>
+    <span class="co">// Recursive tree building unit</span>
+    <span class="kw">typedef</span> _Type gen_function(<span class="dt">int</span>);
+    ra_node* build_tree(<span class="dt">int</span> l, <span class="dt">int</span> r, gen_function func)
+    {
+        ra_node *p = <span class="kw">this</span>-&gt;alloc_node();
+        <span class="kw">if</span> (l == r) {
+            p-&gt;value = func(l);
+            <span class="kw">return</span> p;
+        }
+        <span class="dt">int</span> mid = (l + r) &gt;&gt; <span class="dv">1</span>;
+        p-&gt;lc = <span class="kw">this</span>-&gt;build_tree(l, mid, func);
+        p-&gt;rc = <span class="kw">this</span>-&gt;build_tree(mid + <span class="dv">1</span>, r, func);
+        <span class="kw">return</span> p;
+    }
+    <span class="co">// Querying data from structure</span>
+    _Type query(ra_node *p, <span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">int</span> pos)
+    {
+        <span class="kw">if</span> (l == r)
+            <span class="kw">return</span> p-&gt;value;
+        <span class="dt">int</span> mid = (l + r) &gt;&gt; <span class="dv">1</span>;
+        <span class="kw">if</span> (pos &lt;= mid)
+            <span class="kw">return</span> <span class="kw">this</span>-&gt;query(p-&gt;lc, l, mid, pos);
+        <span class="kw">else</span>
+            <span class="kw">return</span> <span class="kw">this</span>-&gt;query(p-&gt;rc, mid + <span class="dv">1</span>, r, pos);
+    }
+    <span class="co">// Modifying data in structure</span>
+    ra_node* modify(ra_node *p, <span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">int</span> pos, _Type val)
+    {
+        <span class="co">// Creating clone of this node</span>
+        ra_node *q = <span class="kw">this</span>-&gt;alloc_node();
+        q-&gt;value = p-&gt;value;
+        q-&gt;lc = p-&gt;lc;
+        q-&gt;rc = p-&gt;rc;
+        <span class="co">// Working on segment tree</span>
+        <span class="kw">if</span> (l == r) {
+            q-&gt;value = val;
+            <span class="kw">return</span> q;
+        }
+        <span class="dt">int</span> mid = (l + r) &gt;&gt; <span class="dv">1</span>;
+        <span class="kw">if</span> (pos &lt;= mid)
+            q-&gt;lc = <span class="kw">this</span>-&gt;modify(q-&gt;lc, l, mid, pos, val);
+        <span class="kw">else</span>
+            q-&gt;rc = <span class="kw">this</span>-&gt;modify(q-&gt;rc, mid + <span class="dv">1</span>, r, pos, val);
+        <span class="kw">return</span> q;
+    }
+<span class="kw">private</span>:
+    <span class="co">// Maintaining functions for invoking upper-level retroactive array</span>
+    <span class="co">// functions on I/O</span>
+    size_t get_size(<span class="dt">void</span>)
+    {
+        <span class="kw">return</span> <span class="kw">this</span>-&gt;_size;
+    }
+    <span class="dt">bool</span> has_time(<span class="dt">int</span> time)
+    {
+        <span class="kw">if</span> (<span class="kw">this</span>-&gt;root[time] == NULL)
+            <span class="kw">return</span> <span class="kw">false</span>;
+        <span class="kw">return</span> <span class="kw">true</span>;
+    }
+    <span class="dt">void</span> create_fork(<span class="dt">int</span> time, <span class="dt">int</span> time_old = <span class="dv">0</span>)
+    {
+        <span class="kw">if</span> (time == time_old)
+            <span class="kw">return</span> ;
+        <span class="ot">#ifdef RA_DO_HANDLE_EXCEPTION</span>
+        <span class="kw">if</span> (<span class="kw">this</span>-&gt;root[time_old] == NULL)
+            <span class="kw">throw</span> std::out_of_range(<span class="st">"Unexpected time of fork source supplied."</span>);
+        <span class="ot">#endif</span>
+        <span class="kw">if</span> (<span class="kw">this</span>-&gt;root[time] != NULL)
+            <span class="kw">return</span> ;
+        ra_node *o_root = <span class="kw">this</span>-&gt;root[time_old];
+        ra_node *c_root = <span class="kw">this</span>-&gt;alloc_node();
+        <span class="co">// Copy data for duplication</span>
+        c_root-&gt;value = o_root-&gt;value;
+        c_root-&gt;lc = o_root-&gt;lc;
+        c_root-&gt;rc = o_root-&gt;rc;
+        <span class="co">// Putting back into map</span>
+        <span class="kw">this</span>-&gt;root[time] = c_root;
+        <span class="kw">return</span> ;
+    }
+    _Type get_data(<span class="dt">int</span> time, <span class="dt">int</span> pos)
+    {
+        <span class="ot">#ifdef RA_DO_HANDLE_EXCEPTION</span>
+        <span class="kw">if</span> (pos &lt; <span class="dv">0</span> || pos &gt; <span class="kw">this</span>-&gt;_size)
+            <span class="kw">throw</span> std::out_of_range(<span class="st">"Indexing limits out of bound."</span>);
+        <span class="ot">#endif</span>
+        <span class="co">// Retrieving root at position</span>
+        ra_node *c_root = <span class="kw">this</span>-&gt;root[time];
+        <span class="ot">#ifdef RA_DO_HANDLE_EXCEPTION</span>
+        <span class="kw">if</span> (c_root == NULL)
+            <span class="kw">throw</span> std::out_of_range(<span class="st">"Unexpected time supplied."</span>);
+        <span class="ot">#endif</span>
+        <span class="co">// Getting data</span>
+        _Type res = <span class="kw">this</span>-&gt;query(c_root, <span class="dv">1</span>, _size, pos);
+        <span class="kw">return</span> res;
+    }
+    <span class="dt">void</span> set_data(<span class="dt">int</span> time, <span class="dt">int</span> pos, _Type val)
+    {
+        <span class="ot">#ifdef RA_DO_HANDLE_EXCEPTION</span>
+        <span class="kw">if</span> (pos &lt; <span class="dv">0</span> || pos &gt; <span class="kw">this</span>-&gt;_size)
+            <span class="kw">throw</span> std::out_of_range(<span class="st">"Indexing limits out of bound."</span>);
+        <span class="ot">#endif</span>
+        <span class="co">// Retrieving root at position</span>
+        ra_node *c_root = <span class="kw">this</span>-&gt;root[time];
+        <span class="ot">#ifdef RA_DO_HANDLE_EXCEPTION</span>
+        <span class="kw">if</span> (c_root == NULL)
+            <span class="kw">throw</span> std::out_of_range(<span class="st">"Please create a fork before setting data."</span>);
+        <span class="ot">#endif</span>
+        <span class="co">// Modifying data</span>
+        c_root = <span class="kw">this</span>-&gt;modify(c_root, <span class="dv">1</span>, _size, pos, val);
+        <span class="kw">this</span>-&gt;root[time] = c_root;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> init_array(<span class="dt">int</span> n, gen_function func)
+    {
+        <span class="kw">this</span>-&gt;_size = n;
+        ra_node *c_root = <span class="kw">this</span>-&gt;build_tree(<span class="dv">1</span>, _size, func);
+        <span class="ot">#ifdef RA_UNLIMITED_TIMESTAMPS</span>
+        <span class="kw">this</span>-&gt;root.clear();
+        <span class="ot">#else</span>
+        memset(root, <span class="dv">0</span>, <span class="kw">sizeof</span>(root));
+        <span class="ot">#endif</span>
+        <span class="kw">this</span>-&gt;root[<span class="dv">0</span>] = c_root;
+        <span class="kw">return</span> ;
+    }
+    _Type _default_zero;
+    _Type _zero_override_func(<span class="dt">int</span> in) {
+        <span class="kw">return</span> _default_zero; }
+    <span class="dt">void</span> init_array(<span class="dt">int</span> n, _Type zero)
+    {
+        <span class="kw">this</span>-&gt;_default_zero = zero;
+        <span class="kw">this</span>-&gt;init_array(n, _zero_override_func);
+        <span class="kw">return</span> ;
+    }
+<span class="kw">protected</span>:
+    <span class="co">// Data wrapper for positions (third-level)</span>
+    <span class="kw">class</span> ra_val_wrapper {
+    <span class="kw">protected</span>:
+        retroactive_array* _ra;
+        <span class="dt">int</span> _time, _pos;
+    <span class="kw">public</span>:
+        ra_val_wrapper(retroactive_array* _ra, <span class="dt">int</span> _time, <span class="dt">int</span> _pos) {
+            <span class="kw">this</span>-&gt;_ra = _ra;
+            <span class="kw">this</span>-&gt;_time = _time;
+            <span class="kw">this</span>-&gt;_pos = _pos;
+            <span class="kw">return</span> ; }
+        ra_val_wrapper&amp; <span class="kw">operator</span> = (ra_val_wrapper in) {
+            *<span class="kw">this</span> = _Type(in);
+            <span class="kw">return</span> *<span class="kw">this</span>; }
+        ra_val_wrapper&amp; <span class="kw">operator</span> = (_Type in) {
+            <span class="kw">this</span>-&gt;_ra-&gt;set_data(<span class="kw">this</span>-&gt;_time, <span class="kw">this</span>-&gt;_pos, in);
+            <span class="kw">return</span> *<span class="kw">this</span>; }
+        <span class="kw">operator</span> _Type (<span class="dt">void</span>) {
+            _Type val = <span class="kw">this</span>-&gt;_ra-&gt;get_data(<span class="kw">this</span>-&gt;_time, <span class="kw">this</span>-&gt;_pos);
+            <span class="kw">return</span> val; }
+    };
+    <span class="co">// Data wrapper for time (second-level)</span>
+    <span class="kw">class</span> ra_time_wrapper {
+    <span class="kw">protected</span>:
+        retroactive_array* _ra;
+        <span class="dt">int</span> _time;
+    <span class="kw">public</span>:
+        ra_time_wrapper(retroactive_array* _ra, <span class="dt">int</span> _time) {
+            <span class="kw">this</span>-&gt;_ra = _ra;
+            <span class="kw">this</span>-&gt;_time = _time;
+            <span class="kw">return</span> ; }
+        ra_val_wrapper <span class="kw">operator</span> [] (<span class="dt">int</span> pos) {
+            ra_val_wrapper rvw(<span class="kw">this</span>-&gt;_ra, <span class="kw">this</span>-&gt;_time, pos);
+            <span class="kw">return</span> rvw; }
+    };
+    <span class="co">// Wrapping time</span>
+    ra_time_wrapper call_time_wrapper(<span class="dt">int</span> time)
+    {
+        <span class="co">// Checking if fork required</span>
+        <span class="kw">this</span>-&gt;create_fork(time);
+        <span class="co">// Returning wrapper</span>
+        ra_time_wrapper rtw(<span class="kw">this</span>, time);
+        <span class="kw">return</span> rtw;
+    }
+<span class="kw">public</span>:
+    retroactive_array(<span class="dt">void</span>) {
+        <span class="kw">this</span>-&gt;_size = <span class="dv">0</span>;
+        <span class="ot">#ifndef RA_MALLOC_ON_DEMAND</span>
+        memset(_node_pool, <span class="dv">0</span>, <span class="kw">sizeof</span>(_node_pool));
+        _node_pool_cntr = <span class="dv">0</span>;
+        <span class="ot">#endif</span>
+        <span class="kw">return</span> ; }
+    retroactive_array(<span class="dt">int</span> n, _Type zero) {
+        <span class="kw">this</span>-&gt;init_array(n, zero);
+        <span class="kw">return</span> ; }
+    <span class="dt">void</span> init(<span class="dt">int</span> n, gen_function func) {
+        <span class="kw">this</span>-&gt;init_array(n, func);
+        <span class="kw">return</span> ; }
+    <span class="dt">void</span> init(<span class="dt">int</span> n, _Type zero) {
+        <span class="kw">this</span>-&gt;init_array(n, zero);
+        <span class="kw">return</span> ; }
+    size_t size(<span class="dt">void</span>) {
+        <span class="kw">return</span> <span class="kw">this</span>-&gt;get_size(); }
+    _Type get(<span class="dt">int</span> time, <span class="dt">int</span> pos) {
+        <span class="kw">return</span> <span class="kw">this</span>-&gt;get_data(time, pos); }
+    <span class="dt">void</span> set(<span class="dt">int</span> time, <span class="dt">int</span> pos, _Type val) {
+        <span class="kw">this</span>-&gt;set_data(time, pos, val);
+        <span class="kw">return</span> ; }
+    <span class="dt">void</span> fork(<span class="dt">int</span> time, <span class="dt">int</span> time_old = <span class="dv">0</span>) {
+        <span class="kw">this</span>-&gt;create_fork(time, time_old);
+        <span class="kw">return</span> ; }
+    ra_time_wrapper <span class="kw">operator</span> [] (<span class="dt">int</span> time) {
+        <span class="kw">return</span> <span class="kw">this</span>-&gt;call_time_wrapper(time); }
+};</code></pre></div>
+<p><strong>The following is a previous template, which costs more memory and time. We advise you against using the deprecated version.</strong></p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;map&gt;</span>
+<span class="ot">#include &lt;stdexcept&gt;</span>
+
+<span class="kw">template</span> &lt;<span class="kw">typename</span> _Type&gt;
+<span class="kw">class</span> retroactive_array
+{
+<span class="kw">private</span>:
+    <span class="co">// Segment tree structural implementation</span>
+    <span class="kw">class</span> ra_node {
+    <span class="kw">public</span>:
+        _Type value;
+        ra_node *lc, *rc;
+    };
+    std::map&lt;<span class="dt">int</span>, ra_node*&gt; root;
+    ra_node* alloc_node(<span class="dt">void</span>)
+    {
+        ra_node *p = <span class="kw">new</span> ra_node;
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">int</span> _size;
+    <span class="co">// Recursive tree building unit</span>
+    ra_node* build_tree(<span class="dt">int</span> l, <span class="dt">int</span> r, _Type zero)
+    {
+        ra_node *p = <span class="kw">this</span>-&gt;alloc_node();
+        <span class="kw">if</span> (l == r) {
+            p-&gt;value = zero;
+            <span class="kw">return</span> p;
+        }
+        <span class="dt">int</span> mid = (l + r) &gt;&gt; <span class="dv">1</span>;
+        p-&gt;lc = <span class="kw">this</span>-&gt;build_tree(l, mid, zero);
+        p-&gt;rc = <span class="kw">this</span>-&gt;build_tree(mid + <span class="dv">1</span>, r, zero);
+        <span class="kw">return</span> p;
+    }
+    <span class="co">// Querying data from structure</span>
+    _Type query(ra_node *p, <span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">int</span> pos)
+    {
+        <span class="kw">if</span> (l == r)
+            <span class="kw">return</span> p-&gt;value;
+        <span class="dt">int</span> mid = (l + r) &gt;&gt; <span class="dv">1</span>;
+        <span class="kw">if</span> (pos &lt;= mid)
+            <span class="kw">return</span> <span class="kw">this</span>-&gt;query(p-&gt;lc, l, mid, pos);
+        <span class="kw">else</span>
+            <span class="kw">return</span> <span class="kw">this</span>-&gt;query(p-&gt;rc, mid + <span class="dv">1</span>, r, pos);
+    }
+    <span class="co">// Modifying data in structure</span>
+    ra_node* modify(ra_node *p, <span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">int</span> pos, _Type val)
+    {
+        <span class="co">// Creating clone of this node</span>
+        ra_node *q = <span class="kw">this</span>-&gt;alloc_node();
+        q-&gt;value = p-&gt;value;
+        q-&gt;lc = p-&gt;lc;
+        q-&gt;rc = p-&gt;rc;
+        <span class="co">// Working on segment tree</span>
+        <span class="kw">if</span> (l == r) {
+            q-&gt;value = val;
+            <span class="kw">return</span> q;
+        }
+        <span class="dt">int</span> mid = (l + r) &gt;&gt; <span class="dv">1</span>;
+        <span class="kw">if</span> (pos &lt;= mid)
+            q-&gt;lc = <span class="kw">this</span>-&gt;modify(q-&gt;lc, l, mid, pos, val);
+        <span class="kw">else</span>
+            q-&gt;rc = <span class="kw">this</span>-&gt;modify(q-&gt;rc, mid + <span class="dv">1</span>, r, pos, val);
+        <span class="kw">return</span> q;
+    }
+<span class="kw">private</span>:
+    <span class="co">// Maintaining functions for invoking upper-level retroactive array</span>
+    <span class="co">// functions on I/O</span>
+    size_t get_size(<span class="dt">void</span>)
+    {
+        <span class="kw">return</span> <span class="kw">this</span>-&gt;_size;
+    }
+    <span class="dt">bool</span> has_time(<span class="dt">int</span> time)
+    {
+        <span class="kw">if</span> (<span class="kw">this</span>-&gt;root[time] == NULL)
+            <span class="kw">return</span> <span class="kw">false</span>;
+        <span class="kw">return</span> <span class="kw">true</span>;
+    }
+    <span class="dt">void</span> create_fork(<span class="dt">int</span> time, <span class="dt">int</span> time_old = <span class="dv">0</span>)
+    {
+        <span class="kw">if</span> (time == time_old)
+            <span class="kw">return</span> ;
+        <span class="kw">if</span> (<span class="kw">this</span>-&gt;root[time_old] == NULL)
+            <span class="kw">throw</span> std::out_of_range(<span class="st">"Unexpected time of fork source supplied."</span>);
+        <span class="kw">if</span> (<span class="kw">this</span>-&gt;root[time] != NULL)
+            <span class="kw">return</span> ;
+        ra_node *o_root = <span class="kw">this</span>-&gt;root[time_old];
+        ra_node *c_root = <span class="kw">this</span>-&gt;alloc_node();
+        <span class="co">// Copy data for duplication</span>
+        c_root-&gt;value = o_root-&gt;value;
+        c_root-&gt;lc = o_root-&gt;lc;
+        c_root-&gt;rc = o_root-&gt;rc;
+        <span class="co">// Putting back into map</span>
+        <span class="kw">this</span>-&gt;root[time] = c_root;
+        <span class="kw">return</span> ;
+    }
+    _Type get_data(<span class="dt">int</span> time, <span class="dt">int</span> pos)
+    {
+        <span class="kw">if</span> (pos &lt; <span class="dv">0</span> || pos &gt; <span class="kw">this</span>-&gt;_size)
+            <span class="kw">throw</span> std::out_of_range(<span class="st">"Indexing limits out of bound."</span>);
+        <span class="co">// Retrieving root at position</span>
+        ra_node *c_root = <span class="kw">this</span>-&gt;root[time];
+        <span class="kw">if</span> (c_root == NULL)
+            <span class="kw">throw</span> std::out_of_range(<span class="st">"Unexpected time supplied."</span>);
+        <span class="co">// Getting data</span>
+        _Type res = <span class="kw">this</span>-&gt;query(c_root, <span class="dv">1</span>, _size, pos);
+        <span class="kw">return</span> res;
+    }
+    <span class="dt">void</span> set_data(<span class="dt">int</span> time, <span class="dt">int</span> pos, _Type val)
+    {
+        <span class="kw">if</span> (pos &lt; <span class="dv">0</span> || pos &gt; <span class="kw">this</span>-&gt;_size)
+            <span class="kw">throw</span> std::out_of_range(<span class="st">"Indexing limits out of bound."</span>);
+        <span class="co">// Retrieving root at position</span>
+        ra_node *c_root = <span class="kw">this</span>-&gt;root[time];
+        <span class="kw">if</span> (c_root == NULL)
+            <span class="kw">throw</span> std::out_of_range(<span class="st">"Please create a fork before setting data."</span>);
+        <span class="co">// Modifying data</span>
+        c_root = <span class="kw">this</span>-&gt;modify(c_root, <span class="dv">1</span>, _size, pos, val);
+        <span class="kw">this</span>-&gt;root[time] = c_root;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> init_array(<span class="dt">int</span> n, _Type zero)
+    {
+        <span class="kw">this</span>-&gt;_size = n;
+        ra_node *c_root = <span class="kw">this</span>-&gt;build_tree(<span class="dv">1</span>, _size, zero);
+        <span class="kw">this</span>-&gt;root.clear();
+        <span class="kw">this</span>-&gt;root[<span class="dv">0</span>] = c_root;
+        <span class="kw">return</span> ;
+    }
+<span class="co">// protected:</span>
+<span class="kw">public</span>:
+    <span class="co">// Data wrapper for positions (third-level)</span>
+    <span class="kw">class</span> ra_val_wrapper {
+    <span class="kw">protected</span>:
+        retroactive_array* _ra;
+        <span class="dt">int</span> _time, _pos;
+    <span class="kw">public</span>:
+        ra_val_wrapper(retroactive_array* _ra, <span class="dt">int</span> _time, <span class="dt">int</span> _pos) {
+            <span class="kw">this</span>-&gt;_ra = _ra;
+            <span class="kw">this</span>-&gt;_time = _time;
+            <span class="kw">this</span>-&gt;_pos = _pos;
+            <span class="kw">return</span> ; }
+        ra_val_wrapper&amp; <span class="kw">operator</span> = (ra_val_wrapper in) {
+            *<span class="kw">this</span> = _Type(in);
+            <span class="kw">return</span> *<span class="kw">this</span>; }
+        ra_val_wrapper&amp; <span class="kw">operator</span> = (_Type in) {
+            <span class="kw">this</span>-&gt;_ra-&gt;set_data(<span class="kw">this</span>-&gt;_time, <span class="kw">this</span>-&gt;_pos, in);
+            <span class="kw">return</span> *<span class="kw">this</span>; }
+        <span class="kw">operator</span> _Type (<span class="dt">void</span>) {
+            _Type val = <span class="kw">this</span>-&gt;_ra-&gt;get_data(<span class="kw">this</span>-&gt;_time, <span class="kw">this</span>-&gt;_pos);
+            <span class="kw">return</span> val; }
+    };
+    <span class="co">// Data wrapper for time (second-level)</span>
+    <span class="kw">class</span> ra_time_wrapper {
+    <span class="kw">protected</span>:
+        retroactive_array* _ra;
+        <span class="dt">int</span> _time;
+    <span class="kw">public</span>:
+        ra_time_wrapper(retroactive_array* _ra, <span class="dt">int</span> _time) {
+            <span class="kw">this</span>-&gt;_ra = _ra;
+            <span class="kw">this</span>-&gt;_time = _time;
+            <span class="kw">return</span> ; }
+        ra_val_wrapper <span class="kw">operator</span> [] (<span class="dt">int</span> pos) {
+            ra_val_wrapper rvw(<span class="kw">this</span>-&gt;_ra, <span class="kw">this</span>-&gt;_time, pos);
+            <span class="kw">return</span> rvw; }
+    };
+    <span class="co">// Wrapping time</span>
+    ra_time_wrapper call_time_wrapper(<span class="dt">int</span> time)
+    {
+        <span class="co">// Checking if fork required</span>
+        <span class="kw">this</span>-&gt;create_fork(time);
+        <span class="co">// Returning wrapper</span>
+        ra_time_wrapper rtw(<span class="kw">this</span>, time);
+        <span class="kw">return</span> rtw;
+    }
+<span class="kw">public</span>:
+    retroactive_array(<span class="dt">void</span>) {
+        <span class="kw">this</span>-&gt;root.clear();
+        <span class="kw">this</span>-&gt;_size = <span class="dv">0</span>;
+        <span class="kw">return</span> ; }
+    retroactive_array(<span class="dt">int</span> n, _Type zero) {
+        <span class="kw">this</span>-&gt;init_array(n, zero);
+        <span class="kw">return</span> ; }
+    <span class="dt">void</span> init(<span class="dt">int</span> n, _Type zero) {
+        <span class="kw">this</span>-&gt;init_array(n, zero);
+        <span class="kw">return</span> ; }
+    size_t size(<span class="dt">void</span>) {
+        <span class="kw">return</span> <span class="kw">this</span>-&gt;get_size(); }
+    _Type get(<span class="dt">int</span> time, <span class="dt">int</span> pos) {
+        <span class="kw">return</span> <span class="kw">this</span>-&gt;get_data(time, pos); }
+    <span class="dt">void</span> set(<span class="dt">int</span> time, <span class="dt">int</span> pos, _Type val) {
+        <span class="kw">this</span>-&gt;set_data(time, pos, val);
+        <span class="kw">return</span> ; }
+    <span class="dt">void</span> fork(<span class="dt">int</span> time, <span class="dt">int</span> time_old = <span class="dv">0</span>) {
+        <span class="kw">this</span>-&gt;create_fork(time, time_old);
+        <span class="kw">return</span> ; }
+    ra_time_wrapper <span class="kw">operator</span> [] (<span class="dt">int</span> time) {
+        <span class="kw">return</span> <span class="kw">this</span>-&gt;call_time_wrapper(time); }
+};</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/rta_array/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/rta_array/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/rta_array/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/rta_array/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="rta_array">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

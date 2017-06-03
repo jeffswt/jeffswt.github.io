@@ -1,0 +1,372 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1005: [HNOI2008]明明的烦恼&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1005: [HNOI2008]明明的烦恼
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=HNOI2008" target="_self">
+            <i class="fa fa-tag"></i> HNOI2008
+          </a>
+          <a class="tag" href="/blog/archive/?q=Prufer Sequence" target="_self">
+            <i class="fa fa-tag"></i> Prufer Sequence
+          </a>
+          <a class="tag" href="/blog/archive/?q=High Precision" target="_self">
+            <i class="fa fa-tag"></i> High Precision
+          </a>
+        </span>
+        <span class="date" title="16:12:54 | 20 July, 2016">
+          20 July, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Problem Specification</th>
+<th style="text-align: left;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Time Limit</td>
+<td style="text-align: left;">1 Sec</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Memory Limit</td>
+<td style="text-align: left;">162 MB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Submit</td>
+<td style="text-align: left;">3972</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Solved</td>
+<td style="text-align: left;">1579</td>
+</tr>
+</tbody>
+</table>
+<h2 id="description">Description</h2>
+<p>自从明明学了树的结构, 就对奇怪的树产生了兴趣...... 给出标号为 1 到 N 的点, 以及某些点最终的度数, 允许在<br/>任意两点间连线, 可产生多少棵度数满足要求的树?</p>
+<!-- More -->
+<h2 id="input">Input</h2>
+<p>第一行为 N (0 &lt; N &lt;=1000), 接下来 N 行, 第 i+1 行给出第 i 个节点的度数 Di, 如果对度数不要求, 则输入-1</p>
+<h2 id="output">Output</h2>
+<p>一个整数, 表示不同的满足要求的树的个数, 无解输出 0</p>
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>3
+1
+-1
+-1</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>2</code></pre>
+<h2 id="hint">HINT</h2>
+<p>两棵树分别为 1-2-3; 1-3-2</p>
+<h2 id="source">Source</h2>
+<hr/>
+<blockquote>
+<p>这题需要了解一种数列:<a href="http://www.cnblogs.com/zhj5chengfeng/archive/2013/08/23/3278557.html">Prufer Sequence</a></p>
+<p>我们知道, 一棵树可以用括号序列来表示, 但是, 一棵顶点标号 (1~ n) 的树, 还可以用一个叫做 Prufer Sequence 的数列表示</p>
+<p>一个含有 n 个节点的 Prufer Sequence 有 n-2 个数, Prufer Sequence 中的每个数是 1~ n 中的一个数</p>
+<p>一个定理: 一个 Prufer Sequence 和一棵树一一对应</p>
+<p>化简之后为:<span class="math inline">\(res = \frac{(n - 2)!}{(n - 2 - sum)! \times \pi^{cnt}_{i = 1} (d[i] - 1)} \times (n - cnt)^{n - 2 - sum}\)</span></p>
+<p>在有解的情况下, 计算该结果输出就行了</p>
+<p>无解的情况非常好确定, 这里就再讨论了</p>
+</blockquote>
+<p>话说为什么调了半天还是在第一个点 WA~</p>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp"><span class="co">// SAMPLE CODE FROM HZWER</span>
+<span class="ot">#include&lt;iostream&gt;</span>
+<span class="ot">#include&lt;cstdio&gt;</span>
+<span class="ot">#include&lt;cmath&gt;</span>
+<span class="ot">#include&lt;cstring&gt;</span>
+<span class="ot">#define mod 1000000</span>
+<span class="ot">#define ll long long</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">inline</span> <span class="dt">int</span> read()
+{
+    <span class="dt">int</span> x=<span class="dv">0</span>,f=<span class="dv">1</span>;<span class="dt">char</span> ch=getchar();
+    <span class="kw">while</span>(ch&lt;<span class="st">'0'</span>||ch&gt;<span class="st">'9'</span>){<span class="kw">if</span>(ch==<span class="st">'-'</span>)f=<span class="dv">-1</span>;ch=getchar();}
+    <span class="kw">while</span>(ch&gt;=<span class="st">'0'</span>&amp;&amp;ch&lt;=<span class="st">'9'</span>){x*=<span class="dv">10</span>;x+=ch-<span class="st">'0'</span>;ch=getchar();}
+    <span class="kw">return</span> x*f;
+}
+<span class="dt">int</span> n,m,tot,cnt;
+<span class="dt">int</span> d[<span class="dv">1005</span>],num[<span class="dv">1005</span>],pri[<span class="dv">1005</span>];
+<span class="dt">int</span> ans[<span class="dv">1005</span>],l=<span class="dv">1</span>;
+<span class="kw">inline</span> <span class="dt">bool</span> jud(<span class="dt">int</span> x)
+{
+     <span class="kw">for</span>(<span class="dt">int</span> i=<span class="dv">2</span>;i&lt;=sqrt(x);i++)
+         <span class="kw">if</span>(x%i==<span class="dv">0</span>)<span class="kw">return</span> <span class="dv">0</span>;
+     <span class="kw">return</span> <span class="dv">1</span>;
+}
+<span class="dt">void</span> getpri()
+{
+     <span class="kw">for</span>(<span class="dt">int</span> i=<span class="dv">2</span>;i&lt;=<span class="dv">1000</span>;i++)
+         <span class="kw">if</span>(jud(i))pri[++cnt]=i;
+}
+<span class="dt">void</span> solve(<span class="dt">int</span> a,<span class="dt">int</span> f)
+{
+     <span class="kw">for</span>(<span class="dt">int</span> k=<span class="dv">1</span>;k&lt;=a;k++)
+     {
+         <span class="dt">int</span> x=k;
+         <span class="kw">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=cnt;i++)
+         {
+             <span class="kw">if</span>(x&lt;=<span class="dv">1</span>)<span class="kw">break</span>;
+             <span class="kw">while</span>(x%pri[i]==<span class="dv">0</span>)
+             {num[i]+=f;x/=pri[i];}
+         }
+     }
+}
+<span class="dt">void</span> mul(<span class="dt">int</span> x)
+{
+    <span class="kw">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=l;i++)
+        ans[i] = ans[i] * x;
+    <span class="kw">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=l;i++)
+    {
+        ans[i<span class="dv">+1</span>]+=ans[i]/mod;
+        ans[i]%=mod;
+    }
+    <span class="kw">while</span>(ans[l<span class="dv">+1</span>]&gt;<span class="dv">0</span>)
+    {l++;ans[l<span class="dv">+1</span>]+=ans[l]/mod;ans[l]%=mod;}
+}
+<span class="dt">void</span> print()
+{
+    <span class="kw">for</span>(<span class="dt">int</span> i=l;i&gt;<span class="dv">0</span>;i--)
+        <span class="kw">if</span>(i==l)printf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>,ans[i]);
+        <span class="kw">else</span> printf(<span class="st">"</span><span class="ch">%06d</span><span class="st">"</span>,ans[i]);
+}
+<span class="dt">int</span> main()
+{
+     getpri();ans[<span class="dv">1</span>]=<span class="dv">1</span>;
+     n=read();
+     <span class="kw">if</span>(n==<span class="dv">1</span>)
+     {
+         <span class="dt">int</span> x=read();
+         <span class="kw">if</span>(!x)printf(<span class="st">"1"</span>);
+         <span class="kw">else</span> printf(<span class="st">"0"</span>);
+         <span class="kw">return</span> <span class="dv">0</span>;
+     }
+     <span class="kw">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;i++)
+     {
+         d[i]=read();
+         <span class="kw">if</span>(!d[i]){printf(<span class="st">"0"</span>);<span class="kw">return</span> <span class="dv">0</span>;}
+         <span class="kw">if</span>(d[i]==<span class="dv">-1</span>)m++;
+         <span class="kw">else</span> {d[i]--;tot+=d[i];}
+     }
+     <span class="kw">if</span>(tot&gt;n<span class="dv">-2</span>){printf(<span class="st">"0"</span>);<span class="kw">return</span> <span class="dv">0</span>;}
+     solve(n<span class="dv">-2</span>,<span class="dv">1</span>);
+     solve(n<span class="dv">-2</span>-tot,<span class="dv">-1</span>);
+     <span class="kw">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;i++)
+         <span class="kw">if</span>(d[i])solve(d[i],<span class="dv">-1</span>);
+     <span class="kw">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=cnt;i++)
+         <span class="kw">while</span>(num[i]--)
+             mul(pri[i]);
+     <span class="kw">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n<span class="dv">-2</span>-tot;i++)
+         mul(m);
+     print();
+     <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp"><span class="co">// FALSE CODE, RESERVED FOR DEBUGGING</span>
+<span class="co">// FALSE CODE, RESERVED FOR DEBUGGING</span>
+<span class="co">// FALSE CODE, RESERVED FOR DEBUGGING</span>
+<span class="co">// FALSE CODE, RESERVED FOR DEBUGGING</span>
+<span class="co">// FALSE CODE, RESERVED FOR DEBUGGING</span>
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;iomanip&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;map&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">1100</span>, modr = <span class="dv">100000000</span>;
+
+<span class="co">// High precision modules</span>
+
+<span class="dt">long</span> <span class="dt">long</span>   hpdat[maxn];
+<span class="dt">int</span>         hplen = <span class="dv">0</span>;
+
+<span class="dt">void</span> hpinit(<span class="dt">void</span>) { hplen = <span class="dv">1</span>; hpdat[<span class="dv">1</span>] = <span class="dv">1</span>; <span class="kw">return</span> ; }
+<span class="dt">void</span> hpmult(<span class="dt">int</span> v)
+{
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= hplen; i++) hpdat[i] *= v;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= hplen; i++) hpdat[i + <span class="dv">1</span>] += hpdat[i] / modr, hpdat[i] %= modr;
+    <span class="kw">if</span> (hpdat[hplen + <span class="dv">1</span>] &gt; <span class="dv">0</span>) hplen++;
+    <span class="kw">return</span> ;
+}
+<span class="dt">void</span> hpprint()
+{
+    cout &lt;&lt; hpdat[hplen];
+    <span class="kw">for</span> (<span class="dt">int</span> i = hplen - <span class="dv">1</span>; i &gt;= <span class="dv">1</span>; i--)
+        cout &lt;&lt; setfill(<span class="st">'0'</span>) &lt;&lt; setw(<span class="dv">8</span>) &lt;&lt; hpdat[i];
+    cout &lt;&lt; endl &lt;&lt; flush;
+    <span class="kw">return</span> ;
+}
+
+<span class="co">// Main program procedure</span>
+
+<span class="dt">int</span>             n, d[maxn], sum, cnt;
+<span class="dt">int</span>             primes[maxn], primecnt;
+map&lt;<span class="dt">int</span>, <span class="dt">int</span>&gt;   facts;
+<span class="dt">long</span> <span class="dt">long</span>       result = <span class="dv">0</span>;
+
+<span class="dt">void</span> genprimes(<span class="dt">void</span>)
+{
+    primecnt = <span class="dv">0</span>;
+    primes[++primecnt] = <span class="dv">2</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">3</span>; i &lt;= maxn; i++) {
+        <span class="dt">bool</span> isprime = <span class="kw">true</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= primecnt &amp;&amp; primes[j] * primes[j] &lt; i; j++)
+            <span class="kw">if</span> (i % primes[j] == <span class="dv">0</span>) {
+                isprime = <span class="kw">false</span>;
+                <span class="kw">break</span>;
+            }
+        <span class="kw">if</span> (!isprime) <span class="kw">continue</span>;
+        primes[++primecnt] = i;
+    }
+    facts.clear();
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= primecnt; i++)
+        facts[primes[i]] = <span class="dv">0</span>;
+    <span class="kw">return</span> ;
+}
+
+<span class="dt">void</span> factor(<span class="dt">int</span> x, <span class="dt">int</span> dup)
+{
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= maxn &amp;&amp; x &gt; <span class="dv">1</span>; i++) {
+        <span class="dt">int</span> p = primes[i], q = <span class="dv">0</span>;
+        <span class="kw">while</span> (x % p == <span class="dv">0</span>) x /= p, q++;
+        <span class="kw">if</span> (!q) <span class="kw">continue</span>;
+        facts[p] += q * dup;
+    }
+    <span class="kw">return</span> ;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">if</span> (n == <span class="dv">1</span>) {
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;d[<span class="dv">1</span>]);
+        <span class="kw">if</span> (d[<span class="dv">1</span>] == <span class="dv">0</span>) printf(<span class="st">"1</span><span class="ch">\n</span><span class="st">"</span>);
+        <span class="kw">else</span> printf(<span class="st">"0</span><span class="ch">\n</span><span class="st">"</span>);
+        <span class="kw">return</span> <span class="dv">0</span>;
+    }
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;d[i]);
+        <span class="kw">if</span> (d[i] == <span class="dv">0</span>) {
+            <span class="kw">goto</span> no_result;
+        } <span class="kw">else</span> <span class="kw">if</span> (d[i] &gt; <span class="dv">0</span>) {
+            sum += d[i] - <span class="dv">1</span>;
+            cnt++;
+        }
+    }
+    <span class="kw">if</span> (sum &gt; n - <span class="dv">2</span>)
+        <span class="kw">goto</span> no_result;
+    genprimes();
+    <span class="co">// Initialize formulae from solution</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = n - <span class="dv">2</span> - sum + <span class="dv">1</span>; i &lt;= n - <span class="dv">2</span>; i++)
+        factor(i, <span class="dv">1</span>);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        <span class="kw">if</span> (d[i] != <span class="dv">-1</span>)
+            factor(d[i] - <span class="dv">1</span>, <span class="dv">-1</span>);
+    factor(n - cnt, n - <span class="dv">2</span> - sum);
+    <span class="co">// Apply final results to high-precision number</span>
+    hpinit();
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= primecnt; i++) {
+        <span class="dt">int</span> p = primes[i], q = facts[p];
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= q; j++)
+            hpmult(p);
+    }
+    hpprint();
+    <span class="kw">return</span> <span class="dv">0</span>;
+no_result:
+    printf(<span class="st">"0</span><span class="ch">\n</span><span class="st">"</span>);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> pydatagen <span class="im">import</span> <span class="op">*</span>
+n <span class="op">=</span> randrange(<span class="dv">1</span>, <span class="dv">1000</span>)
+<span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span>
+<span class="bu">print</span>(<span class="st">'</span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> n)
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">0</span>, n):
+    a <span class="op">=</span> randrange(<span class="dv">1</span>, <span class="dv">4</span>)
+    <span class="cf">if</span> a <span class="op">+</span> <span class="bu">sum</span> <span class="op">&lt;</span> (n <span class="op">-</span> <span class="dv">2</span>) <span class="op">/</span> <span class="dv">2</span>:
+        <span class="bu">sum</span> <span class="op">+=</span> a
+        printf(<span class="st">'</span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> a)
+    <span class="cf">else</span>:
+        printf(<span class="st">'-1</span><span class="ch">\n</span><span class="st">'</span>)
+fclose()</code></pre></div>
+<hr/>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1005/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1005/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1005/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1005/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1005">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1059: [ZJOI2007]矩阵游戏&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1059: [ZJOI2007]矩阵游戏
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=ZJOI2007" target="_self">
+            <i class="fa fa-tag"></i> ZJOI2007
+          </a>
+          <a class="tag" href="/blog/archive/?q=Implementation" target="_self">
+            <i class="fa fa-tag"></i> Implementation
+          </a>
+          <a class="tag" href="/blog/archive/?q=" target="_self">
+            <i class="fa fa-tag"></i> 
+          </a>
+        </span>
+        <span class="date" title="13:00:00 | 15 August, 2016">
+          15 August, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Problem Specification</th>
+<th style="text-align: left;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Time Limit</td>
+<td style="text-align: left;">10 Sec</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Memory Limit</td>
+<td style="text-align: left;">162 MB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Submit</td>
+<td style="text-align: left;">3604</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Solved</td>
+<td style="text-align: left;">1729</td>
+</tr>
+</tbody>
+</table>
+<!-- More -->
+<h2 id="description">Description</h2>
+<p>小 Q 是一个非常聪明的孩子, 除了国际象棋, 他还很喜欢玩一个电脑益智游戏--矩阵游戏. 矩阵游戏在一个 N * N 黑白方阵进行 (如同国际象棋一般, 只是颜色是随意的). 每次可以对该矩阵进行两种操作: 行交换操作: 选择矩阵的任意两行, 交换这两行 (即交换对应格子的颜色) 列交换操作: 选择矩阵的任意行列, 交换这两列 (即交换对应格子的颜色) 游戏的目标, 即通过若干次操作, 使得方阵的主对角线 (左上角到右下角的连线) 上的格子均为黑色. 对于某些关卡, 小 Q 百思不得其解, 以致他开始怀疑这些关卡是不是根本就是无解的!! 于是小 Q 决定写一个程序来判断这些关卡是否有解.</p>
+<h2 id="input">Input</h2>
+<p>第一行包含一个整数 T, 表示数据的组数. 接下来包含 T 组数据, 每组数据第一行为一个整数 N, 表示方阵的大小; 接下来 N 行为一个 N*N 的 01 矩阵 (0 表示白色, 1 表示黑色).</p>
+<h2 id="output">Output</h2>
+<p>输出文件应包含 T 行. 对于每一组数据, 如果该关卡有解, 输出一行 Yes; 否则输出一行 No.</p>
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>2
+2
+0 0
+0 1
+3
+0 0 1
+0 1 0
+1 0 0</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>No
+Yes
+【数据规模】
+对于100%的数据，N ≤ 200</code></pre>
+<h2 id="hint">HINT</h2>
+<h2 id="source">Source</h2>
+<hr/>
+<p>交换任意两列、两行不会改变最终的结果, 黑白位置对应的排布也不会变化.</p>
+<p>所以我们可以建一个二分图, 然后把被染黑的点的横纵坐标连在一起, 二分图匹配一下就可以了.</p>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">210</span>, maxm = <span class="dv">40010</span>;
+
+<span class="kw">class</span> Dinic
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v;
+        edge *next;
+    };
+    edge *edges[maxn], epool[maxm];
+    <span class="dt">int</span> n, cnt, from[maxn], used[maxn];
+    <span class="dt">void</span> addedge(<span class="dt">int</span> u, <span class="dt">int</span> v)
+    {
+        edge *p = &amp;epool[cnt++];
+        p-&gt;u = u; p-&gt;v = v;
+        p-&gt;next = edges[u]; edges[u] = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> match(<span class="dt">int</span> p)
+    {
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+            <span class="kw">if</span> (!used[ep-&gt;v]) {
+                used[ep-&gt;v] = <span class="kw">true</span>;
+                <span class="kw">if</span> (!from[ep-&gt;v] || match(from[ep-&gt;v])) {
+                    from[ep-&gt;v] = p;
+                    <span class="kw">return</span> <span class="kw">true</span>;
+                }
+            }
+        <span class="kw">return</span> <span class="kw">false</span>;
+    }
+    <span class="dt">int</span> eval(<span class="dt">void</span>)
+    {
+        memset(from, <span class="dv">0</span>, <span class="kw">sizeof</span>(from));
+        <span class="dt">int</span> res = <span class="dv">0</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+            memset(used, <span class="dv">0</span>, <span class="kw">sizeof</span>(used));
+            <span class="kw">if</span> (match(i))
+                res++;
+        }
+        <span class="kw">return</span> res;
+    }
+    <span class="dt">void</span> reset(<span class="dt">int</span> n_)
+    {
+        n = n_;
+        memset(edges, <span class="dv">0</span>, <span class="kw">sizeof</span>(edges));
+        cnt = <span class="dv">0</span>;
+        <span class="kw">return</span> ;
+    }
+} graph;
+
+<span class="dt">int</span> n, T;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;T);
+    <span class="kw">for</span> (<span class="dt">int</span> idx = <span class="dv">1</span>; idx &lt;= T; idx++) {
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+        graph.reset(n);
+        <span class="dt">int</span> tot = <span class="dv">0</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>, a; j &lt;= n; j++) {
+                scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;a);
+                <span class="kw">if</span> (a &gt; <span class="dv">0</span>) {
+                    tot++;
+                    graph.addedge(i, j);
+                }
+            }
+        <span class="dt">int</span> res = graph.eval();
+        printf(<span class="st">"</span><span class="ch">%s\n</span><span class="st">"</span>, res &gt;= n ? <span class="st">"Yes"</span> : <span class="st">"No"</span>);
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="im">from</span> pydatagen <span class="im">import</span> <span class="op">*</span>
+T <span class="op">=</span> randrange(<span class="dv">1</span>, <span class="dv">10</span>)
+printf(<span class="st">"</span><span class="sc">%d</span><span class="ch">\n</span><span class="st">"</span>, T)
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">0</span>, T):
+    n <span class="op">=</span> randrange(<span class="dv">10</span>, <span class="dv">200</span>)
+    printf(<span class="st">"</span><span class="sc">%d</span><span class="ch">\n</span><span class="st">"</span>, n)
+    <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(<span class="dv">0</span>, n):
+        <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="dv">0</span>, n):
+            <span class="cf">if</span> possibility(<span class="fl">2.0</span> <span class="op">/</span> n):
+                printf(<span class="st">"1 "</span>)
+            <span class="cf">else</span>:
+                printf(<span class="st">"0 "</span>)
+        printf(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)
+    <span class="cf">pass</span></code></pre></div>
+<hr/>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1059/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1059/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1059/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1059/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1059">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

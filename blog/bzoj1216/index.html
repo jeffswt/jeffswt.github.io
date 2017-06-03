@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1216: [HNOI2003]操作系统&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1216: [HNOI2003]操作系统
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=HNOI2003" target="_self">
+            <i class="fa fa-tag"></i> HNOI2003
+          </a>
+          <a class="tag" href="/blog/archive/?q=Simulation" target="_self">
+            <i class="fa fa-tag"></i> Simulation
+          </a>
+          <a class="tag" href="/blog/archive/?q=Heap" target="_self">
+            <i class="fa fa-tag"></i> Heap
+          </a>
+          <a class="tag" href="/blog/archive/?q=Balanced Tree" target="_self">
+            <i class="fa fa-tag"></i> Balanced Tree
+          </a>
+        </span>
+        <span class="date" title="00:00:21 | 24 December, 2016">
+          24 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>写一个程序来模拟操作系统的进程调度. 假设该系统只有一个 CPU, 每一个进程的到达时间, 执行时间和运行优先级都是已知的. 其中运行优先级用自然数表示, 数字越大, 则优先级 越高. 如果一个进程到达的时候 CPU 是空闲的, 则它会一直占用 CPU 直到该进程结束. 除非在这个过程中, 有一个比它优先级高的进程要运行. 在这种情况下, 这个新的 (优先级更高的) 进程会占用 CPU, 而老的只有等待. 如果一个进程到达时, CPU 正在处理一个比它优先级高或优先级相同的进程, 则这个 (新到达的) 进程必须等待. 一旦 CPU 空闲, 如果此时有进程在 等待, 则选择优先级最高的先运行. 如果有多个优先级最高的进程, 则选择到达时间最早的.</p>
+<h2 id="input">Input</h2>
+<p>输入文件包含若干行, 每一行有四个自然数 (均不超过 <span class="math inline">\(10^8\)</span>) , 分别是进程号, 到达 时间, 执行时间和优先级. 不同进程有不同的编号, 不会有两个相同优先级的进程同时到达. 输入数据已经按到达时间从小到大排序. 输入数据保证在任何时候, 等待队列中的进程不超过 <span class="math inline">\(15000\)</span> 个.</p>
+<h2 id="output">Output</h2>
+<p>按照进程结束的时间输出每个进程的进程号和结束时间.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>1 1 5 3
+2 10 5 1
+3 12 7 2
+4 20 2 3
+5 21 9 4
+6 22 2 4
+7 23 5 2
+8 24 2 4</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>1 6
+3 19
+5 30
+6 32
+8 34
+4 35
+7 40
+2 42</code></pre>
+<h2 id="explanation">Explanation</h2>
+<p>严格意义上来说就是一道 <span class="math inline">\(O(n \log n)\)</span> 的模拟题. 每一次用堆维护一个优先权最大的任务, 然后不停插入弹出或者再插入 (如果那个任务没有新加入的任务优先级高的话).</p>
+<p>其实 STL 就可以水过了...... 但是读入没有 <span class="math inline">\(n\)</span> 实在太坑, 好久都没有用过 <code>while EOF</code> 了, 现在都生疏了~</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">300200</span>;
+<span class="dt">const</span> lli infinit = <span class="dv">1000000000ll</span>;
+
+<span class="kw">struct</span> process_t {
+    lli proc_id, priority;
+    lli begin_time, exec_time;
+};
+<span class="dt">bool</span> <span class="kw">operator</span> &lt; (process_t a, process_t b) {
+    <span class="kw">if</span> (a.priority == b.priority)
+        <span class="kw">return</span> a.begin_time &gt; b.begin_time;
+    <span class="kw">return</span> a.priority &lt; b.priority; }
+<span class="dt">bool</span> cmp(process_t a, process_t b) {
+    <span class="kw">return</span> a.begin_time &lt; b.begin_time; }
+
+<span class="kw">struct</span> result_typ {
+    lli proc_id, end_time;
+    result_typ(lli&amp; _, lli&amp; __) { proc_id = _; end_time = __; }
+    result_typ() { proc_id = end_time = <span class="dv">0</span>; }
+};
+<span class="dt">bool</span> comp(result_typ a, result_typ b) {
+    <span class="kw">return</span> a.end_time &lt; b.end_time; }
+
+<span class="dt">int</span> n;
+process_t proc[maxn];
+result_typ res[maxn];
+<span class="co">// lli res[maxn];</span>
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    lli a, b, c, d;
+    <span class="kw">while</span> (scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;a) != EOF) {
+        scanf(<span class="st">"</span><span class="ch">%lld%lld%lld</span><span class="st">"</span>, &amp;b, &amp;c, &amp;d);
+        n += <span class="dv">1</span>;
+        proc[n].proc_id = a;
+        proc[n].begin_time = b;
+        proc[n].exec_time = c;
+        proc[n].priority = d;
+    }
+    <span class="co">// Add (useless) process.</span>
+    proc[n<span class="dv">+1</span>].proc_id = <span class="dv">0</span>;
+    proc[n<span class="dv">+1</span>].begin_time = infinit;
+    proc[n<span class="dv">+1</span>].exec_time = <span class="dv">0</span>;
+    proc[n<span class="dv">+1</span>].priority = <span class="dv">0</span>;
+    <span class="co">// Sorting according to arrival time.</span>
+    sort(proc + <span class="dv">1</span>, proc + <span class="dv">1</span> + n, cmp);
+    <span class="co">// for (int i = 1; i &lt;= n; i++) {</span>
+    <span class="co">//     printf("%lld %lld %lld %lld\n",</span>
+    <span class="co">//         proc[i].proc_id,</span>
+    <span class="co">//         proc[i].begin_time,</span>
+    <span class="co">//         proc[i].exec_time,</span>
+    <span class="co">//         proc[i].priority</span>
+    <span class="co">//     );</span>
+    <span class="co">// }</span>
+    <span class="co">// Adding processes to CPU.</span>
+    priority_queue&lt;process_t&gt; pq;
+    lli cur_time = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n<span class="dv">+1</span>; i++) {
+        lli req_time = proc[i].begin_time - cur_time;
+        <span class="co">// printf("req %lld top exec %lld\n", req_time, !pq.empty() ? pq.top().exec_time : -1);</span>
+        <span class="kw">while</span> (!pq.empty() &amp;&amp; pq.top().exec_time &lt;= req_time) {
+            process_t t_proc = pq.top();
+            <span class="co">// printf("ejecting %lld\n", t_proc.proc_id);</span>
+            cur_time += t_proc.exec_time;
+            res[t_proc.proc_id] = result_typ(
+                t_proc.proc_id, cur_time);
+            req_time -= t_proc.exec_time;
+            pq.pop();
+        }
+        <span class="co">// Termination sequences</span>
+        <span class="kw">if</span> (i &gt;= n<span class="dv">+1</span>)
+            <span class="kw">break</span>;
+        <span class="co">// Rejecting last worse task</span>
+        <span class="kw">if</span> (!pq.empty() &amp;&amp; req_time &gt; <span class="dv">0</span>) {
+            process_t o_proc = pq.top();
+            pq.pop();
+            o_proc.exec_time -= req_time;
+            pq.push(o_proc);
+        }
+        <span class="co">// Injecting this object.</span>
+        process_t n_proc = proc[i];
+        cur_time = n_proc.begin_time;
+        pq.push(n_proc);
+    }
+    <span class="co">// Output results</span>
+    sort(res + <span class="dv">1</span>, res + n<span class="dv">+1</span>, comp);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        printf(<span class="st">"</span><span class="ch">%lld</span><span class="st"> </span><span class="ch">%lld\n</span><span class="st">"</span>, res[i].proc_id, res[i].end_time);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1216/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1216/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1216/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1216/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1216">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

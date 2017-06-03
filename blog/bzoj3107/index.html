@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj3107: [cqoi2013]二进制a+b&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj3107: [cqoi2013]二进制a+b
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=CQOI2013" target="_self">
+            <i class="fa fa-tag"></i> CQOI2013
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+        </span>
+        <span class="date" title="19:22:02 | 3 December, 2016">
+          3 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>输入三个整数 <span class="math inline">\(a, b, c\)</span>, 把它们写成无前导 0 的二进制整数. 比如 <span class="math inline">\(a = 7, b = 6, c = 9\)</span>, 写成二进制为 <span class="math inline">\(a = 111, b = 110, c = 1001\)</span>. 接下来以位数最多的为基准, 其他整数在前面添加前导 0, 使得 <span class="math inline">\(a, b, c\)</span> 拥有相同的位数. 比如在刚才的例子中, 添加完前导 0 后为 <span class="math inline">\(a = 0111, b = 0110, c = 1001\)</span>. 最后, 把 <span class="math inline">\(a, b, c\)</span> 的各位进行重排, 得到 <span class="math inline">\(a_1, b_1, c_1\)</span>, 使得 <span class="math inline">\(a_1 + b_1 = c_1\)</span>. 比如在刚才的例子中, 可以这样重排:<span class="math inline">\(a_1 = 0111, b_1 = 0011, c_1 = 1010\)</span>. 你的任务是让 <span class="math inline">\(c_1\)</span> 最小. 如果无解, 输出 <span class="math inline">\(-1\)</span>.</p>
+<h2 id="input">Input</h2>
+<p>输入仅一行, 包含三个整数 <span class="math inline">\(a, b, c\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>输出仅一行, 为 <span class="math inline">\(c_1\)</span> 的最小值.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>7 6 9</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>10</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p><span class="math inline">\(a, b, c \leq 2^{30}\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>这道题看上去就和 <span class="math inline">\(a, b, c\)</span> 一点关系没有.</p>
+<p>然后统计一下 <span class="math inline">\(a, b, c\)</span> 里面的 1 的个数, 就变成了一个 DP 问题. 简单建一个五维数组, 然后考虑上进位问题瞎搞一发 AC</p>
+<p>结果一个 <code>1 &lt;&lt; n</code> 挑了好久发现不停地输出 <code>-2147483648</code>, 后来才发现如果要进行高精度位运算地移位问题需要考虑到 <code>long long</code>, 然后正确的写法应该是 <code>1ll &lt;&lt; n</code>. 这一点应该在以后的代码中留心.</p>
+<p><strong><del>内存强迫症请使用滚动数组</del></strong></p>
+<p>被 3106 错交了两次的题目表示莫名躺枪~</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="ot">#define rep(__var,__begin,__end) for(lli __var=__begin;__var&lt;=__end;__var++)</span>
+<span class="ot">#define minimize(__ref,__val) __ref=min(__ref,__val);</span>
+<span class="ot">#define dig(__n) (1ll&lt;&lt;(__n))</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">40</span>;
+
+lli get_available_digits(lli in) { lli res = <span class="dv">0</span>;
+    <span class="kw">while</span> (in) res += in &amp; <span class="dv">1</span>, in &gt;&gt;= <span class="dv">1</span>; <span class="kw">return</span> res; }
+lli get_digits(lli in) { lli res = <span class="dv">0</span>;
+    <span class="kw">while</span> (in) res++, in &gt;&gt;= <span class="dv">1</span>; <span class="kw">return</span> res; }
+<span class="kw">template</span> &lt;<span class="kw">typename</span> _T&gt;
+_T max_3(_T __x, _T __y, _T __z) { <span class="kw">return</span> max(max(__x, __y), __z); }
+
+lli v_a, v_b, v_c, n, a, b, c;
+lli dp_arr[maxn][maxn][maxn][maxn][<span class="dv">2</span>];
+<span class="ot">#define dp(__t,__i,__j,__k,__l) dp_arr[__t][__i][__j][__k][__l]</span>
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    <span class="co">// v_a, v_b, v_c are actual values.</span>
+    scanf(<span class="st">"</span><span class="ch">%lld%lld%lld</span><span class="st">"</span>, &amp;v_a, &amp;v_b, &amp;v_c);
+    <span class="co">// Maximum length of a, b, c</span>
+    n = max_3(get_digits(v_a), get_digits(v_b), get_digits(v_c));
+    <span class="co">// Get existent 1s in a, b, c</span>
+    a = get_available_digits(v_a);
+    b = get_available_digits(v_b);
+    c = get_available_digits(v_c);
+    <span class="co">// Resolved data, dynamic programming.</span>
+    <span class="co">// dp[t][i][j][k][l] = Counted t digits, i 1s in A, j 1s in B, k 1s in C,</span>
+    <span class="co">//     with l indicating whether last digits was an incrementation</span>
+    lli max_bound = <span class="dv">1ll</span> &lt;&lt; (n + <span class="dv">1</span>);
+    <span class="co">// printf("%lld %lld\n", n, max_bound);</span>
+    <span class="co">// Cleaning area...</span>
+    rep(t, <span class="dv">0</span>, n) rep(i, <span class="dv">0</span>, a) rep(j, <span class="dv">0</span>, b) rep(k, <span class="dv">0</span>, c)
+        dp(t, i, j, k, <span class="dv">0</span>) = dp(t, i, j, k, <span class="dv">1</span>) = max_bound;
+    dp(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>) = <span class="dv">0</span>;
+    <span class="co">// Main procedure of dynamic programming.</span>
+    rep(t, <span class="dv">0</span>, n - <span class="dv">1</span>) rep(i, <span class="dv">0</span>, min(a, t)) rep(j, <span class="dv">0</span>, min(b, t)) rep(k, <span class="dv">0</span>, min(c, t)) {
+        <span class="co">// No addition, without increment @ here</span>
+        minimize( dp(t + <span class="dv">1</span>, i, j, k, <span class="dv">0</span>), dp(t, i, j, k, <span class="dv">0</span>) );
+        <span class="co">// No addition, with increment @ here</span>
+        minimize( dp(t + <span class="dv">1</span>, i, j, k + <span class="dv">1</span>, <span class="dv">0</span>), dp(t, i, j, k, <span class="dv">1</span>) );
+        <span class="co">// Single addition, without increment @ here</span>
+        minimize( dp(t + <span class="dv">1</span>, i + <span class="dv">1</span>, j, k + <span class="dv">1</span>, <span class="dv">0</span>), dp(t, i, j, k, <span class="dv">0</span>) + dig(t) );
+        minimize( dp(t + <span class="dv">1</span>, i, j + <span class="dv">1</span>, k + <span class="dv">1</span>, <span class="dv">0</span>), dp(t, i, j, k, <span class="dv">0</span>) + dig(t) );
+        <span class="co">// Single addition, with increment @ here</span>
+        minimize( dp(t + <span class="dv">1</span>, i + <span class="dv">1</span>, j, k, <span class="dv">1</span>), dp(t, i, j, k, <span class="dv">1</span>) + dig(t) );
+        minimize( dp(t + <span class="dv">1</span>, i, j + <span class="dv">1</span>, k, <span class="dv">1</span>), dp(t, i, j, k, <span class="dv">1</span>) + dig(t) );
+        <span class="co">// Double addition, without increment @ here</span>
+        minimize( dp(t + <span class="dv">1</span>, i + <span class="dv">1</span>, j + <span class="dv">1</span>, k, <span class="dv">1</span>), dp(t, i, j, k, <span class="dv">0</span>) + dig(t + <span class="dv">1</span>) );
+        <span class="co">// Double addition, with increment @ here</span>
+        minimize( dp(t + <span class="dv">1</span>, i + <span class="dv">1</span>, j + <span class="dv">1</span>, k + <span class="dv">1</span>, <span class="dv">1</span>), dp(t, i, j, k, <span class="dv">1</span>) + dig(t + <span class="dv">1</span>) );
+    }
+    <span class="co">// Get final result</span>
+    lli res = dp(n, a, b, c, <span class="dv">0</span>);
+    <span class="kw">if</span> (res &gt;= max_bound)
+        res = <span class="dv">-1</span>;
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj3107/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj3107/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj3107/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj3107/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj3107">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

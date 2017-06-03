@@ -1,0 +1,247 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Flashing MI 1S: Bricking and Un-bricking&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="en">
+      <div class="post-header">
+        <h1 class="title">
+          Flashing MI 1S: Bricking and Un-bricking
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Phones" target="_self">
+            <i class="fa fa-tag"></i> Phones
+          </a>
+          <a class="tag" href="/blog/archive/?q=Firmware" target="_self">
+            <i class="fa fa-tag"></i> Firmware
+          </a>
+          <a class="tag" href="/blog/archive/?q=Tweaking" target="_self">
+            <i class="fa fa-tag"></i> Tweaking
+          </a>
+        </span>
+        <span class="date" title="15:41:56 | 31 October, 2016">
+          31 October, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h3 id="prelude">Prelude</h3>
+<p>Having been sleepless for a long time, I finally decided to make some improvements on that vintage <del>smart</del>phone Xiaomi 1S. It had been rumoured, and had been true, that support for this device had been officially dropped. Typically, one would not bother to make further modifications to that device, as many have appeared to be, instead adhering to its original, obsolete firmware that was released aeons ago. Should I attempt to fix it, in a way, it should at least be working in an appropriate way.</p>
+<figure>
+<img class="thumb" data-small="/blog/flash_mi1s/DSC00133-small.jpg" data-src="/blog/flash_mi1s/DSC00133.JPG" data-thumb="/blog/flash_mi1s/DSC00133-thumb.jpg" src="/blog/flash_mi1s/DSC00133-thumb.jpg" title="MI-Recovery 2.0.0" width="4320px"/>
+<figcaption>
+MI-Recovery 2.0.0
+</figcaption>
+</figure>
+<p>The battery was outdated anyway, and there should be some attempts to retrieve a newer and more long-lasting battery for that model. I had not truly succeeded in this because I had never decided to use this phone in any way. It was just an experiment, to <del>save some device from being bricked or</del> merely test my abilities.</p>
+<p>This post would describe the whole process in detail, with figures of course. If you want to see more please enter this post for more information.</p>
+<!-- More -->
+<p><strong>Warning: Before you take any actions following the instructions in this post, be sure you have read all the text inside this post. Cross references are linked everywhere without notice. Sometimes precautions are mentioned after the occurences in the post.</strong></p>
+<h3 id="catastrophe">Catastrophe</h3>
+<p>The whole device came into appearance a day ago, when I discovered a few ashes in the <code>Downloads</code> folder, where some bits of unused firmware laid around without order. Instead of cleaning them up, why shouldn ‘t I apply them to the phone, thought I. So I took out the phone, and tried to apply the <code>update.zip</code> s to the device.</p>
+<p>Sadly MIUI5 did not accept these firmware packages, in plain words. It simply denied the installation. Neither did its <code>recovery</code> ROM accept it. So I tried to flash in a <code>CyanogenWorkMod</code> recovery, which was a success. The fedora in the centre explicitly stated the success in the procedure, which led me to the next process.</p>
+<figure>
+<img class="thumb" data-small="/blog/flash_mi1s/DSC00141-small.jpg" data-src="/blog/flash_mi1s/DSC00141.JPG" data-thumb="/blog/flash_mi1s/DSC00141-thumb.jpg" src="/blog/flash_mi1s/DSC00141-thumb.jpg" title="First Installation" width="4320px"/>
+<figcaption>
+First Installation
+</figcaption>
+</figure>
+<p>Following that I pushed the <code>update.zip</code> to the <code>/system</code> path, which terminated amidst the operation. After a few tries I knew that it was lack of disk space. Partitioning in Android was particularly difficult, since it wasn’ t provided with GUI tools, nor was it provided with remote partitioning applications. The only things we have are <code>parted</code> and <code>fdisk</code>.<code>parted</code> was more advanced than the latter, while it would fail to display message when encountering problems.<code>fdisk</code>, on the other hand, would devote its most efforts to unveil the partitioning hierarchy to the user, but was harder to use.</p>
+<p>So with a couple of failed attempts (now I am completely blocked out of the Android system since I wiped it out), I decided to wipe the last 6 partitions which contained <code>/system</code> and <code>/system1</code>, with later suspect on <code>/recovery</code>. Thereafter I was denied access to <code>recovery</code> too.<code>ADB</code> went completely blank and SSH did not work. The only thing I have was <code>fastboot</code>, with which I booted the phone with <code>recovery.img</code> with the command:</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="kw">fastboot</span> boot D:/recovery.img</code></pre></div>
+<p>Though recovery restored, I still SSHed the device into wiping the entire partition table (primary partitions 0 to 3, and logical partitions 0 to 19). This, however, also wiped out <code>fastboot</code>, which made it completely impossible to fix it through easy terms.</p>
+<p>I did nothing but <strong>bricked</strong> this phone.</p>
+<h3 id="unbricking">Unbricking</h3>
+<p>When I was flashing the firmware of my broken Sandisk Ultra a few weeks ago, I also bricked the flash drive in some way. Had I fixed it, but after shorting two jumper pins of the controller chip on its motherboard. There must be some way to reset this phone in a similar way.</p>
+<p>The device could not enter Android <del> (exactly)</del>, nor could it enter <code>recovery</code> since it was wiped out, and it could not enter <code>fastboot</code> either. Yet when it was plugged into the computer a device named <code>QHSUSB_DLOAD</code> was displayed in the Device Manager. This might be a serial debugging device.</p>
+<p>After I retrieved the driver of this piece of bricked hardware, I installed it with complication onto the computer. It was not digitally signed, and since I run an operating system later than Windows 7, I had to reboot the computer, enter the boot menu, and override the boot options in “troubleshoot” in order to disable the mandatory driver signature verifications.</p>
+<figure>
+<img class="thumb" data-small="/blog/flash_mi1s/flash_com1-small.jpg" data-src="/blog/flash_mi1s/flash_com1.png" data-thumb="/blog/flash_mi1s/flash_com1-thumb.jpg" src="/blog/flash_mi1s/flash_com1-thumb.jpg" title="Burning image through COM1 port" width="658px"/>
+<figcaption>
+Burning image through COM1 port
+</figcaption>
+</figure>
+<p>After this, we can burn the official Xiaomi image onto the phone through the virtual COM1 port. The process might take 200 seconds or around that number, but eventually it will complete. After this the phone becomes unbricked again. Similar approaches can be found, and those who bricked their devices can refer to this post for more discoveries.</p>
+<h3 id="re-partitioning">Re-partitioning</h3>
+<p><em>The original steps and information refers to another position:</em><a class="uri" href="http://www.miui.com/thread-960573-1-1.html">http://www.miui.com/thread-960573-1-1.html</a></p>
+<p>We enter the CWM again, and wipe all partitions including <code>/cache</code>,<code>/data</code>,<code>/system</code>,<code>/system1</code> et cetera. Most firmwares require at least 300MB of free space on <code>/system</code>, so we must make space for them. This induced the requirement of <code>fdisk</code>, which we shall introduce later. Using <code>fdisk</code> is rather dangerous, due to its low level access to hardware. The following is the result of the re-partition process:</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="kw">~</span> $ <span class="kw">fdisk</span> /dev/block/mmcblk0
+
+<span class="kw">The</span> number of cylinders for this disk is set to 477184.
+<span class="kw">There</span> is nothing wrong with that, but this is larger than 1024,
+<span class="kw">and</span> could in certain setups cause problems with:
+<span class="kw">1</span>) <span class="kw">software</span> that runs at boot time (e.g., old versions of LILO)
+<span class="kw">2</span>) <span class="kw">booting</span> and partitioning software from other OSs
+   <span class="kw">(e.g.</span>, DOS FDISK, OS/2 FDISK<span class="kw">)</span>
+
+<span class="kw">Command</span> (m for help)<span class="kw">:</span> print
+
+<span class="kw">Disk</span> /dev/block/mmcblk0: 3909 MB, 3909091328 bytes
+<span class="kw">1</span> heads, 16 sectors/track, 477184 cylinders
+<span class="kw">Units</span> = cylinders of 16 * 512 = 8192 bytes
+
+              <span class="kw">Device</span> Boot      Start         End      Blocks  Id System
+<span class="kw">/dev/block/mmcblk0p1</span>               1       12801      102400   c Win95 FAT32 (LBA)
+<span class="kw">Partition</span> 1 does not end on cylinder boundary
+<span class="kw">/dev/block/mmcblk0p2</span>   *       12801       12863         500  4d Unknown
+<span class="kw">Partition</span> 2 does not end on cylinder boundary
+<span class="kw">/dev/block/mmcblk0p3</span>           12863       13051        1500  51 Unknown
+<span class="kw">Partition</span> 3 does not end on cylinder boundary
+<span class="kw">/dev/block/mmcblk0p4</span>           13051      477184     3713071+  5 Extended
+<span class="kw">Partition</span> 4 does not end on cylinder boundary
+<span class="kw">/dev/block/mmcblk0p5</span>           13052       13114         500  47 Unknown
+<span class="kw">/dev/block/mmcblk0p6</span>           13114       13370        2048  45 Unknown
+<span class="kw">/dev/block/mmcblk0p7</span>           13370       13683        2500  4c Unknown
+<span class="kw">/dev/block/mmcblk0p8</span>           13683       14963       10240  48 Unknown
+<span class="kw">/dev/block/mmcblk0p9</span>           14963       16243       10240  64 Unknown
+<span class="kw">/dev/block/mmcblk0p10</span>          16243       16305         500  46 Unknown
+<span class="kw">/dev/block/mmcblk0p11</span>          16305       16368         500  65 Unknown
+<span class="kw">/dev/block/mmcblk0p12</span>          16385       16768        3072  4a Unknown
+<span class="kw">/dev/block/mmcblk0p13</span>          16769       17152        3072  4b Unknown
+<span class="kw">/dev/block/mmcblk0p14</span>          20481       20864        3072  58 Unknown
+<span class="kw">/dev/block/mmcblk0p15</span>          20866       69694      390632  83 Linux
+<span class="kw">/dev/block/mmcblk0p16</span>          69696       76544       54792  83 Linux
+<span class="kw">/dev/block/mmcblk0p17</span>          77825       79104       10240  60 Unknown
+<span class="kw">/dev/block/mmcblk0p18</span>          81921       82944        8192  83 Linux
+<span class="kw">/dev/block/mmcblk0p19</span>          82946      105984      184312  83 Linux
+<span class="kw">/dev/block/mmcblk0p20</span>         105986      355986     2000008  83 Linux</code></pre></div>
+<p>Discover the two system partitions, and remove all partitions after these two, including themselves, but the approximate size must be remembered for the sake of adding them later.</p>
+<figure>
+<img class="thumb" data-small="/blog/flash_mi1s/flash_part-small.jpg" data-src="/blog/flash_mi1s/flash_part.png" data-thumb="/blog/flash_mi1s/flash_part-thumb.jpg" src="/blog/flash_mi1s/flash_part-thumb.jpg" title="Partitioning process" width="1152px"/>
+<figcaption>
+Partitioning process
+</figcaption>
+</figure>
+<p>Remake the two systems, one large and one small. The larger should have about 400MB of space, leaving the smaller one with around 50MB free space. After the remake, the ones which should have been untouched should be re-added to the partition table. When the partitioning utility informs you that the cylinders are already in use, increment the cylinder count, which might solve the problem.</p>
+<p>Partition types (i. e. 0x60/Unknown instead of 0x83/Linux) should be restored to their original states before applying changes. These must also be taken into consideration.</p>
+<p>After this whole lot of trouble, write the changes to disk. If you are not sure what you are doing, do not write changes. If you made a mistake, feel free to quit the utility anytime before writing the changes.</p>
+<h3 id="fixing-partitions">Fixing Partitions</h3>
+<p>Before we continue to installing the ROM, we must make sure these partitions are mountable. Enter these commands into the SSH terminal:</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="kw">mount</span> -t ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system
+<span class="kw">mount</span> -t ext4 /dev/block/platform/msm_sdcc.1/by-name/userdata /data
+<span class="co"># Or those with equivalence on most situations:</span>
+<span class="kw">mount</span> -t ext4 /dev/block/mmcblk0p15 /system
+<span class="kw">mount</span> -t ext4 /dev/block/mmcblk0p20 /data</code></pre></div>
+<p>If any problems occur, such as the following messages:</p>
+<pre><code>mount: mounting /dev/block/platform/msm_sdcc.1/by-name/system on /system failed: Invalid argument</code></pre>
+<p>Then that means the new partitions are not formatted, as in the usual case. This means that you ‘ll have to remake the partitions in order for them to work. Type in the shell commands to ensure you have the right and working partitions.</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="kw">/dev/block/platform/msm_sdcc.1/by-name</span> $ mkfs.ext2 -L system ./system
+<span class="kw">mkfs.ext2</span> -L system ./system
+<span class="kw">Filesystem</span> label=system
+<span class="kw">OS</span> type: Linux
+<span class="kw">Block</span> size=1024 (log=0)
+<span class="kw">Fragment</span> size=1024 (log=0)
+<span class="kw">97920</span> inodes, 390632 blocks
+<span class="kw">19531</span> blocks (5%) <span class="kw">reserved</span> for the super user
+<span class="kw">First</span> data block=1
+<span class="kw">Maximum</span> filesystem blocks=524288
+<span class="kw">48</span> block groups
+<span class="kw">8192</span> blocks per group, 8192 fragments per groups
+<span class="kw">2040</span> inodes per group
+<span class="kw">Superblock</span> backups stored on blocks:
+        <span class="kw">8193</span>, 24577, 40961, 57345, 73729, 204801, 221185
+<span class="kw">/dev/block/platform/msm_sdcc.1/by-name</span> $ mount -t ext4 ./system /system
+<span class="kw">mount</span> -t ext4 ./system /system
+<span class="kw">/dev/block/platform/msm_sdcc.1/by-name</span> $ umount /system
+<span class="kw">umount</span> /system</code></pre></div>
+<p>In the same way you could create the data partition, but for older Linux kernels, this might not be the situation. You may experience troubles on creating the <code>/data</code> partition on older kernels, especially with partition sizes larger than 2GB. One can tell the reason, is that 32-bit systems can’ t address large files. For this problem, we could simply sacrifice the size of the partition instead of bothering to flash another kernel (which I didn ‘t try).</p>
+<figure>
+<img class="thumb" data-small="/blog/flash_mi1s/flash_format-small.jpg" data-src="/blog/flash_mi1s/flash_format.png" data-thumb="/blog/flash_mi1s/flash_format-thumb.jpg" src="/blog/flash_mi1s/flash_format-thumb.jpg" title="Formatting /system partition" width="1270px"/>
+<figcaption>
+Formatting /system partition
+</figcaption>
+</figure>
+<p>After these operations, all partitions should be functional. View <code>/etc/fstab</code> for details, as it should be working well. Or, you could simply check the mount points after you have test-mounted the partitions:</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="kw">/</span> $ mount
+<span class="kw">mount</span>
+<span class="kw">rootfs</span> on / type rootfs (rw)
+<span class="kw">tmpfs</span> on /dev type tmpfs (rw,nosuid,relatime,mode=755)
+<span class="kw">devpts</span> on /dev/pts type devpts (rw,relatime,mode=600)
+<span class="kw">proc</span> on /proc type proc (rw,relatime)
+<span class="kw">sysfs</span> on /sys type sysfs (rw,relatime)
+<span class="kw">/dev/block/platform/msm_sdcc.1/by-name/system</span> on /system type ext4 (rw,relatime,user_xattr,acl,barrier=1)
+<span class="kw">/dev/block/platform/msm_sdcc.1/by-name/userdata</span> on /data type ext4 (rw,relatime,user_xattr,acl,barrier=1)
+<span class="kw">/</span> $ umount /system
+<span class="kw">umount</span> /system
+<span class="kw">/</span> $ umount /data
+<span class="kw">umount</span> /data</code></pre></div>
+<h3 id="installing">Installing</h3>
+<p>After this we have changed our partition sizes, and can now flash our ROM onto the phone. In order to avoid bricking other electronic devices, we choose to attach as few objects to the phone, including SD cards. Thence, we should use sideloading to install <code>update.zip</code> s. The process might take a long time through sideloading, but it’ s certainly safer than from SDcards.</p>
+<figure>
+<img class="thumb" data-small="/blog/flash_mi1s/DSC00144-small.jpg" data-src="/blog/flash_mi1s/DSC00144.JPG" data-thumb="/blog/flash_mi1s/DSC00144-thumb.jpg" src="/blog/flash_mi1s/DSC00144-thumb.jpg" title="Phone finally working" width="4320px"/>
+<figcaption>
+Phone finally working
+</figcaption>
+</figure>
+<p>The phone should now be ready for use. Some ROMs contain malicious software or adware, which should have been get rid of. Since we are root now, we can simply remove the packages from <code>/system/app</code>. A couple of reboots of the phone is highly recommended so that bugs may reduce in some aspect (sounds unreasonable). We can then add our own favourite applications, and then it would be ready to use. This is a screenshot of my phone <del> (Do not mind the time, I haven ‘t changed it yet)</del>:</p>
+<figure>
+<img class="thumb" data-small="/blog/flash_mi1s/flash_final-small.jpg" data-src="/blog/flash_mi1s/flash_final.png" data-thumb="/blog/flash_mi1s/flash_final-thumb.jpg" src="/blog/flash_mi1s/flash_final-thumb.jpg" title="Final state" width="480px"/>
+<figcaption>
+Final state
+</figcaption>
+</figure>
+<p>However, it seems that Xiaomi 1S is not ready for CM12 and might never be ready. The current version I am using is CM11, which is based on Android 4. 4. 2, while CM12 is based on Android 5. 0, which requires a higher version of kernel. I do not suggest your flashing your Xiaomi 1S to CM12, as that would pose an abundant number of security vulnerabilities and stability issues.</p>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/flash_mi1s/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/flash_mi1s/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/flash_mi1s/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/flash_mi1s/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="flash_mi1s">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

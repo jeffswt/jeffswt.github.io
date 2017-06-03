@@ -1,0 +1,241 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Retroactive Disjoint Set&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="en">
+      <div class="post-header">
+        <h1 class="title">
+          Retroactive Disjoint Set
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Retroactive Data Structures" target="_self">
+            <i class="fa fa-tag"></i> Retroactive Data Structures
+          </a>
+          <a class="tag" href="/blog/archive/?q=Retroactive Disjoint Set" target="_self">
+            <i class="fa fa-tag"></i> Retroactive Disjoint Set
+          </a>
+          <a class="tag" href="/blog/archive/?q=Templates" target="_self">
+            <i class="fa fa-tag"></i> Templates
+          </a>
+        </span>
+        <span class="date" title="01:15:29 | 7 January, 2017">
+          7 January, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <p>This is a simple container for implementing a retroactive disjoint set. It supports joining sets and querying their proximity online, and also creating branches of versions instantly. The time complexity is <span class="math inline">\(O(n \log^2 n)\)</span>, while its memory complexity is <span class="math inline">\(O(n \log n)\)</span>.<del> However this version seemed to have a constant error, id est failed by allocating too much memory.</del> I updated the template this afternoon, and came to optimize this and reduced the memory to around 150MB.</p>
+<p>It ‘s quite simple to use this template. All you need to do is to initialize the template, build it and fork it. To initialize, do the following:</p>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp"><span class="dt">int</span> n = <span class="dv">5000</span>;
+retroactive_disjoint_set set;
+set.init(n);</code></pre></div>
+<p>To create branches, you need to specify the older version by its version number. The version number could be arbitrary integers, but not floating point numbers or 64 bit integers. To maintain maximum compatibility, we advise you against using timestamps of large values or less than 0. If no version number is set, we default the base version to #0:</p>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp"><span class="dt">int</span> old_time = <span class="dv">3</span>;
+<span class="dt">int</span> new_time = <span class="dv">7</span>;
+set.fork(new_time, old_time);
+<span class="co">// Creating another from base version</span>
+set.fork(new_time);
+<span class="co">// set.fork(new_time, 0);</span></code></pre></div>
+<p>To combine two sets, simply specify one arbitrary element in each individual set and call the join command:</p>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp">set.fork(<span class="dv">6</span>, <span class="dv">0</span>);
+<span class="co">// Should output "False" for the line below</span>
+std::cout &lt;&lt; set.joined(<span class="dv">6</span>, <span class="dv">3468</span>, <span class="dv">3580</span>) ? <span class="st">"True"</span> : <span class="st">"False"</span> &lt;&lt; std::endl;
+<span class="co">// Join the two sets by the two elements</span>
+set.join(<span class="dv">6</span>, <span class="dv">3468</span>, <span class="dv">3580</span>);
+<span class="co">// Should output "True" for the line below</span>
+std::cout &lt;&lt; set.joined(<span class="dv">6</span>, <span class="dv">3468</span>, <span class="dv">3580</span>) ? <span class="st">"True"</span> : <span class="st">"False"</span> &lt;&lt; std::endl;</code></pre></div>
+<p>If you are looking for the template, you can find it by expanding the article and look below. This works perfectly well at most places. But if you find a bug, don’ t ask me. I don ‘t know very clearly about this, and it’ s not very efficient, though.</p>
+<!-- More -->
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include "rta_array.cpp"</span>
+
+<span class="kw">struct</span> rds_unit {
+    <span class="dt">int</span> par, size;
+    rds_unit(<span class="dt">void</span>) { par = size = <span class="dv">0</span>; }
+    rds_unit(<span class="dt">int</span> _1, <span class="dt">int</span> _2) { par = _1, size = _2; }
+};
+rds_unit ra_generator(<span class="dt">int</span> pos) {
+    rds_unit ru(pos, <span class="dv">1</span>);
+    <span class="kw">return</span> ru;
+}
+
+<span class="kw">class</span> retroactive_disjoint_set
+{
+<span class="kw">private</span>:
+    <span class="dt">int</span> n;
+    retroactive_array&lt;rds_unit&gt; ra;
+<span class="kw">public</span>:
+    <span class="dt">void</span> fork(<span class="dt">int</span> time, <span class="dt">int</span> time_old = <span class="dv">0</span>) {
+        ra.fork(time, time_old);
+        <span class="kw">return</span> ; }
+    <span class="dt">int</span> find(<span class="dt">int</span> time, <span class="dt">int</span> p)
+    {
+        rds_unit q_ru = ra.get(time, p);
+        <span class="dt">int</span> q = q_ru.par;
+        <span class="kw">if</span> (p == q)
+            <span class="kw">return</span> p;
+        <span class="kw">return</span> find(time, q);
+    }
+    <span class="dt">bool</span> joined(<span class="dt">int</span> time, <span class="dt">int</span> p, <span class="dt">int</span> q)
+    {
+        p = find(time, p);
+        q = find(time, q);
+        <span class="kw">if</span> (p == q)
+            <span class="kw">return</span> <span class="kw">true</span>;
+        <span class="kw">return</span> <span class="kw">false</span>;
+    }
+    <span class="dt">void</span> join(<span class="dt">int</span> time, <span class="dt">int</span> p, <span class="dt">int</span> q)
+    {
+        p = find(time, p);
+        q = find(time, q);
+        <span class="kw">if</span> (p == q)
+            <span class="kw">return</span> ;
+        rds_unit p_ru = ra.get(time, p),
+                 q_ru = ra.get(time, q);
+        <span class="co">// Ensure rank balance</span>
+        <span class="kw">if</span> (p_ru.size &gt; q_ru.size)
+            std::swap(p, q),
+            std::swap(p_ru, q_ru);
+        <span class="co">// Joining</span>
+        q_ru.size += p_ru.size;
+        p_ru.par = q;
+        ra.set(time, p, p_ru);
+        ra.set(time, q, q_ru);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> init(<span class="dt">int</span> n)
+    {
+        <span class="kw">this</span>-&gt;n = n;
+        ra.init(n, ra_generator);
+        <span class="kw">return</span> ;
+    }
+};</code></pre></div>
+<p><strong>The following is a previous template, which costs more memory and time. We advise you against using the deprecated version.</strong></p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include "rta_array_old.cpp"</span>
+
+<span class="kw">class</span> retroactive_disjoint_set
+{
+<span class="kw">private</span>:
+    <span class="kw">struct</span> rds_unit {
+        <span class="dt">int</span> par, size;
+        rds_unit(<span class="dt">void</span>) { par = size = <span class="dv">0</span>; }
+        rds_unit(<span class="dt">int</span> _1, <span class="dt">int</span> _2) { par = _1, size = _2; }
+    }; <span class="dt">int</span> n;
+    retroactive_array&lt;rds_unit&gt; ra;
+<span class="kw">public</span>:
+    <span class="dt">void</span> fork(<span class="dt">int</span> time, <span class="dt">int</span> time_old = <span class="dv">0</span>) {
+        ra.fork(time, time_old);
+        <span class="kw">return</span> ; }
+    <span class="dt">int</span> find(<span class="dt">int</span> time, <span class="dt">int</span> p)
+    {
+        rds_unit q_ru = ra[time][p];
+        <span class="dt">int</span> q = q_ru.par;
+        <span class="kw">if</span> (p == q)
+            <span class="kw">return</span> p;
+        <span class="kw">return</span> find(time, q);
+    }
+    <span class="dt">bool</span> joined(<span class="dt">int</span> time, <span class="dt">int</span> p, <span class="dt">int</span> q)
+    {
+        p = find(time, p);
+        q = find(time, q);
+        <span class="kw">if</span> (p == q)
+            <span class="kw">return</span> <span class="kw">true</span>;
+        <span class="kw">return</span> <span class="kw">false</span>;
+    }
+    <span class="dt">void</span> join(<span class="dt">int</span> time, <span class="dt">int</span> p, <span class="dt">int</span> q)
+    {
+        p = find(time, p);
+        q = find(time, q);
+        <span class="kw">if</span> (p == q)
+            <span class="kw">return</span> ;
+        rds_unit p_ru = ra[time][p],
+                 q_ru = ra[time][q];
+        <span class="co">// Ensure rank balance</span>
+        <span class="kw">if</span> (p_ru.size &gt; q_ru.size)
+            swap(p, q),
+            swap(p_ru, q_ru);
+        <span class="co">// Joining</span>
+        q_ru.size += p_ru.size;
+        p_ru.par = q;
+        ra[time][p] = p_ru;
+        ra[time][q] = q_ru;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> init(<span class="dt">int</span> n)
+    {
+        <span class="kw">this</span>-&gt;n = n;
+        rds_unit ru(<span class="dv">0</span>, <span class="dv">1</span>);
+        ra.init(n, rds_unit(<span class="dv">0</span>, <span class="dv">1</span>));
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+            ru = rds_unit(i, <span class="dv">1</span>);
+            ra[<span class="dv">0</span>][i] = ru;
+        }
+        <span class="kw">return</span> ;
+    }
+};</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/rta_djs/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/rta_djs/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/rta_djs/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/rta_djs/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="rta_djs">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

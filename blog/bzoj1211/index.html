@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1211: [HNOI2004]树的计数&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1211: [HNOI2004]树的计数
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=HNOI2004" target="_self">
+            <i class="fa fa-tag"></i> HNOI2004
+          </a>
+          <a class="tag" href="/blog/archive/?q=Prüfer Sequence" target="_self">
+            <i class="fa fa-tag"></i> Prüfer Sequence
+          </a>
+          <a class="tag" href="/blog/archive/?q=Fast Exponentiation" target="_self">
+            <i class="fa fa-tag"></i> Fast Exponentiation
+          </a>
+        </span>
+        <span class="date" title="19:13:00 | 5 April, 2017">
+          5 April, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>一个有 <span class="math inline">\(n\)</span> 个结点的树, 设它的结点分别为 <span class="math inline">\(v_1, v_2, \ldots, v_n\)</span>, 已知第 <span class="math inline">\(i\)</span> 个结点 <span class="math inline">\(v_i\)</span> 的度数为 <span class="math inline">\(d_i\)</span>, 问满足这样的条件的不同的树有多少棵. 给定 <span class="math inline">\(n, d_1, d_2, \ldots, d_n\)</span>, 编程需要输出满足 <span class="math inline">\(d_{v_i} = d_i\)</span> 的树的个数.</p>
+<h2 id="input">Input</h2>
+<p>第一行是一个正整数 <span class="math inline">\(n\)</span>, 表示树有 <span class="math inline">\(n\)</span> 个结点. 第二行有 <span class="math inline">\(n\)</span> 个数, 第 <span class="math inline">\(i\)</span> 个数表示 <span class="math inline">\(d_i\)</span>, 即树的第 <span class="math inline">\(i\)</span> 个结点的度数. 其中<span class="math inline">\(1 \leq n \leq 150\)</span>, 输入数据保证满足条件的树不超过 <span class="math inline">\(10^{17}\)</span> 个.</p>
+<h2 id="output">Output</h2>
+<p>输出满足条件的树有多少棵.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>4
+2 1 2 1</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>2</code></pre>
+<h2 id="explanation">Explanation</h2>
+<p><strong>此题做法类同 bzoj1005, 具体如下, 摘自黄学长博客:<a href="">http://hzwer.com/3272.html</a></strong></p>
+<p><strong>该题运用到了树的 Prüfer 编码的性质:</strong></p>
+<ol type="1">
+<li>树的 Prüfer 编码的实现: 不断删除树中度数为 <span class="math inline">\(1\)</span> 的最小序号的点, 并输出与其相连的节点的序号, 直至树中只有两个节点.</li>
+<li>通过观察我们可以发现: 任意一棵 <span class="math inline">\(n\)</span> 节点的树都可唯一的用长度为 <span class="math inline">\(n-2\)</span> 的 Prüfer 编码表示, 度数为 <span class="math inline">\(m\)</span> 的节点的序号在 Prüfer 编码中出现的次数为 <span class="math inline">\(m-1\)</span>.</li>
+<li>怎样将 Prüfer 编码还原为一棵树: 从 Prüfer 编码的最前端开始扫描节点, 设该节点序号为 <span class="math inline">\(u\)</span>, 寻找不在 Prüfer 编码的最小序号且没有被标记的节点 <span class="math inline">\(v\)</span>, 连接 <span class="math inline">\(u, v\)</span> 并标记 <span class="math inline">\(v\)</span>, 将 <span class="math inline">\(u\)</span> 从 Prüfer 编码中删除, 扫描下一节点.</li>
+</ol>
+<p><strong>该题需要将树转化为 Prüfer 编码:</strong></p>
+<p><span class="math inline">\(n\)</span> 为树的节点数,<span class="math inline">\(d_i\)</span> 为各节点的度数,<span class="math inline">\(m\)</span> 为无限制度数的节点数, 则:<span class="math display">\[
+tot = \sum_{i=1}^{n} d_i - 1
+\]</span> 所以要求在 <span class="math inline">\(n-2​\)</span> 大小的数组中插入 <span class="math inline">\(tot​\)</span> 各序号, 共有 <span class="math inline">\(C_{n-2}^{tot}​\)</span> 种插法;</p>
+<p>在 <span class="math inline">\(tot\)</span> 各序号排列中, 插第一个节点的方法有 <span class="math inline">\(C_{tot}^{d_1-1}\)</span> 种插法;</p>
+<p>插第二个节点的方法有 <span class="math inline">\(C_{tot-(d_1-1)}^{d_2-1}\)</span> 种插法;</p>
+<p>………</p>
+<p>另外还有 <span class="math inline">\(m\)</span> 各节点无度数限制, 所以它们可任意排列在剩余的 <span class="math inline">\(n-2-tot\)</span> 的空间中, 排列方法总数为 <span class="math inline">\(m^{n-2-tot}\)</span>;</p>
+<p><strong>根据乘法原理:</strong><span class="math display">\[
+\begin{aligned}
+ans &amp;= C_{n-2}^{tot} \cdot C_{tot}^{d_1-1} \cdot C_{tot-(d_1-1)}^{d_2-1} \cdot \ldots \cdot c_{d_n-1}^{d_n-1} \cdot m^{n-2-tot}\\
+&amp;\Leftrightarrow \frac{(n-2)!}{(n-2-tot)!tot!} \cdot \frac{tot!}{(d_1-1)!(tot-d_1+1)!} \cdot \ldots \cdot \frac{(d_n-1)!}{(d_n-1)!} \cdot m^{n-2-tot}\\
+&amp;\Leftrightarrow \frac{(n-2)! \cdot m^{n-2-tot}}{(n-2-tot)! \cdot (d_1-1)! \cdot (d_2-1)! \cdot \ldots \cdot (d_n-1)!}
+\end{aligned}
+\]</span></p>
+<p>然后就要高精度了...... 但高精度除法太麻烦了, 显而易见的排列组合一定是整数, 所以可以进行质因数分解, 再做一下相加减.</p>
+<p>关于 <span class="math inline">\(n!\)</span> 质因数分解有两种方法, 第一种暴力分解, 这里着重讲第二种.</p>
+<p>若 <span class="math inline">\(p\)</span> 为质数, 则 <span class="math inline">\(n!\)</span> 可分解为 一个数 <span class="math inline">\(\times p^x\)</span>, 其中:<span class="math display">\[
+x = \left\lfloor \frac{n}{p} \right\rfloor + \left\lfloor \frac{n}{p^2} \right\rfloor + \ldots \left\lfloor \frac{n}{p^t} \right\rfloor (p_t \lt n)
+\]</span></p>
+<p><span class="math display">\[
+\therefore n! = \prod_{i=1}^{m} p_i^{x_i} (p_m \lt n)
+\]</span></p>
+<p><strong>然后我们把这道题的结论推广到这里:</strong></p>
+<ul>
+<li>当某些节点不联通时, 一定无法生成一棵树.</li>
+<li>当总连通度之和加起来不等于 <span class="math inline">\(2n-2\)</span> 时, 根本就不是一棵树.</li>
+</ul>
+<p><strong>特判完毕以后套用上面那道题公式就可以了.</strong></p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">210</span>;
+
+lli qpow(lli a, lli b)
+{
+    lli c = <span class="dv">1</span>;
+    <span class="kw">for</span> (; b &gt; <span class="dv">0</span>; b &gt;&gt;= <span class="dv">1</span>, a *= a)
+        <span class="kw">if</span> (b &amp; <span class="dv">1</span>)
+            c *= a;
+    <span class="kw">return</span> c;
+}
+
+<span class="dt">int</span> comp[maxn];
+<span class="dt">void</span> factor(lli x, <span class="dt">int</span> flag)
+{
+    <span class="kw">for</span> (lli i = <span class="dv">2</span>; i * i &lt;= x; i++)
+        <span class="kw">while</span> (x % i == <span class="dv">0</span>)
+            comp[i] += flag,
+            x /= i;
+    <span class="kw">if</span> (x &gt; <span class="dv">0</span>)
+        comp[x] += flag;
+    <span class="kw">return</span> ;
+}
+
+<span class="dt">int</span> n;
+<span class="dt">int</span> v[maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;v[i]);
+    <span class="co">// Attempting to really do some decompositions</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>; i &lt;= n - <span class="dv">2</span>; i++)
+        factor(i, <span class="dv">1</span>);
+    <span class="co">// Checking if all are not right</span>
+    lli sum = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        <span class="kw">if</span> (v[i] &lt;= <span class="dv">0</span> &amp;&amp; n != <span class="dv">1</span>) {
+            printf(<span class="st">"0</span><span class="ch">\n</span><span class="st">"</span>);
+            <span class="kw">return</span> <span class="dv">0</span>;
+        }
+        sum += v[i] - <span class="dv">1</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">2</span>; j &lt;= v[i] - <span class="dv">1</span>; j++)
+            factor(i, <span class="dv">-1</span>);
+    }
+    <span class="kw">if</span> (sum != n - <span class="dv">2</span>) {
+        printf(<span class="st">"0</span><span class="ch">\n</span><span class="st">"</span>);
+        <span class="kw">return</span> <span class="dv">0</span>;
+    }
+    <span class="co">// Invoking fast exponentiation</span>
+    lli res = <span class="dv">1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n - <span class="dv">2</span>; i++)
+        <span class="kw">if</span> (v[i] &gt; <span class="dv">0</span>)
+            res *= qpow(i, v[i]);
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1211/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1211/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1211/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1211/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1211">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

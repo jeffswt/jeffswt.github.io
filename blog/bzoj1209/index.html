@@ -1,0 +1,259 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1209: [HNOI2004]最佳包裹&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1209: [HNOI2004]最佳包裹
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=HNOI2004" target="_self">
+            <i class="fa fa-tag"></i> HNOI2004
+          </a>
+          <a class="tag" href="/blog/archive/?q=Computational Geometry" target="_self">
+            <i class="fa fa-tag"></i> Computational Geometry
+          </a>
+          <a class="tag" href="/blog/archive/?q=Convex Hull" target="_self">
+            <i class="fa fa-tag"></i> Convex Hull
+          </a>
+          <a class="tag" href="/blog/archive/?q=Incremental Convex Hull Algorithm" target="_self">
+            <i class="fa fa-tag"></i> Incremental Convex Hull Algorithm
+          </a>
+        </span>
+        <span class="date" title="20:51:01 | 5 April, 2017">
+          5 April, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>H 公司生产了一种金属制品, 是由一些笔直的金属条支撑起来的, 金属条和别的金属条在交点上被焊接在了一起. 现在由于美观需要, 在这个产品用一层特殊的材料包裹起来. 公司为了节约成本, 希望消耗的材料最少 (不计裁剪时的边角料的损失). 你的程序需要根据给定的输入, 给出符合题意的输出: 输入包括该产品的顶点的个数, 以及所有顶点的坐标; 你需要根据输入的计算出包裹这个产品所需要的材料的最小面积. 结果要求精确到小数点后第六位. (四舍五入)</p>
+<h2 id="input">Input</h2>
+<p>第 <span class="math inline">\(1\)</span> 行是一个整数 <span class="math inline">\(n (4 \leq n \leq 100)\)</span>, 表示顶点的个数;</p>
+<p>第 <span class="math inline">\(2\)</span> 行到第 <span class="math inline">\(n+1\)</span> 行, 每行是 <span class="math inline">\(3\)</span> 个实数 <span class="math inline">\(x_i, y_i, z_i\)</span>, 表示第 <span class="math inline">\(i\)</span> 个顶点的坐标. 每个顶点的位置各不相同.</p>
+<h2 id="output">Output</h2>
+<p>输出只有一个实数, 表示包裹一个该产品所需的材料面积的最小值.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>4
+0 0 0
+1 0 0
+0 1 0
+0 0 1</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>2.366025</code></pre>
+<h2 id="explanation">Explanation</h2>
+<p>有个做法叫随机增量法, 本来是设计到二维上应用的, 但是可以推广到 <span class="math inline">\(n\)</span> 维.</p>
+<ol type="1">
+<li>按照输入顺序将点加入点集;</li>
+<li>维护当前点集的凸包, 方法如下:
+<ol type="1">
+<li>新点在凸包内部
+<ul>
+<li><span class="math inline">\(O(n)\)</span> 判定</li>
+</ul></li>
+<li>新点在凸包外部
+<ul>
+<li>删除从新点可见的凸包边</li>
+<li>用链表维护凸包</li>
+<li><span class="math inline">\(O(n)\)</span> 删除和判断</li>
+</ul></li>
+</ol></li>
+<li>是一个时间复杂度为 <span class="math inline">\(O(n^2)\)</span> 的<strong>在线</strong>算法</li>
+</ol>
+<p>如果要推广到立体几何就可以把面换成体、线换成面, 不用链表维护即可.</p>
+<p>另外增量法需要对所有坐标进行微小的抖动, 以免出现坐标冲突.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cmath&gt;</span>
+<span class="ot">#include &lt;vector&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">double</span> llf;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">210</span>;
+<span class="dt">const</span> llf epsilon = <span class="fl">1e-9</span>;
+
+<span class="kw">template</span> &lt;<span class="kw">typename</span> _T&gt;
+_T sqr(_T a) { <span class="kw">return</span> a * a; }
+
+llf rand_eps(<span class="dt">void</span>) {
+    <span class="kw">return</span> ((llf)rand() / (llf)RAND_MAX + <span class="fl">0.5</span>) * epsilon; }
+
+<span class="kw">struct</span> point {
+    llf x, y, z;
+    point(<span class="dt">void</span>) {
+        x = y = z = <span class="fl">0.0</span>; }
+    point(llf _1, llf _2, llf _3) {
+        x = _1, y = _2, z = _3; }
+    llf length(<span class="dt">void</span>) {
+        <span class="kw">return</span> sqrt(sqr(x) + sqr(y) + sqr(z)); }
+}; point <span class="kw">operator</span> - (point a, point b) {
+    <span class="kw">return</span> point(a.x - b.x, a.y - b.y, a.z - b.z);
+} point cross(point a, point b) {
+    <span class="kw">return</span> point(a.y*b.z - b.y*a.z, a.z*b.x - b.z*a.x, a.x*b.y - b.x*a.y);
+} point cross(point a, point b, point c) {
+    <span class="kw">return</span> cross(b - a, c - a);
+} llf dot(point a, point b) {
+    <span class="kw">return</span> a.x*b.x + a.y*b.y + a.z*b.z;
+} point add_noise(point a) {
+    <span class="kw">return</span> point(a.x + rand_eps(), a.y + rand_eps(), a.z + rand_eps());
+}
+
+<span class="kw">struct</span> face {
+    <span class="dt">int</span> v[<span class="dv">3</span>];
+    face(<span class="dt">void</span>) {
+        v[<span class="dv">0</span>] = v[<span class="dv">1</span>] = v[<span class="dv">2</span>] = <span class="dv">0</span>;
+    } face(<span class="dt">int</span> _1, <span class="dt">int</span> _2, <span class="dt">int</span> _3) {
+        v[<span class="dv">0</span>] = _1; v[<span class="dv">1</span>] = _2; v[<span class="dv">2</span>] = _3;
+    } point normal(point p[]) {
+        <span class="kw">return</span> cross(p[v[<span class="dv">0</span>]], p[v[<span class="dv">1</span>]], p[v[<span class="dv">2</span>]]);
+    } <span class="dt">bool</span> cansee(point p[], <span class="dt">int</span> i) {
+        <span class="kw">return</span> dot(p[i] - p[v[<span class="dv">0</span>]], <span class="kw">this</span>-&gt;normal(p)) &gt; <span class="dv">0</span>;
+    } llf area(point p[]) {
+        <span class="kw">return</span> <span class="fl">0.5</span> * cross(p[v[<span class="dv">0</span>]], p[v[<span class="dv">1</span>]], p[v[<span class="dv">2</span>]]).length();
+    }
+};
+
+<span class="kw">class</span> ConvexHull
+{
+<span class="kw">public</span>:
+    point p[maxn], p1[maxn];
+    <span class="dt">bool</span> vis[maxn][maxn];
+    <span class="dt">int</span> n;
+    vector&lt;face&gt; vec;
+    <span class="dt">void</span> increment(point p[])
+    {
+        memset(vis, <span class="dv">0</span>, <span class="kw">sizeof</span>(vis));
+        <span class="co">// Generating noise in hope of distinction</span>
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++)
+            p[i] = add_noise(p[i]);
+        <span class="co">// Initial elements</span>
+        vec.clear();
+        vec.push_back(face(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>));
+        vec.push_back(face(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>));
+        <span class="co">// Increment algorithm</span>
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">3</span>; i &lt; n; i++) {
+            vector&lt;face&gt; tmp;
+            tmp.clear();
+            <span class="kw">for</span> (<span class="dt">unsigned</span> <span class="dt">int</span> j = <span class="dv">0</span>; j &lt; vec.size(); j++) {
+                face f = vec[j];
+                <span class="dt">bool</span> r = f.cansee(p, i);
+                <span class="kw">if</span> (!r) tmp.push_back(f);
+                <span class="co">// Marking visited</span>
+                <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">0</span>; k &lt; <span class="dv">3</span>; k++)
+                    vis[f.v[k]][f.v[(k<span class="dv">+1</span>)%<span class="dv">3</span>]] = r;
+            }
+            <span class="kw">for</span> (<span class="dt">unsigned</span> <span class="dt">int</span> j = <span class="dv">0</span>; j &lt; vec.size(); j++) {
+                <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">0</span>; k &lt; <span class="dv">3</span>; k++) {
+                    <span class="dt">int</span> a = vec[j].v[k],
+                        b = vec[j].v[(k<span class="dv">+1</span>)%<span class="dv">3</span>];
+                    <span class="kw">if</span> (vis[a][b] != vis[b][a] &amp;&amp; vis[a][b])
+                        tmp.push_back(face(a, b, i));
+                }
+            }
+            vec = tmp;
+        }
+        <span class="kw">return</span> ;
+    }
+    llf eval(<span class="dt">void</span>)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++)
+            p1[i] = p[i];
+        increment(p1);
+        llf res = <span class="fl">0.0</span>;
+        <span class="kw">for</span> (<span class="dt">unsigned</span> <span class="dt">int</span> i = <span class="dv">0</span>; i &lt; vec.size(); i++)
+            res += vec[i].area(p);
+        <span class="kw">return</span> res;
+    }
+} cvh;
+
+<span class="dt">int</span> n;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    cvh.n = n;
+    <span class="co">// We are counting from 0 because 1 is hard to deal with modulo calculations</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++)
+        scanf(<span class="st">"</span><span class="ch">%Lf%Lf%Lf</span><span class="st">"</span>, &amp;cvh.p[i].x, &amp;cvh.p[i].y, &amp;cvh.p[i].z);
+    llf res = cvh.eval();
+    printf(<span class="st">"</span><span class="ch">%.6Lf\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1209/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1209/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1209/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1209/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1209">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

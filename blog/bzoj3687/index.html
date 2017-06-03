@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj3687: 简单题&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj3687: 简单题
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=Mathematics" target="_self">
+            <i class="fa fa-tag"></i> Mathematics
+          </a>
+          <a class="tag" href="/blog/archive/?q=STL" target="_self">
+            <i class="fa fa-tag"></i> STL
+          </a>
+          <a class="tag" href="/blog/archive/?q=Bitset" target="_self">
+            <i class="fa fa-tag"></i> Bitset
+          </a>
+        </span>
+        <span class="date" title="18:01:24 | 27 November, 2016">
+          27 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>小呆开始研究集合论了, 他提出了关于一个数集四个问题:</p>
+<ol type="1">
+<li>子集的异或和的算术和.</li>
+<li>子集的异或和的异或和.</li>
+<li>子集的算术和的算术和.</li>
+<li>子集的算术和的异或和.</li>
+</ol>
+<p>目前为止, 小呆已经解决了前三个问题, 还剩下最后一个问题还没有解决, 他决定把 这个问题交给你, 未来的集训队队员来实现.</p>
+<h2 id="input">Input</h2>
+<p>第一行, 一个整数 n.</p>
+<p>第二行, n 个正整数, 表示 a1, a2...... ．,.</p>
+<h2 id="output">Output</h2>
+<p>一行, 包含一个整数, 表示所有子集和的异或和.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>2
+1 3</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>6</code></pre>
+<h2 id="sample-explanation">Sample Explanation</h2>
+<p>6=1 异或 3 异或 (1+3)</p>
+<h2 id="data-range">Data Range</h2>
+<p><span class="math inline">\(a_i \gt 0\)</span>,<span class="math inline">\(1 \lt n \lt 1000\)</span>,<span class="math inline">\(\sum a_i \leq 2000000\)</span>.</p>
+<p>另外, 不保证集合中的数满足互异性, 即有可能出现 Ai=Aj 且 i 不等于 J</p>
+<h2 id="solution">Solution</h2>
+<p>一道玄学题...... 前面的三种情况都比较好想:</p>
+<p>算术和的算术和: 考虑针对每个数选与不选的情况, 那么每一个数被选的种数有 <span class="math inline">\(2^{n-1}\)</span>, 而且不被选中的种数有 <span class="math inline">\(2^{n-1}\)</span> 个. 固然最后的答案为:</p>
+<p><span class="math display">\[\sum_{i=1}^{n} a_i \cdot 2^{n-1}\]</span></p>
+<p>异或和的异或和: 考虑每一位被选的情况有 <span class="math inline">\(2^{n-1}\)</span> 次, 不被选的情况也有 <span class="math inline">\(2^{n-1}\)</span> 次, 并且 <span class="math inline">\(2^{n-1}\)</span> 是一个偶数, 所以完全亦或之后结果的所有位上都是 <span class="math inline">\(0\)</span>, 固然异或和的异或和总是 <span class="math inline">\(0\)</span>.</p>
+<p>异或和的算数和: 由于亦或操作在每一位上完全独立, 所以我们可以转化成一个 0-1 问题. 考虑在某一位上一共有 <span class="math inline">\(m\)</span> 个 <span class="math inline">\(1\)</span>,<span class="math inline">\(n - m\)</span> 个 <span class="math inline">\(0\)</span>, 那么最后这一位所能构成的子集的个数有 <span class="math inline">\(2^n\)</span> 个, 其中有一部分的异或和是 <span class="math inline">\(1\)</span>, 其余的是 <span class="math inline">\(0\)</span>. 注意到所有构成异或和 为 <span class="math inline">\(1\)</span> 的子集中都有奇数个 <span class="math inline">\(1\)</span>, 而 <span class="math inline">\(0\)</span> 的数量没有关系. 自然问题就转化成为了从 <span class="math inline">\(n-m\)</span> 个数中选出奇数个数和从 <span class="math inline">\(m\)</span> 个数中选出任意多个数 (考虑数与数之间的差异) 的方法数. 由于本题没有具体涉及这个方面, 我再此就不给出具体的结果了.</p>
+<p>最后是算数和的异或和. 考虑相同的两组算数和 (出自不同的子集), 它们无论接下来如何选择, 最后它们的亦或和总是 <span class="math inline">\(0\)</span> (因为被湮灭掉了). 这样一来, 我们只需要每一次维护 一下这个和, 然后把不应该出现的东西湮灭掉就可以了. 时间复杂度是 O (max n), 有可能超时. 然而用一个神奇的 bitset 维护一下就可以省下整整一个 <span class="math inline">\(64\)</span> 的常数, 保证 在时限内做完.</p>
+<blockquote>
+<p>bitset, 处理高精位运算的有力工具 (雾)</p>
+</blockquote>
+<p>另外 bitset 有一点玄学. 假如将下面代码中的 <code>int x</code> 从全局变量中移到局部变量里, 也就是说, 加在 <code>scanf("%d", &amp;x);</code> 之前. 理论上这不会造成任何影响, 在本机上也不会, 但是交到耒阳上就会不停 WA. 为了这个我提交了差不多 16 次才找到这个问题. 另外豫先 把数据读到 <code>int arr[maxn]</code> 里, 再预处理这样也是不行的, 虽然逻辑上没有任何错误, 在本地测完也是正确的, 但是都会挂在耒阳上.</p>
+<p><strong>我强烈要求 BZOJ 的 Maintainer 给一个说法!! ! (当然也有可能是玄学 STL)</strong></p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;bitset&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">2001000</span>;
+
+<span class="dt">int</span> n, x, sum, res;
+bitset&lt;maxn&gt; dp;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    dp[<span class="dv">0</span>] = <span class="dv">1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;x);
+        sum += x;
+        dp ^= (dp &lt;&lt; x);
+    }
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= sum; i++)
+        <span class="kw">if</span> (dp[i])
+            res ^= i;
+    printf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj3687/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj3687/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj3687/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj3687/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj3687">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

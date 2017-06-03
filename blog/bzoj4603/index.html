@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj4603: [Sdoi2016]平凡的骰子&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj4603: [Sdoi2016]平凡的骰子
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=SDOI2016" target="_self">
+            <i class="fa fa-tag"></i> SDOI2016
+          </a>
+          <a class="tag" href="/blog/archive/?q=Computational Geometry" target="_self">
+            <i class="fa fa-tag"></i> Computational Geometry
+          </a>
+        </span>
+        <span class="date" title="13:52:56 | 9 February, 2017">
+          9 February, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>这是一枚平凡的骰子. 它是一个均质凸多面体, 表面有 <span class="math inline">\(n\)</span> 个端点, 有 <span class="math inline">\(f\)</span> 个面, 每一面是一个凸多边形, 且任意两面不共面. 将这枚骰子抛向空中, 骰子落地的时候不会发生二次弹跳 (这是一种非常理想的情况). 你希望知道最终每一面着地的概率. 每一面着地的概率 可以用如下的方法计算: 我们假设 <span class="math inline">\(O\)</span> 为骰子的重心, 并以 <span class="math inline">\(O\)</span> 为球心, 做半径为 <span class="math inline">\(1\)</span> 的单位球面 (记为 <span class="math inline">\(S\)</span>) . 我们知道 <span class="math inline">\(S\)</span> 的表面积即单位球的表面积, 为 <span class="math inline">\(4\pi\)</span>, 这里 <span class="math inline">\(\pi\)</span> 为圆周率. 对于骰子的某一面 <span class="math inline">\(C\)</span> 来说, 球面 <span class="math inline">\(S\)</span> 上存在一块区域 <span class="math inline">\(T\)</span> 满足: 当下落时若骰子所受重力方向与 <span class="math inline">\(S\)</span> 的交点落在 <span class="math inline">\(T\)</span> 中, 则 <span class="math inline">\(C\)</span> 就是最终着地的一面. 那么 <span class="math inline">\(C\)</span> 着地的概率为区域 <span class="math inline">\(T\)</span> 的面积除以 <span class="math inline">\(4\pi\)</span>. 为了能更好地辅助计算球面上一块区域的 面积, 我们给出单位球面 <span class="math inline">\(S\)</span> 上三角形的面积计算公式. 考虑单位球面 <span class="math inline">\(S\)</span> 上的三个两两 相交的大圆, 交点依次为 <span class="math inline">\(A, B, C\)</span>. 则曲面三角形 <span class="math inline">\(ABC\)</span> 的面积为 <span class="math inline">\(S_{ABC} = \alpha+\beta+\gamma-\pi\)</span>, 其中 <span class="math inline">\(\alpha, \beta, \gamma\)</span> 分别对应了三个二面角的大小.</p>
+<p>我们保证: 每一面着地的时候, 重心的垂心都恰好在这一面内. 也就是说不会出现摆不稳的 情况.</p>
+<h2 id="input">Input</h2>
+<p>第一行输入两个整数, 分别表示端点总数 <span class="math inline">\(n\)</span> 与表面总数 <span class="math inline">\(f\)</span>, 分别从 <span class="math inline">\(1\)</span> 开始编号. 之后 <span class="math inline">\(n\)</span> 行, 每行有三个浮点数 <span class="math inline">\(x, y, z\)</span>, 给出了每一个端点的坐标. 之后 <span class="math inline">\(f\)</span> 行依次描述了每一块表面, 首先给出不小于 <span class="math inline">\(3\)</span> 的整数 <span class="math inline">\(d\)</span>, 表示这一面的端点个数, 之后 <span class="math inline">\(d\)</span> 个整数按照逆时针方向 (视角在骰子的外面) 给出了每一个端点的编号.</p>
+<h2 id="output">Output</h2>
+<p>输出 <span class="math inline">\(f\)</span> 行, 第 <span class="math inline">\(i\)</span> 行有一个浮点数, 表示第 <span class="math inline">\(i\)</span> 个面着地的概率. 本题中您的输出应该保留距离答案最近的 <span class="math inline">\(7\)</span> 位小数, 即在需要保留 <span class="math inline">\(7\)</span> 位小数的前提之下与标准答案最 接近. 数据保证可以避免对小数点后第八位四舍五入后产生的精度误差.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>8 6
+1 0 0
+1 1 0
+1 0 1
+1 1 1
+0 0 0
+0 1 0
+0 0 1
+0 1 1
+4 1 2 4 3
+4 2 6 8 4
+4 6 5 7 8
+4 5 1 3 7
+4 3 4 8 7
+4 1 5 6 2</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>0.1666667
+0.1666667
+0.1666667
+0.1666667
+0.1666667
+0.1666667</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有数据, 满足:<span class="math inline">\(4 \leq n \leq 50, 4 \leq m \leq 50, 0 \leq |x|, |y| \leq 10000\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>参照本神犇题解, 原文链接:<a href="">http://blog.csdn.net/sunshinezff/article/details/51463895</a></p>
+<blockquote>
+<p>可以发现题目分为两步:</p>
+<ol type="1">
+<li>求重心</li>
+<li>算球面多边形面积</li>
+</ol>
+<p>求重心我们可以对整个多面体进行四面体剖分.</p>
+<p>求出每个四面体的重心, 然后再按它们的体积加权平均.</p>
+<p>求四面体的体积可以用一个点引出的三个向量的混合积乘 <span class="math inline">\(\frac{1}{6}\)</span>,</p>
+<p>然后重心就求完了.</p>
+<p>算面积直接按题目说的方法算就可以.</p>
+<p>求二面角可以用法向量.</p>
+<p>代码还是不难写的......</p>
+</blockquote>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cmath&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="kw">typedef</span> <span class="dt">double</span> llf;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">110</span>;
+<span class="dt">const</span> llf pi = <span class="fl">3.1415926535897932384626</span>;
+
+<span class="kw">struct</span> node {
+    llf x, y, z;
+    node&amp; <span class="kw">operator</span> += (<span class="dt">const</span> node&amp; b) {
+        x += b.x, y += b.y, z += b.z; <span class="kw">return</span> *<span class="kw">this</span>; }
+    node&amp; <span class="kw">operator</span> -= (<span class="dt">const</span> node&amp; b) {
+        x -= b.x, y -= b.y, z -= b.z; <span class="kw">return</span> *<span class="kw">this</span>; }
+    node&amp; <span class="kw">operator</span> *= (<span class="dt">const</span> llf&amp; b) {
+        x *= b, y *= b, z *= b; <span class="kw">return</span> *<span class="kw">this</span>; }
+    node&amp; <span class="kw">operator</span> /= (<span class="dt">const</span> llf&amp; b) {
+        x /= b, y /= b, z /= b; <span class="kw">return</span> *<span class="kw">this</span>; }
+    node(llf _1, llf _2, llf _3) {
+        x = _1, y = _2, z = _3; <span class="kw">return</span> ; }
+    node(<span class="dt">void</span>) {
+        x = y = z = <span class="fl">0.0</span>; <span class="kw">return</span> ; }
+    llf dist(<span class="dt">void</span>) {
+        <span class="kw">return</span> sqrt(x*x + y*y + z*z); }
+};
+node <span class="kw">operator</span> + (<span class="dt">const</span> node&amp; a, <span class="dt">const</span> node&amp; b) {
+    node c = a; c += b; <span class="kw">return</span> c; }
+node <span class="kw">operator</span> - (<span class="dt">const</span> node&amp; a, <span class="dt">const</span> node&amp; b) {
+    node c = a; c -= b; <span class="kw">return</span> c; }
+node <span class="kw">operator</span> * (<span class="dt">const</span> node&amp; a, <span class="dt">const</span> llf&amp; b) {
+    node c = a; c *= b; <span class="kw">return</span> c; }
+node <span class="kw">operator</span> / (<span class="dt">const</span> node&amp; a, <span class="dt">const</span> llf&amp; b) {
+    node c = a; c /= b; <span class="kw">return</span> c; }
+llf <span class="kw">operator</span> * (<span class="dt">const</span> node&amp; a, <span class="dt">const</span> node&amp; b) {
+    <span class="kw">return</span> a.x*b.x + a.y*b.y + a.z*b.z; }
+node <span class="kw">operator</span> ^ (<span class="dt">const</span> node&amp; a, <span class="dt">const</span> node&amp; b) {
+    <span class="kw">return</span> node(a.y*b.z-a.z*b.y, a.z*b.x-a.x*b.z, a.x*b.y-a.y*b.x); }
+node get_centre(<span class="dt">const</span> node&amp; a, <span class="dt">const</span> node&amp; b, <span class="dt">const</span> node&amp; c, <span class="dt">const</span> node&amp; d) {
+    <span class="kw">return</span> (a + b + c + d) / <span class="fl">4.0</span>; }
+llf get_volume(node p, node a, node b, node c) {
+    a -= p, b -= p, c -= p;
+    <span class="kw">return</span> fabs(((a^b) * c) / <span class="fl">6.0</span>); }
+llf get_angle_rad(node p, node a, node b, node c) {
+    a -= p, b -= p, c -= p;
+    a /= a.dist(), b /= b.dist(), c /= c.dist();
+    node x = a^b, y = a^c;
+    <span class="kw">return</span> acos(x*y / x.dist() / y.dist()); }
+
+<span class="kw">struct</span> surface {
+    <span class="dt">int</span> n;
+    node nd[maxn];
+};
+llf get_curve_area(<span class="dt">const</span> surface&amp; sf, <span class="dt">const</span> node&amp; cent)
+{
+    llf res = -(sf.n - <span class="dv">2</span>) * pi;
+    <span class="dt">int</span> n = sf.n;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++)
+        res += get_angle_rad(cent, sf.nd[i], sf.nd[(i<span class="dv">+1</span>)%n], sf.nd[(i<span class="dv">-1</span>+n)%n]);
+    <span class="kw">return</span> res;
+}
+
+<span class="dt">int</span> n, m;
+node nd[maxn], cent;
+surface sf[maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%lf%lf%lf</span><span class="st">"</span>, &amp;nd[i].x, &amp;nd[i].y, &amp;nd[i].z);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;sf[i].n);
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">0</span>, x; j &lt; sf[i].n; j++) {
+            scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;x);
+            sf[i].nd[j] = nd[x];
+        }
+    }
+    <span class="co">// Calculating the centre of the object</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        cent += nd[i];
+    cent /= n;
+    <span class="co">// Adjusting the centre of the object from pre-calculations</span>
+    node f_cent;
+    llf f_vol;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt; sf[i].n - <span class="dv">1</span>; j++) {
+            llf vol = get_volume(cent, sf[i].nd[<span class="dv">0</span>], sf[i].nd[j], sf[i].nd[j<span class="dv">+1</span>]);
+            node t = get_centre(cent, sf[i].nd[<span class="dv">0</span>], sf[i].nd[j], sf[i].nd[j<span class="dv">+1</span>]);
+            t *= vol; f_vol += vol; f_cent += t;
+        }
+    }
+    cent = f_cent / f_vol;
+    <span class="co">// Calculating result</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        llf res = get_curve_area(sf[i], cent);
+        res /= <span class="fl">4.0</span> * pi;
+        printf(<span class="st">"</span><span class="ch">%.7lf\n</span><span class="st">"</span>, res);
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj4603/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj4603/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj4603/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj4603/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj4603">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj3174: [Tjoi2013]拯救小矮人&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj3174: [Tjoi2013]拯救小矮人
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=TJOI2013" target="_self">
+            <i class="fa fa-tag"></i> TJOI2013
+          </a>
+          <a class="tag" href="/blog/archive/?q=Greedy" target="_self">
+            <i class="fa fa-tag"></i> Greedy
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+        </span>
+        <span class="date" title="23:47:23 | 24 January, 2017">
+          24 January, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>一群小矮人掉进了一个很深的陷阱里, 由于太矮爬不上来, 于是他们决定搭一个人梯. 即: 一个小矮人站在另一小矮人的肩膀上, 知道最顶端的小矮人伸直胳膊可以碰到陷阱口. 对于 每一个小矮人, 我们知道他从脚到肩膀的高度 <span class="math inline">\(A_i\)</span>, 并且他的胳膊长度为 <span class="math inline">\(B_i\)</span>. 陷阱 深度为 <span class="math inline">\(H\)</span>. 如果我们利用矮人 <span class="math inline">\(1\)</span>, 矮人 <span class="math inline">\(2\)</span>, 矮人 <span class="math inline">\(3\)</span>, ...... , 矮人 <span class="math inline">\(k\)</span> 搭一个梯子, 满足 <span class="math inline">\(A_1 + A_2 + A_3 + \ldots + A_k + B_k \geq H\)</span>, 那么矮人 <span class="math inline">\(k\)</span> 就可以离开陷阱逃跑了, 一旦一个矮人逃跑了, 他就不能再搭人梯了.</p>
+<p>我们希望尽可能多的小矮人逃跑, 问最多可以使多少个小矮人逃跑.</p>
+<h2 id="input">Input</h2>
+<p>第一行一个整数 <span class="math inline">\(n\)</span>, 表示矮人的个数, 接下来 <span class="math inline">\(n\)</span> 行每一行两个整数 <span class="math inline">\(A_i\)</span> 和 <span class="math inline">\(B_i\)</span>, 最后一行是 <span class="math inline">\(H\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>一个整数表示对多可以逃跑多少小矮人</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>2
+20 10
+5 5
+30</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>2</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于 30% 的数据,<span class="math inline">\(n \leq 200\)</span></p>
+<p>对于 100% 的数据,<span class="math inline">\(n \leq 2000, A_i, B_i, H \leq 10^5\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>我们发现垫在最底下的小矮人总是上不来, 所以基本上顺序没什么关系.</p>
+<p>这样我们钦定个头最高的垫在底下, 好让更多的矮人上来 (高个儿表示不服)</p>
+<p>然后发现不停地把人磊上去, 最后确定一个界限, 然后就可以成功求得答案.</p>
+<p>似乎是一道比较显著的结论+贪心题~</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="ot">#define maximize(__x,__y) __x=max(__x,__y)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">2010</span>;
+
+<span class="kw">struct</span> dwarf {
+    <span class="dt">int</span> body, arm; };
+<span class="dt">bool</span> <span class="kw">operator</span> &lt; (dwarf a, dwarf b) {
+    <span class="kw">return</span> a.body + a.arm &lt; b.body + b.arm; }
+
+<span class="dt">int</span> n, H;
+<span class="dt">int</span> dp[maxn];
+dwarf arr[maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;arr[i].body, &amp;arr[i].arm);
+        dp[<span class="dv">0</span>] += arr[i].body;
+    }
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;H);
+    sort(arr + <span class="dv">1</span>, arr + <span class="dv">1</span> + n);
+    <span class="co">// Some magical dynamic programming...</span>
+    <span class="dt">int</span> res = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n<span class="dv">+1</span>; i++)
+        dp[i] = <span class="dv">-1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        <span class="kw">for</span> (<span class="dt">int</span> j = res; j &gt;= <span class="dv">0</span>; j--) {
+            <span class="kw">if</span> (dp[j] + arr[i].arm &gt;= H)
+                maximize(dp[j + <span class="dv">1</span>], dp[j] - arr[i].body);
+            <span class="kw">if</span> (dp[res + <span class="dv">1</span>] &gt;= <span class="dv">0</span>)
+                res += <span class="dv">1</span>;
+        }
+    }
+    <span class="co">// Output results</span>
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj3174/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj3174/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj3174/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj3174/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj3174">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

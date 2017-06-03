@@ -1,0 +1,289 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1015: [JSOI2008]星球大战starwar&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1015: [JSOI2008]星球大战starwar
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=JSOI2008" target="_self">
+            <i class="fa fa-tag"></i> JSOI2008
+          </a>
+          <a class="tag" href="/blog/archive/?q=Disjoint Set" target="_self">
+            <i class="fa fa-tag"></i> Disjoint Set
+          </a>
+        </span>
+        <span class="date" title="08:53:12 | 30 July, 2016">
+          30 July, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Problem Specification</th>
+<th style="text-align: left;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Time Limit</td>
+<td style="text-align: left;">3 Sec</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Memory Limit</td>
+<td style="text-align: left;">162 MB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Submit</td>
+<td style="text-align: left;">4722</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Solved</td>
+<td style="text-align: left;">2127</td>
+</tr>
+</tbody>
+</table>
+<!-- More -->
+<h2 id="description">Description</h2>
+<p>很久以前, 在一个遥远的星系, 一个黑暗的帝国靠着它的超级武器统治者整个星系. 某一天, 凭着一个偶然的机遇, 一支反抗军摧毁了帝国的超级武器, 并攻下了星系中几乎所有的星球. 这些星球通过特殊的以太隧道互相直接或间接地连接. 但好景不长, 很快帝国又重新造出了他的超级武器. 凭借这超级武器的力量, 帝国开始有计划地摧毁反抗军占领的星球. 由于星球的不断被摧毁, 两个星球之间的通讯通道也开始不可靠起来. 现在, 反抗军首领交给你一个任务: 给出原来两个星球之间的以太隧道连通情况以及帝国打击的星球顺序, 以尽量快的速度求出每一次打击之后反抗军占据的星球的连通快的个数. (如果两个星球可以通过现存的以太通道直接或间接地连通, 则这两个星球在同一个连通块中).</p>
+<h2 id="input">Input</h2>
+<p>输入文件第一行包含两个整数, N (1 &lt;=N &lt;=2M) 和 M (1 &lt;=M &lt;=200, 000), 分别表示星球的数目和以太隧道的数目. 星球用 0~ N-1 的整数编号. 接下来的 M 行, 每行包括两个整数 X, Y, 其中 (0 &lt;=X &lt;&gt; Y 表示星球 x 和星球 y 之间有 “以太” 隧道, 可以直接通讯. 接下来的一行为一个整数 k, 表示将遭受攻击的星球的数目. 接下来的 k 行, 每行有一个整数, 按照顺序列出了帝国军的攻击目标. 这 k 个数互不相同, 且都在 0 到 n-1 的范围内.</p>
+<h2 id="output">Output</h2>
+<p>输出文件的第一行是开始时星球的连通块个数. 接下来的 N 行, 每行一个整数, 表示经过该次打击后现存星球的连通块个数.</p>
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>8 13
+0 1
+1 6
+6 5
+5 0
+0 6
+1 2
+2 3
+3 4
+4 5
+7 1
+7 2
+7 6
+3 6
+5
+1
+6
+3
+5
+7</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>1
+1
+1
+2
+3
+3</code></pre>
+<h2 id="hint">HINT</h2>
+<h2 id="source">Source</h2>
+<hr/>
+<p>简单用并查集维护区块连通性就可以解决了~</p>
+<p>按照被毁灭的时间倒着进行合并 (如果强制在线我就不知道怎么办了), 然后输出</p>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">800200</span>, maxm = <span class="dv">800200</span>;
+
+<span class="kw">class</span> UnionFindSet
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> par[maxn];
+    <span class="dt">int</span> cnt, n;
+    <span class="dt">int</span> find(<span class="dt">int</span> p)
+    {
+        <span class="kw">if</span> (par[p] == p)
+            <span class="kw">return</span> p;
+        <span class="kw">return</span> par[p] = find(par[p]);
+    }
+    <span class="dt">void</span> link(<span class="dt">int</span> p, <span class="dt">int</span> q)
+    {
+        <span class="co">// Link p to being a child of q</span>
+        p = find(p);
+        q = find(q);
+        <span class="kw">if</span> (p == q)
+            <span class="kw">return</span> ;
+        par[p] = q;
+        cnt--;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> build(<span class="dt">int</span> _n)
+    {
+        cnt = n = _n;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++)
+            par[i] = i;
+        <span class="kw">return</span> ;
+    }
+} ufs;
+
+<span class="kw">class</span> Graph
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v;
+        edge *next;
+    };
+    edge *edges[maxn], epool[maxm];
+    <span class="dt">int</span> cnt;
+    <span class="dt">void</span> addedge(<span class="dt">int</span> u, <span class="dt">int</span> v)
+    {
+        edge *p = &amp;epool[cnt++],
+             *q = &amp;epool[cnt++];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;next = edges[u]; edges[u] = p;
+        q-&gt;u = v; q-&gt;v = u; q-&gt;next = edges[v]; edges[v] = q;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> build(<span class="dt">void</span>)
+    {
+        memset(edges, <span class="dv">0</span>, <span class="kw">sizeof</span>(edges));
+        <span class="kw">return</span> ;
+    }
+} graph;
+
+<span class="dt">int</span> n, m, atk;
+<span class="dt">int</span> arr[maxn]; <span class="co">// In the order of being attacked</span>
+<span class="dt">int</span> dest[maxn]; <span class="co">// True if destroyed</span>
+<span class="dt">int</span> used[maxn]; <span class="co">// True if connected into map</span>
+<span class="dt">int</span> fres[maxn], rescnt = <span class="dv">0</span>; <span class="co">// The result (to be outputted reversed)</span>
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    graph.build();
+    ufs.build(n);
+    <span class="co">// Building graph</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        <span class="dt">int</span> a = <span class="dv">0</span>, b = <span class="dv">0</span>;
+        scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;a, &amp;b);
+        graph.addedge(a, b);
+    }
+    <span class="co">// Reading attacked planets</span>
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;atk);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= atk; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;arr[i]);
+        dest[arr[i]] = <span class="kw">true</span>;
+    }
+    <span class="co">// Connecting all planets after the apocalypse (final status)</span>
+    ufs.cnt = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++) {
+        <span class="kw">if</span> (dest[i]) <span class="kw">continue</span>;
+        ufs.cnt++;
+        <span class="kw">for</span> (Graph::edge *ep = graph.edges[i]; ep; ep = ep-&gt;next)
+            <span class="kw">if</span> (used[ep-&gt;v])
+                ufs.link(i, ep-&gt;v);
+        used[i] = <span class="kw">true</span>;
+    }
+    fres[++rescnt] = ufs.cnt;
+    <span class="co">// Connecting them from reversed time sequence</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = atk; i &gt;= <span class="dv">1</span>; i--) {
+        ufs.cnt++;
+        <span class="kw">for</span> (Graph::edge *ep = graph.edges[arr[i]]; ep; ep = ep-&gt;next)
+            <span class="kw">if</span> (used[ep-&gt;v])
+                ufs.link(arr[i], ep-&gt;v);
+        used[arr[i]] = <span class="kw">true</span>;
+        fres[++rescnt] = ufs.cnt;
+    }
+    <span class="co">// Output final result</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = rescnt; i &gt;= <span class="dv">1</span>; i--)
+        printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, fres[i]);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p><strong>Atom 遇到下划线还是在不停地抽风</strong></p>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> pydatagen <span class="im">import</span> <span class="op">*</span>
+m <span class="op">=</span> randrange(<span class="dv">3</span>, <span class="dv">2000</span>)
+n <span class="op">=</span> randrange((<span class="bu">int</span>)(m <span class="op">/</span> <span class="dv">2</span>), m)
+printf(<span class="st">'</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> (n, m))
+g <span class="op">=</span> Graph(n, m, connected<span class="op">=</span><span class="va">False</span>, weighed<span class="op">=</span><span class="va">False</span>)
+print_oi(g)
+sz <span class="op">=</span> randrange(<span class="dv">1</span>, n)
+l <span class="op">=</span> randlist(sz, <span class="bu">range</span>(<span class="dv">0</span>, n), distinct<span class="op">=</span><span class="va">True</span>)
+printf(<span class="st">'</span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> sz)
+<span class="cf">for</span> i <span class="op">in</span> l:
+    printf(<span class="st">'</span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> i)
+fclose()</code></pre></div>
+<hr/>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1015/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1015/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1015/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1015/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1015">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

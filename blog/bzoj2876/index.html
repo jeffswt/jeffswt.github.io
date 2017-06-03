@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj2876: [Noi2012]骑行川藏&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj2876: [Noi2012]骑行川藏
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOI2012" target="_self">
+            <i class="fa fa-tag"></i> NOI2012
+          </a>
+          <a class="tag" href="/blog/archive/?q=Binary Search" target="_self">
+            <i class="fa fa-tag"></i> Binary Search
+          </a>
+          <a class="tag" href="/blog/archive/?q=Number Theory" target="_self">
+            <i class="fa fa-tag"></i> Number Theory
+          </a>
+          <a class="tag" href="/blog/archive/?q=Lagrange Multiplier" target="_self">
+            <i class="fa fa-tag"></i> Lagrange Multiplier
+          </a>
+        </span>
+        <span class="date" title="19:09:27 | 2 February, 2017">
+          2 February, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>蛋蛋非常热衷于挑战自我, 今年暑假他准备沿川藏线骑着自行车从成都前往拉萨. 川藏线的 沿途有着非常美丽的风景, 但在这一路上也有着很多的艰难险阻, 路况变化多端, 而蛋蛋的 体力十分有限, 因此在每天的骑行前设定好目的地、同时合理分配好自己的体力是一件非常重要的事情.</p>
+<p>由于蛋蛋装备了一辆非常好的自行车, 因此在骑行过程中可以认为他仅在克服风阻做功 (不受 自行车本身摩擦力以及自行车与地面的摩擦力影响). 某一天他打算骑 <span class="math inline">\(n\)</span> 段路, 每一段内 的路况可视为相同: 对于第 <span class="math inline">\(i\)</span> 段路, 我们给出有关这段路况的 <span class="math inline">\(3\)</span> 个参数 <span class="math inline">\(s_i, k_i, \mathop{{v_i}'}\)</span>, 其中 <span class="math inline">\(s_i\)</span> 表示这段路的长度,<span class="math inline">\(k_i\)</span> 表示这段路的风阻系数,<span class="math inline">\(\mathop{{v_i}'}\)</span> 表示这段路上的风速 (表示在这段路上他遇到了顺风, 反之则意味着他将受逆风影响). 若某一时刻在这段 路上骑车速度为 <span class="math inline">\(v\)</span>, 则他受到的风阻大小为 <span class="math inline">\(F = k_i \cdot (v - \mathop{{v_i}'})^2\)</span> (这样若在长度为 <span class="math inline">\(s\)</span> 的路程内保持骑行速度 <span class="math inline">\(v\)</span> 不变, 则他消耗能量 (做功 <span class="math inline">\(E = k_i \cdot (v - \mathop{{v_i}'})^2 \cdot s\)</span>) .</p>
+<p>设蛋蛋在这天开始时的体能值是 <span class="math inline">\(Eu\)</span>, 请帮助他设计一种行车方案, 使他在有限的体力内用最短的时间到达目的地. 请告诉他最短的时间 <span class="math inline">\(T\)</span> 是多少.</p>
+<p><em>提示: 必然存在一种最优的体力方案满足: 蛋蛋在每段路上都采用匀速骑行的方式.</em></p>
+<h2 id="input">Input</h2>
+<p>第一行包含一个正整数 <span class="math inline">\(n\)</span> 和一个实数 <span class="math inline">\(Eu\)</span>, 分别表示路段的数量以及蛋蛋的体能值.</p>
+<p>接下来 <span class="math inline">\(n\)</span> 行分别描述 <span class="math inline">\(n\)</span> 个路段, 每行有 <span class="math inline">\(3\)</span> 个实数 <span class="math inline">\(s_i, k_i, \mathop{{v_i}'}\)</span>, 分别表示第 <span class="math inline">\(i\)</span> 段路的长度, 风阻系数以及风速.</p>
+<h2 id="output">Output</h2>
+<p>输出一个实数 <span class="math inline">\(T\)</span>, 表示蛋蛋到达目的地消耗的最短时间, 要求至少保留到小数点后 <span class="math inline">\(6\)</span> 位.</p>
+<p>本题没有部分分, 你程序的输出只有和标准答案的差距不超过 <span class="math inline">\(0.000001\)</span> 时, 才能获得该测试点的满分, 否则不得分.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>3 10000
+10000 10 5
+20000 15 8
+50000 5 6</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>12531.34496464</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于 10% 的数据,<span class="math inline">\(n = 1\)</span>;</p>
+<p>对于 40% 的数据,<span class="math inline">\(n \leq 2\)</span>;</p>
+<p>对于 60% 的数据,<span class="math inline">\(n \leq 100\)</span>;</p>
+<p>对于 80% 的数据,<span class="math inline">\(n \leq 1000\)</span>;</p>
+<p>对于所有数据,<span class="math inline">\(n \leq 10000, 0 \leq Eu \leq 10^8, 0 \lt s_i \leq 100000, 0 \lt k_i \leq 1, -100 \lt \mathop{{v_i}'} \lt 100\)</span>. 数据保证最终的答案不会超过 <span class="math inline">\(10^5\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<p>对于 n=1 可以直接求, 考场上可以骗到 10 分......</p>
+<p>对于 n=2 可以求解一个二元二次方程, 然后在考场用二分搜索一类的玩意儿来骗分, 大概可以骗到 40 分......</p>
+<p>以上就是我什么也不学的能力允许的范围, 以下是 PoPoQQQ 大爷题解, 保证满分:</p>
+<p>原文链接:<a href="">http://blog.csdn.net/popoqqq/article/details/42366599</a></p>
+<p>首先要在 <span class="math inline">\(\sum_{i=1}^{n} k_i s_i (v_i - \mathop{{v_i}'})^2 \leq E\)</span> 的情况下求出 <span class="math inline">\(\sum_{i=1}^{n} \frac{s_i}{v_i}\)</span> 的最大值</p>
+<p>那么由贪心思想可知要保证 <span class="math inline">\(\sum_{i=1}^{n} k_i s_i (v_i - \mathop{{v_i}'})^2 = E\)</span> 才能找到最优解</p>
+<p>随后套用拉格朗日乘数法, 得到方程组:</p>
+<p><span class="math display">\[\begin{cases}
+-\frac{s_i}{v_i^2} + 2 \lambda k_i s_i (v_i - \mathop{{v_i}'}) = 0
+\end{cases}\]</span></p>
+<p>化简得:</p>
+<p><span class="math display">\[\begin{cases}
+2 \lambda k_i v_i^2 (v_i - \mathop{{v_i}'}) = 1
+\end{cases}\]</span></p>
+<p>我们会发现 <span class="math inline">\(v_i\)</span> 关于 <span class="math inline">\(\lambda\)</span> 单调递减</p>
+<p>由于总能量消耗关于 <span class="math inline">\(v_i\)</span> 单调递增, 故总能耗关于 <span class="math inline">\(\lambda\)</span> 单调递减, 我们可以二分 <span class="math inline">\(\lambda\)</span> 的值</p>
+<p>对于每一个 <span class="math inline">\(\lambda\)</span>, 我们需要代入 <span class="math inline">\(n\)</span> 个方程求出 <span class="math inline">\(v_i\)</span> 以计算总能耗</p>
+<p>由于 <span class="math inline">\(v_i^2 (v_i - \mathop{{v_i}'})^2\)</span> 关于 <span class="math inline">\(v_i\)</span> 单调递增, 因此我们可以二分出这个方程的解</p>
+<p>无需牛顿迭代, 无需套用求根公式--</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="ot">#define sqr(__x) ((__x)*(__x))</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="kw">typedef</span> <span class="dt">double</span> llf;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">10010</span>;
+<span class="dt">const</span> llf epsilon = <span class="fl">1e-12</span>;
+<span class="dt">const</span> llf infinit = <span class="fl">1e10</span>;
+
+<span class="dt">int</span> n;
+llf Eu, <span class="co">// The maximum energy that the person is allowed to cost</span>
+    s[maxn], <span class="co">// Distance in each interval</span>
+    k[maxn], <span class="co">// Air resistance ratio</span>
+    v[maxn], <span class="co">// Anticipated velocity of the wind, opposing the person</span>
+    x[maxn]; <span class="co">// Final evaluated velocity of the riding speed</span>
+
+llf lagrange(llf lambda)
+{
+    llf res = <span class="fl">0.0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        llf l = max(<span class="fl">0.0</span>, v[i]), r = infinit;
+        <span class="kw">while</span> (r - l &gt; epsilon) {
+            llf mid = (l + r) / <span class="dv">2</span>;
+            <span class="kw">if</span> (<span class="dv">2</span> * lambda * k[i] * sqr(mid) * (mid-v[i]) &gt; <span class="fl">1.0</span>)
+                r = mid;
+            <span class="kw">else</span>
+                l = mid;
+        }
+        x[i] = (l + r) / <span class="dv">2</span>;
+        res += k[i] * sqr(x[i] - v[i]) * s[i];
+    }
+    <span class="kw">return</span> res;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%lf</span><span class="st">"</span>, &amp;n, &amp;Eu);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%lf%lf%lf</span><span class="st">"</span>, &amp;s[i], &amp;k[i], &amp;v[i]);
+    <span class="co">// Binary search the area.</span>
+    llf l = <span class="dv">0</span>, r = infinit;
+    <span class="kw">while</span> (r - l &gt; epsilon) {
+        llf mid = (l + r) / <span class="dv">2</span>;
+        <span class="kw">if</span> (lagrange(mid) &gt;= Eu)
+            l = mid;
+        <span class="kw">else</span>
+            r = mid;
+    }
+    <span class="co">// Finalizing to calculate the time</span>
+    llf res = <span class="fl">0.0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        res += s[i] / x[i];
+    printf(<span class="st">"</span><span class="ch">%.10lf\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj2876/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj2876/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj2876/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj2876/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj2876">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

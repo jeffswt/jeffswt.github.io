@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NOIP-EMU-141023-pour Jams 倒酒&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          NOIP-EMU-141023-pour Jams 倒酒
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOIP Emulation" target="_self">
+            <i class="fa fa-tag"></i> NOIP Emulation
+          </a>
+          <a class="tag" href="/blog/archive/?q=Number Theory" target="_self">
+            <i class="fa fa-tag"></i> Number Theory
+          </a>
+          <a class="tag" href="/blog/archive/?q=Mathematics" target="_self">
+            <i class="fa fa-tag"></i> Mathematics
+          </a>
+          <a class="tag" href="/blog/archive/?q=Implementation" target="_self">
+            <i class="fa fa-tag"></i> Implementation
+          </a>
+        </span>
+        <span class="date" title="17:37:06 | 6 November, 2016">
+          6 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="jams倒酒-pour.cpp">Jams 倒酒 (pour. cpp)</h2>
+<p>Jams 是一家酒吧的老板, 他的酒吧提供 2 种体积的啤酒, a ml 和 b ml, 分别使用容积为 a ml 和 b ml 的酒杯来装载. 酒吧的生意并不好. Jams 发现酒鬼们都很穷, 不像他那么土豪. 有时, 他们会因为负担不起 a ml 或者 b ml 酒的消费, 而不得不离去. 因此, Jams 决定出手第三种体积的啤酒 (较小体积的啤酒). Jams 只有两种杯子, 容积分别为 a ml 和 b ml, 而且啤酒杯是没有刻度的. 他只能通过两种杯子和酒桶间的互相倾倒来得到新的体积的酒.</p>
+<p>倒酒步骤为:</p>
+<ol type="1">
+<li>规定 a&gt;=b</li>
+<li>酒桶容积无限, 酒桶中酒体积无限大.</li>
+<li>只能包含三种可能的倒酒操作:
+<ol type="1">
+<li>将酒桶中的酒倒入容积为 b ml 的酒杯中;</li>
+<li>将容积为 a ml 的酒杯中的酒倒入酒桶;</li>
+<li>将容积为 b ml 的酒杯中的酒倒入容积为 a ml 的酒杯中.</li>
+</ol></li>
+<li>每次倒酒必须把杯子倒满或者把被倾倒的杯子倒空.</li>
+</ol>
+<p>Jams 希望通过若干次倾倒得到容积为 a ml 酒杯中剩下的就体积尽可能小, 他请求你帮助他设计倾倒方案.</p>
+<h3 id="输入">输入</h3>
+<p>两个整数 a, b (<span class="math inline">\(0 \lt b \leq a \leq 10^9\)</span>)</p>
+<h3 id="输出">输出</h3>
+<p>第一行一个整数, 表示可以得到的最小体积的酒.</p>
+<p>第二行两个整数 Pa 和 Pb (中间用一个空格分开), 分别表示从体积为 a ml 的酒杯中到处酒的次数和将酒倒入体积为 b ml 的酒杯的次数.</p>
+<p>若有多种可能的 Pa, Pb 满足要求, 那么请输出 Pa 最小的. 若 Pa 最小的时候有多个 Pb, 那么输出 Pb 最小的.</p>
+<!-- More -->
+<h3 id="样例输入">样例输入</h3>
+<pre><code>5 3</code></pre>
+<h3 id="样例输出">样例输出</h3>
+<pre><code>1
+1 2</code></pre>
+<h3 id="样例解释">样例解释</h3>
+<p>倾倒方案为:</p>
+<ol type="1">
+<li>桶-&gt;B;</li>
+<li>B-&gt;A;</li>
+<li>桶-&gt;B;</li>
+<li>B-&gt;A;</li>
+<li>A-&gt;桶;</li>
+<li>B-&gt;A;</li>
+</ol>
+<h3 id="数据范围">数据范围</h3>
+<p>对于 20% 的数据,<span class="math inline">\(p_a\)</span>,<span class="math inline">\(p_b\)</span> 总和不超过 5 对于 60% 的数据,<span class="math inline">\(p_a \leq 10^8\)</span> 对于 100% 的数据,<span class="math inline">\(0 &lt; b \leq a \leq 10^9\)</span></p>
+<h3 id="explanation">Explanation</h3>
+<p>就是一道结论题, 用一些很漂亮的结论可以解出这一道题.</p>
+<p>比如说,<span class="math inline">\(a, b\)</span> 各除以 <span class="math inline">\(gcd(a, b)\)</span> 之后得到的数一定互质 (废话). 然后 <span class="math inline">\(a\ mod\ n \times b, n \in [1, b]\)</span> 所构成的集合 <span class="math inline">\(S\)</span> 一定满足这样的条件:<span class="math inline">\(S = {0, 1, 2, ..., b - 1}\)</span>, 也就是构成一个剩余系. 这样我们就可 以说明首先最后的答案一定是 <span class="math inline">\(gcd(a, b)\)</span>. 然后我们寻找这样的方法:</p>
+<p>无非就是将 A 倒空, 然后不停地用 B 罐装满 A 罐. 直到装满为止倒空 A 罐, 然后再将 剩余的 B 罐中的酒倒到 A 罐里, 以此类推.</p>
+<p>然后几个特判:</p>
+<ol type="1">
+<li><span class="math inline">\(a\ mod\ b = 0\)</span></li>
+<li><span class="math inline">\(a = b\)</span></li>
+</ol>
+<p>最后我不是太懂第十组数据:</p>
+<pre><code>1000000000 999999999</code></pre>
+<p>就是这一个点把我的程序 T 掉了~ 求大神指点数论解法把 <span class="math inline">\(O(b)\)</span> 优化成 <span class="math inline">\(O(1)\)</span>. ......</p>
+<h3 id="example-code">Example Code</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+
+<span class="dt">int</span> gcd(<span class="dt">int</span> x, <span class="dt">int</span> y)
+{
+    <span class="kw">if</span> (x == <span class="dv">0</span>)
+        <span class="kw">return</span> y;
+    <span class="kw">return</span> gcd(y % x, x);
+}
+
+<span class="dt">int</span> a, b;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;a, &amp;b);
+    <span class="dt">int</span> c = gcd(a, b);
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, gcd(a, b));
+    a /= c, b /= c;
+    <span class="co">// Calculating best count used</span>
+    <span class="kw">if</span> (a == b) {
+        printf(<span class="st">"0 1</span><span class="ch">\n</span><span class="st">"</span>);
+        <span class="kw">return</span> <span class="dv">0</span>;
+    } <span class="kw">else</span> <span class="kw">if</span> (a % b == <span class="dv">0</span>) {
+        printf(<span class="st">"0 1</span><span class="ch">\n</span><span class="st">"</span>);
+        <span class="kw">return</span> <span class="dv">0</span>;
+    }
+    <span class="dt">int</span> md = a % b;
+    <span class="dt">int</span> resa = <span class="dv">0</span>, resb = <span class="dv">0</span>;
+    <span class="dt">int</span> a_div_b = a / b;
+    <span class="dt">int</span> tmp_md = <span class="dv">0</span>; <span class="co">// (md * i) mod b</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= b; i++) {
+        tmp_md = tmp_md + md; <span class="kw">if</span> (tmp_md &gt;= b) tmp_md -= b;
+        <span class="dt">int</span> tmp_test = b - tmp_md;
+        <span class="kw">if</span> (tmp_test &lt;= md) resb += a_div_b + <span class="dv">1</span>;
+        <span class="kw">else</span> resb += a_div_b;
+        resa++; <span class="co">// Always guranteed is 1</span>
+        <span class="kw">if</span> (tmp_test == <span class="dv">1</span>)
+            <span class="kw">break</span>;
+    }
+    printf(<span class="st">"</span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d\n</span><span class="st">"</span>, resa, resb);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/noipemu24pour/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/noipemu24pour/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/noipemu24pour/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/noipemu24pour/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="noipemu24pour">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NOIP-EMU-141031-treas 藏宝图&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          NOIP-EMU-141031-treas 藏宝图
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOIP Emulation" target="_self">
+            <i class="fa fa-tag"></i> NOIP Emulation
+          </a>
+          <a class="tag" href="/blog/archive/?q=Minimum Span Tree" target="_self">
+            <i class="fa fa-tag"></i> Minimum Span Tree
+          </a>
+          <a class="tag" href="/blog/archive/?q=Prim" target="_self">
+            <i class="fa fa-tag"></i> Prim
+          </a>
+          <a class="tag" href="/blog/archive/?q=Shortest Path" target="_self">
+            <i class="fa fa-tag"></i> Shortest Path
+          </a>
+        </span>
+        <span class="date" title="16:17:11 | 11 November, 2016">
+          11 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="藏宝图-treas">藏宝图 (treas)</h2>
+<h3 id="背景">背景</h3>
+<p>Czy 爬上黑红树, 到达了一个奇怪的地方……</p>
+<h3 id="题目描述">题目描述</h3>
+<p>Czy 发现了一张奇怪的藏宝图. 图上有 n 个点, m 条无向边. 已经标出了图中两两之间距离 dist. 但是 czy 知道, 只有当图刚好又是一颗树的时候, 这张藏宝图才是真的. 如果藏宝图是真的, 那么经过点 x 的边的边权平均数最大的那个 x 是藏着宝物的地方. 请计算这是不是真 的藏宝图, 如果是真的藏宝之处在哪里.</p>
+<h3 id="格式">格式</h3>
+<p>输入数据第一行一个数 T, 表示 T 组数据.</p>
+<p>对于每组数据, 第一行一个 n, 表示藏宝图上的点的个数.</p>
+<p>接下来 n 行, 每行 n 个数, 表示两两节点之间的距离.</p>
+<p>输出一行或两行. 第一行 “Yes” 或 “No”, 表示这是不是真的藏宝图.</p>
+<p>若是真的藏宝图, 第二行再输出一个数, 表示哪个点是藏宝之处.</p>
+<!-- More -->
+<h3 id="样例输入">样例输入</h3>
+<pre><code>2
+3
+0 7 9
+7 0 2
+9 2 0
+3
+0 2 7
+2 0 9
+7 9 0</code></pre>
+<h3 id="样例输出">样例输出</h3>
+<pre><code>Yes
+1
+Yes
+3</code></pre>
+<h3 id="样例解释">样例解释</h3>
+<p>第一棵树的形状是 1--2--3. 1、2 之间的边权是 7, 2、3 之间是 2.</p>
+<p>第二棵树的形状是 2--1--3. 2、1 之间的边权是 2, 1、3 之间是 7.</p>
+<h3 id="数据范围">数据范围</h3>
+<p>对于 30% 数据,<span class="math inline">\(n \leq 50\)</span>,<span class="math inline">\(1 \leq 树上的边的长度 \leq 10^9\)</span>.</p>
+<p>对于 50% 数据,<span class="math inline">\(n \leq 600\)</span>.</p>
+<p>对于 100% 数据,<span class="math inline">\(1 \leq n \leq 2500\)</span>, 除 30% 小数据外任意 <span class="math inline">\(0 \leq dist[i][j] \leq 10^9\)</span>,<span class="math inline">\(T \leq 5\)</span></p>
+<h3 id="explanation">Explanation</h3>
+<del>
+此题看上去很玄学的样子。
+</del>
+<p>先生成一个最小生成树, 我们可以证明: 若原图是一棵树, 则其最小生成树必定是其原图. 得到这个结论以后, 我们将原来的完全图 (当然是一个稠密图, 极其稠密的稠密图) 进行一下 生成最小生成树.</p>
+<p>显然我们不能用 Kruskal, 因为在稠密图上被 Prim 秒杀; 另外不能用堆优化 Prim, 否则它会被<del>优</del>化到 <span class="math inline">\(O(n^2 \cdot log(n))\)</span>; 所以最后只能用 Prim.</p>
+<p>然后有一段很玄学的 <span class="math inline">\(O(n^2 \cdot log(n))\)</span> 最短路代码写在底下.</p>
+<p>最后交题的时候由于是在本地评测, 所以就闹出了一段笑话:</p>
+<p>在隔壁的台式机上由于出题人 <strong>恶意卡常</strong> (并且出题人强行立 flag 说不用开 long long 但是实际是需要的), 只能跑到 3s 左右. 在我的笔记本上大概 std 需要跑 31s, 然后 就只能强行调时限了.</p>
+<figure>
+<img class="thumb" data-small="/blog/noipemu30treas/gpgpu_hp_core2-small.jpg" data-src="/blog/noipemu30treas/gpgpu_hp_core2.png" data-thumb="/blog/noipemu30treas/gpgpu_hp_core2-thumb.jpg" src="/blog/noipemu30treas/gpgpu_hp_core2-thumb.jpg" title="我的笔记本" width="400px"/>
+<figcaption>
+我的笔记本
+</figcaption>
+</figure>
+<figure>
+<img class="thumb" data-small="/blog/noipemu30treas/gpgpu_dell_i3-small.jpg" data-src="/blog/noipemu30treas/gpgpu_dell_i3.png" data-thumb="/blog/noipemu30treas/gpgpu_dell_i3-thumb.jpg" src="/blog/noipemu30treas/gpgpu_dell_i3-thumb.jpg" title="隔壁的台式机" width="400px"/>
+<figcaption>
+隔壁的台式机
+</figcaption>
+</figure>
+<h3 id="source-code">Source Code</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">2600</span>;
+<span class="dt">const</span> lli infinit = <span class="bn">0x007f7f7f7f7f7f7fll</span>;
+
+<span class="kw">class</span> MinimumSpanTree
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge {
+        <span class="dt">int</span> u, v; lli len;
+        edge *next;
+    } *edges[maxn], epool[<span class="dv">2</span> * maxn];
+    <span class="dt">int</span> n, root, ecnt;
+    <span class="dt">void</span> addedge(<span class="dt">int</span> u, <span class="dt">int</span> v, lli len)
+    {
+        edge *p = &amp;epool[++ecnt],
+             *q = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;len = len;
+        p-&gt;next = edges[u]; edges[u] = p;
+        q-&gt;u = v; q-&gt;v = u; q-&gt;len = len;
+        q-&gt;next = edges[v]; edges[v] = q;
+        <span class="kw">return</span> ;
+    }
+    lli dist[maxn][maxn];
+    lli dis[maxn]; <span class="co">// The distance used in eval() function.</span>
+    <span class="dt">int</span> from[maxn]; <span class="co">// The "from" as in SPFA, relaxed nodes</span>
+    <span class="dt">bool</span> visited[maxn]; <span class="co">// Whether visited or not</span>
+    <span class="dt">void</span> eval(<span class="dt">void</span>)
+    {
+        <span class="co">// Resetting initial settings</span>
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+            visited[i] = <span class="kw">false</span>, dis[i] = infinit;
+        dis[<span class="dv">1</span>] = <span class="dv">0</span>;
+        <span class="co">// Iterate exactly n times with i.</span>
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+            <span class="dt">int</span> p = <span class="dv">-1</span>;
+            <span class="co">// Select previously nearest node</span>
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++)
+                <span class="kw">if</span> (!visited[j])
+                    <span class="kw">if</span> (p &lt;= <span class="dv">0</span> || dis[j] &lt; dis[p])
+                        p = j; <span class="co">// Assign better node</span>
+            <span class="kw">if</span> (p &lt; <span class="dv">0</span>)
+                <span class="kw">break</span>; <span class="co">// Search failed</span>
+            visited[p] = <span class="kw">true</span>;
+            addedge(from[p], p, dist[from[p]][p]);
+            <span class="co">// Relaxing edges</span>
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++)
+                <span class="kw">if</span> (!visited[j] &amp;&amp; dist[p][j] &lt; dis[j]) {
+                    dis[j] = dist[p][j];
+                    from[j] = p;
+                }
+            <span class="kw">continue</span>;
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> clear(<span class="dt">void</span>)
+    {
+        memset(edges, <span class="dv">0</span>, <span class="kw">sizeof</span>(edges));
+        memset(epool, <span class="dv">0</span>, <span class="kw">sizeof</span>(epool));
+        memset(dist, <span class="dv">0</span>, <span class="kw">sizeof</span>(dist));
+        memset(from, <span class="dv">0</span>, <span class="kw">sizeof</span>(from));
+        n = <span class="dv">0</span>, ecnt = <span class="dv">0</span>;
+        <span class="kw">return</span> ;
+    }
+} graph;
+
+<span class="kw">class</span> ShortestPath
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge {
+        <span class="dt">int</span> u, v; lli len;
+        edge *next;
+    } *edges[maxn], epool[<span class="dv">2</span> * maxn];
+    <span class="dt">int</span> n, ecnt;
+    <span class="dt">void</span> addedge(<span class="dt">int</span> u, <span class="dt">int</span> v, lli len)
+    {
+        edge *p = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;len = len;
+        p-&gt;next = edges[u]; edges[u] = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> visited[maxn];
+    lli dist[maxn][maxn];
+    lli edge_sum[maxn];
+    <span class="dt">int</span> edge_cnt[maxn];
+    vector&lt;<span class="dt">int</span>&gt; vec; <span class="co">// Vector optimizing shortest path calculation</span>
+    <span class="dt">void</span> dfs(<span class="dt">int</span> p)
+    {
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next) {
+            <span class="co">// Already visited</span>
+            <span class="kw">if</span> (visited[ep-&gt;v])
+                <span class="kw">continue</span>;
+            <span class="kw">for</span> (<span class="dt">unsigned</span> <span class="dt">int</span> j = <span class="dv">0</span>; j &lt; vec.size(); j++) {
+                dist[ep-&gt;v][vec[j]] = dist[vec[j]][ep-&gt;v] = dist[vec[j]][p] + ep-&gt;len;
+                edge_sum[p] += ep-&gt;len;
+                edge_sum[ep-&gt;v] += ep-&gt;len;
+                edge_cnt[p]++;
+                edge_cnt[ep-&gt;v]++;
+            }
+            vec.push_back(ep-&gt;v);
+            visited[ep-&gt;v] = <span class="kw">true</span>;
+            dfs(ep-&gt;v);
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> eval(<span class="dt">void</span>) {
+        dfs(<span class="dv">1</span>); }
+    <span class="dt">void</span> clear(<span class="dt">void</span>)
+    {
+        memset(edges, <span class="dv">0</span>, <span class="kw">sizeof</span>(edges));
+        memset(epool, <span class="dv">0</span>, <span class="kw">sizeof</span>(epool));
+        memset(visited, <span class="dv">0</span>, <span class="kw">sizeof</span>(visited));
+        memset(dist, <span class="dv">0</span>, <span class="kw">sizeof</span>(dist));
+        memset(edge_sum, <span class="dv">0</span>, <span class="kw">sizeof</span>(edge_sum));
+        memset(edge_cnt, <span class="dv">0</span>, <span class="kw">sizeof</span>(edge_cnt));
+        n = <span class="dv">0</span>, ecnt = <span class="dv">0</span>;
+        vec.clear();
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> cp_vis[maxn];
+    <span class="dt">void</span> cp_dfs(<span class="dt">int</span> p)
+    {
+        cp_vis[p] = <span class="kw">true</span>;
+        <span class="kw">for</span> (MinimumSpanTree::edge *ep = graph.edges[p]; ep; ep = ep-&gt;next)
+            <span class="kw">if</span> (!cp_vis[ep-&gt;v]) {
+                addedge(p, ep-&gt;v, ep-&gt;len);
+                cp_dfs(ep-&gt;v);
+            }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> copy_edges(<span class="dt">void</span>)
+    {
+        memset(cp_vis, <span class="dv">0</span>, <span class="kw">sizeof</span>(cp_vis));
+        cp_dfs(<span class="dv">1</span>);
+    }
+} spfa;
+
+<span class="dt">int</span> T, n, m;
+
+<span class="dt">int</span> select_best(<span class="dt">void</span>)
+{
+    <span class="dt">int</span> best_val = <span class="dv">0</span>,
+        best_pos = <span class="dv">1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        <span class="kw">if</span> (spfa.edge_cnt[i] &lt;= <span class="dv">0</span>)
+            <span class="kw">continue</span>;
+        <span class="dt">int</span> tmp = spfa.edge_sum[i] / spfa.edge_cnt[i];
+        <span class="kw">if</span> (tmp &gt; best_val) {
+            best_val = tmp;
+            best_pos = i;
+        }
+    }
+    <span class="kw">return</span> best_pos;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;T);
+    <span class="kw">for</span> (<span class="dt">int</span> idx = <span class="dv">1</span>; idx &lt;= T; idx++) {
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+        graph.clear();
+        spfa.clear();
+        graph.n = spfa.n = n;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++)
+                scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;graph.dist[i][j]);
+        <span class="co">// Evaluating MST, complexity O(n^2)</span>
+        graph.eval();
+        <span class="co">// Copying edges data from MST to shortest path</span>
+        spfa.copy_edges();
+        <span class="co">// Evaluating SPFA, complexity O(n^2 * logn)</span>
+        spfa.eval();
+        <span class="co">// Judging</span>
+        <span class="dt">bool</span> okay = <span class="kw">true</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n &amp;&amp; okay; i++)
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n &amp;&amp; okay; j++)
+                <span class="kw">if</span> (spfa.dist[i][j] &gt; graph.dist[i][j])
+                    okay = <span class="kw">false</span>;
+        printf(<span class="st">"</span><span class="ch">%s\n</span><span class="st">"</span>, okay ? <span class="st">"Yes"</span> : <span class="st">"No"</span>);
+        <span class="co">// Print the "Best Place for Treasure Hiding"</span>
+        <span class="kw">if</span> (okay)
+            printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, select_best());
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/noipemu30treas/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/noipemu30treas/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/noipemu30treas/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/noipemu30treas/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="noipemu30treas">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

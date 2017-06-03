@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj4240: 有趣的家庭菜园&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj4240: 有趣的家庭菜园
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=Fenwick Tree" target="_self">
+            <i class="fa fa-tag"></i> Fenwick Tree
+          </a>
+          <a class="tag" href="/blog/archive/?q=Segment Tree" target="_self">
+            <i class="fa fa-tag"></i> Segment Tree
+          </a>
+        </span>
+        <span class="date" title="00:07:14 | 9 February, 2017">
+          9 February, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>对家庭菜园有兴趣的 JOI 君每年在自家的田地中种植一种叫做 IOI 草的植物. JOI 君的田地沿东西方向被划分为 <span class="math inline">\(n\)</span> 个区域, 由西到东标号为 <span class="math inline">\(1 - n\)</span>. IOI 草一共有 <span class="math inline">\(n\)</span> 株, 每个区域 种植着一株. 在第 <span class="math inline">\(i\)</span> 个区域种植的 IOI 草, 在春天的时候高度会生长至 <span class="math inline">\(h_i\)</span>, 此后便不再生长.</p>
+<p>为了观察春天的样子而出行的 JOI 君注意到了 IOI 草的配置与预定的不太一样. IOI 草是一种 非常依靠阳光的植物, 如果某个区域的 IOI 草的东侧和西侧都有比它高的 IOI 草存在, 那么 这株 IOI 草就会在夏天之前枯萎. 换句话说, 为了不让任何一株 IOI 草枯萎, 需要满足以下条件:</p>
+<p>对于任意 <span class="math inline">\(2 \leq i \leq n-1\)</span>, 以下两个条件至少满足一个:</p>
+<ol type="1">
+<li><span class="math inline">\(\forall 1 \leq j \leq i-1, h_j \leq h_i\)</span></li>
+<li><span class="math inline">\(\forall i+1 \leq k \leq n, h_k \leq h_i\)</span></li>
+</ol>
+<p>IOI 草是非常昂贵的, 为了不让 IOI 草枯萎, JOI 君需要调换 IOI 草的顺序. IOI 草非常非常的 高大且纤细的植物, 因此 JOI 君每次只能交换相邻两株 IOI 草. 也就是说, JOI 君每次需要选择一个整数 <span class="math inline">\(i (1 \leq i \leq n-1)\)</span>, 然后交换第 <span class="math inline">\(i\)</span> 株 IOI 草和第 <span class="math inline">\(i+1\)</span> 株 IOI 草. 随着 夏天临近, IOI 草枯萎的可能性越来越大, 因此 JOI 君想知道让所有 IOI 草都不会枯萎的最少操作次数.</p>
+<p>现在给出田地的区域数, 以及每株 IOI 草的高度, 请你求出让所有 IOI 草的不会枯萎的最少操作次数.</p>
+<h2 id="input">Input</h2>
+<p>第一行一个正整数 <span class="math inline">\(n\)</span>, 代表田地被分为了 <span class="math inline">\(n\)</span> 个区域.</p>
+<p>接下来 <span class="math inline">\(n\)</span> 行, 第 <span class="math inline">\(i\)</span> 行 <span class="math inline">\((1 \leq i \leq n)\)</span> 一个整数 <span class="math inline">\(h_i\)</span>, 表示第 <span class="math inline">\(i\)</span> 株植物在 春天时的高度.</p>
+<h2 id="output">Output</h2>
+<p>输出一行一个整数, 表示最少需要的操作次数.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>6
+2
+8
+4
+5
+3
+6</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>3</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有数据, 满足:<span class="math inline">\(3 \leq n \leq 3 \times 10^5, 1 \leq h_i \leq 10^9\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>首先一个足够高的植物一定不会影响到更高的植物对吧......</p>
+<p>然后极端地来看像最高的那一棵到哪里都会招人恨对不对......</p>
+<p>然后贪心地我们发现一棵植物必须要么向左要么向右移动, 移动的距离就是左边比他高一点 的最靠左的那一棵植物, 右边同理. 然后发现其实就是每一次贪心一下, 用树状数组或者线段树记录一下就可以了.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">300100</span>;
+
+<span class="kw">class</span> BinaryIndexedTree
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> n, arr[maxn];
+    <span class="dt">void</span> change(<span class="dt">int</span> x, <span class="dt">int</span> v)
+    {
+        <span class="kw">for</span> (; x &gt; <span class="dv">0</span>; x -= x&amp;-x)
+            arr[x] += v;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> query(<span class="dt">int</span> x)
+    {
+        <span class="dt">int</span> res = <span class="dv">0</span>;
+        <span class="kw">for</span> (; x &lt;= n; x += x&amp;-x)
+            res += arr[x];
+        <span class="kw">return</span> res;
+    }
+    <span class="dt">void</span> clear(<span class="dt">void</span>)
+    {
+        n = <span class="dv">0</span>;
+        memset(arr, <span class="dv">0</span>, <span class="kw">sizeof</span>(arr));
+        <span class="kw">return</span> ;
+    }
+} bit;
+
+<span class="dt">int</span> n, n__, a[maxn];
+pair&lt;<span class="dt">int</span>, <span class="dt">int</span>&gt; b[maxn];
+<span class="dt">int</span> l[maxn], r[maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;b[i].first);
+        b[i].second = i;
+    }
+    sort(b + <span class="dv">1</span>, b + n + <span class="dv">1</span>);
+    n__ = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        <span class="kw">if</span> (i == <span class="dv">1</span> || b[i].first != b[i<span class="dv">-1</span>].first)
+            n__ += <span class="dv">1</span>;
+        a[b[i].second] = n__;
+    }
+    <span class="co">// Inserting</span>
+    bit.n = n__;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        bit.change(a[i], <span class="dv">1</span>);
+        l[i] = bit.query(a[i] + <span class="dv">1</span>);
+    }
+    bit.clear();
+    <span class="co">// Inserting, reversed.</span>
+    bit.n = n__;
+    <span class="kw">for</span> (<span class="dt">int</span> i = n; i &gt;= <span class="dv">1</span>; i--) {
+        bit.change(a[i], <span class="dv">1</span>);
+        r[i] = bit.query(a[i] + <span class="dv">1</span>);
+    }
+    <span class="co">// Generate output</span>
+    lli res = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        res += min(l[i], r[i]);
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj4240/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj4240/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj4240/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj4240/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj4240">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

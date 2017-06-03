@@ -1,0 +1,260 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1149: [CTSC2007]风玲Mobiles&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1149: [CTSC2007]风玲Mobiles
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=CTSC2007" target="_self">
+            <i class="fa fa-tag"></i> CTSC2007
+          </a>
+          <a class="tag" href="/blog/archive/?q=Depth First Search" target="_self">
+            <i class="fa fa-tag"></i> Depth First Search
+          </a>
+        </span>
+        <span class="date" title="20:11:29 | 10 April, 2017">
+          10 April, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>你准备给弟弟 Ike 买一件礼物, 但是, Ike 挑选礼物的方式很特别: 他只喜欢那些能按照他 1 特有方式排成有序的东西.</p>
+<p>你准备给 Ike 买一个风铃. 风铃是一种多层的装饰品, 一般挂在天花板上. 每个风铃都包含一些由竖直的线连起来的水平杆. 每根杆的两端都有线连接, 下面或者挂着另一根水平杆, 或者挂着一个玩具. 下面是一个风铃的例子:</p>
+<figure>
+<img class="thumb" data-small="/blog/bzoj1149/bzoj1149_1-small.jpg" data-src="/blog/bzoj1149/bzoj1149_1.png" data-thumb="/blog/bzoj1149/bzoj1149_1-thumb.jpg" src="/blog/bzoj1149/bzoj1149_1-thumb.jpg" title="" width="419px"/>
+<figcaption>
+</figcaption>
+</figure>
+<p>为使你的弟弟满意, 你需要选一个满足下面两个条件的风铃:</p>
+<ol type="1">
+<li>所有的玩具都在同一层 (也就是说, 每个玩具到天花板之间的杆的个数是一样的) 或至多相差一层.</li>
+<li>对于两个相差一层的玩具, 左边的玩具比右边的玩具要更靠下一点.</li>
+</ol>
+<p>风铃可以按照下面的规则重新排列: 任选一根杆, 将杆两端的线 “交换”. 也就是解开一根杆左右两端的线, 然后将它们分别绑到杆的另一端. 注意这个操作不会改变下面的杆上线的排列顺序.</p>
+<p>由于你正在参加信息学奥林匹克的训练, 所以你决定设计一个算法, 判断能否通过重新排列, 将一个给定的风铃变为 Ike 喜欢的样子.</p>
+<p>考虑上面的例子, 上图中的风铃满足条件 <span class="math inline">\(1\)</span>, 却不满足条件 <span class="math inline">\(2\)</span>----最左边的那个玩具比它右边的要高.</p>
+<p>但是, 我们可以通过下面的步骤把这个风铃变成一个 Ike 喜欢的形式:</p>
+<ol type="1">
+<li>第一步, 将杆 <span class="math inline">\(1\)</span> 的左右两端交换, 这使得杆 <span class="math inline">\(2\)</span> 和杆 <span class="math inline">\(3\)</span> 的位置互换, 交换的结果如下图所示:
+<figure>
+<img class="thumb" data-small="/blog/bzoj1149/bzoj1149_2-small.jpg" data-src="/blog/bzoj1149/bzoj1149_2.png" data-thumb="/blog/bzoj1149/bzoj1149_2-thumb.jpg" src="/blog/bzoj1149/bzoj1149_2-thumb.jpg" title="" width="418px"/>
+<figcaption>
+</figcaption>
+</figure></li>
+<li>第二步, 也是最后一步, 将杆 <span class="math inline">\(2\)</span> 的左右两端交换, 这使得杆 <span class="math inline">\(4\)</span> 到了左边, 原来在左边的玩具到了右边, 交换的结果如下图所示:
+<figure>
+<img class="thumb" data-small="/blog/bzoj1149/bzoj1149_3-small.jpg" data-src="/blog/bzoj1149/bzoj1149_3.png" data-thumb="/blog/bzoj1149/bzoj1149_3-thumb.jpg" src="/blog/bzoj1149/bzoj1149_3-thumb.jpg" title="" width="461px"/>
+<figcaption>
+</figcaption>
+</figure></li>
+</ol>
+<p>现在这个风铃就满足 Ike 的条件了.</p>
+<p>你的任务是: 给定一个风铃的描述, 求出最少需要多少次交换才能使这个风铃满足 Ike 的条件 (如果可能的话).</p>
+<h2 id="input">Input</h2>
+<p>输入的第一行包含一个整数 <span class="math inline">\(n (1 \leq n \leq 100000)\)</span>, 表示风铃中有多少根杆.</p>
+<p>接下来的 <span class="math inline">\(n\)</span> 行描述杆的连接信息. 这部分的第 <span class="math inline">\(i\)</span> 行包含两个由空格分割的整数 <span class="math inline">\(l_i, r_i\)</span>, 描述杆 <span class="math inline">\(i\)</span> 的左右两端悬挂的东西. 如果挂的是一个玩具, 则对应的值为 <span class="math inline">\(-1\)</span>, 否则为挂在下面的杆的编号.</p>
+<p>如果杆 <span class="math inline">\(i\)</span> 下面挂有其它杆, 则这些杆的编号将严格大于 <span class="math inline">\(i\)</span>. 杆 <span class="math inline">\(1\)</span> 位于风铃的顶部.</p>
+<h2 id="output">Output</h2>
+<p>输出仅包含一个整数. 表示最少需要多少次交换能使风铃满足 Ike 的条件. 如果不可能满足, 输出 <span class="math inline">\(-1\)</span>.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>6
+2 3
+-1 4
+5 6
+-1 -1
+-1 -1
+-1 -1</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>2</code></pre>
+<h2 id="explanation">Explanation</h2>
+<p>因为只能交换相邻两棵子树, 所以如果有一根杆 (其实就是一个节点) 的两个子树之间深度差超过 <span class="math inline">\(2\)</span>, 那么无论怎么换都不会使这个深度减小.</p>
+<p>所以如果树的最大深度与最小深度值差超过 <span class="math inline">\(2\)</span>, 直接返回无解.</p>
+<p>如果所有叶子结点的深度都一样的话, 不需要做任何交换.</p>
+<p>接下来如果有一个节点左右两个子树均同时包含最小深度和最大深度, 也是无法通过交换使得这棵树 “平衡” 的; 否则需要进行一次交换.</p>
+<p>大概按照这个思路 dfs 一发即可......</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+
+<span class="ot">#define rep(_var,_begin,_end) for(int _var=_begin;_var&lt;=_end;_var++)</span>
+<span class="ot">#define range(_begin,_end) rep(_,_begin,_end)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">200100</span>;
+<span class="dt">const</span> <span class="dt">int</span> infinit = <span class="bn">0x3f3f3f3f</span>;
+
+<span class="kw">class</span> TreeDP
+{
+<span class="kw">public</span>:
+    <span class="ot">#define lc(_p) ch[_p][0]</span>
+    <span class="ot">#define rc(_p) ch[_p][1]</span>
+    <span class="dt">int</span> n, root, max_dep, min_dep;
+    <span class="dt">int</span> ch[maxn][<span class="dv">2</span>], par[maxn];
+    <span class="dt">int</span> depth[maxn];
+    <span class="dt">void</span> set_child(<span class="dt">int</span> parent, <span class="dt">int</span> child, <span class="dt">int</span> side)
+    {
+        par[child] = parent;
+        ch[parent][side] = child;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> final_res;
+    <span class="dt">int</span> dfs(<span class="dt">int</span> p, <span class="dt">int</span> depth)
+    {
+        <span class="co">// Returns a bit-compressed data</span>
+        <span class="co">// 2 if has minimum depth, 1 if has maximum depth</span>
+        <span class="co">// The two bits are combined with logic or.</span>
+        <span class="co">// printf("dfs %d %d\n", p, depth);</span>
+        <span class="kw">if</span> (p == <span class="dv">0</span>) {
+            <span class="kw">if</span> (depth == max_dep)
+                <span class="kw">return</span> <span class="dv">1</span>;
+            <span class="kw">else</span> <span class="kw">if</span> (depth == min_dep)
+                <span class="kw">return</span> <span class="dv">2</span>;
+        }
+        <span class="co">// Setting to check both children</span>
+        <span class="dt">int</span> lv = dfs(lc(p), depth + <span class="dv">1</span>),
+            rv = dfs(rc(p), depth + <span class="dv">1</span>);
+        <span class="co">// If they all have differential heights, then it is certain that we</span>
+        <span class="co">// cannot swap sticks to make things right.</span>
+        <span class="co">// THINK ABOUT IT.</span>
+        <span class="kw">if</span> (lv == <span class="dv">3</span> &amp;&amp; rv == <span class="dv">3</span>) {
+            final_res = -infinit;
+            <span class="kw">return</span> <span class="dv">-1</span>;
+        }
+        <span class="co">// Adding some data.</span>
+        <span class="kw">if</span> (lv == <span class="dv">2</span> &amp;&amp; (rv == <span class="dv">1</span> || rv == <span class="dv">3</span>))
+            final_res += <span class="dv">1</span>;
+        <span class="kw">else</span> <span class="kw">if</span> (lv == <span class="dv">3</span> &amp;&amp; rv == <span class="dv">1</span>)
+            final_res += <span class="dv">1</span>;
+        <span class="kw">return</span> lv | rv;
+    }
+    <span class="dt">int</span> eval(<span class="dt">void</span>)
+    {
+        <span class="co">// Getting maximum depth and minimum depth</span>
+        max_dep = <span class="dv">0</span>, min_dep = infinit;
+        queue&lt;<span class="dt">int</span>&gt; que;
+        que.push(root);
+        depth[root] = <span class="dv">1</span>;
+        <span class="kw">while</span> (!que.empty()) {
+            <span class="dt">int</span> p = que.front();
+            que.pop();
+            range(<span class="dv">0</span>, <span class="dv">1</span>) <span class="kw">if</span> (!ch[p][_]) {
+                max_dep = max(max_dep, depth[p] + <span class="dv">1</span>);
+                min_dep = min(min_dep, depth[p] + <span class="dv">1</span>);
+            }
+            range(<span class="dv">0</span>, <span class="dv">1</span>) <span class="kw">if</span> (ch[p][_]) {
+                depth[ch[p][_]] = depth[p] + <span class="dv">1</span>;
+                que.push(ch[p][_]);
+            }
+        }
+        <span class="co">// Checking the delta between the two extreme values</span>
+        <span class="kw">if</span> (max_dep &gt;= min_dep + <span class="dv">2</span>)
+            <span class="kw">return</span> <span class="dv">-1</span>;
+        <span class="kw">else</span> <span class="kw">if</span> (max_dep == min_dep)
+            <span class="kw">return</span> <span class="dv">0</span>;
+        <span class="co">// Processing DP on a tree</span>
+        final_res = <span class="dv">0</span>;
+        dfs(root, <span class="dv">1</span>);
+        <span class="kw">if</span> (final_res &lt; <span class="dv">0</span>)
+            <span class="kw">return</span> <span class="dv">-1</span>;
+        <span class="kw">return</span> final_res;
+    }
+} tdp;
+
+<span class="dt">int</span> n;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    tdp.root = <span class="dv">1</span>;
+    tdp.n = n;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, a, b; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;a, &amp;b);
+        <span class="kw">if</span> (a != <span class="dv">-1</span>)
+            tdp.set_child(i, a, <span class="dv">0</span>);
+        <span class="kw">if</span> (b != <span class="dv">-1</span>)
+            tdp.set_child(i, b, <span class="dv">1</span>);
+    }
+    <span class="co">// Finished building tree.</span>
+    <span class="dt">int</span> res = tdp.eval();
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1149/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1149/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1149/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1149/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1149">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

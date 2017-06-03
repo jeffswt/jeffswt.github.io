@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1061: [Noi2008]志愿者招募&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1061: [Noi2008]志愿者招募
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOI2008" target="_self">
+            <i class="fa fa-tag"></i> NOI2008
+          </a>
+          <a class="tag" href="/blog/archive/?q=Maximum Flow Minimum Cost" target="_self">
+            <i class="fa fa-tag"></i> Maximum Flow Minimum Cost
+          </a>
+        </span>
+        <span class="date" title="17:04:43 | 10 April, 2017">
+          10 April, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>申奥成功后, 布布经过不懈努力, 终于成为奥组委下属公司人力资源部门的主管. 布布刚上任就遇到了一个难题: 为即将启动的奥运新项目招募一批短期志愿者. 经过估算, 这个项目需要 <span class="math inline">\(n\)</span> 天才能完成, 其中第 <span class="math inline">\(i\)</span> 天至少需要 <span class="math inline">\(d_i\)</span> 个人. 布布通过了解得知, 一共有 <span class="math inline">\(m\)</span> 类志愿者可以招募. 其中第 <span class="math inline">\(i\)</span> 类可以从第<span class="math inline">\(s_i\)</span> 天工作到第 <span class="math inline">\(t_i\)</span> 天, 招募费用是每人 <span class="math inline">\(c_i\)</span> 元. 新官上任三把火, 为了出色地完成自己的工作, 布布希望用尽量少的费用招募足够的志愿者, 但这并不是他的特长! 于是布布找到了你, 希望你帮他设计一种最优的招募方案.</p>
+<h2 id="input">Input</h2>
+<p>第一行包含两个整数 <span class="math inline">\(n, m\)</span>, 表示完成项目的天数和可以招募的志愿者的种类.</p>
+<p>接下来的一行中包含 <span class="math inline">\(n\)</span> 个非负整数 <span class="math inline">\(d_i\)</span>, 表示每天至少需要的志愿者人数.</p>
+<p>接下来的 <span class="math inline">\(m\)</span> 行中每行包含三个整数 <span class="math inline">\(s_i, t_i, c_i\)</span>, 含义如上文所述.</p>
+<p>为了方便起见, 我们可以认为每类志愿者的数量都是无限多的.</p>
+<h2 id="output">Output</h2>
+<p>仅包含一个整数, 表示你所设计的最优方案的总费用.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>3 3
+2 3 4
+1 2 2
+2 3 5
+3 3 2</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>14</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有数据, 满足:<span class="math inline">\(1 \leq n \leq 1000, 1 \leq m \leq 10000\)</span>, 题目中其他所涉及的数据均不超过 <span class="math inline">\(2^{31}-1\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<p>把每个志愿者工作的时间段当作一个区间, 于是把一个两个维度的问题压到了一个维度上 (雾). 由于涉及两组信息, 我们可以建一个费用流图, 具体建法如下:</p>
+<ul>
+<li>对于每一个志愿者, 连接一条边 <span class="math inline">\((s_i \rightarrow t_i+1, \infty, c_i)\)</span>;</li>
+<li>对于 <span class="math inline">\([1, n+1]\)</span> 中的任何一个整数 <span class="math inline">\(i\)</span>, 若 <span class="math inline">\(d_i \geq d_{i-1}\)</span>, 则连接边 <span class="math inline">\((S \rightarrow i, d_i - d_{i-1}, 0)\)</span>;</li>
+<li>反之, 若 <span class="math inline">\(d_i \lt d_{i-1}\)</span>, 则连接边 <span class="math inline">\((i \rightarrow T, d_{i-1} - d_i, 0)\)</span>.</li>
+</ul>
+<p>然后求出满流情况下的最小费用即可.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+
+<span class="ot">#define nullptr NULL</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">10010</span>, maxm = <span class="dv">100100</span>;
+<span class="dt">const</span> lli infinit = <span class="bn">0x007f7f7f7f7f7f7fll</span>;
+
+<span class="kw">class</span> SpfaMaxflow
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v;
+        lli flow, cost;
+        edge *next, *rev;
+    };
+    <span class="dt">int</span> n, s, t, ecnt;
+    edge *edges[maxn], epool[maxm], *from[maxn];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v, lli flow, lli cost)
+    {
+        edge *p = &amp;epool[++ecnt],
+             *q = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;flow = flow; p-&gt;cost = cost;
+        p-&gt;next = edges[u]; edges[u] = p; p-&gt;rev = q;
+        q-&gt;u = v; q-&gt;v = u; q-&gt;flow = <span class="dv">0</span>, q-&gt;cost = -cost;
+        q-&gt;next = edges[v]; edges[v] = q; q-&gt;rev = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> inque[maxn];
+    lli dist[maxn];
+    <span class="dt">bool</span> bfs(<span class="dt">void</span>)
+    {
+        queue&lt;<span class="dt">int</span>&gt; que;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++)
+            inque[i] = <span class="kw">false</span>, dist[i] = infinit, from[i] = <span class="kw">nullptr</span>;
+        que.push(s); inque[s] = <span class="kw">true</span>;
+        dist[s] = <span class="dv">0</span>;
+        <span class="kw">while</span> (!que.empty()) {
+            <span class="dt">int</span> p = que.front();
+            que.pop();
+            <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+                <span class="kw">if</span> (ep-&gt;flow &amp;&amp; dist[p] + ep-&gt;cost &lt; dist[ep-&gt;v]) {
+                    dist[ep-&gt;v] = dist[p] + ep-&gt;cost;
+                    from[ep-&gt;v] = ep;
+                    <span class="kw">if</span> (!inque[ep-&gt;v]) {
+                        que.push(ep-&gt;v);
+                        inque[ep-&gt;v] = <span class="kw">true</span>;
+                    }
+                }
+            inque[p] = <span class="kw">false</span>;
+        }
+        <span class="kw">if</span> (dist[t] &gt;= infinit)
+            <span class="kw">return</span> <span class="kw">false</span>;
+        <span class="kw">return</span> <span class="kw">true</span>;
+    }
+    lli max_flow, min_cost;
+    <span class="dt">void</span> eval(<span class="dt">void</span>)
+    {
+        max_flow = min_cost = <span class="dv">0</span>;
+        <span class="kw">while</span> (bfs()) {
+            lli tmp = infinit;
+            <span class="kw">for</span> (edge *ep = from[t]; ep; ep = from[ep-&gt;u])
+                tmp = min(tmp, ep-&gt;flow);
+            <span class="kw">for</span> (edge *ep = from[t]; ep; ep = from[ep-&gt;u])
+                ep-&gt;flow -= tmp,
+                ep-&gt;rev-&gt;flow += tmp;
+            max_flow += tmp;
+            min_cost += dist[t] * tmp;
+        }
+        <span class="kw">return</span> ;
+    }
+} graph;
+
+<span class="dt">int</span> n, m;
+lli d[maxn], s[maxn], t[maxn], c[maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;d[i]);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+        scanf(<span class="st">"</span><span class="ch">%lld%lld%lld</span><span class="st">"</span>, &amp;s[i], &amp;t[i], &amp;c[i]);
+    <span class="co">// Constructing graph</span>
+    graph.n = n + <span class="dv">2</span>;
+    graph.s = <span class="dv">0</span>;
+    graph.t = graph.n;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+        graph.add_edge(s[i], t[i] + <span class="dv">1</span>, infinit, c[i]);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n + <span class="dv">1</span>; i++) {
+        <span class="dt">int</span> tmp = d[i] - d[i - <span class="dv">1</span>];
+        <span class="kw">if</span> (tmp &gt;= <span class="dv">0</span>)
+            graph.add_edge(graph.s, i, tmp, <span class="dv">0</span>);
+        <span class="kw">else</span>
+            graph.add_edge(i, graph.t, -tmp, <span class="dv">0</span>);
+        graph.add_edge(i, i - <span class="dv">1</span>, infinit, <span class="dv">0</span>);
+    }
+    graph.eval();
+    lli cost = graph.min_cost;
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, cost);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1061/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1061/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1061/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1061/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1061">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj3569: DZY Loves Chinese II&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj3569: DZY Loves Chinese II
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=Fiddling" target="_self">
+            <i class="fa fa-tag"></i> Fiddling
+          </a>
+          <a class="tag" href="/blog/archive/?q=Randomization Algorithm" target="_self">
+            <i class="fa fa-tag"></i> Randomization Algorithm
+          </a>
+        </span>
+        <span class="date" title="16:45:46 | 20 April, 2017">
+          20 April, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>神校 XJ 之学霸兮, Dzy 皇考曰 JC.</p>
+<p>摄提贞于孟陬兮, 惟庚寅 Dzy 以降.</p>
+<p>纷 Dzy 既有此内美兮, 又重之以修能.</p>
+<p>遂降临于 OI 界, 欲以神力而凌♂辱众生.</p>
+<p>今 Dzy 有一魞歄图, 其上有 <span class="math inline">\(n\)</span> 座祭坛, 又有 <span class="math inline">\(m\)</span> 条膴蠁边.</p>
+<p>时而 Dzy 狂 WA 而怒发冲冠, 神力外溢, 遂有 <span class="math inline">\(k\)</span> 条膴蠁边灰飞烟灭.</p>
+<p>而后俟其日 A50 题则又令其复原. (可视为立即复原)</p>
+<p>然若有祭坛无法相互到达, Dzy 之神力便会大减, 于是欲知其是否连通.</p>
+<h2 id="input">Input</h2>
+<p>第一行 <span class="math inline">\(n, m\)</span></p>
+<p>接下来 <span class="math inline">\(m\)</span> 行 <span class="math inline">\(x, y\)</span>: 表示 <span class="math inline">\(m\)</span> 条膴蠁边, 依次编号</p>
+<p>接下来一行 <span class="math inline">\(Q\)</span></p>
+<p>接下来 <span class="math inline">\(Q\)</span> 行:</p>
+<p>每行第一个数 <span class="math inline">\(k\)</span> 而后 <span class="math inline">\(k\)</span> 个编号 <span class="math inline">\(c_1 \sim c_k\)</span>: 表示 <span class="math inline">\(k\)</span> 条边, 编号为 <span class="math inline">\(c_1 \sim c_k\)</span></p>
+<p>为了体现在线,<span class="math inline">\(c_1 \sim c_k\)</span> 均需异或之前回答为连通的个数</p>
+<h2 id="output">Output</h2>
+<p>对于每个询问输出: 连通则为 “Connected”, 不连通则为 “Disconnected” (不加引号).</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>5 10
+2 1
+3 2
+4 2
+5 1
+5 3
+4 1
+4 3
+5 2
+3 1
+5 4
+5
+1 1
+3 7 0 3
+4 0 7 4 6
+2 2 7
+4 5 0 2 13</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>Connected
+Connected
+Connected
+Connected
+Disconnected</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有数据, 满足:<span class="math inline">\(n \leq 10^5, m \leq 5 \times 10^5, Q \leq 50000, 1 \leq k \leq 15\)</span>, 并且: 数据保证没有重边与自环.</p>
+<h2 id="explanation">Explanation</h2>
+<p><strong>题目大意:<span class="math inline">\(n\)</span> 个点,<span class="math inline">\(m\)</span> 条边,<span class="math inline">\(k\)</span> 次询问, 每次询问去掉某条边之后图是否连通.</strong></p>
+<blockquote>
+<p>我们找到这个图的任意一棵生成树, 然后对于每条非树边将其的权值赋为一个随机数.</p>
+<p>对于每条树边, 我们将这条树边的权值设为所有覆盖这条树边的边权的异或和.</p>
+<p>那么图不连通当且仅当删除一条树边和覆盖这条树边的所有边集, 而由于刚才的处理一条树边和覆盖这条边的所有边集的异或和为零.</p>
+<p>于是问题转化成了对于给定的 <span class="math inline">\(k\)</span> 条边是否存在一个边权的异或和为零的子集果断高斯消元由于使用了随机化所以碰撞率极低.</p>
+</blockquote>
+<p>参照这篇题解:<a href="">http://blog.csdn.net/PoPoQQQ/article/details/41865807</a></p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">500100</span>, maxm = <span class="dv">500100</span>;
+
+<span class="kw">class</span> IDontKnowWhatThisDoes
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v, rnd;
+        edge *next;
+    };
+    <span class="dt">int</span> n, root, ecnt;
+    edge *edges[maxn], epool[maxm];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v)
+    {
+        edge *p = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v;
+        p-&gt;next = edges[u]; edges[u] = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> vis[maxn];
+    <span class="dt">int</span> b[maxn];
+    <span class="dt">void</span> dfs1(<span class="dt">int</span> p)
+    {
+        vis[p] = <span class="kw">true</span>;
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+            <span class="kw">if</span> (!vis[ep-&gt;v]) {
+                dfs1(ep-&gt;v);
+            } <span class="kw">else</span> {
+                ep-&gt;rnd = rand();
+                b[p] ^= ep-&gt;rnd;
+                b[ep-&gt;v] ^= ep-&gt;rnd;
+            }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> dfs2(<span class="dt">int</span> p)
+    {
+        vis[p] = <span class="kw">true</span>;
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+            <span class="kw">if</span> (!vis[ep-&gt;v]) {
+                dfs2(ep-&gt;v);
+                ep-&gt;rnd ^= b[ep-&gt;v];
+                b[p] ^= b[ep-&gt;v];
+            }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> construct(<span class="dt">void</span>)
+    {
+        root = <span class="dv">1</span>;
+        memset(vis, <span class="dv">0</span>, <span class="kw">sizeof</span>(vis));
+        dfs1(root);
+        memset(vis, <span class="dv">0</span>, <span class="kw">sizeof</span>(vis));
+        dfs2(root);
+        <span class="kw">return</span> ;
+    }
+    <span class="co">// Here goes the checking</span>
+    <span class="dt">int</span> c[<span class="dv">64</span>];
+    <span class="dt">bool</span> judge(<span class="dt">int</span> k)
+    {
+        <span class="dt">int</span> now = <span class="dv">0</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span> &lt;&lt; <span class="dv">30</span>; i; i &gt;&gt;= <span class="dv">1</span>) {
+            <span class="dt">int</span> j = now + <span class="dv">1</span>;
+            <span class="kw">for</span> (; j &lt;= k; j++)
+                <span class="kw">if</span> (c[j] &amp; i)
+                    <span class="kw">break</span>;
+            <span class="kw">if</span> (j == k + <span class="dv">1</span>)
+                <span class="kw">continue</span>;
+            swap(c[j], c[++now]);
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= k; j++)
+                <span class="kw">if</span> (j != now &amp;&amp; c[j] &amp; i)
+                    c[j] ^= c[now];
+        }
+        <span class="kw">if</span> (c[k])
+            <span class="kw">return</span> <span class="kw">false</span>;
+        <span class="kw">return</span> <span class="kw">true</span>;
+    }
+} graph;
+
+<span class="dt">int</span> n, m, T;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    srand(<span class="dv">19990610</span>);
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, a, b; i &lt;= m; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;a, &amp;b);
+        <span class="kw">if</span> (a &gt; b) swap(a, b);
+        graph.add_edge(a, b);
+    }
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;T);
+    graph.construct();
+    <span class="dt">int</span> res = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> idx = <span class="dv">1</span>, k; idx &lt;= T; idx++) {
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;k);
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, x; i &lt;= k; i++) {
+            scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;x);
+            x ^= res;
+            graph.c[i] = graph.epool[x].rnd;
+        }
+        <span class="kw">if</span> (graph.judge(k)) {
+            printf(<span class="st">"Disconnected</span><span class="ch">\n</span><span class="st">"</span>);
+        } <span class="kw">else</span> {
+            res += <span class="dv">1</span>;
+            printf(<span class="st">"Connected</span><span class="ch">\n</span><span class="st">"</span>);
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj3569/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj3569/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj3569/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj3569/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj3569">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

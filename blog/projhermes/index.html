@@ -1,0 +1,527 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Project Hermes: Deploying a Fully-Functional Portable Environment&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="en">
+      <div class="post-header">
+        <h1 class="title">
+          Project Hermes: Deploying a Fully-Functional Portable Environment
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Tutorials" target="_self">
+            <i class="fa fa-tag"></i> Tutorials
+          </a>
+          <a class="tag" href="/blog/archive/?q=Portable" target="_self">
+            <i class="fa fa-tag"></i> Portable
+          </a>
+          <a class="tag" href="/blog/archive/?q=Flash Drive" target="_self">
+            <i class="fa fa-tag"></i> Flash Drive
+          </a>
+          <a class="tag" href="/blog/archive/?q=Linux" target="_self">
+            <i class="fa fa-tag"></i> Linux
+          </a>
+          <a class="tag" href="/blog/archive/?q=Fedora" target="_self">
+            <i class="fa fa-tag"></i> Fedora
+          </a>
+          <a class="tag" href="/blog/archive/?q=Btrfs" target="_self">
+            <i class="fa fa-tag"></i> Btrfs
+          </a>
+          <a class="tag" href="/blog/archive/?q=LUKS" target="_self">
+            <i class="fa fa-tag"></i> LUKS
+          </a>
+        </span>
+        <span class="date" title="12:49:11 | 1 January, 2017">
+          1 January, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <p>So it had been quite a long time since I had decided that I need a fully functional portable environment that can be used anywhere, anytime and in every possible way. I believe that I had did this before, around 1 year ago, when I deployed a few stuff onto my flash drive and oops,<em> the free space was not sufficient</em>. Yet half of the space of my thumb drive was consumed deliberately and it still made no sense.</p>
+<p>It would be apparent that people who own devices of large storage spaces, should not be worried about the <em>empty space problem</em>, had their flash drives be stacked with several hundred gigabytes or a few terabytes. But people like me, who own small ones, like the Sandisk Ultra which I fixed a few months earlier, that contained no more than <strong>14. 7 GiB</strong>.</p>
+<p>The entire process was devastating, and by no less than a dozen and a half repeated wrongdoings had I tried, in order to proceed to the final step. The time would be longer should I not have backed up the data created midway. Some of the data were lost, and some did not. I recalled having the installation ran for around 20 times, while half of them required a full disk wipe (for clearing up the disk of course). Backing up of the Btrfs filesystem, either in partition image, in subvolume dump or in tar archives, would also have counted to ten.</p>
+<p>No matter how the process had been aggrieving, the results were astounding and satisfying. One may realize the importance it brings, and the efficiency it dedicates. Having such a device would certainly be helpful, such as operating system failures and development-on-the-go. These are a few screenshots used to demonstrate the results of this deployment, in hope that they might impress you:</p>
+<figure>
+<img class="thumb" data-small="/blog/projhermes/hermes_6-small.jpg" data-src="/blog/projhermes/hermes_6.png" data-thumb="/blog/projhermes/hermes_6-thumb.jpg" src="/blog/projhermes/hermes_6-thumb.jpg" title="PortableApps on Windows" width="1920px"/>
+<figcaption>
+PortableApps on Windows
+</figcaption>
+</figure>
+<figure>
+<img class="thumb" data-small="/blog/projhermes/hermes_prev_3-small.jpg" data-src="/blog/projhermes/hermes_prev_3.png" data-thumb="/blog/projhermes/hermes_prev_3-thumb.jpg" src="/blog/projhermes/hermes_prev_3-thumb.jpg" title="Fedora 24 Workstation, Linux on Bootable Partition" width="1920px"/>
+<figcaption>
+Fedora 24 Workstation, Linux on Bootable Partition
+</figcaption>
+</figure>
+<p>If you had interest in this process, or if you would like to make one yourself, you may refer to the rest of this page by expanding the content.<strong> Note that the drive should not contain critical information or files of great importance. Any damage the following procedures dealt to your disk are entirely out of the author ‘s control and I take no responsibilities for the potential consequences.</strong></p>
+<!-- More -->
+<h2 id="failed-attempts">Failed Attempts</h2>
+<p>Most people would not be interested in this section. But to remember the failures that I had encountered, and make people understand that these approaches are not correct and would <strong>definitely result in failure</strong>, I decided that it would be better to leave them here.<em> If you really aren’ t interested in this section, simply skip it.</em></p>
+<h3 id="attempt-1">Attempt #1</h3>
+<p>I successively tried a great many distributions of Linux images, while none of them happened to work. Most of them resulted in the error message:</p>
+<pre><code>syslinux 5.10: failed to load ldlinux.c32</code></pre>
+<p>Indeed the file <code>ldlinux.c32</code> is present on disk, and by trying all the possible file of the same name in different GNU/Linux distributions I have reached a conclusion, that it has nothing to do with the individual distributions (or a high unlikeliness to be), but the image burner or the flash drive itself.</p>
+<p>So I refered to a few documents or questions on the Internet, and this blog post turned out to be quite a nice solution:</p>
+<p><a href="">http://blog.csdn.net/fireroll/article/details/46744525</a></p>
+<blockquote>
+<p>用 UltraISO 制作 Ubuntu 或 Debian 的 U 盘启动盘后, 在机器用 U 盘启动时有时会报这个错误: failed to load ldlinux. c32</p>
+<p>是因为 UltraISO 的问题, 需要换刻录软件; 请换刻录软件 linux 的用 mkusb, windows 的用 Win32DiskImager</p>
+<p>具体用法: https: //wiki. ubuntu. com/Win32DiskImager/iso2usb https: //help. ubuntu. com/community/mkusb</p>
+</blockquote>
+<p><strong>I have to clarify myself hereby, that I am not using non-genuine software due to the fact that these softwares such as <em>PowerISO</em> and <em>UltraISO</em> are currently under trial period.</strong></p>
+<p>Therefore I abandoned UltraISO and turned to PowerISO for help. This immediately solved the problem, and the Linux Live CD is now bootable (again). I believe that it would not be necessary to have a security penetration testing system in my pocket, so I gave up Kali Linux (while the most important reason is that it was too big). While Fedora 25 Workstation had some issues with the <code>anaconda</code> installer that resulted in some terrible segmentation faults, I falled back to Fedora 24 Workstation. The image is relatively small, and only a mere 1. 6 GiB.</p>
+<h3 id="attempt-2">Attempt #2</h3>
+<p>In fact I did not install Fedora to the drive this time, only to test out a few outstanding Linux features, such as partition compression and LUKS partition encryption.</p>
+<p>At first it seemed that Btrfs did not support encryption (And it certainly did not). But considering all the implications I figured out that neither did Ext4 support encryption in one way but under the LUKS container (Actually it might be an LVM container that had a LUKS header), it supported encryption. Searching through the web I found a Gentoo Wiki page that described exactly how to create a <strong>bootable, encrypted, compressed</strong> Linux installation.</p>
+<p><a href="">https://wiki.gentoo.org/wiki/Full_Encrypted_Btrfs/Native_System_Root_Guide</a></p>
+<blockquote>
+<p>Basically this article is an extension to Btrfs/Native System Root Guide which adds Dm-crypt and uses Dracut to create the initramfs rather then dealing with the Early Userspace Mounting approach. As the root partition, which also includes /boot, will end up encrypted, we ‘ll store the keyfile to unlock the btrfs raid partitions within the initramfs. This may be a bit unsafer on runtime as the keyfile ends up in memory but we gain a faster boot process without the need to input the password 4 times (2 x grub and 2 x btrfs raid1). I also have an btrs raid6 with 6 full encrypted disks and this would lead me to enter my password 10 times to have a fully working system. so i’ m happy with embedding the keyfile within the initramfs.</p>
+<p>As i didn ‘t find a way to get a working system with the initramfs generated by genkernel I’ ve decided to use dracut.</p>
+<p>We ‘ll migrate an existing MD software raid1 to an btrfs raid1 without adding extra disks. So better make backups of your data! I assume the raid members of /dev/md1 to be /dev/sda and /dev/sdb.</p>
+<p>The whole procedure is straight forward but you have to double check a few things i’ ll mention later. Please carefully read the whole post and pay extra attention to grub2 and dracut.</p>
+<p>There may be better ways to accomplish this setup but after nights of research and testing within a virtual machine this procedure has worked for me.</p>
+</blockquote>
+<h4 id="preparing-encryption">Preparing Encryption</h4>
+<p>As we ‘ll use a keyfile to unlock the partitions we’ ll now create one (paranoid settings). Since some computers don ‘t support hardware random or don’ t contain supported TPM modules, we are using <code>/dev/urandom</code> instead.</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">[<span class="kw">root@liveuser</span> ~]$ dd if=/dev/urandom of=/root/secretkey bs=1 count=4096
+[<span class="kw">root@liveuser</span> ~]$ chmod 0400 /root/secretkey</code></pre></div>
+<p>Now we have a key to encrypt the drive, but this key has nothing to do with the passphrase. The key to decode the drive, is encrypted with the passphrase and stored in the LUKS header on the partition, which if not provided with the correct passphrase would not be able to turn into a valid encryption key to decrypt the drive itself.</p>
+<h4 id="encrypting-partition">Encrypting Partition</h4>
+<p>After partitioning the partitions, we create an unformatted <code>/dev/sdc3</code> area. This area is used to create the LUKS partition, which should, when the climate is right, contain the Btrfs partition. We shall format the partitions:</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">[<span class="kw">root@liveuser</span> ~]$ cryptsetup luksFormat -s 512 -c aes-xts-plain64 /dev/sdc3</code></pre></div>
+<p>Next we add the key to the partition.</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">[<span class="kw">root@liveuser</span> ~]$ cryptsetup luksAddKey /dev/sdc3 /root/secretkey</code></pre></div>
+<p>Finally we mount the root partition to where it should be.</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">[<span class="kw">root@liveuser</span> ~]$ cryptsetup open -d /root/secretkey /dev/sdc3 luks-1</code></pre></div>
+<h4 id="creating-filesystem-mountpoints-and-subvolumes">Creating filesystem, mountpoints and subvolumes</h4>
+<p>Now we format the mapped partition.</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="kw">mkfs.btrfs</span> -L System /dev/mapper/luks-1</code></pre></div>
+<p>Next we create the mountpoints, mount the filesystems and create subvolumes. Since <code>zlib</code> has a better compression ratio than <code>lzo</code>, and portable devices demand free space, we are using <code>zlib</code><del>instead</del>.</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="co"># Create mountpoints for first pass</span>
+[<span class="kw">root@liveuser</span> ~]$ mkdir /mnt/btrfsmirror
+[<span class="kw">root@liveuser</span> ~]$ mkdir /mnt/newroot
+<span class="co"># Mounting and creating subvolumes</span>
+[<span class="kw">root@liveuser</span> ~]$ mount -t btrfs -o defaults,noatime,compress=zlib,autodefrag /dev/mapper/luks-1 /mnt/btrfsmirror
+[<span class="kw">root@liveuser</span> ~]$ btrfs subvol create /mnt/btrfsmirror/root
+[<span class="kw">root@liveuser</span> ~]$ mount -t btrfs -o defaults,noatime,compress=zlib,autodefrag,subvol=root /dev/mapper/luks-1 /mnt/newroot</code></pre></div>
+<p>We wouldn ‘t be needing <code>/home</code> and <code>/boot</code> mountpoints this time.</p>
+<p>But after glaring at the rest of the documentation, I immediately decided that this tutorial is too difficult for me to complete, and the methods don’ t seem to be quite automated, and everytime a kernel update occurs it had to be done manually again, which I don ‘t hope to see.</p>
+<p>So, after a full disk wipe, I started the process again.</p>
+<h3 id="attempt-3">Attempt #3</h3>
+<p>I wiped the entire disk in about 20 minutes, then format the disk in the following manner:</p>
+<ol type="1">
+<li>Data Partition, NTFS, 11 GiB</li>
+<li>Boot Partition, Ext4, 128 MiB (Later changed to 256 MiB due to warnings)</li>
+<li>System Partition, Btrfs, 3. 7 GiB</li>
+</ol>
+<p>The partitions are automatically mounted to the <code>/tmp</code> section by <code>anaconda</code>, so there is no possibility (with ease) that you can override the mount parameters before installation.</p>
+<p>The installer actively refused the request due to the massive nature of the linux distribution. Therefore I had to enlarge the Btrfs partition to around 6 GiB in order to contain the distro and further updates.</p>
+<p>After the installation, I rebooted the system into the flash drive (and indeed) it worked.<strong> This proved that Btrfs is bootable as a system partition.</strong></p>
+<p>Ere the fiddling ended, I meddled with the <code>/etc/fstab</code> in the targetted partition, and modified the mount arguments. Doing this employed compression on the target disk, and certainly managed to do so. We also have to do a full disk defragmentation and compress it to the smallest possible.</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">[<span class="kw">root@liveuser</span> ~]$ cd /mnt/sysimage/root
+[<span class="kw">root@liveuser</span> root]$ btrfs filesystem defragment -rvf -czlib .</code></pre></div>
+<p>After doing this we have a small disk filled with inflated data. It also happened to boot successfully from grub2, and therefor proven that <strong>Btrfs is capable of compressing a bootable system partition</strong>.</p>
+<h3 id="attempt-4">Attempt #4</h3>
+<p>However, this attempt to shrink the filesystem to under 3 GiB had failed. Due to the exclusive nature that Btrfs requires the data on drive, uncompressed, to be not less than the partition content, it is not practical to shrink it to below the actual size of the filesystem.</p>
+<figure>
+<img class="thumb" data-small="/blog/projhermes/hermes_1-small.jpg" data-src="/blog/projhermes/hermes_1.png" data-thumb="/blog/projhermes/hermes_1-thumb.jpg" src="/blog/projhermes/hermes_1-thumb.jpg" title="Failed to directly shrink Btrfs partition" width="1920px"/>
+<figcaption>
+Failed to directly shrink Btrfs partition
+</figcaption>
+</figure>
+<p>So I tried out <code>tar</code> and store the data, register the UUID in <code>/etc/fstab</code> and reboot into the flash drive. During this period it seemed that nothing wrong happened.<strong> BUT</strong>, it turned out that the user may never be able to login to the account, regardless his permissions. I believe that I have restored the files with its proper permissions and locations, using <code>tar</code> commands without further modifcations. Yet the operating system had failed to recognize this, and reportedly did not find the <code>/bin/bash</code> executable which is evidently there.</p>
+<figure>
+<img class="thumb" data-small="/blog/projhermes/hermes_2-small.jpg" data-src="/blog/projhermes/hermes_2.png" data-thumb="/blog/projhermes/hermes_2-thumb.jpg" src="/blog/projhermes/hermes_2-thumb.jpg" title="Restoring partition with TAR, which failed" width="1920px"/>
+<figcaption>
+Restoring partition with TAR, which failed
+</figcaption>
+</figure>
+<p>Problems shall arise. Was it caused by a small bug while modifying the content beforehand (alas, before I tar the files while in the flash drive, because I didn’ t check its consistency)? Probably not. So this method is to be abandoned.</p>
+<h3 id="attempt-5">Attempt #5</h3>
+<p>By a mistake, I actually tried to copy a gigantic file into the Btrfs partition, without warnings. The data, plus the free space in the compressed subvolume is evidently sufficient, but not when adding the raw free space that hasn ‘t been compressed. No warnings occured, and the data seemed intact.</p>
+<p>This leads to a decision, that <strong>Btrfs can be written with as many data as it can hold while in compression mode, and will not cease to do so until it cannot compress more data than it held</strong>. In this way we can tar excessive stuff into it, without errors.</p>
+<h3 id="further-attempts">Further Attempts</h3>
+<p>The numbers labeled on those subtitles, are not exactly how many attempts I happened to run into. These are only for demonstration purposes and I did not keep a strict log.</p>
+<p>Most further attempts succeeded without problems, which, when bilaterally implemented and accepted may, when the climate is right, lead to a mutually satisfactory resolution.</p>
+<hr/>
+<h2 id="installing-fedora">Installing Fedora</h2>
+<p>One could simply follow the predefine instructions to install Fedora. In this particular case I would cover the installation with a predifined passphrase to encrypt the system partition. Those who go against this scheme could simply left the encryption-related steps to skip this out.</p>
+<figure>
+<img class="thumb" data-small="/blog/projhermes/hermes_3-small.jpg" data-src="/blog/projhermes/hermes_3.png" data-thumb="/blog/projhermes/hermes_3-thumb.jpg" src="/blog/projhermes/hermes_3-thumb.jpg" title="Installing Fedora 24 Workstation" width="1920px"/>
+<figcaption>
+Installing Fedora 24 Workstation
+</figcaption>
+</figure>
+<p>After waiting for a few minutes, the system would be ready for us to use. If you would like to prepare some premature steps before actually inflating the operating system, reboot into the flash drive and configure the operating system.</p>
+<p>You would need to partition this drive in the following scheme:</p>
+<ol type="1">
+<li>Boot Partition, Ext4, 256 MiB (Do not encrypt or compress)</li>
+<li>System Partition, Btrfs, 10 GiB (Encrypted with LUKS, Not compressed <strong>YET</strong>)</li>
+</ol>
+<p>Tweak the system if you like, while checking if the installation worked.</p>
+<h2 id="dumping-content">Dumping Content</h2>
+<p>We need to preserve the content in the filesystem flawlessly and losslessly. To do this we need to invoke the built-in btrfs toolchain and send the data of the subvolume to a reliable location where we can store the data for a moment.</p>
+<p>Note that for ease of demonstration, we will unlock the LUKS container in GNOME Disks before we enter the terminal. This could greatly reduce the keyboard burden.</p>
+<p>Let us assume that the UUID of <code>/dev/sdd1</code>, alias <code>/boot</code> is <code>1be96153-0000-0000-0000-0123456789ab</code>, UUID of the LUKS container is <code>c69c6f93-1111-1111-1111-0123456789ab</code>, the UUID of the Btrfs partition is <code>39a06cc3-2222-2222-2222-0123456789ab</code>. The following examples and code snippets are based on this assumption.</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">[<span class="kw">root@liveuser</span> ~]$ cd /mnt
+[<span class="kw">root@liveuser</span> mnt]$ mkdir /mnt/btrfs
+[<span class="kw">root@liveuser</span> mnt]$ mount -t btrfs -o defaults,noatime /dev/mapper/c69c6f93-1111-1111-1111-0123456789ab /mnt/btrfs
+[<span class="kw">root@liveuser</span> mnt]$ cd btrfs
+[<span class="kw">root@liveuser</span> btrfs]$ ls
+<span class="kw">total</span> 20
+<span class="kw">drwx------.</span> 1 liveuser liveuser    8 Dec 31 11:07 .
+<span class="kw">drwxr-xr-x.</span> 3 root     root     4096 Dec 31 11:08 ..
+<span class="kw">dr-xr-xr-x.</span> 1 root     root      152 Dec 31 11:20 root
+[<span class="kw">root@liveuser</span> btrfs]$</code></pre></div>
+<p>At this point we have mounted the partition, which contained a subvolume <code>root</code>. By the following methods we could dump the subvolume to an external location. Let us assume that the remote location is called <code>/backup</code>.</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">[<span class="kw">root@liveuser</span> btrfs]$ btrfs property set root ro false
+[<span class="kw">root@liveuser</span> btrfs]$ cd root
+[<span class="kw">root@liveuser</span> root]$ ls
+<span class="kw">total</span> 32
+<span class="kw">dr-xr-xr-x.</span> 1 root     root      152 Dec 31 11:20 .
+<span class="kw">drwx------.</span> 1 root     root       28 Dec 31 11:07 ..
+<span class="kw">lrwxrwxrwx.</span> 1 root     root        7 Feb  3  2016 bin -<span class="kw">&gt;</span> usr/bin
+<span class="kw">drwxr-xr-x.</span> 1 root     root       30 Dec 31 08:40 boot
+<span class="kw">drwxr-xr-x.</span> 1 root     root        0 Dec 31 08:40 dev
+<span class="kw">drwxr-xr-x.</span> 1 root     root    73412 Dec 31 08:59 etc
+<span class="kw">drwxr-xr-x.</span> 1 root     root       14 Dec 31 08:53 home
+<span class="kw">lrwxrwxrwx.</span> 1 root     root        7 Feb  3  2016 lib -<span class="kw">&gt;</span> usr/lib
+<span class="kw">lrwxrwxrwx.</span> 1 root     root        9 Feb  3  2016 lib64 -<span class="kw">&gt;</span> usr/lib64
+<span class="kw">drwx------.</span> 1 root     root        0 Jun 14  2016 lost+found
+<span class="kw">drwxr-xr-x.</span> 1 root     root        7 Feb  3  2016 media
+<span class="kw">drwxr-xr-x.</span> 1 root     root        0 Feb  3  2016 mnt
+<span class="kw">drwxr-xr-x.</span> 1 root     root        0 Feb  3  2016 opt
+<span class="kw">drwxr-xr-x.</span> 1 root     root        0 Dec 31 08:40 proc
+<span class="kw">dr-xr-x---.</span> 1 root     root      167 Dec 31 08:59 root
+<span class="kw">drwxr-xr-x.</span> 1 root     root        0 Dec 31 08:40 run
+<span class="kw">lrwxrwxrwx.</span> 1 root     root        8 Feb  3  2016 sbin -<span class="kw">&gt;</span> usr/sbin
+<span class="kw">drwxr-xr-x.</span> 1 root     root        0 Feb  3  2016 srv
+<span class="kw">drwxr-xr-x.</span> 1 root     root        0 Dec 31 08:40 sys
+<span class="kw">drwxrwxrwt.</span> 1 root     root      325 Dec 31 08:54 tmp
+<span class="kw">drwxr-xr-x.</span> 1 root     root      177 Jun 14  2016 usr
+<span class="kw">drwxr-xr-x.</span> 1 root     root     1367 Dec 31 03:55 var
+<span class="co"># Note that the data in the results are meddled with. So don't try to find anything</span>
+<span class="co"># Seemingly useful from it.</span>
+[<span class="kw">root@liveuser</span> root]$</code></pre></div>
+<p>Currently this subvolume <code>@root</code> is read-only. I must clarify that the function <code>btrfs property</code> is not documented in the documentation until very recently, which until now is still unavailable through <code>man btrfs</code>. Albeit though, you can still access the manpage for it through <code>man btrfs-property</code>.</p>
+<figure>
+<img class="thumb" data-small="/blog/projhermes/hermes_4-small.jpg" data-src="/blog/projhermes/hermes_4.png" data-thumb="/blog/projhermes/hermes_4-thumb.jpg" src="/blog/projhermes/hermes_4-thumb.jpg" title="Extracting subvolume from Btrfs partition" width="1920px"/>
+<figcaption>
+Extracting subvolume from Btrfs partition
+</figcaption>
+</figure>
+<p>Now we are about to extract it from the partition.</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">[<span class="kw">root@liveuser</span> root]$ cd ..
+[<span class="kw">root@liveuser</span> btrfs]$ btrfs send -v /mnt/btrfs/root <span class="kw">&gt;</span> /backup/dump.vol
+<span class="kw">At</span> subvol root
+<span class="kw">BTRFS_IOC_SEND</span> returned 0
+<span class="kw">joining</span> genl thread
+[<span class="kw">root@liveuser</span> btrfs]$</code></pre></div>
+<p>Still, we had to retrieve the UUIDs of the partitions, so that we may restored them at a later point.</p>
+<p>Because I personally do not welcome such partition tables like <code>/dev/sdd4</code> comes before <code>/dev/sdd1</code>, I would certainly rename the <code>/boot</code> partition to <code>/dev/sdd2</code>, as a reservation for the data partition, which is to be accessible (and the only one accessible) in Windows. The following commands retrieves the UUID from the <code>/boot</code> partition:</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">[<span class="kw">root@liveuser</span> dev]# dumpe2fs /dev/sdd2
+<span class="kw">dumpe2fs</span> 1.42.13 (17-May-2015)
+<span class="kw">Filesystem</span> volume name:   Boot
+<span class="kw">Last</span> mounted on:          /run/media/liveuser/Boot
+<span class="kw">Filesystem</span> UUID:          1be96153-0000-0000-0000-0123456789ab
+<span class="kw">Filesystem</span> magic number:  0xEF53
+<span class="kw">Filesystem</span> revision <span class="co">#:    1 (dynamic)</span>
+<span class="kw">Filesystem</span> features:      has_journal ext_attr resize_inode dir_index filetype extent flex_bg sparse_super large_file huge_file uninit_bg dir_nlink extra_isize
+<span class="kw">Filesystem</span> flags:         signed_directory_hash
+<span class="kw">Default</span> mount options:    user_xattr acl
+<span class="kw">Filesystem</span> state:         clean
+<span class="kw">Errors</span> behavior:          Continue
+<span class="kw">Filesystem</span> OS type:       Linux
+<span class="kw">Inode</span> count:              65536
+<span class="kw">Block</span> count:              262144
+<span class="kw">Reserved</span> block count:     13107
+<span class="kw">Free</span> blocks:              132408
+<span class="kw">Free</span> inodes:              65106
+<span class="kw">First</span> block:              1
+<span class="kw">Block</span> size:               1024
+<span class="kw">Fragment</span> size:            1024
+<span class="kw">Reserved</span> GDT blocks:      256
+<span class="kw">Blocks</span> per group:         8192
+<span class="kw">Fragments</span> per group:      8192
+<span class="kw">Inodes</span> per group:         2048
+<span class="kw">Inode</span> blocks per group:   256
+<span class="kw">Flex</span> block group size:    16
+<span class="kw">......</span></code></pre></div>
+<p>While the UUID of the Btrfs partition, can (as far as I am concerned) only be read by gparted, as a subsidiary function.</p>
+<p>Since the LUKS UUID can be read from <code>/dev/mapper/*</code>, we may not need to care about it at the moment.</p>
+<p>Note that you need to be specifically careful about this. The UUID must be taken down carefully, in order to avoid more sophistication modifying different grub and Linux configurations.</p>
+<h2 id="restoring-content">Restoring Content</h2>
+<p>Now this comes to the harder part. We need to recreate a lot of stuff, then we can restore the content. We need to restore the UUID and the subvolumes et cetera, but it’ s still not half as sophisticated as doing it by bare hand.</p>
+<p>We need to relocate the <code>/boot</code> partition from <code>/dev/sdd1</code> to <code>/dev/sdd2</code>, and remove <code>/dev/sdd2</code> on the way (That is to remove the Btrfs+LUKS partiton). This may require <code>fdisk</code>, since <code>parted</code> would forcefully convert the MBR partition table to GPT partition table anyway, which we do not like to happen, since this flash drive is faced towards a wider range of computers.</p>
+<p>Deleting <code>/dev/sdd2</code> can be done in gparted.</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">[<span class="kw">root@liveuser</span> mnt]$ fdisk /dev/sdd
+
+<span class="kw">Welcome</span> to fdisk (util-linux 2.28)<span class="kw">.</span>
+<span class="kw">Changes</span> will remain in memory only, until_ you decide to write them.
+<span class="kw">Be</span> careful before using the write command.
+
+
+<span class="kw">Command</span> (m for help)<span class="kw">:</span> p
+<span class="kw">Disk</span> /dev/sdd: 14.8 GiB, 15854469120 bytes, 30965760 sectors
+<span class="kw">Units</span>: sectors of 1 * 512 = 512 bytes
+<span class="kw">Sector</span> size (logical/physical)<span class="kw">:</span> 512 bytes / 512 bytes
+<span class="kw">I/O</span> size (minimum/optimal)<span class="kw">:</span> 512 bytes / 512 bytes
+<span class="kw">Disklabel</span> type: dos
+<span class="kw">Disk</span> identifier: 0x3456789a
+
+<span class="kw">Device</span>     Boot    Start      End Sectors  Size Id Type
+<span class="kw">/dev/sdd1</span>  *    30441472 30965759  524288  256M 83 Linux
+
+<span class="kw">Command</span> (m for help)<span class="kw">:</span> d
+<span class="kw">Selected</span> partition 1
+<span class="kw">Partition</span> 1 has been deleted.
+
+<span class="kw">Command</span> (m for help)<span class="kw">:</span> n
+<span class="kw">Partition</span> type
+   <span class="kw">p</span>   primary (0 primary, 0 extended, 4 free)
+   <span class="kw">e</span>   extended (container for logical partitions)
+<span class="kw">Select</span> (default p)<span class="kw">:</span> p
+<span class="kw">Partition</span> number (1-4, default 1)<span class="kw">:</span> 2
+<span class="kw">First</span> sector (2048-30965759, default 2048)<span class="kw">:</span> 30441472
+<span class="kw">Last</span> sector, +sectors or +size<span class="dt">{K,M,G,T,P}</span> (30441472-30965759, default 30965759)<span class="kw">:</span> 30965759
+
+<span class="kw">Created</span> a new partition 2 of type Linux and of size 256 MiB.
+
+<span class="kw">Command</span> (m for help)<span class="kw">:</span> a
+<span class="kw">Selected</span> partition 2
+<span class="kw">The</span> bootable flag on partition 2 is enabled now.
+
+<span class="kw">Command</span> (m for help)<span class="kw">:</span> p
+<span class="kw">Disk</span> /dev/sdd: 14.8 GiB, 15854469120 bytes, 30965760 sectors
+<span class="kw">Units</span>: sectors of 1 * 512 = 512 bytes
+<span class="kw">Sector</span> size (logical/physical)<span class="kw">:</span> 512 bytes / 512 bytes
+<span class="kw">I/O</span> size (minimum/optimal)<span class="kw">:</span> 512 bytes / 512 bytes
+<span class="kw">Disklabel</span> type: dos
+<span class="kw">Disk</span> identifier: 0x92663fa3
+
+<span class="kw">Device</span>     Boot    Start      End Sectors  Size Id Type
+<span class="kw">/dev/sdd2</span>  *    30441472 30965759  524288  256M 83 Linux
+
+<span class="kw">Command</span> (m for help)<span class="kw">:</span> w
+<span class="kw">The</span> partition table has been altered.
+<span class="kw">Calling</span> ioctl() <span class="kw">to</span> re-read partition table.
+<span class="kw">Syncing</span> disks.
+
+[<span class="kw">root@liveuser</span> mnt]$</code></pre></div>
+<p>We may now use GNOME Disks to recreate another LUKS Partition, But this time with an Ext4 partition at first. Should we set the passphrase to some known values, we may remove the Ext4 partition, then create a Btrfs partition inside the LUKS container, which <strong>is allowed in GNOME Disks but not in gparted</strong>.</p>
+<p>Now we modify the LUKS container ‘s UUID, after unmounting all subsidiaries of it to prevent data corruption.</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">[<span class="kw">root@liveuser</span> mnt]$ cryptsetup luksUUID --uuid c69c6f93-1111-1111-1111-0123456789ab /dev/sdd3
+
+<span class="kw">WARNING</span>!
+========
+<span class="kw">Do</span> you really want to change UUID of device?
+
+<span class="kw">Are</span> you sure? (Type uppercase yes)<span class="kw">:</span> YES
+[<span class="kw">root@liveuser</span> dev]$ cryptsetup luksUUID /dev/sdd3
+<span class="kw">c69c6f93-1111-1111-1111-0123456789ab</span></code></pre></div>
+<p>So now we receive the dump of the subvolume to the Btrfs partition. We assume that it is mounted on <code>/mnt/btrfs</code>, with compression <code>zlib</code>.</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">[<span class="kw">root@liveuser</span> mnt]$ mount -t btrfs -o noatime,compress=zlib /dev/mapper/luks-c69c6f93-1111-1111-1111-0123456789ab /mnt/btrfs
+[<span class="kw">root@liveuser</span> mnt]$ cd /mnt/btrfs
+[<span class="kw">root@liveuser</span> btrfs]$ btrfs receive -vf /backup/dump.vol /mnt/btrfs
+<span class="kw">At</span> subvol root
+<span class="kw">receiving</span> subvol root uuid=303dc832-1234-5678-9abc-123456789abc, stransid=62
+<span class="kw">BTRFS_IOC_SET_RECEIVED_SUBVOL</span> uuid=303dc832-1234-5678-9abc-123456789abc, stransid=62
+[<span class="kw">root@liveuser</span> btrfs]$</code></pre></div>
+<p>The UUID of a Btrfs partition is hard-coded on every block of the partition. So compared to LUKS and Ext4, it’ s a bit harder to change its UUID. It ‘s a bit harder, but not impossible. Only to mention that you should not remove your dump <strong>YET</strong>, since this action might be potentially dangerous.</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">[<span class="kw">root@liveuser</span> mnt]$ btrfs check /dev/mapper/luks-c69c6f93-1111-1111-1111-0123456789ab
+<span class="kw">Checking</span> filesystem on /dev/mapper/luks-c69c6f93-1111-1111-1111-0123456789ab
+<span class="kw">UUID</span>: 2a5df1d8-6666-6666-6666-0123456789ab
+<span class="kw">checking</span> extents
+<span class="kw">checking</span> free space cache
+<span class="kw">checking</span> fs roots
+<span class="kw">checking</span> csums
+<span class="kw">checking</span> root refs
+<span class="kw">found</span> 2419159047 bytes used err is 0
+<span class="kw">total</span> csum bytes: 2000000
+<span class="kw">total</span> tree bytes: 180000000
+<span class="kw">total</span> fs tree bytes: 160000000
+<span class="kw">total</span> extent tree bytes: 10300000
+<span class="kw">btree</span> space waste bytes: 23000000
+<span class="kw">file</span> data blocks allocated: 2200000000
+ <span class="kw">referenced</span> 3800000000
+[<span class="kw">root@liveuser</span> mnt]$</code></pre></div>
+<p>After checking the partition for problems, we mount the partition, and modify the UUID with a small trick. The partition must be offline before you make these modifications.</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">[<span class="kw">root@liveuser</span> mnt]$ btrfstune -U 39a06cc3-2222-2222-2222-0123456789ab /dev/mapper/luks-c69c6f93-1111-1111-1111-0123456789ab
+<span class="kw">Warning</span>: It is highly recommended to run <span class="st">'btrfs check'</span> before this operation
+<span class="kw">Also</span> canceling running UUID change progress may cause corruption
+<span class="kw">We</span> are going to change UUID, are your sure? [y/N]: y
+<span class="kw">Current</span> fsid: 2a5df1d8-6666-6666-6666-0123456789ab
+<span class="kw">New</span> fsid: 39a06cc3-2222-2222-2222-0123456789ab
+<span class="kw">Set</span> superblock flag CHANGING_FSID
+<span class="kw">Change</span> fsid in extents
+<span class="kw">Change</span> fsid on devices
+<span class="kw">Clear</span> superblock flag CHANGING_FSID
+<span class="kw">Fsid</span> change finished
+[<span class="kw">root@liveuser</span> mnt]$ btrfs property set /mnt/btrfs/root ro false</code></pre></div>
+<p>If you are not confident, re-run a filesystem check. This won’ t take too long.</p>
+<h2 id="managing-to-boot">Managing to Boot</h2>
+<p>Some may discover that their <code>grub2</code> may fail to load their systems after a reboot into the target. This is evidently true, as one occured oneself. The only thing that you need to do is re-install grub, like this:</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">[<span class="kw">root@liveuser</span> mnt]$ grub2-install --boot-directory /mnt/newboot /dev/sdd
+<span class="kw">Installing</span> for i386-pc platform.
+<span class="kw">Installation</span> finished. No error reported.
+[<span class="kw">root@liveuser</span> mnt]$</code></pre></div>
+<p>Where <code>/mnt/newboot</code> detonates the location of <code>/dev/sdd2</code>, i. e. the boot partition on your flash drive.</p>
+<p>This should work fine, and when you boot up from the flash drive you may see a password dialog, when entered you are inside the operating system.</p>
+<h2 id="small-tweaks">Small Tweaks</h2>
+<p>You may want to add RpmFusion sources to the flash drive.</p>
+<ol type="1">
+<li>Free Software:<a href="">https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-24.noarch.rpm</a></li>
+<li>Non-Free Software:<a href="">https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-24.noarch.rpm</a></li>
+</ol>
+<p>Then you can add your favourite applications to your portable environment.</p>
+<p>You may also consider removing some useless programs, but this depends on personal opinions. I would not make a suggestion here.</p>
+<figure>
+<img class="thumb" data-small="/blog/projhermes/hermes_5-small.jpg" data-src="/blog/projhermes/hermes_5.png" data-thumb="/blog/projhermes/hermes_5-thumb.jpg" src="/blog/projhermes/hermes_5-thumb.jpg" title="Finishing /etc/fstab on the data partition" width="1920px"/>
+<figcaption>
+Finishing /etc/fstab on the data partition
+</figcaption>
+</figure>
+<p>Creating a few symbolic links from your data partition (<code>/dev/sdd1</code>) to your home folder may also be a good choice. This could prevent routinely files from consuming all your <code>/dev/sdd3</code> space.</p>
+<p>You can disable the password requirements upon bootup, since you had already entered the key to unlocking the drive upon kernel load.</p>
+<h2 id="installing-portable-apps">Installing Portable Apps</h2>
+<p>Compared to the Linux Part, this is way easier.</p>
+<p>I simply made the partition inflatable (By setting a flag to TRUE), and the space consumption immediately reduced to a small value. But we had to backup the content of this portable environment as a whole and deflate it, so we need to reduce the partition size at first, then wipe the empty area, and inflate it again.</p>
+<p>These are a few screenshots I have taken midway:</p>
+<figure>
+<img class="thumb" data-small="/blog/projhermes/hermes_7-small.jpg" data-src="/blog/projhermes/hermes_7.png" data-thumb="/blog/projhermes/hermes_7-thumb.jpg" src="/blog/projhermes/hermes_7-thumb.jpg" title="Wiping partition" width="1419px"/>
+<figcaption>
+Wiping partition
+</figcaption>
+</figure>
+<figure>
+<img class="thumb" data-small="/blog/projhermes/hermes_8-small.jpg" data-src="/blog/projhermes/hermes_8.png" data-thumb="/blog/projhermes/hermes_8-thumb.jpg" src="/blog/projhermes/hermes_8-thumb.jpg" title="Setting up filesystem compression" width="525px"/>
+<figcaption>
+Setting up filesystem compression
+</figcaption>
+</figure>
+<figure>
+<img class="thumb" data-small="/blog/projhermes/hermes_9-small.jpg" data-src="/blog/projhermes/hermes_9.png" data-thumb="/blog/projhermes/hermes_9-thumb.jpg" src="/blog/projhermes/hermes_9-thumb.jpg" title="Resizing partition" width="1439px"/>
+<figcaption>
+Resizing partition
+</figcaption>
+</figure>
+<p>Note that after modifying a volume it should be better to check if the UUID had changed. If it had, modify it in <code>/etc/fstab</code>, should you automount the partition upon startup.</p>
+<p>I also created a few splashes for the Portable Applications, as a replacement. They can be accessed here:<a href="hermes_splashes.tar.xz">Archived splashes, with project files</a></p>
+<h2 id="final-touches">Final Touches</h2>
+<p>Edit the modified time and created time on NTFS to 2017-01-01 08: 00: 00, then it ‘s all done.</p>
+<p>Dump the image of the flash drive to a <code>.img</code> file and deflate it, so that we can deploy it later in a blink. Note that if you enabled encryption, you will receive poor results while deflating <code>/dev/sdd3</code>.</p>
+<figure>
+<img class="thumb" data-small="/blog/projhermes/hermes_10-small.jpg" data-src="/blog/projhermes/hermes_10.png" data-thumb="/blog/projhermes/hermes_10-thumb.jpg" src="/blog/projhermes/hermes_10-thumb.jpg" title="Dumping Image" width="1075px"/>
+<figcaption>
+Dumping Image
+</figcaption>
+</figure>
+<h2 id="final-effect">Final Effect</h2>
+<figure>
+<img class="thumb" data-small="/blog/projhermes/hermes_prev_1-small.jpg" data-src="/blog/projhermes/hermes_prev_1.png" data-thumb="/blog/projhermes/hermes_prev_1-thumb.jpg" src="/blog/projhermes/hermes_prev_1-thumb.jpg" title="Maximum flow minimum cost, on Atom in Fedora" width="1920px"/>
+<figcaption>
+Maximum flow minimum cost, on Atom in Fedora
+</figcaption>
+</figure>
+<figure>
+<img class="thumb" data-small="/blog/projhermes/hermes_prev_2-small.jpg" data-src="/blog/projhermes/hermes_prev_2.png" data-thumb="/blog/projhermes/hermes_prev_2-thumb.jpg" src="/blog/projhermes/hermes_prev_2-thumb.jpg" title="Papers in Kingsoft Office, in Fedora" width="1920px"/>
+<figcaption>
+Papers in Kingsoft Office, in Fedora
+</figcaption>
+</figure>
+<figure>
+<img class="thumb" data-small="/blog/projhermes/hermes_prev_4-small.jpg" data-src="/blog/projhermes/hermes_prev_4.png" data-thumb="/blog/projhermes/hermes_prev_4-thumb.jpg" src="/blog/projhermes/hermes_prev_4-thumb.jpg" title="Windows Atom installation, viewed in Fedora" width="1920px"/>
+<figcaption>
+Windows Atom installation, viewed in Fedora
+</figcaption>
+</figure>
+<figure>
+<img class="thumb" data-small="/blog/projhermes/hermes_prev_5-small.jpg" data-src="/blog/projhermes/hermes_prev_5.png" data-thumb="/blog/projhermes/hermes_prev_5-thumb.jpg" src="/blog/projhermes/hermes_prev_5-thumb.jpg" title="Remaining space analysis, in Fedora" width="1920px"/>
+<figcaption>
+Remaining space analysis, in Fedora
+</figcaption>
+</figure>
+<h2 id="editor-notes">Editor Notes</h2>
+<p>The reason why I called it <em>Project Hermes</em> is that according to the following description on Wikipedia, it seemed that he is the guardian of travellers, in Greek myths. I would like that, though. Because I had been suffering from a variety of kernel panics and blue screens. So I expect none of the above to happen when I’ m coding on my flash drive at school.</p>
+<blockquote>
+<p>Hermes is considered a god of transitions and boundaries. He is described as quick and cunning, moving freely between the worlds of the mortal and divine. He is also portrayed as an emissary and messenger of the gods; an intercessor between mortals and the divine, and conductor of souls into the afterlife. He has been viewed as the protector and patron of herdsmen, thieves, oratory and wit, literature and poetry, athletics and sports, invention and trade, roads, boundaries and travelers.</p>
+</blockquote>
+<p>The other reason is that <em>Hermes</em> is the orbiting space station that circulates between Earth and Mars for <em>Ares</em> missions, in movie <em>The Martian</em>. I had always liked how Mark survived his near-death situation, which I am in OI currently, as half a Pro and mostly a Noob. One had always hoped that one could be like him, turning from a noob to a pro.</p>
+<p>I am not going to upload the image to the Internet. But you can do this on your own, or help your friends to do it. We can all carry a thumb drive of our usual stuff so that we could program everywhere. It ‘s not that difficult, anyway.</p>
+<p><strong>You may not:</strong></p>
+<ul>
+<li>Take this post away and claim as yours.</li>
+<li>Repost the photos and the related contents as yours.</li>
+<li>Take large paragraphs (sufficiently large, at least half of it) of the post without claiming the author.</li>
+</ul>
+<p><strong>You may:</strong></p>
+<ul>
+<li>Re-post this post verbatim as long as the original author is noted explicitly.</li>
+<li>Study the project and imitate small parts while retaining your ideas. This has no restrictions on whether or not to claim the original author.</li>
+<li>Study paragraphs and cite them with the claim of the original author.</li>
+<li>Spread this post by a pointer to your friends.</li>
+</ul>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/projhermes/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/projhermes/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/projhermes/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/projhermes/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="projhermes">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

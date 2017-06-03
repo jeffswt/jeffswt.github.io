@@ -1,0 +1,499 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1089: [SCOI2003]严格n元树&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1089: [SCOI2003]严格n元树
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=SCOI2003" target="_self">
+            <i class="fa fa-tag"></i> SCOI2003
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+          <a class="tag" href="/blog/archive/?q=High Precision" target="_self">
+            <i class="fa fa-tag"></i> High Precision
+          </a>
+        </span>
+        <span class="date" title="21:00:00 | 15 August, 2016">
+          15 August, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Problem Specification</th>
+<th style="text-align: left;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Time Limit</td>
+<td style="text-align: left;">1 Sec</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Memory Limit</td>
+<td style="text-align: left;">162 MB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Submit</td>
+<td style="text-align: left;">1378</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Solved</td>
+<td style="text-align: left;">688</td>
+</tr>
+</tbody>
+</table>
+<!-- More -->
+<h2 id="description">Description</h2>
+<p>如果一棵树的所有非叶节点都恰好有 n 个儿子, 那么我们称它为严格 n 元树. 如果该树中最底层的节点深度为 d (根的深度为 0), 那么我们称它为一棵深度为 d 的严格 n 元树. 例如, 深度为２的严格２元树有三个, 如下图:</p>
+<figure>
+<img class="thumb" data-small="/blog/bzoj1089/bzoj1089_1-small.jpg" data-src="/blog/bzoj1089/bzoj1089_1.jpg" data-thumb="/blog/bzoj1089/bzoj1089_1-thumb.jpg" src="/blog/bzoj1089/bzoj1089_1-thumb.jpg" title="" width="621px"/>
+<figcaption>
+</figcaption>
+</figure>
+<p>给出 n, d, 编程数出深度为 d 的 n 元树数目.</p>
+<h2 id="input">Input</h2>
+<p>仅包含两个整数 n, d (0 &lt; n &lt;=32, 0 &lt;=d &lt;=16)</p>
+<h2 id="output">Output</h2>
+<p>仅包含一个数, 即深度为 d 的 n 元树的数目.</p>
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>【样例输入1】
+2 2
+
+【样例输入2】
+2 3
+
+【样例输入3】
+3 5</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>【样例输出1】
+3
+
+【样例输出2】
+21
+
+【样例输出2】
+58871587162270592645034001</code></pre>
+<h2 id="hint">HINT</h2>
+<h2 id="source">Source</h2>
+<hr/>
+<p>一看就是简单的不能再简单的 DP 问题了, 只是需要高精</p>
+<p>所以就从这位同志这里 借来了一个高精运算库-效率很高</p>
+<p><a href="">http://www.cnblogs.com/PegasusWang/archive/2013/03/23/2977610.html</a></p>
+<p>然后就没有然后了</p>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">64</span>;
+
+<span class="co">////////////////////////////////////////////////////////////////////////////////</span>
+<span class="co">// Thanks to the BigNum implementation by @PegasusWang on:</span>
+<span class="co">// http://www.cnblogs.com/PegasusWang/archive/2013/03/23/2977610.html</span>
+<span class="co">////////////////////////////////////////////////////////////////////////////////</span>
+
+<span class="ot">#define MAXN 9999</span>
+<span class="ot">#define MAXSIZE 10</span>
+<span class="ot">#define DLEN 4</span>
+
+<span class="kw">class</span> BigNum
+{
+<span class="kw">private</span>:
+    <span class="dt">int</span> a[<span class="dv">50000</span>];    <span class="co">//可以控制大数的位数</span>
+    <span class="dt">int</span> len;       <span class="co">//大数长度</span>
+<span class="kw">public</span>:
+    BigNum(){ len = <span class="dv">1</span>;memset(a,<span class="dv">0</span>,<span class="kw">sizeof</span>(a)); }   <span class="co">//构造函数</span>
+    BigNum(<span class="dt">const</span> <span class="dt">int</span>);       <span class="co">//将一个int类型的变量转化为大数</span>
+    BigNum(<span class="dt">const</span> <span class="dt">char</span>*);     <span class="co">//将一个字符串类型的变量转化为大数</span>
+    BigNum(<span class="dt">const</span> BigNum &amp;);  <span class="co">//拷贝构造函数</span>
+    BigNum &amp;<span class="kw">operator</span>=(<span class="dt">const</span> BigNum &amp;);   <span class="co">//重载赋值运算符，大数之间进行赋值运算</span>
+
+    <span class="kw">friend</span> istream&amp; <span class="kw">operator</span>&gt;&gt;(istream&amp;,  BigNum&amp;);   <span class="co">//重载输入运算符</span>
+    <span class="kw">friend</span> ostream&amp; <span class="kw">operator</span>&lt;&lt;(ostream&amp;,  BigNum&amp;);   <span class="co">//重载输出运算符</span>
+
+    BigNum <span class="kw">operator</span>+(<span class="dt">const</span> BigNum &amp;) <span class="dt">const</span>;   <span class="co">//重载加法运算符，两个大数之间的相加运算</span>
+    BigNum <span class="kw">operator</span>-(<span class="dt">const</span> BigNum &amp;) <span class="dt">const</span>;   <span class="co">//重载减法运算符，两个大数之间的相减运算</span>
+    BigNum <span class="kw">operator</span>*(<span class="dt">const</span> BigNum &amp;) <span class="dt">const</span>;   <span class="co">//重载乘法运算符，两个大数之间的相乘运算</span>
+    BigNum <span class="kw">operator</span>/(<span class="dt">const</span> <span class="dt">int</span>   &amp;) <span class="dt">const</span>;    <span class="co">//重载除法运算符，大数对一个整数进行相除运算</span>
+
+    BigNum <span class="kw">operator</span>^(<span class="dt">const</span> <span class="dt">int</span>  &amp;) <span class="dt">const</span>;    <span class="co">//大数的n次方运算</span>
+    <span class="dt">int</span>    <span class="kw">operator</span>%(<span class="dt">const</span> <span class="dt">int</span>  &amp;) <span class="dt">const</span>;    <span class="co">//大数对一个int类型的变量进行取模运算</span>
+    <span class="dt">bool</span>   <span class="kw">operator</span>&gt;(<span class="dt">const</span> BigNum &amp; T)<span class="dt">const</span>;   <span class="co">//大数和另一个大数的大小比较</span>
+    <span class="dt">bool</span>   <span class="kw">operator</span>&gt;(<span class="dt">const</span> <span class="dt">int</span> &amp; t)<span class="dt">const</span>;      <span class="co">//大数和一个int类型的变量的大小比较</span>
+
+    <span class="dt">void</span> print();       <span class="co">//输出大数</span>
+};
+BigNum::BigNum(<span class="dt">const</span> <span class="dt">int</span> b)     <span class="co">//将一个int类型的变量转化为大数</span>
+{
+    <span class="dt">int</span> c,d = b;
+    len = <span class="dv">0</span>;
+    memset(a,<span class="dv">0</span>,<span class="kw">sizeof</span>(a));
+    <span class="kw">while</span>(d &gt; MAXN)
+    {
+        c = d - (d / (MAXN + <span class="dv">1</span>)) * (MAXN + <span class="dv">1</span>);
+        d = d / (MAXN + <span class="dv">1</span>);
+        a[len++] = c;
+    }
+    a[len++] = d;
+}
+BigNum::BigNum(<span class="dt">const</span> <span class="dt">char</span>*s)     <span class="co">//将一个字符串类型的变量转化为大数</span>
+{
+    <span class="dt">int</span> t,k,index,l,i;
+    memset(a,<span class="dv">0</span>,<span class="kw">sizeof</span>(a));
+    l=strlen(s);
+    len=l/DLEN;
+    <span class="kw">if</span>(l%DLEN)
+        len++;
+    index=<span class="dv">0</span>;
+    <span class="kw">for</span>(i=l<span class="dv">-1</span>;i&gt;=<span class="dv">0</span>;i-=DLEN)
+    {
+        t=<span class="dv">0</span>;
+        k=i-DLEN<span class="dv">+1</span>;
+        <span class="kw">if</span>(k&lt;<span class="dv">0</span>)
+            k=<span class="dv">0</span>;
+        <span class="kw">for</span>(<span class="dt">int</span> j=k;j&lt;=i;j++)
+            t=t*<span class="dv">10</span>+s[j]-<span class="st">'0'</span>;
+        a[index++]=t;
+    }
+}
+BigNum::BigNum(<span class="dt">const</span> BigNum &amp; T) : len(T.len)  <span class="co">//拷贝构造函数</span>
+{
+    <span class="dt">int</span> i;
+    memset(a,<span class="dv">0</span>,<span class="kw">sizeof</span>(a));
+    <span class="kw">for</span>(i = <span class="dv">0</span> ; i &lt; len ; i++)
+        a[i] = T.a[i];
+}
+BigNum &amp; BigNum::<span class="kw">operator</span>=(<span class="dt">const</span> BigNum &amp; n)   <span class="co">//重载赋值运算符，大数之间进行赋值运算</span>
+{
+    <span class="dt">int</span> i;
+    len = n.len;
+    memset(a,<span class="dv">0</span>,<span class="kw">sizeof</span>(a));
+    <span class="kw">for</span>(i = <span class="dv">0</span> ; i &lt; len ; i++)
+        a[i] = n.a[i];
+    <span class="kw">return</span> *<span class="kw">this</span>;
+}
+istream&amp; <span class="kw">operator</span>&gt;&gt;(istream &amp; in,  BigNum &amp; b)   <span class="co">//重载输入运算符</span>
+{
+    <span class="dt">char</span> ch[MAXSIZE*<span class="dv">4</span>];
+    <span class="dt">int</span> i = <span class="dv">-1</span>;
+    in&gt;&gt;ch;
+    <span class="dt">int</span> l=strlen(ch);
+    <span class="dt">int</span> count=<span class="dv">0</span>,sum=<span class="dv">0</span>;
+    <span class="kw">for</span>(i=l<span class="dv">-1</span>;i&gt;=<span class="dv">0</span>;)
+    {
+        sum = <span class="dv">0</span>;
+        <span class="dt">int</span> t=<span class="dv">1</span>;
+        <span class="kw">for</span>(<span class="dt">int</span> j=<span class="dv">0</span>;j&lt;<span class="dv">4</span>&amp;&amp;i&gt;=<span class="dv">0</span>;j++,i--,t*=<span class="dv">10</span>)
+        {
+            sum+=(ch[i]-<span class="st">'0'</span>)*t;
+        }
+        b.a[count]=sum;
+        count++;
+    }
+    b.len =count++;
+    <span class="kw">return</span> in;
+
+}
+ostream&amp; <span class="kw">operator</span>&lt;&lt;(ostream&amp; out,  BigNum&amp; b)   <span class="co">//重载输出运算符</span>
+{
+    <span class="dt">int</span> i;
+    cout &lt;&lt; b.a[b.len - <span class="dv">1</span>];
+    <span class="kw">for</span>(i = b.len - <span class="dv">2</span> ; i &gt;= <span class="dv">0</span> ; i--)
+    {
+        cout.width(DLEN);
+        cout.fill(<span class="st">'0'</span>);
+        cout &lt;&lt; b.a[i];
+    }
+    <span class="kw">return</span> out;
+}
+
+BigNum BigNum::<span class="kw">operator</span>+(<span class="dt">const</span> BigNum &amp; T) <span class="dt">const</span>   <span class="co">//两个大数之间的相加运算</span>
+{
+    BigNum t(*<span class="kw">this</span>);
+    <span class="dt">int</span> i,big;      <span class="co">//位数</span>
+    big = T.len &gt; len ? T.len : len;
+    <span class="kw">for</span>(i = <span class="dv">0</span> ; i &lt; big ; i++)
+    {
+        t.a[i] +=T.a[i];
+        <span class="kw">if</span>(t.a[i] &gt; MAXN)
+        {
+            t.a[i + <span class="dv">1</span>]++;
+            t.a[i] -=MAXN<span class="dv">+1</span>;
+        }
+    }
+    <span class="kw">if</span>(t.a[big] != <span class="dv">0</span>)
+        t.len = big + <span class="dv">1</span>;
+    <span class="kw">else</span>
+        t.len = big;
+    <span class="kw">return</span> t;
+}
+BigNum BigNum::<span class="kw">operator</span>-(<span class="dt">const</span> BigNum &amp; T) <span class="dt">const</span>   <span class="co">//两个大数之间的相减运算</span>
+{
+    <span class="dt">int</span> i,j,big;
+    <span class="dt">bool</span> flag;
+    BigNum t1,t2;
+    <span class="kw">if</span>(*<span class="kw">this</span>&gt;T)
+    {
+        t1=*<span class="kw">this</span>;
+        t2=T;
+        flag=<span class="dv">0</span>;
+    }
+    <span class="kw">else</span>
+    {
+        t1=T;
+        t2=*<span class="kw">this</span>;
+        flag=<span class="dv">1</span>;
+    }
+    big=t1.len;
+    <span class="kw">for</span>(i = <span class="dv">0</span> ; i &lt; big ; i++)
+    {
+        <span class="kw">if</span>(t1.a[i] &lt; t2.a[i])
+        {
+            j = i + <span class="dv">1</span>;
+            <span class="kw">while</span>(t1.a[j] == <span class="dv">0</span>)
+                j++;
+            t1.a[j--]--;
+            <span class="kw">while</span>(j &gt; i)
+                t1.a[j--] += MAXN;
+            t1.a[i] += MAXN + <span class="dv">1</span> - t2.a[i];
+        }
+        <span class="kw">else</span>
+            t1.a[i] -= t2.a[i];
+    }
+    t1.len = big;
+    <span class="kw">while</span>(t1.a[len - <span class="dv">1</span>] == <span class="dv">0</span> &amp;&amp; t1.len &gt; <span class="dv">1</span>)
+    {
+        t1.len--;
+        big--;
+    }
+    <span class="kw">if</span>(flag)
+        t1.a[big<span class="dv">-1</span>]=<span class="dv">0</span>-t1.a[big<span class="dv">-1</span>];
+    <span class="kw">return</span> t1;
+}
+
+BigNum BigNum::<span class="kw">operator</span>*(<span class="dt">const</span> BigNum &amp; T) <span class="dt">const</span>   <span class="co">//两个大数之间的相乘运算</span>
+{
+    BigNum ret;
+    <span class="dt">int</span> i,j,up;
+    <span class="dt">int</span> temp,temp1;
+    <span class="kw">for</span>(i = <span class="dv">0</span> ; i &lt; len ; i++)
+    {
+        up = <span class="dv">0</span>;
+        <span class="kw">for</span>(j = <span class="dv">0</span> ; j &lt; T.len ; j++)
+        {
+            temp = a[i] * T.a[j] + ret.a[i + j] + up;
+            <span class="kw">if</span>(temp &gt; MAXN)
+            {
+                temp1 = temp - temp / (MAXN + <span class="dv">1</span>) * (MAXN + <span class="dv">1</span>);
+                up = temp / (MAXN + <span class="dv">1</span>);
+                ret.a[i + j] = temp1;
+            }
+            <span class="kw">else</span>
+            {
+                up = <span class="dv">0</span>;
+                ret.a[i + j] = temp;
+            }
+        }
+        <span class="kw">if</span>(up != <span class="dv">0</span>)
+            ret.a[i + j] = up;
+    }
+    ret.len = i + j;
+    <span class="kw">while</span>(ret.a[ret.len - <span class="dv">1</span>] == <span class="dv">0</span> &amp;&amp; ret.len &gt; <span class="dv">1</span>)
+        ret.len--;
+    <span class="kw">return</span> ret;
+}
+BigNum BigNum::<span class="kw">operator</span>/(<span class="dt">const</span> <span class="dt">int</span> &amp; b) <span class="dt">const</span>   <span class="co">//大数对一个整数进行相除运算</span>
+{
+    BigNum ret;
+    <span class="dt">int</span> i,down = <span class="dv">0</span>;
+    <span class="kw">for</span>(i = len - <span class="dv">1</span> ; i &gt;= <span class="dv">0</span> ; i--)
+    {
+        ret.a[i] = (a[i] + down * (MAXN + <span class="dv">1</span>)) / b;
+        down = a[i] + down * (MAXN + <span class="dv">1</span>) - ret.a[i] * b;
+    }
+    ret.len = len;
+    <span class="kw">while</span>(ret.a[ret.len - <span class="dv">1</span>] == <span class="dv">0</span> &amp;&amp; ret.len &gt; <span class="dv">1</span>)
+        ret.len--;
+    <span class="kw">return</span> ret;
+}
+<span class="dt">int</span> BigNum::<span class="kw">operator</span> %(<span class="dt">const</span> <span class="dt">int</span> &amp; b) <span class="dt">const</span>    <span class="co">//大数对一个int类型的变量进行取模运算</span>
+{
+    <span class="dt">int</span> i,d=<span class="dv">0</span>;
+    <span class="kw">for</span> (i = len<span class="dv">-1</span>; i&gt;=<span class="dv">0</span>; i--)
+    {
+        d = ((d * (MAXN<span class="dv">+1</span>))% b + a[i])% b;
+    }
+    <span class="kw">return</span> d;
+}
+BigNum BigNum::<span class="kw">operator</span>^(<span class="dt">const</span> <span class="dt">int</span> &amp; n) <span class="dt">const</span>    <span class="co">//大数的n次方运算</span>
+{
+    BigNum t,ret(<span class="dv">1</span>);
+    <span class="dt">int</span> i;
+    <span class="kw">if</span>(n&lt;<span class="dv">0</span>)
+        exit(<span class="dv">-1</span>);
+    <span class="kw">if</span>(n==<span class="dv">0</span>)
+        <span class="kw">return</span> <span class="dv">1</span>;
+    <span class="kw">if</span>(n==<span class="dv">1</span>)
+        <span class="kw">return</span> *<span class="kw">this</span>;
+    <span class="dt">int</span> m=n;
+    <span class="kw">while</span>(m&gt;<span class="dv">1</span>)
+    {
+        t=*<span class="kw">this</span>;
+        <span class="kw">for</span>( i=<span class="dv">1</span>;i&lt;&lt;<span class="dv">1</span>&lt;=m;i&lt;&lt;=<span class="dv">1</span>)
+        {
+            t=t*t;
+        }
+        m-=i;
+        ret=ret*t;
+        <span class="kw">if</span>(m==<span class="dv">1</span>)
+            ret=ret*(*<span class="kw">this</span>);
+    }
+    <span class="kw">return</span> ret;
+}
+<span class="dt">bool</span> BigNum::<span class="kw">operator</span>&gt;(<span class="dt">const</span> BigNum &amp; T) <span class="dt">const</span>   <span class="co">//大数和另一个大数的大小比较</span>
+{
+    <span class="dt">int</span> ln;
+    <span class="kw">if</span>(len &gt; T.len)
+        <span class="kw">return</span> <span class="kw">true</span>;
+    <span class="kw">else</span> <span class="kw">if</span>(len == T.len)
+    {
+        ln = len - <span class="dv">1</span>;
+        <span class="kw">while</span>(a[ln] == T.a[ln] &amp;&amp; ln &gt;= <span class="dv">0</span>)
+            ln--;
+        <span class="kw">if</span>(ln &gt;= <span class="dv">0</span> &amp;&amp; a[ln] &gt; T.a[ln])
+            <span class="kw">return</span> <span class="kw">true</span>;
+        <span class="kw">else</span>
+            <span class="kw">return</span> <span class="kw">false</span>;
+    }
+    <span class="kw">else</span>
+        <span class="kw">return</span> <span class="kw">false</span>;
+}
+<span class="dt">bool</span> BigNum::<span class="kw">operator</span> &gt;(<span class="dt">const</span> <span class="dt">int</span> &amp; t) <span class="dt">const</span>
+{
+    BigNum b(t);
+    <span class="kw">return</span> *<span class="kw">this</span>&gt;b;
+}
+
+<span class="dt">void</span> BigNum::print()
+{
+    <span class="dt">int</span> i;
+    cout &lt;&lt; a[len - <span class="dv">1</span>];
+    <span class="kw">for</span>(i = len - <span class="dv">2</span> ; i &gt;= <span class="dv">0</span> ; i--)
+    {
+        cout.width(DLEN);
+        cout.fill(<span class="st">'0'</span>);
+        cout &lt;&lt; a[i];
+    }
+    cout &lt;&lt; endl;
+}
+
+<span class="co">////////////////////////////////////////////////////////////////////////////////</span>
+<span class="co">// End of BigNum library</span>
+<span class="co">////////////////////////////////////////////////////////////////////////////////</span>
+
+<span class="kw">typedef</span> BigNum lli;
+<span class="dt">int</span> n, d;
+lli dp[maxn];
+
+<span class="co">// I passed this problem... maybe the data on BZOJ wasn't big enough.</span>
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;d);
+    <span class="co">// i is the depth of the tree.</span>
+    dp[<span class="dv">0</span>] = <span class="dv">1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= d; i++) {
+        dp[i] = <span class="dv">1</span>;
+        <span class="co">// dp[i] = dp[i - 1] ^ n + 1</span>
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++)
+            dp[i] = dp[i] *  dp[i - <span class="dv">1</span>];
+        dp[i] = dp[i] + <span class="dv">1</span>;
+    }
+    lli res = dp[d] - dp[d - <span class="dv">1</span>];
+    cout &lt;&lt; res &lt;&lt; endl;
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<hr/>
+<hr/>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1089/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1089/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1089/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1089/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1089">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

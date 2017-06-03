@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj3131: [Sdoi2013]淘金&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj3131: [Sdoi2013]淘金
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=SDOI2013" target="_self">
+            <i class="fa fa-tag"></i> SDOI2013
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+          <a class="tag" href="/blog/archive/?q=Digits DP" target="_self">
+            <i class="fa fa-tag"></i> Digits DP
+          </a>
+          <a class="tag" href="/blog/archive/?q=Heap" target="_self">
+            <i class="fa fa-tag"></i> Heap
+          </a>
+        </span>
+        <span class="date" title="13:38:33 | 14 March, 2017">
+          14 March, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>小 Z 在玩一个叫做《淘金者》的游戏. 游戏的世界是一个二维坐标. X 轴、Y 轴坐标范围均为 <span class="math inline">\(1 \dots n\)</span>. 初始的时候, 所有的整数坐标点上均有一块金子, 共 $n $块.</p>
+<p>一阵风吹过, 金子的位置发生了一些变化. 细心的小 Z 发现, 初始在 <span class="math inline">\((i, j)\)</span> 坐标处的金子 会变到 <span class="math inline">\((f(i), f(j))\)</span> 坐标处. 其中 <span class="math inline">\(f(x)\)</span> 表示 <span class="math inline">\(x\)</span> 各位数字的乘积, 例如 <span class="math inline">\(f(99) = 81, f(12) = 2, f(10) = 0\)</span>. 如果金子变化后的坐标不在 <span class="math inline">\(1 \ldots n\)</span> 的范围内, 我们认为这块金子已经被移出游戏. 同时可以发现, 对于变化之后的游戏局面, 某些坐标上的金子数量可能不止一块, 而另外一些坐标上可能已经没有金子. 这次变化之后, 游戏将不会再对金子的位置和数量进行改变, 玩家可以开始进行采集工作.</p>
+<p>小 Z 很懒, 打算只进行 <span class="math inline">\(k\)</span> 次采集. 每次采集可以得到某一个坐标上的所有金子, 采集之后, 该坐标上的金子数变为 0.</p>
+<p>现在小 Z 希望知道, 对于变化之后的游戏局面, 在采集次数为 <span class="math inline">\(k\)</span> 的前提下, 最多可以采集 到多少块金子?</p>
+<p>答案可能很大, 小 Z 希望得到对 <span class="math inline">\(10^9+7\)</span> 取模之后的答案.</p>
+<h2 id="input">Input</h2>
+<p>共一行, 包含两个正整数 <span class="math inline">\(n, k\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>一个整数, 表示最多可以采集到的金子数量.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>12 5</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>18</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有数据, 满足:<span class="math inline">\(n \leq 10^{12}, k \leq 10^5, k \leq n^2\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<p>由于 <span class="math inline">\(n\)</span> 不是很大, 在足够小的范围内, 所以我们认为在 <span class="math inline">\(1 \ldots n\)</span> 这一段范围内 产生的乘积数量比较少, 所以可以先用一个搜索预处理出来所有可能的被采集的坐标.</p>
+<p>听说 <code>unique</code> 函数是一个很有用的 STL 加成, 能够把 <strong>相邻的 (用错了别怪我没说)</strong> 重复元素移出到随机访问容器的最末尾, 并返回最后得到的相邻元素不重复的容器的大小.</p>
+<p>针对每一位都进行一个 dp, 然后针对每一个位置把所有对应的 <span class="math inline">\(dp[]\)</span> 的值加起来, 得到 (单一坐标) 位置存在的金子的数目.</p>
+<p>然后用一个堆找出 <span class="math inline">\(k\)</span> 个最好位置就可以了. 对于较大的 <span class="math inline">\(k\)</span> 的情况, 我实在是没有什么 做法.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="ot">#define rep(_var,_begin,_end) for(int _var=_begin;_var&lt;=_end;_var++)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">400010</span>, maxm = <span class="dv">15</span>;
+<span class="dt">const</span> lli modr = <span class="dv">1000000007ll</span>;
+
+lli n, K;
+<span class="dt">int</span> dig[maxm];
+lli num[maxn], size[maxn];
+lli dp[maxm][maxn][<span class="dv">2</span>];
+
+<span class="kw">struct</span> state {
+    <span class="dt">int</span> x, y; lli v;
+    state(<span class="dt">int</span> x, <span class="dt">int</span> y) {
+        <span class="kw">this</span>-&gt;x = x; <span class="kw">this</span>-&gt;y = y;
+        v = size[x] * size[y];
+        <span class="kw">return</span> ; }
+}; <span class="dt">bool</span> <span class="kw">operator</span> &lt; (state a, state b) {
+    <span class="kw">return</span> a.v &lt; b.v; }
+<span class="dt">bool</span> cmp(lli a, lli b) {
+    <span class="kw">return</span> a &gt; b; }
+
+<span class="dt">void</span> dfs(<span class="dt">int</span> cur, <span class="dt">int</span> depth, lli mult)
+{
+    <span class="kw">if</span> (depth == dig[<span class="dv">0</span>]) {
+        num[++num[<span class="dv">0</span>]] = mult;
+    } <span class="kw">else</span> {
+        <span class="kw">if</span> (mult &lt;= <span class="dv">0</span>)
+            <span class="kw">return</span> ;
+        <span class="kw">for</span> (<span class="dt">int</span> i = cur; i &lt; <span class="dv">10</span>; i++)
+            dfs(i, depth + <span class="dv">1</span>, mult * i);
+    }
+    <span class="kw">return</span> ;
+}
+
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%lld%lld</span><span class="st">"</span>, &amp;n, &amp;K);
+    <span class="co">// Filtering individual digits</span>
+    <span class="kw">while</span> (n &gt; <span class="dv">0</span>) {
+        dig[++dig[<span class="dv">0</span>]] = n % <span class="dv">10</span>;
+        n /= <span class="dv">10</span>;
+    }
+    <span class="co">// Calculating all possible multiples</span>
+    num[++num[<span class="dv">0</span>]] = <span class="dv">0</span>;
+    dfs(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>);
+    <span class="co">// Removing duplicates</span>
+    sort(num + <span class="dv">1</span>, num + num[<span class="dv">0</span>] + <span class="dv">1</span>);
+    num[<span class="dv">0</span>] = unique(num + <span class="dv">1</span>, num + num[<span class="dv">0</span>] + <span class="dv">1</span>) - num - <span class="dv">1</span>;
+    <span class="co">// Dynamic programming</span>
+    dp[<span class="dv">0</span>][<span class="dv">2</span>][<span class="dv">0</span>] = <span class="dv">1</span>;
+    rep(i, <span class="dv">0</span>, dig[<span class="dv">0</span>]) rep(j, <span class="dv">1</span>, num[<span class="dv">0</span>]) rep(k, <span class="dv">0</span>, <span class="dv">1</span>) <span class="kw">if</span> (dp[i][j][k])
+        <span class="kw">for</span> (<span class="dt">int</span> x = (i == <span class="dv">0</span> ? <span class="dv">0</span> : <span class="dv">1</span>); x &lt; <span class="dv">10</span>; x++) {
+            <span class="dt">int</span> tm = lower_bound(num + <span class="dv">1</span>, num + num[<span class="dv">0</span>] + <span class="dv">1</span>, num[j] * x) - num;
+            dp[i<span class="dv">+1</span>][tm][(k+x) &gt; dig[i<span class="dv">+1</span>]] += dp[i][j][k];
+        }
+    rep(i, <span class="dv">1</span>, num[<span class="dv">0</span>]) {
+        rep(j, <span class="dv">1</span>, dig[<span class="dv">0</span>] - <span class="dv">1</span>)
+            size[i] += dp[j][i][<span class="dv">0</span>] + dp[j][i][<span class="dv">1</span>];
+        size[i] += dp[dig[<span class="dv">0</span>]][i][<span class="dv">0</span>];
+    }
+    size[<span class="dv">0</span>] = num[<span class="dv">0</span>];
+    sort(size + <span class="dv">1</span>, size + size[<span class="dv">0</span>] + <span class="dv">1</span>, cmp);
+    <span class="co">// Using a heap to choose the best</span>
+    lli res = <span class="dv">0</span>;
+    priority_queue&lt;state&gt; pq;
+    pq.push(state(<span class="dv">2</span>, <span class="dv">2</span>));
+    <span class="kw">while</span> (!pq.empty() &amp;&amp; K &gt; <span class="dv">0</span>) {
+        state st = pq.top();
+        pq.pop();
+        res = (res + st.v) % modr;
+        <span class="kw">if</span> (!(--K)) <span class="kw">break</span>;
+        <span class="kw">if</span> (st.x != st.y) {
+            res = (res + st.v) % modr;
+            <span class="kw">if</span> (!(--K)) <span class="kw">break</span>;
+            pq.push(state(st.x + <span class="dv">1</span>, st.y));
+        }
+        <span class="kw">if</span> (st.x == <span class="dv">2</span>)
+            pq.push(state(st.x, st.y + <span class="dv">1</span>));
+    }
+    <span class="co">// Output result.</span>
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj3131/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj3131/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj3131/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj3131/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj3131">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

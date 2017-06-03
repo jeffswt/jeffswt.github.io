@@ -1,0 +1,377 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1070: [SCOI2007]修车&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1070: [SCOI2007]修车
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=SCOI2007" target="_self">
+            <i class="fa fa-tag"></i> SCOI2007
+          </a>
+          <a class="tag" href="/blog/archive/?q=Network Flow" target="_self">
+            <i class="fa fa-tag"></i> Network Flow
+          </a>
+          <a class="tag" href="/blog/archive/?q=Maximum Flow Minimum Cost" target="_self">
+            <i class="fa fa-tag"></i> Maximum Flow Minimum Cost
+          </a>
+          <a class="tag" href="/blog/archive/?q=Fiddling" target="_self">
+            <i class="fa fa-tag"></i> Fiddling
+          </a>
+        </span>
+        <span class="date" title="20:42:29 | 12 December, 2016">
+          12 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>同一时刻有 <span class="math inline">\(n\)</span> 位车主带着他们的爱车来到了汽车维修中心. 维修中心共有 <span class="math inline">\(m\)</span> 位技术人 员, 不同的技术人员对不同的车进行维修所用的时间是不同的. 现在需要安排这 <span class="math inline">\(m\)</span> 位技术人员所维修的车及顺序, 使得顾客平均等待的时间最小.</p>
+<p>说明: 顾客的等待时间是指从他把车送至维修中心到维修完毕所用的时间.</p>
+<h2 id="input">Input</h2>
+<p>第一行有两个 <span class="math inline">\(m, n\)</span>, 表示技术人员数与顾客数.</p>
+<p>接下来 <span class="math inline">\(n\)</span> 行, 每行 <span class="math inline">\(m\)</span> 个整数. 第 <span class="math inline">\(i + 1\)</span> 行第 <span class="math inline">\(j\)</span> 个数表示第 <span class="math inline">\(j\)</span> 位技术人员维修第 <span class="math inline">\(i\)</span> 辆车需要用的时间 <span class="math inline">\(T\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>最小平均等待时间, 答案精确到小数点后 <span class="math inline">\(2\)</span> 位.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>2 2
+3 2
+1 4</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>1.50</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有的数据, 满足:<span class="math inline">\(2 \leq m \leq 9, 1 \leq n \leq 60, 1 \leq T \leq 1000\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>这道题应该是一道很好做的费用流, 参考黄学长题解:</p>
+<blockquote>
+<p>没写 cnt=1 调了半天、、、</p>
+<p><span class="math inline">\(n\)</span> 辆车,<span class="math inline">\(m\)</span> 个工人.</p>
+<p>把每个工人拆成 <span class="math inline">\(n\)</span> 个点. 记为 <span class="math inline">\(A[i, j]\)</span> 表示第 <span class="math inline">\(i\)</span> 个工人修倒数第 <span class="math inline">\(j\)</span> 辆车.</p>
+<p>每个车跟所有 <span class="math inline">\(nm\)</span> 个工人拆出的点连边. 流量为 <span class="math inline">\(1\)</span>, 费用为 <span class="math inline">\(time[i, j] \times k\)</span>.</p>
+<p>源和每辆车连边,<span class="math inline">\(nm\)</span> 个点和汇连边, 流量都为 <span class="math inline">\(1\)</span>, 费用同为 <span class="math inline">\(0\)</span>.</p>
+<p>为什么这么构图呢?</p>
+<p>考虑第 <span class="math inline">\(i\)</span> 个工人, 他修第 <span class="math inline">\(j\)</span> 辆车只对后面要修的车有影响, 而前面修过的车已经对当前没有影响了.</p>
+<p>而这个影响就是后面每个将要修理的车都多等待了 <span class="math inline">\(time\)</span> 的时间.</p>
+<p>其他边流量都为 <span class="math inline">\(1\)</span> 是显然的, 每辆车修一次, 每个工人一个时段只能修理一辆车.</p>
+</blockquote>
+<p>但是这道题调了差不多三个小时 [Facepalm]</p>
+<p>为什么呢? 因为本人因为安全的因素, 通常都是保证做题时尽量用 long long 的, 然而这次 居然遇上了这样一道不会爆 long long 地题目, 然后加上 OJ 极其玄学, 所以:</p>
+<p>调了三个小时, 将各种代码拷过来一行一行地等价代替, 然后发现一直 AC, 最后交完了发现和原来的代码差不多, 结果 diff 一下出来这样一个结果:</p>
+<pre><code>D:\Desktop&gt;diff 1070.cpp 1070_wa.cpp
+18c18
+&lt;         int u, v; int flow, cost;
+---
+&gt;         int u, v; lli flow, cost;
+23c23
+&lt;     int dist[maxn];
+---
+&gt;     lli dist[maxn];
+25c25
+&lt;     void add_edge(int u, int v, int flow, int cost)
+---
+&gt;     void add_edge(int u, int v, lli flow, lli cost)
+61c61
+&lt;     int eval()
+---
+&gt;     lli eval()
+63c63
+&lt;         int res = 0;
+---
+&gt;         lli res = 0;
+65c65
+&lt;             int tmp = infinit;
+---
+&gt;             lli tmp = infinit;
+100c100
+&lt;     int res = graph.eval();
+---
+&gt;     lli res = graph.eval();</code></pre>
+<p>当时就懵了~ 为什么正解和错解就差这么一点......</p>
+<figure>
+<img class="thumb" data-small="/blog/bzoj1070/bzoj1070_rec-small.jpg" data-src="/blog/bzoj1070/bzoj1070_rec.png" data-thumb="/blog/bzoj1070/bzoj1070_rec-thumb.jpg" src="/blog/bzoj1070/bzoj1070_rec-thumb.jpg" title="" width="1646px"/>
+<figcaption>
+</figcaption>
+</figure>
+<p>上面就是各种叫人作呕的提交记录 (本来今天想写五六道题的结果都被迷之 hustoj 拖慢了) 我觉得 lavendir 有必要关注这一件事...... 这是继 (全局变量/局部变量) 之后本人遇到的第二次 bug......</p>
+<p>顺便附上 TLE 的代码 (大家可以自己试一试)</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">double</span> llf;
+<span class="dt">const</span> <span class="dt">int</span> maxN = <span class="dv">100</span>, maxn = <span class="dv">1010</span>, maxm = <span class="dv">100100</span>;
+<span class="dt">const</span> lli infinit = <span class="bn">0x0f3f3f3f</span>;
+
+<span class="kw">class</span> SpfaMaxFlowMinCost
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v; lli flow, cost;
+        edge *next, *rev;
+    };
+    <span class="dt">int</span> n, s, t, ecnt;
+    edge *edges[maxn], *from[maxn], epool[maxm];
+    lli dist[maxn];
+    <span class="dt">bool</span> inque[maxn];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v, lli flow, lli cost)
+    {
+        edge *p = &amp;epool[++ecnt],
+             *q = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;flow = flow; p-&gt;cost = cost;
+        p-&gt;next = edges[u]; edges[u] = p; p-&gt;rev = q;
+        q-&gt;u = v; q-&gt;v = u; q-&gt;flow = <span class="dv">0</span>; q-&gt;cost = - cost;
+        q-&gt;next = edges[v]; edges[v] = q; q-&gt;rev = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> spfa(<span class="dt">void</span>)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++)
+            dist[i] = infinit, inque[i] = <span class="kw">false</span>, from[i] = NULL;
+        dist[s] = <span class="dv">0</span>; inque[s] = <span class="kw">true</span>;
+        queue&lt;<span class="dt">int</span>&gt; que;
+        que.push(s);
+        <span class="kw">while</span> (!que.empty())
+        {
+            <span class="dt">int</span> p = que.front();
+            que.pop();
+            <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+                <span class="kw">if</span> (ep-&gt;flow &amp;&amp; dist[p] + ep-&gt;cost &lt; dist[ep-&gt;v]) {
+                    dist[ep-&gt;v] = dist[p] + ep-&gt;cost;
+                    from[ep-&gt;v] = ep;
+                    <span class="kw">if</span> (!inque[ep-&gt;v]) {
+                        inque[ep-&gt;v] = <span class="kw">true</span>;
+                        que.push(ep-&gt;v);
+                    }
+                }
+            inque[p] = <span class="kw">false</span>;
+        }
+        <span class="kw">if</span> (dist[t] &gt;= infinit)
+            <span class="kw">return</span> <span class="kw">false</span>;
+        <span class="kw">return</span> <span class="kw">true</span>;
+    }
+    lli eval()
+    {
+        lli res = <span class="dv">0</span>;
+        <span class="kw">while</span> (spfa()) {
+            lli tmp = infinit;
+            <span class="kw">for</span> (edge *ep = from[t]; ep; ep = from[ep-&gt;u])
+                tmp = min(tmp, ep-&gt;flow);
+            <span class="kw">for</span> (edge *ep = from[t]; ep; ep = from[ep-&gt;u]) {
+                ep-&gt;flow -= tmp;
+                ep-&gt;rev-&gt;flow += tmp;
+                res += ep-&gt;cost * tmp;
+            }
+        }
+        <span class="kw">return</span> res;
+    }
+} graph;
+
+<span class="dt">int</span> n, m;
+<span class="dt">int</span> arr[maxN][maxN];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++)
+            scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;arr[i][j]);
+    <span class="co">// Building graph.</span>
+    graph.s = <span class="dv">0</span>;
+    graph.t = <span class="dv">1001</span>;
+    graph.n = <span class="dv">1001</span>;
+    graph.ecnt = <span class="dv">1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n * m; i++)
+        graph.add_edge(graph.s, i, <span class="dv">1</span>, <span class="dv">0</span>);
+    <span class="kw">for</span> (<span class="dt">int</span> i = n * m + <span class="dv">1</span>; i &lt;= n * m + m; i++)
+        graph.add_edge(i, graph.t, <span class="dv">1</span>, <span class="dv">0</span>);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= m; j++)
+            <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= m; k++)
+                graph.add_edge((i - <span class="dv">1</span>) * m + j, n * m + k, <span class="dv">1</span>, arr[k][i] * j);
+    lli res = graph.eval();
+    printf(<span class="st">"</span><span class="ch">%.2Lf</span><span class="st">"</span>, (llf)res / m);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">double</span> llf;
+<span class="dt">const</span> <span class="dt">int</span> maxN = <span class="dv">100</span>, maxn = <span class="dv">1010</span>, maxm = <span class="dv">100100</span>;
+<span class="dt">const</span> lli infinit = <span class="bn">0x0f3f3f3f</span>;
+
+<span class="kw">class</span> SpfaMaxFlowMinCost
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v; <span class="dt">int</span> flow, cost;
+        edge *next, *rev;
+    };
+    <span class="dt">int</span> n, s, t, ecnt;
+    edge *edges[maxn], *from[maxn], epool[maxm];
+    <span class="dt">int</span> dist[maxn];
+    <span class="dt">bool</span> inque[maxn];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v, <span class="dt">int</span> flow, <span class="dt">int</span> cost)
+    {
+        edge *p = &amp;epool[++ecnt],
+             *q = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;flow = flow; p-&gt;cost = cost;
+        p-&gt;next = edges[u]; edges[u] = p; p-&gt;rev = q;
+        q-&gt;u = v; q-&gt;v = u; q-&gt;flow = <span class="dv">0</span>; q-&gt;cost = - cost;
+        q-&gt;next = edges[v]; edges[v] = q; q-&gt;rev = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> spfa(<span class="dt">void</span>)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++)
+            dist[i] = infinit, inque[i] = <span class="kw">false</span>, from[i] = NULL;
+        dist[s] = <span class="dv">0</span>; inque[s] = <span class="kw">true</span>;
+        queue&lt;<span class="dt">int</span>&gt; que;
+        que.push(s);
+        <span class="kw">while</span> (!que.empty())
+        {
+            <span class="dt">int</span> p = que.front();
+            que.pop();
+            <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+                <span class="kw">if</span> (ep-&gt;flow &amp;&amp; dist[p] + ep-&gt;cost &lt; dist[ep-&gt;v]) {
+                    dist[ep-&gt;v] = dist[p] + ep-&gt;cost;
+                    from[ep-&gt;v] = ep;
+                    <span class="kw">if</span> (!inque[ep-&gt;v]) {
+                        inque[ep-&gt;v] = <span class="kw">true</span>;
+                        que.push(ep-&gt;v);
+                    }
+                }
+            inque[p] = <span class="kw">false</span>;
+        }
+        <span class="kw">if</span> (dist[t] &gt;= infinit)
+            <span class="kw">return</span> <span class="kw">false</span>;
+        <span class="kw">return</span> <span class="kw">true</span>;
+    }
+    <span class="dt">int</span> eval()
+    {
+        <span class="dt">int</span> res = <span class="dv">0</span>;
+        <span class="kw">while</span> (spfa()) {
+            <span class="dt">int</span> tmp = infinit;
+            <span class="kw">for</span> (edge *ep = from[t]; ep; ep = from[ep-&gt;u])
+                tmp = min(tmp, ep-&gt;flow);
+            <span class="kw">for</span> (edge *ep = from[t]; ep; ep = from[ep-&gt;u]) {
+                ep-&gt;flow -= tmp;
+                ep-&gt;rev-&gt;flow += tmp;
+                res += ep-&gt;cost * tmp;
+            }
+        }
+        <span class="kw">return</span> res;
+    }
+} graph;
+
+<span class="dt">int</span> n, m;
+<span class="dt">int</span> arr[maxN][maxN];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++)
+            scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;arr[i][j]);
+    <span class="co">// Building graph.</span>
+    graph.s = <span class="dv">0</span>;
+    graph.t = <span class="dv">1001</span>;
+    graph.n = <span class="dv">1001</span>;
+    graph.ecnt = <span class="dv">1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n * m; i++)
+        graph.add_edge(graph.s, i, <span class="dv">1</span>, <span class="dv">0</span>);
+    <span class="kw">for</span> (<span class="dt">int</span> i = n * m + <span class="dv">1</span>; i &lt;= n * m + m; i++)
+        graph.add_edge(i, graph.t, <span class="dv">1</span>, <span class="dv">0</span>);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= m; j++)
+            <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= m; k++)
+                graph.add_edge((i - <span class="dv">1</span>) * m + j, n * m + k, <span class="dv">1</span>, arr[k][i] * j);
+    <span class="dt">int</span> res = graph.eval();
+    printf(<span class="st">"</span><span class="ch">%.2Lf</span><span class="st">"</span>, (llf)res / m);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1070/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1070/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1070/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1070/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1070">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

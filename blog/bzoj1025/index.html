@@ -1,0 +1,234 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1025: [SCOI2009]游戏&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1025: [SCOI2009]游戏
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=SCOI2009" target="_self">
+            <i class="fa fa-tag"></i> SCOI2009
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+          <a class="tag" href="/blog/archive/?q=Mathematics" target="_self">
+            <i class="fa fa-tag"></i> Mathematics
+          </a>
+          <a class="tag" href="/blog/archive/?q=Implementation" target="_self">
+            <i class="fa fa-tag"></i> Implementation
+          </a>
+        </span>
+        <span class="date" title="21:20:16 | 11 December, 2016">
+          11 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>windy 学会了一种游戏. 对于 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 这 <span class="math inline">\(n\)</span> 个数字, 都有唯一且不同的 1 到 <span class="math inline">\(n\)</span> 的数 字与之对应. 最开始 windy 把数字按顺序 <span class="math inline">\(1, 2, 3, \ldots, n\)</span> 写一排在纸上. 然后再在 这一排下面写上它们对应的数字. 然后又在新的一排下面写上它们对应的数字. 如此反复, 直到序列再次变为 <span class="math inline">\(1, 2, 3, \ldots n\)</span>.</p>
+<p>如:<span class="math inline">\(1, 2, 3, 4, 5, 6\)</span> 对应的关系为:<span class="math inline">\(1 \rightarrow 2, 2 \rightarrow 3, 3 \rightarrow 1, 4 \rightarrow 5, 5 \rightarrow 4, 6 \rightarrow 6\)</span></p>
+<p>windy 的操作如下:</p>
+<pre><code>1 2 3 4 5 6
+2 3 1 5 4 6
+3 1 2 4 5 6
+1 2 3 5 4 6
+2 3 1 4 5 6
+3 1 2 5 4 6
+1 2 3 4 5 6</code></pre>
+<p>这时, 我们就有若干排 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 的排列, 上例中有 <span class="math inline">\(7\)</span> 排. 现在 windy 想知道, 对于 所有可能的对应关系, 有多少种可能的排数.</p>
+<h2 id="input">Input</h2>
+<p>包含一个整数 <span class="math inline">\(n\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>包含一个整数, 可能的排数.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>10</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>16</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有的数据, 满足 <span class="math inline">\(1 \leq n \leq 1000\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<p>首先把一个映射看成一条边, 然后发现整个图一定不是一条链, 也不是一个仙人掌图, 抑或 是一个仙人掌图的集合, 也不是一个森林, 只能是一堆环 (具体证明参见黄学长博客:)</p>
+<blockquote>
+<p>这道题可以转换一下.</p>
+<p>试想每一个对应关系 <span class="math inline">\(a - b\)</span> 为从 <span class="math inline">\(a \rightarrow b\)</span> 的一条边,</p>
+<p>那么图中一定存在 n 条边且每个点入度出度都为 1,</p>
+<p>易证一定存在一个或几个环.</p>
+</blockquote>
+<p>然后整个图需要转换的次数就是所有环的长度之最小公倍数.</p>
+<p>原题就转化成为了求和为 <span class="math inline">\(n\)</span> 的数的集合的最小公倍数有多少种.</p>
+<p>简单动归一下就可以了.</p>
+<p>顺带说一下, 最开始看错题了, 以为是给定一个序列求需要多少次变换回到原来的状态, 然后以为是一道水题就开开心心地写完了, 结果输入样例的时候发现写错了 QAQ...... 不过 下面这个代码大概是对的:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">2010</span>;
+
+<span class="dt">int</span> n, to[maxn];
+<span class="dt">int</span> belong[maxn], bcnt;
+<span class="dt">int</span> l_size[maxn]; <span class="co">// Loop size</span>
+
+<span class="dt">int</span> gcd(<span class="dt">int</span> a, <span class="dt">int</span> b)
+{
+    <span class="kw">if</span> (b == <span class="dv">0</span>) <span class="kw">return</span> a;
+    <span class="kw">return</span> gcd(b, a % b);
+}
+
+<span class="dt">int</span> lcm(<span class="dt">int</span> a, <span class="dt">int</span> b)
+{
+    <span class="kw">return</span> a * b / gcd(a, b);
+}
+
+<span class="dt">void</span> dfs(<span class="dt">int</span> p, <span class="dt">int</span> loop_root, <span class="dt">int</span> depth)
+{
+    <span class="kw">if</span> (to[p] == loop_root) {
+        l_size[++bcnt] = depth + <span class="dv">1</span>;
+        belong[p] = bcnt;
+        <span class="kw">return</span> ;
+    }
+    dfs(to[p], loop_root, depth + <span class="dv">1</span>);
+    belong[p] = belong[to[p]];
+    <span class="kw">return</span> ;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;to[i]);
+    <span class="co">// Deep first search the cycles</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        <span class="kw">if</span> (!belong[i])
+            dfs(i, i, <span class="dv">0</span>);
+    <span class="dt">int</span> res = <span class="dv">1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= bcnt; i++)
+        res = lcm(res, l_size[i]);
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">1010</span>;
+
+<span class="dt">int</span> n, primes, prime[maxn];
+lli dp[maxn][maxn];
+
+<span class="dt">bool</span> not_prime[maxn];
+<span class="dt">void</span> proc_primes(<span class="dt">void</span>)
+{
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>; i &lt;= <span class="dv">1000</span>; i++) {
+        <span class="kw">if</span> (!not_prime[i])
+            prime[++primes] = i;
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= primes &amp;&amp; i * prime[j] &lt;= <span class="dv">1000</span>; j++) {
+            not_prime[i * prime[j]] = <span class="kw">true</span>;
+            <span class="kw">if</span> (i % prime[j] == <span class="dv">0</span>)
+                <span class="kw">break</span>;
+        }
+    }
+    <span class="kw">return</span> ;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    proc_primes();
+    <span class="co">// Dynamic programming procedures:</span>
+    dp[<span class="dv">0</span>][<span class="dv">0</span>] = <span class="dv">1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= primes; i++) {
+        <span class="co">// Copy from last state</span>
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">0</span>; j &lt;= n; j++)
+            dp[i][j] = dp[i - <span class="dv">1</span>][j];
+        <span class="kw">for</span> (<span class="dt">int</span> j = prime[i]; j &lt;= n; j *= prime[i])
+            <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">0</span>; k &lt;= n - j; k++)
+                dp[i][k + j] += dp[i - <span class="dv">1</span>][k];
+    }
+    lli res = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++)
+        res += dp[primes][i];
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1025/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1025/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1025/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1025/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1025">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

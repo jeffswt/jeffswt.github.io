@@ -1,0 +1,330 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj2432: [Noi2011]兔农&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj2432: [Noi2011]兔农
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOI2011" target="_self">
+            <i class="fa fa-tag"></i> NOI2011
+          </a>
+          <a class="tag" href="/blog/archive/?q=Matrix Multiplication" target="_self">
+            <i class="fa fa-tag"></i> Matrix Multiplication
+          </a>
+          <a class="tag" href="/blog/archive/?q=Fast Exponentiation" target="_self">
+            <i class="fa fa-tag"></i> Fast Exponentiation
+          </a>
+          <a class="tag" href="/blog/archive/?q=Number Theory" target="_self">
+            <i class="fa fa-tag"></i> Number Theory
+          </a>
+          <a class="tag" href="/blog/archive/?q=Multiplicative Inverse" target="_self">
+            <i class="fa fa-tag"></i> Multiplicative Inverse
+          </a>
+          <a class="tag" href="/blog/archive/?q=Extended Euclidean Algorithm" target="_self">
+            <i class="fa fa-tag"></i> Extended Euclidean Algorithm
+          </a>
+        </span>
+        <span class="date" title="22:38:13 | 23 January, 2017">
+          23 January, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>农夫栋栋近年收入不景气, 正在他发愁如何能多赚点钱时, 他听到隔壁的小朋友在讨论兔子 繁殖的问题.</p>
+<p>问题是这样的: 第一个月初有一对刚出生的小兔子, 经过两个月长大后, 这对兔子从第三个 月开始, 每个月初生一对小兔子. 新出生的小兔子生长两个月后又能每个月生出一对小兔子. 问第 <span class="math inline">\(n\)</span> 个月有多少只兔子?</p>
+<p>聪明的你可能已经发现, 第 <span class="math inline">\(n\)</span> 个月的兔子数正好是第 <span class="math inline">\(n\)</span> 个 Fibonacci (斐波那契) 数. 栋栋不懂什么是 Fibonacci 数, 但他也发现了规律: 第 <span class="math inline">\(i+2\)</span> 个月的兔子数等于第 <span class="math inline">\(i\)</span> 个月 的兔子数加上第 <span class="math inline">\(i+1\)</span> 个月的兔子数. 前几个月的兔子数依次为:</p>
+<p><span class="math display">\[1, 1, 2, 3, 5, 8, 13, 21, 34, \ldots\]</span></p>
+<p>栋栋发现越到后面兔子数增长的越快, 期待养兔子一定能赚大钱, 于是栋栋在第一个月初 买了一对小兔子开始饲养.</p>
+<p>每天, 栋栋都要给兔子们喂食, 兔子们吃食时非常特别, 总是每 <span class="math inline">\(k\)</span> 对兔子围成一圈, 最后 剩下的不足 <span class="math inline">\(k\)</span> 对的围成一圈, 由于兔子特别害怕孤独, 从第三个月开始, 如果吃食时围成某一个圈的只有一对兔子, 这对兔子就会很快死掉.</p>
+<p>我们假设死去的总是刚出生的兔子, 那么每个月的兔子数仍然是可以计算的. 例如, 当 <span class="math inline">\(k = 7\)</span> 时, 前几个月的兔子数依次为:</p>
+<p><span class="math display">\[1, 1, 2, 3, 5, 7, 12, 19, 31, 49, 80, \ldots\]</span></p>
+<p>给定 <span class="math inline">\(n\)</span>, 你能帮助栋栋计算第 <span class="math inline">\(n\)</span> 个月他有多少对兔子么? 由于答案可能非常大, 你只 需要告诉栋栋第 <span class="math inline">\(n\)</span> 个月的兔子对数除 <span class="math inline">\(p\)</span> 的余数即可.</p>
+<h2 id="input">Input</h2>
+<p>输入一行, 包含三个正整数 <span class="math inline">\(n, k, p\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>输出一行, 包含一个整数, 表示栋栋第 <span class="math inline">\(n\)</span> 个月的兔子对数除 <span class="math inline">\(p\)</span> 的余数.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>6 7 100</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>7</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有数据, 满足 <span class="math inline">\(1 \leq n \leq 10^{18}, 2 \leq k \leq 10^6, 2 \leq p \leq 10^9\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>其实 vfk 说的很详细了, 原文链接:<a href="">http://vfleaking.blog.163.com/blog/static/174807634201341721051604/</a></p>
+<p>首先我们考察模 <span class="math inline">\(G\)</span> 意义下的 Fibonacci 数列的循环节吧～</p>
+<p>这个有个高端的名字叫 Pisano period.</p>
+<p>可以去看 <a href="">http://math.arizona.edu/~ura-reports/071/Campbell.Charles/Final.pdf</a> (下载链接:<a class="uri" href="pisano_period.pdf">pisano_period.pdf</a></p>
+<p>超好懂.</p>
+<p>OEIS 列出了前几项:<a href="">http://oeis.org/A001175</a></p>
+<p>现在我们来证, 循环节 <span class="math inline">\(p \leq 6G\)</span></p>
+<p>设 <span class="math inline">\(G = 2^t \cdot 5^s \cdot p_1^{k_1} \cdot p_2^{k_2} \cdot \ldots \cdot p_a^{k_a}\)</span></p>
+<p><span class="math inline">\(t = 0\)</span> 或 <span class="math inline">\(s = 0\)</span> 的情况就不考虑了.</p>
+<p><span class="math display">\[P \leq lcm(3 \cdot 2^{t - 1}, 4 \cdot 5^s, 2(p_1 + 1) \cdot p_1^{k_1 - 1}, 2(p_2 + 1) \cdot p_2^{k_2 - 1}, \ldots, 2(p_a + 1) \cdot p_a^{k_a - 1})\]</span></p>
+<p><span class="math display">\[= lcm(3, 2^{t - 1}, 4, 5^s, \frac{p_1 + 1}{2} \cdot p_1^{k_1 - 1}, \frac{p_2 + 1}{2} \cdot p_2^{k_2 - 1}, \ldots, \frac{p_a + 1}{2} \cdot p_a^{k_a - 1})\]</span></p>
+<p><span class="math display">\[\leq 3 \cdot 4 \cdot (2^{t - 1} \cdot 5^s \cdot p_1^{k_1} \cdot p_2^{k_2} \cdot \ldots \cdot p_a^{k_a})\]</span></p>
+<p><span class="math display">\[\leq 12 \cdot \frac{G}{2}\]</span></p>
+<p><span class="math display">\[= 6G\]</span></p>
+<p>这个是不可改进的, 因为形如 <span class="math inline">\(2 \cdot 5^s\)</span> 的数能达到这个上界.</p>
+<p>……好帅气的结论!! !</p>
+<p>记 Fibonacci 数列第 <span class="math inline">\(n\)</span> 项对 <span class="math inline">\(G\)</span> 取模的值为 <span class="math inline">\(Fib[n]\)</span>.</p>
+<p>考虑题目中给的 <span class="math inline">\(F\)</span> 与 <span class="math inline">\(Fib\)</span> 的区别, 就在于那个减一了～～</p>
+<p>神马时候会减一呢?</p>
+<p>考虑第一次减一, 假设出现在 <span class="math inline">\(k\)</span>:</p>
+<p>则 <span class="math inline">\(Fib[k] = 1\)</span></p>
+<p>那么此时:</p>
+<p>...... Fib [k-2] Fib [k-1] 0 Fib [k-1] Fib [k-1] 2Fib [k-1] 3Fib [k-1]. ......</p>
+<p>考虑后面那一串, 现在暂时不对 G 取模鸟～:</p>
+<p>Fib [k-1] Fib [k-1] 2Fib [k-1] 3Fib [k-1] 5Fib [k-1] 8Fib [k-1]. ......</p>
+<p>它们都是 <span class="math inline">\(Fib[k - 1]\)</span> 的倍数耶……</p>
+<p>同时除以 <span class="math inline">\(Fib[k - 1]\)</span> 就有:</p>
+<p>1 1 2 3 5 8......</p>
+<p>新的 Fibonacci 数列.</p>
+<p>于是我们注意到每次减一之后一定会出现一个 0 咯……而 0 前面一个数如果是 a, 那么这一段的数列就是:</p>
+<p>...... a 0 Fib [1] a Fib [2] a Fib [3] a Fib [4] a......</p>
+<p>我们把 “Fib [1] a Fib [2] a Fib [3] a Fib [4] a...... Fib [L-1] a 0” 这样的一串称作数列 b [a].</p>
+<p>那么数列 b 的长度是多少呢? 就是问 L 等于多少, 就是问使得 Fib [L] a=1 (mod G) 的最小的 L.</p>
+<p>由于 Fib 循环节最长是 <span class="math inline">\(6G \leq 6 \cdot 10^6\)</span>, 所以我们可以暴力记录下来 Fib 的一个循环节, 用逆元乱搞下就能求出 L.</p>
+<p>我们还能求出 <span class="math inline">\(next[a]\)</span> 数组, 表示 “<span class="math inline">\(Fib[L - 1]a\)</span>” 的值.</p>
+<p>这样如果 <span class="math inline">\(b[a]\)</span> 数列出现了, 后面一定跟着 <span class="math inline">\(b[next[a]]\)</span> 数列.</p>
+<p>当然如果不存在 <span class="math inline">\(a\)</span> 的逆元或者没有 <span class="math inline">\(Fib[L] = a\)</span> 的逆元, 就永远不会有下一个 <span class="math inline">\(b\)</span> ……</p>
+<p>此时反正不会减一, 直接当 Fibonacci 数列处理.</p>
+<p>用矩阵乘法算模 <span class="math inline">\(P\)</span> 的答案.</p>
+<p>暴力搞搞都行了.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="ot">#define rep(_var,_begin,_end) for(int _var=_begin;_var&lt;=_end;_var++)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">1001000</span>;
+<span class="dt">const</span> lli infinit = <span class="bn">0x7fffffffffffffffll</span>;
+<span class="dt">int</span> modr = <span class="dv">1000000007</span>;
+
+<span class="kw">struct</span> matrix { lli arr[<span class="dv">3</span>][<span class="dv">3</span>];
+    lli&amp; <span class="kw">operator</span>() (<span class="dt">int</span> x, <span class="dt">int</span> y) { <span class="kw">return</span> <span class="kw">this</span>-&gt;arr[x][y]; }
+    lli <span class="kw">operator</span>() (<span class="dt">int</span> x, <span class="dt">int</span> y) <span class="dt">const</span> { <span class="kw">return</span> <span class="kw">this</span>-&gt;arr[x][y]; }
+    matrix&amp; <span class="kw">operator</span> *= (<span class="dt">const</span> matrix &amp;b) {
+        lli c[<span class="dv">3</span>][<span class="dv">3</span>];
+        rep(i, <span class="dv">0</span>, <span class="dv">2</span>) rep(j, <span class="dv">0</span>, <span class="dv">2</span>) {
+            c[i][j] = <span class="dv">0</span>;
+            rep(k, <span class="dv">0</span>, <span class="dv">2</span>) c[i][j] += arr[i][k] * b.arr[k][j];
+            c[i][j] %= modr; }
+        rep(i, <span class="dv">0</span>, <span class="dv">2</span>) rep(j, <span class="dv">0</span>, <span class="dv">2</span>)
+            <span class="kw">this</span>-&gt;arr[i][j] = c[i][j];
+        <span class="kw">return</span> *<span class="kw">this</span>;
+    }
+    matrix(lli _1, lli _2, lli _3, lli _4, lli _5, lli _6, lli _7, lli _8, lli _9) {
+        arr[<span class="dv">0</span>][<span class="dv">0</span>] = _1, arr[<span class="dv">0</span>][<span class="dv">1</span>] = _2, arr[<span class="dv">0</span>][<span class="dv">2</span>] = _3;
+        arr[<span class="dv">1</span>][<span class="dv">0</span>] = _4, arr[<span class="dv">1</span>][<span class="dv">1</span>] = _5, arr[<span class="dv">1</span>][<span class="dv">2</span>] = _6;
+        arr[<span class="dv">2</span>][<span class="dv">0</span>] = _7, arr[<span class="dv">2</span>][<span class="dv">1</span>] = _8, arr[<span class="dv">2</span>][<span class="dv">2</span>] = _9;
+        <span class="kw">return</span> ;
+    }
+    matrix(<span class="dt">void</span>) {
+        rep(i, <span class="dv">0</span>, <span class="dv">2</span>) rep(j, <span class="dv">0</span>, <span class="dv">2</span>)
+            arr[i][j] = <span class="dv">0</span>;
+        <span class="kw">return</span> ;
+    }
+    matrix(<span class="dt">int</span> k) {
+        rep(i, <span class="dv">0</span>, <span class="dv">2</span>) rep(j, <span class="dv">0</span>, <span class="dv">2</span>)
+            arr[i][j] = i == j ? k : <span class="dv">0</span>;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> print(<span class="dt">void</span>) {
+        rep(i, <span class="dv">0</span>, <span class="dv">2</span>) { rep(j, <span class="dv">0</span>, <span class="dv">2</span>)
+            printf(<span class="st">"</span><span class="ch">%lld</span><span class="st"> "</span>, arr[i][j]);
+        printf(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>); }
+        <span class="kw">return</span> ;
+    }
+};
+matrix <span class="kw">operator</span> ^ (matrix a, lli pw) {
+    matrix res(<span class="dv">1</span>);
+    <span class="kw">for</span> (lli i = pw; i &gt; <span class="dv">0</span>; i &gt;&gt;= <span class="dv">1</span>) {
+        <span class="kw">if</span> (i &amp; <span class="dv">1</span>) res *= a;
+        a *= a;
+    }
+    <span class="kw">return</span> res;
+}
+
+lli m_rev(lli a, lli m)
+{
+    lli x1 = <span class="dv">1</span>, x2 = <span class="dv">0</span>, x3 = a;
+    lli y1 = <span class="dv">0</span>, y2 = <span class="dv">1</span>, y3 = m;
+    <span class="co">// Extended euclid algorithm.</span>
+    <span class="kw">while</span> (y3 != <span class="dv">0</span>) {
+        lli k = x3 / y3;
+        lli t1 = x1 - y1 * k, t2 = x2 - y2 * k, t3 = x3 - y3 * k;
+        x1 = y1, x2 = y2, x3 = y3;
+        y1 = t1, y2 = t2, y3 = t3;
+    }
+    <span class="kw">if</span> (x3 != <span class="dv">1</span>)
+        <span class="kw">return</span> <span class="dv">0</span>;
+    <span class="kw">return</span> x1 &gt;= <span class="dv">0</span> ? x1 : x1 + m;
+}
+
+lli n, K, p;
+<span class="dt">int</span> first_pos[maxn], fib[maxn*<span class="dv">6+1</span>];
+lli rev[maxn], pow[maxn];
+<span class="dt">int</span> next[maxn];
+<span class="dt">bool</span> vis[maxn + <span class="dv">1</span>];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%lld%lld%lld</span><span class="st">"</span>, &amp;n, &amp;K, &amp;p);
+    modr = p;
+    <span class="co">// Calculate repetition subsequence</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; maxn; i++)
+        first_pos[i] = <span class="dv">-1</span>;
+    fib[<span class="dv">0</span>] = fib[<span class="dv">1</span>] = <span class="dv">1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>; <span class="kw">true</span>; i++) {
+        <span class="dt">int</span> cur = fib[i<span class="dv">-1</span>] + fib[i<span class="dv">-2</span>];
+        <span class="kw">while</span> (cur &gt; K)
+            cur -= K;
+        fib[i] = cur;
+        <span class="kw">if</span> (first_pos[cur] &lt; <span class="dv">0</span>)
+            first_pos[cur] = i;
+        <span class="kw">if</span> (fib[i] == <span class="dv">1</span> &amp;&amp; fib[i<span class="dv">-1</span>] == <span class="dv">1</span>)
+            <span class="kw">break</span>;
+    }
+    <span class="co">// Multiplicative inverse calculation</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; K; i++)
+        rev[i] = m_rev(i, K);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; K; i++) {
+        <span class="kw">if</span> (!rev[i] || !first_pos[rev[i]]) {
+            next[i] = <span class="dv">-1</span>, pow[i] = infinit;
+        } <span class="kw">else</span> {
+            <span class="dt">int</span> k = first_pos[rev[i]];
+            next[i] = (lli)fib[k<span class="dv">-1</span>] * i % K;
+            pow[i] = k<span class="dv">+1</span>;
+        }
+    }
+    <span class="co">// Matrix multiplication</span>
+    matrix matA(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>,
+                <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>,
+                <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>);
+    matrix matB(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>,
+                <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>,
+                modr - <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>);
+    <span class="dt">int</span> cirN;
+    <span class="kw">for</span> (cirN = <span class="dv">1</span>; cirN != <span class="dv">-1</span> &amp;&amp; !vis[cirN]; cirN = next[cirN])
+        vis[cirN] = <span class="kw">true</span>;
+    matrix matRes(<span class="dv">1</span>);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i != cirN &amp;&amp; n &gt; <span class="dv">0</span>; i = next[i]) {
+        <span class="kw">if</span> (n &lt; pow[i]) {
+            matRes *= matA ^ n;
+            n = <span class="dv">0</span>;
+        } <span class="kw">else</span> {
+            matRes *= matA ^ (pow[i] - <span class="dv">1</span>);
+            matRes *= matB;
+            n -= pow[i];
+        }
+    }
+    <span class="co">// Final processing</span>
+    <span class="kw">if</span> (n &gt; <span class="dv">0</span>) {
+        <span class="dt">int</span> cur = cirN;
+        lli tot = <span class="dv">0</span>;
+        matrix matComp(<span class="dv">1</span>);
+        <span class="kw">do</span> {
+            matComp *= matA ^ (pow[cur] - <span class="dv">1</span>);
+            matComp *= matB;
+            tot += pow[cur];
+            cur = next[cur];
+        } <span class="kw">while</span> (cur != cirN);
+        matRes *= matComp ^ (n / tot);
+        n %= tot;
+        <span class="kw">for</span> (<span class="dt">int</span> i = cirN; n &gt; <span class="dv">0</span>; i = next[i]) {
+            <span class="kw">if</span> (n &lt; pow[i]) {
+                matRes *= matA ^ n;
+                n = <span class="dv">0</span>;
+            } <span class="kw">else</span> {
+                matRes *= matA ^ (pow[i] - <span class="dv">1</span>);
+                matRes *= matB;
+                n -= pow[i];
+            }
+        }
+    }
+    lli vec[<span class="dv">3</span>] = {<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>};
+    lli res = <span class="dv">0</span>;
+    rep(k, <span class="dv">0</span>, <span class="dv">2</span>) res += vec[k] * matRes(k, <span class="dv">0</span>);
+    res %= modr;
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj2432/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj2432/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj2432/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj2432/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj2432">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1824: [JSOI2010]下棋问题&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1824: [JSOI2010]下棋问题
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=JSOI2010" target="_self">
+            <i class="fa fa-tag"></i> JSOI2010
+          </a>
+          <a class="tag" href="/blog/archive/?q=Queue" target="_self">
+            <i class="fa fa-tag"></i> Queue
+          </a>
+          <a class="tag" href="/blog/archive/?q=Monotonicity" target="_self">
+            <i class="fa fa-tag"></i> Monotonicity
+          </a>
+        </span>
+        <span class="date" title="00:24:40 | 20 April, 2017">
+          20 April, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>JYY 发明了一个新的益智游戏, 该游戏由 A 和 B兩人轮流在一个 <span class="math inline">\(10^6 \times 10^6\)</span> 的方格棋盘上的网格线交点下棋, 网格线交点的坐标以 <span class="math inline">\((x, y)\)</span> 表示之,<span class="math inline">\((0, 0)\)</span> 代表棋盘最左下角的点. 每一个棋子放置的位置不可以与任何其它棋子在同一 <span class="math inline">\(X\)</span> 坐标或 <span class="math inline">\(Y\)</span> 坐标上, 棋盘上新增加一个棋子时, 棋盘上的计数器会自动算出以目前棋盘上棋子所能够围成的 “无障碍四方形” 个数. “无障碍四方形” 是指以任意兩个棋子所定义出的四方形内部不含其它棋子, 每下一个棋子后所算出的 “无障碍四方形” 个数即为下该棋子的得分数. 每位下棋者的总分即是该下棋者每个所下棋子的得分数总和. 请写一个程序计算 A 和 B兩位下棋者的累计总分.</p>
+<h2 id="input">Input</h2>
+<p>第一行输入只有一个整数 <span class="math inline">\(n\)</span>, 代表此盘棋共下了 <span class="math inline">\(n\)</span> 个棋子.</p>
+<p>接下來的 <span class="math inline">\(n\)</span> 行, 每一行有兩个整数, 依序代表这 <span class="math inline">\(n\)</span> 个棋子所放置的位置.</p>
+<h2 id="output">Output</h2>
+<p>请输出兩个整数, 分别代表该盘棋兩位下棋者的累计得分數. 先下棋者 (A) 的分数在前, 后下棋者 (B) 的分数在后, 中间用一个空格隔开.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>4
+2  3
+3  4
+1  2
+4  1
+</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>2  6</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有数据, 满足:<span class="math inline">\(1 \leq n \leq 5000\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<p><strong>我不生产题解, 我只是题解的搬运工</strong>:<a href="">http://www.tuicool.com/articles/um2YVv</a></p>
+<p>加入一个点时, 将之前加入的所有点根据当前点分为 <span class="math inline">\(4\)</span> 个象限, 在四个象限中都能得到一条单调上升或下降的序列 (注意: 这里的单调队列指的是找到一个 <span class="math inline">\(Y\)</span> 比当前结尾高 (低) 的点就加入, 具体可以考虑什么样的点能和当前点构成无障碍四方形). 这个点添加的贡献就是四个队列中的点数和, 但是还要考虑删除的贡献. (注, 接下来的点都指单调队列中的点) 相邻象限中的四方形不会产生贡献, 考虑相对象限的点. 对于 <span class="math inline">\(1, 3\)</span> 象限, 枚举在第一象限中的每一个点, 然后在第二象限中找到第一个 <span class="math inline">\(Y\)</span> 值比枚举点小的点, 在第三象限中找到 X 值比这个点小的点数, 然后在第四象限中找 <span class="math inline">\(X\)</span> 值比枚举点小的 <span class="math inline">\(X\)</span> 最大的点, 然后得出 <span class="math inline">\(Y\)</span> 比他小的数, 两者相减得出答案. 由于 <span class="math inline">\(X, Y\)</span> 都有单调性, 所以枚举时可以一直向下, 时间效率 <span class="math inline">\(O(n^2)\)</span>.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">5010</span>;
+<span class="dt">const</span> <span class="dt">int</span> infinit = <span class="bn">0x3f3f3f3f</span>;
+
+<span class="kw">struct</span> node {
+    <span class="dt">int</span> x, y, id;
+}; <span class="dt">bool</span> <span class="kw">operator</span> &lt; (node a, node b) {
+    <span class="kw">return</span> a.x &lt; b.x;
+}
+
+<span class="kw">class</span> my_queue
+{
+<span class="kw">public</span>:
+    node data[maxn];
+    <span class="dt">int</span> head, tail, end;
+    <span class="dt">void</span> init(<span class="dt">int</span> now, <span class="dt">int</span> flag)
+    {
+        head = tail = end = <span class="dv">0</span>;
+        data[<span class="dv">0</span>].x = now;
+        data[<span class="dv">0</span>].y = flag * infinit;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> push(node a, <span class="dt">bool</span> flag)
+    {
+        <span class="kw">if</span> ((a.y &lt; data[end].y) ^ flag)
+            data[++end] = a;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> pop_x(<span class="dt">int</span> x, <span class="dt">bool</span> flag)
+    {
+        <span class="kw">while</span> (head &lt;= end &amp;&amp; ((data[head].x &lt; x) ^ flag))
+            head += <span class="dv">1</span>;
+        <span class="kw">if</span> (head &gt; <span class="dv">0</span>)
+            head -= <span class="dv">1</span>;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> pop_y(<span class="dt">int</span> y, <span class="dt">bool</span> flag)
+    {
+        <span class="kw">while</span> (tail &lt;= end &amp;&amp; ((data[tail].y &lt; y) ^ flag))
+            tail += <span class="dv">1</span>;
+        <span class="kw">return</span> ;
+    }
+} que1, que2, que3, que4;
+
+<span class="dt">int</span> n;
+lli res_f[maxn];
+node a[maxn], b[maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;a[i].x, &amp;a[i].y);
+        b[i].x = a[i].x, b[i].y = a[i].y;
+        a[i].id = b[i].id = i;
+    }
+    sort(b + <span class="dv">1</span>, b + n + <span class="dv">1</span>);
+    lli res = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        que1.init(a[i].x, <span class="dv">1</span>);
+        que2.init(a[i].x, <span class="dv">1</span>);
+        que3.init(a[i].x, <span class="dv">-1</span>);
+        que4.init(a[i].x, <span class="dv">-1</span>);
+        <span class="dt">int</span> k = <span class="dv">0</span>;
+        <span class="kw">for</span> (k = <span class="dv">1</span>; b[k].x &lt; a[i].x; k++);
+        <span class="kw">for</span> (<span class="dt">int</span> j = k - <span class="dv">1</span>; j &gt;= <span class="dv">1</span>; j--) <span class="kw">if</span> (b[j].id &lt; i) {
+            <span class="kw">if</span> (b[j].y &gt; a[i].y)
+                que2.push(b[j], <span class="kw">false</span>);
+            <span class="kw">else</span>
+                que3.push(b[j], <span class="kw">true</span>);
+        }
+        <span class="kw">for</span> (<span class="dt">int</span> j = k + <span class="dv">1</span>; j &lt;= n; j++) <span class="kw">if</span> (b[j].id &lt; i) {
+            <span class="kw">if</span> (b[j].y &gt; a[i].y)
+                que1.push(b[j], <span class="kw">false</span>);
+            <span class="kw">else</span>
+                que4.push(b[j], <span class="kw">true</span>);
+        }
+        res += que1.end + que2.end + que3.end + que4.end;
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= que1.end; j++) {
+            <span class="dt">int</span> x = que1.data[j].x,
+                y = que1.data[j].y;
+            <span class="kw">if</span> (!que3.end)
+                <span class="kw">break</span>;
+            que2.pop_y(y, <span class="kw">true</span>);
+            <span class="dt">int</span> xx = (que2.tail &gt; que2.end) ? (-infinit) : (que2.data[que2.tail].x);
+            que3.pop_x(xx, <span class="kw">true</span>);
+            que4.pop_x(x, <span class="kw">false</span>);
+            <span class="dt">int</span> yy = (que4.data[que4.head].y);
+            que3.pop_y(yy, <span class="kw">false</span>);
+            <span class="kw">if</span> (que3.tail &lt;= <span class="dv">0</span>)
+                que3.tail += <span class="dv">1</span>;
+            res -= max(que3.head - que3.tail + <span class="dv">1</span>, <span class="dv">0</span>);
+        }
+        que2.head = que2.tail = que3.head = que3.tail = que4.head = que4.tail = <span class="dv">1</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= que2.end; j++) {
+            <span class="dt">int</span> x = que2.data[j].x,
+                y = que2.data[j].y;
+            <span class="kw">if</span> (!que4.end)
+                <span class="kw">break</span>;
+            que1.pop_y(y, <span class="kw">true</span>);
+            <span class="dt">int</span> xx = (que1.tail &gt; que1.end) ? (infinit) : (que1.data[que1.tail].x);
+            que4.pop_x(xx, <span class="kw">false</span>);
+            que3.pop_x(x, <span class="kw">true</span>);
+            <span class="dt">int</span> yy = (que3.data[que3.head].y);
+            que4.pop_y(yy, <span class="kw">false</span>);
+            <span class="kw">if</span> (que4.tail &lt;= <span class="dv">0</span>)
+                que4.tail += <span class="dv">1</span>;
+            res -= max(que4.head - que4.tail + <span class="dv">1</span>, <span class="dv">0</span>);
+        }
+        res_f[i &amp; <span class="dv">1</span>] += res;
+    }
+    <span class="co">// Output</span>
+    printf(<span class="st">"</span><span class="ch">%lld</span><span class="st"> </span><span class="ch">%lld\n</span><span class="st">"</span>, res_f[<span class="dv">1</span>], res_f[<span class="dv">0</span>]);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1824/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1824/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1824/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1824/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1824">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

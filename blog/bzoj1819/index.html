@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1819: [JSOI2010]Word Query电子字典&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1819: [JSOI2010]Word Query电子字典
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=JSOI2010" target="_self">
+            <i class="fa fa-tag"></i> JSOI2010
+          </a>
+          <a class="tag" href="/blog/archive/?q=Trie" target="_self">
+            <i class="fa fa-tag"></i> Trie
+          </a>
+        </span>
+        <span class="date" title="23:44:21 | 18 April, 2017">
+          18 April, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>人们在英文字典中查找某个单词的时候可能不知道该单词的完整拼法, 而只知道该单词的一个错误的近似拼法, 这时人们可能陷入困境, 为了查找一个单词而浪费大量的时间. 带有模糊查询功能的电子字典能够从一定程度上解决这一问题: 用户只要输入一个字符串, 电子字典就返回与该单词编辑距离最小的几个单词供用户选择.</p>
+<p>字符串 <span class="math inline">\(a\)</span> 与字符串 <span class="math inline">\(b\)</span> 的编辑距离是指: 允许对 <span class="math inline">\(a\)</span> 或 <span class="math inline">\(b\)</span> 串进行下列 “编辑” 操作, 将 <span class="math inline">\(a\)</span> 变为 <span class="math inline">\(b\)</span> 或 <span class="math inline">\(b\)</span> 变为 <span class="math inline">\(a\)</span>, 最少 “编辑” 次数即为距离.</p>
+<ul>
+<li>删除串中某个位置的字母</li>
+<li>添加一个字母到串中某个位置</li>
+<li>替换串中某一位置的一个字母为另一个字母</li>
+</ul>
+<p>JSOI 团队正在开发一款电子字典, 你需要帮助团队实现一个用于模糊查询功能的计数部件: 对于一个待查询字符串, 如果它是单词, 则返回 <span class="math inline">\(-1\)</span>; 如果它不是单词, 则返回字典中有多少个单词与它的编辑距离为 <span class="math inline">\(1\)</span>.</p>
+<h2 id="input">Input</h2>
+<p>第一行包含两个正整数 <span class="math inline">\(n\)</span> 和 <span class="math inline">\(m\)</span>.</p>
+<p>接下来的 <span class="math inline">\(n\)</span> 行, 每行一个字符串, 第 <span class="math inline">\(i+1\)</span> 行为单词 <span class="math inline">\(W_i\)</span>. 单词长度在 <span class="math inline">\(1\)</span> 至 <span class="math inline">\(20\)</span> 之间.</p>
+<p>再接下来 <span class="math inline">\(m\)</span> 行, 每行一个字符串, 第 <span class="math inline">\(i+n+1\)</span> 表示一个待查字符串 <span class="math inline">\(Q_i\)</span>. 待查字符串长度在 <span class="math inline">\(1\)</span> 至 <span class="math inline">\(20\)</span> 之间.</p>
+<p><span class="math inline">\(W_i\)</span> 和 <span class="math inline">\(Q_i\)</span> 均由小写字母构成, 文件中不包含多余空格. 所有单词互不相同, 但是查询字符串可能有重复.</p>
+<h2 id="output">Output</h2>
+<p>输出应包括 <span class="math inline">\(m\)</span> 行, 第 <span class="math inline">\(i\)</span> 行为一个整数 <span class="math inline">\(X_i\)</span>.<span class="math inline">\(X_i = -1\)</span> 表示 <span class="math inline">\(Q_i\)</span> 为字典中的单词; 否则 <span class="math inline">\(X_i\)</span> 表示与 <span class="math inline">\(Q_i\)</span> 编辑距离为 <span class="math inline">\(1\)</span> 的单词的个数.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>4 3
+abcd
+abcde
+aabc
+abced
+abcd
+abc
+abcdd</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>-1
+2
+3</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于 50% 的数据, 满足:<span class="math inline">\(n \leq 1000, m \leq 1000\)</span>;</p>
+<p>对于所有数据, 满足:<span class="math inline">\(n \leq 10000, m \leq 10000\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<p>查询的方法很类似朴素的 Trie 树, 并且也不需要 fail 指针, 我也不清楚为什么我的类名启成了 <code>AhoCorasickAutomaton</code>.</p>
+<p>在查询的时候适当转移, 添加字符、删除字符以及修改字符, 适当考虑孩子节点状况即可作出类似 Trie 树的查询. 否则维护数量返回数量.</p>
+<p>大概就是一棵魔改版 Trie 树......</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">200100</span>;
+
+<span class="kw">class</span> AhoCorasickAutomaton
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> ch[maxn][<span class="dv">26</span>];
+    <span class="dt">bool</span> flag[maxn], vis[maxn];
+    <span class="dt">int</span> root, ncnt;
+    <span class="dt">void</span> insert(<span class="dt">char</span> str[])
+    {
+        <span class="dt">int</span> len = strlen(str),
+            p = root;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; len; i++) {
+            <span class="dt">int</span> v = str[i] - <span class="st">'a'</span>;
+            <span class="kw">if</span> (!ch[p][v])
+                ch[p][v] = ++ncnt;
+            p = ch[p][v];
+        }
+        flag[p] = <span class="kw">true</span>;
+        <span class="kw">return</span> ;
+    }
+    queue&lt;<span class="dt">int</span>&gt; que;
+    <span class="dt">int</span> dfs(<span class="dt">char</span> str[], <span class="dt">int</span> len, <span class="dt">int</span> p, <span class="dt">int</span> pos, <span class="dt">int</span> offset)
+    {
+        <span class="kw">if</span> (pos == len &amp;&amp; flag[p] &amp;&amp; offset == <span class="dv">0</span>)
+            <span class="kw">return</span> <span class="dv">0</span>;
+        <span class="kw">if</span> (pos == len &amp;&amp; flag[p] &amp;&amp; offset != <span class="dv">0</span>) {
+            <span class="kw">if</span> (vis[p])
+                <span class="kw">return</span> <span class="dv">0</span>;
+            que.push(p);
+            vis[p] = <span class="kw">true</span>;
+            <span class="kw">return</span> <span class="dv">1</span>;
+        }
+        <span class="dt">int</span> sum = <span class="dv">0</span>;
+        <span class="co">// Supposing that this character is removed</span>
+        <span class="kw">if</span> (pos &lt; len &amp;&amp; offset == <span class="dv">0</span>)
+            sum += dfs(str, len, p, pos + <span class="dv">1</span>, <span class="dv">1</span>);
+        <span class="co">// Supposing that this character is modified</span>
+        <span class="kw">if</span> (offset == <span class="dv">0</span>) {
+            <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">26</span>; i++)
+                <span class="kw">if</span> (ch[p][i])
+                    sum += dfs(str, len, ch[p][i], pos, <span class="dv">1</span>);
+            <span class="co">// Or continue with addition</span>
+            <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">26</span>; i++)
+                <span class="kw">if</span> (ch[p][i] &amp;&amp; i != str[pos<span class="dv">+1</span>] - <span class="st">'a'</span>)
+                    sum += dfs(str, len, ch[p][i], pos + <span class="dv">1</span>, <span class="dv">1</span>);
+        }
+        <span class="co">// Can't just add something...</span>
+        <span class="kw">if</span> (pos &lt; len &amp;&amp; ch[p][str[pos<span class="dv">+1</span>]-<span class="st">'a'</span>])
+            sum += dfs(str, len, ch[p][str[pos<span class="dv">+1</span>]-<span class="st">'a'</span>], pos + <span class="dv">1</span>, offset);
+        <span class="co">// Returns</span>
+        <span class="kw">return</span> sum;
+    }
+    <span class="dt">int</span> query(<span class="dt">char</span> str[])
+    {
+        <span class="co">// Finding if this is a string in the tree</span>
+        <span class="dt">bool</span> found = <span class="kw">true</span>;
+        <span class="dt">int</span> len = strlen(str + <span class="dv">1</span>),
+            p = root;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= len; i++) {
+            <span class="dt">int</span> v = str[i] - <span class="st">'a'</span>;
+            <span class="kw">if</span> (!ch[p][v]) {
+                found = <span class="kw">false</span>;
+                <span class="kw">break</span>;
+            }
+            p = ch[p][v];
+        }
+        <span class="kw">if</span> (found &amp;&amp; flag[p])
+            <span class="kw">return</span> <span class="dv">-1</span>;
+        <span class="co">// Depth First Search</span>
+        <span class="kw">while</span> (!que.empty()) {
+            vis[que.front()] = <span class="kw">false</span>;
+            que.pop();
+        }
+        <span class="kw">return</span> dfs(str, len, root, <span class="dv">0</span>, <span class="dv">0</span>);
+    }
+    <span class="dt">void</span> init(<span class="dt">void</span>)
+    {
+        ncnt = <span class="dv">0</span>;
+        root = ++ncnt;
+        <span class="kw">return</span> ;
+    }
+} acm;
+
+<span class="dt">int</span> n, m;
+<span class="dt">char</span> str[<span class="dv">64</span>];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    acm.init();
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str);
+        acm.insert(str);
+    }
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str + <span class="dv">1</span>);
+        <span class="dt">int</span> res = acm.query(str);
+        printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1819/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1819/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1819/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1819/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1819">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

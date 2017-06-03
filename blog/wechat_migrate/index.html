@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Migrating WeChat Logs&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="en">
+      <div class="post-header">
+        <h1 class="title">
+          Migrating WeChat Logs
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Debugging" target="_self">
+            <i class="fa fa-tag"></i> Debugging
+          </a>
+          <a class="tag" href="/blog/archive/?q=WeChat" target="_self">
+            <i class="fa fa-tag"></i> WeChat
+          </a>
+          <a class="tag" href="/blog/archive/?q=Android" target="_self">
+            <i class="fa fa-tag"></i> Android
+          </a>
+          <a class="tag" href="/blog/archive/?q=Emulator" target="_self">
+            <i class="fa fa-tag"></i> Emulator
+          </a>
+        </span>
+        <span class="date" title="01:59:20 | 11 November, 2016">
+          11 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h3 id="prologue">Prologue</h3>
+<p>When I got tired of using the disilluminating black-and-white WeChat on the e-ink display, I decided to migrate to another device. The other device, must be not a smartphone, because smartphones tend to draw people ‘s attention. In other words they might not do other things as well as they use WeChat, which is what I want to prevent.</p>
+<p>Therefore I came to the decision that I may use an emulator to do so.<em> Anyone maintaining the WeChat regulations, if you see this and believe that this is not a good idea, please contact me immediately instead of banning my account.</em> Using an emulator to carry the chat application along the way.</p>
+<figure>
+<img class="thumb" data-small="/blog/wechat_migrate/wechat_new-small.jpg" data-src="/blog/wechat_migrate/wechat_new.png" data-thumb="/blog/wechat_migrate/wechat_new-thumb.jpg" src="/blog/wechat_migrate/wechat_new-thumb.jpg" title="" width="524px"/>
+<figcaption>
+</figcaption>
+</figure>
+<p>There are some emulators on the market, however. Some are official, yet incredibly slow, such as (and only) Google’ s AOSP emulator, which may cost you about half an hour to boot, if your computer is fast, owning a 1000% performance advantage over my computer, which did not boot within 5 hours before my closing the emulator. Others are certainly unofficial, but often bores great speed and reliability.</p>
+<!-- More -->
+<p>If you want to read more about how I installed and migrated the WeChat application, please read the article for details. Any damage caused by the derivative actions from this article are not held liable by the author.</p>
+<!-- More -->
+<h3 id="initial-installation">Initial Installation</h3>
+<p>Some time during the past I used to use <em>BlueStacks</em>. It is a nice project, though. But it does not satisfy my favour. I was a complete fan of reducing overall program processes, and became steadily furious of <em>BlueStack</em> ‘s implementation. My friend,<span class="citation" data-cites="xmcp"> @xmcp</span>, introduced to me <em>Nox</em>, which I had already known by the time he told me that. In his words, that emulator lacked a sufficiency of processes, which is in fact good news to me, and I doubt any would consider this a bad news. He also stated that in most cases it tended to crash less often, which is a great thing in terms of reliability. Other advantages includes higher performance and better user interface. File sharing and other common yet useful features are also featured in <em>Nox</em>. Yes, it had been proven that all abovementioned are without at all a bit of falsification.</p>
+<p>So I installed <em>Nox</em>. Yet it had a problem: it’ s network was composed of NAT instead of directly bridging. You may not see the problem in this, but this is indeed the catalyst of a series of problems.</p>
+<p><em>Nox</em> has a dummy installation, which means you don ‘t have to do anything (not literally nothing, no). So you could just sit back and enjoy the 3 minutes of progress bar crawling towards the end.</p>
+<h3 id="direct-attempt">Direct Attempt</h3>
+<p>One way to copy data from the ebook to the emulator is through direct copies. After archiving the folder <code>/mnt/sdcard/tencent/MicroMsg</code>, one may find out that there are no datum connected either directly or indirectly with chat logs. So, though unbelievable, the chat logs are stored in <code>/data/data/com.tencent.mm/MicroMsg</code>.</p>
+<p>Thus we may not copy them, not indirectly. I tried to connect the two devices, with a sheer two hours, trying to get the QR codes working. You may not notice that there are two major problems associating with WeChat’ s abuse of QR codes on the source and target devices:</p>
+<ol type="1">
+<li>The EBook does not have a camera (Which means it would not accept QR codes as an input, not directly)</li>
+<li>The emulator does not support a virtual camera (up to now).</li>
+<li>My laptop does not have a webcam.</li>
+</ol>
+<p>One of the solutions is to simulate a camera, using the application <code>VCam</code>, which I strongly disapprove of in terms of using with <em>Nox</em>, as there are to be strange dithering and stretching of the scene. The other is more reliable, but also very slow and inefficient as well. You scan the QR codes through images, or send the images and scan the QR codes in the sent images.</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="kw">C</span>:\Programs\MiPhone\Google\Android<span class="kw">&gt;</span>adb shell
+<span class="kw">root@mione_plus</span>:/ <span class="co"># tar --help</span>
+<span class="kw">tar</span> --help
+<span class="kw">BusyBox</span> v1.22.1 bionic (2014-06-22 23:11 +0200) <span class="kw">multi-call</span> binary.
+
+<span class="kw">Usage</span>: tar -[cxtzJjahmpvO] [-X FILE] [-T FILE] [-f TARFILE] [-C DIR] [FILE]...
+
+<span class="kw">Create</span>, extract, or list files from a tar file
+
+<span class="kw">Operation</span>:
+        <span class="kw">c</span>       Create
+        <span class="kw">x</span>       Extract
+        <span class="kw">t</span>       List
+        <span class="kw">f</span>       Name of TARFILE (<span class="st">'-'</span> for stdin/out)
+        <span class="kw">C</span>       Change to DIR before operation
+        <span class="kw">v</span>       Verbose
+        <span class="kw">z</span>       (De)<span class="kw">compress</span> using gzip
+        <span class="kw">J</span>       (De)<span class="kw">compress</span> using xz
+        <span class="kw">j</span>       (De)<span class="kw">compress</span> using bzip2
+        <span class="kw">a</span>       (De)<span class="kw">compress</span> using lzma
+        <span class="kw">O</span>       Extract to stdout
+        <span class="kw">h</span>       Follow symlinks
+        <span class="kw">m</span>       Don<span class="st">''</span>t restore mtime
+        <span class="kw">exclude</span> File to exclude
+        <span class="kw">X</span>       File with names to exclude
+        <span class="kw">T</span>       File with names to include
+        <span class="kw">p</span>       Store SELinux contexts
+
+<span class="kw">1|root@mione_plus</span>:/ <span class="co"># mount</span>
+<span class="kw">mount</span>
+<span class="kw">rootfs</span> / rootfs ro,relatime 0 0
+<span class="kw">tmpfs</span> /dev tmpfs rw,nosuid,relatime,mode=755 0 0
+<span class="kw">devpts</span> /dev/pts devpts rw,relatime,mode=600 0 0
+<span class="kw">proc</span> /proc proc rw,relatime 0 0
+<span class="kw">sysfs</span> /sys sysfs rw,relatime 0 0
+<span class="kw">none</span> /acct cgroup rw,relatime,cpuacct 0 0
+<span class="kw">none</span> /sys/fs/cgroup tmpfs rw,relatime,mode=750,gid=1000 0 0
+<span class="kw">tmpfs</span> /mnt/asec tmpfs rw,relatime,mode=755,gid=1000 0 0
+<span class="kw">tmpfs</span> /mnt/obb tmpfs rw,relatime,mode=755,gid=1000 0 0
+<span class="kw">tmpfs</span> /mnt/fuse tmpfs rw,relatime,mode=775,gid=1000 0 0
+<span class="kw">none</span> /dev/cpuctl cgroup rw,relatime,cpu 0 0
+<span class="kw">/dev/block/platform/msm_sdcc.1/by-name/system</span> /system ext4 ro,relatime,user_xattr,acl,barrier=1,data=ordered 0 0
+<span class="kw">/dev/block/platform/msm_sdcc.1/by-name/userdata</span> /data ext4 rw,nosuid,nodev,relatime,user_xattr,acl,barrier=1,noauto_da_alloc 0 0
+<span class="kw">/dev/block/mmcblk0p1</span> /firmware vfat ro,relatime,fmask=0000,dmask=0000,allow_utime=0022,codepage=cp437,iocharset=iso8859-1,shortname=lower,errors=remount-ro 0 0
+<span class="kw">tmpfs</span> /tmp tmpfs rw,relatime,size=32768k 0 0
+<span class="kw">/dev/block/vold</span>/179:<span class="kw">33</span> /mnt/media_rw/sdcard0 vfat rw,dirsync,nosuid,nodev,noexec,relatime,uid=1023,gid=1023,fmask=0007,dmask=0007,allow_utime=0020,codepage=cp437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro 0 0
+<span class="kw">/dev/block/vold</span>/179:<span class="kw">33</span> /mnt/secure/asec vfat rw,dirsync,nosuid,nodev,noexec,relatime,uid=1023,gid=1023,fmask=0007,dmask=0007,allow_utime=0020,codepage=cp437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro 0 0
+<span class="kw">/dev/fuse</span> /storage/sdcard0 fuse rw,nosuid,nodev,relatime,user_id=1023,group_id=1023,default_permissions,allow_other 0 0
+<span class="kw">root@mione_plus</span>:/ <span class="co"># ^C</span>
+<span class="kw">C</span>:\Programs\MiPhone\Google\Android<span class="kw">&gt;</span>adb reboot
+
+<span class="kw">C</span>:\Programs\MiPhone\Google\Android<span class="kw">&gt;</span>adb shell
+<span class="kw">~</span> <span class="co"># cd /data</span>
+<span class="kw">cd</span> /data
+<span class="kw">/data</span> <span class="co"># cd data</span>
+<span class="kw">cd</span> data
+<span class="kw">/data/data</span> <span class="co"># cd com.tencent.mm</span>
+<span class="kw">cd</span> com.tencent.mm
+<span class="kw">/data/data/com.tencent.mm</span> <span class="co"># ls</span>
+<span class="kw">ls</span>
+<span class="kw">MicroMsg</span>          app_recover_lib   cache             lib
+<span class="kw">app_cache</span>         app_tbs           databases         shared_prefs
+<span class="kw">app_dex</span>           app_webview       dex.lock
+<span class="kw">app_lib</span>           app_webviewcache  files
+<span class="kw">/data/data/com.tencent.mm</span> <span class="co"># tar c MicroMsg -f mm.tar</span>
+<span class="kw">tar</span> c MicroMsg -f mm.tar
+<span class="kw">/data/data/com.tencent.mm</span> <span class="co"># ^D</span>
+
+<span class="kw">C</span>:\Programs\MiPhone\Google\Android<span class="kw">&gt;</span>adb pull /data/data/com.tencent.mm/mm.tar D:/mm.tar
+<span class="kw">3871</span> KB/s (11926016 bytes in 3.008s)
+
+<span class="kw">C</span>:\Programs\MiPhone\Google\Android<span class="kw">&gt;</span>adb shell
+<span class="kw">~</span> <span class="co"># cd /sdcard</span>
+<span class="kw">cd</span> /sdcard
+<span class="kw">/sdcard</span> <span class="co"># cd tencent</span>
+<span class="kw">cd</span> tencent
+<span class="kw">/sdcard/tencent</span> <span class="co"># tar c MicroMsg -f mm.tar</span>
+<span class="kw">tar</span> c MicroMsg -f mm.tar
+<span class="kw">/sdcard/tencent</span> <span class="co"># ls -al</span>
+<span class="kw">ls</span> -al
+<span class="kw">drwxrwxrwx</span>    4 root     root          4096 Nov 10 17:35 .
+<span class="kw">drwxrwxrwx</span>   15 root     root          4096 Jan  1  1970 ..
+<span class="kw">drwxrwxrwx</span>   19 root     root          4096 Nov 10  2016 MicroMsg
+<span class="kw">-rwxrwxrwx</span>    1 root     root      52958720 Nov 10 17:36 mm.tar
+<span class="kw">drwxrwxrwx</span>    2 root     root          4096 Nov 10  2016 mta
+<span class="kw">/sdcard/tencent</span> <span class="co"># ^D</span>
+
+<span class="kw">C</span>:\Programs\MiPhone\Google\Android<span class="kw">&gt;</span>adb pull /sdcard/tencent/mm.tar D:/res.tar
+<span class="kw">3983</span> KB/s (52958720 bytes in 12.981s)
+
+<span class="kw">C</span>:\Programs\MiPhone\Google\Android<span class="kw">&gt;</span></code></pre></div>
+<p>Yes. This is supposed to work right, but hitherto the network addresses came to bother me. So we are going to download a set of Github Ppages.</p>
+<p>I am giving the fact quite clear: There is not fast way to change the network mode from NAT to bridging. So the two devices will and will always (The computer, the phones, the ebooks as direct children of the wireless router; between the emulator running on the computer) be separated in different networks.</p>
+<p>It will simply throw you a warning / error that it is not something possible, or simply they decided not to implement log migration between different devices.</p>
+<h3 id="migrating-while-evolving">Migrating While Evolving</h3>
+<blockquote>
+<p>I simply used 10 minutes to tell people that this is right.</p>
+</blockquote>
+<blockquote>
+<p>No matter what you use, if you use then there are bugs.</p>
+</blockquote>
+<p>It took me around two and a half hours to transfer my chat logs to a XiaoMi 1S, the one which I bricked and unbricked at least two weeks ago. Once of these operations (migration) ended up in 99% and connection broke down amidst the final packets.</p>
+<p>So when doing something uninterruptable, try solving it in sections.</p>
+<p>Thereafter the datum had moved from the EBook without camera to a temporary smartphone with cameras.</p>
+<p>However, this method costs time. Because of the speed of the network and the quality of the connection, the time complexity varies accordingly. The average speed, tested by myself, appears to be around 50kb/s at a low rate.</p>
+<h3 id="copying-data">Copying Data</h3>
+<p>I ‘ve tried almost every combination and method, including Tencent’ s PC Manager, which is quite a nuisance, and can contribute no help, if not less than zero, to the migration process.</p>
+<figure>
+<img class="thumb" data-small="/blog/wechat_migrate/re_mgr_cp-small.jpg" data-src="/blog/wechat_migrate/re_mgr_cp.png" data-thumb="/blog/wechat_migrate/re_mgr_cp-thumb.jpg" src="/blog/wechat_migrate/re_mgr_cp-thumb.jpg" title="" width="524px"/>
+<figcaption>
+</figcaption>
+</figure>
+<p>The only last method is directly copying data from the smartphone and copy them into the emulator. Surprisingly, this had escaped SIGSEGV and worked.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>WeChat is something hard to use that is defective by design. The complex logics between users and usergroups, e. t. c., are indeed very irritating.</p>
+<p>But if you want to try much, there is a small probability that you may eradicate its artificial limits and override with your own creativity. The thing I am doing is purely random and only managed to do so with sheer luck.</p>
+<p>Anyway, evolving from B&amp;W to RGB is indeed a great improvement.</p>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/wechat_migrate/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/wechat_migrate/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/wechat_migrate/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/wechat_migrate/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="wechat_migrate">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

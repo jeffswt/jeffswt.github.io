@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj2120: 数颜色&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj2120: 数颜色
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=Partitioning" target="_self">
+            <i class="fa fa-tag"></i> Partitioning
+          </a>
+          <a class="tag" href="/blog/archive/?q=Mo's Algorithm" target="_self">
+            <i class="fa fa-tag"></i> Mo's Algorithm
+          </a>
+        </span>
+        <span class="date" title="10:17:35 | 18 February, 2017">
+          18 February, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>墨墨购买了一套 <span class="math inline">\(n\)</span> 支彩色画笔 (其中有些颜色可能相同), 摆成一排, 你需要回答墨墨的 提问. 墨墨会像你发布如下指令:</p>
+<ol type="1">
+<li><code>Q L R</code> 代表询问你从第 <span class="math inline">\(L\)</span> 支画笔到第 <span class="math inline">\(R\)</span> 支画笔中共有几种不同颜色的画笔.</li>
+<li><code>R P Col</code> 把第 <span class="math inline">\(P\)</span> 支画笔替换为颜色 <span class="math inline">\(Col\)</span>.</li>
+</ol>
+<p>为了满足墨墨的要求, 你知道你需要干什么了吗?</p>
+<h2 id="input">Input</h2>
+<p>第 <span class="math inline">\(1\)</span> 行两个整数 <span class="math inline">\(n, m\)</span>, 分别代表初始画笔的数量以及墨墨会做的事情的个数.</p>
+<p>第 <span class="math inline">\(2\)</span> 行 <span class="math inline">\(n\)</span> 个整数, 分别代表初始画笔排中第 <span class="math inline">\(i\)</span> 支画笔的颜色.</p>
+<p>第 <span class="math inline">\(3\)</span> 行到第 <span class="math inline">\(2+m\)</span> 行, 每行分别代表墨墨会做的一件事情, 格式见题干部分.</p>
+<h2 id="output">Output</h2>
+<p>对于每一个 <code>Query</code> 的询问, 你需要在对应的行中给出一个数字, 代表第 <span class="math inline">\(L\)</span> 支画笔到第 <span class="math inline">\(R\)</span> 支画笔中共有几种不同颜色的画笔.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>6 5
+1 2 3 4 5 5
+Q 1 4
+Q 2 6
+R 1 2
+Q 1 4
+Q 2 6</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>4
+4
+3
+4</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于 100% 的数据,<span class="math inline">\(n \leq 10000, m \leq 10000\)</span>, 修改操作不多于 <span class="math inline">\(1000\)</span> 次, 所有的输入数据中出现的所有整数均大于等于 <span class="math inline">\(1\)</span> 且不超过 <span class="math inline">\(10^6\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<p>第一感觉是这道题可以用 <span class="math inline">\(O(n^\frac{5}{3})\)</span> 的待修改莫队算法来做, 但是不会写, 所以 就放弃了.</p>
+<p>然后发现有一个特性, 计某一个位置之前的和他相同的颜色为 <span class="math inline">\(pre_i\)</span>, 则在一段区间 <span class="math inline">\([L, R]\)</span> 之内某一个颜色出现至少两次的充要条件为 <span class="math inline">\(pre_i \geq L\)</span>. 于是我们把整个数列分成 <span class="math inline">\(m\)</span> 块, 然后对每一个块内的 <span class="math inline">\(pre_i\)</span> 排一下序, 得到的就可以用二分查找来 获得 Query 的答案.</p>
+<p>对于 Change, 由于修改次数不多, 所以每次把整个序列扫一遍就可以了 (虽然觉得很暴力但是这毕竟是 <span class="math inline">\(O(跑得过)\)</span>. ......</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cmath&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">1001000</span>;
+
+<span class="kw">class</span> DuplicateFinder
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> n, m, blk;
+    <span class="dt">int</span> c[maxn], last[maxn], plast[maxn],
+        pre[maxn], pos[maxn];
+    <span class="dt">void</span> reset_blk(<span class="dt">int</span> x)
+    {
+        <span class="dt">int</span> l = (x - <span class="dv">1</span>) * blk + <span class="dv">1</span>,
+            r = min(x * blk, n);
+        <span class="kw">for</span> (<span class="dt">int</span> i = l; i &lt;= r; i++)
+            pre[i] = plast[i];
+        sort(pre + l, pre + r + <span class="dv">1</span>);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> find(<span class="dt">int</span> x, <span class="dt">int</span> v)
+    {
+        <span class="dt">int</span> l = (x - <span class="dv">1</span>) * blk + <span class="dv">1</span>,
+            r = min(x * blk, n);
+        <span class="dt">int</span> first = l;
+        <span class="kw">while</span> (l &lt;= r) {
+            <span class="dt">int</span> mid = (l + r) &gt;&gt; <span class="dv">1</span>;
+            <span class="kw">if</span> (pre[mid] &lt; v)
+                l = mid + <span class="dv">1</span>;
+            <span class="kw">else</span>
+                r = mid - <span class="dv">1</span>;
+        }
+        <span class="kw">return</span> l - first;
+    }
+    <span class="dt">int</span> query(<span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="dt">int</span> res = <span class="dv">0</span>;
+        <span class="kw">if</span> (pos[l] == pos[r]) { <span class="co">// Same block</span>
+            <span class="kw">for</span> (<span class="dt">int</span> i = l; i &lt;= r; i++)
+                <span class="kw">if</span> (plast[i] &lt; l)
+                    res += <span class="dv">1</span>;
+        } <span class="kw">else</span> <span class="kw">if</span> (pos[l] != pos[r]) { <span class="co">// Different block</span>
+            <span class="kw">for</span> (<span class="dt">int</span> i = l; i &lt;= pos[l] * blk; i++)
+                <span class="kw">if</span> (plast[i] &lt; l)
+                    res += <span class="dv">1</span>;
+            <span class="kw">for</span> (<span class="dt">int</span> i = (pos[r] - <span class="dv">1</span>) * blk + <span class="dv">1</span>; i &lt;= r; i++)
+                <span class="kw">if</span> (plast[i] &lt; l)
+                    res += <span class="dv">1</span>;
+        }
+        <span class="kw">for</span> (<span class="dt">int</span> i = pos[l] + <span class="dv">1</span>; i &lt; pos[r]; i++)
+            res += find(i, l);
+        <span class="kw">return</span> res;
+    }
+    <span class="dt">void</span> change(<span class="dt">int</span> x, <span class="dt">int</span> v)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+            last[c[i]] = <span class="dv">0</span>;
+        c[x] = v;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+            <span class="dt">int</span> tmp = plast[i];
+            plast[i] = last[c[i]];
+            <span class="kw">if</span> (tmp != plast[i])
+                reset_blk(pos[i]);
+            last[c[i]] = i;
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> init(<span class="dt">void</span>)
+    {
+        blk = sqrt(n) + log(<span class="dv">2</span>*n) / log(<span class="dv">2</span>);
+        m = ceil(n / blk);
+        <span class="co">// Initializing all blocks</span>
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+            plast[i] = last[c[i]];
+            last[c[i]] = i;
+            pos[i] = (i - <span class="dv">1</span>) / blk + <span class="dv">1</span>;
+        }
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+            reset_blk(i);
+        <span class="kw">return</span> ;
+    }
+} dpf;
+
+<span class="dt">int</span> n, Q;
+<span class="dt">char</span> str[<span class="dv">64</span>];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;Q);
+    dpf.n = n;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;dpf.c[i]);
+    dpf.init();
+    <span class="co">// Querying</span>
+    <span class="kw">for</span> (<span class="dt">int</span> idx = <span class="dv">1</span>; idx &lt;= Q; idx++) {
+        <span class="dt">int</span> a, b;
+        scanf(<span class="st">"</span><span class="ch">%s%d%d</span><span class="st">"</span>, str, &amp;a, &amp;b);
+        <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'Q'</span>) {
+            <span class="dt">int</span> res = dpf.query(a, b);
+            printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'R'</span>) {
+            dpf.change(a, b);
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj2120/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj2120/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj2120/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj2120/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj2120">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

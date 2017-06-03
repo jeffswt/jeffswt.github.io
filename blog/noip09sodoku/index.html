@@ -1,0 +1,360 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NOIP2009-sodoku 靶形数独&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          NOIP2009-sodoku 靶形数独
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOIP2009" target="_self">
+            <i class="fa fa-tag"></i> NOIP2009
+          </a>
+          <a class="tag" href="/blog/archive/?q=Brute Force Search" target="_self">
+            <i class="fa fa-tag"></i> Brute Force Search
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dancing Links X" target="_self">
+            <i class="fa fa-tag"></i> Dancing Links X
+          </a>
+        </span>
+        <span class="date" title="18:27:22 | 4 November, 2016">
+          4 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h3 id="问题描述">问题描述</h3>
+<p>小城和小华都是热爱数学的好学生, 最近, 他们不约而同地迷上了数独游戏, 好胜的他 们想用数独来一比高低. 但普通的数独对他们来说都过于简单了, 于是他们向 Z 博士请教, Z 博士拿出了他最近发明的 “靶形数独”, 作为这两个孩子比试的题目.</p>
+<p>靶形数独的方格同普通数独一样, 在 9 格宽×9 格高的大九宫格中有 9 个 3 格宽×3 格高的小九宫格 (用粗黑色线隔开的). 在这个大九宫格中, 有一些数字是已知的, 根据这些 数字, 利用逻辑推理, 在其他的空格上填入 1 到 9 的数字. 每个数字在每个小九宫格内不能 重复出现, 每个数字在每行、每列也不能重复出现. 但靶形数独有一点和普通数独不同, 即每一个方格都有一个分值, 而且如同一个靶子一样, 离中心越近则分值越高. (如图)</p>
+<figure>
+<img class="thumb" data-small="/blog/noip09sodoku/sodoku_1-small.jpg" data-src="/blog/noip09sodoku/sodoku_1.png" data-thumb="/blog/noip09sodoku/sodoku_1-thumb.jpg" src="/blog/noip09sodoku/sodoku_1-thumb.jpg" title="" width="442px"/>
+<figcaption>
+</figcaption>
+</figure>
+<p>上图具体的分值分布是: 最里面一格 (黄色区域) 为 10 分, 黄色区域外面的一圈 (红色区域) 每个格子为 9 分, 再外面一圈 (蓝色区域) 每个格子为 8 分, 蓝色区域外面一圈 (棕色区域) 每个格子为 7 分, 最外面一圈 (白色区域) 每个格子为 6 分, 如上图所示. 比赛的要求是: 每个人必须完成一个给定的数独 (每个给定数独可能有不同的填法), 而且要争取更高的总分数. 而这个总分数即每个方格上的分值和完成这个数独时填在相应格上的数字 的乘积的总和. 如图, 在以下的这个已经填完数字的靶形数独游戏中, 总分数为 2829. 游戏规定, 将以总分数的高低决出胜负.</p>
+<figure>
+<img class="thumb" data-small="/blog/noip09sodoku/sodoku_2-small.jpg" data-src="/blog/noip09sodoku/sodoku_2.png" data-thumb="/blog/noip09sodoku/sodoku_2-thumb.jpg" src="/blog/noip09sodoku/sodoku_2-thumb.jpg" title="" width="347px"/>
+<figcaption>
+</figcaption>
+</figure>
+<p>由于求胜心切, 小城找到了善于编程的你, 让你帮他求出, 对于给定的靶形数独, 能够得到的最高分数.</p>
+<h3 id="输入">输入</h3>
+<p>输入文件名为 sudoku. in.</p>
+<p>一共 9 行. 每行 9 个整数 (每个数都在 0--9 的范围内), 表示一个尚未填满的数独方 格, 未填的空格用 “0” 表示. 每两个数字之间用一个空格隔开.</p>
+<h3 id="输出">输出</h3>
+<p>输出文件 sudoku. out 共 1 行.</p>
+<p>输出可以得到的靶形数独的最高分数. 如果这个数独无解, 则输出整数-1.</p>
+<!-- More -->
+<h3 id="输入样例-1">输入样例 1</h3>
+<pre><code>7 0 0 9 0 0 0 0 1
+1 0 0 0 0 5 9 0 0
+0 0 0 2 0 0 0 8 0
+0 0 5 0 2 0 0 0 3
+0 0 0 0 0 0 6 4 8
+4 1 3 0 0 0 0 0 0
+0 0 7 0 0 2 0 9 0
+2 0 1 0 6 0 8 0 4
+0 8 0 5 0 4 0 1 2</code></pre>
+<h3 id="输出样例-1">输出样例 1</h3>
+<pre><code>2829</code></pre>
+<h3 id="输入样例-2">输入样例 2</h3>
+<pre><code>0 0 0 7 0 2 4 5 3
+9 0 0 0 0 8 0 0 0
+7 4 0 0 0 5 0 1 0
+1 9 5 0 8 0 0 0 0
+0 7 0 0 0 0 0 2 5
+0 3 0 5 7 9 1 0 8
+0 0 0 6 0 1 0 0 0
+0 6 0 9 0 0 0 0 1
+0 0 0 0 0 0 0 0 6</code></pre>
+<h3 id="输出样例-2">输出样例 2</h3>
+<pre><code>2852</code></pre>
+<h3 id="数据范围">数据范围</h3>
+<p>40% 的数据, 数独中非 0 数的个数不少于 30.</p>
+<p>80% 的数据, 数独中非 0 数的个数不少于 26.</p>
+<p>100% 的数据, 数独中非 0 数的个数不少于 24.</p>
+<h3 id="explanation">Explanation</h3>
+<p>这一道题看上去就是暴搜了对不对, 所以我们本来应该写的暴搜.</p>
+<p>但是 JerrySkywalker 告诉我还有一个好东西叫 Dancing Links X, 毕竟是 Donald Knuth 发明的好东西 (但是速度似乎比爆搜还要慢上 60000 倍而且写了半天写不出来的说). 于是 就先写了一半的矩阵生成.</p>
+<p>中间的也没有贴上, 因为反正也不想写了. 我觉得精确最小覆盖的问题我以后应该好好地 研究一下.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">400</span>, maxm = <span class="dv">10</span>;
+
+<span class="dt">int</span> get_box(<span class="dt">int</span> x, <span class="dt">int</span> y) { <span class="kw">return</span> (y &lt;= <span class="dv">3</span> ? <span class="dv">1</span> : (y &lt;= <span class="dv">6</span> ? <span class="dv">2</span> : <span class="dv">3</span>)) * <span class="dv">3</span> - <span class="dv">3</span> + (x &lt;= <span class="dv">3</span> ? <span class="dv">1</span> : (x &lt;= <span class="dv">6</span> ? <span class="dv">2</span> : <span class="dv">3</span>)); }
+<span class="dt">int</span> get_weight(<span class="dt">int</span> x, <span class="dt">int</span> y) { <span class="kw">return</span> <span class="dv">10</span> - min(abs(y - <span class="dv">5</span>), abs(x - <span class="dv">5</span>)); }
+
+<span class="kw">class</span> Matrix
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> n, m; <span class="co">// Columns = 324, Rows (dynamic)</span>
+    <span class="dt">int</span> arr[<span class="dv">10</span> * maxn][maxn];
+    <span class="dt">void</span> new_row(<span class="dt">void</span>) { m++; }
+    <span class="dt">void</span> set_val_pos(<span class="dt">int</span> x, <span class="dt">int</span> y, <span class="dt">int</span> weight) {
+        arr[m][(y - <span class="dv">1</span>) * <span class="dv">9</span> + x] = weight; }
+    <span class="dt">void</span> set_val_row(<span class="dt">int</span> y, <span class="dt">int</span> val, <span class="dt">int</span> weight) {
+        arr[m][<span class="dv">81</span> + (y - <span class="dv">1</span>) * <span class="dv">9</span> + val] = weight; }
+    <span class="dt">void</span> set_val_col(<span class="dt">int</span> x, <span class="dt">int</span> val, <span class="dt">int</span> weight) {
+        arr[m][<span class="dv">81</span> * <span class="dv">2</span> + (x - <span class="dv">1</span>) * <span class="dv">9</span> + val] = weight; }
+    <span class="dt">void</span> set_val_box(<span class="dt">int</span> x, <span class="dt">int</span> y, <span class="dt">int</span> val, <span class="dt">int</span> weight) {
+        arr[m][<span class="dv">81</span> * <span class="dv">3</span> + (get_box(x, y) - <span class="dv">1</span>) * <span class="dv">9</span> + val] = weight; }
+    <span class="dt">void</span> set_val(<span class="dt">int</span> x, <span class="dt">int</span> y, <span class="dt">int</span> val) {
+        <span class="dt">int</span> weight = get_weight(x, y);
+        set_val_pos(x, y, weight);
+        set_val_row(y, val, weight);
+        set_val_col(x, val, weight);
+        set_val_box(x, y, val, weight); }
+    <span class="dt">void</span> print(<span class="dt">void</span>) {
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++)
+                <span class="kw">if</span> (arr[i][j]) printf(<span class="st">"</span><span class="ch">%d</span><span class="st"> "</span>, j);
+            printf(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>);
+        } printf(<span class="st">"Matrix has </span><span class="ch">%d</span><span class="st"> rows, </span><span class="ch">%d</span><span class="st"> columns.</span><span class="ch">\n</span><span class="st">"</span>, n, m); }
+} mat;
+
+<span class="kw">class</span> DancingLinksX
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> node { node *l, *r, *u, *d; <span class="dt">int</span> v; };
+    node npool[<span class="dv">40</span> * maxn], *head;
+    node *tmpidx[<span class="dv">10</span> * maxn][maxn];
+    <span class="dt">int</span> ncnt;
+    node* make_node(<span class="dt">void</span>) {
+        node *p = &amp;npool[ncnt++];
+        p-&gt;l = p-&gt;r = p-&gt;u = p-&gt;d = p;
+        <span class="kw">return</span> p; }
+    <span class="dt">void</span> init(Matrix m)
+    {
+        head = make_node();
+        <span class="co">// Making assistive nodes</span>
+        node *last = head;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m.n; i++) {
+            node *cur = make_node();
+            cur-&gt;l = last, last-&gt;r = cur;
+            tmpidx[<span class="dv">0</span>][i] = cur;
+        }
+        tmpidx[<span class="dv">0</span>][m.n]-&gt;r = head;
+        head-&gt;l = tmpidx[<span class="dv">0</span>][m.n];
+        <span class="co">// Rest are omitted, since they will always TLE.</span>
+        
+    }
+} graph;
+
+<span class="dt">int</span> n = <span class="dv">9</span>; <span class="co">// Do not modify!</span>
+<span class="dt">int</span> arr[maxm][maxm];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++)
+            scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;arr[i][j]);
+    <span class="co">// Creating creation matrix</span>
+    mat.n = <span class="dv">324</span>, mat.m = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++)
+            <span class="kw">if</span> (arr[i][j] &gt; <span class="dv">0</span>) {
+                <span class="co">// Already set defined values</span>
+                mat.new_row();
+                mat.set_val(j, i, arr[i][j]);
+            } <span class="kw">else</span> {
+                <span class="co">// Arbitrary values might occur here...</span>
+                <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= <span class="dv">9</span>; k++) {
+                    mat.new_row();
+                    mat.set_val(j, i, k);
+                }
+            }
+    <span class="co">// Made matrix, now preprocess matrix for Dancing Links X.</span>
+    graph.init(mat);
+    mat.print();
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>然后就转战水暴力了.</p>
+<p>于是有了这样的一个故事 (hs 分分钟 AC 掉了这道题), 但是我压位压了半天还是会崩, 所以 就直接写了数组.</p>
+<p>但是这个数组常熟有点大 (雾), 在洛谷上交 75 分就不管了.</p>
+<p>另外顺带说一句还有一种输出-1 的情况.</p>
+<p>话说在交之前一直过不了样例数据, 一直输出 2112 左右的一个小数字 (并且特别慢). 后来才发现是有一个二维数组的地方没有写第二位, 而且 g++没有报错 (差评). 然后就调成差不多+1s 之内能过. 再然后发现答案还是不对, 就改了获得每一个位置的权的函数, 把一个 min 改成 max 然后就答案少了 400 左右. 最后是在无聊的时候自己造了这样一个数独出来玩:</p>
+<pre><code>1 2 3 4 5 6 7 8 9
+4 5 6 7 8 9 1 2 3
+7 8 9 1 2 3 4 5 6
+2 3 4 5 6 7 8 9 1
+5 6 7 8 9 1 2 3 4
+8 9 1 2 3 4 5 6 7
+3 4 5 6 7 8 9 1 2
+6 7 8 9 1 2 3 4 5
+9 1 2 3 4 5 6 7 8</code></pre>
+<p>很显然这个是对的是不是? 于是我就想挖掉一个空. 突然发现如果只挖掉一个空很可能只 输出这一个的权值, 然后就把其他的位置的权值都加上就可以了.</p>
+<p>结果就这样的 75 分过了~</p>
+<p>不是说了我不要剩下 25 分了么? 所以不要问我优化的问题.</p>
+<h3 id="example-code">Example Code</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+
+<span class="dt">int</span> get_box(<span class="dt">int</span> x, <span class="dt">int</span> y) { <span class="kw">return</span> (y &lt;= <span class="dv">3</span> ? <span class="dv">1</span> : (y &lt;= <span class="dv">6</span> ? <span class="dv">2</span> : <span class="dv">3</span>)) * <span class="dv">3</span> - <span class="dv">3</span> + (x &lt;= <span class="dv">3</span> ? <span class="dv">1</span> : (x &lt;= <span class="dv">6</span> ? <span class="dv">2</span> : <span class="dv">3</span>)); }
+<span class="dt">int</span> get_weight(<span class="dt">int</span> x, <span class="dt">int</span> y) { <span class="kw">return</span> <span class="dv">10</span> - max(abs(y - <span class="dv">5</span>), abs(x - <span class="dv">5</span>)); }
+
+<span class="kw">class</span> SodokuState
+{
+<span class="kw">public</span>:
+    <span class="dt">bool</span> state[<span class="dv">28</span>][<span class="dv">10</span>];
+    <span class="dt">bool</span> occupied[<span class="dv">10</span>][<span class="dv">10</span>];
+    <span class="kw">inline</span> <span class="dt">void</span> set_val(<span class="dt">int</span> x, <span class="dt">int</span> y, <span class="dt">int</span> val, <span class="dt">bool</span> dig) {
+        state[y][val] = !dig;
+        state[<span class="dv">9</span> + x][val] = !dig;
+        state[<span class="dv">18</span> + get_box(x, y)][val] = !dig;
+        occupied[y][x] = dig; }
+    <span class="kw">inline</span> <span class="dt">bool</span> get(<span class="dt">int</span> x, <span class="dt">int</span> y, <span class="dt">int</span> val) {
+        <span class="kw">return</span> state[y][val] &amp;&amp; state[<span class="dv">9</span> + x][val] &amp;&amp; state[<span class="dv">18</span> + get_box(x, y)][val]; }
+    <span class="kw">inline</span> <span class="dt">void</span> set(<span class="dt">int</span> x, <span class="dt">int</span> y, <span class="dt">int</span> val) { set_val(x, y, val, <span class="kw">true</span>); }
+    <span class="kw">inline</span> <span class="dt">void</span> unset(<span class="dt">int</span> x, <span class="dt">int</span> y, <span class="dt">int</span> val) { set_val(x, y, val, <span class="kw">false</span>); }
+    <span class="kw">inline</span> <span class="dt">bool</span> select_best(<span class="dt">int</span> &amp;x, <span class="dt">int</span> &amp;y) {
+        <span class="dt">int</span> best_val = <span class="dv">10</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">9</span>; i++)
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= <span class="dv">9</span>; j++) {
+                <span class="kw">if</span> (occupied[i][j]) <span class="kw">continue</span>;
+                <span class="dt">int</span> c_digits = <span class="dv">0</span>;
+                <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= <span class="dv">9</span>; k++)
+                    c_digits += <span class="dt">int</span>(get(j, i, k));
+                <span class="kw">if</span> (c_digits &lt; best_val &amp;&amp; c_digits &gt; <span class="dv">0</span>)
+                    x = j, y = i, best_val = c_digits;
+            }
+        <span class="kw">if</span> (best_val &gt;= <span class="dv">10</span>) <span class="kw">return</span> <span class="kw">false</span>;
+        <span class="kw">return</span> <span class="kw">true</span>; }
+    <span class="kw">inline</span> <span class="dt">void</span> clear(<span class="dt">void</span>) {
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">27</span>; i++)
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= <span class="dv">9</span>; j++)
+                state[i][j] = <span class="kw">true</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">9</span>; i++)
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= <span class="dv">9</span>; j++)
+                occupied[i][j] = <span class="kw">false</span>;
+        <span class="kw">return</span> ; }
+    <span class="kw">inline</span> <span class="dt">bool</span> empty(<span class="dt">void</span>) {
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">9</span>; i++)
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= <span class="dv">9</span>; j++)
+                <span class="kw">if</span> (!occupied[i][j])
+                    <span class="kw">return</span> <span class="kw">false</span>;
+        <span class="kw">return</span> <span class="kw">true</span>; }
+};
+
+<span class="dt">int</span> arr[<span class="dv">10</span>][<span class="dv">10</span>];
+
+<span class="dt">int</span> dfs(SodokuState&amp; ss, <span class="dt">int</span> depth, <span class="dt">int</span> score)
+{
+    <span class="dt">int</span> final_res = <span class="dv">0</span>;
+    <span class="ot">#define maximize(__x) final_res = max(final_res, __x)</span>
+    <span class="kw">if</span> (ss.empty())
+        <span class="kw">return</span> score;
+    <span class="co">// Checked intactness, selecting best node and look for it</span>
+    <span class="dt">int</span> b_x = <span class="dv">1</span>, b_y = <span class="dv">1</span>;
+    <span class="kw">if</span> (!ss.select_best(b_x, b_y))
+        <span class="kw">return</span> <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">9</span>; i++)
+        <span class="kw">if</span> (ss.get(b_x, b_y, i)) {
+            ss.set(b_x, b_y, i);
+            maximize(dfs(ss, depth + <span class="dv">1</span>, score + get_weight(b_x, b_y) * i));
+            ss.unset(b_x, b_y, i);
+        }
+    <span class="kw">return</span> final_res;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">9</span>; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= <span class="dv">9</span>; j++)
+            scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;arr[i][j]);
+    <span class="co">// Making initial state</span>
+    SodokuState ss; ss.clear();
+    <span class="dt">int</span> t_res = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">9</span>; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= <span class="dv">9</span>; j++)
+            <span class="kw">if</span> (arr[i][j]) {
+                ss.set(j, i, arr[i][j]);
+                t_res += arr[i][j] * get_weight(j, i);
+            }
+    <span class="co">// Searching</span>
+    <span class="dt">int</span> res = dfs(ss, <span class="dv">0</span>, <span class="dv">0</span>);
+    <span class="kw">if</span> (!res)
+        printf(<span class="st">"-1</span><span class="ch">\n</span><span class="st">"</span>);
+    <span class="kw">else</span>
+        printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res + t_res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/noip09sodoku/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/noip09sodoku/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/noip09sodoku/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/noip09sodoku/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="noip09sodoku">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

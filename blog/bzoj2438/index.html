@@ -1,0 +1,266 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj2438: [中山市选2011]杀人游戏&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj2438: [中山市选2011]杀人游戏
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ2438" target="_self">
+            <i class="fa fa-tag"></i> BZOJ2438
+          </a>
+          <a class="tag" href="/blog/archive/?q=Strongly Connected Components" target="_self">
+            <i class="fa fa-tag"></i> Strongly Connected Components
+          </a>
+          <a class="tag" href="/blog/archive/?q=Tarjan" target="_self">
+            <i class="fa fa-tag"></i> Tarjan
+          </a>
+        </span>
+        <span class="date" title="19:56:33 | 29 January, 2017">
+          29 January, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>一位冷血的杀手潜入 Na-wiat, 并假装成平民. 警察希望能在 <span class="math inline">\(n\)</span> 个人里面, 查出谁是杀手.</p>
+<p>警察能够对每一个人进行查证, 假如查证的对象是平民, 他会告诉警察, 他认识的人, 谁是 杀手, 谁是平民. 假如查证的对象是杀手, 杀手将会把警察干掉.</p>
+<p>现在警察掌握了每一个人认识谁.</p>
+<p>每一个人都有可能是杀手, 可看作他们是杀手的概率是相同的.</p>
+<p>问: 根据最优的情况, 保证警察自身安全并知道谁是杀手的概率最大是多少?</p>
+<h2 id="input">Input</h2>
+<p>第一行有两个整数 <span class="math inline">\(n, m\)</span>. 接下来有 <span class="math inline">\(m\)</span> 行, 每行两个整数 <span class="math inline">\(x, y\)</span>, 表示 <span class="math inline">\(x\)</span> 认识 <span class="math inline">\(y\)</span> (<span class="math inline">\(y\)</span> 不一定认识 <span class="math inline">\(x\)</span>) .</p>
+<h2 id="output">Output</h2>
+<p>仅包含一行一个实数, 保留小数点后面 <span class="math inline">\(6\)</span> 位, 表示最大概率.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>5 4
+1 2
+1 3
+1 4
+1 5</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>0.800000</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于 100% 的数据有 <span class="math inline">\(1 \leq n \leq 100000, 0 \leq m \leq 300000\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>我们发现如果存在一个强连通分量, 那么这个强连通分量从哪里进去都等效 (只要第一个不是杀手). 然后我们可以进一步推断出, 如果一个强连通分量的入度大于 <span class="math inline">\(1\)</span>, 也就是说 不止一个点指向它, 则整个强连通分量都是安全的了.</p>
+<p>于是我们先预处理出强连通分量, 然后直接搞一下入度就可以了.</p>
+<p>最后答案是 <span class="math inline">\(\frac{n - k}{n}\)</span>.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;stack&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="kw">typedef</span> <span class="dt">double</span> llf;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">100100</span>, maxm = <span class="dv">300100</span>;
+
+<span class="kw">class</span> Graph
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v;
+        edge *next;
+    };
+    <span class="dt">int</span> n, ecnt;
+    edge *edges[maxn], epool[maxm];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v)
+    {
+        edge *p = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v;
+        p-&gt;next = edges[u]; edges[u] = p;
+        <span class="kw">return</span> ;
+    }
+};
+
+<span class="kw">class</span> StronglyConnectedComponents : <span class="kw">public</span> Graph
+{
+<span class="kw">public</span>:
+    stack&lt;<span class="dt">int</span>&gt; stk;
+    <span class="dt">int</span> instk[maxn], dfn[maxn], low[maxn];
+    <span class="dt">int</span> dcnt, bcnt;
+    <span class="dt">int</span> belong[maxn], bsize[maxn];
+    <span class="dt">void</span> dfs(<span class="dt">int</span> p)
+    {
+        low[p] = dfn[p] = ++dcnt;
+        stk.push(p);
+        instk[p] = <span class="kw">true</span>;
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next) {
+            <span class="dt">int</span> q = ep-&gt;v;
+            <span class="kw">if</span> (!dfn[q]) {
+                dfs(q);
+                <span class="kw">if</span> (low[q] &lt; low[p])
+                    low[p] = low[q];
+            } <span class="kw">else</span> <span class="kw">if</span> (instk[q] &amp;&amp; dfn[q] &lt; low[p]) {
+                low[p] = dfn[q];
+            }
+        }
+        <span class="kw">if</span> (dfn[p] == low[p]) {
+            bcnt++; <span class="co">// Assign new belong / block counter index</span>
+            <span class="dt">int</span> q = <span class="dv">0</span>;
+            <span class="kw">do</span> {
+                q = stk.top();
+                stk.pop();
+                instk[q] = <span class="kw">false</span>;
+                belong[q] = bcnt;
+                bsize[bcnt] += <span class="dv">1</span>;
+            } <span class="kw">while</span> (q != p);
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> tarjan(<span class="dt">void</span>)
+    {
+        <span class="kw">while</span> (!stk.empty())
+            stk.pop();
+        dcnt = bcnt = <span class="dv">0</span>;
+        memset(dfn, <span class="dv">0</span>, <span class="kw">sizeof</span>(dfn));
+        memset(low, <span class="dv">0</span>, <span class="kw">sizeof</span>(low));
+        memset(instk, <span class="dv">0</span>, <span class="kw">sizeof</span>(instk));
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+            <span class="kw">if</span> (!dfn[i])
+                dfs(i);
+        <span class="kw">return</span> ;
+    }
+} scc;
+
+<span class="kw">class</span> StronglyConnectedTree : <span class="kw">public</span> Graph
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> in_degree[maxn];
+    <span class="dt">bool</span> vis[maxn];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v)
+    {
+        Graph::add_edge(u, v);
+        in_degree[v] += <span class="dv">1</span>;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> clone(<span class="dt">void</span>)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> p = <span class="dv">1</span>; p &lt;= n; p++) {
+            <span class="kw">for</span> (edge *ep = scc.edges[p]; ep; ep = ep-&gt;next) {
+                <span class="dt">int</span> q = ep-&gt;v;
+                <span class="kw">if</span> (scc.belong[p] != scc.belong[q] &amp;&amp; !vis[scc.belong[q]]) {
+                    vis[scc.belong[q]] = <span class="kw">true</span>;
+                    add_edge(scc.belong[p], scc.belong[q]);
+                }
+            }
+            <span class="kw">for</span> (edge *ep = scc.edges[p]; ep; ep = ep-&gt;next) {
+                <span class="dt">int</span> q = ep-&gt;v;
+                <span class="kw">if</span> (scc.belong[p] != scc.belong[q])
+                    vis[scc.belong[q]] = <span class="kw">false</span>;
+            }
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> judge(<span class="dt">int</span> p)
+    {
+        <span class="kw">if</span> (in_degree[p] != <span class="dv">0</span> || scc.bsize[p] != <span class="dv">1</span>)
+            <span class="kw">return</span> <span class="kw">false</span>;
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+            <span class="kw">if</span> (in_degree[ep-&gt;v] == <span class="dv">1</span>)
+                <span class="kw">return</span> <span class="kw">false</span>;
+        <span class="kw">return</span> <span class="kw">true</span>;
+    }
+} sct;
+
+<span class="dt">int</span> n, m;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    scc.n = sct.n = n;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, u, v; i &lt;= m; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;u, &amp;v);
+        scc.add_edge(u, v);
+    }
+    scc.tarjan();
+    sct.clone();
+    <span class="dt">int</span> res = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= scc.bcnt; i++)
+        <span class="kw">if</span> (sct.in_degree[i] &lt;= <span class="dv">0</span>)
+            res += <span class="dv">1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= scc.bcnt; i++)
+        <span class="kw">if</span> (sct.judge(i)) {
+            res -= <span class="dv">1</span>;
+            <span class="kw">break</span>;
+        }
+    llf f_res = (llf)(n - res) / n;
+    printf(<span class="st">"</span><span class="ch">%.6lf\n</span><span class="st">"</span>, f_res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj2438/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj2438/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj2438/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj2438/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj2438">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

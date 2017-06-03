@@ -1,0 +1,273 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1007: [HNOI2008]水平可见直线&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1007: [HNOI2008]水平可见直线
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=HNOI2008" target="_self">
+            <i class="fa fa-tag"></i> HNOI2008
+          </a>
+          <a class="tag" href="/blog/archive/?q=Convex Hull" target="_self">
+            <i class="fa fa-tag"></i> Convex Hull
+          </a>
+          <a class="tag" href="/blog/archive/?q=Geometry" target="_self">
+            <i class="fa fa-tag"></i> Geometry
+          </a>
+        </span>
+        <span class="date" title="14:15:32 | 21 July, 2016">
+          21 July, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Problem Specification</th>
+<th style="text-align: left;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Time Limit</td>
+<td style="text-align: left;">1 Sec</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Memory Limit</td>
+<td style="text-align: left;">162 MB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Submit</td>
+<td style="text-align: left;">5628</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Solved</td>
+<td style="text-align: left;">2137</td>
+</tr>
+</tbody>
+</table>
+<h2 id="description">Description</h2>
+<p>在 xoy 直角坐标平面上有 n 条直线 L1, L2,. ...... Ln, 若在 y 值为正无穷大处往下看, 能见到 Li 的某个子线段, 则称 Li 为可见的, 否则 Li 为被覆盖的.</p>
+<p>例如, 对于直线:</p>
+<p>L1: y=x; L2: y=-x; L3: y=0</p>
+<p>则 L1 和 L2 是可见的, L3 是被覆盖的.</p>
+<p>给出 n 条直线, 表示成 y=Ax+B 的形式 (|A|,|B|&lt;=500000), 且 n 条直线两两不重合. 求出所有可见的直线.</p>
+<!-- More -->
+<h2 id="input">Input</h2>
+<p>第一行为 N (0 &lt; N &lt; 50000), 接下来的 N 行输入 Ai, Bi</p>
+<h2 id="output">Output</h2>
+<p>从小到大输出可见直线的编号, 两两中间用空格隔开, 最后一个数字后面也必须有个空格</p>
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>3
+-1 0
+1 0
+0 0</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>1 2</code></pre>
+<h2 id="hint">HINT</h2>
+<h2 id="source">Source</h2>
+<hr/>
+<h2 id="explanation">Explanation</h2>
+<p>由于方程可以用 <code>y = kx + b</code> 表示, 说明这条直线一定不平行于 y 轴. 进一步, 我们将这些直线按照斜率排序, 由此可以得出按照斜率从小到大排好序的一坨直线. 有这样一些可以臆想出来的引理:</p>
+<ol type="1">
+<li>左右两端的直线都是可见的直线.</li>
+<li>经斜率排序后, 若一个夹在中间的直线与两边的直线的交点负相应地 (就是说, 方向相反, 左边的直线交点在右边, 以此类推) 分居于这两条直线的交点的两侧, 则这条直线一定是不可见的.</li>
+<li>对于相同斜率的直线, 他们中 y 截距最小的对引理 2 中的中间直线影响最大.</li>
+<li>对于相同斜率的直线, y 截距不是最大的直线一定不能被看见.</li>
+</ol>
+<p>我们用这种方法就可以计算出相应的 2n 个交点, 同时可以计算凸包.</p>
+<p>题外话: 我突然突发奇想写了一个在本地用来跑对拍的 Python 代码. 有兴趣的人可以拿去试一试 (自带编译, 参数自调)</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="im">import</span> os
+<span class="im">import</span> sys
+<span class="im">import</span> re
+<span class="im">from</span> pydatagen <span class="im">import</span> <span class="op">*</span>
+
+gen <span class="op">=</span> sys.argv[<span class="dv">1</span>]
+mycode <span class="op">=</span> sys.argv[<span class="dv">2</span>]
+std <span class="op">=</span> sys.argv[<span class="dv">3</span>]
+count <span class="op">=</span> <span class="bu">int</span>(sys.argv[<span class="dv">4</span>])
+gpp_invoke <span class="op">=</span> <span class="st">'"C:</span><span class="ch">\\</span><span class="st">Program Files (x86)</span><span class="ch">\\</span><span class="st">Dev-Cpp</span><span class="ch">\\</span><span class="st">MinGW64</span><span class="ch">\\</span><span class="st">bin</span><span class="ch">\\</span><span class="st">g++" </span><span class="sc">%s</span><span class="st"> -o </span><span class="sc">%s</span><span class="st">'</span>
+
+<span class="co"># Pre-run compilation</span>
+
+printf(<span class="st">'$ Compiling...</span><span class="ch">\r</span><span class="st">'</span>)
+mycode_e <span class="op">=</span> re.sub(<span class="st">'</span><span class="ch">\\</span><span class="st">.cpp$'</span>, <span class="st">'.exe'</span>, mycode)
+std_e <span class="op">=</span> re.sub(<span class="st">'</span><span class="ch">\\</span><span class="st">.cpp$'</span>, <span class="st">'.exe'</span>, std)
+<span class="cf">if</span> <span class="op">not</span> os.path.exists(mycode_e):
+    os.system(gpp_invoke <span class="op">%</span> (mycode, mycode_e))
+<span class="cf">if</span> <span class="op">not</span> os.path.exists(std_e):
+    os.system(gpp_invoke <span class="op">%</span> (std, std_e))
+printf(<span class="st">'$ Compiling... OK</span><span class="ch">\n</span><span class="st">'</span>)
+
+<span class="co"># Execution and judging</span>
+
+same_count <span class="op">=</span> <span class="dv">0</span>
+
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">0</span>, count):
+    printf(<span class="st">'$ Checking round #</span><span class="sc">%s</span><span class="st">: Generating data...</span><span class="sc">%s</span><span class="ch">\r</span><span class="st">'</span> <span class="op">%</span> (<span class="bu">str</span>(i <span class="op">+</span> <span class="dv">1</span>), <span class="st">' '</span> <span class="op">*</span> <span class="dv">16</span>))
+    os.system(<span class="st">'python </span><span class="sc">%s</span><span class="st"> &gt; __input__.txt'</span> <span class="op">%</span> gen)
+    printf(<span class="st">'$ Checking round #</span><span class="sc">%s</span><span class="st">: Running "</span><span class="sc">%s</span><span class="st">"...</span><span class="sc">%s</span><span class="ch">\r</span><span class="st">'</span> <span class="op">%</span> (<span class="bu">str</span>(i <span class="op">+</span> <span class="dv">1</span>), mycode, <span class="st">' '</span> <span class="op">*</span> <span class="dv">16</span>))
+    os.system(<span class="st">'cat __input__.txt | </span><span class="sc">%s</span><span class="st"> &gt; __out1__.txt'</span> <span class="op">%</span> mycode_e)
+    printf(<span class="st">'$ Checking round #</span><span class="sc">%s</span><span class="st">: Running "</span><span class="sc">%s</span><span class="st">"...</span><span class="sc">%s</span><span class="ch">\r</span><span class="st">'</span> <span class="op">%</span> (<span class="bu">str</span>(i <span class="op">+</span> <span class="dv">1</span>), std, <span class="st">' '</span> <span class="op">*</span> <span class="dv">16</span>))
+    os.system(<span class="st">'cat __input__.txt | </span><span class="sc">%s</span><span class="st"> &gt; __out2__.txt'</span> <span class="op">%</span> std_e)
+    printf(<span class="st">'$ Checking round #</span><span class="sc">%s</span><span class="st">: Judging...</span><span class="sc">%s</span><span class="ch">\r</span><span class="st">'</span> <span class="op">%</span> (<span class="bu">str</span>(i <span class="op">+</span> <span class="dv">1</span>), <span class="st">' '</span> <span class="op">*</span> <span class="dv">16</span>))
+    f1 <span class="op">=</span> <span class="bu">open</span>(<span class="st">'__out1__.txt'</span>, <span class="st">'r'</span>, encoding<span class="op">=</span><span class="st">'utf-8'</span>)
+    f2 <span class="op">=</span> <span class="bu">open</span>(<span class="st">'__out2__.txt'</span>, <span class="st">'r'</span>, encoding<span class="op">=</span><span class="st">'utf-8'</span>)
+    str1 <span class="op">=</span> f1.read().replace(<span class="vs">r'[ \t\r\n]'</span>, <span class="st">''</span>)
+    str2 <span class="op">=</span> f2.read().replace(<span class="vs">r'[ \t\r\n]'</span>, <span class="st">''</span>)
+    f1.close()
+    f2.close()
+    same <span class="op">=</span> str1 <span class="op">==</span> str2
+    <span class="cf">if</span> same:
+        printf(<span class="st">'$ Checking round #</span><span class="sc">%s</span><span class="st">: OK</span><span class="sc">%s</span><span class="ch">\r</span><span class="st">'</span> <span class="op">%</span> (<span class="bu">str</span>(i <span class="op">+</span> <span class="dv">1</span>), <span class="st">' '</span> <span class="op">*</span> <span class="dv">16</span>))
+        same_count <span class="op">+=</span> <span class="dv">1</span>
+    <span class="cf">else</span>:
+        printf(<span class="st">'$ Checking round #</span><span class="sc">%s</span><span class="st">: CORRECT</span><span class="sc">%s</span><span class="ch">\r</span><span class="st">'</span> <span class="op">%</span> (<span class="bu">str</span>(i <span class="op">+</span> <span class="dv">1</span>), <span class="st">' '</span> <span class="op">*</span> <span class="dv">16</span>))
+    printf(<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)
+
+printf(<span class="st">'$ Cleaning up...</span><span class="ch">\r</span><span class="st">'</span>)
+os.system(<span class="st">'rm -f __input__.txt __out1__.txt __out2__.txt'</span>)
+printf(<span class="st">'$ Finished </span><span class="sc">%d</span><span class="st"> rounds, of which </span><span class="sc">%d</span><span class="st"> are correct</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> (count, same_count))</code></pre></div>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;stack&gt;</span>
+<span class="ot">#include &lt;map&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">50100</span>;
+
+<span class="dt">int</span>             n, A[maxn], B[maxn];
+<span class="dt">int</span>             seen[maxn];
+map&lt;<span class="dt">int</span>, <span class="dt">int</span>&gt;   msort;
+stack&lt;<span class="dt">int</span>&gt;      lres; <span class="co">// The result of lines</span>
+stack&lt;<span class="dt">double</span>&gt;   nodex; <span class="co">// X-axis values of vertexes</span>
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="co">// Input data and meke sorts according to their k values.</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        seen[i] = <span class="dv">1</span>;
+        scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;A[i], &amp;B[i]);
+        <span class="kw">if</span> (!msort[A[i]]) msort[A[i]] = i;
+        <span class="kw">else</span> <span class="kw">if</span> (B[msort[A[i]]] &lt; B[i]) msort[A[i]] = i;
+    }
+    <span class="co">// Preparing to calculate convex hull</span>
+    map&lt;<span class="dt">int</span>, <span class="dt">int</span>&gt;::iterator itert = msort.begin();
+    lres.push(itert++-&gt;second);
+    <span class="kw">for</span> (itert; itert != msort.end(); itert++) {
+        <span class="dt">int</span>     l1 = itert-&gt;second; <span class="co">// The first line to deal with: the line to be added</span>
+        <span class="dt">double</span>  newx = <span class="fl">0.0</span>;
+        <span class="kw">while</span> (<span class="kw">true</span>) {
+            <span class="dt">int</span> l2 = lres.top(); <span class="co">// The line to be checked</span>
+            newx = (<span class="dt">double</span>)(B[l2] - B[l1]) / (<span class="dt">double</span>)(A[l1] - A[l2]); <span class="co">// Calculate current X intersect</span>
+            <span class="kw">if</span> (nodex.empty()) <span class="kw">break</span>; <span class="co">// Now it should stop as it's reaching the #1 line.</span>
+            <span class="dt">double</span> lastx = nodex.top(); <span class="co">// Get last X-axis value intersection</span>
+            <span class="kw">if</span> (newx &gt; lastx) <span class="kw">break</span>; <span class="co">// The new line shall live peacefully with the others</span>
+            <span class="co">// Then it might be removed, to make place for the new one...</span>
+            lres.pop();
+            nodex.pop();
+        }
+        <span class="co">// Anyway it should be inserted.</span>
+        lres.push(l1);
+        nodex.push(newx);
+    }
+    <span class="co">// We've got all, outputting</span>
+    msort.clear(); <span class="co">// This is a trick to avoid memory wasting</span>
+    <span class="kw">while</span> (!lres.empty()) {
+        msort[lres.top()] = <span class="dv">1</span>;
+        lres.pop();
+    }
+    <span class="kw">for</span> (itert = msort.begin(); itert != msort.end(); itert++)
+        printf(<span class="st">"</span><span class="ch">%d</span><span class="st"> "</span>, itert-&gt;first);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> pydatagen <span class="im">import</span> <span class="op">*</span>
+n <span class="op">=</span> randrange(<span class="dv">1</span>, <span class="dv">50000</span>)
+printf(<span class="st">'</span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> n)
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">0</span>, n):
+    a <span class="op">=</span> randrange(<span class="op">-</span><span class="dv">500000</span>, <span class="dv">500000</span>)
+    b <span class="op">=</span> randrange(<span class="op">-</span><span class="dv">500000</span>, <span class="dv">500000</span>)
+    printf(<span class="st">'</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> (a, b))
+fclose()</code></pre></div>
+<hr/>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1007/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1007/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1007/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1007/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1007">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

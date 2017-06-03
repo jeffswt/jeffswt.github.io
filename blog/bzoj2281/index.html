@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj2281: [Sdoi2011]黑白棋&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj2281: [Sdoi2011]黑白棋
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=SDOI2011" target="_self">
+            <i class="fa fa-tag"></i> SDOI2011
+          </a>
+          <a class="tag" href="/blog/archive/?q=Game Theory" target="_self">
+            <i class="fa fa-tag"></i> Game Theory
+          </a>
+          <a class="tag" href="/blog/archive/?q=Combinatorics" target="_self">
+            <i class="fa fa-tag"></i> Combinatorics
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+        </span>
+        <span class="date" title="00:36:41 | 15 March, 2017">
+          15 March, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>小 A 和小 B 又想到了一个新的游戏.</p>
+<p>这个游戏是在一个 <span class="math inline">\(1 \times n\)</span> 的棋盘上进行的, 棋盘上有 <span class="math inline">\(k\)</span> 个棋子, 一半是黑色, 一半是白色.</p>
+<p>最左边是白色棋子, 最右边是黑色棋子, 相邻的棋子颜色不同.</p>
+<p>小 A 可以移动白色棋子, 小 B 可以移动黑色的棋子, 他们每次操作可以移动 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(d\)</span> 个棋子.</p>
+<p>每当移动某一个棋子时, 这个棋子不能跨越两边的棋子, 当然也不可以出界. 当谁不可以操作时, 谁就失败了.</p>
+<p>小 A 和小 B 轮流操作, 现在小 A 先移动, 有多少种初始棋子的布局会使他胜利呢?</p>
+<h2 id="input">Input</h2>
+<p>共一行, 三个数,<span class="math inline">\(n, k, d\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>输出小 A 胜利的方案总数. 答案对 <span class="math inline">\(10^9+7\)</span> 取模.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>10 4 2</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>182</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有的数据, 满足:<span class="math inline">\(1 \leq d \leq k \leq n \leq 10000, 2 | k, k \leq 100\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p><strong>题解传送门:</strong><a href="">http://hzwer.com/5760.html</a></p>
+<p><strong>题解传送门:</strong><a href="">http://blog.csdn.net/weixinding/article/details/7321139</a></p>
+<p><span class="math inline">\(k = 2\)</span> 的情况, 显然是 A 胜利</p>
+<p>A 第一步将其棋子紧靠 B, 则接下来 B 只能右移, 若 B 移动, A 下一步也能靠着它, 除非 A 一开始就无法移动</p>
+<p>这样答案显然是 <span class="math inline">\(C_n^2 - (n - 1)\)</span></p>
+<p>其实从 <span class="math inline">\(k = 2\)</span> 的情况我们可以看出, B 的右移是没有意义的</p>
+<p>因为 A 可以模仿 B, 同理 A 的左移是没有意义的, 那么就能转换为一个 nim 游戏</p>
+<p>第 <span class="math inline">\(i\)</span> 个白子, 匹配第 <span class="math inline">\(i\)</span> 个黑子, 把他们中间的格子看成石子堆, 变成一个每次可以取 <span class="math inline">\(d\)</span> 堆的 nim 游戏</p>
+<p>结论: 必败态是把每堆石子转换为二进制后, 其中每一位上为 1 的石子堆数都能被 <span class="math inline">\((d + 1)\)</span> 整除</p>
+<p>用 <span class="math inline">\(f[i][j]\)</span> 表示考虑二进制前 <span class="math inline">\(i\)</span> 位, 放置了 <span class="math inline">\(j\)</span> 个石头的方案数, 枚举每一位</p>
+<p>有 <span class="math inline">\(q(d+1)\)</span> 堆是 <span class="math inline">\(1\)</span>, 即放了 <span class="math inline">\(q(d+1) \cdot 2^i\)</span> 个, 用排列组合计算这 <span class="math inline">\(q(d+1)\)</span> 堆是 <span class="math inline">\(k\)</span> 堆中的那些</p>
+<p><span class="math display">\[f[i+1][j+k(d+1) \cdot 2^i] += f[i][j] \cdot C_{\frac{K}{2}}^{k(d+1)}\]</span></p>
+<p>然后用总方案-必败局面数, 总方案显然是 <span class="math inline">\(C_n^k\)</span></p>
+<blockquote>
+<p>2015-11-22</p>
+<p>其实转成 nim 游戏是有误的</p>
+<p>这个游戏往左移, 是可以加石子的, 虽然后手可以模仿, 但是要消耗下次可操作的堆数, 并非没有意义</p>
+<p>反例: d=2</p>
+<p>[] OX [] O [] XO [] XO [] X 0 1 1 1</p>
+<p>前两个白棋往两边移动</p>
+<p>O [] X [] [] OXO [] XO [] X 1 0 1 1</p>
+<p>必败能转移成必败!</p>
+<p>所以题目中要增加限制: 先手不能左移, 后手不能右移</p>
+</blockquote>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="ot">#define pow2(__x) (1&lt;&lt;(__x))</span>
+<span class="ot">#define safe_add(__x,__y) __x=(((__x)+(__y))%modr)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">10010</span>;
+<span class="dt">const</span> lli modr = <span class="dv">1000000007ll</span>;
+
+lli n, K, d;
+lli C_ar[maxn][<span class="dv">210</span>], dp[<span class="dv">30</span>][maxn];
+
+lli C(<span class="dt">int</span> n, <span class="dt">int</span> m)
+{
+    m = min(m, n - m);
+    <span class="kw">return</span> C_ar[n][m];
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%lld%lld%lld</span><span class="st">"</span>, &amp;n, &amp;K, &amp;d);
+    K /= <span class="dv">2</span>; <span class="co">// This looks better than an even number</span>
+    <span class="co">// Generating combinatory numbers using Yang Hui triangle</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++)
+        C_ar[i][<span class="dv">0</span>] = <span class="dv">1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= min(<span class="dv">2</span>*K, (lli)i); j++)
+            C_ar[i][j] = (C_ar[i<span class="dv">-1</span>][j] + C_ar[i<span class="dv">-1</span>][j<span class="dv">-1</span>]) % modr;
+    <span class="co">// Working</span>
+    dp[<span class="dv">0</span>][<span class="dv">0</span>] = <span class="dv">1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">15</span>; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">0</span>; j &lt;= n - <span class="dv">2</span>*K; j++)
+            <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">0</span>; k*(d<span class="dv">+1</span>)&lt;=K &amp;&amp; j+k*(d<span class="dv">+1</span>)*pow2(i)&lt;=n<span class="dv">-2</span>*K; k++)
+                safe_add(dp[i<span class="dv">+1</span>][j+k*(d<span class="dv">+1</span>)*pow2(i)], dp[i][j]*C(K,k*(d<span class="dv">+1</span>)));
+    lli tmp = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n<span class="dv">-2</span>*K; i++)
+        safe_add(tmp, dp[<span class="dv">15</span>][i]*C(n-i-K, K));
+    lli sum = C(n, K*<span class="dv">2</span>);
+    lli res = (sum - tmp + modr) % modr;
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj2281/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj2281/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj2281/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj2281/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj2281">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

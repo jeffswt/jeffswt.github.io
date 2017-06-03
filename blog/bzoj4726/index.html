@@ -1,0 +1,202 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj4726: [POI2017]Sabota?&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj4726: [POI2017]Sabota?
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=POI2017" target="_self">
+            <i class="fa fa-tag"></i> POI2017
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+          <a class="tag" href="/blog/archive/?q=Tree DP" target="_self">
+            <i class="fa fa-tag"></i> Tree DP
+          </a>
+        </span>
+        <span class="date" title="00:19:44 | 5 January, 2017">
+          5 January, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>某个公司有 <span class="math inline">\(n\)</span> 个人, 上下级关系构成了一个有根树. 其中有个人是叛徒 (这个人不知道是谁). 对于一个人, 如果他下属 (直接或者间接, 不包括他自己) 中叛徒占的比例超过 <span class="math inline">\(x\)</span>, 那么这个人也会变成叛徒, 并且他的所有下属都会变成叛徒. 你要求出一个最小的 <span class="math inline">\(x\)</span>, 使得最坏情况下, 叛徒的个数不会超过 <span class="math inline">\(k\)</span>.</p>
+<h2 id="input">Input</h2>
+<p>第一行包含两个正整数 <span class="math inline">\(n, k (1 \leq k \leq n \leq 500000)\)</span>.</p>
+<p>接下来 <span class="math inline">\(n-1\)</span> 行, 第 <span class="math inline">\(i\)</span> 行包含一个正整数 <span class="math inline">\(p[i+1]\)</span>, 表示 <span class="math inline">\(i+1\)</span> 的父亲是 <span class="math inline">\(p[i+1](1 \leq p[i+1] \leq i)\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>输出一行一个实数 <span class="math inline">\(x\)</span>, 误差在 <span class="math inline">\(10^{-6}\)</span> 以内都被认为是正确的.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>9 3
+1
+1
+2
+2
+2
+3
+7
+3</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>0.6666666667</code></pre>
+<h2 id="explanation">Explanation</h2>
+<p><a href="">http://blog.csdn.net/neither_nor/article/details/53373065</a></p>
+<p>首先显然最劣情况初始的叛徒肯定是叶子</p>
+<p>并且带头叛变的人一定是从某个叶子往上走一条链</p>
+<p>因为如果 <span class="math inline">\(i\)</span> 没有带头叛变, 那么 i 的父亲也一定不会带头叛变, 证明显然:</p>
+<p><span class="math inline">\(dp[i]\)</span> 表示 <span class="math inline">\(i\)</span> 不带头叛变的话最小的 <span class="math inline">\(x\)</span></p>
+<p>那么我们对所有子树大小 <span class="math inline">\(\gt k\)</span> 的 <span class="math inline">\(dp\)</span> 值取 <span class="math inline">\(max\)</span> 即是答案</p>
+<p><span class="math display">\[dp[i] = max(dp[i], min(dp[j],\frac{siz[j]}{siz[i]-1})), j\ \text{is child of}\ i\]</span></p>
+<p>因为对于 <span class="math inline">\(i\)</span> 的一个儿子 <span class="math inline">\(j\)</span>, 假如 <span class="math inline">\(i\)</span> 因为 <span class="math inline">\(j\)</span> 的子树里的叛徒比例大于 <span class="math inline">\(x\)</span> 而带头叛变, 那么既要满足 $x $(j 的子树大小占 i 的子树大小的比例), 还要满足 <span class="math inline">\(j\)</span> 带头 叛变即 <span class="math inline">\(x \leq dp[j]\)</span>, 所以对两个量取 <span class="math inline">\(min\)</span></p>
+<p>那么如果 <span class="math inline">\(i\)</span> 不叛变, 那么就不能满足任意一个条件, 所以对所有的取 <span class="math inline">\(max\)</span></p>
+<p>对于叶子,<span class="math inline">\(dp[i]=1\)</span>, 因为不管怎样叶子本身就是叛徒, 可以视为不需要条件就可以带头 叛变, 即只有当 <span class="math inline">\(x \lt 1\)</span> 时才不会叛变</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">double</span> llf;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">500100</span>;
+
+<span class="kw">class</span> TreeDP
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> v;
+        edge *next;
+    };
+    <span class="dt">int</span> n, K, ecnt;
+    edge *edges[maxn], epool[maxn];
+    <span class="dt">int</span> par[maxn], size[maxn];
+    llf dp[maxn];
+    <span class="dt">void</span> set_child(<span class="dt">int</span> p, <span class="dt">int</span> q)
+    {
+        edge *ep = &amp;epool[++ecnt];
+        ep-&gt;v = q;
+        ep-&gt;next = edges[p]; edges[p] = ep;
+        par[q] = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> dfs(<span class="dt">int</span> p)
+    {
+        size[p] = <span class="dv">1</span>;
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next) {
+            dfs(ep-&gt;v);
+            size[p] += size[ep-&gt;v];
+        }
+        <span class="kw">if</span> (edges[p] == NULL) {
+            dp[p] = <span class="fl">1.0</span>;
+        } <span class="kw">else</span> { <span class="co">// Is not a leaf!</span>
+            <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next) {
+                dp[p] = max(dp[p], min(<span class="fl">1.0</span> * size[ep-&gt;v] / (llf)(size[p]<span class="dv">-1</span>), dp[ep-&gt;v]));
+            }
+        }
+        <span class="kw">return</span> ;
+    }
+    llf eval(<span class="dt">void</span>)
+    {
+        llf res = <span class="fl">0.0</span>;
+        dfs(<span class="dv">1</span>);
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+            <span class="kw">if</span> (size[i] &gt; K)
+                res = max(res, dp[i]);
+        <span class="kw">return</span> res;
+    }
+} td;
+
+<span class="dt">int</span> n, K;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;K);
+    td.n = n;
+    td.K = K;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>; i &lt;= n; i++) {
+        <span class="dt">int</span> j = <span class="dv">0</span>;
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;j);
+        td.set_child(j, i);
+    }
+    llf res = td.eval();
+    printf(<span class="st">"</span><span class="ch">%.8Lf\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj4726/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj4726/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj4726/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj4726/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj4726">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,742 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Splay Tree&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="en">
+      <div class="post-header">
+        <h1 class="title">
+          Splay Tree
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Splay Tree" target="_self">
+            <i class="fa fa-tag"></i> Splay Tree
+          </a>
+        </span>
+        <span class="date" title="14:34:00 | 18 July, 2016">
+          18 July, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="basic-principles">Basic Principles</h2>
+<p>See <a href="https://en.wikipedia.org/wiki/Splay_Tree">Splay Trees on Wikipedia</a>.</p>
+<p>Splay tree is a specific kind of binary search trees. It maintains the size comparison properties of BSTs, but manipulates its balance in another way. Its amortized time complexity is O (log n), where its worst case is O (n), takes the shape of a chain. Splay trees have better constants than Red-Black Trees, that would act rather slow.</p>
+<!-- More -->
+<h2 id="sample-codes">Sample Codes</h2>
+<p>This is the sample code of a structural splay tree. Only contains the splay operations without query operations.</p>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">1010</span>;
+
+<span class="kw">class</span> SplayTree
+{
+<span class="kw">public</span>:
+  <span class="co">// Structural databases</span>
+  <span class="dt">int</span> parent[maxn], ch[maxn][<span class="dv">2</span>], root, ncnt;
+  <span class="co">// Data-value informational structures</span>
+  <span class="dt">int</span> val[maxn];
+  <span class="ot">#define lc(x) ch[x][0]</span>
+  <span class="ot">#define rc(x) ch[x][1]</span>
+  <span class="ot">#define par(x) parent[x]</span>
+  <span class="dt">void</span> rotate(<span class="dt">int</span> p)
+  {
+    <span class="dt">int</span> q = par(p), y = par(q), x = (rc(q) == p);
+    ch[q][x] = ch[p][!x];
+    par(ch[q][x]) = q;
+    ch[p][!x] = q;
+    par(q) = p;
+    par(p) = y;
+    <span class="kw">if</span> (y) {
+      <span class="kw">if</span> (lc(y) == q)
+        lc(y) = p;
+      <span class="kw">else</span> <span class="co">// if (rc(y) == q)</span>
+        rc(y) = p;
+    }
+    <span class="kw">return</span> ;
+  }
+  <span class="dt">void</span> splay(<span class="dt">int</span> p)
+  {
+    <span class="kw">for</span> (<span class="dt">int</span> q = <span class="dv">0</span>; q = par(p); rotate(p))
+      <span class="kw">if</span> (par(q))
+        rotate((p == lc(q)) == (q == lc(par(q))) ? q : p);
+    root = p;
+    <span class="kw">return</span> ;
+  }
+  <span class="dt">void</span> insert(<span class="dt">int</span> p, <span class="dt">int</span> v)
+  {
+    <span class="dt">int</span> q = <span class="dv">0</span>;
+    <span class="kw">while</span> (<span class="kw">true</span>) {
+      <span class="kw">if</span> (v &lt; val[p]) q = lc(p);
+      <span class="kw">else</span> q = rc(p);
+      <span class="kw">if</span> (q == <span class="dv">0</span>) <span class="kw">break</span>;
+      p = q;
+    }
+    q = ++ncnt;
+    val[q] = v;
+    lc(q) = rc(q) = <span class="dv">0</span>;
+    par(q) = p;
+    <span class="kw">if</span> (v &lt; val[p]) lc(p) = q;
+    <span class="kw">else</span> rc(p) = q;
+    splay(q);
+    <span class="kw">return</span> ;
+  }
+  <span class="dt">void</span> insert(<span class="dt">int</span> v)
+  {
+    <span class="kw">if</span> (root == <span class="dv">0</span>) {
+      root = ++ncnt;
+      val[root] = v;
+    } <span class="kw">else</span> {
+      insert(root, v);
+    }
+    <span class="kw">return</span> ;
+  }
+  <span class="dt">int</span> pre(<span class="dt">int</span> p)
+  {
+    <span class="dt">int</span> q = lc(p);
+    <span class="kw">while</span> (rc(q))
+      q = rc(q);
+    <span class="kw">return</span> q;
+  }
+  <span class="dt">int</span> suc(<span class="dt">int</span> p)
+  {
+    <span class="dt">int</span> q = rc(p);
+    <span class="kw">while</span> (lc(q))
+      q = lc(q);
+    <span class="kw">return</span> q;
+  }
+  <span class="dt">void</span> debug(<span class="dt">void</span>)
+  {
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">8</span>; i++) {
+      printf(<span class="st">"#</span><span class="ch">%d</span><span class="st">: par </span><span class="ch">%d</span><span class="st"> lc </span><span class="ch">%d</span><span class="st"> rc </span><span class="ch">%d</span><span class="st"> val </span><span class="ch">%d\n</span><span class="st">"</span>, i, parent[i], ch[i][<span class="dv">0</span>], ch[i][<span class="dv">1</span>], val[i]);
+    }
+  }
+  SplayTree()
+  {
+    memset(ch, <span class="dv">0</span>, <span class="kw">sizeof</span>(ch));
+    memset(parent, <span class="dv">0</span>, <span class="kw">sizeof</span>(parent));
+    root = <span class="dv">0</span>;
+    <span class="kw">return</span> ;
+  }
+} sp;</code></pre></div>
+<hr/>
+<p>This version can be used as a sequential version, where <code>insert</code> operations insert objects dynamically after the given numeral position. Specifically, the <code>splay()</code> operation in this version is <em>single-rotation</em>, instead of <em>double-rotation</em>, for debugging purposes, although sacrificing the time complexity. This is mainly aimed to create a correctly working version instead of a fast but erroneous one.</p>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">10010</span>;
+
+<span class="kw">class</span> SplayTree
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> ch[maxn][<span class="dv">2</span>], parent[maxn], root, ncnt, n;
+    <span class="dt">int</span> size[maxn], sum[maxn];
+    <span class="ot">#define lc(x) ch[x][0]</span>
+    <span class="ot">#define rc(x) ch[x][1]</span>
+    <span class="ot">#define par(x) parent[x]</span>
+    <span class="dt">void</span> rotate(<span class="dt">int</span> p)
+    {
+        <span class="dt">int</span> q = par(p), g = par(q), x = p == rc(q);
+        size[q] -= size[p];
+        size[p] -= size[ch[p][!x]];
+        ch[q][x] = ch[p][!x], par(ch[q][x]) = q;
+        ch[p][!x] = q, par(q) = p;
+        par(p) = g;
+        size[q] += size[ch[q][x]];
+        size[p] += size[q];
+        <span class="kw">if</span> (g) ch[g][rc(g) == q] = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> splay(<span class="dt">int</span> p)
+    {
+        <span class="kw">while</span> (par(p))
+            rotate(p);
+        root = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> pre(<span class="dt">int</span> p)
+    {
+        <span class="kw">if</span> (!lc(p)) {
+            <span class="kw">while</span> (p == lc(par(p))) p = par(p);
+            p = par(p);
+        } <span class="kw">else</span> {
+            p = lc(p);
+            <span class="kw">while</span> (rc(p)) p = rc(p);
+        } <span class="kw">return</span> p;
+    }
+    <span class="dt">int</span> suc(<span class="dt">int</span> p)
+    {
+        <span class="kw">if</span> (!rc(p)) {
+            <span class="kw">while</span> (p == rc(par(p))) p = par(p);
+            p = par(p);
+        } <span class="kw">else</span> {
+            p = rc(p);
+            <span class="kw">while</span> (lc(p)) p = lc(p);
+        } <span class="kw">return</span> p;
+    }
+    <span class="dt">int</span> find(<span class="dt">int</span> x)
+    {
+        <span class="dt">int</span> p = root;
+        <span class="kw">while</span> (<span class="kw">true</span>) {
+            <span class="kw">if</span> (x &lt;= size[lc(p)]) {
+                p = lc(p);
+                <span class="kw">continue</span>;
+            } x -= size[lc(p)];
+            <span class="kw">if</span> (x &lt;= <span class="dv">1</span>)
+                <span class="kw">return</span> p;
+            x -= <span class="dv">1</span>;
+            p = rc(p);
+        }
+        <span class="kw">return</span> <span class="dv">0</span>;
+    }
+    <span class="dt">int</span> makenode(<span class="dt">int</span> q, <span class="dt">int</span> v)
+    {
+        <span class="dt">int</span> p = ++ncnt;
+        n++;
+        lc(p) = rc(p) = <span class="dv">0</span>;
+        par(p) = q;
+        size[p] = <span class="dv">1</span>;
+        <span class="co">// sum[p] = v;</span>
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">void</span> updatenode(<span class="dt">int</span> p, <span class="dt">int</span> v)
+    {
+        size[p]++;
+        <span class="co">// sum[p] += v;</span>
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> insert(<span class="dt">int</span> x, <span class="dt">int</span> v)
+    {
+        <span class="dt">int</span> lp = find(x), rp = suc(lp);
+        splay(lp);
+        <span class="kw">if</span> (rp) splay(rp);
+        <span class="dt">int</span> c = makenode(lp, v);
+        rc(lp) = c;
+        updatenode(lp, v);
+        <span class="kw">if</span> (rp) updatenode(rp, v);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> debug()
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+            <span class="kw">if</span> (lc(i)) printf(<span class="st">"</span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d\n</span><span class="st">"</span>, i, lc(i), <span class="dv">1</span>);
+            <span class="kw">else</span> <span class="kw">if</span> (rc(i)) printf(<span class="st">"</span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d\n</span><span class="st">"</span>, i, i + <span class="dv">100</span>, <span class="dv">1</span>);
+            <span class="kw">if</span> (rc(i)) printf(<span class="st">"</span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d\n</span><span class="st">"</span>, i, rc(i), <span class="dv">2</span>);
+            <span class="kw">else</span> <span class="kw">if</span> (lc(i)) printf(<span class="st">"</span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d\n</span><span class="st">"</span>, i, i + <span class="dv">100</span>, <span class="dv">2</span>);
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> buildtree()
+    {
+        n = ncnt = <span class="dv">0</span>;
+        root = makenode(<span class="dv">0</span>, <span class="dv">0</span>);
+        rc(root) = makenode(root, <span class="dv">0</span>);
+        par(rc(root)) = root;
+        updatenode(root, <span class="dv">0</span>);
+        <span class="kw">return</span> ;
+    }
+} sp;
+
+<span class="dt">int</span> main()
+{
+    sp.buildtree();
+    printf(<span class="st">"Program begun.</span><span class="ch">\n</span><span class="st">"</span>);
+    <span class="kw">while</span> (<span class="kw">true</span>)
+    {
+        string a;
+        <span class="dt">int</span> b, c, d;
+        cin &gt;&gt; a;
+        <span class="kw">if</span> (a == <span class="st">"insert"</span>) {
+            cin &gt;&gt; b &gt;&gt; c;
+            sp.insert(b, c);
+        <span class="co">// } else if (a == "sum") {</span>
+        <span class="co">//     cin &gt;&gt; b &gt;&gt; c;</span>
+        <span class="co">//     printf("sum %d %d = %d\n", b, c, sp.query_sum(b, c));</span>
+        } <span class="kw">else</span> <span class="kw">if</span> (a == <span class="st">"splay"</span>) {
+            cin &gt;&gt; b;
+            sp.splay(b);
+        } <span class="kw">else</span> <span class="kw">if</span> (a == <span class="st">"pre"</span>) {
+            cin &gt;&gt; b;
+            printf(<span class="st">"pre </span><span class="ch">%d</span><span class="st"> = </span><span class="ch">%d</span><span class="st">"</span>, b, sp.pre(b));
+        } <span class="kw">else</span> <span class="kw">if</span> (a == <span class="st">"suc"</span>) {
+            cin &gt;&gt; b;
+            printf(<span class="st">"suc </span><span class="ch">%d</span><span class="st"> = </span><span class="ch">%d</span><span class="st">"</span>, b, sp.suc(b));
+        } <span class="kw">else</span> <span class="kw">if</span> (a == <span class="st">"find"</span>) {
+            cin &gt;&gt; b;
+            printf(<span class="st">"find </span><span class="ch">%d</span><span class="st"> = </span><span class="ch">%d</span><span class="st">"</span>, b, sp.find(b));
+        } <span class="kw">else</span> <span class="kw">if</span> (a == <span class="st">"debug"</span>) {
+            sp.debug();
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<hr/>
+<p>This third version features critical updates to the splay tree. These are noted as follow:</p>
+<ul>
+<li>Enabling the splay operation of double rotations.</li>
+<li>Enabled splaying node under a certain node to enforce adjacency.</li>
+<li>Enabled sum queries but not interval addition or other advanced editing operations.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">10010</span>;
+
+<span class="kw">class</span> SplayTree
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> ch[maxn][<span class="dv">2</span>], parent[maxn], root, ncnt, n;
+    <span class="dt">int</span> size[maxn], sum[maxn];
+    <span class="ot">#define lc(x) ch[x][0]</span>
+    <span class="ot">#define rc(x) ch[x][1]</span>
+    <span class="ot">#define par(x) parent[x]</span>
+    <span class="dt">void</span> rotate(<span class="dt">int</span> p)
+    {
+        <span class="dt">int</span> q = par(p), g = par(q), x = p == rc(q);
+        size[q] -= size[p];
+        size[p] -= size[ch[p][!x]];
+        sum[q] -= sum[p];
+        sum[p] -= sum[ch[p][!x]];
+        ch[q][x] = ch[p][!x], par(ch[q][x]) = q;
+        ch[p][!x] = q, par(q) = p;
+        par(p) = g;
+        size[q] += size[ch[q][x]];
+        size[p] += size[q];
+        sum[q] += sum[ch[q][x]];
+        sum[p] += sum[q];
+        <span class="kw">if</span> (g) ch[g][rc(g) == q] = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> splayto(<span class="dt">int</span> p, <span class="dt">int</span> t)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> q = <span class="dv">0</span>; (q = par(p)) &amp;&amp; q != t; rotate(p))
+            <span class="kw">if</span> (par(q) &amp;&amp; par(q) != t)
+                rotate((p == lc(q)) == (q == lc(par(q))) ? q : p);
+        <span class="kw">if</span> (t == <span class="dv">0</span>) root = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> splay(<span class="dt">int</span> p)
+    {
+        splayto(p, <span class="dv">0</span>);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> pre(<span class="dt">int</span> p)
+    {
+        <span class="kw">if</span> (!lc(p)) {
+            <span class="kw">while</span> (p == lc(par(p))) p = par(p);
+            p = par(p);
+        } <span class="kw">else</span> {
+            p = lc(p);
+            <span class="kw">while</span> (rc(p)) p = rc(p);
+        } <span class="kw">return</span> p;
+    }
+    <span class="dt">int</span> suc(<span class="dt">int</span> p)
+    {
+        <span class="kw">if</span> (!rc(p)) {
+            <span class="kw">while</span> (p == rc(par(p))) p = par(p);
+            p = par(p);
+        } <span class="kw">else</span> {
+            p = rc(p);
+            <span class="kw">while</span> (lc(p)) p = lc(p);
+        } <span class="kw">return</span> p;
+    }
+    <span class="dt">int</span> find(<span class="dt">int</span> x)
+    {
+        <span class="dt">int</span> p = root;
+        <span class="kw">while</span> (<span class="kw">true</span>) {
+            <span class="kw">if</span> (x &lt;= size[lc(p)]) {
+                p = lc(p);
+                <span class="kw">continue</span>;
+            } x -= size[lc(p)];
+            <span class="kw">if</span> (x &lt;= <span class="dv">1</span>)
+                <span class="kw">return</span> p;
+            x -= <span class="dv">1</span>;
+            p = rc(p);
+        }
+        <span class="kw">return</span> <span class="dv">0</span>;
+    }
+    <span class="dt">int</span> makenode(<span class="dt">int</span> q, <span class="dt">int</span> v)
+    {
+        <span class="dt">int</span> p = ++ncnt;
+        n++;
+        lc(p) = rc(p) = <span class="dv">0</span>;
+        par(p) = q;
+        size[p] = <span class="dv">1</span>;
+        sum[p] = v;
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">void</span> updatenode(<span class="dt">int</span> p, <span class="dt">int</span> v)
+    {
+        size[p]++;
+        sum[p] += v;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> insert(<span class="dt">int</span> x, <span class="dt">int</span> v)
+    {
+        <span class="dt">int</span> lp = find(x), rp = suc(lp); <span class="co">// Operations should be guranteed that rp is valid</span>
+        splayto(rp, <span class="dv">0</span>);
+        splayto(lp, root);
+        <span class="dt">int</span> c = makenode(lp, v);
+        rc(lp) = c;
+        updatenode(lp, v);
+        updatenode(rp, v);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> query_sum(<span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="dt">int</span> lp = find(l - <span class="dv">1</span>), rp = find(r + <span class="dv">1</span>);
+        splayto(rp, <span class="dv">0</span>);
+        splayto(lp, root);
+        <span class="kw">return</span> sum[rc(lp)];
+    }
+    <span class="dt">void</span> debug()
+    {
+        <span class="co">// xmpaint grammer</span>
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+            <span class="kw">if</span> (lc(i)) printf(<span class="st">"</span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d\n</span><span class="st">"</span>, i, lc(i), <span class="dv">1</span>);
+            <span class="kw">if</span> (rc(i)) printf(<span class="st">"</span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d\n</span><span class="st">"</span>, i, rc(i), <span class="dv">2</span>);
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> buildtree()
+    {
+        n = ncnt = <span class="dv">0</span>;
+        root = makenode(<span class="dv">0</span>, <span class="dv">0</span>);
+        rc(root) = makenode(root, <span class="dv">0</span>);
+        par(rc(root)) = root;
+        updatenode(root, <span class="dv">0</span>);
+        <span class="kw">return</span> ;
+    }
+} sp;
+
+<span class="dt">int</span> main()
+{
+    sp.buildtree();
+    printf(<span class="st">"Program begun.</span><span class="ch">\n</span><span class="st">"</span>);
+    <span class="kw">while</span> (<span class="kw">true</span>)
+    {
+        string a;
+        <span class="dt">int</span> b, c, d;
+        cin &gt;&gt; a;
+        <span class="kw">if</span> (a == <span class="st">"insert"</span>) {
+            cin &gt;&gt; b &gt;&gt; c;
+            sp.insert(b, c);
+        } <span class="kw">else</span> <span class="kw">if</span> (a == <span class="st">"sum"</span>) {
+            cin &gt;&gt; b &gt;&gt; c;
+            printf(<span class="st">"sum </span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d</span><span class="st"> = </span><span class="ch">%d\n</span><span class="st">"</span>, b, c, sp.query_sum(b, c));
+        } <span class="kw">else</span> <span class="kw">if</span> (a == <span class="st">"debug"</span>) {
+            sp.debug();
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<hr/>
+<p>This is the multi-operation edition, as seen in <a href="http://poj.org/problem?id=3580">POJ-3580</a>. Hopefully this one would work, but has not been thoroughly tested yet.<strong> Accepted</strong> version of this splay tree should be referred to the post introducing <em>poj3580</em>. Moreover, further bug fixes would not be introduced in this page. Improvements include:</p>
+<ul>
+<li>Stablized lazy dispatching and value updates based on stored value of the current node.</li>
+<li>Added removal function of nodes.</li>
+<li>Added interval reversal function.</li>
+<li>Added interval revolve function.</li>
+<li>Removed a vast number of unused methods.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">10010</span>;
+<span class="dt">const</span> <span class="dt">int</span> infinit = <span class="dv">1000000007</span>;
+
+<span class="kw">class</span> SplayTree
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> ch[maxn][<span class="dv">2</span>], parent[maxn], root, ncnt, n;
+    <span class="dt">int</span> size[maxn], val[maxn], sum[maxn], minn[maxn];
+    <span class="dt">int</span> lazyadd[maxn], lazyswp[maxn];
+    <span class="ot">#define lc(x) ch[x][lazyswp[x]]</span>
+    <span class="ot">#define rc(x) ch[x][!lazyswp[x]]</span>
+    <span class="ot">#define par(x) parent[x]</span>
+    <span class="dt">int</span> makenode(<span class="dt">int</span> q, <span class="dt">int</span> v)
+    {
+        <span class="dt">int</span> p = ++ncnt; n++;
+        lc(p) = rc(p) = <span class="dv">0</span>;
+        par(p) = q;
+        size[p] = <span class="dv">1</span>;
+        val[p] = sum[p] = minn[p] = v;
+        lazyadd[p] = lazyswp[p] = <span class="dv">0</span>; <span class="co">// Initially they aren't lazy at all</span>
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">void</span> updateminn(<span class="dt">int</span> p)
+    {
+        minn[p] = p &gt; <span class="dv">2</span> ? val[p] : infinit;
+        <span class="kw">if</span> (lc(p)) minn[p] = min(minn[p], minn[lc(p)]);
+        <span class="kw">if</span> (rc(p)) minn[p] = min(minn[p], minn[rc(p)]);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> dispatchlazyadd(<span class="dt">int</span> p)
+    {
+        <span class="co">// Separate dispatched lazy values to children</span>
+        lazyadd[lc(p)] += lazyadd[p];
+        lazyadd[rc(p)] += lazyadd[p];
+        <span class="co">// Update children's initial values</span>
+        val[lc(p)] += lazyadd[p];
+        val[rc(p)] += lazyadd[p];
+        <span class="co">// Update children's sums</span>
+        sum[lc(p)] += size[lc(p)] * lazyadd[p];
+        sum[rc(p)] += size[rc(p)] * lazyadd[p];
+        <span class="co">// Update minimum queried values</span>
+        minn[lc(p)] += lazyadd[p];
+        minn[rc(p)] += lazyadd[p];
+        <span class="co">// Finally reset lazy value</span>
+        lazyadd[p] = <span class="dv">0</span>;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> dispatchlazyswp(<span class="dt">int</span> p)
+    {
+        <span class="kw">if</span> (!lazyswp[p]) <span class="kw">return</span> <span class="kw">false</span>;
+        lazyswp[lc(p)] ^= <span class="dv">1</span>;
+        lazyswp[rc(p)] ^= <span class="dv">1</span>;
+        swap(lc(p), rc(p));
+        lazyswp[p] = <span class="dv">0</span>;
+        <span class="kw">return</span> <span class="kw">true</span>;
+    }
+    <span class="dt">void</span> rotate(<span class="dt">int</span> p)
+    {
+        <span class="dt">int</span> q = par(p), g = par(q), x = p == rc(q);
+        <span class="co">// Dispatching lazy values in case something goes wrong</span>
+        dispatchlazyadd(q);
+        dispatchlazyadd(p);
+        <span class="kw">if</span> (dispatchlazyswp(q)) x ^= <span class="dv">1</span>; <span class="co">// These make no modifications to the actual values</span>
+        dispatchlazyswp(p);
+        <span class="co">// Relink connexions between nodes</span>
+        ch[q][x] = ch[p][!x], par(ch[q][x]) = q;
+        ch[p][!x] = q, par(q) = p;
+        par(p) = g;
+        <span class="kw">if</span> (g) ch[g][rc(g) == q] = p;
+        <span class="co">// Update data values</span>
+        size[q] = size[lc(q)] + <span class="dv">1</span> + size[rc(q)];
+        size[p] = size[lc(p)] + <span class="dv">1</span> + size[rc(p)];
+        sum[q] = sum[lc(q)] + val[q] + sum[rc(q)];
+        sum[p] = sum[lc(p)] + val[p] + sum[rc(p)];
+        updateminn(p);
+        updateminn(q);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> splay(<span class="dt">int</span> p, <span class="dt">int</span> t)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> q = <span class="dv">0</span>; (q = par(p)) &amp;&amp; q != t; rotate(p))
+            <span class="kw">if</span> (par(q) &amp;&amp; par(q) != t)
+                rotate((p == lc(q)) == (q == lc(par(q))) ? q : p);
+        <span class="kw">if</span> (t == <span class="dv">0</span>) root = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> suc(<span class="dt">int</span> p)
+    {
+        <span class="kw">if</span> (!rc(p)) { <span class="kw">while</span> (p == rc(par(p))) p = par(p); p = par(p); }
+        <span class="kw">else</span> { p = rc(p); <span class="kw">while</span> (lc(p)) p = lc(p); }
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">int</span> find(<span class="dt">int</span> x)
+    {
+        <span class="dt">int</span> p = root;
+        <span class="kw">while</span> (<span class="kw">true</span>) {
+            <span class="kw">if</span> (x &lt;= size[lc(p)]) {
+                p = lc(p);
+                <span class="kw">continue</span>;
+            } x -= size[lc(p)];
+            <span class="kw">if</span> (x &lt;= <span class="dv">1</span>)
+                <span class="kw">return</span> p;
+            x -= <span class="dv">1</span>;
+            p = rc(p);
+        }
+        <span class="kw">return</span> <span class="dv">0</span>;
+    }
+    <span class="dt">void</span> insert(<span class="dt">int</span> x, <span class="dt">int</span> v)
+    {
+        <span class="dt">int</span> lp = find(x), rp = suc(lp); <span class="co">// Operations should be guranteed that rp is valid</span>
+        splay(rp, <span class="dv">0</span>);
+        splay(lp, root);
+        <span class="dt">int</span> c = makenode(lp, v);
+        rc(lp) = c;
+        size[lp]++, sum[lp] += v;
+        size[rp]++, sum[rp] += v;
+        updateminn(lp);
+        updateminn(rp);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> remove(<span class="dt">int</span> x)
+    {
+        <span class="dt">int</span> lp = find(x - <span class="dv">1</span>), rp = suc(x);
+        splay(rp, <span class="dv">0</span>);
+        splay(lp, root);
+        <span class="dt">int</span> c = rc(lp);
+        size[lp]--, sum[lp] -= val[c];
+        size[rp]--, sum[rp] -= val[c];
+        updateminn(lp);
+        updateminn(rp);
+        n--;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> query_sum(<span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="dt">int</span> lp = find(l - <span class="dv">1</span>), rp = find(r + <span class="dv">1</span>);
+        splay(rp, <span class="dv">0</span>);
+        splay(lp, root);
+        <span class="co">// Return data values</span>
+        <span class="kw">return</span> sum[rc(lp)];
+    }
+    <span class="dt">int</span> query_min(<span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="dt">int</span> lp = find(l - <span class="dv">1</span>), rp = find(r + <span class="dv">1</span>);
+        splay(rp, <span class="dv">0</span>);
+        splay(lp, root);
+        <span class="co">// Return data values</span>
+        <span class="kw">return</span> minn[rc(lp)];
+    }
+    <span class="dt">void</span> modify_add(<span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">int</span> v)
+    {
+        <span class="dt">int</span> lp = find(l - <span class="dv">1</span>), rp = find(r + <span class="dv">1</span>);
+        splay(rp, <span class="dv">0</span>);
+        splay(lp, root);
+        <span class="co">// Update data values</span>
+        sum[rc(lp)] += size[rc(lp)] * v;
+        sum[lp] += size[rc(lp)] * v;
+        sum[rp] += size[rc(lp)] * v;
+        minn[rc(lp)] += v;
+        val[rc(lp)] += v;
+        printf(<span class="st">"$ modify_add: it is </span><span class="ch">%d</span><span class="st"> who's talking about</span><span class="ch">\n</span><span class="st">"</span>, rc(lp));
+        updateminn(lp);
+        updateminn(rp);
+        lazyadd[rc(lp)] += v;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> modify_swp(<span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="dt">int</span> lp = find(l - <span class="dv">1</span>), rp = find(r + <span class="dv">1</span>);
+        splay(rp, <span class="dv">0</span>);
+        splay(lp, root);
+        <span class="co">// Updating data values, which were easier</span>
+        lazyswp[rc(lp)] ^= <span class="dv">1</span>;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> buildtree()
+    {
+        n = ncnt = <span class="dv">0</span>;
+        root = makenode(<span class="dv">0</span>, <span class="dv">0</span>);
+        rc(root) = makenode(root, <span class="dv">0</span>);
+        minn[<span class="dv">1</span>] = minn[<span class="dv">2</span>] = infinit;
+        par(rc(root)) = root;
+        size[root]++;
+        <span class="kw">return</span> ;
+    }
+} sp;
+
+<span class="dt">int</span> main()
+{
+    sp.buildtree();
+    printf(<span class="st">"Program begun.</span><span class="ch">\n</span><span class="st">"</span>);
+    <span class="kw">while</span> (<span class="kw">true</span>)
+    {
+        string a;
+        <span class="dt">int</span> b, c, d;
+        cin &gt;&gt; a;
+        <span class="kw">if</span> (a == <span class="st">"insert"</span>) {
+            cin &gt;&gt; b &gt;&gt; c;
+            sp.insert(b + <span class="dv">1</span>, c);
+        } <span class="kw">else</span> <span class="kw">if</span> (a == <span class="st">"delete"</span>) {
+            cin &gt;&gt; b;
+            sp.remove(b + <span class="dv">1</span>);
+        } <span class="kw">else</span> <span class="kw">if</span> (a == <span class="st">"sum"</span>) {
+            cin &gt;&gt; b &gt;&gt; c;
+            printf(<span class="st">"sum </span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d</span><span class="st"> = </span><span class="ch">%d\n</span><span class="st">"</span>, b, c, sp.query_sum(b + <span class="dv">1</span>, c + <span class="dv">1</span>));
+        } <span class="kw">else</span> <span class="kw">if</span> (a == <span class="st">"min"</span>) {
+            cin &gt;&gt; b &gt;&gt; c;
+            printf(<span class="st">"min </span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d</span><span class="st"> = </span><span class="ch">%d\n</span><span class="st">"</span>, b, c, sp.query_min(b + <span class="dv">1</span>, c + <span class="dv">1</span>));
+        } <span class="kw">else</span> <span class="kw">if</span> (a == <span class="st">"add"</span>) {
+            cin &gt;&gt; b &gt;&gt; c &gt;&gt; d;
+            sp.modify_add(b + <span class="dv">1</span>, c + <span class="dv">1</span>, d);
+        } <span class="kw">else</span> <span class="kw">if</span> (a == <span class="st">"reverse"</span>) {
+            cin &gt;&gt; b &gt;&gt; c;
+            sp.modify_swp(b + <span class="dv">1</span>, c + <span class="dv">1</span>);
+        } <span class="kw">else</span> <span class="kw">if</span> (a == <span class="st">"revolve"</span>) {
+            cin &gt;&gt; b &gt;&gt; c;
+            d = sp.query_sum(c + <span class="dv">1</span>, c + <span class="dv">1</span>);
+            sp.insert(b, d);
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/splay_trees/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/splay_trees/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/splay_trees/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/splay_trees/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="splay_trees">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

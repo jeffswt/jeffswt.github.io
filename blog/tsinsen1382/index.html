@@ -1,0 +1,351 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>tsinsen1382/bzoj2962: 序列操作&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          tsinsen1382/bzoj2962: 序列操作
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=Tsinsen" target="_self">
+            <i class="fa fa-tag"></i> Tsinsen
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=Segment Tree" target="_self">
+            <i class="fa fa-tag"></i> Segment Tree
+          </a>
+        </span>
+        <span class="date" title="20:36:57 | 27 March, 2017">
+          27 March, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="序列操作">2962: 序列操作</h2>
+<h3 id="description">Description</h3>
+<p>有一个长度为 <span class="math inline">\(n\)</span> 的序列, 有三个操作:</p>
+<ol type="1">
+<li><code>I a b c</code> 表示将 <span class="math inline">\([a, b]\)</span> 这一段区间的元素集体增加 <span class="math inline">\(c\)</span>;</li>
+<li><code>R a b</code> 表示将 <span class="math inline">\([a, b]\)</span> 区间内所有元素变成相反数;</li>
+<li><code>Q a b c</code> 表示询问 <span class="math inline">\([a, b]\)</span> 这一段区间中选择 <span class="math inline">\(c\)</span> 个数相乘的所有方案的和 <span class="math inline">\(\bmod 19940417\)</span> 的值.</li>
+</ol>
+<h3 id="input">Input</h3>
+<p>第一行两个数 <span class="math inline">\(n, q\)</span> 表示序列长度和操作个数.</p>
+<p>第二行 <span class="math inline">\(n\)</span> 个非负整数, 表示序列.</p>
+<p>接下来 <span class="math inline">\(q\)</span> 行每行输入一个操作, 意义如题目描述.</p>
+<h3 id="output">Output</h3>
+<p>对于每个询问, 输出选出 <span class="math inline">\(c\)</span> 个数相乘的所有方案的和 <span class="math inline">\(\bmod 19940417\)</span> 的值.</p>
+<!-- More -->
+<h3 id="sample-input">Sample Input</h3>
+<pre><code>5 5
+1 2 3 4 5
+I 2 3 1
+Q 2 4 2
+R 1 5
+I 1 3 -1
+Q 1 5 1</code></pre>
+<h3 id="sample-output">Sample Output</h3>
+<pre><code>40
+19940397</code></pre>
+<h3 id="data-range">Data Range</h3>
+<p>对于 100% 的数据, 满足:<span class="math inline">\(n \leq 50000, q \leq 50000\)</span>, 初始序列的元素的绝对值 <span class="math inline">\(\leq 10^9\)</span>, 并且所有操作满足如下的性质:</p>
+<ul>
+<li><code>I a b c</code> 中保证 <span class="math inline">\([a, b]\)</span> 是一个合法区间,<span class="math inline">\(|c| \leq 10^9\)</span>;</li>
+<li><code>R a b</code> 中保证 <span class="math inline">\([a, b]\)</span> 是个合法的区间;</li>
+<li><code>Q a b c</code> 中保证 <span class="math inline">\([a, b]\)</span> 是个合法的区间, 且 <span class="math inline">\(1 \leq c \leq min(b - a + 1, 20)\)</span>.</li>
+</ul>
+<h3 id="explanation">Explanation</h3>
+<p>一道双倍经验题...... 不过清橙上可以没有权限号随便交也是比较良心的......</p>
+<p>瞄一眼区间操作就是线段树对吧...... 用 Splay 没有什么意义</p>
+<p>这样搞来就可以比较明确地认为我们可以维护选择 <span class="math inline">\(0 - 20\)</span> 个元素地乘积之和是多少, 而且 可以 <span class="math inline">\(O(c^2)\)</span> 合并, 或者当 <span class="math inline">\(c\)</span> 比较大 (这道题不是这样) 时用卷积 <span class="math inline">\(O(c \log c)\)</span> 合并也不是不可以......</p>
+<p>然后把区间数据用 interval 结构维护, 套上一个裸的线段树即可.</p>
+<p>顺便吐槽一下...... 好像我把某个位置的 change 的 r 写成了 l 无限 WA...... 调了三天 QwQ</p>
+<h3 id="source-code">Source Code</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="ot">#define rep(_var,_begin,_end) for(int _var=_begin;_var&lt;=_end;_var++)</span>
+<span class="ot">#define range(_begin,_end) rep(_,_begin,_end)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">100100</span>, maxk = <span class="dv">21</span>;
+<span class="dt">const</span> lli modr = <span class="dv">19940417</span>;
+
+<span class="co">// Combinatorics</span>
+lli C[maxn][maxk];
+
+<span class="kw">struct</span> interval {
+    lli cnt[maxk];
+    <span class="dt">int</span> size;
+    interval(<span class="dt">void</span>) { size = <span class="dv">0</span>;
+        range(<span class="dv">0</span>, <span class="dv">20</span>) cnt[_] = <span class="dv">0</span>; }
+    interval(<span class="dt">int</span> x) { size = <span class="dv">1</span>;
+        range(<span class="dv">2</span>, <span class="dv">20</span>) cnt[_] = <span class="dv">0</span>;
+        cnt[<span class="dv">0</span>] = <span class="dv">1</span>; cnt[<span class="dv">1</span>] = x; }
+    <span class="dt">void</span> add(lli x) {
+        lli tmp = x; <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">20</span>; i &gt; <span class="dv">0</span>; i--, tmp = x)
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= i; j++, tmp = tmp * x % modr)
+                cnt[i] = (cnt[i] + cnt[i-j] * tmp % modr * C[size-i+j][j]) % modr;
+        <span class="kw">return</span> ; }
+    <span class="dt">void</span> inverse(<span class="dt">void</span>) {
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">20</span>; i += <span class="dv">2</span>)
+            cnt[i] = (modr - cnt[i]) % modr;
+        <span class="kw">return</span> ; }
+}; interval join(interval a, interval b) {
+    interval c; c.size = a.size + b.size;
+    rep(i, <span class="dv">0</span>, <span class="dv">20</span>) rep(j, <span class="dv">0</span>, i)
+        c.cnt[i] = (c.cnt[i] + a.cnt[j] * b.cnt[i-j]) % modr;
+    <span class="kw">return</span> c;
+}
+
+<span class="kw">class</span> SegmentTree
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> node
+    {
+        node *lc, *rc;
+        <span class="dt">int</span> lb, mb, rb;
+        interval val;
+        lli lazyadd;
+        <span class="dt">bool</span> lazyinv;
+    } *root, npool[maxn&lt;&lt;<span class="dv">1</span>];
+    <span class="dt">int</span> n, ncnt;
+    node* make_node(<span class="dt">void</span>)
+    {
+        node *p = &amp;npool[++ncnt];
+        p-&gt;lc = p-&gt;rc = NULL;
+        p-&gt;lb = p-&gt;mb = p-&gt;rb = <span class="dv">0</span>;
+        p-&gt;val = <span class="dv">0</span>;
+        p-&gt;lazyadd = <span class="dv">0</span>;
+        p-&gt;lazyinv = <span class="kw">false</span>;
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">void</span> mark_add(node *p, lli v)
+    {
+        p-&gt;lazyadd = (p-&gt;lazyadd + v) % modr;
+        p-&gt;val.add(v);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> mark_inv(node *p)
+    {
+        p-&gt;lazyadd = (modr - p-&gt;lazyadd) % modr;
+        p-&gt;lazyinv ^= <span class="dv">1</span>;
+        p-&gt;val.inverse();
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> dispatch_lazy(node *p)
+    {
+        <span class="kw">if</span> (p-&gt;lazyinv) {
+            mark_inv(p-&gt;lc);
+            mark_inv(p-&gt;rc);
+            p-&gt;lazyinv = <span class="kw">false</span>;
+        }
+        <span class="kw">if</span> (p-&gt;lazyadd) {
+            mark_add(p-&gt;lc, p-&gt;lazyadd);
+            mark_add(p-&gt;rc, p-&gt;lazyadd);
+            p-&gt;lazyadd = <span class="dv">0</span>;
+        }
+        <span class="kw">return</span> ;
+    }
+    interval query(node *p, <span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="kw">if</span> (p-&gt;lb == l &amp;&amp; p-&gt;rb == r) {
+            <span class="kw">return</span> p-&gt;val;
+        }
+        dispatch_lazy(p);
+        <span class="kw">if</span> (r &lt;= p-&gt;mb) {
+            <span class="kw">return</span> query(p-&gt;lc, l, r);
+        } <span class="kw">else</span> <span class="kw">if</span> (l &gt; p-&gt;mb) {
+            <span class="kw">return</span> query(p-&gt;rc, l, r);
+        } <span class="kw">else</span> {
+            <span class="kw">return</span> join(query(p-&gt;lc, l, p-&gt;mb),
+                query(p-&gt;rc, p-&gt;mb + <span class="dv">1</span>, r));
+        }
+        <span class="kw">return</span> interval();
+    }
+    lli query(<span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">int</span> c)
+    {
+        <span class="kw">if</span> (l &gt; r) swap(l, r);
+        interval res = <span class="kw">this</span>-&gt;query(root, l, r);
+        <span class="kw">return</span> res.cnt[c];
+    }
+    <span class="dt">void</span> change(node *p, <span class="dt">int</span> l, <span class="dt">int</span> r, lli val)
+    {
+        <span class="kw">if</span> (p-&gt;lb == l &amp;&amp; p-&gt;rb == r) {
+            mark_add(p, val);
+            <span class="kw">return</span> ;
+        }
+        dispatch_lazy(p);
+        <span class="kw">if</span> (r &lt;= p-&gt;mb)
+            change(p-&gt;lc, l, r, val);
+        <span class="kw">else</span> <span class="kw">if</span> (l &gt; p-&gt;mb)
+            change(p-&gt;rc, l, r, val);
+        <span class="kw">else</span>
+            change(p-&gt;lc, l, p-&gt;mb, val),
+            change(p-&gt;rc, p-&gt;mb + <span class="dv">1</span>, r, val);
+        p-&gt;val = join(p-&gt;lc-&gt;val, p-&gt;rc-&gt;val);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> change(<span class="dt">int</span> l, <span class="dt">int</span> r, lli val)
+    {
+        val = (val % modr + modr) % modr;
+        <span class="kw">this</span>-&gt;change(root, l, r, val);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> inverse(node *p, <span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="kw">if</span> (p-&gt;lb == l &amp;&amp; p-&gt;rb == r) {
+            mark_inv(p);
+            <span class="kw">return</span> ;
+        }
+        dispatch_lazy(p);
+        <span class="kw">if</span> (r &lt;= p-&gt;mb)
+            inverse(p-&gt;lc, l, r);
+        <span class="kw">else</span> <span class="kw">if</span> (l &gt; p-&gt;mb)
+            inverse(p-&gt;rc, l, r);
+        <span class="kw">else</span>
+            inverse(p-&gt;lc, l, p-&gt;mb),
+            inverse(p-&gt;rc, p-&gt;mb + <span class="dv">1</span>, r);
+        p-&gt;val = join(p-&gt;lc-&gt;val, p-&gt;rc-&gt;val);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> inverse(<span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="kw">this</span>-&gt;inverse(root, l, r);
+        <span class="kw">return</span> ;
+    }
+    node* build_tree(<span class="dt">int</span> l, <span class="dt">int</span> r, lli arr[])
+    {
+        node *p = make_node();
+        <span class="dt">int</span> mid = (l + r) &gt;&gt; <span class="dv">1</span>;
+        p-&gt;lb = l; p-&gt;mb = mid; p-&gt;rb = r;
+        <span class="kw">if</span> (p-&gt;lb == p-&gt;rb) {
+            lli val = (arr[mid] % modr + modr) % modr;
+            p-&gt;val = interval(val);
+        } <span class="kw">else</span> {
+            p-&gt;lc = build_tree(l, mid, arr);
+            p-&gt;rc = build_tree(mid + <span class="dv">1</span>, r, arr);
+            p-&gt;val = join(p-&gt;lc-&gt;val, p-&gt;rc-&gt;val);
+        }
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">void</span> init(<span class="dt">int</span> n, lli arr[])
+    {
+        <span class="kw">this</span>-&gt;n = n;
+        <span class="kw">this</span>-&gt;root = <span class="kw">this</span>-&gt;build_tree(<span class="dv">1</span>, n, arr);
+        <span class="kw">return</span> ;
+    }
+} st;
+
+<span class="dt">int</span> n, m;
+lli arr[maxn];
+<span class="dt">char</span> str[<span class="dv">64</span>];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    <span class="co">// Preloading input</span>
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;arr[i]);
+    <span class="co">// Loading C(...) function with Yang Hui triangle</span>
+    C[<span class="dv">0</span>][<span class="dv">0</span>] = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++) {
+        C[i][<span class="dv">0</span>] = <span class="dv">1</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= i &amp;&amp; j &lt; maxk; j++)
+            C[i][j] = (C[i<span class="dv">-1</span>][j] + C[i<span class="dv">-1</span>][j<span class="dv">-1</span>]) % modr;
+    }
+    <span class="co">// Initializing</span>
+    st.init(n, arr);
+    <span class="co">// Can you answer these queries?</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        <span class="dt">int</span> a, b, c;
+        scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str);
+        <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'I'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d%d%d</span><span class="st">"</span>, &amp;a, &amp;b, &amp;c);
+            c = (c % modr + modr) % modr;
+            st.change(a, b, c);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'R'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;a, &amp;b);
+            st.inverse(a, b);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'Q'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d%d%d</span><span class="st">"</span>, &amp;a, &amp;b, &amp;c);
+            lli res = st.query(a, b, c);
+            printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/tsinsen1382/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/tsinsen1382/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/tsinsen1382/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/tsinsen1382/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="tsinsen1382">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

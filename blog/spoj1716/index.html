@@ -1,0 +1,256 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>spoj1716: GSS3 - Can you answer these queries III&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          spoj1716: GSS3 - Can you answer these queries III
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=SPOJ" target="_self">
+            <i class="fa fa-tag"></i> SPOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=GSS" target="_self">
+            <i class="fa fa-tag"></i> GSS
+          </a>
+          <a class="tag" href="/blog/archive/?q=Segment Tree" target="_self">
+            <i class="fa fa-tag"></i> Segment Tree
+          </a>
+        </span>
+        <span class="date" title="19:53:17 | 16 March, 2017">
+          16 March, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="gss3---can-you-answer-these-queries-iii">GSS3-Can you answer these queries III</h2>
+<h3 id="description">Description</h3>
+<p>You are given a sequence <span class="math inline">\(a\)</span> of <span class="math inline">\(n\)</span> integers between <span class="math inline">\(-10000\)</span> and <span class="math inline">\(10000\)</span>. On this sequence you have to apply <span class="math inline">\(m\)</span> operations:</p>
+<ul>
+<li>Modify the <span class="math inline">\(i-th\)</span> element in the sequence.</li>
+<li>For given <span class="math inline">\(x, y\)</span>, print <span class="math inline">\(max\{a_i + a_{i+1} + \ldots + a_j | x \leq i \leq j \leq y\}\)</span>.</li>
+</ul>
+<h3 id="input">Input</h3>
+<p>The first line of input contains an integer <span class="math inline">\(n\)</span>.</p>
+<p>The following line contains <span class="math inline">\(n\)</span> integers, representing the sequence <span class="math inline">\(a_1 \ldots a_n\)</span>.</p>
+<p>The third line contains an integer <span class="math inline">\(m\)</span>. The next <span class="math inline">\(m\)</span> lines contain the operations in following form:</p>
+<ul>
+<li><code>0 x y</code>: Modify <span class="math inline">\(a_x\)</span> into <span class="math inline">\(y\)</span> (<span class="math inline">\(|y| \leq 10000\)</span>) .</li>
+<li><code>1 x y</code>: Print <span class="math inline">\(max\{a_i + a_{i+1} + \ldots + a_j | x \leq i \leq j \leq y\}\)</span>.</li>
+</ul>
+<h3 id="output">Output</h3>
+<p>For each query, print an integer as the problem required.</p>
+<!-- More -->
+<h3 id="sample-input">Sample Input</h3>
+<pre><code>4
+1 2 3 4
+4
+1 1 3
+0 3 -3
+1 2 4
+1 3 3</code></pre>
+<h3 id="sample-output">Sample Output</h3>
+<pre><code>6
+4
+-3</code></pre>
+<h3 id="data-range">Data Range</h3>
+<p>All data are guaranteed that:<span class="math inline">\(n \leq 50000, m \leq 50000, -10000 \leq a_i \leq 10000\)</span>.</p>
+<h3 id="explanation">Explanation</h3>
+<p>维护一棵线段树区间从左边开始的最大和和从右边开始的最大和和从中间开始的最大和. 这些数据可以 <span class="math inline">\(O(1)\)</span> 合并, 相比 GSS1 来说只是多了修改. 所以需要加一个 lazy 来维护批量修改操作.</p>
+<h3 id="source-code">Source Code</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">50010</span>;
+
+<span class="kw">struct</span> interval {
+    lli maxx, lmx, mmx, rmx, sum;
+    interval(<span class="dt">void</span>) {
+        maxx = lmx = mmx = rmx = sum = <span class="dv">0</span>; }
+    interval(lli v) {
+        maxx = sum = v; lmx = mmx = rmx = v &gt; <span class="dv">0</span> ? v : <span class="dv">0</span>; }
+    interval(lli a, lli b, lli c, lli d, lli e) {
+        maxx = a; lmx = b, mmx = c, rmx = d; sum = e; }
+}; interval join(interval a, interval b) {
+    interval c; c.maxx = max(a.maxx, b.maxx);
+    c.lmx = max(a.lmx, a.sum + b.lmx);
+    c.rmx = max(b.rmx, b.sum + a.rmx);
+    c.mmx = max(max(a.mmx, b.mmx), a.rmx + b.lmx);
+    c.sum = a.sum + b.sum;
+    <span class="kw">return</span> c;
+}
+
+<span class="kw">class</span> SegmentTree
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> node
+    {
+        node *lc, *rc;
+        <span class="dt">int</span> lb, mb, rb;
+        interval val;
+    } *root, npool[maxn&lt;&lt;<span class="dv">1</span>];
+    <span class="dt">int</span> n, ncnt;
+    node* make_node(<span class="dt">void</span>)
+    {
+        node *p = &amp;npool[++ncnt];
+        p-&gt;lc = p-&gt;rc = NULL;
+        p-&gt;lb = p-&gt;mb = p-&gt;rb = <span class="dv">0</span>;
+        p-&gt;val = <span class="dv">0</span>;
+        <span class="kw">return</span> p;
+    }
+    interval query(node *p, <span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="kw">if</span> (p-&gt;lb == l &amp;&amp; p-&gt;rb == r) {
+            <span class="kw">return</span> p-&gt;val;
+        }
+        <span class="kw">if</span> (r &lt;= p-&gt;mb) {
+            <span class="kw">return</span> query(p-&gt;lc, l, r);
+        } <span class="kw">else</span> <span class="kw">if</span> (l &gt; p-&gt;mb) {
+            <span class="kw">return</span> query(p-&gt;rc, l, r);
+        } <span class="kw">else</span> {
+            <span class="kw">return</span> join(query(p-&gt;lc, l, p-&gt;mb),
+                query(p-&gt;rc, p-&gt;mb + <span class="dv">1</span>, r));
+        }
+        <span class="kw">return</span> interval();
+    }
+    lli query(<span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="kw">if</span> (l &gt; r) swap(l, r);
+        interval res = <span class="kw">this</span>-&gt;query(root, l, r);
+        <span class="kw">if</span> (res.maxx &lt; <span class="dv">0</span>) <span class="kw">return</span> res.maxx;
+        <span class="kw">return</span> res.mmx;
+    }
+    <span class="dt">void</span> change(node *p, <span class="dt">int</span> pos, lli val)
+    {
+        <span class="kw">if</span> (p-&gt;lb == p-&gt;rb) {
+            p-&gt;val = interval(val);
+            <span class="kw">return</span> ;
+        }
+        <span class="kw">if</span> (pos &lt;= p-&gt;mb)
+            change(p-&gt;lc, pos, val);
+        <span class="kw">else</span> <span class="kw">if</span> (pos &gt; p-&gt;mb)
+            change(p-&gt;rc, pos, val);
+        p-&gt;val = join(p-&gt;lc-&gt;val, p-&gt;rc-&gt;val);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> change(<span class="dt">int</span> pos, lli val)
+    {
+        <span class="kw">this</span>-&gt;change(root, pos, val);
+    }
+    node* build_tree(<span class="dt">int</span> l, <span class="dt">int</span> r, lli arr[])
+    {
+        node *p = make_node();
+        <span class="dt">int</span> mid = (l + r) &gt;&gt; <span class="dv">1</span>;
+        p-&gt;lb = l; p-&gt;mb = mid; p-&gt;rb = r;
+        <span class="kw">if</span> (p-&gt;lb == p-&gt;rb) {
+            p-&gt;val = interval(arr[mid]);
+        } <span class="kw">else</span> {
+            p-&gt;lc = build_tree(l, mid, arr);
+            p-&gt;rc = build_tree(mid + <span class="dv">1</span>, r, arr);
+            p-&gt;val = join(p-&gt;lc-&gt;val, p-&gt;rc-&gt;val);
+        }
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">void</span> build(<span class="dt">int</span> n, lli arr[])
+    {
+        <span class="kw">this</span>-&gt;n = n;
+        <span class="kw">this</span>-&gt;root = <span class="kw">this</span>-&gt;build_tree(<span class="dv">1</span>, n, arr);
+        <span class="kw">return</span> ;
+    }
+} st;
+
+<span class="dt">int</span> n, m;
+lli arr[maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;arr[i]);
+    st.build(n, arr);
+    <span class="co">// Can you answer these queries</span>
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, x, l, r; i &lt;= m; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d%d%d</span><span class="st">"</span>, &amp;x, &amp;l, &amp;r);
+        <span class="kw">if</span> (x == <span class="dv">1</span>) {
+            lli res = st.query(l, r);
+            printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+        } <span class="kw">else</span> <span class="kw">if</span> (x == <span class="dv">0</span>) {
+            st.change(l, r);
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/spoj1716/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/spoj1716/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/spoj1716/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/spoj1716/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="spoj1716">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

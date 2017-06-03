@@ -1,0 +1,320 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj3110: [Zjoi2013]K大数查询&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj3110: [Zjoi2013]K大数查询
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=ZJOI2013" target="_self">
+            <i class="fa fa-tag"></i> ZJOI2013
+          </a>
+          <a class="tag" href="/blog/archive/?q=Segment Tree" target="_self">
+            <i class="fa fa-tag"></i> Segment Tree
+          </a>
+          <a class="tag" href="/blog/archive/?q=Weighted Segment Tree" target="_self">
+            <i class="fa fa-tag"></i> Weighted Segment Tree
+          </a>
+          <a class="tag" href="/blog/archive/?q=Descatterization" target="_self">
+            <i class="fa fa-tag"></i> Descatterization
+          </a>
+        </span>
+        <span class="date" title="23:44:20 | 27 November, 2016">
+          27 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>有 N 个位置, M 个操作. 操作有两种, 每次操作如果是 1 a b c 的形式表示在第 a 个位置到第 b 个位置, 每个位置加入一个数 c.</p>
+<p>如果是 <code>2 a b c</code> 形式, 表示询问从第 a 个位置到第 b 个位置, 第 C 大的数是多少.</p>
+<h2 id="input">Input</h2>
+<p>第一行 N, M</p>
+<p>接下来 M 行, 每行形如 <code>1 a b c</code> 或 <code>2 a b c</code></p>
+<h2 id="output">Output</h2>
+<p>输出每个询问的结果</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>2 5
+1 1 2 1
+1 1 2 2
+2 1 1 2
+2 1 1 1
+2 1 2 3</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>1
+2
+1</code></pre>
+<h2 id="sample-explanation">Sample Explanation</h2>
+<ol type="1">
+<li>第一个操作后位置 1 的数只有 1, 位置 2 的数也只有 1.</li>
+<li>第二个操作后位置 1 的数有 1、2, 位置 2 的数也有 1、2.</li>
+<li>第三次询问位置 1 到位置 1 第 2 大的数是 1.</li>
+<li>第四次询问位置 1 到位置 1 第 1 大的数是 2.</li>
+<li>第五次询问位置 1 到位置 2 第 3 大的数是 1.</li>
+</ol>
+<h2 id="data-range">Data Range</h2>
+<p>100% 的数据保证 <span class="math inline">\(N, M \leq 50000, N, M \leq 50000, a \leq b \leq N\)</span></p>
+<p>其中 <code>1</code> 操作中 <span class="math inline">\(|c| \leq N\)</span>,<code>2</code> 操作中 <span class="math inline">\(c \leq 2^{63}-1\)</span></p>
+<h2 id="solution">Solution</h2>
+<p>参见了一下这位大神的博客:<a href="">https://blog.sengxian.com/solutions/bzoj-3110</a></p>
+<p>一道树套树的题, 外层是权值线段树, 里层是普通区间线段树.</p>
+<p>对于权值线段树的节点 <span class="math inline">\(u\)</span> 表示权值区间 <span class="math inline">\([l,r)\)</span>, 其对应的普通线段树的节点 <span class="math inline">\(v\)</span> 表示 序列 <span class="math inline">\([l_1,r_1)\)</span> 中一共有多少个在权值区间 <span class="math inline">\([l,r)\)</span> 的树.</p>
+<p>这样不难得到我们的查询算法, 要查 <span class="math inline">\([a,b]\)</span> 的第 <span class="math inline">\(k\)</span> 大, 如果权值线段树根的右儿子代表的线段树区间 <span class="math inline">\([a,b]\)</span> 的和为 <span class="math inline">\(s\)</span>, 如果 <span class="math inline">\(s\)</span> 大于 <span class="math inline">\(k\)</span>, 说明第 <span class="math inline">\(k\)</span> 大在右儿子代表的权值区间. 否则在左儿子代表的权值区间上面.</p>
+<p>修改也很好修改, 只有一个区间加标记, 如果要在 <span class="math inline">\([a,b]\)</span> 中加一个 <span class="math inline">\(c\)</span>, 那么应该在外 层线段树中将所有包含权值 <span class="math inline">\(c\)</span> 的节点对应的线段树的 <span class="math inline">\([a,b]\)</span> 区间全部+1.</p>
+<p>剩下唯一的问题就是空间, 理论上需要 <span class="math inline">\(O(n^2)\)</span> 的空间, 我们可以动态开点, 未开的点给到 <code>null</code>, 如果查询的时候走到 <code>null</code>, 不需新建直接返回 0; 如果修改的时候走到 <code>null</code>, 那就新建节点, 每次操作第一层最多影响 <span class="math inline">\(\log n\)</span> 个节点, 第二层最对影响 <span class="math inline">\(\log n\)</span> 个节点, 所以总空间复杂度是 <span class="math inline">\(O(m \cdot \log^2 n)\)</span>.</p>
+<p><strong>然而 hzwer 代码巨坑啊~ 直接交上去就 WA~</strong></p>
+<p>是因为新数据的问题: 新的数据加上了负数和超大整数, 然而 hzwer 并没有考虑到这个问题 233</p>
+<p>所以就手写了一个 <code>class</code> 加上了一个离散化的小 Trick 然后踩着 19. 6 秒的时限 AC 了</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">200100</span>, maxm = <span class="dv">20001000</span>;
+
+<span class="kw">class</span> MultiPointSegmentTree
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> n, ncnt;
+    <span class="dt">int</span> ch[maxm][<span class="dv">2</span>], root[maxn];
+    lli sum[maxm], lazy[maxm];
+    <span class="dt">void</span> dispatch_lazy(<span class="dt">int</span> p, <span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="co">// Nothing to dispatch</span>
+        <span class="kw">if</span> (!lazy[p] || l == r)
+            <span class="kw">return</span> ;
+        <span class="co">// Tending to create children, if not exist.</span>
+        <span class="kw">if</span> (!ch[p][<span class="dv">0</span>]) ch[p][<span class="dv">0</span>] = ++ncnt;
+        <span class="kw">if</span> (!ch[p][<span class="dv">1</span>]) ch[p][<span class="dv">1</span>] = ++ncnt;
+        <span class="co">// Dispatching lazy.</span>
+        lazy[ch[p][<span class="dv">0</span>]] += lazy[p];
+        lazy[ch[p][<span class="dv">1</span>]] += lazy[p];
+        <span class="co">// Adding sum.</span>
+        <span class="dt">int</span> mid = (l + r) / <span class="dv">2</span>;
+        sum[ch[p][<span class="dv">0</span>]] += (mid - l + <span class="dv">1</span>) * lazy[p];
+        sum[ch[p][<span class="dv">1</span>]] += (r - mid) * lazy[p];
+        lazy[p] = <span class="dv">0</span>;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> change(<span class="dt">int</span>&amp; p, <span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">int</span> left, <span class="dt">int</span> right)
+    {
+        <span class="co">// Create new node, if necessary.</span>
+        <span class="kw">if</span> (!p) p = ++ncnt;
+        <span class="co">// Dispatch lazy values</span>
+        dispatch_lazy(p, l, r);
+        <span class="co">// Matches left boundaries and right boundaries</span>
+        <span class="kw">if</span> (l == left &amp;&amp; r == right) {
+            sum[p] += r - l + <span class="dv">1</span>;
+            lazy[p]++;
+            <span class="kw">return</span> ;
+        }
+        <span class="co">// Dispatch to lower children</span>
+        <span class="dt">int</span> mid = (l + r) / <span class="dv">2</span>;
+        <span class="kw">if</span> (right &lt;= mid) {
+            change(ch[p][<span class="dv">0</span>], l, mid, left, right);
+        } <span class="kw">else</span> <span class="kw">if</span> (left &gt; mid) {
+            change(ch[p][<span class="dv">1</span>], mid + <span class="dv">1</span>, r, left, right);
+        } <span class="kw">else</span> {
+            change(ch[p][<span class="dv">0</span>], l, mid, left, mid);
+            change(ch[p][<span class="dv">1</span>], mid + <span class="dv">1</span>, r, mid + <span class="dv">1</span>, right);
+        }
+        sum[p] = sum[ch[p][<span class="dv">0</span>]] + sum[ch[p][<span class="dv">1</span>]];
+        <span class="kw">return</span> ;
+    }
+    lli query(<span class="dt">int</span> p, <span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">int</span> left, <span class="dt">int</span> right)
+    {
+        <span class="co">// Fail-safe check on things</span>
+        <span class="kw">if</span> (!p) <span class="kw">return</span> <span class="dv">0</span>;
+        <span class="co">// Dispatch lazy values</span>
+        dispatch_lazy(p, l, r);
+        <span class="co">// Normal non-heap segment trees</span>
+        <span class="kw">if</span> (l == left &amp;&amp; r == right)
+            <span class="kw">return</span> sum[p];
+        <span class="dt">int</span> mid = (l + r) / <span class="dv">2</span>;
+        <span class="kw">if</span> (right &lt;= mid) {
+            <span class="kw">return</span> query(ch[p][<span class="dv">0</span>], l, mid, left, right);
+        } <span class="kw">else</span> <span class="kw">if</span> (left &gt; mid) {
+            <span class="kw">return</span> query(ch[p][<span class="dv">1</span>], mid + <span class="dv">1</span>, r, left, right);
+        } <span class="kw">else</span> {
+            <span class="kw">return</span> query(ch[p][<span class="dv">0</span>], l, mid, left, mid)
+                 + query(ch[p][<span class="dv">1</span>], mid + <span class="dv">1</span>, r, mid + <span class="dv">1</span>, right);
+        }
+        <span class="co">// Fail-safe check (should not happen!)</span>
+        <span class="kw">return</span> <span class="dv">0</span>;
+    }
+    <span class="dt">void</span> insert(<span class="dt">int</span> l, <span class="dt">int</span> r, lli val)
+    {
+        <span class="co">// Preprocess position</span>
+        val = n - val + <span class="dv">1</span>;
+        <span class="dt">int</span> p = <span class="dv">1</span>, <span class="co">// heap-like node traversal</span>
+            left = <span class="dv">1</span>, right = n; <span class="co">// Binary-search-like worker</span>
+        <span class="kw">while</span> (left != right) {
+            <span class="dt">int</span> mid = (left + right) / <span class="dv">2</span>;
+            change(root[p], <span class="dv">1</span>, n, l, r);
+            <span class="kw">if</span> (val &lt;= mid) {
+                right = mid;
+                p = <span class="dv">2</span> * p;
+            } <span class="kw">else</span> {
+                left = mid + <span class="dv">1</span>;
+                p = <span class="dv">2</span> * p + <span class="dv">1</span>;
+            }
+        }
+        change(root[p], <span class="dv">1</span>, n, l, r);
+        <span class="kw">return</span> ;
+    }
+    lli query(<span class="dt">int</span> l, <span class="dt">int</span> r, lli pos)
+    {
+        <span class="dt">int</span> p = <span class="dv">1</span>, <span class="co">// Binary-search-like traversal.</span>
+            left = <span class="dv">1</span>, right = n;
+        <span class="kw">while</span> (left != right) {
+            <span class="dt">int</span> mid = (left + right) / <span class="dv">2</span>;
+            lli res = query(root[<span class="dv">2</span> * p], <span class="dv">1</span>, n, l, r);
+            <span class="kw">if</span> (res &gt;= pos) {
+                right = mid;
+                p = p * <span class="dv">2</span>;
+            } <span class="kw">else</span> {
+                left = mid + <span class="dv">1</span>;
+                p = p * <span class="dv">2</span> + <span class="dv">1</span>;
+                pos -= res;
+            }
+        }
+        <span class="kw">return</span> n - left + <span class="dv">1</span>;
+    }
+} st;
+
+<span class="kw">struct</span> srtr { lli val; <span class="dt">int</span> pos; };
+<span class="dt">bool</span> <span class="kw">operator</span> &lt; (srtr a, srtr b) { <span class="kw">return</span> a.val &lt; b.val; }
+<span class="kw">class</span> DiscreteProcessor
+{
+<span class="kw">public</span>:
+    srtr srt[maxn];
+    lli arr[maxn];
+    lli val[maxn];
+    <span class="dt">int</span> cnt;
+    <span class="dt">void</span> eval(<span class="dt">void</span>)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= cnt; i++)
+            srt[i].val = arr[i], srt[i].pos = i;
+        sort(srt + <span class="dv">1</span>, srt + <span class="dv">1</span> + cnt);
+        <span class="co">// Restoring values</span>
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= cnt; i++) {
+            <span class="dt">int</span> rel_pos = <span class="dv">0</span>;
+            <span class="kw">if</span> (i == <span class="dv">1</span> || srt[i].val != srt[i - <span class="dv">1</span>].val)
+                rel_pos = arr[srt[i - <span class="dv">1</span>].pos] + <span class="dv">1</span>;
+            <span class="kw">else</span>
+                rel_pos = arr[srt[i - <span class="dv">1</span>].pos];
+            arr[srt[i].pos] = rel_pos;
+            val[rel_pos] = srt[i].val;
+        }
+        <span class="kw">return</span> ;
+    }
+} dcp;
+
+<span class="dt">int</span> n, m;
+lli op[maxn][<span class="dv">4</span>];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    st.n = n;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        scanf(<span class="st">"</span><span class="ch">%lld%lld%lld%lld</span><span class="st">"</span>, &amp;op[i][<span class="dv">0</span>], &amp;op[i][<span class="dv">1</span>], &amp;op[i][<span class="dv">2</span>], &amp;op[i][<span class="dv">3</span>]);
+        <span class="kw">if</span> (op[i][<span class="dv">0</span>] == <span class="dv">1</span>) {
+            <span class="co">// printf("%lld ", op[i][3]);</span>
+            dcp.arr[++dcp.cnt] = op[i][<span class="dv">3</span>];
+            op[i][<span class="dv">3</span>] = dcp.cnt;
+        }
+    }
+    <span class="co">// Processing discrete numbers</span>
+    dcp.eval();
+    <span class="co">// printf("\n");</span>
+    <span class="co">// for (int i = 1; i &lt;= dcp.cnt; i++)</span>
+    <span class="co">//     printf("%lld ", dcp.arr[i]);</span>
+    <span class="co">// printf("\n");</span>
+    <span class="co">// Redoing operations</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        <span class="kw">if</span> (op[i][<span class="dv">0</span>] == <span class="dv">1</span>)
+            st.insert(op[i][<span class="dv">1</span>], op[i][<span class="dv">2</span>], dcp.arr[op[i][<span class="dv">3</span>]]);
+        <span class="kw">else</span>
+            printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, dcp.val[st.query(op[i][<span class="dv">1</span>], op[i][<span class="dv">2</span>], op[i][<span class="dv">3</span>])]);
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj3110/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj3110/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj3110/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj3110/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj3110">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

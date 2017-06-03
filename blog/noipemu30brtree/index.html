@@ -1,0 +1,340 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NOIP-EMU-141031-brtree&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          NOIP-EMU-141031-brtree
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOIP Emulation" target="_self">
+            <i class="fa fa-tag"></i> NOIP Emulation
+          </a>
+          <a class="tag" href="/blog/archive/?q=Mathematics" target="_self">
+            <i class="fa fa-tag"></i> Mathematics
+          </a>
+          <a class="tag" href="/blog/archive/?q=Combinatorics" target="_self">
+            <i class="fa fa-tag"></i> Combinatorics
+          </a>
+          <a class="tag" href="/blog/archive/?q=Implementation" target="_self">
+            <i class="fa fa-tag"></i> Implementation
+          </a>
+        </span>
+        <span class="date" title="23:37:51 | 16 November, 2016">
+          16 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="黑红树-brtree">黑红树 (brtree)</h2>
+<h3 id="背景">背景</h3>
+<p>Mz 们在 czy 的生日送他一个黑红树种子...... czy 种下种子, 结果种子很快就长得飞快, 它的枝干伸入空中看不见了......</p>
+<h3 id="题目描述">题目描述</h3>
+<p>Czy 发现黑红树具有一些独特的性质.</p>
+<ol type="1">
+<li>这是二叉树, 除根节点外每个节点都有红与黑之间的一种颜色.</li>
+<li>每个节点的两个儿子节点都被染成恰好一个红色一个黑色.</li>
+<li>这棵树你是望不到头的 (树的深度可以到无限大)</li>
+<li>黑红树上的高度这样定义: h (根节点)=0, h [son]=h [father]+1.</li>
+</ol>
+<p>Czy 想从树根顺着树往上爬. 他有 <span class="math inline">\(\frac{p}{q}\)</span> 的概率到达红色的儿子节点, 有 <span class="math inline">\(1 - \frac{p}{q}\)</span> 的概率到达黑色节点. 但是他知道如果自己经过的路径是不平衡的, 他会马上摔下来. 一条红黑树上的链是不平衡的, 当且仅当红色节点与黑色节点的个数之差大于 <span class="math inline">\(1\)</span>. 现在他想知道他刚好在高度为 <span class="math inline">\(h\)</span> 的地方摔下来的概率的精确值 <span class="math inline">\(\frac{a}{b}, gcd(a, b) = 0\)</span>. 那可能很大, 所以他只要知道 <span class="math inline">\(a\)</span>,<span class="math inline">\(b\)</span> 对 <span class="math inline">\(K\)</span> 取模的结果就可以了. 另外, czy 对输入数据加密: 第 <span class="math inline">\(i\)</span> 个询问 <span class="math inline">\(Q_i\)</span> 真正大小将是给定的 <span class="math inline">\(Q\)</span> 减上一个询问 的第一个值 <span class="math inline">\(a\ mod\ K\)</span>.</p>
+<h3 id="格式">格式</h3>
+<p>第一行四个数<span class="math inline">\(p, q, T, k\)</span>, 表示走红色节点概率是 <span class="math inline">\(\frac{p}{q}\)</span>, 以下 <span class="math inline">\(T\)</span> 组询问, 答案对 <span class="math inline">\(K\)</span> 取模. 接下来 <span class="math inline">\(T\)</span> 行, 每行一个数 <span class="math inline">\(Q\)</span>, 表示 czy 想知道刚好在高度 <span class="math inline">\(Q\)</span> 掉下 来的概率 <strong> (已加密)</strong></p>
+<p>输出 <span class="math inline">\(T\)</span> 行, 每行两个整数, 表示要求的概率 <span class="math inline">\(\frac{a}{b}\)</span> 中 <span class="math inline">\(a\ mod\ K\)</span> 和<span class="math inline">\(b\ mod\ K\)</span> 的精确值. 如果这个概率就是 <span class="math inline">\(0\)</span> 或 <span class="math inline">\(1\)</span>, 直接输出 <code>0 0</code> 或 <code>1 1</code> (中间有空格).</p>
+<!-- More -->
+<h3 id="样例输入1">样例输入 1</h3>
+<pre><code>2 3 2 100
+1
+2</code></pre>
+<h3 id="样例输出1">样例输出 1</h3>
+<pre><code>0 0
+5 9</code></pre>
+<h3 id="样例输入2">样例输入 2</h3>
+<pre><code>2 3 2 20
+4
+6</code></pre>
+<h3 id="样例输出2">样例输出 2</h3>
+<pre><code>0 1
+0 9</code></pre>
+<h3 id="数据范围">数据范围</h3>
+<p>对于 30% 数据,<span class="math inline">\(p, q \leq 5, T \leq 1000, K \leq 127\)</span>, 对于任意解密后的 Q, 有 <span class="math inline">\(Q \leq 30\)</span></p>
+<p>对于 60% 数据,<span class="math inline">\(p, q \leq 20, T \leq 100000, K \leq 65535\)</span>, 对于任意解密后的 Q, 有 <span class="math inline">\(Q \leq 1000\)</span></p>
+<p>对于 100% 数据,<span class="math inline">\(p, q \leq 100, T \leq 1000000, K \leq 1000000007\)</span>, 对于任意解密后的 Q, 有 <span class="math inline">\(Q \leq 1000000\)</span></p>
+<p>对于 100% 数据, 有 <span class="math inline">\(q \gt p\)</span>, 即 <span class="math inline">\(0 \leq \frac{p}{q} \leq 1\)</span></p>
+<h3 id="explanation">Explanation</h3>
+<p><strong>以下是官方题解, 我的题解和这个差不多:</strong></p>
+<p>把树分成两层两层考虑, 那么下面的一层显然不可能出现结束的状态, 因为取到红和黑的点数之差一定为 1. 每一层只有三种情况: 1 红 1 黑, 0 红 2 黑, 2 红 0 黑. 因为达到这一层的时候 一定取到红点的个数和取到黑点的个数之和一定是偶数, 因此红点和黑点的个数一定相等. 当取到 0 红 2 黑和 2 红 0 黑的时候在这一层就结束了, 否则 1 红 1 黑就走到下一层. 结束的概率是:</p>
+<p><span class="math display">\[\frac{p^2 + (p - q)^2}{q^2}\]</span></p>
+<p><span class="math display">\[= \frac{2 p^2 - 2 p q + q^2}{q^2}\]</span></p>
+<p>不结束的概率是:</p>
+<p><span class="math display">\[1 - \frac{p^2 + (p - q)^2}{q^2}\]</span></p>
+<p><span class="math display">\[= \frac{2 p q - 2 p^2}{q^2}\]</span></p>
+<p>令能结束的概率是 <span class="math inline">\(\frac{A}{B}\)</span>, 一轮不能结束的概率是 <span class="math inline">\(\frac{C}{D}\)</span>. 那么答案就是 <span class="math inline">\(\frac{C}{D}^{t - 1} \cdot \frac{A}{B}\)</span>. 因为还要约分, 考虑到对于 <span class="math inline">\(n \leq 10000\)</span>,<span class="math inline">\(2\)</span> 的因子最多不会超过 <span class="math inline">\(20\)</span> 个, 所以前 <span class="math inline">\(20\)</span> 个直接用分解质因数搞一下就好, 后面直接乘起来.</p>
+<h3 id="source-code">Source Code</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">1001000</span>, maxf = <span class="dv">1030</span>;
+lli modr = <span class="dv">1000000007</span>;
+
+<span class="dt">int</span> T;
+lli p, q, K;
+
+lli div_1, div_2; <span class="co">// res = (div_1 / div_2) ^ n</span>
+
+lli gcd(lli a, lli b) {
+    <span class="kw">if</span> (b == <span class="dv">0</span>) <span class="kw">return</span> a;
+    <span class="kw">return</span> gcd(b, a % b);
+}
+
+lli prime[maxf], primes;
+<span class="dt">void</span> sort_primes(<span class="dt">void</span>) {
+    primes = <span class="dv">0</span>;
+    prime[++primes] = <span class="dv">2</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">3</span>; primes &lt; maxf - <span class="dv">1</span>; i++) {
+        <span class="dt">bool</span> isprime = <span class="kw">true</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= primes; j++)
+            <span class="kw">if</span> (i % prime[j] == <span class="dv">0</span>)
+                isprime = <span class="kw">false</span>;
+        <span class="kw">if</span> (!isprime) <span class="kw">continue</span>;
+        prime[++primes] = i;
+    }
+    <span class="kw">return</span> ;
+}
+
+<span class="kw">struct</span> fact_res
+{ <span class="dt">int</span> facts[maxf]; };
+
+fact_res factor(lli in) {
+    fact_res out;
+    memset(out.facts, <span class="dv">0</span>, <span class="kw">sizeof</span>(out.facts));
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt; maxf; i++) {
+        <span class="kw">if</span> (in == <span class="dv">1</span>)
+            <span class="kw">break</span>;
+        <span class="kw">while</span> (in % prime[i] == <span class="dv">0</span>) {
+            in /= prime[i];
+            out.facts[i]++;
+        }
+    }
+    <span class="kw">return</span> out;
+}
+
+lli res_a[maxn], res_b[maxn];
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%lld%lld%d%lld</span><span class="st">"</span>, &amp;p, &amp;q, &amp;T, &amp;K);
+    modr = K;
+    <span class="co">// Pre-processing data</span>
+    <span class="kw">if</span> ((p == <span class="dv">1</span> &amp;&amp; q == <span class="dv">1</span>) || (p == <span class="dv">0</span> &amp;&amp; q == <span class="dv">0</span>)) {
+        <span class="co">// Not entirely falling down, etc.</span>
+        res_a[<span class="dv">2</span>] = res_b[<span class="dv">2</span>] = <span class="dv">1</span>;
+    } <span class="kw">else</span> {
+        sort_primes();
+        lli c = p * p + (q - p) * (q - p),
+            d = q * q,
+            a = d - c,
+            b = d; <span class="co">// a / b, c / d, two fractions.</span>
+        lli div_a_b = gcd(a, b),
+            div_c_d = gcd(c, d);
+        a /= div_a_b, b /= div_a_b;
+        c /= div_c_d, d /= div_c_d;
+        <span class="co">// Retrieved best case. Factoring expressions</span>
+        fact_res f_a = factor(a),
+                 f_b = factor(b),
+                 f_c = factor(c),
+                 f_d = factor(d);
+        <span class="co">// Setting initial state.</span>
+        res_a[<span class="dv">2</span>] = c % modr;
+        res_b[<span class="dv">2</span>] = d % modr;
+        <span class="co">// Prime counters</span>
+        <span class="dt">int</span> prmc[maxf];
+        memset(prmc, <span class="dv">0</span>, <span class="kw">sizeof</span>(prmc));
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt; maxf; i++)
+            prmc[i] += f_c.facts[i] - f_d.facts[i];
+        <span class="co">// Division</span>
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">4</span>; i &lt;= <span class="dv">40</span>; i += <span class="dv">2</span>) {
+            lli sum_1 = <span class="dv">1</span>, sum_2 = <span class="dv">1</span>;
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt; maxf; j++)
+                prmc[j] += f_a.facts[j] - f_b.facts[j];
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt; maxf; j++) {
+                <span class="kw">if</span> (prmc[j] &gt; <span class="dv">0</span>)
+                    <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= prmc[j]; k++)
+                        sum_1 = (sum_1 * prime[j]) % modr;
+                <span class="kw">else</span> <span class="kw">if</span> (prmc[j] &lt; <span class="dv">0</span>)
+                    <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= -prmc[j]; k++)
+                        sum_2 = (sum_2 * prime[j]) % modr;
+            }
+            res_a[i] = sum_1;
+            res_b[i] = sum_2;
+        }
+        <span class="co">// The rest of them doesn't contain factor problems</span>
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">42</span>; i &lt;= <span class="dv">1000000</span>; i += <span class="dv">2</span>) {
+            res_a[i] = (res_a[i - <span class="dv">2</span>] * a) % modr;
+            res_b[i] = (res_b[i - <span class="dv">2</span>] * b) % modr;
+        }
+    }
+    <span class="co">// Input sets of data and respond accordingly.</span>
+    lli last_enc = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> idx = <span class="dv">1</span>; idx &lt;= T; idx++) {
+        lli Q = <span class="dv">0</span>;
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;Q);
+        Q -= last_enc; <span class="co">// Deciphering input</span>
+        printf(<span class="st">"</span><span class="ch">%lld</span><span class="st"> </span><span class="ch">%lld\n</span><span class="st">"</span>, res_a[Q], res_b[Q]);
+        last_enc = res_a[Q];
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>还有一半没写完的快速幂版本, 仅供部分参考:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">1010</span>;
+lli modr = <span class="dv">1000000007</span>;
+
+<span class="kw">class</span> Matrix { <span class="kw">public</span>: lli dat[<span class="dv">4</span>][<span class="dv">4</span>]; };
+<span class="kw">class</span> RowMatrix { <span class="kw">public</span>: lli dat[<span class="dv">4</span>]; };
+Matrix <span class="kw">operator</span> * (Matrix a, Matrix b) {
+    Matrix c;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">3</span>; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= <span class="dv">3</span>; j++) {
+            c.dat[i][j] = <span class="dv">0</span>;
+            <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= <span class="dv">3</span>; k++)
+                c.dat[i][j] += a.dat[i][k] * b.dat[k][j];
+            c.dat[i][j] %= modr;
+        }
+    <span class="kw">return</span> c; }
+RowMatrix <span class="kw">operator</span> * (RowMatrix a, Matrix b) {
+    RowMatrix c;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">3</span>; i++) {
+        c.dat[i] = <span class="dv">0</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= <span class="dv">3</span>; k++)
+            c.dat[i] += a.dat[k] * b.dat[k][i];
+        c.dat[i] %= modr;
+    }
+    <span class="kw">return</span> c; }
+Matrix make_matrix(<span class="dt">int</span> _1, <span class="dt">int</span> _2, <span class="dt">int</span> _3, <span class="dt">int</span> __1, <span class="dt">int</span> __2, <span class="dt">int</span> __3, <span class="dt">int</span> _1_, <span class="dt">int</span> _2_, <span class="dt">int</span> _3_) {
+    Matrix c;
+    c.dat[<span class="dv">1</span>][<span class="dv">1</span>] = _1,  c.dat[<span class="dv">1</span>][<span class="dv">2</span>] = _2,  c.dat[<span class="dv">1</span>][<span class="dv">3</span>] = _3;
+    c.dat[<span class="dv">2</span>][<span class="dv">1</span>] = __1, c.dat[<span class="dv">2</span>][<span class="dv">2</span>] = __2, c.dat[<span class="dv">2</span>][<span class="dv">3</span>] = __3;
+    c.dat[<span class="dv">3</span>][<span class="dv">1</span>] = _1_, c.dat[<span class="dv">3</span>][<span class="dv">2</span>] = _3_, c.dat[<span class="dv">3</span>][<span class="dv">3</span>] = _3_;
+    <span class="kw">return</span> c; }
+RowMatrix make_row_matrix(<span class="dt">int</span> _1, <span class="dt">int</span> _2, <span class="dt">int</span> _3) {
+    RowMatrix c;
+    c.dat[<span class="dv">1</span>] = _1, c.dat[<span class="dv">2</span>] = _2, c.dat[<span class="dv">3</span>] = _3;
+    <span class="kw">return</span> c; }
+
+lli dp[maxn][<span class="dv">3</span>];
+<span class="dt">int</span> p, q, T, K;
+
+lli eval(lli height)
+{
+    lli tmp = <span class="dv">1</span>;
+    <span class="co">// Creating matrix of sequence</span>
+    Matrix m_base = make_matrix(
+        <span class="dv">0</span>,     p,     <span class="dv">0</span>,
+        q - p, <span class="dv">0</span>,     p,
+        <span class="dv">0</span>,     q - p, <span class="dv">0</span>);
+    Matrix m_calc = make_matrix(
+        <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>,
+        <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>,
+        <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>);
+    <span class="kw">while</span> (tmp &lt;= height) {
+        <span class="kw">if</span> (height &amp; tmp)
+            m_calc = m_calc * m_base;
+        m_base = m_base * m_base;
+    }
+    <span class="co">// Applying matrix calculation results to number</span>
+    RowMatrix rm_c = make_row_matrix(
+        <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>);
+    <span class="kw">return</span> (rm_c.dat[<span class="dv">1</span>] + rm_c.dat[<span class="dv">2</span>] + rm_c.dat[<span class="dv">3</span>]) % modr;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d%d%d</span><span class="st">"</span>, &amp;p, &amp;q, &amp;T, &amp;K);
+    modr = (lli)K;
+    <span class="kw">for</span> (<span class="dt">int</span> idx = <span class="dv">1</span>; idx &lt;= T; idx++) {
+        <span class="co">// The rest of the code tampers with the reading and reacting.</span>
+        <span class="co">// I gurantee that this would WA most of the data.</span>
+        <span class="co">// So this chunk is not going to be maintained.</span>
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/noipemu30brtree/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/noipemu30brtree/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/noipemu30brtree/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/noipemu30brtree/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="noipemu30brtree">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

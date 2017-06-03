@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj3996: [TJOI2015]线性代数&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj3996: [TJOI2015]线性代数
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=TJOI2015" target="_self">
+            <i class="fa fa-tag"></i> TJOI2015
+          </a>
+          <a class="tag" href="/blog/archive/?q=Network Flow" target="_self">
+            <i class="fa fa-tag"></i> Network Flow
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dinic" target="_self">
+            <i class="fa fa-tag"></i> Dinic
+          </a>
+        </span>
+        <span class="date" title="01:20:23 | 28 December, 2016">
+          28 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>给出一个 <span class="math inline">\(n \times n\)</span> 的矩阵 <span class="math inline">\(B\)</span> 和一个 <span class="math inline">\(1 \times n\)</span> 的矩阵 <span class="math inline">\(C\)</span>. 求出一个 <span class="math inline">\(1 \times n\)</span> 的 01 矩阵 <span class="math inline">\(A\)</span>, 使得 <span class="math inline">\(D = (A \times B - C) \times A^T\)</span> 最大. 其中 <span class="math inline">\(A^T\)</span> 为 <span class="math inline">\(A\)</span> 的转置.</p>
+<h2 id="input">Input</h2>
+<p>第一行输入一个整数 <span class="math inline">\(n\)</span>, 接下来 <span class="math inline">\(n\)</span> 行输入 <span class="math inline">\(B\)</span> 矩阵, 第 <span class="math inline">\(i\)</span> 行第 <span class="math inline">\(j\)</span> 个数字代表 <span class="math inline">\(B_{i,j}\)</span>;</p>
+<p>接下来一行输入 <span class="math inline">\(n\)</span> 个整数, 代表矩阵 <span class="math inline">\(C\)</span>. 矩阵 <span class="math inline">\(B\)</span> 和矩阵 <span class="math inline">\(C\)</span> 中每个数字都是不 超过 <span class="math inline">\(1000\)</span> 的非负整数.</p>
+<h2 id="output">Output</h2>
+<p>输出最大的 <span class="math inline">\(D\)</span></p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>3
+1 2 1
+3 1 0
+1 2 3
+2 3 7</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>2</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p><span class="math inline">\(1 \leq n \leq 500\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>首先可以保证不会爆 long long;</p>
+<p>然后按照黄学长的说法, 应该有:</p>
+<p><span class="math display">\[\sum_{i=1}^n \sum_{j=1}^n B_{ij} \cdot A_i \cdot A_j – \sum_{i=1}^n A_i \cdot C_i\]</span></p>
+<p>然后最小割一发就可以了.</p>
+<p><strong>此题应该高亮之后再看一看</strong></p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxN = <span class="dv">510</span>, maxn = <span class="dv">300100</span>, maxm = <span class="dv">2000100</span>;
+<span class="dt">const</span> <span class="dt">int</span> infinit = <span class="bn">0x0f7f7f7f</span>;
+
+<span class="kw">class</span> Dinic
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v, flow;
+        edge *next, *rev;
+    };
+    <span class="dt">int</span> n, s, t, ecnt;
+    edge *edges[maxn], epool[maxm];
+    <span class="dt">int</span> level[maxn];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v, <span class="dt">int</span> flow)
+    {
+        edge *p = &amp;epool[++ecnt],
+             *q = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;flow = flow;
+        p-&gt;next = edges[u]; edges[u] = p; p-&gt;rev = q;
+        q-&gt;u = v; q-&gt;v = u; q-&gt;flow = <span class="dv">0</span>;
+        q-&gt;next = edges[v]; edges[v] = q; q-&gt;rev = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> make_level(<span class="dt">void</span>)
+    {
+        memset(level, <span class="dv">0</span>, <span class="kw">sizeof</span>(level));
+        queue&lt;<span class="dt">int</span>&gt; que;
+        que.push(s);
+        level[s] = <span class="dv">1</span>;
+        <span class="kw">while</span> (!que.empty()) {
+            <span class="dt">int</span> p = que.front();
+            que.pop();
+            <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+                <span class="kw">if</span> (ep-&gt;flow &amp;&amp; !level[ep-&gt;v]) {
+                    level[ep-&gt;v] = level[p] + <span class="dv">1</span>;
+                    que.push(ep-&gt;v);
+                }
+        }
+        <span class="kw">if</span> (level[t] &gt; <span class="dv">0</span>)
+            <span class="kw">return</span> <span class="kw">true</span>;
+        <span class="kw">return</span> <span class="kw">false</span>;
+    }
+    <span class="dt">int</span> dfs(<span class="dt">int</span> p, <span class="dt">int</span> mn)
+    {
+        <span class="kw">if</span> (p == t)
+            <span class="kw">return</span> mn;
+        <span class="dt">int</span> sum = <span class="dv">0</span>, tmp;
+        <span class="kw">for</span> (edge *ep = edges[p]; ep &amp;&amp; sum &lt; mn; ep = ep-&gt;next)
+            <span class="kw">if</span> (ep-&gt;flow &amp;&amp; level[ep-&gt;v] == level[p] + <span class="dv">1</span>) {
+                tmp = dfs(ep-&gt;v, min(mn - sum, ep-&gt;flow));
+                <span class="kw">if</span> (tmp &gt; <span class="dv">0</span>) {
+                    sum += tmp;
+                    ep-&gt;flow -= tmp;
+                    ep-&gt;rev-&gt;flow += tmp;
+                }
+            }
+        <span class="kw">return</span> sum;
+    }
+    <span class="dt">int</span> eval(<span class="dt">void</span>)
+    {
+        <span class="dt">int</span> sum = <span class="dv">0</span>, tmp;
+        <span class="kw">while</span> (make_level()) {
+            tmp = dfs(s, infinit);
+            <span class="kw">if</span> (tmp &lt;= <span class="dv">0</span>)
+                <span class="kw">break</span>;
+            sum += tmp;
+        }
+        <span class="kw">return</span> sum;
+    }
+} graph;
+
+<span class="dt">int</span> n;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    graph.n = n + n*n + <span class="dv">2</span>;
+    graph.s = n + n*n + <span class="dv">1</span>;
+    graph.t = graph.n;
+    <span class="dt">int</span> cnt = n;
+    <span class="dt">int</span> sum = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++) {
+            <span class="dt">int</span> x; scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;x);
+            cnt += <span class="dv">1</span>;
+            graph.add_edge(i, cnt, infinit);
+            graph.add_edge(j, cnt, infinit);
+            graph.add_edge(cnt, graph.t, x);
+            sum += x;
+        }
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        <span class="dt">int</span> x; scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;x);
+        graph.add_edge(graph.s, i, x);
+    }
+    sum -= graph.eval();
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, sum);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj3996/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj3996/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj3996/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj3996/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj3996">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

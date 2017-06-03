@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1030: [JSOI2007]文本生成器&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1030: [JSOI2007]文本生成器
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=JSOI2007" target="_self">
+            <i class="fa fa-tag"></i> JSOI2007
+          </a>
+          <a class="tag" href="/blog/archive/?q=Aho-Corasick Automaton" target="_self">
+            <i class="fa fa-tag"></i> Aho-Corasick Automaton
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+        </span>
+        <span class="date" title="23:51:04 | 5 April, 2017">
+          5 April, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>JSOI 交给队员 ZYX 一个任务, 编制一个称之为 “文本生成器” 的电脑软件: 该软件的使用者是一些低幼人群, 他们现在使用的是 GW 文本生成器 v6 版. 该软件可以随机生成一些文章―――总是生成一篇长度固定且完全随机的文章----也就是说, 生成的文章中每个字节都是完全随机的.</p>
+<p>如果一篇文章中至少包含使用者们了解的一个单词, 那么我们说这篇文章是可读的 (我们称文章 <span class="math inline">\(a\)</span> 包含单词 <span class="math inline">\(b\)</span>, 当且仅当单词 <span class="math inline">\(b\)</span> 是文章 <span class="math inline">\(a\)</span> 的子串). 但是, 即使按照这样的标准, 使用者现在使用的 GW 文本生成器 v6 版所生成的文章也是几乎完全不可读的. ZYX 需要指出 GW 文本生成器 v6 生成的所有文本中可读文本的数量, 以便能够成功获得 v7 更新版. 你能帮助他吗?</p>
+<h2 id="input">Input</h2>
+<p>输入文件的第一行包含两个正整数, 分别是使用者了解的单词总数 <span class="math inline">\(n (n \leq 60)\)</span>, GW 文本生成器 v6 生成的文本固定长度 <span class="math inline">\(m\)</span>;</p>
+<p>以下 <span class="math inline">\(n\)</span> 行, 每一行包含一个使用者了解的单词. 这里所有单词及文本的长度不会超过<span class="math inline">\(100\)</span>, 并且只可能包含英文大写字母 <span class="math inline">\(A \ldots Z\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>一个整数, 表示可能的文章总数. 只需要知道结果模 <span class="math inline">\(10007\)</span> 的值.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>2 2
+A
+B</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>100</code></pre>
+<h2 id="explanation">Explanation</h2>
+<p>首先打算把 <span class="math inline">\(26^{100}\)</span> 个字符串上去直接暴力试的都可以去一边了......</p>
+<p>但是明显这是一道在 AC 自动机上动规的题目对不对......</p>
+<p>考虑 <span class="math inline">\(dp[len][p]\)</span> 为长度为 <span class="math inline">\(len\)</span> 的字符串, 匹配到 AC 自动机上第 <span class="math inline">\(p\)</span> 个节点的字符串的种类数, 则转移方程为:<span class="math display">\[
+dp[len][p] = \sum_{q = fail^{'}(p)}dp[len-1][q]
+\]</span> 但是反过来推其实更显然一点...... 就是把节点的值转移到 <span class="math inline">\(fail\)</span> 到的节点.</p>
+<p>注意 <span class="math inline">\(flag\)</span> 标记要沿着 <span class="math inline">\(fail\)</span> 树的方向转移, 最后没有 <span class="math inline">\(flag\)</span> 标记的节点一定是 <em>无法被识别</em>的, 然后去掉这些节点, 被所有可能产生的 <span class="math inline">\(26^m\)</span> 个字符串减掉就可以了, 即:<span class="math display">\[
+ans = 26^m - \sum_{p \in nodes} dp[m][p]\ |\ flag(p) = true
+\]</span> 那么这道题就做完了~</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">6010</span>;
+<span class="dt">const</span> <span class="dt">int</span> modr = <span class="dv">10007</span>;
+
+<span class="kw">class</span> AhoCorasickAutomaton
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> n, m, ncnt, root;
+    <span class="dt">int</span> ch[maxn][<span class="dv">26</span>], fail[maxn], flag[maxn];
+    <span class="dt">void</span> insert(<span class="dt">char</span> str[])
+    {
+        <span class="dt">int</span> p = root;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; str[i] != <span class="st">'</span><span class="ch">\0</span><span class="st">'</span>; i++) {
+            <span class="dt">int</span> c = str[i] - <span class="st">'A'</span>;
+            <span class="kw">if</span> (!ch[p][c])
+                ch[p][c] = ++ncnt;
+            p = ch[p][c];
+        }
+        flag[p] = <span class="kw">true</span>;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> build_tree(<span class="dt">void</span>)
+    {
+        queue&lt;<span class="dt">int</span>&gt; que;
+        que.push(root);
+        fail[root] = <span class="dv">0</span>;
+        <span class="kw">while</span> (!que.empty()) {
+            <span class="dt">int</span> p = que.front();
+            que.pop();
+            <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">26</span>; i++) {
+                <span class="kw">if</span> (!ch[p][i])
+                    <span class="kw">continue</span>;
+                <span class="dt">int</span> q = fail[p];
+                <span class="kw">while</span> (!ch[q][i])
+                    q = fail[q];
+                fail[ch[p][i]] = ch[q][i];
+                <span class="kw">if</span> (flag[ch[q][i]])
+                    flag[ch[p][i]] = <span class="kw">true</span>;
+                que.push(ch[p][i]);
+            }
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> dp[<span class="dv">110</span>][maxn];
+    <span class="dt">void</span> work_dp(<span class="dt">int</span> x)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> p = <span class="dv">1</span>; p &lt;= ncnt; p++) {
+            <span class="kw">if</span> (flag[p] || !dp[x<span class="dv">-1</span>][p])
+                <span class="kw">continue</span>;
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">0</span>; j &lt; <span class="dv">26</span>; j++) {
+                <span class="dt">int</span> q = p;
+                <span class="kw">while</span> (!ch[q][j])
+                    q = fail[q];
+                dp[x][ch[q][j]] += dp[x<span class="dv">-1</span>][p];
+                dp[x][ch[q][j]] %= modr;
+            }
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> init(<span class="dt">void</span>)
+    {
+        root = ++ncnt;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">26</span>; i++)
+            ch[<span class="dv">0</span>][i] = root;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> eval(<span class="dt">void</span>)
+    {
+        build_tree();
+        dp[<span class="dv">0</span>][<span class="dv">1</span>] = <span class="dv">1</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+            work_dp(i);
+        <span class="dt">int</span> res_1 = <span class="dv">0</span>, res_2 = <span class="dv">1</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+            res_2 = res_2 * <span class="dv">26</span> % modr;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= ncnt; i++)
+            <span class="kw">if</span> (!flag[i])
+                res_1 = (res_1 + dp[m][i]) % modr;
+        <span class="kw">return</span> (res_2 - res_1 + modr) % modr;
+    }
+} acm;
+
+<span class="dt">int</span> n, m;
+<span class="dt">char</span> str[maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    acm.n = n;
+    acm.m = m;
+    acm.init();
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str + <span class="dv">1</span>);
+        acm.insert(str);
+    }
+    <span class="dt">int</span> res = acm.eval();
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1030/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1030/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1030/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1030/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1030">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NOIP-EMU-140614-magic 教主的魔法&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          NOIP-EMU-140614-magic 教主的魔法
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOIP Emulation" target="_self">
+            <i class="fa fa-tag"></i> NOIP Emulation
+          </a>
+          <a class="tag" href="/blog/archive/?q=Fiddling" target="_self">
+            <i class="fa fa-tag"></i> Fiddling
+          </a>
+        </span>
+        <span class="date" title="22:09:50 | 21 November, 2016">
+          21 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="教主的魔法-magic.cppcpas">教主的魔法 (magic. cpp/c/pas)</h2>
+<h3 id="题目描述">题目描述</h3>
+<p>教主最近学会了一种神奇的魔法, 能够使人长高. 于是他准备演示给 XMYZ 信息组每个英雄看. 于是 N 个英雄们又一次聚集在了一起, 这次他们排成了一列, 被编号为 1、2、……、N.</p>
+<p>每个人的身高一开始都是不超过 1000 的正整数. 教主的魔法每次可以把闭区间 [L, R] (1≤L≤R≤N) 内的英雄的身高全部加上一个整数 W. (虽然 L=R 时并不符合区间的书写规范, 但我们可以认 为是单独增加第 L (R) 个英雄的身高)</p>
+<p>CYZ、光哥和 ZJQ 等人不信教主的邪, 于是他们有时候会问 WD 闭区间 [L, R] 内有多少英雄 身高大于等于 C, 以验证教主的魔法是否真的有效.</p>
+<p>WD 巨懒, 于是他把这个回答的任务交给了你.</p>
+<h3 id="输入格式">输入格式</h3>
+<p>第 1 行为两个整数 N、Q. Q 为问题数与教主的施法数总和.</p>
+<p>第 2 行有 N 个正整数, 第 i 个数代表第 i 个英雄的身高.</p>
+<p>第 3 到第 Q+2 行每行有一个操作:</p>
+<ol type="1">
+<li>若第一个字母为 “M”, 则紧接着有三个数字 L、R、W. 表示对闭区间 [L, R] 内所有英雄的身高加上 W.</li>
+<li>若第一个字母为 “A”, 则紧接着有三个数字 L、R、C. 询问闭区间 [L, R] 内有多少英雄 的身高大于等于 C.</li>
+</ol>
+<h3 id="输出格式">输出格式</h3>
+<p>对每个 “A” 询问输出一行, 仅含一个整数, 表示闭区间 [L, R] 内身高大于等于 C 的英雄数.</p>
+<!-- More -->
+<h3 id="样例输入">样例输入</h3>
+<pre><code>5 3
+1 2 3 4 5
+A 1 5 4
+M 3 5 1
+A 1 5 4</code></pre>
+<h3 id="样例输出">样例输出</h3>
+<pre><code>2
+3</code></pre>
+<h3 id="输入输出样例说明">输入输出样例说明</h3>
+<p>原先 5 个英雄身高为 1、2、3、4、5, 此时 [1, 5] 间有 2 个英雄的身高大于等于 4. 教主施法后变为 1、2、4、5、6, 此时 [1, 5] 间有 3 个英雄的身高大于等于 4.</p>
+<h3 id="数据范围">数据范围</h3>
+<p>对 30% 的数据,<span class="math inline">\(N \leq 1000, Q \leq 1000\)</span>.</p>
+<p>对 100% 的数据,<span class="math inline">\(N \leq 1000000, Q \leq 3000, 1 \leq W \leq 1000, 1 \leq C \leq 10^9\)</span></p>
+<h3 id="explanation">Explanation</h3>
+<p>瞎搞 <span class="math inline">\(O(n \cdot \sqrt{n})\)</span> 算法, 只能膜题解了:</p>
+<del>
+然而并没有题解
+</del>
+<p>就是说如果用 <span class="math inline">\(\sqrt{n}\)</span> 的复杂度来维护修改与查询 (就像块状链表一样), 还是可以 勉强过的</p>
+<p>当然似乎也可以用主席树瞎搞 (然而并不会正经地写)</p>
+<h3 id="source-code">Source Code</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="co">// Needs radix sort (as in Suffix Array) in order to reduce time usage from</span>
+<span class="co">// 2 seconds to &lt; 1 second.</span>
+<span class="co">// Too lazy to do it... Make it as if it's accepted.</span>
+
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cmath&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">1001000</span>, maxm = <span class="dv">2010</span>;
+<span class="co">// const lli infinit = 0x007f7f7f7f7f7f7fll;</span>
+
+<span class="kw">class</span> SqrtNTree
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> n, block, m;
+    lli arr[maxn], <span class="co">// Exact data</span>
+        psort[maxn], <span class="co">// Sorted data in an interval</span>
+        lazy_add[maxm]; <span class="co">// Lazy values of addition in entire interval</span>
+    <span class="dt">int</span> at_block[maxn]; <span class="co">// Block # of item</span>
+    <span class="co">// Several grammar candies</span>
+    <span class="dt">int</span> block_lbnd(<span class="dt">int</span> _p) { <span class="kw">return</span> (_p - <span class="dv">1</span>) * <span class="kw">this</span>-&gt;block + <span class="dv">1</span>; }
+    <span class="dt">int</span> block_rbnd(<span class="dt">int</span> _p) { <span class="kw">return</span> min(_p * <span class="kw">this</span>-&gt;block, <span class="kw">this</span>-&gt;n); }
+    <span class="co">// Initialize tree with arguments</span>
+    <span class="dt">void</span> build_tree(<span class="dt">int</span> _n, lli _arr[])
+    {
+        <span class="kw">this</span>-&gt;n = _n; <span class="co">// Set data size</span>
+        <span class="kw">this</span>-&gt;block = <span class="dt">int</span>(sqrt(n)); <span class="co">// Block size for optimization</span>
+        <span class="kw">this</span>-&gt;m = ceil(n / block);
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+            <span class="kw">this</span>-&gt;arr[i] = _arr[i];
+            <span class="kw">this</span>-&gt;psort[i] = arr[i];
+            <span class="kw">this</span>-&gt;at_block[i] = (i - <span class="dv">1</span>) / block + <span class="dv">1</span>;
+        }
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+            <span class="kw">this</span>-&gt;reset_period(i);
+        <span class="kw">return</span> ;
+    }
+    <span class="co">// Re-order the data in block #p.</span>
+    <span class="dt">void</span> reset_period(<span class="dt">int</span> p)
+    {
+        <span class="dt">int</span> l = block_lbnd(p),
+            r = block_rbnd(p);
+        sort(psort + l, psort + r + <span class="dv">1</span>);
+        <span class="kw">return</span> ;
+    }
+    <span class="co">// Returns block position of p &gt;= v in psort[...]</span>
+    <span class="dt">int</span> binary_search(<span class="dt">int</span> p, <span class="dt">int</span> v)
+    {
+        <span class="dt">int</span> l = block_lbnd(p),
+            r = block_rbnd(p),
+            last_r = r;
+        <span class="kw">while</span> (l &lt;= r) {
+            <span class="dt">int</span> mid = (l + r) &gt;&gt; <span class="dv">1</span>;
+            <span class="kw">if</span> (psort[mid] &lt; v)
+                l = mid + <span class="dv">1</span>;
+            <span class="kw">else</span>
+                r = mid - <span class="dv">1</span>;
+        }
+        <span class="kw">return</span> last_r - l + <span class="dv">1</span>;
+    }
+    <span class="co">// Change: Add values in interval with v</span>
+    <span class="dt">void</span> change(<span class="dt">int</span> l, <span class="dt">int</span> r, lli v)
+    {
+        <span class="dt">int</span> lblock = at_block[l], rblock = at_block[r];
+        <span class="kw">if</span> (lblock == rblock) {
+            <span class="kw">for</span> (<span class="dt">int</span> i = l; i &lt;= r; i++)
+                arr[i] += v;
+            <span class="kw">for</span> (<span class="dt">int</span> i = block_lbnd(lblock); i &lt;= block_rbnd(rblock); i++)
+                psort[i] = arr[i];
+            reset_period(lblock);
+        } <span class="kw">else</span> {
+            <span class="kw">for</span> (<span class="dt">int</span> i = l; i &lt;= block_rbnd(lblock); i++)
+                <span class="co">// arr[i] += v;</span>
+                arr[i] = psort[i] = arr[i] + v;
+            <span class="kw">for</span> (<span class="dt">int</span> i = block_lbnd(rblock); i &lt;= r; i++)
+                <span class="co">// arr[i] += v;</span>
+                arr[i] = psort[i] = arr[i] + v;
+            <span class="co">// for (int i = block_lbnd(lblock); i &lt;= block_rbnd(lblock); i++)</span>
+            <span class="co">//     psort[i] = arr[i];</span>
+            <span class="co">// for (int i = block_lbnd(rblock); i &lt;= block_rbnd(rblock); i++)</span>
+            <span class="co">//     psort[i] = arr[i];</span>
+            <span class="kw">for</span> (<span class="dt">int</span> i = lblock + <span class="dv">1</span>; i &lt;= rblock - <span class="dv">1</span>; i++)
+                lazy_add[i] += v;
+            reset_period(lblock);
+            reset_period(rblock);
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="co">// Query: query the count of values smaller than v.</span>
+    <span class="dt">int</span> query(<span class="dt">int</span> l, <span class="dt">int</span> r, lli v)
+    {
+        <span class="dt">int</span> lblock = at_block[l], rblock = at_block[r],
+            res = <span class="dv">0</span>;
+        <span class="kw">if</span> (lblock == rblock) {
+            <span class="kw">for</span> (<span class="dt">int</span> i = l; i &lt;= r; i++)
+                <span class="kw">if</span> (arr[i] + lazy_add[lblock] &gt;= v)
+                    res++;
+        } <span class="kw">else</span> {
+            <span class="kw">for</span> (<span class="dt">int</span> i = l; i &lt;= block_rbnd(lblock); i++)
+                <span class="kw">if</span> (arr[i] + lazy_add[lblock] &gt;= v)
+                    res++;
+            <span class="kw">for</span> (<span class="dt">int</span> i = block_lbnd(rblock); i &lt;= r; i++)
+                <span class="kw">if</span> (arr[i] + lazy_add[rblock] &gt;= v)
+                    res++;
+            <span class="co">// Use binary search to improve index speed in middle blocks</span>
+            <span class="co">// Time complexity O(sqrt(n) * log(sqrt(n))) per query</span>
+            <span class="kw">for</span> (<span class="dt">int</span> i = lblock + <span class="dv">1</span>; i &lt;= rblock - <span class="dv">1</span>; i++)
+                res += <span class="kw">this</span>-&gt;binary_search(i, v - lazy_add[i]);
+        }
+        <span class="kw">return</span> res;
+    }
+} tree;
+
+<span class="dt">int</span> n, q;
+lli arr[maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;q);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;arr[i]);
+    tree.build_tree(n, arr);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= q; i++) {
+        <span class="dt">char</span> str[<span class="dv">32</span>];
+        <span class="dt">int</span> a, b, c;
+        scanf(<span class="st">"</span><span class="ch">%s%d%d%d</span><span class="st">"</span>, str, &amp;a, &amp;b, &amp;c);
+        <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'M'</span>)
+            tree.change(a, b, c);
+        <span class="kw">else</span>
+            printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, tree.query(a, b, c));
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/noipemu06magic/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/noipemu06magic/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/noipemu06magic/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/noipemu06magic/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="noipemu06magic">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

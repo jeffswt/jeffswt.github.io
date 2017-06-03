@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj4321: queue2&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj4321: queue2
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+        </span>
+        <span class="date" title="21:08:54 | 31 March, 2017">
+          31 March, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p><span class="math inline">\(n\)</span> 个沙茶, 被编号 <span class="math inline">\(1 - n\)</span>. 排完队之后, 每个沙茶希望, 自己的相邻的两人只要无一个人的编号和自己的编号相差为 <span class="math inline">\(1 (\pm 1)\)</span> 就行;</p>
+<p>现在想知道, 存在多少方案满足沙茶们如此不苛刻的条件.</p>
+<h2 id="input">Input</h2>
+<p>只有一行且为用空格隔开的一个正整数 <span class="math inline">\(n\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>一个非负整数, 表示方案数对 <span class="math inline">\(7777777\)</span> 取模.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>4</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>2</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有的数据, 满足:<span class="math inline">\(1 \leq n \leq 1000\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>我们发现这个问题可以转化为一个类似分治的做法. 我们可以用有一点像数学归纳法的搞法来做这题.</p>
+<p>对于 <span class="math inline">\(n = 1\)</span>, 一定可行.</p>
+<p>对于 <span class="math inline">\(n = 2\)</span>, 没有任何方法使得成立.</p>
+<p>对于 <span class="math inline">\(n = 3\)</span>, 同样没有任何方法符合题意.</p>
+<p>对于 <span class="math inline">\(n = 4\)</span>, 有两种情况 <code>2 4 1 3</code> 和 <code>3 1 4 2</code> 均符合题意.</p>
+<p>那么针对所有的 <span class="math inline">\(n \geq 5\)</span>, 必定可以转化为 <span class="math inline">\(n\)</span> 插入 <span class="math inline">\(n - 1\)</span> 对应的序列中的方案, 这样的方案的种类数取决于插入的特性. 若插入的位置旁边没有 <span class="math inline">\(n - 1\)</span>, 则可以分开两个数值 (假如相邻的话, 不然维持原样不变); 若有, 则这个方案是不可行的. 按照这样的方法讨论, 我们可以抵达这样的做法:</p>
+<p>构造一个数组 <span class="math inline">\(dp[n][n][2]\)</span>, 其中 <span class="math inline">\(dp[i][j][k]\)</span> 为长度为 <span class="math inline">\(i\)</span>,<span class="math inline">\(n - 1\)</span> 在第 <span class="math inline">\(j\)</span> 个位置,<span class="math inline">\(k\)</span> 代表 <span class="math inline">\(n - 1\)</span> 是否和 <span class="math inline">\(n - 2\)</span> 相邻.</p>
+<p>然后随便转移一下水过此题~</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="ot">#define rep(_var,_begin,_end) for(int _var=_begin;_var&lt;=_end;_var++)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">1010</span>;
+<span class="dt">const</span> lli modr = <span class="dv">7777777</span>;
+
+<span class="kw">inline</span> <span class="dt">void</span> add(lli&amp; a, lli b) {
+    a = (a + b) % modr; }
+
+<span class="dt">int</span> n;
+lli dp[maxn][maxn][<span class="dv">2</span>];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="co">// Dynamic programming</span>
+    dp[<span class="dv">1</span>][<span class="dv">0</span>][<span class="dv">0</span>] = <span class="dv">1</span>;
+    rep(i, <span class="dv">2</span>, n) rep(j, <span class="dv">0</span>, i - <span class="dv">1</span>) {
+        dp[i][j][<span class="dv">1</span>] = dp[i<span class="dv">-1</span>][j][<span class="dv">1</span>];
+        <span class="kw">if</span> (j &gt; <span class="dv">0</span>)
+            add(dp[i][j][<span class="dv">1</span>], dp[i<span class="dv">-1</span>][j<span class="dv">-1</span>][<span class="dv">0</span>] * <span class="dv">2</span> + dp[i<span class="dv">-1</span>][j<span class="dv">-1</span>][<span class="dv">1</span>]);
+        add(dp[i][j][<span class="dv">0</span>], dp[i<span class="dv">-1</span>][j<span class="dv">+1</span>][<span class="dv">1</span>] * j);
+        add(dp[i][j][<span class="dv">0</span>], dp[i<span class="dv">-1</span>][j<span class="dv">+1</span>][<span class="dv">0</span>] * (j + <span class="dv">1</span>));
+        add(dp[i][j][<span class="dv">0</span>], dp[i<span class="dv">-1</span>][j][<span class="dv">1</span>] * (i - j - <span class="dv">1</span>));
+        add(dp[i][j][<span class="dv">0</span>], dp[i<span class="dv">-1</span>][j][<span class="dv">0</span>] * (i - j - <span class="dv">2</span>));
+    }
+    <span class="co">// Results</span>
+    lli res = dp[n][<span class="dv">0</span>][<span class="dv">0</span>];
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj4321/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj4321/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj4321/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj4321/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj4321">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

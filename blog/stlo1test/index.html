@@ -1,0 +1,276 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Standard Library Container Timing Tests&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="en">
+      <div class="post-header">
+        <h1 class="title">
+          Standard Library Container Timing Tests
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Analysis" target="_self">
+            <i class="fa fa-tag"></i> Analysis
+          </a>
+          <a class="tag" href="/blog/archive/?q=STL" target="_self">
+            <i class="fa fa-tag"></i> STL
+          </a>
+          <a class="tag" href="/blog/archive/?q=Container" target="_self">
+            <i class="fa fa-tag"></i> Container
+          </a>
+          <a class="tag" href="/blog/archive/?q=Timing" target="_self">
+            <i class="fa fa-tag"></i> Timing
+          </a>
+        </span>
+        <span class="date" title="20:09:44 | 16 November, 2016">
+          16 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <p>Recently I and two of my colleagues went into an argument, which was very heated though, about whichever to use as the best containers. The main arguments were focused on commonly used containers in OI, which contained <code>array</code>,<code>queue</code>,<code>stack</code>,<code>vector</code>, and a much less commonly used <code>deque</code>, that I didn ‘t know until one of them started a code fight with it.</p>
+<p>I possess suspicion over the exact results of who was right and who was wrong. So we have to test what could we believe in, just as Karl Marx had once said, verum index sui et falsi.</p>
+<p>The following table is a list of the final results, all of which intervened <span class="math inline">\(10^7\)</span> insertions, queries or modifications for each group of operations.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Operation</th>
+<th style="text-align: left;">Array</th>
+<th style="text-align: left;">Queue</th>
+<th style="text-align: left;">Stack</th>
+<th style="text-align: left;">Deque</th>
+<th style="text-align: left;">Vector</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Random Access</td>
+<td style="text-align: left;">0. 306 s</td>
+<td style="text-align: left;"><strong>N/A</strong></td>
+<td style="text-align: left;"><strong>N/A</strong></td>
+<td style="text-align: left;"><strong>N/A</strong></td>
+<td style="text-align: left;">0. 658 s</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Random Modification</td>
+<td style="text-align: left;">0. 881 s</td>
+<td style="text-align: left;"><strong>N/A</strong></td>
+<td style="text-align: left;"><strong>N/A</strong></td>
+<td style="text-align: left;"><strong>N/A</strong></td>
+<td style="text-align: left;">0. 924 s</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Push (Front)</td>
+<td style="text-align: left;"><strong>N/A</strong></td>
+<td style="text-align: left;">2. 473 s</td>
+<td style="text-align: left;"><strong>N/A</strong></td>
+<td style="text-align: left;">1. 995 s</td>
+<td style="text-align: left;">~ 4000 s</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Push (Rear)</td>
+<td style="text-align: left;"><strong>N/A</strong></td>
+<td style="text-align: left;"><strong>N/A</strong></td>
+<td style="text-align: left;">2. 535 s</td>
+<td style="text-align: left;">2. 130 s</td>
+<td style="text-align: left;">2. 709 s</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Get (Front)</td>
+<td style="text-align: left;"><strong>N/A</strong></td>
+<td style="text-align: left;">2. 000 s</td>
+<td style="text-align: left;"><strong>N/A</strong></td>
+<td style="text-align: left;">1. 593 s</td>
+<td style="text-align: left;">0. 658 s</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Get (Rear)</td>
+<td style="text-align: left;"><strong>N/A</strong></td>
+<td style="text-align: left;"><strong>N/A</strong></td>
+<td style="text-align: left;">4. 693 s</td>
+<td style="text-align: left;">4. 606 s</td>
+<td style="text-align: left;">0. 658 s</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pop (Front)</td>
+<td style="text-align: left;"><strong>N/A</strong></td>
+<td style="text-align: left;">1. 374 s</td>
+<td style="text-align: left;"><strong>N/A</strong></td>
+<td style="text-align: left;">1. 109 s</td>
+<td style="text-align: left;">~ 7000 s</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pop (Rear)</td>
+<td style="text-align: left;"><strong>N/A</strong></td>
+<td style="text-align: left;"><strong>N/A</strong></td>
+<td style="text-align: left;">1. 375 s</td>
+<td style="text-align: left;">1. 148 s</td>
+<td style="text-align: left;">~ 4500 s</td>
+</tr>
+</tbody>
+</table>
+<p>Some of the data are not properly tested, due to the <span class="math inline">\(O(n^2)\)</span> time complexity of doing that, I am not eligible to spend my precious time on such meaningless things.</p>
+<!-- More -->
+<p>The aforementioned test results are tested on an Intel 1st Gen Core 2 Duo T7500, with 2. 20 GHz CPU clock frequence, loaded with 4GB DDR2-667 memory. This spec is closer to the official NOI judging interface, and around 10 times slower than the average state-of-the-art computers.</p>
+<p>It seems that <code>deque</code> not only captures both the qualities of <code>stack</code> and <code>queue</code>, it also implements it in faster ways than <code>stack</code> and <code>queue</code>, and provides fast access speeds for them.</p>
+<p>Manually implementing a queue or a stack using arrays can be a nice choice, when time is required and memory constraints are not severe. Otherwise use <code>deque</code> instead, it is indeed faster than <code>queue</code> or <code>stack</code>, especially after a couple of tests.</p>
+<p>The source code of the test is released below, which requires around 400 MB of memory on runtime.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;ctime&gt;</span>
+
+<span class="ot">#include &lt;queue&gt;</span>
+<span class="ot">#include &lt;stack&gt;</span>
+<span class="ot">#include &lt;vector&gt;</span>
+<span class="co">// #include &lt;list&gt;</span>
+<span class="ot">#include &lt;deque&gt;</span>
+
+<span class="ot">#define rep(__x) for (int i = 1; i &lt;= (__x); i++)</span>
+<span class="ot">#define note(__s) printf("%s: %lf</span><span class="er">\</span><span class="ot">n", __s, get_time())</span>
+<span class="ot">#define $ if (0)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+
+<span class="dt">double</span> get_time(<span class="dt">void</span>)
+{
+    <span class="dt">static</span> <span class="dt">double</span> last_time = <span class="dv">0</span>;
+    <span class="dt">double</span> cur_time = (<span class="dt">double</span>)clock() / <span class="fl">1000.0</span>;
+    <span class="dt">double</span> elapsed_time = cur_time - last_time;
+    last_time = cur_time;
+    <span class="kw">return</span> elapsed_time;
+}
+
+<span class="dt">const</span> <span class="dt">int</span>   n = <span class="fl">10e7</span>; <span class="co">// Size of performance evaluation</span>
+<span class="dt">const</span> <span class="dt">int</span>   m = <span class="fl">10e4</span>; <span class="co">// For smaller sizes, estimated large time complexity.</span>
+queue&lt;<span class="dt">int</span>&gt;  que;
+stack&lt;<span class="dt">int</span>&gt;  stk;
+vector&lt;<span class="dt">int</span>&gt; vec;
+deque&lt;<span class="dt">int</span>&gt;  deq;
+<span class="dt">int</span>*        arr = <span class="kw">new</span> <span class="dt">int</span>[n + <span class="dv">1</span>];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{<span class="er">$</span>{
+    <span class="co">// Array operations</span>
+    get_time();
+    rep(n) arr[i] = <span class="dv">16384</span>;
+    note(<span class="st">"Array random modify"</span>);
+    rep(n) <span class="dt">int</span> tmp = arr[i];
+    note(<span class="st">"Array random access"</span>);
+    <span class="co">// Queue operations</span>
+    get_time();
+    rep(n) que.push(<span class="dv">16384</span>);
+    note(<span class="st">"Queue pushing"</span>);
+    rep(n) <span class="dt">int</span> tmp = que.front();
+    note(<span class="st">"Queue fronting"</span>);
+    rep(n) que.pop();
+    note(<span class="st">"Queue popping"</span>);
+    <span class="co">// Stack operations</span>
+    get_time();
+    rep(n) stk.push(<span class="dv">16384</span>);
+    note(<span class="st">"Stack pushing"</span>);
+    rep(n) <span class="dt">int</span> tmp = stk.top();
+    note(<span class="st">"Stack topping"</span>);
+    rep(n) stk.pop();
+    note(<span class="st">"Stack popping"</span>);
+    <span class="co">// Deque operations</span>
+    get_time();
+    rep(n) deq.push_front(<span class="dv">16384</span>);
+    note(<span class="st">"Deque pushing (front)"</span>);
+    rep(n) <span class="dt">int</span> tmp = deq.front();
+    note(<span class="st">"Deque getting (front)"</span>);
+    rep(n) deq.pop_front();
+    note(<span class="st">"Deque popping (front)"</span>);
+    rep(n) deq.push_back(<span class="dv">16384</span>);
+    note(<span class="st">"Deque pushing (back)"</span>);
+    rep(n) <span class="dt">int</span> tmp = deq.back();
+    note(<span class="st">"Deque getting (back)"</span>);
+    rep(n) deq.pop_back();
+    note(<span class="st">"Deque popping (back)"</span>);
+    <span class="co">// Vector operations</span>
+}
+    get_time();
+    rep(m) vec.insert(vec.begin(), <span class="dv">16384</span>);
+    note(<span class="st">"Vector pushing (front)"</span>);
+    rep(m) <span class="dt">int</span> tmp = *vec.begin();
+    note(<span class="st">"Vector getting (front)"</span>);
+    rep(m) vec.erase(vec.begin());
+    note(<span class="st">"Vector popping (front)"</span>);
+    rep(n) vec.push_back(<span class="dv">16384</span>);
+    note(<span class="st">"Vector pushing (back)"</span>);
+    rep(n) <span class="dt">int</span> tmp = *--vec.end();
+    note(<span class="st">"Vector getting (back)"</span>);
+    rep(m) vec.erase(--vec.begin());
+    note(<span class="st">"Vector popping (back)"</span>);
+    vec.clear();
+    get_time();
+    rep(n) <span class="dt">int</span> tmp = vec[i];
+    note(<span class="st">"Vector random access"</span>);
+    rep(n) vec[i] = <span class="dv">256</span>;
+    note(<span class="st">"Vector random modify"</span>);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/stlo1test/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/stlo1test/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/stlo1test/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/stlo1test/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="stlo1test">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

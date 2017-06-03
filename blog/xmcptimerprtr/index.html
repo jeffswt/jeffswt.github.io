@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>@xmcp's Automatic Time Reporter&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="en">
+      <div class="post-header">
+        <h1 class="title">
+          @xmcp's Automatic Time Reporter
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Python" target="_self">
+            <i class="fa fa-tag"></i> Python
+          </a>
+          <a class="tag" href="/blog/archive/?q=Time" target="_self">
+            <i class="fa fa-tag"></i> Time
+          </a>
+          <a class="tag" href="/blog/archive/?q=Text-To-Speech" target="_self">
+            <i class="fa fa-tag"></i> Text-To-Speech
+          </a>
+        </span>
+        <span class="date" title="19:46:47 | 19 November, 2016">
+          19 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <p>Days before <span class="citation" data-cites="xmcp"> @xmcp</span> built a strange <del> (and useless)</del> program reporting the time with TTS, along with a “Beep” sound, in demonstration of the current time. We are now particularly in favour of this design and refer to this program occasionally.</p>
+<p>I think I could call this program <code>xmTime</code>, if he does not disencourage this format of naming programs.</p>
+<figure>
+<img class="thumb" data-small="/blog/xmcptimerprtr/xmtime_scr-small.jpg" data-src="/blog/xmcptimerprtr/xmtime_scr.png" data-thumb="/blog/xmcptimerprtr/xmtime_scr-thumb.jpg" src="/blog/xmcptimerprtr/xmtime_scr-thumb.jpg" title="Running xmTime" width="240px"/>
+<figcaption>
+Running xmTime
+</figcaption>
+</figure>
+<!-- More -->
+<p>The source code of the program is released as follows. If this violates the copyright of <span class="citation" data-cites="xmcp"> @xmcp</span>, please contact me immediately for the takedown of this source code.</p>
+<div class="sourceCode"><pre class="sourceCode pyw"><code class="sourceCode python"><span class="co">#coding=utf-8</span>
+<span class="im">from</span> __future__ <span class="im">import</span> division
+<span class="im">import</span> sys
+<span class="im">import</span> os
+<span class="cf">if</span> sys.version[<span class="dv">0</span>]<span class="op">==</span><span class="st">'3'</span>:
+    os.system(<span class="st">"start C:/Programs/Python2/pythonw.exe "</span><span class="op">+</span>sys.argv[<span class="dv">0</span>])
+
+<span class="im">from</span> Tkinter <span class="im">import</span> <span class="op">*</span>
+<span class="im">from</span> ttk <span class="im">import</span> <span class="op">*</span>
+
+<span class="im">import</span> base64
+<span class="im">import</span> threading
+<span class="im">import</span> time
+
+beep<span class="op">=</span><span class="st">'UklGRigFAABXQVZFZm10IBAAAAABAAEAAAgAAAAQAAACABAAZGF0YQQFAACYOpg6mDqYOpbUvgX\</span>
+<span class="st">nIonGQTL+7vPmIjbVyJ4bPA5Iz/U51dog/W4pe8VLLWj3c9/WOFTMvRNsFgnLEjjh4ZL0EC+xxVknAACn\</span>
+<span class="st">2E868NBuCx8e7sf3NJTpQ+ysMyrHjSCYCLXShTqS1uACKyULxrgwxPFi5Cs33skNGQIRv813ORndQvpqK\</span>
+<span class="st">2jFaitC+hnddzm/zQIRDRneySs3YuTE8bgwC8YrJeACktaFOrXSmAiNICrHrDND7JTp9zTuxx8ebgvw0E\</span>
+<span class="st">86p9gAAFknscUQL5L04eESOAnLbBa9E1TM1jhz32j3Sy17xW4pIP3V2vU5SM88Dp4b1cgiNvPm/u5BMon\</span>
+<span class="st">G5yK+BZbUmDqW1L4F5yKJxkEy/u7z5iI21cieGzwOSM/1OdXaIP1uKXvFSy1o93Pf1jhUzL0TbBYJyxI4\</span>
+<span class="st">4eGS9BAvscVZJwAAp9hPOvDQbgsfHu7H9zSU6UPsrDMqx40gmAi10oU6ktbgAislC8a4MMTxYuQrN97JD\</span>
+<span class="st">RkCEb/NdzkZ3UL6aitoxWorQvoZ3Xc5v80CEQ0Z3skrN2LkxPG4MAvGKyXgApLWhTq10pgIjSAqx6wzQ+\</span>
+<span class="st">yU6fc07scfHm4L8NBPOqfYAABZJ7HFEC+S9OHhEjgJy2wWvRNUzNY4c99o90ste8VuKSD91dr1OUjPPA6\</span>
+<span class="st">eG9XIIjbz5v7uQTKJxucivgWW1Jg6ltS+BeciicZBMv7u8+YiNtXInhs8DkjP9TnV2iD9bil7xUstaPdz\</span>
+<span class="st">39Y4VMy9E2wWCcsSOOHhkvQQL7HFWScAAKfYTzrw0G4LHx7ux/c0lOlD7KwzKseNIJgItdKFOpLW4AIrJ\</span>
+<span class="st">QvGuDDE8WLkKzfeyQ0ZAhG/zXc5Gd1C+moraMVqK0L6Gd13Ob/NAhENGd7JKzdi5MTxuDALxisl4AKS1o\</span>
+<span class="st">U6tdKYCI0gKsesM0PslOn3NO7HHx5uC/DQTzqn2AAAWSexxRAvkvTh4RI4CctsFr0TVMzWOHPfaPdLLXv\</span>
+<span class="st">Fbikg/dXa9TlIzzwOnhvVyCI28+b+7kEyicbnIr4FltSYOpbUvgXnIonGQTL+7vPmIjbVyJ4bPA5Iz/U5\</span>
+<span class="st">1dog/W4pe8VLLWj3c9/WOFTMvRNsFgnLEjjh4ZL0EC+xxVknAACn2E868NBuCx8e7sf3NJTpQ+ysMyrHj\</span>
+<span class="st">SCYCLXShTqS1uACKyULxrgwxPFi5Cs33skNGQIRv813ORndQvpqK2jFaitC+hnddzm/zQIRDRneySs3Yu\</span>
+<span class="st">TE8bgwC8YrJeACktaFOrXSmAiNICrHrDND7JTp9zTuxx8ebgvw0E86p9gAAFknscUQL5L04eESOAnLbBa\</span>
+<span class="st">9E1TM1jhz32j3Sy17xW4pIP3V2vU5SM88Dp4b1cgiNvPm/u5BMonG5yK+BZbUmDqW1L4F5yKJxkEy/u7z\</span>
+<span class="st">5iI21cieGzwOSM/1OdXaIP1uKXvFSy1o93Pf1jhUzL0TbBYJyxI44eGS9BAvscVZJwAAp9hPOvDQbgsfH\</span>
+<span class="st">u7H9zSU6UPsrDMqx40gmAi10oU6mDqYOpg6mDqYOpg6mDqYOpg6mDqYOpg6mDqYOpg6mDqYOpg6mDqYOp\</span>
+<span class="st">g6mDqYOpg6mDqYOpg6mDqYOpg6mDqYOpg6mDqYOpg6mDqYOpg6mDqYOpg6mDqYOpg6mDqYOpg6mDqYOpg\</span>
+<span class="st">6mDqYOpg6mDqYOpg6mDqYOpg6mDqYOpg6mDqYOpg6mDqYOpg6mDqYOpg6mDqYOpg6mDqYOpg6mDo='</span>
+bmem<span class="op">=</span>base64.b64decode(beep)
+
+<span class="kw">def</span> sayit():
+    <span class="im">from</span> win32com <span class="im">import</span> client <span class="im">as</span> w32
+    voice<span class="op">=</span>w32.Dispatch(<span class="st">"SAPI.SpVoice"</span>)
+
+    <span class="kw">def</span> waitfor10s():
+        sec<span class="op">=</span>time.localtime().tm_sec<span class="op">%</span><span class="dv">30</span>
+        <span class="cf">if</span> sec<span class="op">&lt;</span><span class="dv">29</span>:
+            time.sleep(<span class="dv">29</span><span class="op">-</span>sec)
+        <span class="cf">while</span> time.localtime().tm_sec<span class="op">%</span><span class="dv">30</span>:
+            time.sleep(<span class="fl">0.05</span>)
+
+    <span class="kw">def</span> baoshi():
+        <span class="kw">def</span> proctime(timeobj):
+            h<span class="op">=</span>timeobj.tm_hour
+            m<span class="op">=</span>timeobj.tm_min
+            s<span class="op">=</span>timeobj.tm_sec
+            <span class="cf">if</span> s: s <span class="op">=</span> <span class="st">' plus </span><span class="sc">%d</span><span class="st"> seconds'</span> <span class="op">%</span> s
+            <span class="cf">else</span>: s <span class="op">=</span> <span class="st">''</span>
+            <span class="cf">return</span> (h,m,s)
+
+        <span class="co"># voice.Speak(u'下面阴响、是北京时间、%s点、%s分、%s秒'%proctime(tnow))</span>
+        voice.Speak(<span class="st">u'The time at next beep is </span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="st"> </span><span class="sc">%s</span><span class="st">'</span><span class="op">%</span>proctime(tnow))
+
+    <span class="im">from</span> winsound <span class="im">import</span> PlaySound,SND_MEMORY,SND_PURGE
+    waitfor10s()
+    <span class="cf">while</span> <span class="va">True</span>:
+        tnow<span class="op">=</span>time.localtime(time.time()<span class="op">+</span><span class="dv">30</span>)
+        time.sleep(<span class="dv">20</span>)
+        baoshi()
+        waitfor10s()
+        PlaySound(bmem,SND_MEMORY<span class="op">|</span>SND_PURGE)
+        time.sleep(.<span class="dv">5</span>)
+
+<span class="kw">def</span> disp():
+    <span class="cf">while</span> <span class="va">True</span>:
+        timenow.<span class="bu">set</span>(time.strftime(<span class="st">"%H:%M:%S"</span>, time.localtime()))
+        t<span class="op">=</span>time.time()
+        <span class="cf">if</span> t<span class="op">%</span><span class="dv">1</span><span class="op">&lt;</span><span class="fl">0.85</span>:
+            time.sleep(.<span class="dv">9</span><span class="op">-</span>t<span class="op">%</span><span class="dv">1</span>)
+        <span class="cf">while</span> t<span class="op">%</span><span class="dv">1</span><span class="op">==</span>time.time()<span class="op">%</span><span class="dv">1</span>:
+            time.sleep(.<span class="dv">05</span>)
+
+tk<span class="op">=</span>Tk()
+tk.title(<span class="st">'Time Reporter'</span>)
+tk.resizable(<span class="va">False</span>,<span class="va">False</span>)
+tk.attributes(<span class="st">'-topmost'</span>, <span class="va">True</span>)
+tk.attributes(<span class="st">'-toolwindow'</span>, <span class="va">True</span>)
+
+timenow<span class="op">=</span>StringVar()
+Label(tk,textvariable<span class="op">=</span>timenow,font<span class="op">=</span><span class="st">'Consolas -50'</span>,width<span class="op">=</span><span class="dv">8</span>).grid(row<span class="op">=</span><span class="dv">0</span>,column<span class="op">=</span><span class="dv">0</span>,padx<span class="op">=</span><span class="dv">10</span>,pady<span class="op">=</span><span class="dv">5</span>)
+
+t<span class="op">=</span>threading.Thread(target<span class="op">=</span>disp,args<span class="op">=</span>())
+t.setDaemon(<span class="va">True</span>)
+t.start()
+t<span class="op">=</span>threading.Thread(target<span class="op">=</span>sayit,args<span class="op">=</span>())
+t.setDaemon(<span class="va">True</span>)
+t.start()
+
+mainloop()</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/xmcptimerprtr/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/xmcptimerprtr/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/xmcptimerprtr/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/xmcptimerprtr/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="xmcptimerprtr">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

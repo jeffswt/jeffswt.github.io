@@ -1,0 +1,307 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1861: [Zjoi2006]Book 书架&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1861: [Zjoi2006]Book 书架
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=ZJOI2006" target="_self">
+            <i class="fa fa-tag"></i> ZJOI2006
+          </a>
+          <a class="tag" href="/blog/archive/?q=Splay Tree" target="_self">
+            <i class="fa fa-tag"></i> Splay Tree
+          </a>
+          <a class="tag" href="/blog/archive/?q=Balanced Tree" target="_self">
+            <i class="fa fa-tag"></i> Balanced Tree
+          </a>
+        </span>
+        <span class="date" title="20:27:28 | 13 December, 2016">
+          13 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>小 T 有一个很大的书柜. 这个书柜的构造有些独特, 即书柜里的书是从上至下堆放成一列. 她用 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 的正整数给每本书都编了号. 小 T 在看书的时候, 每次取出一本书, 看完 后放回书柜然后再拿下一本. 由于这些书太有吸引力了, 所以她看完后常常会忘记原来是放在书柜的什么位置. 不过小 T 的记忆力是非常好的, 所以每次放书的时候至少能够将那本书放在拿出来时的位置附近, 比如说她拿的时候这本书上面有 <span class="math inline">\(x\)</span> 本书, 那么放回去时这本 书上面就只可能有 <span class="math inline">\(x - 1\)</span>,<span class="math inline">\(x\)</span> 或 <span class="math inline">\(x + 1\)</span> 本书.</p>
+<p>当然也有特殊情况, 比如在看书的时候突然电话响了或者有朋友来访. 这时候粗心的小 T 会随手把书放在书柜里所有书的最上面或者最下面, 然后转身离开.</p>
+<p>久而久之, 小 T 的书柜里的书的顺序就会越来越乱, 找到特定的编号的书就变得越来越困难. 于是她想请你帮她编写一个图书管理程序, 处理她看书时的一些操作, 以及回答她的两个 提问:</p>
+<ol type="1">
+<li>编号为 <span class="math inline">\(x\)</span> 的书在书柜的什么位置.</li>
+<li>从上到下第 <span class="math inline">\(i\)</span> 本书的编号是多少.</li>
+</ol>
+<h2 id="input">Input</h2>
+<p>第一行有两个数 <span class="math inline">\(n, m\)</span>, 分别表示书的个数以及命令的条数;</p>
+<p>第二行为 <span class="math inline">\(n\)</span> 个正整数: 第 <span class="math inline">\(i\)</span> 个数表示初始时从上至下第 i 个位置放置的书的编号;</p>
+<p>第三行到 <span class="math inline">\(m + 2\)</span> 行, 每行一条命令.</p>
+<p>命令有 5 种形式:</p>
+<ol type="1">
+<li><code>Top S</code>: 表示把编号为 S 的书房在最上面.</li>
+<li><code>Bottom S</code>: 表示把编号为 S 的书房在最下面.</li>
+<li><code>Insert S T</code>:<span class="math inline">\(T \in \{-1, 0, 1\}\)</span>, 若编号为 <span class="math inline">\(S\)</span> 的书上面有 <span class="math inline">\(x\)</span> 本书, 则这条命令表示把这本书放回去后它的上面有 <span class="math inline">\(x + T\)</span> 本书;</li>
+<li><code>Ask S</code>: 询问编号为 <span class="math inline">\(S\)</span> 的书的上面目前有多少本书.</li>
+<li><code>Query S</code>: 询问从上面数起的第 S 本书的编号.</li>
+</ol>
+<h2 id="output">Output</h2>
+<p>对于每一条 <code>Ask</code> 或 <code>Query</code> 语句你应该输出一行, 一个数, 代表询问的答案.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>10 10
+1 3 2 7 5 8 10 4 9 6
+Query 3
+Top 5
+Ask 6
+Bottom 3
+Ask 3
+Top 6
+Insert 4 -1
+Query 5
+Query 2
+Ask 2</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>2
+9
+9
+7
+5
+3</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有的数据, 满足 <span class="math inline">\(n, m \leq 80000\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>本题可以用 Splay 水一发.</p>
+<p>如果用 map 来维护一下书的编号和节点编号之间的对应关系, 直接就可以查询水 STL. 进一步, 其实这道题本质上和 poj3580 没有区别, 只不过是一道数据弱化版的题目.</p>
+<p>Splay 写完 1A 好开心 (离 <em>Splay with tree</em> 又近了一步)</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;map&gt;</span>
+
+<span class="ot">#define rep(_var,_begin,_end) for(int _var=_begin;_var&lt;=_end;_var++)</span>
+<span class="ot">#define range(_begin,_end) rep(_,_begin,_end)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">200100</span>;
+<span class="dt">const</span> <span class="dt">int</span> infinit = <span class="fl">10e7</span>;
+
+<span class="kw">class</span> SplayTree
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> ch[maxn][<span class="dv">2</span>], par[maxn];
+    <span class="dt">int</span> val[maxn], size[maxn];
+    <span class="dt">int</span> root, ncnt;
+    <span class="ot">#define lc(__x) ch[__x][0]</span>
+    <span class="ot">#define rc(__x) ch[__x][1]</span>
+    <span class="dt">int</span> make_node(<span class="dt">int</span> v)
+    {
+        <span class="dt">int</span> p = ++ncnt;
+        lc(p) = rc(p) = par[p] = <span class="dv">0</span>;
+        val[p] = v; size[p] = <span class="dv">1</span>;
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">void</span> rotate(<span class="dt">int</span> p)
+    {
+        <span class="dt">int</span> q = par[p], g = par[q];
+        <span class="dt">int</span> x = p == rc(q), y = q == rc(g);
+        ch[q][x] = ch[p][!x]; <span class="kw">if</span> (ch[q][x]) par[ch[q][x]] = q;
+        ch[p][!x] = q; par[q] = p;
+        <span class="kw">if</span> (g) ch[g][y] = p; par[p] = g;
+        size[q] = size[lc(q)] + size[rc(q)] + <span class="dv">1</span>;
+        size[p] = size[lc(p)] + size[rc(p)] + <span class="dv">1</span>;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> splay(<span class="dt">int</span> p, <span class="dt">int</span> t)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> q = <span class="dv">0</span>; (q = par[p]) &amp;&amp; q != t; rotate(p))
+            <span class="kw">if</span> (par[q] &amp;&amp; par[q] != t)
+                rotate((p == rc(q)) == (q == rc(par[q])) ? q : p);
+        <span class="kw">if</span> (t == <span class="dv">0</span>) root = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> find_(<span class="dt">int</span> sz)
+    {
+        <span class="dt">int</span> p = root;
+        <span class="kw">while</span> (p) {
+            <span class="kw">if</span> (sz &lt;= size[lc(p)]) {
+                p = lc(p); <span class="kw">continue</span>; }
+            sz -= size[lc(p)];
+            <span class="kw">if</span> (sz == <span class="dv">1</span>) <span class="kw">return</span> p;
+            sz--; p = rc(p);
+        }
+        splay(p, <span class="dv">0</span>);
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">int</span> find(<span class="dt">int</span> sz)
+    {
+        <span class="kw">return</span> find_(sz + <span class="dv">1</span>);
+    }
+    <span class="dt">int</span> get_rank(<span class="dt">int</span> p)
+    {
+        splay(p, <span class="dv">0</span>);
+        <span class="kw">return</span> size[lc(root)];
+    }
+    <span class="dt">int</span> suc(<span class="dt">int</span> p)
+    {
+        <span class="kw">if</span> (!rc(p)) { <span class="kw">while</span> (p &amp;&amp; p == rc(par[p])) p = par[p]; p = par[p]; }
+        <span class="kw">else</span> { p = rc(p); <span class="kw">while</span> (p &amp;&amp; lc(p)) p = lc(p); }
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">int</span> pre(<span class="dt">int</span> p)
+    {
+        <span class="kw">if</span> (!lc(p)) { <span class="kw">while</span> (p &amp;&amp; p == lc(par[p])) p = par[p]; p = par[p]; }
+        <span class="kw">else</span> { p = lc(p); <span class="kw">while</span> (p &amp;&amp; rc(p)) p = rc(p); }
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">int</span> insert(<span class="dt">int</span> l, <span class="dt">int</span> v)
+    {
+        <span class="dt">int</span> p = find_(l + <span class="dv">1</span>), q = find_(l + <span class="dv">2</span>);
+        splay(p, <span class="dv">0</span>);
+        splay(q, p);
+        <span class="dt">int</span> r = make_node(v);
+        par[r] = q; lc(q) = r;
+        size[q]++, size[p]++;
+        splay(r, <span class="dv">0</span>);
+        <span class="kw">return</span> r;
+    }
+    <span class="dt">void</span> remove(<span class="dt">int</span> p)
+    {
+        <span class="dt">int</span> lp = pre(p), rp = suc(p);
+        splay(lp, <span class="dv">0</span>);
+        splay(rp, root);
+        lc(rp) = <span class="dv">0</span>;
+        size[rp]--;
+        size[lp]--;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> init(<span class="dt">void</span>)
+    {
+        root = make_node(<span class="dv">0</span>);
+        rc(root) = make_node(<span class="dv">0</span>);
+        par[rc(root)] = root;
+        size[root] = <span class="dv">2</span>;
+        <span class="kw">return</span> ;
+    }
+} st;
+
+<span class="dt">int</span> n, m;
+map&lt;<span class="dt">int</span>, <span class="dt">int</span>&gt; mp; <span class="co">// Actual ID -&gt; node # in splay</span>
+<span class="dt">char</span> str[<span class="dv">32</span>];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    st.init();
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, x; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;x);
+        mp[x] = st.insert(i - <span class="dv">1</span>, x);
+    }
+    <span class="co">// Can you answer these queries (-→_-→)</span>
+    <span class="kw">for</span> (<span class="dt">int</span> idx = <span class="dv">1</span>; idx &lt;= m; idx++) {
+        scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str);
+        <span class="dt">int</span> p, rel;
+        <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'T'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;p);
+            <span class="dt">int</span> nd = mp[p];
+            st.remove(nd);
+            mp[p] = st.insert(<span class="dv">0</span>, p);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'B'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;p);
+            <span class="dt">int</span> nd = mp[p];
+            st.remove(nd);
+            mp[p] = st.insert(n - <span class="dv">1</span>, p);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'I'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;p, &amp;rel);
+            <span class="kw">if</span> (rel == <span class="dv">0</span>) <span class="co">// What use of this...</span>
+                <span class="kw">continue</span>;
+            <span class="dt">int</span> nd = mp[p];
+            <span class="dt">int</span> rn = st.get_rank(nd);
+            rn += rel; <span class="co">// New insert position</span>
+            st.remove(nd);
+            mp[p] = st.insert(rn - <span class="dv">1</span>, p);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'A'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;p);
+            <span class="dt">int</span> nd = mp[p];
+            <span class="dt">int</span> rn = st.get_rank(nd);
+            printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, rn - <span class="dv">1</span>);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'Q'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;p);
+            <span class="dt">int</span> nd = st.find(p);
+            printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, st.val[nd]);
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1861/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1861/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1861/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1861/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1861">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

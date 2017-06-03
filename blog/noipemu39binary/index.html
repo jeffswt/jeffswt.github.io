@@ -1,0 +1,481 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NOIP-EMU-141104-binary 改造二叉树&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          NOIP-EMU-141104-binary 改造二叉树
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOIP Emulation" target="_self">
+            <i class="fa fa-tag"></i> NOIP Emulation
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+          <a class="tag" href="/blog/archive/?q=Optimized DP" target="_self">
+            <i class="fa fa-tag"></i> Optimized DP
+          </a>
+          <a class="tag" href="/blog/archive/?q=Segment Tree" target="_self">
+            <i class="fa fa-tag"></i> Segment Tree
+          </a>
+          <a class="tag" href="/blog/archive/?q=Binary Search" target="_self">
+            <i class="fa fa-tag"></i> Binary Search
+          </a>
+          <a class="tag" href="/blog/archive/?q=Splay Tree" target="_self">
+            <i class="fa fa-tag"></i> Splay Tree
+          </a>
+        </span>
+        <span class="date" title="21:48:35 | 8 November, 2016">
+          8 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h3 id="题目描述">题目描述</h3>
+<p>小 Y 在学树论时看到了有关二叉树的介绍: 在计算机科学中, 二叉树是每个结点最多有两个子结点的有序树. 通常子结点被称作 “左孩子” 和 “右孩子”. 二叉树被用作二叉搜索 树和二叉堆. 随后他又和他人讨论起了二叉搜索树.</p>
+<p>什么是二叉搜索树呢? 二叉搜索树首先是一棵二叉树. 设 key [p] 表示结点 p 上的数值. 对于其中的每个结点 p, 若其存在左孩子 lch, 则 key [p]<span class="math inline">\(\gt\)</span> key [lch]; 若其存在右孩子 rch, 则 key [p]<span class="math inline">\(\lt\)</span> key [rch]; 注意, 本题中的二叉搜索树应满足对于所有结点, 其左子树中的 key 小于 当前结点的 key, 其右子树中的 key 大于当前结点的 key.</p>
+<p>小 Y 与他人讨论的内容则是, 现在给定一棵二叉树, 可以任意修改结点的数值. 修改一个结点的数值算作一次修改, 且这个结点不能再被修改. 若要将其变成一棵二叉搜索树, 且任意时刻结点的数值必须是整数 (可以是负整数或 0), 所要的最少修改次数.</p>
+<p>相信这一定难不倒你! 请帮助小 Y 解决这个问题吧.</p>
+<h3 id="输入格式">输入格式</h3>
+<p>第一行一个正整数 n 表示二叉树结点数. 结点从 1~ n 进行编号.</p>
+<p>第二行 n 个正整数用空格分隔开, 第 i 个数 ai 表示结点 i 的原始数值.</p>
+<p>此后 n-1 行每行两个非负整数 fa, ch, 第 i+2 行描述结点 i+1 的父亲编号 fa, 以及父子关系 ch, (ch=0 表示 i+1 为左儿子, ch=1 表示 i+1 为右儿子).</p>
+<p>结点 1 一定是二叉树的根.</p>
+<h3 id="输出格式">输出格式</h3>
+<p>仅一行包含一个整数, 表示最少的修改次数.</p>
+<!-- More -->
+<h3 id="样例输入-1">样例输入 1</h3>
+<pre><code>3
+2 2 2
+1 0
+1 1</code></pre>
+<h3 id="样例输出-1">样例输出 1</h3>
+<pre><code>2</code></pre>
+<h3 id="样例输入-2">样例输入 2</h3>
+<pre><code>7
+6 2 5 3 4 7 2
+1 1
+2 1
+3 1
+4 1
+5 1
+6 1</code></pre>
+<h3 id="样例输出-2">样例输出 2</h3>
+<pre><code>4</code></pre>
+<h3 id="数据范围">数据范围</h3>
+<p>20%:<span class="math inline">\(n \leq 10 , a_i \leq 100\)</span>.</p>
+<p>40%:<span class="math inline">\(n \leq 100 , a_i \leq 200\)</span></p>
+<p>60%:<span class="math inline">\(n \leq 2000\)</span>.</p>
+<p>100%:<span class="math inline">\(n \leq 10^5 , a_i \lt 2^{31}\)</span>.</p>
+<h3 id="explanation">Explanation</h3>
+<p>就是一道巨水 DP 题. 简单的来讲, 我们可以先求出这棵树的先序遍历, 然后就把一个在树上的复杂问题变成了一个在序列上瞎搞的题目......</p>
+<p>然后问题就变成一个类 <em>最长非降子序列</em>的问题. 这样看来, 将每一个数加上当前所在位置的哈希 (所谓哈希, 就是 <span class="math inline">\(n - i\)</span>) . 最后就变成了求一个序列的最长非降子序列.</p>
+<del>
+这道题难道不是很简单嘛~
+</del>
+<p>但是写了很久还是没有 AC. 为什么呢? 因为我又 作死写了一个 Splay 然后调了一整下午三个小时都不停地死循环+TLE+WA+RE+CE (233)~</p>
+<p>其他的做法还有:</p>
+<ol type="1">
+<li>神奇优化线段树 (先离散化, 然后在线段树上区间最大区间修改), 就是我的 AC 做法.</li>
+<li>玄学二分做法 (<span class="citation" data-cites="MisakiHanayo">(@MisakiHanayo</span> 的做法)</li>
+<li>还有比较正常的堆~</li>
+</ol>
+<blockquote>
+<p>Splay 能干的事, 没有什么不是 Heap 不能干的事.</p>
+<p>世界上没有什么问题不是 Heap 不能干的事. 如果有, 那就是可持久化 Heap.</p>
+</blockquote>
+<h3 id="source-code">Source Code</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">200100</span>;
+
+<span class="kw">class</span> SegmentTree
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> n, lbnd[maxn], rbnd[maxn], vmx[maxn], lazy[maxn];
+    <span class="dt">void</span> build_tree(<span class="dt">int</span> n_) {
+        n = <span class="dv">1</span>; <span class="kw">while</span> (n &lt; n_) n *= <span class="dv">2</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+            lbnd[i + n - <span class="dv">1</span>] = rbnd[i + n - <span class="dv">1</span>] = i;
+            vmx[i + n - <span class="dv">1</span>] = lazy[i + n - <span class="dv">1</span>] = <span class="dv">0</span>; }
+        <span class="kw">for</span> (<span class="dt">int</span> i = n - <span class="dv">1</span>; i &gt;= <span class="dv">1</span>; i--) {
+            lbnd[i] = lbnd[i * <span class="dv">2</span>];
+            rbnd[i] = rbnd[i * <span class="dv">2</span> + <span class="dv">1</span>];
+            vmx[i] = lazy[i] = <span class="dv">0</span>; }
+        <span class="kw">return</span> ; }
+    <span class="dt">void</span> dispatch_lazy(<span class="dt">int</span> p) {
+        lazy[<span class="dv">2</span> * p] = max(lazy[<span class="dv">2</span> * p], lazy[p]);
+        lazy[<span class="dv">2</span> * p + <span class="dv">1</span>] = max(lazy[<span class="dv">2</span> * p + <span class="dv">1</span>], lazy[p]);
+        vmx[p] = max(vmx[p], lazy[p]);
+        lazy[p] = <span class="dv">0</span>; }
+    <span class="dt">int</span> query(<span class="dt">int</span> p, <span class="dt">int</span> l, <span class="dt">int</span> r) {
+        <span class="kw">if</span> (l == lbnd[p] &amp;&amp; r == rbnd[p])
+            <span class="kw">return</span> max(vmx[p], lazy[p]);
+        dispatch_lazy(p);
+        <span class="kw">if</span> (r &lt;= rbnd[<span class="dv">2</span> * p]) <span class="kw">return</span> query(<span class="dv">2</span> * p, l, r);
+        <span class="kw">else</span> <span class="kw">if</span> (l &gt;= lbnd[<span class="dv">2</span> * p + <span class="dv">1</span>]) <span class="kw">return</span> query(<span class="dv">2</span> * p + <span class="dv">1</span>, l, r);
+        <span class="kw">return</span> max(query(<span class="dv">2</span> * p, l, rbnd[<span class="dv">2</span> * p]), query(<span class="dv">2</span> * p + <span class="dv">1</span>, lbnd[<span class="dv">2</span> * p + <span class="dv">1</span>], r)); }
+    <span class="dt">void</span> change(<span class="dt">int</span> p, <span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">int</span> v) {
+        <span class="kw">if</span> (l == lbnd[p] &amp;&amp; r == rbnd[p]) {
+            lazy[p] = max(lazy[p], v);
+            <span class="kw">return</span> ; }
+        dispatch_lazy(p);
+        <span class="kw">if</span> (r &lt;= rbnd[<span class="dv">2</span> * p]) change(<span class="dv">2</span> * p, l, r, v);
+        <span class="kw">else</span> <span class="kw">if</span> (l &gt;= lbnd[<span class="dv">2</span> * p + <span class="dv">1</span>]) change(<span class="dv">2</span> * p + <span class="dv">1</span>, l, r, v);
+        <span class="kw">else</span> change(<span class="dv">2</span> * p, l, rbnd[<span class="dv">2</span> * p], v), change(<span class="dv">2</span> * p + <span class="dv">1</span>, lbnd[<span class="dv">2</span> * p + <span class="dv">1</span>], r, v);
+        vmx[p] = max(max(vmx[<span class="dv">2</span> * p], lazy[<span class="dv">2</span> * p]), max(vmx[<span class="dv">2</span> * p + <span class="dv">1</span>], lazy[<span class="dv">2</span> * p + <span class="dv">1</span>])); }
+<span class="kw">public</span>:
+    <span class="dt">int</span> query(<span class="dt">int</span> l, <span class="dt">int</span> r) {
+        <span class="kw">if</span> (l &gt; r) <span class="kw">return</span> <span class="dv">0</span>;
+        <span class="kw">return</span> query(<span class="dv">1</span>, l, r); }
+    <span class="dt">void</span> change(<span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">int</span> v) {
+        <span class="kw">if</span> (l &gt; r) <span class="kw">return</span> ;
+        change(<span class="dv">1</span>, l, r, v); }
+} st;
+
+<span class="kw">struct</span> srtr { <span class="dt">int</span> a, b; };
+<span class="dt">bool</span> cmp(srtr a, srtr b) { <span class="kw">return</span> a.a &lt; b.a; };
+<span class="kw">class</span> DistributionReduction
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> n;
+    <span class="dt">int</span> arr[maxn];
+    srtr srt[maxn];
+    <span class="dt">int</span> eval(<span class="dt">int</span> n) {
+        <span class="kw">this</span>-&gt;n = n;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+            srt[i].a = arr[i];
+            srt[i].b = i;
+        }
+        sort(srt + <span class="dv">1</span>, srt + <span class="dv">1</span> + n, cmp);
+        <span class="dt">int</span> ncnt = <span class="dv">0</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+            arr[srt[i].b] = (srt[i].a &gt; srt[i - <span class="dv">1</span>].a) ? (++ncnt) : (ncnt);
+        <span class="kw">return</span> ncnt; }
+} dr;
+
+<span class="dt">int</span> n, root, arr_cnt;
+<span class="dt">int</span> ch[maxn][<span class="dv">2</span>];
+<span class="dt">int</span> val[maxn], arr[maxn];
+<span class="dt">int</span> dp[maxn];
+
+<span class="dt">void</span> dfs_tree(<span class="dt">int</span> p)
+{
+    <span class="kw">if</span> (p == <span class="dv">0</span>)
+        <span class="kw">return</span> ;
+    <span class="co">// If this is not a null sequence, make some modifications</span>
+    dfs_tree(ch[p][<span class="dv">0</span>]);
+    arr[++arr_cnt] = val[p];
+    dfs_tree(ch[p][<span class="dv">1</span>]);
+    <span class="kw">return</span> ;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;val[i]);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>, a, b; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;a, &amp;b);
+        ch[a][b] = i;
+    }
+    <span class="co">// Done inputting data, now processing tree into a sequence.</span>
+    dfs_tree(<span class="dv">1</span>);
+    <span class="co">// Pre-processing a sequence.</span>
+    <span class="co">// Obviously the datum must be added with its successive number.</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        arr[i] -= i - n;
+    <span class="co">// Pre-saving data orientation with sorting techniques</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) dr.arr[i] = arr[i];
+    <span class="dt">int</span> m = dr.eval(n); <span class="co">// Sorting and evaluating...</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) arr[i] = dr.arr[i];
+    <span class="co">// Dynamic programming (with segment tree optimisation)</span>
+    st.build_tree(m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        <span class="co">// dp[i] = 1;</span>
+        <span class="co">// for (int j = 1; j &lt; i; j++)</span>
+        <span class="co">//     if (arr[j] &lt;= arr[i])</span>
+        <span class="co">//         dp[i] = max(dp[i], dp[j] + 1);</span>
+        <span class="dt">int</span> j = st.query(<span class="dv">1</span>, arr[i]);
+        dp[i] = j + <span class="dv">1</span>;
+        st.change(arr[i], m, dp[i]);
+    }
+    <span class="dt">int</span> res = n;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        res = min(res, n - dp[i]);
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p><strong>以下是 WA 掉的代码. 虽然不会 CE, 但是请诸位大神慎入~</strong></p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;set&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">200100</span>;
+<span class="dt">const</span> <span class="dt">int</span> infinit = <span class="dv">1000000007</span>;
+
+<span class="kw">class</span> SplayTree
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> ch[maxn][<span class="dv">2</span>], parent[maxn], root, ncnt, n;
+    <span class="dt">int</span> val[maxn], dat[maxn], maxx[maxn];
+    <span class="ot">#define lc(x) ch[x][0]</span>
+    <span class="ot">#define rc(x) ch[x][1]</span>
+    <span class="ot">#define par(x) parent[x]</span>
+    <span class="dt">int</span> makenode(<span class="dt">int</span> q, <span class="dt">int</span> v, <span class="dt">int</span> w)
+    {
+        <span class="dt">int</span> p = ++ncnt; n++;
+        lc(p) = rc(p) = <span class="dv">0</span>;
+        par(p) = q;
+        val[p] = v;
+        dat[p] = maxx[p] = w;
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">void</span> updatemaxx(<span class="dt">int</span> p)
+    {
+        maxx[p] = p &gt; <span class="dv">2</span> ? dat[p] : <span class="dv">0</span>;
+        <span class="kw">if</span> (lc(p)) maxx[p] = max(maxx[p], maxx[lc(p)]);
+        <span class="kw">if</span> (rc(p)) maxx[p] = max(maxx[p], maxx[rc(p)]);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> rotate(<span class="dt">int</span> p)
+    {
+        <span class="dt">int</span> q = par(p), g = par(q), x = p == rc(q);
+        <span class="co">// Relink connexions between nodes</span>
+        ch[q][x] = ch[p][!x], par(ch[q][x]) = q;
+        ch[p][!x] = q, par(q) = p;
+        par(p) = g;
+        <span class="kw">if</span> (g) ch[g][rc(g) == q] = p;
+        <span class="co">// Update data values</span>
+        updatemaxx(p);
+        updatemaxx(q);
+        <span class="kw">if</span> (g)
+            updatemaxx(g);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> splay(<span class="dt">int</span> p, <span class="dt">int</span> t)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> q = <span class="dv">0</span>; (q = par(p)) &amp;&amp; q != t; rotate(p))
+            <span class="kw">if</span> (par(q) &amp;&amp; par(q) != t)
+                rotate((p == lc(q)) == (q == lc(par(q))) ? q : p);
+        <span class="kw">if</span> (t == <span class="dv">0</span>) root = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> suc(<span class="dt">int</span> p)
+    {
+        <span class="kw">if</span> (!rc(p)) { <span class="kw">while</span> (p == rc(par(p))) p = par(p); p = par(p); }
+        <span class="kw">else</span> { p = rc(p); <span class="kw">while</span> (lc(p)) p = lc(p); }
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">int</span> find(<span class="dt">int</span> x)
+    {
+        <span class="dt">int</span> p = root;
+        <span class="kw">while</span> (p &amp;&amp; (lc(p) || rc(p))) {
+            <span class="kw">if</span> (x &lt; val[p])
+                p = lc(p);
+            <span class="kw">else</span> <span class="kw">if</span> (x == val[p])
+                <span class="kw">return</span> p;
+            <span class="kw">else</span>
+                p = rc(p);
+        }
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">void</span> insert(<span class="dt">int</span> v, <span class="dt">int</span> w)
+    {
+        <span class="dt">int</span> lp = find(v), rp = suc(lp);
+        splay(rp, <span class="dv">0</span>);
+        splay(lp, root);
+        <span class="dt">int</span> c = makenode(lp, v, w);
+        rc(lp) = c;
+        updatemaxx(lp);
+        updatemaxx(rp);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> modify(<span class="dt">int</span> v, <span class="dt">int</span> w)
+    {
+        printf(<span class="st">"modify </span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d\n</span><span class="st">"</span>, v, w);
+        <span class="dt">int</span> p = find(v);
+        <span class="kw">if</span> (!p)
+            <span class="kw">return</span> ;
+        <span class="kw">if</span> (val[p] != v) {
+            insert(v, w);
+            <span class="kw">return</span> ;
+        }
+        splay(p, <span class="dv">0</span>);
+        dat[p] = w;
+        updatemaxx(p);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> query_max(<span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="dt">int</span> lp = find(l), rp = find(r);
+        printf(<span class="st">"query max </span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d\n</span><span class="st">"</span>, l, r, lp, rp);
+        splay(rp, <span class="dv">0</span>);
+        splay(lp, root);
+        <span class="co">// Return data values</span>
+        <span class="dt">int</span> res = maxx[rc(lp)];
+        <span class="kw">if</span> (dat[lp] &gt;= l)
+            res = max(res, dat[lp]);
+        <span class="kw">if</span> (dat[rp] &lt;= r)
+            res = max(res, dat[rp]);
+        <span class="kw">return</span> res;
+    }
+    <span class="dt">void</span> buildtree()
+    {
+        n = ncnt = <span class="dv">0</span>;
+        root = makenode(<span class="dv">0</span>, <span class="dv">-2</span>, <span class="dv">0</span>);
+        rc(root) = makenode(root, infinit, <span class="dv">0</span>);
+        maxx[<span class="dv">1</span>] = maxx[<span class="dv">2</span>] = infinit;
+        par(rc(root)) = root;
+        <span class="kw">return</span> ;
+    }
+} sp;
+
+<span class="dt">int</span> n, root, arr_cnt;
+<span class="dt">int</span> ch[maxn][<span class="dv">2</span>];
+<span class="dt">int</span> val[maxn], arr[maxn];
+<span class="dt">int</span> dp[maxn];
+
+<span class="dt">void</span> dfs_tree(<span class="dt">int</span> p)
+{
+    <span class="kw">if</span> (p == <span class="dv">0</span>)
+        <span class="kw">return</span> ;
+    <span class="co">// If this is not a null sequence, make some modifications</span>
+    dfs_tree(ch[p][<span class="dv">0</span>]);
+    arr[++arr_cnt] = val[p];
+    dfs_tree(ch[p][<span class="dv">1</span>]);
+    <span class="kw">return</span> ;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    <span class="co">// sp.buildtree();</span>
+    <span class="co">// sp.modify(0, 0);</span>
+    <span class="co">// sp.modify(12, 1);</span>
+    <span class="co">// sp.modify(7, 1);</span>
+    <span class="co">// sp.modify(9, 1);</span>
+    <span class="co">// sp.modify(6, 1);</span>
+    <span class="co">// sp.modify(6, 1);</span>
+    <span class="co">// sp.modify(8, 1);</span>
+    <span class="co">// sp.modify(2, 1);</span>
+    <span class="co">// sp.query_max(1, 7);</span>
+    <span class="co">// return 0;</span>
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;val[i]);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>, a, b; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;a, &amp;b);
+        ch[a][b] = i;
+    }
+    <span class="co">// Done inputting data, now processing tree into a sequence.</span>
+    dfs_tree(<span class="dv">1</span>);
+    <span class="co">// Pre-processing a sequence.</span>
+    <span class="co">// Obviously the datum must be added with its successive number.</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        arr[i] -= i - n;
+    <span class="co">// As the splay tree has problems...</span>
+    sp.buildtree();
+    sp.modify(<span class="dv">0</span>, <span class="dv">0</span>);
+    sp.insert(infinit - <span class="dv">1</span>, <span class="dv">0</span>);
+    set&lt;<span class="dt">int</span>&gt; st; st.insert(<span class="dv">-0</span>);
+    <span class="co">// Now checking incrementation status</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        dp[i] = <span class="dv">1</span>;
+        <span class="co">// for (int j = 1; j &lt; i; j++)</span>
+        <span class="co">//     if (arr[j] &lt;= arr[i])</span>
+        <span class="co">//         dp[i] = max(dp[i], dp[j] + 1);</span>
+        <span class="dt">int</span> j = arr[i]; <span class="co">// Find exact data, smaller than arr[i]</span>
+        <span class="dt">int</span> v = sp.query_max(<span class="dv">0</span>, j);
+        printf(<span class="st">"dping </span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d\n</span><span class="st">"</span>, i, j, v);
+        dp[i] = v + <span class="dv">1</span>;
+        sp.modify(arr[i], dp[i]);
+        st.insert(-arr[i]);
+    }
+    <span class="co">// Processing best selection</span>
+    <span class="dt">int</span> res = n;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        res = min(res, n - dp[i]);
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/noipemu39binary/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/noipemu39binary/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/noipemu39binary/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/noipemu39binary/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="noipemu39binary">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

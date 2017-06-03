@@ -1,0 +1,587 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj2227: [Zjoi2011]看电影(movie)&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj2227: [Zjoi2011]看电影(movie)
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=ZJOI2011" target="_self">
+            <i class="fa fa-tag"></i> ZJOI2011
+          </a>
+          <a class="tag" href="/blog/archive/?q=Combinatorics" target="_self">
+            <i class="fa fa-tag"></i> Combinatorics
+          </a>
+          <a class="tag" href="/blog/archive/?q=High Precision" target="_self">
+            <i class="fa fa-tag"></i> High Precision
+          </a>
+        </span>
+        <span class="date" title="17:05:13 | 26 January, 2017">
+          26 January, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>到了难得的假期, 小白班上组织大家去看电影. 但由于假期里看电影的人太多, 很难做到让全班看上同一场电影, 最后大家在一个偏僻的小胡同里找到了一家电影院. 但这家电影院 分配座位的方式很特殊, 具体方式如下:</p>
+<ol type="1">
+<li>电影院的座位共有 <span class="math inline">\(k\)</span> 个, 并被标号为 <span class="math inline">\(1 \ldots k\)</span>, 每个人买完票后会被随机指定一个座位, 具体来说是从 <span class="math inline">\(1 \ldots k\)</span> 中等可能的随机选取一个正整数, 设其为 <span class="math inline">\(L\)</span>.</li>
+<li>如果编号 <span class="math inline">\(L\)</span> 的座位是空位, 则这个座位就分配给此人, 否则将 <span class="math inline">\(L\)</span> 加一, 继续前面 的步骤.</li>
+<li>如果在第二步中不存在编号 <span class="math inline">\(L\)</span> 的座位, 则该人只能站着看电影, 即所谓的站票.</li>
+</ol>
+<p>小白班上共有 <span class="math inline">\(n\)</span> 人 (包括小白自己), 作为数学爱好者, 小白想知道全班都能够有座位的 概率是多少.</p>
+<h2 id="input">Input</h2>
+<p>输入文件第一行有且只有一个正整数 <span class="math inline">\(T\)</span>, 表示测试数据的组数. 第 <span class="math inline">\(2 - T+1\)</span> 行, 每行 两个正整数 <span class="math inline">\(n, k\)</span>, 用单个空格隔开, 其含义同题目描述.</p>
+<h2 id="output">Output</h2>
+<p>输出文件共包含 <span class="math inline">\(T\)</span> 行. 第 <span class="math inline">\(i\)</span> 行应包含两个用空格隔开的整数 <span class="math inline">\(A, B\)</span>, 表示输入文件中的第 <span class="math inline">\(i\)</span> 组数据的答案为 <span class="math inline">\(\frac{A}{B} (gcd(A, B) = 1)\)</span>.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>3
+1 1
+2 1
+2 2</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>1 1
+0 1
+3 4</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于 100% 的数据, 满足:<span class="math inline">\(T \leq 50, n, k \leq 200\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>题解已经写的很清楚了, 其实最开始这道题是 <span class="citation" data-cites="Burst_Zero"> @Burst_Zero</span> 告诉我的神题. 然而我这样想了, 然后用 Python 交了一发, 发现无限 WA, 就怀疑是不是自己写错了. 于是从 ZJOI 的官方数据里拿出数据测了一发, 发现所有点都是 AC, 故而开始怀疑 BZOJ 的 Bug 到底有多少~ 最后用了个高精度库交了一发, A 了 (QwQ)</p>
+<p>下面是应该正确但是 BZOJ 不给过的 Python 代码:</p>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">
+primes <span class="op">=</span> [ <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">11</span>, <span class="dv">13</span>, <span class="dv">17</span>, <span class="dv">19</span>, <span class="dv">23</span>, <span class="dv">29</span>, <span class="dv">31</span>, <span class="dv">37</span>, <span class="dv">41</span>, <span class="dv">43</span>, <span class="dv">47</span>, <span class="dv">53</span>, <span class="dv">59</span>, <span class="dv">61</span>,
+    <span class="dv">67</span>, <span class="dv">71</span>, <span class="dv">73</span>, <span class="dv">79</span>, <span class="dv">83</span>, <span class="dv">89</span>, <span class="dv">97</span>, <span class="dv">101</span>, <span class="dv">103</span>, <span class="dv">107</span>, <span class="dv">109</span>, <span class="dv">113</span>, <span class="dv">127</span>, <span class="dv">131</span>, <span class="dv">137</span>, <span class="dv">139</span>,
+    <span class="dv">149</span>, <span class="dv">151</span>, <span class="dv">157</span>, <span class="dv">163</span>, <span class="dv">167</span>, <span class="dv">173</span>, <span class="dv">179</span>, <span class="dv">181</span>, <span class="dv">191</span>, <span class="dv">193</span>, <span class="dv">197</span>, <span class="dv">199</span>]
+s_primes <span class="op">=</span> <span class="bu">set</span>(primes)
+
+<span class="kw">def</span> factor(a):
+    res <span class="op">=</span> {}
+    <span class="cf">for</span> i <span class="op">in</span> primes:
+        <span class="cf">if</span> i <span class="op">&gt;</span> a:
+            <span class="cf">break</span>
+        cnt <span class="op">=</span> <span class="dv">0</span>
+        <span class="cf">while</span> a <span class="op">%</span> i <span class="op">==</span> <span class="dv">0</span>:
+            cnt <span class="op">+=</span> <span class="dv">1</span>
+            a <span class="op">//=</span> i
+        <span class="cf">if</span> cnt <span class="op">&gt;</span> <span class="dv">0</span>:
+            res[i] <span class="op">=</span> cnt
+    <span class="cf">return</span> res
+
+<span class="kw">def</span> mult_factor(a, mul):
+    res <span class="op">=</span> {}
+    <span class="cf">for</span> i <span class="op">in</span> a:
+        res[i] <span class="op">=</span> a[i] <span class="op">*</span> mul
+    <span class="cf">return</span> res
+
+<span class="kw">def</span> add_factor(a, b):
+    res <span class="op">=</span> {}
+    <span class="cf">for</span> i <span class="op">in</span> a:
+        res[i] <span class="op">=</span> a[i]
+    <span class="cf">for</span> i <span class="op">in</span> b:
+        <span class="cf">if</span> i <span class="op">not</span> <span class="op">in</span> res:
+            res[i] <span class="op">=</span> <span class="dv">0</span>
+        res[i] <span class="op">+=</span> b[i]
+    <span class="cf">return</span> res
+
+<span class="kw">def</span> join_factor(a):
+    res <span class="op">=</span> <span class="dv">1</span>
+    <span class="cf">for</span> i <span class="op">in</span> a:
+        res <span class="op">*=</span> i<span class="op">**</span>a[i]
+    <span class="cf">return</span> res
+
+T <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>())
+
+<span class="cf">for</span> idx <span class="op">in</span> <span class="bu">range</span>(<span class="dv">0</span>, T):
+    n, K <span class="op">=</span> <span class="bu">map</span>(<span class="bu">int</span>, <span class="bu">input</span>().split(<span class="st">' '</span>))
+    <span class="cf">if</span> n <span class="op">&gt;</span> K:
+        <span class="bu">print</span>(<span class="dv">0</span>, <span class="dv">1</span>)
+        <span class="cf">continue</span>
+    <span class="cf">elif</span> n <span class="op">==</span> <span class="dv">1</span>:
+        <span class="bu">print</span>(<span class="dv">1</span>, <span class="dv">1</span>)
+        <span class="cf">continue</span>
+    upper <span class="op">=</span> add_factor(factor(K<span class="op">-</span>n<span class="dv">+1</span>), mult_factor(factor(K<span class="dv">+1</span>), n<span class="dv">-1</span>))
+    lower <span class="op">=</span> mult_factor(factor(K), n)
+    <span class="cf">for</span> i <span class="op">in</span> lower:
+        a <span class="op">=</span> lower[i]
+        <span class="cf">if</span> i <span class="op">in</span> upper:
+            b <span class="op">=</span> upper[i]
+            c <span class="op">=</span> <span class="bu">min</span>(a, b)
+            lower[i] <span class="op">-=</span> c
+            upper[i] <span class="op">-=</span> c
+        <span class="cf">pass</span>
+    u <span class="op">=</span> join_factor(upper)
+    l <span class="op">=</span> join_factor(lower)
+    <span class="bu">print</span>(u, l)</code></pre></div>
+<p>题解原文链接:<a href="">http://blog.lightning34.cn/?p=166</a></p>
+<p>概率就是可行方案除以所有方案.</p>
+<p>所有方案就是 <span class="math inline">\(k^n\)</span>.</p>
+<p>考虑可行方案, 如果加上一个座位使得所有的位置连成环的话, 方案数就是 <span class="math inline">\((k+1)^n\)</span>, 另外由于是环, 有重复的情况, 所以要除以 <span class="math inline">\(k+1\)</span>.</p>
+<p>然后再断开, 只要是空位的都可以断开, 所以断开的方案数为 <span class="math inline">\(k-n+1\)</span>.</p>
+<p>所以最后的可行方案数为 <span class="math inline">\((k−n+1) \cdot (k+1)^{n−1}\)</span>.</p>
+<p>答案可以质因数分解之后高精度求.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">47</span>;
+
+<span class="co">////////////////////////////////////////////////////////////////////////////////</span>
+<span class="co">// Thanks to the BigNum implementation by @PegasusWang on:</span>
+<span class="co">// http://www.cnblogs.com/PegasusWang/archive/2013/03/23/2977610.html</span>
+<span class="co">////////////////////////////////////////////////////////////////////////////////</span>
+
+<span class="ot">#define MAXN 9999</span>
+<span class="ot">#define MAXSIZE 10</span>
+<span class="ot">#define DLEN 4</span>
+
+<span class="kw">class</span> BigNum
+{
+<span class="kw">private</span>:
+    <span class="dt">int</span> a[<span class="dv">50000</span>];    <span class="co">//可以控制大数的位数</span>
+    <span class="dt">int</span> len;       <span class="co">//大数长度</span>
+<span class="kw">public</span>:
+    BigNum(){ len = <span class="dv">1</span>;memset(a,<span class="dv">0</span>,<span class="kw">sizeof</span>(a)); }   <span class="co">//构造函数</span>
+    BigNum(<span class="dt">const</span> <span class="dt">int</span>);       <span class="co">//将一个int类型的变量转化为大数</span>
+    BigNum(<span class="dt">const</span> <span class="dt">char</span>*);     <span class="co">//将一个字符串类型的变量转化为大数</span>
+    BigNum(<span class="dt">const</span> BigNum &amp;);  <span class="co">//拷贝构造函数</span>
+    BigNum &amp;<span class="kw">operator</span>=(<span class="dt">const</span> BigNum &amp;);   <span class="co">//重载赋值运算符，大数之间进行赋值运算</span>
+
+    <span class="kw">friend</span> istream&amp; <span class="kw">operator</span>&gt;&gt;(istream&amp;,  BigNum&amp;);   <span class="co">//重载输入运算符</span>
+    <span class="kw">friend</span> ostream&amp; <span class="kw">operator</span>&lt;&lt;(ostream&amp;,  BigNum&amp;);   <span class="co">//重载输出运算符</span>
+
+    BigNum <span class="kw">operator</span>+(<span class="dt">const</span> BigNum &amp;) <span class="dt">const</span>;   <span class="co">//重载加法运算符，两个大数之间的相加运算</span>
+    BigNum <span class="kw">operator</span>-(<span class="dt">const</span> BigNum &amp;) <span class="dt">const</span>;   <span class="co">//重载减法运算符，两个大数之间的相减运算</span>
+    BigNum <span class="kw">operator</span>*(<span class="dt">const</span> BigNum &amp;) <span class="dt">const</span>;   <span class="co">//重载乘法运算符，两个大数之间的相乘运算</span>
+    BigNum <span class="kw">operator</span>/(<span class="dt">const</span> <span class="dt">int</span>   &amp;) <span class="dt">const</span>;    <span class="co">//重载除法运算符，大数对一个整数进行相除运算</span>
+
+    BigNum <span class="kw">operator</span>^(<span class="dt">const</span> <span class="dt">int</span>  &amp;) <span class="dt">const</span>;    <span class="co">//大数的n次方运算</span>
+    <span class="dt">int</span>    <span class="kw">operator</span>%(<span class="dt">const</span> <span class="dt">int</span>  &amp;) <span class="dt">const</span>;    <span class="co">//大数对一个int类型的变量进行取模运算</span>
+    <span class="dt">bool</span>   <span class="kw">operator</span>&gt;(<span class="dt">const</span> BigNum &amp; T)<span class="dt">const</span>;   <span class="co">//大数和另一个大数的大小比较</span>
+    <span class="dt">bool</span>   <span class="kw">operator</span>&gt;(<span class="dt">const</span> <span class="dt">int</span> &amp; t)<span class="dt">const</span>;      <span class="co">//大数和一个int类型的变量的大小比较</span>
+
+    <span class="dt">void</span> print();       <span class="co">//输出大数</span>
+};
+BigNum::BigNum(<span class="dt">const</span> <span class="dt">int</span> b)     <span class="co">//将一个int类型的变量转化为大数</span>
+{
+    <span class="dt">int</span> c,d = b;
+    len = <span class="dv">0</span>;
+    memset(a,<span class="dv">0</span>,<span class="kw">sizeof</span>(a));
+    <span class="kw">while</span>(d &gt; MAXN)
+    {
+        c = d - (d / (MAXN + <span class="dv">1</span>)) * (MAXN + <span class="dv">1</span>);
+        d = d / (MAXN + <span class="dv">1</span>);
+        a[len++] = c;
+    }
+    a[len++] = d;
+}
+BigNum::BigNum(<span class="dt">const</span> <span class="dt">char</span>*s)     <span class="co">//将一个字符串类型的变量转化为大数</span>
+{
+    <span class="dt">int</span> t,k,index,l,i;
+    memset(a,<span class="dv">0</span>,<span class="kw">sizeof</span>(a));
+    l=strlen(s);
+    len=l/DLEN;
+    <span class="kw">if</span>(l%DLEN)
+        len++;
+    index=<span class="dv">0</span>;
+    <span class="kw">for</span>(i=l<span class="dv">-1</span>;i&gt;=<span class="dv">0</span>;i-=DLEN)
+    {
+        t=<span class="dv">0</span>;
+        k=i-DLEN<span class="dv">+1</span>;
+        <span class="kw">if</span>(k&lt;<span class="dv">0</span>)
+            k=<span class="dv">0</span>;
+        <span class="kw">for</span>(<span class="dt">int</span> j=k;j&lt;=i;j++)
+            t=t*<span class="dv">10</span>+s[j]-<span class="st">'0'</span>;
+        a[index++]=t;
+    }
+}
+BigNum::BigNum(<span class="dt">const</span> BigNum &amp; T) : len(T.len)  <span class="co">//拷贝构造函数</span>
+{
+    <span class="dt">int</span> i;
+    memset(a,<span class="dv">0</span>,<span class="kw">sizeof</span>(a));
+    <span class="kw">for</span>(i = <span class="dv">0</span> ; i &lt; len ; i++)
+        a[i] = T.a[i];
+}
+BigNum &amp; BigNum::<span class="kw">operator</span>=(<span class="dt">const</span> BigNum &amp; n)   <span class="co">//重载赋值运算符，大数之间进行赋值运算</span>
+{
+    <span class="dt">int</span> i;
+    len = n.len;
+    memset(a,<span class="dv">0</span>,<span class="kw">sizeof</span>(a));
+    <span class="kw">for</span>(i = <span class="dv">0</span> ; i &lt; len ; i++)
+        a[i] = n.a[i];
+    <span class="kw">return</span> *<span class="kw">this</span>;
+}
+istream&amp; <span class="kw">operator</span>&gt;&gt;(istream &amp; in,  BigNum &amp; b)   <span class="co">//重载输入运算符</span>
+{
+    <span class="dt">char</span> ch[MAXSIZE*<span class="dv">4</span>];
+    <span class="dt">int</span> i = <span class="dv">-1</span>;
+    in&gt;&gt;ch;
+    <span class="dt">int</span> l=strlen(ch);
+    <span class="dt">int</span> count=<span class="dv">0</span>,sum=<span class="dv">0</span>;
+    <span class="kw">for</span>(i=l<span class="dv">-1</span>;i&gt;=<span class="dv">0</span>;)
+    {
+        sum = <span class="dv">0</span>;
+        <span class="dt">int</span> t=<span class="dv">1</span>;
+        <span class="kw">for</span>(<span class="dt">int</span> j=<span class="dv">0</span>;j&lt;<span class="dv">4</span>&amp;&amp;i&gt;=<span class="dv">0</span>;j++,i--,t*=<span class="dv">10</span>)
+        {
+            sum+=(ch[i]-<span class="st">'0'</span>)*t;
+        }
+        b.a[count]=sum;
+        count++;
+    }
+    b.len =count++;
+    <span class="kw">return</span> in;
+
+}
+ostream&amp; <span class="kw">operator</span>&lt;&lt;(ostream&amp; out,  BigNum&amp; b)   <span class="co">//重载输出运算符</span>
+{
+    <span class="dt">int</span> i;
+    cout &lt;&lt; b.a[b.len - <span class="dv">1</span>];
+    <span class="kw">for</span>(i = b.len - <span class="dv">2</span> ; i &gt;= <span class="dv">0</span> ; i--)
+    {
+        cout.width(DLEN);
+        cout.fill(<span class="st">'0'</span>);
+        cout &lt;&lt; b.a[i];
+    }
+    <span class="kw">return</span> out;
+}
+
+BigNum BigNum::<span class="kw">operator</span>+(<span class="dt">const</span> BigNum &amp; T) <span class="dt">const</span>   <span class="co">//两个大数之间的相加运算</span>
+{
+    BigNum t(*<span class="kw">this</span>);
+    <span class="dt">int</span> i,big;      <span class="co">//位数</span>
+    big = T.len &gt; len ? T.len : len;
+    <span class="kw">for</span>(i = <span class="dv">0</span> ; i &lt; big ; i++)
+    {
+        t.a[i] +=T.a[i];
+        <span class="kw">if</span>(t.a[i] &gt; MAXN)
+        {
+            t.a[i + <span class="dv">1</span>]++;
+            t.a[i] -=MAXN<span class="dv">+1</span>;
+        }
+    }
+    <span class="kw">if</span>(t.a[big] != <span class="dv">0</span>)
+        t.len = big + <span class="dv">1</span>;
+    <span class="kw">else</span>
+        t.len = big;
+    <span class="kw">return</span> t;
+}
+BigNum BigNum::<span class="kw">operator</span>-(<span class="dt">const</span> BigNum &amp; T) <span class="dt">const</span>   <span class="co">//两个大数之间的相减运算</span>
+{
+    <span class="dt">int</span> i,j,big;
+    <span class="dt">bool</span> flag;
+    BigNum t1,t2;
+    <span class="kw">if</span>(*<span class="kw">this</span>&gt;T)
+    {
+        t1=*<span class="kw">this</span>;
+        t2=T;
+        flag=<span class="dv">0</span>;
+    }
+    <span class="kw">else</span>
+    {
+        t1=T;
+        t2=*<span class="kw">this</span>;
+        flag=<span class="dv">1</span>;
+    }
+    big=t1.len;
+    <span class="kw">for</span>(i = <span class="dv">0</span> ; i &lt; big ; i++)
+    {
+        <span class="kw">if</span>(t1.a[i] &lt; t2.a[i])
+        {
+            j = i + <span class="dv">1</span>;
+            <span class="kw">while</span>(t1.a[j] == <span class="dv">0</span>)
+                j++;
+            t1.a[j--]--;
+            <span class="kw">while</span>(j &gt; i)
+                t1.a[j--] += MAXN;
+            t1.a[i] += MAXN + <span class="dv">1</span> - t2.a[i];
+        }
+        <span class="kw">else</span>
+            t1.a[i] -= t2.a[i];
+    }
+    t1.len = big;
+    <span class="kw">while</span>(t1.a[len - <span class="dv">1</span>] == <span class="dv">0</span> &amp;&amp; t1.len &gt; <span class="dv">1</span>)
+    {
+        t1.len--;
+        big--;
+    }
+    <span class="kw">if</span>(flag)
+        t1.a[big<span class="dv">-1</span>]=<span class="dv">0</span>-t1.a[big<span class="dv">-1</span>];
+    <span class="kw">return</span> t1;
+}
+
+BigNum BigNum::<span class="kw">operator</span>*(<span class="dt">const</span> BigNum &amp; T) <span class="dt">const</span>   <span class="co">//两个大数之间的相乘运算</span>
+{
+    BigNum ret;
+    <span class="dt">int</span> i,j,up;
+    <span class="dt">int</span> temp,temp1;
+    <span class="kw">for</span>(i = <span class="dv">0</span> ; i &lt; len ; i++)
+    {
+        up = <span class="dv">0</span>;
+        <span class="kw">for</span>(j = <span class="dv">0</span> ; j &lt; T.len ; j++)
+        {
+            temp = a[i] * T.a[j] + ret.a[i + j] + up;
+            <span class="kw">if</span>(temp &gt; MAXN)
+            {
+                temp1 = temp - temp / (MAXN + <span class="dv">1</span>) * (MAXN + <span class="dv">1</span>);
+                up = temp / (MAXN + <span class="dv">1</span>);
+                ret.a[i + j] = temp1;
+            }
+            <span class="kw">else</span>
+            {
+                up = <span class="dv">0</span>;
+                ret.a[i + j] = temp;
+            }
+        }
+        <span class="kw">if</span>(up != <span class="dv">0</span>)
+            ret.a[i + j] = up;
+    }
+    ret.len = i + j;
+    <span class="kw">while</span>(ret.a[ret.len - <span class="dv">1</span>] == <span class="dv">0</span> &amp;&amp; ret.len &gt; <span class="dv">1</span>)
+        ret.len--;
+    <span class="kw">return</span> ret;
+}
+BigNum BigNum::<span class="kw">operator</span>/(<span class="dt">const</span> <span class="dt">int</span> &amp; b) <span class="dt">const</span>   <span class="co">//大数对一个整数进行相除运算</span>
+{
+    BigNum ret;
+    <span class="dt">int</span> i,down = <span class="dv">0</span>;
+    <span class="kw">for</span>(i = len - <span class="dv">1</span> ; i &gt;= <span class="dv">0</span> ; i--)
+    {
+        ret.a[i] = (a[i] + down * (MAXN + <span class="dv">1</span>)) / b;
+        down = a[i] + down * (MAXN + <span class="dv">1</span>) - ret.a[i] * b;
+    }
+    ret.len = len;
+    <span class="kw">while</span>(ret.a[ret.len - <span class="dv">1</span>] == <span class="dv">0</span> &amp;&amp; ret.len &gt; <span class="dv">1</span>)
+        ret.len--;
+    <span class="kw">return</span> ret;
+}
+<span class="dt">int</span> BigNum::<span class="kw">operator</span> %(<span class="dt">const</span> <span class="dt">int</span> &amp; b) <span class="dt">const</span>    <span class="co">//大数对一个int类型的变量进行取模运算</span>
+{
+    <span class="dt">int</span> i,d=<span class="dv">0</span>;
+    <span class="kw">for</span> (i = len<span class="dv">-1</span>; i&gt;=<span class="dv">0</span>; i--)
+    {
+        d = ((d * (MAXN<span class="dv">+1</span>))% b + a[i])% b;
+    }
+    <span class="kw">return</span> d;
+}
+BigNum BigNum::<span class="kw">operator</span>^(<span class="dt">const</span> <span class="dt">int</span> &amp; n) <span class="dt">const</span>    <span class="co">//大数的n次方运算</span>
+{
+    BigNum t,ret(<span class="dv">1</span>);
+    <span class="dt">int</span> i;
+    <span class="kw">if</span>(n&lt;<span class="dv">0</span>)
+        exit(<span class="dv">-1</span>);
+    <span class="kw">if</span>(n==<span class="dv">0</span>)
+        <span class="kw">return</span> <span class="dv">1</span>;
+    <span class="kw">if</span>(n==<span class="dv">1</span>)
+        <span class="kw">return</span> *<span class="kw">this</span>;
+    <span class="dt">int</span> m=n;
+    <span class="kw">while</span>(m&gt;<span class="dv">1</span>)
+    {
+        t=*<span class="kw">this</span>;
+        <span class="kw">for</span>( i=<span class="dv">1</span>;i&lt;&lt;<span class="dv">1</span>&lt;=m;i&lt;&lt;=<span class="dv">1</span>)
+        {
+            t=t*t;
+        }
+        m-=i;
+        ret=ret*t;
+        <span class="kw">if</span>(m==<span class="dv">1</span>)
+            ret=ret*(*<span class="kw">this</span>);
+    }
+    <span class="kw">return</span> ret;
+}
+<span class="dt">bool</span> BigNum::<span class="kw">operator</span>&gt;(<span class="dt">const</span> BigNum &amp; T) <span class="dt">const</span>   <span class="co">//大数和另一个大数的大小比较</span>
+{
+    <span class="dt">int</span> ln;
+    <span class="kw">if</span>(len &gt; T.len)
+        <span class="kw">return</span> <span class="kw">true</span>;
+    <span class="kw">else</span> <span class="kw">if</span>(len == T.len)
+    {
+        ln = len - <span class="dv">1</span>;
+        <span class="kw">while</span>(a[ln] == T.a[ln] &amp;&amp; ln &gt;= <span class="dv">0</span>)
+            ln--;
+        <span class="kw">if</span>(ln &gt;= <span class="dv">0</span> &amp;&amp; a[ln] &gt; T.a[ln])
+            <span class="kw">return</span> <span class="kw">true</span>;
+        <span class="kw">else</span>
+            <span class="kw">return</span> <span class="kw">false</span>;
+    }
+    <span class="kw">else</span>
+        <span class="kw">return</span> <span class="kw">false</span>;
+}
+<span class="dt">bool</span> BigNum::<span class="kw">operator</span> &gt;(<span class="dt">const</span> <span class="dt">int</span> &amp; t) <span class="dt">const</span>
+{
+    BigNum b(t);
+    <span class="kw">return</span> *<span class="kw">this</span>&gt;b;
+}
+
+<span class="dt">void</span> BigNum::print()
+{
+    <span class="dt">int</span> i;
+    cout &lt;&lt; a[len - <span class="dv">1</span>];
+    <span class="kw">for</span>(i = len - <span class="dv">2</span> ; i &gt;= <span class="dv">0</span> ; i--)
+    {
+        cout.width(DLEN);
+        cout.fill(<span class="st">'0'</span>);
+        cout &lt;&lt; a[i];
+    }
+    <span class="co">// cout &lt;&lt; endl;</span>
+}
+
+<span class="co">////////////////////////////////////////////////////////////////////////////////</span>
+<span class="co">// End of BigNum library</span>
+<span class="co">////////////////////////////////////////////////////////////////////////////////</span>
+
+<span class="dt">int</span> primes[<span class="dv">47</span>] = { <span class="dv">46</span>,
+    <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">11</span>, <span class="dv">13</span>, <span class="dv">17</span>, <span class="dv">19</span>, <span class="dv">23</span>, <span class="dv">29</span>, <span class="dv">31</span>, <span class="dv">37</span>, <span class="dv">41</span>, <span class="dv">43</span>, <span class="dv">47</span>, <span class="dv">53</span>, <span class="dv">59</span>, <span class="dv">61</span>, <span class="dv">67</span>, <span class="dv">71</span>,
+    <span class="dv">73</span>, <span class="dv">79</span>, <span class="dv">83</span>, <span class="dv">89</span>, <span class="dv">97</span>, <span class="dv">101</span>, <span class="dv">103</span>, <span class="dv">107</span>, <span class="dv">109</span>, <span class="dv">113</span>, <span class="dv">127</span>, <span class="dv">131</span>, <span class="dv">137</span>, <span class="dv">139</span>, <span class="dv">149</span>, <span class="dv">151</span>,
+    <span class="dv">157</span>, <span class="dv">163</span>, <span class="dv">167</span>, <span class="dv">173</span>, <span class="dv">179</span>, <span class="dv">181</span>, <span class="dv">191</span>, <span class="dv">193</span>, <span class="dv">197</span>, <span class="dv">199</span> };
+
+<span class="kw">class</span> factor
+{
+<span class="kw">public</span>:
+    lli cnt[maxn];
+    factor(lli in) {
+        memset(cnt, <span class="dv">0</span>, <span class="kw">sizeof</span>(cnt));
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= primes[<span class="dv">0</span>]; i++) {
+            <span class="kw">if</span> (primes[i] &gt; in) <span class="kw">break</span>;
+            <span class="kw">while</span> (in % primes[i] == <span class="dv">0</span>)
+                in /= primes[i], cnt[i] += <span class="dv">1</span>;
+        } <span class="kw">return</span> ; }
+};
+factor <span class="kw">operator</span> * (factor a, factor b)
+{
+    factor c(<span class="dv">1</span>);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= primes[<span class="dv">0</span>]; i++)
+        c.cnt[i] = a.cnt[i] + b.cnt[i];
+    <span class="kw">return</span> c;
+}
+factor <span class="kw">operator</span> ^ (factor a, lli powr)
+{
+    factor b(<span class="dv">1</span>);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= primes[<span class="dv">0</span>]; i++)
+        b.cnt[i] = a.cnt[i] * powr;
+    <span class="kw">return</span> b;
+}
+ostream&amp; <span class="kw">operator</span> &lt;&lt; (ostream&amp; out, factor f)
+{
+    <span class="dt">bool</span> printed = <span class="kw">false</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= primes[<span class="dv">0</span>]; i++) {
+        <span class="kw">if</span> (f.cnt[i] &lt;= <span class="dv">0</span>) <span class="kw">continue</span>;
+        <span class="kw">if</span> (printed) out &lt;&lt; <span class="st">"*"</span>;
+        printed = <span class="kw">true</span>;
+        out &lt;&lt; primes[i] &lt;&lt; <span class="st">"^"</span> &lt;&lt; f.cnt[i];
+    }
+    <span class="kw">if</span> (!printed) out &lt;&lt; <span class="st">"1"</span>;
+    <span class="kw">return</span> out;
+}
+
+<span class="dt">int</span> T;
+lli n, k;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;T);
+    <span class="kw">for</span> (<span class="dt">int</span> idx = <span class="dv">1</span>; idx &lt;= T; idx++) {
+        scanf(<span class="st">"</span><span class="ch">%lld%lld</span><span class="st">"</span>, &amp;n, &amp;k);
+        <span class="kw">if</span> (n &gt; k) {
+            printf(<span class="st">"0 1</span><span class="ch">\n</span><span class="st">"</span>);
+            <span class="kw">continue</span>;
+        }
+        factor upper = factor(k-n<span class="dv">+1</span>) * (factor(k<span class="dv">+1</span>) ^ (n<span class="dv">-1</span>));
+        factor lower = factor(k) ^ n;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= primes[<span class="dv">0</span>]; i++) {
+            <span class="dt">int</span> a = upper.cnt[i], b = lower.cnt[i];
+            upper.cnt[i] -= min(a, b);
+            lower.cnt[i] -= min(a, b);
+        }
+        BigNum u = <span class="dv">1</span>, l = <span class="dv">1</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= primes[<span class="dv">0</span>]; i++) {
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= upper.cnt[i]; j++)
+                u = u * primes[i];
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= lower.cnt[i]; j++)
+                l = l * primes[i];
+        }
+        u.print();
+        cout &lt;&lt; <span class="st">' '</span>;
+        l.print();
+        cout &lt;&lt; <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>;
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj2227/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj2227/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj2227/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj2227/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj2227">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

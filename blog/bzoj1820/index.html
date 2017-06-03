@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1820: [JSOI2010]Express Service 快递服务&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1820: [JSOI2010]Express Service 快递服务
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=JSOI2010" target="_self">
+            <i class="fa fa-tag"></i> JSOI2010
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+        </span>
+        <span class="date" title="11:13:10 | 19 April, 2017">
+          19 April, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>「飞奔」快递公司成立之后, 已经分别与市内许多中小企业公司签订邮件收送服务契约. 由于有些公司是在同一栋大楼内, 所以「飞奔」公司收件的地点 (收件点) 最多只有 <span class="math inline">\(m\)</span> 点 <span class="math inline">\((1, 2, \ldots, m)\)</span>, 因此「飞奔」仅先行采购了三辆货車并聘用了三名司机, 每天早上分别从收件地点 <span class="math inline">\(1, 2\)</span> 及 <span class="math inline">\(3\)</span> 出发. 而在与客户的服务契约中有明确订约: 「飞奔」必须在客户提出邮件寄送要求的隔天派人至该公司 (地点) 收件.</p>
+<p>为了能更有效率的服务客户并节省收件时间, 该公司设立了收件服务登记网站, 客户如有邮件需要寄送, 必须在需要收件的前一天就先上网登记. 为了节省油量, 「飞奔」就利用晚上先行安排三位司机隔天的收件路线. 每位司机至各地点收件的顺序应与各公司上网登记的顺序相符且必须能在最省油的情况下完成当天所有的收件服务. 因此每位司机有可能需要在不同时间重复到同一地点收件, 或不同的司机有可能需在不同的时间点前往同一地点收件.</p>
+<p>如下面范例二: 收件公司地点依序为:<span class="math inline">\(4, 2, 4, 1, 5, 4, 3, 2, 1\)</span> 所示, 虽然司机 <span class="math inline">\(1\)</span> 一开始就已经在收件地点 <span class="math inline">\(1\)</span> 了, 但是他却不能先把后面第四个登记的公司 (地点 <span class="math inline">\(1\)</span>) 邮件先收了再前往第一、第二、或第三个登记收件地点 (地点 <span class="math inline">\(4, 2, 4\)</span>) 收件. 但是如果前三个登记收件的服务是由司机 <span class="math inline">\(2\)</span> 或 <span class="math inline">\(3\)</span> 來负责, 则司机 <span class="math inline">\(1\)</span> 就可以在地点 <span class="math inline">\(1\)</span> 收了第四个登记的邮件后再前往后面所登记的地点收件.</p>
+<p>此外, 在某些情况下, 不一定每辆车都要收到货, 也就是說, 最佳收件方式也有可能是只需出动一或兩辆车去收货. 请写一个程序來帮「飞奔」公司计算每天依预约顺序至各收件地点收件的最少总耗油量.</p>
+<h2 id="input">Input</h2>
+<p>输入文件第一行有一个整数 <span class="math inline">\(m (3 \leq m \leq 200)\)</span>, 代表「飞奔」公司收件的地点数, 以 <span class="math inline">\(1\)</span> 至 <span class="math inline">\(m\)</span> 之间的整数代号來表示每个地点.</p>
+<p>接下來的 <span class="math inline">\(m\)</span> 行 (第 <span class="math inline">\(2\)</span> 到第 <span class="math inline">\(m+1\)</span> 行), 每行有 <span class="math inline">\(m\)</span> 个整数, 代表一个矩阵 <span class="math inline">\(D\)</span>. 第 <span class="math inline">\(i +1\)</span> 行的第 <span class="math inline">\(j\)</span> 个整数是 <span class="math inline">\(D(i, j)\)</span>,<span class="math inline">\(D(i, j)\)</span> 代表司机开车从收件点 <span class="math inline">\(i\)</span> 到收件点 <span class="math inline">\(j\)</span> 所需耗油量.</p>
+<p>最后有一行数串, 数串之数字依序为前一天上网登记要求收件的公司地点代号, 最多会有 <span class="math inline">\(1000\)</span> 个收件请求. 输入文件中任兩个相邻的整数都以一个空白隔开.</p>
+<h2 id="output">Output</h2>
+<p>输出一个整数, 代表收件所需最少总耗油量.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>4
+0 5 0 6
+6 0 5 6
+1 6 0 6
+1 1 1 0
+1 1 1 1 4 4 2 2 2 3
+</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>6</code></pre>
+<h2 id="explanation">Explanation</h2>
+<p>题目本身就是一个疯狂降维的过程......</p>
+<p>记 <span class="math inline">\(f[l][i][j][k]\)</span> 为在序列第 <span class="math inline">\(l\)</span> 次, 三个司机分别在 <span class="math inline">\(i, j, k\)</span> 的位置时的耗油量.</p>
+<p>我们发现 <span class="math inline">\(i, j, k\)</span> 的次序无关紧要, 所以可以瞎转移. 进一步地, 我们发现在三个位置中, 总有一个为收件序列的第 <span class="math inline">\(l\)</span> 项, 于是这一维度可以省去.</p>
+<p>状态转移允许滚动数组, 在使用一些奇怪的卡常技巧以后就可以水过了.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="ot">#define rep(_var,_begin,_end) for(int _var=_begin;_var&lt;=_end;_var++)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">1010</span>;
+<span class="dt">const</span> <span class="dt">int</span> infinit = <span class="bn">0x3f3f3f3f</span>;
+
+<span class="dt">int</span> n, m;
+<span class="dt">int</span> dist[maxn][maxn];
+<span class="dt">int</span> to[maxn];
+<span class="dt">int</span> dp_arr[<span class="dv">2</span>][maxn][maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    rep(i, <span class="dv">1</span>, n) rep(j, <span class="dv">1</span>, n)
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;dist[i][j]);
+    <span class="co">// You might be using a fake stdin</span>
+    <span class="kw">while</span> (scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;to[++m]) != EOF);
+    <span class="co">// Rolling array</span>
+    <span class="dt">int</span> dp_pos = <span class="dv">0</span>;
+    <span class="ot">#define dp_now dp_arr[dp_pos]</span>
+    <span class="ot">#define dp_las dp_arr[!dp_pos]</span>
+    rep(k, <span class="dv">0</span>, <span class="dv">1</span>) rep(i, <span class="dv">0</span>, n) rep(j, <span class="dv">0</span>, n)
+        dp_arr[k][i][j] = infinit;
+    <span class="co">// Setting initial values</span>
+    dp_now[<span class="dv">1</span>][<span class="dv">2</span>] = dist[<span class="dv">3</span>][to[<span class="dv">1</span>]];
+    dp_now[<span class="dv">1</span>][<span class="dv">3</span>] = dist[<span class="dv">2</span>][to[<span class="dv">1</span>]];
+    dp_now[<span class="dv">2</span>][<span class="dv">3</span>] = dist[<span class="dv">1</span>][to[<span class="dv">1</span>]];
+    <span class="co">// Dynamic programming</span>
+    rep(i, <span class="dv">2</span>, m - <span class="dv">1</span>) {
+        dp_pos ^= <span class="dv">1</span>;
+        rep(j, <span class="dv">0</span>, n) rep(k, <span class="dv">0</span>, n)
+            dp_now[j][k] = infinit;
+        <span class="co">// Cleared.</span>
+        rep(j, <span class="dv">1</span>, n) rep(k, j, n) {
+            <span class="ot">#define minimize(__x,__y,__z) dp_now[__x][__y]=dp_now[__y][__x]=min(dp_now[__x][__y],__z);</span>
+            minimize(j, k, dp_las[j][k] + dist[to[i<span class="dv">-1</span>]][to[i]]);
+            minimize(to[i<span class="dv">-1</span>], k, dp_las[j][k] + dist[j][to[i]]);
+            minimize(to[i<span class="dv">-1</span>], j, dp_las[j][k] + dist[k][to[i]]);
+        }
+    }
+    <span class="co">// Getting minimum result</span>
+    <span class="dt">int</span> res = infinit;
+    rep(i, <span class="dv">1</span>, n) rep(j, i, n)
+        res = min(res, dp_now[i][j]);
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1820/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1820/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1820/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1820/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1820">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

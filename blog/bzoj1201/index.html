@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1201: [HNOI2005]数三角形&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1201: [HNOI2005]数三角形
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=HNOI2005" target="_self">
+            <i class="fa fa-tag"></i> HNOI2005
+          </a>
+          <a class="tag" href="/blog/archive/?q=Brute Force" target="_self">
+            <i class="fa fa-tag"></i> Brute Force
+          </a>
+        </span>
+        <span class="date" title="00:37:18 | 23 December, 2016">
+          23 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<figure>
+<img class="thumb" data-small="/blog/bzoj1201/bzoj1201_1-small.jpg" data-src="/blog/bzoj1201/bzoj1201_1.png" data-thumb="/blog/bzoj1201/bzoj1201_1-thumb.jpg" src="/blog/bzoj1201/bzoj1201_1-thumb.jpg" title="" width="614px"/>
+<figcaption>
+</figcaption>
+</figure>
+<h2 id="input">Input</h2>
+<p>大三角形的所有短边可以看成由 <span class="math inline">\(\frac{n \cdot (n+1)}{2}\)</span> 个单位三角形的边界组成. 如下图的灰色三角形所示. 其中第 <span class="math inline">\(1\)</span> 排有 <span class="math inline">\(1\)</span> 个灰色三角形, 第 <span class="math inline">\(2\)</span> 排有 <span class="math inline">\(2\)</span> 个灰色三角形,. ...... , 第 <span class="math inline">\(n\)</span> 排有 <span class="math inline">\(n\)</span> 个灰色三角形. 所以输入格式是这样规定的: 输入 第一行为正整数 <span class="math inline">\(n\)</span>, 其中 <span class="math inline">\(1 \leq n \leq 1000\)</span>, 表示大三角形每边的长度. 接下来的 <span class="math inline">\(n\)</span> 行, 第 <span class="math inline">\(i+1\)</span> 行有 <span class="math inline">\(i\)</span> 组数, 从左到右每组数描述一个三角形, 每组数都有 <span class="math inline">\(3\)</span> 个数, 这 <span class="math inline">\(3\)</span> 个数非 <span class="math inline">\(0\)</span> 即 <span class="math inline">\(1\)</span>, 表示对应的短边是否被删除,<span class="math inline">\(0\)</span> 表示已被删除,<span class="math inline">\(1\)</span> 表示未被删除, 依次按照三角形的左、右、下边的顺序来描述. 所以第 <span class="math inline">\(i+1\)</span> 行有 <span class="math inline">\(3i\)</span> 个数, 每个数是 <span class="math inline">\(0\)</span> 或 <span class="math inline">\(1\)</span></p>
+<figure>
+<img class="thumb" data-small="/blog/bzoj1201/bzoj1201_2-small.jpg" data-src="/blog/bzoj1201/bzoj1201_2.png" data-thumb="/blog/bzoj1201/bzoj1201_2-thumb.jpg" src="/blog/bzoj1201/bzoj1201_2-thumb.jpg" title="" width="273px"/>
+<figcaption>
+</figcaption>
+</figure>
+<h2 id="output">Output</h2>
+<p>仅包含一个整数 <span class="math inline">\(T\)</span>, 表示有多少个三角形的边界都没有被删除.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>5
+1 1 1
+1 1 0 1 1 0
+1 1 1 1 1 1 1 0 1
+1 0 1 1 1 1 0 1 1 1 1 1
+0 1 1 1 1 1 0 1 1 1 1 1 0 1 1</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>19</code></pre>
+<h2 id="explanation">Explanation</h2>
+<p>用前缀和来维护区间查询连续性.</p>
+<p>然后直接上暴力就可以解出此题. 虽然 <span class="math inline">\(O(n^3)\)</span> 看起来会爆, 但是考虑到各种剪枝和 优化再加上 bzoj 宽裕大方的 10s 时限, 其实是可以过掉的.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="ot">#define rep(_var,_begin,_end) for(int _var=_begin;_var&lt;=_end;_var++)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">1010</span>;
+
+<span class="kw">class</span> line
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> arr[maxn], n;
+    <span class="dt">void</span> add(<span class="dt">int</span> pos, <span class="dt">int</span> val) {
+        arr[pos] += val;
+        <span class="kw">return</span> ; }
+    <span class="dt">void</span> build(<span class="dt">void</span>) {
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>; i &lt;= n; i++)
+            arr[i] += arr[i - <span class="dv">1</span>];
+        <span class="kw">return</span> ; }
+    <span class="dt">bool</span> check(<span class="dt">int</span> l, <span class="dt">int</span> r) {
+        <span class="kw">return</span> arr[r] - arr[l - <span class="dv">1</span>] == r - l + <span class="dv">1</span>; }
+};
+
+line tlef[maxn], trig[maxn]; <span class="co">// Triangle left, right.</span>
+<span class="dt">bool</span> low[maxn][maxn];
+<span class="dt">int</span> n;
+
+<span class="dt">bool</span> check_upright_triangle(<span class="dt">int</span> row, <span class="dt">int</span> l, <span class="dt">int</span> r)
+{
+    <span class="dt">int</span> len = r - l + <span class="dv">1</span>;
+    <span class="kw">return</span> tlef[l].check(row-l<span class="dv">+1</span> - len + <span class="dv">1</span>, row-l<span class="dv">+1</span>)
+        &amp;&amp; trig[row-r<span class="dv">+1</span>].check(r - len + <span class="dv">1</span>, r);
+}
+
+<span class="dt">bool</span> check_inverted_triangle(<span class="dt">int</span> row, <span class="dt">int</span> l, <span class="dt">int</span> r)
+{
+    <span class="dt">int</span> len = r - l + <span class="dv">1</span>;
+    <span class="kw">return</span> trig[row-l<span class="dv">+2</span>].check(l, l+len<span class="dv">-1</span>)
+        &amp;&amp; tlef[r<span class="dv">+1</span>].check(row-r<span class="dv">+1</span>, row-r<span class="dv">+1</span> + len - <span class="dv">1</span>);
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    rep(i, <span class="dv">1</span>, n) tlef[i].n = trig[i].n = n - i + <span class="dv">1</span>;
+    rep(i, <span class="dv">1</span>, n) rep(j, <span class="dv">1</span>, i) {
+        <span class="dt">int</span> x, y, z;
+        scanf(<span class="st">"</span><span class="ch">%d%d%d</span><span class="st">"</span>, &amp;x, &amp;y, &amp;z);
+        <span class="kw">if</span> (x) tlef[j].add(i-j<span class="dv">+1</span>, <span class="dv">1</span>);
+        <span class="kw">if</span> (y) trig[i-j<span class="dv">+1</span>].add(j, <span class="dv">1</span>);
+        low[i][j] = z;
+    }
+    rep(i, <span class="dv">1</span>, n)
+        tlef[i].build(),
+        trig[i].build();
+    <span class="co">// Processing with brute force, only a bit faster.</span>
+    <span class="dt">int</span> res = <span class="dv">0</span>;
+    <span class="co">// i is the row number #i</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        <span class="co">// l, r represents the left bound and the right bound of the triangle</span>
+        <span class="dt">int</span> l = <span class="dv">1</span>, r = <span class="dv">0</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= i; j++) {
+            <span class="co">// Impossible detection. Does not form a triangle anymore.</span>
+            <span class="kw">if</span> (low[i][j]) r += <span class="dv">1</span>;
+            <span class="kw">else</span> l = j<span class="dv">+1</span>, r = j;
+            <span class="co">// Choosing r as right bound, k as left bound of detecting triangle</span>
+            <span class="kw">for</span> (<span class="dt">int</span> k = l; k &lt;= r; k++) {
+                res += check_upright_triangle(i, k, r);
+                <span class="co">// if it satisfies the inverted triangle.</span>
+                <span class="kw">if</span> (r-k<span class="dv">+1</span> &lt;= n-i)
+                    res += check_inverted_triangle(i, k, r);
+            }
+        }
+    }
+    <span class="co">// Output result.</span>
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1201/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1201/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1201/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1201/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1201">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

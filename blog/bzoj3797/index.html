@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj3797: Ural 1745 Yet Another Answer&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj3797: Ural 1745 Yet Another Answer
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=Ural" target="_self">
+            <i class="fa fa-tag"></i> Ural
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+          <a class="tag" href="/blog/archive/?q=Greedy" target="_self">
+            <i class="fa fa-tag"></i> Greedy
+          </a>
+        </span>
+        <span class="date" title="20:48:04 | 29 March, 2017">
+          29 March, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>外星人制造了超级电脑来思考生命, 宇宙, 以及世界万物的答案, 最后得出了 42 这个结果. 人们并不满意于这个答案, 于是再一次设计了超级电脑. 经历了 <span class="math inline">\(\pi\)</span> 百万年的计算, 再一次得出了新的答案. 答案是由一些字符串组成的, 每个字符串都只包含 <code>(</code> 和 <code>)</code> 两种字符. 现在的问题是, 从这些字符串中选取一些, 按照一定的顺序连接起来, 使得构成一个合法的括号序列而且长度尽量长.</p>
+<h2 id="input">Input</h2>
+<p>本题存在多组数据, 请做到文件底结束, 任两组数据间存在一空行.</p>
+<p>在每组数据中, 第一行一个正整数 <span class="math inline">\(n\)</span>, 表示字符串个数.</p>
+<p>接下来 <span class="math inline">\(n\)</span> 行每行一个字符串. 总长度不超过 <span class="math inline">\(10000\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>对于每组数据, 输出生成的括号序列的最大长度.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>3
+()
+(()
+)</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>6</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有的数据, 满足:<span class="math inline">\(1 \leq n \leq 1000\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<p>贪心地讲, 我们发现一个括号串中间括号的分布对结果是没有影响的. 有影响的是一个括号中有几个开括号, 几个闭括号; 有多少个左边强行关闭 (即没有开括号配对的) 闭括号, 右边 多少个强行打开的开括号. 将这些值维护以后, 我们开始贪心.</p>
+<p>膜拜 hld67890 口头 AC 题解......</p>
+<p>优先选择全开的括号串, 最后选择全闭的括号串.</p>
+<p>然后在半开半闭的括号串中 dp, 优先选择开的更多的.</p>
+<p>然而我觉得应该直接贪心, 然后 sort 了一下进行了一个 dp 过了, 但是并不明白怎么回事 QwQ</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="ot">#define maximize(__x,__y) __x=max(__x,__y)</span>
+<span class="ot">#define max_3(__x,__y,__z) max(max(__x,__y),__z)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">1010</span>, maxm = <span class="dv">10010</span>;
+<span class="dt">const</span> <span class="dt">int</span> infinit = <span class="bn">0x3f3f3f3f</span>;
+
+<span class="kw">struct</span> parthstr { <span class="dt">int</span> lbrac, rbrac, pairs; }; <span class="co">// Parentheses in strings</span>
+<span class="dt">bool</span> <span class="kw">operator</span> &lt; (parthstr a, parthstr b) {
+    <span class="dt">bool</span> ba = a.lbrac &gt;= a.rbrac,
+         bb = b.lbrac &gt;= b.rbrac;
+    <span class="kw">if</span> (ba != bb) {
+        <span class="kw">return</span> ba &gt; bb;
+    } <span class="kw">else</span> {
+        <span class="kw">if</span> (ba) <span class="kw">return</span> a.rbrac &lt; b.rbrac;
+        <span class="kw">else</span> <span class="kw">return</span> a.lbrac &gt; b.lbrac;
+    }
+    <span class="kw">return</span> <span class="kw">false</span>;
+} parthstr ps[maxn];
+
+<span class="dt">int</span> n;
+<span class="dt">char</span> str[maxm];
+<span class="dt">int</span> dp[<span class="dv">2</span>][maxm];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    <span class="kw">while</span> (scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n) != EOF) {
+        <span class="co">// Clearing previous data for intactness.</span>
+        memset(ps, <span class="dv">0</span>, <span class="kw">sizeof</span>(ps));
+        memset(str, <span class="dv">0</span>, <span class="kw">sizeof</span>(str));
+        memset(dp, <span class="dv">0</span>, <span class="kw">sizeof</span>(dp));
+        <span class="co">// Read the strings and abandon the rest.</span>
+        <span class="dt">int</span> sumlen = <span class="dv">0</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+            scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str + <span class="dv">1</span>);
+            <span class="dt">int</span> len = strlen(str + <span class="dv">1</span>);
+            <span class="dt">int</span> lbrac = <span class="dv">0</span>, <span class="co">// Unclosed left parentheses</span>
+                rbrac = <span class="dv">0</span>, <span class="co">// Unclosed right parentheses</span>
+                pairs = <span class="dv">0</span>; <span class="co">// Created pairs</span>
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= len; j++) {
+                <span class="kw">if</span> (str[j] == <span class="st">'('</span>) {
+                    lbrac += <span class="dv">1</span>;
+                } <span class="kw">else</span> {
+                    <span class="kw">if</span> (lbrac == <span class="dv">0</span>)
+                        rbrac += <span class="dv">1</span>;
+                    <span class="kw">else</span>
+                        lbrac -= <span class="dv">1</span>, pairs += <span class="dv">1</span>;
+                }
+            }
+            pairs += rbrac;
+            ps[i].lbrac = lbrac;
+            ps[i].rbrac = rbrac;
+            ps[i].pairs = pairs;
+            sumlen += len;
+        }
+        <span class="co">// We need to arrange them in a timely manner so that</span>
+        <span class="co">// there is some part of greedy in it.</span>
+        sort(ps + <span class="dv">1</span>, ps + n + <span class="dv">1</span>);
+        <span class="co">// To dynamic programming or not, this is a question</span>
+        <span class="dt">int</span> mx = (sumlen + <span class="dv">1</span>) / <span class="dv">2</span>;
+        <span class="dt">int</span> now = <span class="dv">1</span>, last = <span class="dv">0</span>;
+        dp[now][<span class="dv">0</span>] = <span class="dv">0</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= mx; j++)
+            dp[now][j] = -infinit;
+        swap(now, last);
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">0</span>; j &lt;= mx; j++)
+                dp[now][j] = dp[last][j];
+            <span class="dt">int</span> lbrac = ps[i].lbrac,
+                rbrac = ps[i].rbrac,
+                pairs = ps[i].pairs;
+            <span class="kw">for</span> (<span class="dt">int</span> j = rbrac; j + lbrac - rbrac &lt;= mx &amp;&amp; j &lt;= mx; j++) {
+                maximize(dp[now][j + lbrac - rbrac], dp[last][j] + pairs);
+            }
+            swap(now, last);
+        }
+        <span class="co">// Now getting result.</span>
+        <span class="dt">int</span> res = dp[last][<span class="dv">0</span>] * <span class="dv">2</span>;
+        printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj3797/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj3797/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj3797/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj3797/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj3797">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

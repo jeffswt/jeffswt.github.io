@@ -1,0 +1,330 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NOIP-EMU-141102-rollcall 点名&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          NOIP-EMU-141102-rollcall 点名
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOIP Emulation" target="_self">
+            <i class="fa fa-tag"></i> NOIP Emulation
+          </a>
+          <a class="tag" href="/blog/archive/?q=Splay Tree" target="_self">
+            <i class="fa fa-tag"></i> Splay Tree
+          </a>
+          <a class="tag" href="/blog/archive/?q=Treap" target="_self">
+            <i class="fa fa-tag"></i> Treap
+          </a>
+        </span>
+        <span class="date" title="16:04:19 | 10 November, 2016">
+          10 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h3 id="题目描述">题目描述</h3>
+<p>在 J 班的体育课上, 同学们常常会迟到几分钟, 但体育老师的点名却一直很准时.</p>
+<p>老师只关心同学的身高, 他会依次询问当前最高的身高, 次高的身高, 第三高的身高, 等等. 在询问的过程中, 会不时地有人插进队伍里. 你需要回答老师每次的询问.</p>
+<h3 id="输入格式">输入格式</h3>
+<p>第一行两个整数 <span class="math inline">\(n\)</span><span class="math inline">\(m\)</span>, 表示先后有 <span class="math inline">\(n\)</span> 个人进队, 老师询问了 <span class="math inline">\(m\)</span> 次</p>
+<p>第二行 <span class="math inline">\(n\)</span> 个整数, 第 <span class="math inline">\(i\)</span> 个数 <span class="math inline">\(A_i\)</span> 表示第 <span class="math inline">\(i\)</span> 个进入队伍的同学的身高为 <span class="math inline">\(A_i\)</span></p>
+<p>第三行 <span class="math inline">\(m\)</span> 个整数, 第 <span class="math inline">\(j\)</span> 个数 <span class="math inline">\(B_j\)</span> 表示老师在第 <span class="math inline">\(B_j\)</span> 个同学进入队伍后有一次询问</p>
+<h3 id="输出格式">输出格式</h3>
+<p><span class="math inline">\(m\)</span> 行, 每行一个整数, 依次表示老师每次询问的答案. 数据保证合法.</p>
+<!-- More -->
+<h3 id="样例输入">样例输入</h3>
+<pre><code>7 4
+9 7 2 8 14 1 8
+1 2 6 6</code></pre>
+<h3 id="样例输出">样例输出</h3>
+<pre><code>9
+9
+7
+8</code></pre>
+<h3 id="样例解释">样例解释</h3>
+<p>(9) {No. 1=9}; (9 7) {No. 2=9}; (9 7 2 8 14 1) {No. 3=7; No. 4=8}</p>
+<h3 id="数据范围">数据范围</h3>
+<p>40% 的数据保证 <span class="math inline">\(n \leq 1000\)</span></p>
+<p>100% 的数据保证 <span class="math inline">\(1 \leq m \leq n \leq 30000\)</span>;<span class="math inline">\(0 \leq A_i \lt 2^{32}\)</span></p>
+<h3 id="explanation">Explanation</h3>
+<p>暴力可以水 40 分.</p>
+<p>如果要 100 分做法需要用 Treap 或 Splay 维护第 K 大值.</p>
+<p>但是 Splay 调不出来啊~</p>
+<p>所以就用了 <span class="citation" data-cites="xmcp"> @xmcp</span> 的代码.</p>
+<h3 id="source-code">Source Code</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;vector&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">40010</span>;
+<span class="dt">const</span> lli infinit = <span class="bn">0x007f7f7f7f7f7f7fll</span>;
+
+<span class="co">/*</span>
+<span class="co">class SplayTree</span>
+<span class="co">{</span>
+<span class="co">public:</span>
+<span class="co">    int parent[maxn], ch[maxn][2], root, ncnt, n;</span>
+<span class="co">    int size[maxn];</span>
+<span class="co">    lli val[maxn];</span>
+<span class="co">    #define lc(_x) ch[_x][0]</span>
+<span class="co">    #define rc(_x) ch[_x][1]</span>
+<span class="co">    #define par(_x) parent[_x]</span>
+<span class="co">    int makenode(int q, lli v) {</span>
+<span class="co">        int p = ++ncnt; n++;</span>
+<span class="co">        lc(p) = rc(p) = 0;</span>
+<span class="co">        par(p) = q;</span>
+<span class="co">        size[p] = 1;</span>
+<span class="co">        val[p] = v;</span>
+<span class="co">        return p; }</span>
+<span class="co">    void rotate(int p) {</span>
+<span class="co">        int q = par(p), g = par(q), x = p == rc(q);</span>
+<span class="co">        // Relink connections</span>
+<span class="co">        ch[q][x] = ch[p][!x]; if (ch[q][x]) par(ch[q][x]) = q;</span>
+<span class="co">        ch[p][!x] = q, par(q) = p;</span>
+<span class="co">        par(p) = g; if (g) ch[g][rc(g) == q] = p;</span>
+<span class="co">        size[q] = size[lc(q)] + 1 + size[rc(q)];</span>
+<span class="co">        size[p] = size[lc(p)] + 1 + size[rc(p)];</span>
+<span class="co">        return ; }</span>
+<span class="co">    void splay(int p, int t) {</span>
+<span class="co">        for (int q = 0; (q = par(p)) &amp;&amp; q != t; rotate(p))</span>
+<span class="co">            if (par(q) &amp;&amp; par(q) != t)</span>
+<span class="co">                rotate((p == lc(q)) == (q == lc(par(q))) ? q : p);</span>
+<span class="co">        if (t == 0) root = p; }</span>
+<span class="co">    int pre(int p) {</span>
+<span class="co">        cout &lt;&lt; "preing " &lt;&lt; p &lt;&lt; endl;</span>
+<span class="co">        if (!lc(p)) { while (p == lc(par(p))) p = par(p); p = par(p); }</span>
+<span class="co">        if  { p = lc(p); while (rc(p)) p = rc(p); }</span>
+<span class="co">        return p; }</span>
+<span class="co">    int find(int x) {</span>
+<span class="co">        int p = root;</span>
+<span class="co">        while (true) {</span>
+<span class="co">            if (size[lc(p)] &gt;= x) {</span>
+<span class="co">                p = lc(p); continue;</span>
+<span class="co">            } x -= size[lc(p)];</span>
+<span class="co">            if (x == 1) return p; x -= 1;</span>
+<span class="co">            p = rc(p);</span>
+<span class="co">        } return root; }</span>
+<span class="co">    int locate(lli v) {</span>
+<span class="co">        int p = root;</span>
+<span class="co">        while (true) {</span>
+<span class="co">            if (v &gt; val[p] &amp;&amp; rc(p)) {</span>
+<span class="co">                p = rc(p); continue; }</span>
+<span class="co">            if (v == val[p]) return p;</span>
+<span class="co">            if (lc(p)) p = lc(p); else return p;</span>
+<span class="co">        } return root; }</span>
+<span class="co">    lli query(int x) {</span>
+<span class="co">        int m = n - 1 - x;</span>
+<span class="co">        return val[find(m + 1)]; }</span>
+<span class="co">    void dfs(int p)</span>
+<span class="co">    {</span>
+<span class="co">        if (!p) return ;</span>
+<span class="co">        printf("%d %d %d\n", par(p), p, p==rc(par(p)));</span>
+<span class="co">        dfs(lc(p));</span>
+<span class="co">        dfs(rc(p));</span>
+<span class="co">    }</span>
+<span class="co">    void dfstree(void)</span>
+<span class="co">    {</span>
+<span class="co">        dfs(root);</span>
+<span class="co">    }</span>
+<span class="co">    void insert(lli v) {</span>
+<span class="co">        int rp = locate(v), lp = pre(lp);</span>
+<span class="co">        cout &lt;&lt; rp &lt;&lt; ' ' &lt;&lt; lp &lt;&lt; "*\n";</span>
+<span class="co">        splay(rp, 0);</span>
+<span class="co">        splay(lp, root);</span>
+<span class="co">        int c = makenode(lp, v);</span>
+<span class="co">        rc(lp) = c;</span>
+<span class="co">        size[lp]++, size[rp]++;</span>
+<span class="co">        dfstree();</span>
+<span class="co">        return ; }</span>
+<span class="co">    void build_tree(void) {</span>
+<span class="co">        n = ncnt = 0;</span>
+<span class="co">        root = makenode(0, 0);</span>
+<span class="co">        rc(root) = makenode(root, infinit);</span>
+<span class="co">        par(rc(root)) = root;</span>
+<span class="co">        size[root]++; }</span>
+<span class="co">} st; */</span>
+
+<span class="ot">#define $ if(0)</span>
+
+<span class="kw">class</span> XmcpsSplayTree
+{
+<span class="kw">public</span>:
+    <span class="dt">static</span> <span class="dt">const</span> <span class="dt">int</span> _N=<span class="dv">50007</span>, _I=<span class="dv">2147000000</span>;
+    <span class="dt">int</span> child[_N][<span class="dv">2</span>], parent[_N], size[_N];
+    lli value[_N];
+    <span class="dt">int</span> root, graphtop;
+    <span class="dt">int</span> query[_N];
+    <span class="dt">int</span> insvalue[_N];
+    <span class="dt">bool</span> inserted;
+
+    <span class="dt">void</span> build_tree(<span class="dt">void</span>) {
+        root = <span class="dv">1</span>, graphtop = <span class="dv">2</span>;
+        inserted = <span class="kw">false</span>;
+    }
+    <span class="dt">int</span> flag(<span class="dt">int</span> x) {
+        <span class="kw">return</span> x[parent][child][<span class="dv">1</span>]==x;
+    }
+    <span class="dt">void</span> rotate(<span class="dt">int</span> self) {
+        <span class="dt">int</span> flaj=flag(self),
+            p=self[parent],
+            pp=p[parent],
+            ch=self[child][!flaj];
+        <span class="co">/****/</span> self[parent]=pp;
+        <span class="kw">if</span>(pp) pp[child][flag(p)]=self;
+        <span class="co">/****/</span> p[parent]=self;
+        <span class="co">/****/</span> self[child][!flaj]=p;
+        <span class="kw">if</span>(ch) ch[parent]=p;
+        <span class="co">/****/</span> p[child][flaj]=ch;
+        p[size]=p[child][<span class="dv">0</span>][size]+p[child][<span class="dv">1</span>][size]<span class="dv">+1</span>;
+    }
+    <span class="dt">void</span> splay(<span class="dt">int</span> self) {
+        <span class="dt">int</span> p,pp;
+        <span class="kw">while</span>((p=self[parent])) {
+            <span class="kw">if</span>((pp=p[parent]))
+                rotate(flag(self)==flag(pp)?p:self);
+            rotate(self);
+        }
+        root=self;
+    }
+    <span class="dt">void</span> insert__(lli val) {
+        <span class="kw">while</span>(<span class="kw">true</span>) {
+            <span class="dt">int</span> ch=root[child][root[value]&lt;val];
+            <span class="kw">if</span>(!ch) {
+                ch=graphtop++;
+                ch[value]=val;
+                ch[child][<span class="dv">0</span>]=ch[child][<span class="dv">1</span>]=<span class="dv">0</span>;
+                ch[parent]=root;
+                ch[size]=<span class="dv">1</span>;
+                root[child][root[value]&lt;val]=ch;
+                splay(ch);
+                <span class="kw">return</span>;
+            }
+            root=ch;
+        }
+    }
+    <span class="dt">void</span> insert(lli val) {
+        <span class="kw">if</span> (!inserted) {
+            root[value] = val;
+            inserted = <span class="kw">true</span>;
+            <span class="kw">return</span> ;
+        }
+        insert__(val);
+    }
+    lli queryf(<span class="dt">int</span> k)
+    {
+        <span class="co">// int target = root;</span>
+        <span class="er">$</span> printf(<span class="st">"get </span><span class="ch">%d\n</span><span class="st">"</span>,k);
+        <span class="dt">int</span> self=root,szl;
+        <span class="kw">while</span>((szl=self[child][<span class="dv">0</span>][size])!=k<span class="dv">-1</span>) {
+            <span class="kw">if</span>(szl&gt;k<span class="dv">-1</span>) {
+                <span class="er">$</span> puts(<span class="st">"goto left"</span>);
+                self=self[child][<span class="dv">0</span>];
+            }
+            <span class="kw">else</span> {
+                <span class="er">$</span> puts(<span class="st">"goto right"</span>);
+                self=self[child][<span class="dv">1</span>],
+                    k-=szl<span class="dv">+1</span>;
+            }
+            <span class="er">$</span> printf(<span class="st">"now size of left = </span><span class="ch">%d\n</span><span class="st">"</span>,szl);
+        }
+        <span class="er">$</span> printf(<span class="st">"value is </span><span class="ch">%lld\n</span><span class="st">"</span>,self[value]);
+        <span class="kw">return</span> self[value];
+    }
+} st;
+
+<span class="dt">int</span> n, m;
+lli ins[maxn];
+vector&lt;<span class="dt">int</span>&gt; qry[maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;ins[i]);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, a; i &lt;= m; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;a);
+        qry[a].push_back(i);
+    }
+    <span class="co">// Querying while inserting</span>
+    st.build_tree();
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        st.insert(ins[i]);
+        <span class="kw">for</span> (<span class="dt">unsigned</span> <span class="dt">int</span> j = <span class="dv">0</span>; j &lt; qry[i].size(); j++)
+            printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, st.queryf(qry[i][j]));
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/noipemu35rollcall/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/noipemu35rollcall/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/noipemu35rollcall/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/noipemu35rollcall/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="noipemu35rollcall">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1082: [SCOI2005]栅栏&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1082: [SCOI2005]栅栏
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=SCOI2005" target="_self">
+            <i class="fa fa-tag"></i> SCOI2005
+          </a>
+          <a class="tag" href="/blog/archive/?q=Binary Search" target="_self">
+            <i class="fa fa-tag"></i> Binary Search
+          </a>
+          <a class="tag" href="/blog/archive/?q=Brute Force Search" target="_self">
+            <i class="fa fa-tag"></i> Brute Force Search
+          </a>
+        </span>
+        <span class="date" title="13:27:04 | 13 December, 2016">
+          13 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>农夫约翰打算建立一个栅栏将他的牧场给围起来, 因此他需要一些特定规格的木材. 于是农夫约翰到木材店购买木材. 可是木材店老板说他这里只剩下少部分大规格的木板了. 不过约翰可以购买这些木板, 然后切割成他所需要的规格. 而且约翰有一把神奇的锯子, 用它来锯 木板, 不会产生任何损失, 也就是说长度为 <span class="math inline">\(10\)</span> 的木板可以切成长度为 <span class="math inline">\(8\)</span> 和 <span class="math inline">\(2\)</span> 的两 个木板. 你的任务是, 给你约翰所需要的木板的规格, 还有木材店老板能够给出的木材的规 格, 求约翰最多能够得到多少他所需要的木板.</p>
+<h2 id="input">Input</h2>
+<p>第一行为整数 <span class="math inline">\(m\)</span> 表示木材店老板可以提供多少块木材给约翰. 紧跟着 <span class="math inline">\(m\)</span> 行为老板提供 的每一块木板的长度. 接下来一行为整数 <span class="math inline">\(n\)</span>, 表示约翰需要多少木材. 接下来 <span class="math inline">\(n\)</span> 行表示他所需要的每一块木板的长度. 木材的规格小于 <span class="math inline">\(32767\)</span>. (对于店老板提供的和约翰需要的每块木板, 你只能使用一次).</p>
+<h2 id="output">Output</h2>
+<p>只有一行, 为约翰最多能够得到的符合条件的木板的个数.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>4
+30
+40
+50
+25
+10
+15
+16
+17
+18
+19
+20
+21
+25
+24
+30</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>7</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有数据, 满足:<span class="math inline">\(m \leq 50, n \leq 1000\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>先把所有的对象从小到大排一遍序, 然后去掉根本不可能的元素.</p>
+<p>这样一来就可以爆搜最开始的前面几块木板可不可以被切出来了, 二分答案加上爆搜可以 水过此题.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">1010</span>;
+
+<span class="dt">int</span> n, m;
+lli a[maxn], b[maxn];
+lli sum_a, sum_b[maxn];
+
+<span class="dt">bool</span> flag = <span class="kw">false</span>;
+lli bl[maxn];
+<span class="dt">void</span> dfs(<span class="dt">int</span> pa, <span class="dt">int</span> pb, <span class="dt">int</span> len, <span class="dt">int</span> sum)
+{
+    <span class="co">// Final status.</span>
+    <span class="kw">if</span> (pb == <span class="dv">0</span>)
+        flag = <span class="kw">true</span>;
+    <span class="co">// Skipping non-choosable boards</span>
+    <span class="kw">while</span> (pa &lt;= n &amp;&amp; a[pa] &lt; b[<span class="dv">1</span>])
+        sum += a[pa++];
+    <span class="co">// That would be impossible.</span>
+    <span class="kw">if</span> (flag || pa &gt; n)
+        <span class="kw">return</span> ;
+    <span class="kw">if</span> (sum + sum_b[len] &gt; sum_a)
+        <span class="kw">return</span> ;
+    <span class="co">// Searching further situations.</span>
+    <span class="dt">int</span> t = pa, t1 = pa, t2 = pb, t3 = sum;
+    <span class="kw">if</span> (b[pb] == b[pb + <span class="dv">1</span>] &amp;&amp; pb != len)
+        t = bl[pb + <span class="dv">1</span>];
+    <span class="kw">for</span> (<span class="dt">int</span> i = t; i &lt;= n; i++)
+        <span class="co">// If selectable of this board</span>
+        <span class="kw">if</span> (a[i] &gt;= b[pb]) {
+            bl[pb] = i;
+            a[i] -= b[pb--];
+            dfs(pa, pb, len, sum);
+            pa = t1;
+            pb = t2;
+            sum = t3;
+            a[i] += b[pb];
+        }
+    <span class="kw">return</span> ;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;a[i]);
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;b[i]);
+    <span class="co">// Arranging data sequences</span>
+    sort(a + <span class="dv">1</span>, a + <span class="dv">1</span> + n);
+    sort(b + <span class="dv">1</span>, b + <span class="dv">1</span> + m);
+    <span class="co">// Removing boards that are too large to satisfy</span>
+    <span class="kw">while</span> (b[m] &gt; a[n])
+        m--;
+    <span class="co">// Removing base-boards that are too small to be cut up</span>
+    <span class="dt">int</span> new_n = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        <span class="kw">if</span> (a[i] &gt; b[<span class="dv">1</span>])
+            a[++new_n] = a[i];
+    n = new_n;
+    <span class="co">// Calculating sums.</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        sum_a += a[i];
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+        sum_b[i] = sum_b[i - <span class="dv">1</span>] + b[i];
+    <span class="co">// Binary searching results</span>
+    <span class="dt">int</span> l = <span class="dv">1</span>, r = m, res = <span class="dv">0</span>;
+    <span class="kw">while</span> (l &lt;= r) {
+        <span class="dt">int</span> mid = (l + r) / <span class="dv">2</span>;
+        flag = <span class="kw">false</span>;
+        dfs(<span class="dv">1</span>, mid, mid, <span class="dv">0</span>);
+        <span class="kw">if</span> (flag) l = mid + <span class="dv">1</span>, res = mid;
+        <span class="kw">else</span> r = mid - <span class="dv">1</span>;
+    }
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1082/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1082/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1082/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1082/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1082">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

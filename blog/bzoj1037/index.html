@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1037: [ZJOI2008]生日聚会Party&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1037: [ZJOI2008]生日聚会Party
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=ZJOI2008" target="_self">
+            <i class="fa fa-tag"></i> ZJOI2008
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+        </span>
+        <span class="date" title="17:06:58 | 2 August, 2016">
+          2 August, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Problem Specification</th>
+<th style="text-align: left;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Time Limit</td>
+<td style="text-align: left;">10 Sec</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Memory Limit</td>
+<td style="text-align: left;">162 MB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Submit</td>
+<td style="text-align: left;">1967</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Solved</td>
+<td style="text-align: left;">1165</td>
+</tr>
+</tbody>
+</table>
+<!-- More -->
+<h2 id="description">Description</h2>
+<p>今天是 hidadz 小朋友的生日, 她邀请了许多朋友来参加她的生日 party. hidadz 带着朋友们来到花园中, 打算坐成一排玩游戏. 为了游戏不至于无聊, 就座的方案应满足如下条件: 对于任意连续的一段, 男孩与女孩的数目之差不超过 k. 很快, 小朋友便找到了一种方案坐了下来开始游戏. hidadz 的好朋友 Susie 发现, 这样的就座方案其实是很多的, 所以大家很快就找到了一种, 那么到底有多少种呢? 热爱数学的 hidadz 和她的朋友们开始思考这个问题...... 假设参加 party 的人中共有 n 个男孩与 m 个女孩, 你是否能解答 Susie 和 hidadz 的疑问呢? 由于这个数目可能很多, 他们只想知道这个数目除以 12345678 的余数.</p>
+<h2 id="input">Input</h2>
+<p>仅包含一行共 3 个整数, 分别为男孩数目 n, 女孩数目 m, 常数 k.</p>
+<h2 id="output">Output</h2>
+<p>应包含一行, 为题中要求的答案.</p>
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>1 2 1</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>1</code></pre>
+<h2 id="hint">HINT</h2>
+<p>n, m ≤ 150, k ≤ 20.</p>
+<h2 id="source">Source</h2>
+<hr/>
+<blockquote>
+<p>http: //www. cnphp6. com/archives/61515 看来自己越来越弱了......</p>
+<p>这些计数题设计的状态都很巧妙,, 自己智商太低 QAQ</p>
+<p>和矩阵 dp 做的那题差不多, 都是枚举当前点的情况然后开了一些维来维护从当前点向前延伸的一些状态.</p>
+<p>设 d [i, j, x, y] 表示前 i 个男的前 j 个女的, x 表示从当前点向前延伸得到的最大的男减女的差, y 表示从当前点向前延伸得到的最大的女减男的差.</p>
+<p>则 d [i+1, j, x+1, max (y-1, 0)] +=d [i, j, x, y], d [i, j+1, x, max (y-1, 0)] +=d [i, j, x, y]</p>
+<p>这样设计状态能不重不漏的统计且能转移是因为, 转移的点是 i+1, j+1, 而 x 和 y 设计的状态只用考虑当前的和 i+1 或 j+1 这个点</p>
+<p>还有个地方我竟然考虑了很久? 就是 max 那里, 会不会不正确? 但是想想就应该知道, 假如变成了-1, 那么总有办法从前边去掉一个使得变成 0, 而我们所设计的状态要保证任意一段最大, 所以存在了最大的段, 即 0</p>
+<p>最后答案就是 sum {d [n, m, x, y], 0&lt;=x, y&lt;=k}</p>
+</blockquote>
+<p>连这么水的 DP 都想不出来真是没脸见人了~</p>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="dt">const</span> <span class="dt">int</span> mod = <span class="dv">12345678</span>;
+
+<span class="dt">int</span> n, m, k;
+<span class="dt">int</span> dp[<span class="dv">160</span>][<span class="dv">160</span>][<span class="dv">25</span>][<span class="dv">25</span>];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d%d</span><span class="st">"</span>, &amp;n, &amp;m, &amp;k);
+    dp[<span class="dv">0</span>][<span class="dv">0</span>][<span class="dv">0</span>][<span class="dv">0</span>] = <span class="dv">1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++) <span class="co">// Counting i boys</span>
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">0</span>; j &lt;= m; j++) <span class="co">// Counting j girls</span>
+            <span class="kw">for</span> (<span class="dt">int</span> x = <span class="dv">0</span>; x &lt;= k; x++) <span class="co">// There are x more boys than girls up to now</span>
+                <span class="kw">for</span> (<span class="dt">int</span> y = <span class="dv">0</span>; y &lt;= k; y++) { <span class="co">// There are y more girls than boys up to now</span>
+                    <span class="co">// This time it's completely empty, and shall not care about it...</span>
+                    <span class="kw">if</span> (dp[i][j][x][y] &lt;= <span class="dv">0</span>) <span class="kw">continue</span>;
+                    <span class="kw">if</span> (i &lt; n &amp;&amp; x &lt; k) <span class="co">// Adding a boy</span>
+                        dp[i + <span class="dv">1</span>][j][x + <span class="dv">1</span>][max(y - <span class="dv">1</span>, <span class="dv">0</span>)] =
+                                (dp[i + <span class="dv">1</span>][j][x + <span class="dv">1</span>][max(y - <span class="dv">1</span>, <span class="dv">0</span>)] +
+                                dp[i][j][x][y]) % mod;
+                    <span class="kw">if</span> (j &lt; m &amp;&amp; y &lt; k) <span class="co">// Adding a girl</span>
+                        dp[i][j + <span class="dv">1</span>][max(x - <span class="dv">1</span>, <span class="dv">0</span>)][y + <span class="dv">1</span>] =
+                                (dp[i][j + <span class="dv">1</span>][max(x - <span class="dv">1</span>, <span class="dv">0</span>)][y + <span class="dv">1</span>] +
+                                dp[i][j][x][y]) % mod;
+                }
+    <span class="co">// Of course, the sum is all of the states of the last timestamp, i.e.</span>
+    <span class="co">// for each 0 &lt;= x, y &lt;= k, we give dp[n][m][x][y] to the sum</span>
+    <span class="dt">int</span> sum = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> x = <span class="dv">0</span>; x &lt;= k; x++)
+        <span class="kw">for</span> (<span class="dt">int</span> y = <span class="dv">0</span>; y &lt;= k; y++)
+            sum = (sum + dp[n][m][x][y]) % mod;
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, sum);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> pydatagen <span class="im">import</span> <span class="op">*</span>
+x <span class="op">=</span> randrange(<span class="dv">90</span>, <span class="dv">150</span>)
+y <span class="op">=</span> x <span class="op">+</span> randrange(<span class="op">-</span><span class="dv">150</span> <span class="op">+</span> x, <span class="dv">150</span> <span class="op">-</span> x)
+k <span class="op">=</span> randrange(<span class="dv">2</span>, <span class="dv">20</span>)
+printf(<span class="st">'</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> (x, y, k))
+fclose()</code></pre></div>
+<hr/>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1037/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1037/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1037/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1037/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1037">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

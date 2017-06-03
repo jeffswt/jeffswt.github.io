@@ -1,0 +1,290 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1206: [HNOI2005]虚拟内存&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1206: [HNOI2005]虚拟内存
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=HNOI2005" target="_self">
+            <i class="fa fa-tag"></i> HNOI2005
+          </a>
+          <a class="tag" href="/blog/archive/?q=STL" target="_self">
+            <i class="fa fa-tag"></i> STL
+          </a>
+          <a class="tag" href="/blog/archive/?q=Balanced Tree" target="_self">
+            <i class="fa fa-tag"></i> Balanced Tree
+          </a>
+        </span>
+        <span class="date" title="02:01:55 | 26 December, 2016">
+          26 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>操作系统中一种重要的存储管理技术就是虚拟内存技术. 操作系统中允许进程同时运行, 也就是并行. 每个进程都有其相对独立的数据块 (进程运行的过程中将对其进行读写操作). 理想的情况下, 这些数据块都应该存放在内存中, 这样才能实现高效的读写操作. 但事实上, 内存的容量有限, 每个进程只能把一部分数据放在内存中, 为了解决这个矛盾, 提出了虚拟内存技术. 虚拟内存技术的基本原理是: 对进程而言, 内存空间是无限大的, 进程可以随意 地读写数据, 而对操作系统内部而言, 利用外存来模拟扩充的内存空间, 进程要求访问某个 内存单元时, 交由操作系统处理, 操作系统首先在内存中查找该单元是否存在, 如果存在, 查找成功, 否则转入外存查找 (一定存在于外存中). 就存储介质的物理性质而言, 内存的访问速度相对于外存要快得多, 因此对于每个进程来说操作系统应该把那些访问次数较多的 数据存放在内存中, 而把那些访问次数很少的数据放在外存中. 如何选择内存中暂留的数据 是一个很值得研究的问题, 下面介绍一个内存管理中比较常用的算法: 内存中的数据以页为基本存储单位, 进程的读写操作都针对页来进行. 实际内存空间被分割成 n 页, 虚拟内存空间 的页数往往要多得多. 某一时刻, 进程需要访问虚存编号为 P 的页, 该算法的执行步骤如下:</p>
+<ol type="1">
+<li>首先在内存中查找, 如果该页位于内存中, 查找成功, 转 4, 否则继续下面的操作;</li>
+<li>寻找内存中是否存在空页 (即没有装载任何数据页的页面), 若有, 则从外存中读入要 查找页, 并将该页送至内存中的空页进行存储, 然后转 4, 否则继续下面的操作;</li>
+<li>在内存中寻找一个访问次数最少的页面 (如果存在多个页面的访问次数同时为最少, 则选取最早读入数据进入内存的那个页面), 从外存中读入要查找页, 替换该页.</li>
+<li>结束</li>
+</ol>
+<p>所谓访问次数是指从当前页面进入内存到该时刻被访问的次数, 如果该页面以前进入过内存 并被其它页面替换, 那么前面的访问次数不应计入这个时刻的访问次数中. 你的任务是设计一个程序实现上述算法. 测试数据将会提供 <span class="math inline">\(m\)</span> 条读写内存的命令, 每条命题提供要求访问 的虚拟内存页的编号 <span class="math inline">\(P\)</span>. 你的程序要求能够模拟整个 <span class="math inline">\(m\)</span> 条命令的全部执行过程, 所有的命令是按照输入的先后执行的, 最开始的时候内存中的 <span class="math inline">\(n\)</span> 页全为空.</p>
+<h2 id="input">Input</h2>
+<p>第 <span class="math inline">\(1\)</span> 行为 <span class="math inline">\(n \lt 10000\)</span> 和 <span class="math inline">\(m \lt 1000000\)</span>, 分别表示内存页数和读写内存命令条数. 接下来有 <span class="math inline">\(m\)</span> 行, 其中第 <span class="math inline">\(i+1\)</span> 行有一个正整数 <span class="math inline">\(P_i \leq 10^9\)</span>, 表示第 <span class="math inline">\(i\)</span> 条读写内存命令需要访问的虚拟内存页的编号.</p>
+<h2 id="output">Output</h2>
+<p>仅包含一个正整数, 表示在整个模拟过程中, 在内存中直接查找成功的次数 (即上面的算法 只执行步骤 1 的次数).</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>3 8
+1
+1
+2
+3
+4
+2
+5
+4</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>1</code></pre>
+<h2 id="explanation">Explanation</h2>
+<p>是不是随便拿 STL 水一下就可以过了呢~</p>
+<p>其实用各种 set map 维护一发就可以了...... 就是逻辑可能有点混乱, 而且不停申请内存和销毁内存的开销可能有点大 (不过我的程序常数一直就很大对不对).</p>
+<p>其实我的程序还是比较好看懂的, 就是各种 <code>access_t</code> 的定义太奇葩 233</p>
+<p>话说这样说到底可以提高程序可读性, 降低检索次数 (就是查看这个变量是干嘛的)</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;map&gt;</span>
+<span class="ot">#include &lt;set&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">10010</span>;
+
+<span class="kw">typedef</span> lli vmemaddr_t;
+<span class="kw">typedef</span> <span class="dt">int</span> memaddr_t;
+<span class="kw">typedef</span> <span class="dt">int</span> access_t;
+<span class="kw">typedef</span> <span class="dt">int</span> loadtime_t;
+<span class="dt">const</span> vmemaddr_t vmem_null = <span class="dv">0</span>;
+<span class="dt">const</span> memaddr_t mem_null = <span class="dv">0</span>;
+
+<span class="kw">class</span> VirtualMemoryManager
+{
+<span class="kw">private</span>:
+    <span class="co">// Used to access memory address through virtual memory address</span>
+    map&lt;vmemaddr_t, memaddr_t&gt; vmem_to_mem;
+    <span class="co">// Used to access virtual memory addresses through access counter</span>
+    map&lt;access_t, map&lt;loadtime_t, vmemaddr_t&gt; &gt; cnt_to_vmem;
+    <span class="co">// Used to access virtual memory address stored in memory</span>
+    vmemaddr_t mem_to_vmem[maxn];
+    <span class="co">// Used to store time variables for virtual memory addresses</span>
+    map&lt;vmemaddr_t, access_t&gt; vmem_to_cnt;
+    map&lt;vmemaddr_t, loadtime_t&gt; vmem_to_tim;
+    <span class="co">// Global stati</span>
+    set&lt;memaddr_t&gt; empty_mem;
+    loadtime_t atomic_time;
+    <span class="dt">int</span> n;
+<span class="kw">protected</span>:
+    <span class="dt">bool</span> cache_hit(vmemaddr_t vma)
+    {
+        <span class="kw">if</span> (vmem_to_mem[vma] &gt; <span class="dv">0</span>)
+            <span class="kw">return</span> <span class="kw">true</span>;
+        <span class="kw">return</span> <span class="kw">false</span>;
+    }
+    <span class="co">// void unload_memory(memaddr_t ma)</span>
+    <span class="co">// {</span>
+    <span class="co">//     vmemaddr_t vma = mem_to_vmem[ma];</span>
+    <span class="co">//     access_t act = vmem_to_cnt[vma];</span>
+    <span class="co">//     loadtime_t ltt = vmem_to_tim[vma];</span>
+    <span class="co">//     map&lt;loadtime_t, vmemaddr_t&gt;&amp; lvm = cnt_to_vmem[act];</span>
+    <span class="co">//     lvm.erase(lvm.find(ltt));</span>
+    <span class="co">//     if (lvm.empty())</span>
+    <span class="co">//         cnt_to_vmem.erase(cnt_to_vmem.find(act));</span>
+    <span class="co">//     // Unloading indices</span>
+    <span class="co">//     mem_to_vmem[ma] = 0;</span>
+    <span class="co">//     vmem_to_mem.erase(vmem_to_mem.find(vma));</span>
+    <span class="co">//     vmem_to_cnt.erase(vmem_to_cnt.find(vma));</span>
+    <span class="co">//     vmem_to_tim.erase(vmem_to_tim.find(vma));</span>
+    <span class="co">//     empty_mem.insert(ma);</span>
+    <span class="co">//     return ;</span>
+    <span class="co">// }</span>
+<span class="kw">public</span>:
+    <span class="dt">bool</span> access_memory(vmemaddr_t vma)
+    {
+        <span class="co">// printf("ACCESSING VMEM ADDRESS 0x%lld...\n", vma);</span>
+        <span class="co">// If cache hit, update counter and leave.</span>
+        <span class="kw">if</span> (<span class="kw">this</span>-&gt;cache_hit(vma)) {
+            access_t act = vmem_to_cnt[vma];
+            loadtime_t ltt = vmem_to_tim[vma];
+            <span class="co">// printf("  CACHE HIT: ACCESSED %d, INJECTED @ %d\n", act, ltt);</span>
+            <span class="co">// Unloading original value.</span>
+            map&lt;loadtime_t, vmemaddr_t&gt;&amp; lvm = cnt_to_vmem[act];
+            lvm.erase(lvm.find(ltt));
+            <span class="kw">if</span> (lvm.empty())
+                cnt_to_vmem.erase(cnt_to_vmem.find(act));
+            <span class="co">// Loading new value.</span>
+            act += <span class="dv">1</span>;
+            <span class="kw">if</span> (cnt_to_vmem.find(act) == cnt_to_vmem.end()) {
+                map&lt;loadtime_t, vmemaddr_t&gt; lvm;
+                cnt_to_vmem[act] = lvm;
+            }
+            cnt_to_vmem[act][ltt] = vma;
+            <span class="co">// Finished loading. Updating indexes.</span>
+            vmem_to_cnt[vma] = act;
+            <span class="kw">return</span> <span class="kw">true</span>;
+        }
+        <span class="co">// Insert into memory, if doesn't exist.</span>
+        <span class="co">// Freeing memory for extra spaces</span>
+        <span class="kw">if</span> (empty_mem.empty()) {
+            <span class="co">// printf("  MEMORY FULL, LOOKING FOR EXCESSIVE SPACE\n", vma);</span>
+            map&lt;access_t, map&lt;loadtime_t, vmemaddr_t&gt; &gt;::iterator it1
+                = cnt_to_vmem.begin();
+            map&lt;loadtime_t, vmemaddr_t&gt;::iterator it2
+                = it1-&gt;second.begin();
+            vmemaddr_t vma = it2-&gt;second;
+            <span class="co">// Eradicating from structure</span>
+            <span class="co">// printf("  DUMPING 0x%lld INTO PAGEFILE... ", vma);</span>
+            <span class="co">// this-&gt;unload_memory(vma);</span>
+            memaddr_t ma = vmem_to_mem[vma];
+            access_t act = vmem_to_cnt[vma];
+            loadtime_t ltt = vmem_to_tim[vma];
+            it1-&gt;second.erase(it2);
+            <span class="kw">if</span> (it1-&gt;second.empty())
+                cnt_to_vmem.erase(it1);
+            <span class="co">// printf("OK\n  REMOVING INDICES... ");</span>
+            mem_to_vmem[ma] = <span class="dv">0</span>;
+            vmem_to_mem.erase(vmem_to_mem.find(vma));
+            vmem_to_cnt.erase(vmem_to_cnt.find(vma));
+            vmem_to_tim.erase(vmem_to_tim.find(vma));
+            empty_mem.insert(ma);
+            <span class="co">// printf("OK\n");</span>
+        }
+        <span class="co">// Injecting indices</span>
+        access_t act = <span class="dv">1</span>;
+        loadtime_t ltt = atomic_time;
+        <span class="co">// printf("  INJECTING VMEM WITH SETTINGS %d, @ %d\n", act, ltt);</span>
+        vmem_to_cnt[vma] = act;
+        vmem_to_tim[vma] = ltt;
+        <span class="co">// Injecting into free memory</span>
+        memaddr_t ma = *empty_mem.begin();
+        empty_mem.erase(empty_mem.begin());
+        vmem_to_mem[vma] = ma;
+        mem_to_vmem[ma] = vma;
+        <span class="kw">if</span> (cnt_to_vmem.find(act) == cnt_to_vmem.end()) {
+            map&lt;loadtime_t, vmemaddr_t&gt; lvm;
+            cnt_to_vmem[act] = lvm;
+        }
+        cnt_to_vmem[act][ltt] = vma;
+        <span class="co">// printf("  MEMORY CACHING SUCCEEDED\n");</span>
+        <span class="kw">return</span> <span class="kw">false</span>;
+    }
+    <span class="dt">void</span> increment_atomic_time(<span class="dt">void</span>)
+    {
+        atomic_time += <span class="dv">1</span>;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> init(<span class="dt">int</span> n_)
+    {
+        <span class="kw">this</span>-&gt;n = n_;
+        atomic_time = <span class="dv">1</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+            vmem_to_mem[i] = <span class="dv">0</span>;
+            empty_mem.insert(i);
+        }
+        <span class="kw">return</span> ;
+    }
+} vmm;
+
+<span class="dt">int</span> n, m;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    vmm.init(n);
+    <span class="dt">int</span> res = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        vmemaddr_t vma;
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;vma);
+        res += vmm.access_memory(vma);
+        vmm.increment_atomic_time();
+    }
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1206/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1206/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1206/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1206/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1206">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

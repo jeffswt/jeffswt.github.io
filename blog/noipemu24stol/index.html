@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NOIP-EMU-141023-stol 土豪聪要请客&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          NOIP-EMU-141023-stol 土豪聪要请客
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOIP Emulation" target="_self">
+            <i class="fa fa-tag"></i> NOIP Emulation
+          </a>
+          <a class="tag" href="/blog/archive/?q=Brute Force" target="_self">
+            <i class="fa fa-tag"></i> Brute Force
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+        </span>
+        <span class="date" title="18:50:48 | 6 November, 2016">
+          6 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="土豪聪要请客-stol">土豪聪要请客 (stol)</h2>
+<p>众所周知, 聪哥 (ndsf) 是个土豪, 不过你们不知道的是他的 MZ 和他的 RMB 一样滴多……</p>
+<p>某天土豪聪又赚了 <span class="math inline">\(10^{10000}\)</span> 的 RMB, 他比较开心, 于是准备请客. 他在自己在 XX 星上的别墅里面大摆酒席, 想要邀请尽可能多的 MZ 来参加他的宴会. 他将会同 MZ 一起坐在一个巨大的长方形桌子上. 这个桌子能坐下的人数等于他的边长. 聪哥要求他的桌子能够放进他的别墅, 并且桌子的边必须与别墅的边界平行. 给定别墅的平面图, 请你求出聪哥最多可以请多少个 MZ.</p>
+<h3 id="输入格式">输入格式</h3>
+<p>第一行 n, m. 表示别墅的长宽</p>
+<p>下面 n 行, 每行 M 个字符, 表示一个方块是空的 (<code>.</code>) 或是被占用了 (<code>X</code>) .</p>
+<p>聪哥只要他的桌子放在别墅里, 并且桌子不能占用任何一个已经占用了的方块.</p>
+<h3 id="输出格式">输出格式</h3>
+<p>一个数, 表示聪哥最多可以请几个 Maze.</p>
+<!-- More -->
+<h3 id="样例输入1">样例输入 1</h3>
+<pre><code>2 2
+..
+..</code></pre>
+<h3 id="样例输出1">样例输出 1</h3>
+<pre><code>7</code></pre>
+<h3 id="样例输入2">样例输入 2</h3>
+<pre><code>4 4
+X.XX
+X..X
+..X.
+..XX</code></pre>
+<h3 id="样例输出2">样例输出 2</h3>
+<pre><code>9</code></pre>
+<h3 id="数据范围">数据范围</h3>
+<p>对于 60% 的数据,<span class="math inline">\(n, m \leq 100\)</span> 对于 100% 的数据,<span class="math inline">\(n, m \leq 400\)</span></p>
+<h3 id="explanation">Explanation</h3>
+<blockquote>
+<p>当我第一次知道要做这道题的时候</p>
+<p>其实我是, 是拒绝的</p>
+<p>我跟导演讲, 我拒绝, 因为</p>
+<p>其实我, 根本不会写 DP</p>
+<p>教练跟我讲, 写完加特技</p>
+<p>DP 上优化, 速度很高、很快、很 AC.</p>
+<p>加了一行特技之后, 速度 DUANG~</p>
+</blockquote>
+<blockquote>
+<p>后来我也知道暴力是, 是假的, 是 DP 成分的</p>
+<p>我现在呢, 每天还在, 加特技</p>
+<p>加了很多特技, 复杂度 DUANG~ DUANG~ DUANG~</p>
+<p>考试用完后, 不加特技</p>
+<p>AC 都没有</p>
+<p>我的暴力, 速度特快</p>
+<p>因为我, 用 DP</p>
+<p>我用完之后, 根本没有写暴力</p>
+<p>这个就是我用的 IDE</p>
+</blockquote>
+<blockquote>
+<p>我的 IDE DP DP 上 DP</p>
+<p>写的时候, 根本没有上暴力</p>
+<p>AC AC, 我的代码, 会 AC</p>
+<p>我的代码, 会 AC</p>
+<p>是 DP 的暴力, 是暴力的 DP.</p>
+</blockquote>
+<p>大概就是这个意思, 随便优化一下暴力搜索就当成 DP 在 170ms 以内 AC 了.</p>
+<p>如果要转发上面那首打油诗请署上我的 handle, 谢谢.</p>
+<h3 id="example-code">Example Code</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">410</span>;
+
+<span class="dt">int</span> n, m;
+<span class="dt">bool</span> used[maxn][maxn];
+<span class="dt">int</span> extent_hor[maxn][maxn];
+<span class="dt">int</span> extent_ver[<span class="dv">2</span>][maxn][maxn],
+    ver_idx;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= m; j++) {
+            <span class="dt">char</span> ch = <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>;
+            <span class="kw">while</span> (ch != <span class="st">'.'</span> &amp;&amp; ch != <span class="st">'X'</span>)
+                scanf(<span class="st">"</span><span class="ch">%c</span><span class="st">"</span>, &amp;ch);
+            used[i][j] = ch == <span class="st">'X'</span>;
+        }
+    <span class="co">// Maximum extension -&gt; right end</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        extent_hor[i][m + <span class="dv">1</span>] = <span class="dv">0</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> j = m; j &gt;= <span class="dv">1</span>; j--)
+            <span class="kw">if</span> (used[i][j])
+                extent_hor[i][j] = <span class="dv">0</span>;
+            <span class="kw">else</span>
+                extent_hor[i][j] = extent_hor[i][j + <span class="dv">1</span>] + <span class="dv">1</span>;
+    }
+    <span class="co">// Maximum extension -&gt; bottom end</span>
+    <span class="dt">int</span> final_res = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = n; i &gt;= <span class="dv">1</span>; i--) {
+        <span class="dt">int</span> tmp_best = <span class="dv">0</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= m; j++) {
+            extent_ver[ver_idx][j][<span class="dv">1</span>] = extent_hor[i][j];
+            <span class="kw">if</span> (!extent_ver[ver_idx][j][<span class="dv">1</span>])
+                <span class="kw">continue</span>;
+            tmp_best = max(tmp_best, extent_ver[ver_idx][j][<span class="dv">1</span>] + <span class="dv">1</span>);
+            <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">2</span>; k &lt;= n + <span class="dv">1</span> - i; k++) {
+                extent_ver[ver_idx][j][k] = min(extent_ver[!ver_idx][j][k - <span class="dv">1</span>], extent_hor[i][j]);
+                <span class="kw">if</span> (!extent_ver[ver_idx][j][k])
+                    <span class="kw">break</span>;
+                tmp_best = max(tmp_best, extent_ver[ver_idx][j][k] + k);
+            }
+        }
+        final_res = max(final_res, tmp_best);
+        <span class="co">// printf("# row %d -&gt; %d\n", i, tmp_best);</span>
+        <span class="co">// for (int k = 1; k &lt;= n + 1 - i; cout &lt;&lt; endl, k++)</span>
+        <span class="co">//     for (int j = 1; j &lt;= m; j++)</span>
+        <span class="co">//         printf("%d ", extent_ver[ver_idx][j][k]);</span>
+        <span class="co">// cout &lt;&lt; endl;</span>
+        ver_idx = !ver_idx;
+    }
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, final_res * <span class="dv">2</span> - <span class="dv">1</span>);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/noipemu24stol/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/noipemu24stol/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/noipemu24stol/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/noipemu24stol/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="noipemu24stol">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj2002: [Hnoi2010]Bounce 弹飞绵羊&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj2002: [Hnoi2010]Bounce 弹飞绵羊
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=HNOI2010" target="_self">
+            <i class="fa fa-tag"></i> HNOI2010
+          </a>
+          <a class="tag" href="/blog/archive/?q=Link-Cut Tree" target="_self">
+            <i class="fa fa-tag"></i> Link-Cut Tree
+          </a>
+        </span>
+        <span class="date" title="01:04:12 | 3 February, 2017">
+          3 February, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>某天, Lostmonkey 发明了一种超级弹力装置, 为了在他的绵羊朋友面前显摆, 他邀请小绵羊 一起玩个游戏. 游戏一开始, Lostmonkey 在地上沿着一条直线摆上 <span class="math inline">\(n\)</span> 个装置, 每个装置 设定初始弹力系数 <span class="math inline">\(k_i\)</span>, 当绵羊达到第 <span class="math inline">\(i\)</span> 个装置时, 它会往后弹 <span class="math inline">\(k_i\)</span> 步, 达到第 <span class="math inline">\(i + k_i\)</span> 个装置, 若不存在第 <span class="math inline">\(i + k_i\)</span> 个装置, 则绵羊被弹飞. 绵羊想知道当它从第 <span class="math inline">\(i\)</span> 个装置起步时, 被弹几次后会被弹飞. 为了使得游戏更有趣, Lostmonkey 可以修改某个 弹力装置的弹力系数, 任何时候弹力系数均为正整数.</p>
+<h2 id="input">Input</h2>
+<p>第一行包含一个整数 <span class="math inline">\(n\)</span>, 表示地上有 <span class="math inline">\(n\)</span> 个装置, 装置的编号从 <span class="math inline">\(0\)</span> 到 <span class="math inline">\(n-1\)</span>, 接下来一行有 <span class="math inline">\(n\)</span> 个正整数, 依次为那 <span class="math inline">\(n\)</span> 个装置的初始弹力系数. 第三行有一个正整数 <span class="math inline">\(m\)</span>, 接下来 <span class="math inline">\(m\)</span> 行每行至少有两个数 <span class="math inline">\(i, j\)</span>, 若 <span class="math inline">\(i=1\)</span>, 你要输出从 <span class="math inline">\(j\)</span> 出发被弹几次后被 弹飞, 若 <span class="math inline">\(i=2\)</span> 则还会再输入一个正整数 <span class="math inline">\(k\)</span>, 表示第 <span class="math inline">\(j\)</span> 个弹力装置的系数被修改成 <span class="math inline">\(k\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>对于每个 <span class="math inline">\(i=1\)</span> 的情况, 你都要输出一个需要的步数, 占一行.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>4
+1 2 1 1
+3
+1 1
+2 1 1
+1 1</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>2
+3</code></pre>
+<h2 id="data-range">Data RAnge</h2>
+<p>对于 20% 的数据, 满足:<span class="math inline">\(n, m \leq 10000\)</span>;</p>
+<p>对于 100% 的数据, 满足:<span class="math inline">\(n \leq 200000, m \leq 100000\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<blockquote>
+<p>大家 <strong>一定</strong>要把这个 bzoj2002 写一遍, 叫弹飞绵羊...... Link-Cut Tree 的模板题 一定要写得很熟练...... ---Tsienyi Lawyer</p>
+</blockquote>
+<p>好吧, 叶老师的这番话我终于听从了, 然后写了一遍动态树 (然而 QTREE 还没有写 QwQ).</p>
+<p>关于这道题我调了半天, 然后就是死活 TLE (明显是死循环好不好) 停不下来. 然后我就把自己的代码和标程对着改了很久很久 (差不多两三个小时, 到一点多), 为了这个动用了几乎一切设备:<em> IntelliCLI, PyJudge, MinGW GDB, GDB on Bash on Windows, Diff......</em>, 导致桌面乱糟糟, 最后发现一个很细微的差异:</p>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp">par(p) = g; <span class="kw">if</span> (g) ch(g, y) = p;
+<span class="kw">if</span> (isroot(q)) {
+    isroot(p) = <span class="kw">true</span>;
+    isroot(q) = <span class="kw">false</span>;
+}</code></pre></div>
+<p>其中这一块的写法和 Splay 的写法是无异的, 但是就是这样写, 导致了本人无限死循环, 因为其实这段代码应该是这样写的:</p>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp">par(p) = g;
+<span class="kw">if</span> (isroot(q)) {
+    isroot(p) = <span class="kw">true</span>;
+    isroot(q) = <span class="kw">false</span>;
+} <span class="kw">else</span> {
+    ch(g, y) = p;
+}</code></pre></div>
+<p>原因就在于一个节点到底是不是树根并不取决于其父亲是不是空节点, 而是取决于该节点 的根标记. 如果根标记为真, 该节点才是根. 这里就把 Splay 树里默认的整个数据结构只有一个根的假设代入到了 Link-Cut Tree 里面了, 然而这个数据结构里有很多个根, 所以 导致了万恶的无限死循环......</p>
+<p>然而令人很开心的是三行 Splay 魔改一下就可以兼容了=w=</p>
+<p>现在回来说题, 题目的大意就是给一棵树, 动态修改节点的父亲, 求节点到根一共遍历了 多少个节点 (就是某节点的深度是多少).</p>
+<p>谈到修改边的连接, 基本就是动态树无疑了.</p>
+<p>然而如果要是一开始以为这 <strong>只</strong>是个有向无环图 (虽然它是), 那么你就错了. 因为 虽然每一个点可能从多个点到达, 但是反过来每一个点却只可能去一个点, 这就是一棵树 无疑了. 那还有什么可以犹豫的......</p>
+<p>有关动态树的操作, 请参见这个论文:<a href="qtree.pdf">QTREE解法的一些研究.pdf</a></p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">200100</span>;
+
+<span class="kw">class</span> LinkCutTree
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> arr_i[maxn][<span class="dv">5</span>];
+    <span class="ot">#define lc(_x) arr_i[_x][0]</span>
+    <span class="ot">#define rc(_x) arr_i[_x][1]</span>
+    <span class="ot">#define ch(_x,_y) arr_i[_x][_y]</span>
+    <span class="ot">#define par(_x) arr_i[_x][2]</span>
+    <span class="ot">#define size(_x) arr_i[_x][3]</span>
+    <span class="ot">#define isroot(_x) arr_i[_x][4]</span>
+    <span class="dt">int</span> n;
+    <span class="dt">void</span> update_lazy(<span class="dt">int</span> p)
+    {
+        size(p) = size(lc(p)) + <span class="dv">1</span> + size(rc(p));
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> rotate(<span class="dt">int</span> p)
+    {
+        <span class="dt">int</span> q = par(p), g = par(q);
+        <span class="dt">int</span> x = rc(q) == p, y = q == rc(g);
+        ch(q, x) = ch(p, !x); <span class="kw">if</span> (ch(q, x)) par(ch(q, x)) = q;
+        ch(p, !x) = q; par(q) = p;
+        par(p) = g; <span class="co">// if (g) ch(g, y) = p;</span>
+        <span class="kw">if</span> (isroot(q)) {
+            isroot(p) = <span class="kw">true</span>;
+            isroot(q) = <span class="kw">false</span>;
+        } <span class="kw">else</span> {
+            ch(g, y) = p;
+        }
+        update_lazy(q);
+        update_lazy(p);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> splay(<span class="dt">int</span> p)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> q = <span class="dv">0</span>; (q = par(p)) &amp;&amp; !isroot(p); rotate(p))
+            <span class="kw">if</span> (par(q) &amp;&amp; !isroot(q))
+                rotate((p == rc(q)) == (q == rc(par(q))) ? q : p);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> access(<span class="dt">int</span> p)
+    {
+        <span class="dt">int</span> q = <span class="dv">0</span>;
+        <span class="kw">while</span> (p) {
+            splay(p);
+            isroot(rc(p)) = <span class="kw">true</span>;
+            isroot(q) = <span class="kw">false</span>;
+            rc(p) = q;
+            update_lazy(p);
+            q = p, p = par(p);
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> makeroot(<span class="dt">int</span> p)
+    {
+        access(p);
+        splay(p);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> link(<span class="dt">int</span> p, <span class="dt">int</span> q)
+    {
+        makeroot(p);
+        par(lc(p)) = <span class="dv">0</span>;
+        isroot(lc(p)) = <span class="kw">true</span>;
+        lc(p) = <span class="dv">0</span>;
+        par(p) = q;
+        update_lazy(p);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> init(<span class="dt">int</span> n_)
+    {
+        <span class="kw">this</span>-&gt;n = n_;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+            isroot(i) = <span class="kw">true</span>;
+            size(i) = <span class="dv">1</span>;
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> query(<span class="dt">int</span> p)
+    {
+        makeroot(p);
+        <span class="kw">return</span> size(lc(p)) + <span class="dv">1</span>;
+    }
+} lct;
+
+<span class="dt">int</span> n, m;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    lct.init(n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, a; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;a);
+        <span class="kw">if</span> (i + a &lt;= n)
+            lct.link(i, i + a);
+    }
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> idx = <span class="dv">1</span>; idx &lt;= m; idx++) {
+        <span class="dt">int</span> a, b, c;
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;a);
+        <span class="kw">if</span> (a == <span class="dv">1</span>) { <span class="co">// To query</span>
+            scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;b);
+            b += <span class="dv">1</span>; <span class="co">// Due to the strange marker descripted in the problem</span>
+            printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, lct.query(b));
+        } <span class="kw">else</span> <span class="kw">if</span> (a == <span class="dv">2</span>) { <span class="co">// To modify</span>
+            scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;b, &amp;c);
+            b += <span class="dv">1</span>; <span class="co">// Due to the strange marker descripted in the problem</span>
+            lct.link(b, b+c &lt;= n ? b+c : <span class="dv">0</span>);
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj2002/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj2002/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj2002/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj2002/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj2002">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

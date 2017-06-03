@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj4238: 电压&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj4238: 电压
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=Depth First Search" target="_self">
+            <i class="fa fa-tag"></i> Depth First Search
+          </a>
+          <a class="tag" href="/blog/archive/?q=Graph Theory" target="_self">
+            <i class="fa fa-tag"></i> Graph Theory
+          </a>
+        </span>
+        <span class="date" title="00:01:34 | 9 February, 2017">
+          9 February, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>你知道 Just Odd Inventions 社吗? 这个公司的业务是 “只不过是奇妙的发明”. 这里简称为 JOI 社.</p>
+<p>JOI 社的某个实验室中有着复杂的电路. 电路由 <span class="math inline">\(n\)</span> 个节点和 <span class="math inline">\(m\)</span> 根细长的电阻组成. 节点被标号为 <span class="math inline">\(1 - n\)</span>;</p>
+<p>每个节点有一个可设定的状态【高电压】或者【低电压】. 每个电阻连接两个节点, 只有 一端是高电压, 另一端是低电压的电阻才会有电流流过. 两端都是高电压或者低电压的电阻不会有电流流过.</p>
+<p>某天, JOI 社为了维护电路, 选择了一根电阻, 为了能让【只有这根电阻上的电流停止流动, 其他 <span class="math inline">\(m - 1\)</span> 根电阻中都有电流流过】, 需要调节各节点的电压. 为了满足这个条件, 能选择的电阻共有多少根?</p>
+<p>对了, JOI 社这个奇妙的电路是用在什么样的发明上的呢? 这是公司内的最高机密, 除了社长 以外谁都不知道哦~</p>
+<p>现在给出电路的信息, 请你输出电路维护时可以选择使其不流的电阻的个数.</p>
+<h2 id="input">Input</h2>
+<p>第一行两个空格分隔的正整数 <span class="math inline">\(n, m\)</span>, 表示电路中有 <span class="math inline">\(n\)</span> 个节点和 <span class="math inline">\(m\)</span> 根电阻.</p>
+<p>接下来 <span class="math inline">\(m\)</span> 行, 第 <span class="math inline">\(i\)</span> 行有两个空格分隔的正整数 <span class="math inline">\(A_i, B_i (1 \leq A_i, B_i \leq n, A_i \neq B_i)\)</span>, 表示第 <span class="math inline">\(i\)</span> 个电阻连接节点 <span class="math inline">\(A_i\)</span> 和节点 <span class="math inline">\(B_i\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>输出一行一个整数, 代表电路维护时可选择的使其不流的电阻个数.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>4 4
+1 2
+2 3
+3 2
+4 3</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>2</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有数据, 保证:<span class="math inline">\(2 \leq n \leq 10^5, 1 \leq m \leq 2 \times 10^5\)</span>, 但是不保证图是连通的, 也不保证没有重边.</p>
+<h2 id="explanation">Explanation</h2>
+<p>题目好复杂......</p>
+<p>简化来说就是这样一道题, 给定一个不一定联通的无向图, 求将节点黑白染色以后, 有多少种情况下只有一条边两边颜色相同, 其他边两边颜色不同?</p>
+<p>PoPoQQQ 给了这样一种解法, 说只要求出生成树就可以了......</p>
+<p>因为没有什么太大关系, 所以随便一个生成树就可以了...... 然后树上距离为奇数的一定是可以颜色互异的, 距离为偶数的颜色一定相同...... 然后统计一下就可以了.</p>
+<p><code>dfs(i, NULL)</code> 给写成 <code>dfs(1, NULL)</code> 我也是醉了......</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">200100</span>, maxm = <span class="dv">500100</span>;
+
+<span class="kw">class</span> TreeManager
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge {
+        <span class="dt">int</span> u, v;
+        edge *next, *rev;
+    };
+    <span class="dt">int</span> n, ecnt;
+    edge *edges[maxn], epool[maxm];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v)
+    {
+        edge *p = &amp;epool[++ecnt],
+             *q = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;rev = q;
+        p-&gt;next = edges[u]; edges[u] = p;
+        q-&gt;u = v; q-&gt;v = u; q-&gt;rev = p;
+        q-&gt;next = edges[v]; edges[v] = q;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> vis[maxn];
+    <span class="dt">int</span> depth[maxn], par[maxn];
+    <span class="dt">int</span> good[maxn], bad[maxn];
+    <span class="dt">int</span> good_cnt, bad_cnt;
+    <span class="dt">void</span> dfs(<span class="dt">int</span> p, edge *from)
+    {
+        vis[p] = <span class="kw">true</span>;
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+            <span class="kw">if</span> (ep-&gt;rev != from) {
+                <span class="kw">if</span> (!vis[ep-&gt;v]) {
+                    par[ep-&gt;v] = p;
+                    depth[ep-&gt;v] = depth[p] + <span class="dv">1</span>;
+                    dfs(ep-&gt;v, ep);
+                    good[p] += good[ep-&gt;v];
+                    bad[p] += bad[ep-&gt;v];
+                } <span class="kw">else</span> {
+                    <span class="kw">if</span> (depth[ep-&gt;v] &gt; depth[p])
+                        <span class="kw">continue</span>;
+                    <span class="kw">if</span> ((depth[p] - depth[ep-&gt;v]) % <span class="dv">2</span> == <span class="dv">1</span>)
+                        good[p]++, good[ep-&gt;v]--, good_cnt++;
+                    <span class="kw">else</span>
+                        bad[p]++, bad[ep-&gt;v]--, bad_cnt++;
+                }
+            }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> work(<span class="dt">void</span>)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+            <span class="kw">if</span> (!vis[i]) {
+                depth[i] = <span class="dv">1</span>;
+                par[i] = <span class="dv">0</span>;
+                dfs(i, NULL);
+            }
+        <span class="co">// Processing results</span>
+        <span class="dt">int</span> res = <span class="dv">0</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+            <span class="kw">if</span> (par[i] &amp;&amp; bad[i] == bad_cnt &amp;&amp; !good[i])
+                res += <span class="dv">1</span>;
+        <span class="kw">if</span> (bad_cnt == <span class="dv">1</span>)
+            res += <span class="dv">1</span>;
+        <span class="kw">return</span> res;
+    }
+} graph;
+
+<span class="dt">int</span> n, m;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    graph.n = n;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, a, b; i &lt;= m; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;a, &amp;b);
+        graph.add_edge(a, b);
+    }
+    <span class="dt">int</span> res = graph.work();
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj4238/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj4238/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj4238/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj4238/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj4238">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1083: [SCOI2005]繁忙的都市&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1083: [SCOI2005]繁忙的都市
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=SCOI2005" target="_self">
+            <i class="fa fa-tag"></i> SCOI2005
+          </a>
+          <a class="tag" href="/blog/archive/?q=Minimum Span Tree" target="_self">
+            <i class="fa fa-tag"></i> Minimum Span Tree
+          </a>
+        </span>
+        <span class="date" title="19:07:17 | 13 December, 2016">
+          13 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>城市 C 是一个非常繁忙的大都市, 城市中的道路十分的拥挤, 于是市长决定对其中的道路进行 改造. 城市 C 的道路是这样分布的: 城市中有 <span class="math inline">\(n\)</span> 个交叉路口, 有些交叉路口之间有道路相连, 两个交叉路口之间最多有一条道路相连接. 这些道路是双向的, 且把所有的交叉路口直接或间接的连接起来了. 每条道路都有一个分值, 分值越小表示这个道路越繁忙, 越需要进行改造. 但是市政府的资金有限, 市长希望进行改造的道路越少越好, 于是他提出下面的 要求:</p>
+<ol type="1">
+<li>改造的那些道路能够把所有的交叉路口直接或间接的连通起来.</li>
+<li>在满足要求 1 的情况下, 改造的道路尽量少.</li>
+<li>在满足要求 1, 2 的情况下, 改造的那些道路中分值最大的道路分值尽量小.</li>
+</ol>
+<p>作为市规划局的你, 你应当作出最佳的决策, 选择那些道路应当被修建.</p>
+<h2 id="input">Input</h2>
+<p>第一行有两个整数 <span class="math inline">\(n, m\)</span> 表示城市有 <span class="math inline">\(n\)</span> 个交叉路口,<span class="math inline">\(m\)</span> 条道路.</p>
+<p>接下来 <span class="math inline">\(m\)</span> 行是对每条道路的描述,<span class="math inline">\(u, v, c\)</span> 表示交叉路口 <span class="math inline">\(u\)</span> 和 <span class="math inline">\(v\)</span> 之间有道路相连, 分值为 <span class="math inline">\(c\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>两个整数 <span class="math inline">\(s, max\)</span>, 表示你选出了几条道路, 分值最大的那条道路的分值是多少.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>4 5
+1 2 3
+1 4 5
+2 4 7
+2 3 6
+3 4 8</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>3 6</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有的数据, 满足:<span class="math inline">\(1 \leq n \leq 300, 1 \leq c \leq 10000\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>最小瓶颈生成树就是最小生成树, 因为 Kruskal 和 Prim 都是这样贪心求的最小生成树. 其实就是一道模板题.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">310</span>, maxm = <span class="dv">100100</span>;
+
+<span class="kw">class</span> UnionFindSet
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> n, par[maxn];
+    <span class="dt">int</span> find(<span class="dt">int</span> p)
+    {
+        <span class="kw">if</span> (par[p] == p)
+            <span class="kw">return</span> p;
+        <span class="kw">return</span> par[p] = find(par[p]);
+    }
+    <span class="dt">void</span> join(<span class="dt">int</span> p, <span class="dt">int</span> q)
+    {
+        p = find(p);
+        q = find(q);
+        par[p] = q;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> init(<span class="dt">int</span> n_)
+    {
+        n = n_;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+            par[i] = i;
+        <span class="kw">return</span> ;
+    }
+} ufs;
+
+<span class="kw">struct</span> edge {
+    <span class="dt">int</span> u, v, len;
+    edge *next; };
+<span class="dt">bool</span> cmp(edge a, edge b) {
+    <span class="kw">return</span> a.len &lt; b.len; }
+
+<span class="kw">class</span> MinimumSpanTree
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> n, ecnt;
+    edge *edges[maxn], epool[maxm];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v, <span class="dt">int</span> len)
+    {
+        edge *p = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;len = len;
+        p-&gt;next = edges[u]; edges[u] = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> eval(<span class="dt">void</span>)
+    {
+        <span class="dt">int</span> res = <span class="dv">0</span>;
+        sort(epool + <span class="dv">1</span>, epool + <span class="dv">1</span> + ecnt, cmp);
+        ufs.init(n);
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= ecnt; i++) {
+            <span class="dt">int</span> p = epool[i].u,
+                q = epool[i].v;
+            p = ufs.find(p);
+            q = ufs.find(q);
+            <span class="kw">if</span> (p == q)
+                <span class="kw">continue</span>;
+            ufs.join(p, q);
+            res = max(res, epool[i].len);
+        }
+        <span class="kw">return</span> res;
+    }
+} graph;
+
+<span class="dt">int</span> n, m;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    graph.n = n;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, a, b, c; i &lt;= m; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d%d%d</span><span class="st">"</span>, &amp;a, &amp;b, &amp;c);
+        graph.add_edge(a, b, c);
+    }
+    <span class="dt">int</span> res = graph.eval();
+    printf(<span class="st">"</span><span class="ch">%d</span><span class="st"> </span><span class="ch">%d\n</span><span class="st">"</span>, n - <span class="dv">1</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1083/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1083/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1083/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1083/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1083">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj3144: [Hnoi2013]切糕&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj3144: [Hnoi2013]切糕
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=HNOI2013" target="_self">
+            <i class="fa fa-tag"></i> HNOI2013
+          </a>
+          <a class="tag" href="/blog/archive/?q=Minimum Cut" target="_self">
+            <i class="fa fa-tag"></i> Minimum Cut
+          </a>
+        </span>
+        <span class="date" title="15:43:21 | 21 March, 2017">
+          21 March, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>经过千辛万苦小 A 得到了一块切糕, 切糕的形状是长方体, 小 A 打算拦腰将切糕切成两半分给小 B. 出于美观考虑, 小 A 希望切面能尽量光滑且和谐. 于是她找到你, 希望你能帮她找出 最好的切割方案.</p>
+<p>出于简便考虑, 我们将切糕视作一个长 <span class="math inline">\(P\)</span>、宽 <span class="math inline">\(Q\)</span>、高 <span class="math inline">\(R\)</span> 的长方体点阵. 我们将位于第 <span class="math inline">\(z\)</span> 层中第 <span class="math inline">\(x\)</span> 行、第 <span class="math inline">\(y\)</span> 列上 ($1 x P, 1 y Q, 1 z R) 的点称为 <span class="math inline">\((x, y, z)\)</span>, 它有一个非负的不和谐值 <span class="math inline">\(v(x, y, z)\)</span>. 一个合法的切面满足以下两个条件:</p>
+<ol type="1">
+<li>与每个纵轴 (一共有 <span class="math inline">\(P \times Q\)</span> 个纵轴) 有且仅有一个交点. 即切面是一个函数 <span class="math inline">\(f(x, y)\)</span>, 对于所有 <span class="math inline">\(1 \leq x \leq P, 1 \leq y \leq Q\)</span>, 我们需指定一个切割点 <span class="math inline">\(f(x, y)\)</span>, 且 <span class="math inline">\(1 \leq f(x, y) \leq Q\)</span>.</li>
+<li>切面需要满足一定的光滑性要求, 即相邻纵轴上的切割点不能相距太远. 对于所有的 <span class="math inline">\(1 \leq x, x' \leq P\)</span> 和 <span class="math inline">\(1 \leq y, y' \leq Q\)</span>, 若 <span class="math inline">\(|x - x'| + |y - y'| = 1\)</span>, 则 <span class="math inline">\(|f(x, y) - f(x', y')| \leq D\)</span>, 其中 <span class="math inline">\(D\)</span> 时给定的一个非负整数.</li>
+</ol>
+<p>可能有许多切面 <span class="math inline">\(f\)</span> 满足上面的条件, 小 A 希望找出总的切割点上的不和谐值最小的那个, 即 <span class="math inline">\(\sum_{x,y} v(x, y, f(x, y))\)</span> 最小.</p>
+<h2 id="input">Input</h2>
+<p>第一行是三个正整数 <span class="math inline">\(P, Q, R\)</span>, 表示切糕的长 <span class="math inline">\(P\)</span>、宽 <span class="math inline">\(Q\)</span>、高 <span class="math inline">\(R\)</span>. 第二行有一个非负 整数 <span class="math inline">\(D\)</span>, 表示光滑性要求.</p>
+<p>接下来是 <span class="math inline">\(R\)</span> 个 <span class="math inline">\(P\)</span> 行 <span class="math inline">\(Q\)</span> 列的矩阵, 第 <span class="math inline">\(z\)</span> 个矩阵的第 <span class="math inline">\(x\)</span> 行第 <span class="math inline">\(y\)</span> 列是 <span class="math inline">\(v(x, y, z)\)</span> (<span class="math inline">\(1 \leq x \leq P, 1 \leq y \leq Q, 1 \leq z \leq R\)</span>) .</p>
+<h2 id="output">Output</h2>
+<p>仅包含一个整数, 表示在合法基础上最小的总不和谐值.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>2 2 2
+1
+6 1
+6 1
+2 6
+2 6</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>6</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于 100% 的数据, 满足:<span class="math inline">\(P, Q, R \leq 40, 0 \leq D \leq R\)</span>, 且给出的所有的不和谐值不超过 <span class="math inline">\(1000\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<p>相邻等高两个位置之间是可以进行割的操作的, 代价为不和谐值.</p>
+<p>在可允许的高度差之间, 可以连一条不可以割断的边.</p>
+<p>最后将每一纵列的最高处和汇连一条边, 然后跑一个最小割.</p>
+<p>明显把切糕切成两半就是最小割水题对吧......</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="ot">#define rep(_var,_begin,_end) for(int _var=_begin;_var&lt;=_end;_var++)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">100100</span>, maxm = <span class="dv">1001000</span>, maxN = <span class="dv">50</span>;
+<span class="dt">const</span> <span class="dt">int</span> infinit = <span class="bn">0x3fffffff</span>;
+
+<span class="dt">const</span> <span class="dt">int</span> movx[<span class="dv">4</span>] = { <span class="dv">0</span>,  <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">-1</span> },
+          movy[<span class="dv">4</span>] = { <span class="dv">1</span>, <span class="dv">-1</span>, <span class="dv">0</span>,  <span class="dv">0</span> };
+
+<span class="kw">class</span> Dinic
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v, flow;
+        edge *next, *rev;
+    };
+    <span class="dt">int</span> n, s, t, ecnt;
+    edge *edges[maxn], epool[maxm];
+    <span class="dt">int</span> level[maxn];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v, <span class="dt">int</span> flow)
+    {
+        edge *p = &amp;epool[++ecnt],
+             *q = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;flow = flow;
+        p-&gt;next = edges[u]; edges[u] = p; p-&gt;rev = q;
+        q-&gt;u = v; q-&gt;v = u; q-&gt;flow = <span class="dv">0</span>;
+        q-&gt;next = edges[v]; edges[v] = q; q-&gt;rev = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> make_level(<span class="dt">void</span>)
+    {
+        queue&lt;<span class="dt">int</span>&gt; que;
+        memset(level, <span class="dv">0</span>, <span class="kw">sizeof</span>(level));
+        que.push(s);
+        level[s] = <span class="dv">1</span>;
+        <span class="kw">while</span> (!que.empty()) {
+            <span class="dt">int</span> p = que.front();
+            que.pop();
+            <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+                <span class="kw">if</span> (ep-&gt;flow &amp;&amp; !level[ep-&gt;v]) {
+                    level[ep-&gt;v] = level[p] + <span class="dv">1</span>;
+                    que.push(ep-&gt;v);
+                }
+        }
+        <span class="kw">if</span> (level[t] &gt; <span class="dv">0</span>)
+            <span class="kw">return</span> <span class="kw">true</span>;
+        <span class="kw">return</span> <span class="kw">false</span>;
+    }
+    <span class="dt">int</span> find(<span class="dt">int</span> p, <span class="dt">int</span> mn)
+    {
+        <span class="kw">if</span> (p == t)
+            <span class="kw">return</span> mn;
+        <span class="dt">int</span> sum = <span class="dv">0</span>, tmp;
+        <span class="kw">for</span> (edge *ep = edges[p]; ep &amp;&amp; sum &lt; mn; ep = ep-&gt;next)
+            <span class="kw">if</span> (ep-&gt;flow &amp;&amp; level[ep-&gt;v] == level[p] + <span class="dv">1</span>) {
+                tmp = find(ep-&gt;v, min(ep-&gt;flow, mn - sum));
+                <span class="kw">if</span> (tmp &gt; <span class="dv">0</span>) {
+                    sum += tmp;
+                    ep-&gt;flow -= tmp;
+                    ep-&gt;rev-&gt;flow += tmp;
+                }
+            }
+        <span class="kw">if</span> (sum &lt;= <span class="dv">0</span>)
+            level[p] = <span class="dv">0</span>;
+        <span class="kw">return</span> sum;
+    }
+    <span class="dt">int</span> eval(<span class="dt">void</span>)
+    {
+        <span class="dt">int</span> sum = <span class="dv">0</span>, tmp;
+        <span class="kw">while</span> (make_level()) {
+            tmp = find(s, infinit);
+            <span class="kw">if</span> (tmp &lt;= <span class="dv">0</span>)
+                <span class="kw">break</span>;
+            sum += tmp;
+        }
+        <span class="kw">return</span> sum;
+    }
+} graph;
+
+<span class="dt">int</span> P, Q, R, D;
+<span class="dt">int</span> f[maxN][maxN][maxN];
+<span class="kw">inline</span> <span class="dt">int</span> pos(<span class="dt">int</span> x, <span class="dt">int</span> y, <span class="dt">int</span> z) {
+    <span class="kw">if</span> (z == <span class="dv">0</span>) <span class="kw">return</span> <span class="dv">0</span>;
+    <span class="kw">return</span> (z<span class="dv">-1</span>)*P*Q + (x<span class="dv">-1</span>)*Q + y; }
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    <span class="co">// The cake is a lie.</span>
+    scanf(<span class="st">"</span><span class="ch">%d%d%d%d</span><span class="st">"</span>, &amp;P, &amp;Q, &amp;R, &amp;D);
+    rep(k, <span class="dv">1</span>, R) rep(i, <span class="dv">1</span>, P) rep(j, <span class="dv">1</span>, Q)
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;f[i][j][k]);
+    <span class="co">// Aperture Science reassure you that you will be baked, and there</span>
+    <span class="co">// will be cake.</span>
+    graph.s = <span class="dv">0</span>;
+    graph.t = P * Q * R + <span class="dv">1</span>;
+    graph.n = graph.t + <span class="dv">1</span>;
+    rep(i, <span class="dv">1</span>, P) rep(j, <span class="dv">1</span>, Q) {
+        rep(k, <span class="dv">1</span>, R) {
+            graph.add_edge(pos(i, j, k<span class="dv">-1</span>), pos(i, j, k), f[i][j][k]);
+            <span class="kw">if</span> (k &gt; D) rep(mv, <span class="dv">0</span>, <span class="dv">3</span>) {
+                <span class="dt">int</span> nx = i + movx[mv], ny = j + movy[mv];
+                <span class="kw">if</span> (nx &lt; <span class="dv">1</span> || nx &gt; P || ny &lt; <span class="dv">1</span> || ny &gt; Q)
+                    <span class="kw">continue</span>;
+                graph.add_edge(pos(i, j, k), pos(nx, ny, k-D), infinit);
+            }
+        }
+        graph.add_edge(pos(i, j, R), graph.t, infinit);
+    }
+    <span class="co">// What are you doing? Come back!</span>
+    <span class="dt">int</span> res = graph.eval();
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj3144/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj3144/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj3144/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj3144/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj3144">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

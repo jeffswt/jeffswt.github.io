@@ -1,0 +1,253 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NOIP-EMU-141030-sdtg 忧桑三角形&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          NOIP-EMU-141030-sdtg 忧桑三角形
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOIP Emulation" target="_self">
+            <i class="fa fa-tag"></i> NOIP Emulation
+          </a>
+          <a class="tag" href="/blog/archive/?q=Tree" target="_self">
+            <i class="fa fa-tag"></i> Tree
+          </a>
+          <a class="tag" href="/blog/archive/?q=Implementation" target="_self">
+            <i class="fa fa-tag"></i> Implementation
+          </a>
+          <a class="tag" href="/blog/archive/?q=Metaphysics" target="_self">
+            <i class="fa fa-tag"></i> Metaphysics
+          </a>
+          <a class="tag" href="/blog/archive/?q=Fiddling" target="_self">
+            <i class="fa fa-tag"></i> Fiddling
+          </a>
+        </span>
+        <span class="date" title="11:38:51 | 14 November, 2016">
+          14 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="忧桑三角形">忧桑三角形</h2>
+<h3 id="题目描述">题目描述</h3>
+<p>小 J 是一名 OI 退役滚粗文化课选手, 他十分喜欢做题, 尤其是裸题. 有一棵树, 树上每个点都有点权, 现在有以下两个操作:</p>
+<ol type="1">
+<li>修改某个点的点权</li>
+<li>查询点 u 和点 v 构成的简单路径上是否能选出三个点组成三角形</li>
+</ol>
+<h3 id="输入格式">输入格式</h3>
+<p>第一行两个整数 <span class="math inline">\(N,Q\)</span>, 代表点数和询问数. 第二行 <span class="math inline">\(N\)</span> 个整数表示点权. 下面 <span class="math inline">\(N - 1\)</span> 行每行两个整数 <span class="math inline">\(a, b\)</span> 代表 <span class="math inline">\(a, b\)</span> 之间有一条边. 下面 <span class="math inline">\(Q\)</span> 行每行 3 个整数 <span class="math inline">\(t, a, b\)</span>: 若 <span class="math inline">\(t = 0\)</span>, 询问 <span class="math inline">\((a, b)\)</span>; 否则将点 <span class="math inline">\(a\)</span> 的权值修改为 <span class="math inline">\(b\)</span>.</p>
+<h3 id="输出格式">输出格式</h3>
+<p>对于每个询问输出<code>Y</code> 表示能构成三角形, 输出<code>N</code> 表示不能构成三角形</p>
+<!-- More -->
+<h3 id="样例输入">样例输入</h3>
+<pre><code>5 5
+1 2 3 4 5
+1 2
+2 3
+3 4
+1 5
+0 1 3
+0 4 5
+1 1 4
+0 2 5
+0 2 3</code></pre>
+<h3 id="样例输出">样例输出</h3>
+<pre><code>N
+Y
+Y
+N</code></pre>
+<h3 id="数据范围">数据范围</h3>
+<p>对于 30% 的数据有 <span class="math inline">\(N, Q \leq 1000\)</span></p>
+<p>对于 100% 的数据有 <span class="math inline">\(N, Q \leq 10^5\)</span>, 点权范围在 32 位整数范围内</p>
+<h3 id="explanation">Explanation</h3>
+<p>如果要保证一群数互相不构成三角形数, 需要保证:</p>
+<ol type="1">
+<li>将这群数从到大小排序,</li>
+<li><span class="math inline">\(\forall i \in [0, n - 2], S_i + S_{i+1} &lt;= S_{i+2}\)</span></li>
+<li>所以这个数组必定上升快于斐波那契数列.</li>
+</ol>
+<p>因为斐波那契数列 <span class="math inline">\(F_45 \approx 2^{32}\)</span>:</p>
+<p>所以大概搜完超过 45 个点就可以停止搜索并且 <code>return true</code> 了.</p>
+<p>否则按照规定拍一下序, 然后瞎搞一发.</p>
+<p>这个想法是 <span class="citation" data-cites="Burst_Zero"> @Burst_Zero</span> 大神告诉我的.</p>
+<h3 id="source-code">Source Code</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+<span class="ot">#include &lt;vector&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">100100</span>;
+
+<span class="kw">class</span> XiaGaoTree
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v;
+        edge *next;
+    } *edges[maxn], epool[maxn * <span class="dv">2</span>];
+    <span class="dt">int</span> depth[maxn];
+    <span class="dt">int</span> parent[maxn];
+    <span class="dt">int</span> n, ecnt;
+    lli value[maxn];
+    <span class="dt">void</span> addedge(<span class="dt">int</span> u, <span class="dt">int</span> v)
+    {
+        edge *p = &amp;epool[++ecnt],
+             *q = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v;
+        p-&gt;next = edges[u]; edges[u] = p;
+        q-&gt;u = v; q-&gt;v = u;
+        q-&gt;next = edges[v]; edges[v] = q;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> bfs(<span class="dt">void</span>)
+    {
+        queue&lt;<span class="dt">int</span>&gt; que;
+        que.push(<span class="dv">1</span>);
+        depth[<span class="dv">1</span>] = <span class="dv">1</span>;
+        <span class="kw">while</span> (!que.empty()) {
+            <span class="dt">int</span> p = que.front();
+            que.pop();
+            <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+                <span class="kw">if</span> (!depth[ep-&gt;v]) {
+                    depth[ep-&gt;v] = depth[p] + <span class="dv">1</span>;
+                    parent[ep-&gt;v] = p;
+                    que.push(ep-&gt;v);
+                }
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> change(<span class="dt">int</span> p, lli val)
+    {
+        value[p] = val;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> query(<span class="dt">int</span> p, <span class="dt">int</span> q)
+    {
+        vector&lt;lli&gt; vec;
+        <span class="dt">int</span> cnt = <span class="dv">0</span>;
+        <span class="kw">while</span> (p != q) {
+            <span class="co">// printf("dbfs %d %d\n", p, q);</span>
+            <span class="kw">if</span> (depth[p] &gt;= depth[q]) {
+                vec.push_back(value[p]);
+                p = parent[p];
+            } <span class="kw">else</span> {
+                vec.push_back(value[q]);
+                q = parent[q];
+            }
+            cnt++;
+            <span class="kw">if</span> (cnt &gt;= <span class="dv">50</span>)
+                <span class="kw">return</span> <span class="kw">true</span>;
+        }
+        vec.push_back(value[p]);
+        sort(vec.begin(), vec.end());
+        <span class="co">// for (int i = 0; i &lt; vec.size(); i++)</span>
+        <span class="co">//     cout &lt;&lt; vec[i] &lt;&lt; ' ';</span>
+        <span class="co">// cout &lt;&lt; endl;</span>
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; (<span class="dt">int</span>)vec.size() - <span class="dv">2</span>; i++)
+            <span class="kw">if</span> (vec[i] + vec[i + <span class="dv">1</span>] &gt; vec[i + <span class="dv">2</span>])
+                <span class="kw">return</span> <span class="kw">true</span>;
+        <span class="kw">return</span> <span class="kw">false</span>;
+    }
+} graph;
+
+<span class="dt">int</span> n, q;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;q);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;graph.value[i]);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, a, b; i &lt; n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;a, &amp;b);
+        graph.addedge(a, b);
+    }
+    graph.n = n;
+    graph.bfs();
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= q; i++) {
+        <span class="dt">int</span> a, b; lli c;
+        scanf(<span class="st">"</span><span class="ch">%d%d%lld</span><span class="st">"</span>, &amp;a, &amp;b, &amp;c);
+        <span class="kw">if</span> (a == <span class="dv">0</span>) {
+            printf(<span class="st">"</span><span class="ch">%s\n</span><span class="st">"</span>, graph.query(b, c) ? <span class="st">"Y"</span> : <span class="st">"N"</span>);
+        } <span class="kw">else</span> {
+            graph.change(b, c);
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/noipemu29sdtg/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/noipemu29sdtg/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/noipemu29sdtg/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/noipemu29sdtg/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="noipemu29sdtg">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

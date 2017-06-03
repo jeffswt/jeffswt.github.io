@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1150: [CTSC2007]数据备份Backup&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1150: [CTSC2007]数据备份Backup
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=CTSC2007" target="_self">
+            <i class="fa fa-tag"></i> CTSC2007
+          </a>
+          <a class="tag" href="/blog/archive/?q=Brute Force" target="_self">
+            <i class="fa fa-tag"></i> Brute Force
+          </a>
+          <a class="tag" href="/blog/archive/?q=Greedy" target="_self">
+            <i class="fa fa-tag"></i> Greedy
+          </a>
+        </span>
+        <span class="date" title="21:05:01 | 10 April, 2017">
+          10 April, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>你在一家 IT 公司为大型写字楼或办公楼 (offices) 的计算机数据做备份. 然而数据备份的工作是枯燥乏味的, 因此你想设计一个系统让不同的办公楼彼此之间互相备份, 而你则坐在家中尽享计算机游戏的乐趣. 已知办公楼都位于同一条街上. 你决定给这些办公楼配对 (两个一组). 每一对办公楼可以通过在这两个建筑物之间铺设网络电缆使得它们可以互相备份. 然而, 网络电缆的费用很高. 当地电信公司仅能为你提供 <span class="math inline">\(k\)</span> 条网络电缆, 这意味着你仅能为 <span class="math inline">\(k\)</span> 对办公楼 (或总计 <span class="math inline">\(2k\)</span> 个办公楼) 安排备份. 任一个办公楼都属于唯一的配对组 (换句话说, 这 <span class="math inline">\(2k\)</span> 个办公楼一定是相异的). 此外, 电信公司需按网络电缆的长度 (公里数) 收费. 因而, 你需要选择这 <span class="math inline">\(k\)</span> 对办公楼使得电缆的总长度尽可能短. 换句话说, 你需要选择这 <span class="math inline">\(k\)</span> 对办公楼, 使得每一对办公楼之间的距离之和 (总距离) 尽可能小. 下面给出一个示例, 假定你有 <span class="math inline">\(5\)</span> 个客户, 其办公楼都在一条街上, 如下图所示. 这 <span class="math inline">\(5\)</span> 个办公楼分别位于距离大街起点 <span class="math inline">\(1km, 3km, 4km, 6km\)</span> 和 <span class="math inline">\(12km\)</span> 处. 电信公司仅为你提供 <span class="math inline">\(k=2\)</span> 条电缆.</p>
+<figure>
+<img class="thumb" data-small="/blog/bzoj1150/bzoj1150-small.jpg" data-src="/blog/bzoj1150/bzoj1150.png" data-thumb="/blog/bzoj1150/bzoj1150-thumb.jpg" src="/blog/bzoj1150/bzoj1150-thumb.jpg" title="" width="528px"/>
+<figcaption>
+</figcaption>
+</figure>
+<p>上例中最好的配对方案是将第 <span class="math inline">\(1\)</span> 个和第 <span class="math inline">\(2\)</span> 个办公楼相连, 第 <span class="math inline">\(3\)</span> 个和第 <span class="math inline">\(4\)</span> 个办公楼相连. 这样可按要求使用 <span class="math inline">\(k=2\)</span> 条电缆. 第 <span class="math inline">\(1\)</span> 条电缆的长度是 <span class="math inline">\(3km-1km=2km\)</span>, 第 <span class="math inline">\(2\)</span> 条电缆的长度是 <span class="math inline">\(6km-4km=2km\)</span>. 这种配对方案需要总长 <span class="math inline">\(4km\)</span> 的网络电缆, 满足距离之和最小的要求.</p>
+<h2 id="input">Input</h2>
+<p>输入的第一行包含整数 <span class="math inline">\(n\)</span> 和 <span class="math inline">\(k\)</span>, 其中 <span class="math inline">\(n (2 \leq n \leq 100000)\)</span> 表示办公楼的数目,<span class="math inline">\(k (1 \leq k \leq \frac{n}{2})\)</span> 表示可利用的网络电缆的数目.</p>
+<p>接下来的 <span class="math inline">\(n\)</span> 行每行仅包含一个整数 <span class="math inline">\(s (0 \leq s \leq 10^9)\)</span>, 表示每个办公楼到大街起点处的距离. 这些整数将按照从小到大的顺序依次出现.</p>
+<h2 id="output">Output</h2>
+<p>输出应由一个正整数组成, 给出将 <span class="math inline">\(2k\)</span> 个相异的办公楼连成 <span class="math inline">\(k\)</span> 对所需的网络电缆的最小总长度.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>5 2
+1
+3
+4
+6
+12</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>4</code></pre>
+<h2 id="explanation">Explanation</h2>
+<p>用优先队列维护一个双向链表, 考虑每次贪心最优解, 如果出现旁边两个冲突即移除之, 重新维护链表.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;vector&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="kw">typedef</span> pair&lt;lli, <span class="dt">int</span>&gt; prli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">100100</span>;
+<span class="dt">const</span> lli infinit = <span class="bn">0x3f3f3f3f</span>;
+
+<span class="dt">int</span> n, m;
+lli len[maxn];
+<span class="dt">int</span> pre[maxn], nxt[maxn];
+priority_queue&lt;prli, vector&lt;prli&gt;, greater&lt;prli&gt; &gt; que;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, a = <span class="dv">0</span>, b; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;b);
+        len[i] = b - a; a = b;
+        pre[i] = i - <span class="dv">1</span>, nxt[i] = i + <span class="dv">1</span>;
+    }
+    pre[<span class="dv">2</span>] = <span class="dv">0</span>;
+    nxt[n] = <span class="dv">0</span>;
+    <span class="co">// Pushing into the heap</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>; i &lt;= n; i++)
+        que.push(make_pair(len[i], i));
+    <span class="co">// Maintaining all m values</span>
+    lli res = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> idx = <span class="dv">1</span>; idx &lt;= m; idx++) {
+        <span class="co">// Matching values</span>
+        <span class="kw">while</span> (que.top().first != len[que.top().second])
+            que.pop();
+        <span class="dt">int</span> x = que.top().second,
+            l = pre[x], r = nxt[x];
+        que.pop();
+        res += len[x];
+        <span class="co">// Proposing adjacency</span>
+        nxt[x] = nxt[r];
+        pre[nxt[x]] = x;
+        pre[x] = pre[l];
+        nxt[pre[x]] = x;
+        <span class="co">// Adjusting lengths</span>
+        len[x] = l &amp;&amp; r ? min(infinit, len[l] + len[r] - len[x]) : infinit;
+        len[l] = len[r] = infinit;
+        que.push(make_pair(len[x], x));
+    }
+    <span class="co">// Result GET</span>
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1150/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1150/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1150/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1150/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1150">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

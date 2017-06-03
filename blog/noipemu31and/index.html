@@ -1,0 +1,260 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NOIP-EMU-141031-and 与&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          NOIP-EMU-141031-and 与
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOIP Emulation" target="_self">
+            <i class="fa fa-tag"></i> NOIP Emulation
+          </a>
+          <a class="tag" href="/blog/archive/?q=Greedy" target="_self">
+            <i class="fa fa-tag"></i> Greedy
+          </a>
+        </span>
+        <span class="date" title="20:19:52 | 19 November, 2016">
+          19 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="与and">与 (and)</h2>
+<h3 id="题目描述">题目描述</h3>
+<p>给你一个长度为 <span class="math inline">\(n\)</span> 的序列 <span class="math inline">\(A\)</span>, 请你求出一对 <span class="math inline">\(A_i, A_j\)</span> (<span class="math inline">\(1 \leq i \lt j \leq n\)</span>) 使 <span class="math inline">\(A_i\)</span> “与”<span class="math inline">\(A_j\)</span> 最大.</p>
+<p>P. S.: “与” 表示位运算 and, 在 C++中表示为&amp;.</p>
+<h3 id="输入描述">输入描述</h3>
+<p>第一行为 <span class="math inline">\(n\)</span>. 接下来 <span class="math inline">\(n\)</span> 行, 一行一个数字表示 <span class="math inline">\(A_i\)</span>.</p>
+<h3 id="输出描述">输出描述</h3>
+<p>输出最大的 <span class="math inline">\(A_i\)</span> “与”<span class="math inline">\(A_j\)</span> 的结果.</p>
+<!-- More -->
+<h3 id="样例输入">样例输入</h3>
+<pre><code>3
+8
+10
+2</code></pre>
+<h3 id="样例输出">样例输出</h3>
+<pre><code>8</code></pre>
+<h3 id="样例解释">样例解释</h3>
+<p>8 and 10=8 8 and 2=0 10 and 2=2</p>
+<h3 id="数据范围">数据范围</h3>
+<p>20% 的数据保证 <span class="math inline">\(n \leq 5000\)</span> 100% 的数据保证 <span class="math inline">\(n \leq 3 \cdot 10^5, 0 \leq A_i \leq 10^9\)</span></p>
+<h3 id="explanation">Explanation</h3>
+<p>最开始想了个 Trie 树的做法, 然后就直接滚粗了 (雾)</p>
+<p>其实最开始我先到的机房, 然后后来 <span class="citation" data-cites="xmcp"> @xmcp</span>,<span class="citation" data-cites="MisakiYanayo"> @MisakiYanayo</span>,<span class="citation" data-cites="JerrySkywalker"> @JerrySkywalker</span> 才陆陆续续地到了. 但是他们一看到我在写一个叫 <code>class BinaryTrie</code> 的东西当场就懵了. 然后我一本正经地和他们解释 Trie 树是一个正确的写法.</p>
+<p>虽然这也可以是正确的, 但是 Trie 树毕竟还要各种维护, 然后进行了负优化. 这样看来, 本来就是 Trie+暴力的算法何不直接用暴力 (不然还有一个 32 的常数). 结果我们一行人就这样被我坑了 (233).</p>
+<p>最后当然是用暴力~</p>
+<p>顺便贴一下写错的代码 (雾):</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="co">// You can pass A+B problem with Trie.</span>
+
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">300100</span>, maxm = <span class="dv">11000000</span>;
+
+<span class="kw">class</span> BinaryTrie
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> node
+    {
+        node *ch[<span class="dv">2</span>], *par;
+        <span class="dt">int</span> dat, cnt;
+        <span class="dt">bool</span> flag;
+    }; <span class="co">// Depth should not exceed 2^31 - 1.</span>
+    node *root, npool[maxm];
+    <span class="dt">int</span> ncnt;
+    node* make_node(node* par, <span class="dt">int</span> dat)
+    {
+        node *p = &amp;npool[++ncnt];
+        p-&gt;ch[<span class="dv">0</span>] = p-&gt;ch[<span class="dv">1</span>];
+        p-&gt;par = par;
+        p-&gt;cnt = <span class="dv">0</span>;
+        p-&gt;flag = <span class="kw">false</span>;
+        p-&gt;dat = dat;
+        <span class="kw">if</span> (p-&gt;par)
+            p-&gt;par-&gt;ch[dat] = p;
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">bool</span> insert(lli dat)
+    { <span class="co">// Returns true if insertion figures out the return value...</span>
+        <span class="dt">int</span> dig = <span class="dv">30</span>;
+        node *p = root;
+        <span class="kw">while</span> (dig &gt;= <span class="dv">0</span>) {
+            <span class="dt">int</span> dat = (dat &gt;&gt; dig) &amp; <span class="dv">1</span>;
+            p-&gt;cnt++;
+            <span class="kw">if</span> (!p-&gt;ch[dat])
+                p = make_node(p, dat);
+            <span class="kw">else</span>
+                p = p-&gt;ch[<span class="dv">1</span>];
+        }
+        p-&gt;cnt++;
+        <span class="kw">if</span> (p-&gt;flag)
+            <span class="kw">return</span> <span class="kw">true</span>;
+        p-&gt;flag = <span class="kw">true</span>;
+        <span class="kw">return</span> <span class="kw">false</span>;
+    }
+    <span class="dt">void</span> build_tree(<span class="dt">void</span>)
+    {
+        root = make_node(NULL, <span class="dv">0</span>);
+        root-&gt;par = NULL;
+        <span class="kw">return</span> ;
+    }
+} tree;
+
+<span class="dt">int</span> n;
+
+lli work_result(<span class="dt">void</span>)
+{
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        lli a; scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;a);
+        <span class="kw">if</span> (tree.insert(a))
+            <span class="kw">return</span> a;
+    }
+    <span class="co">// Brute forcing nodes, select them greedily</span>
+    BinaryTrie::node *p = tree.root;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= <span class="dv">31</span>; i++) {
+        <span class="kw">if</span> (!p-&gt;ch[<span class="dv">0</span>]) {
+            p = p-&gt;ch[<span class="dv">1</span>];
+            <span class="kw">continue</span>;
+        } <span class="kw">else</span> <span class="kw">if</span> (!p-&gt;ch[<span class="dv">1</span>]) {
+            p = p-&gt;ch[<span class="dv">0</span>];
+            <span class="kw">continue</span>;
+        }
+        <span class="co">// Has many children, checking whether to goto #1 or not.</span>
+        <span class="kw">if</span> (p-&gt;ch[<span class="dv">1</span>]-&gt;cnt &gt;= <span class="dv">2</span>) {
+            p = p-&gt;ch[<span class="dv">1</span>];
+            <span class="kw">continue</span>;
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    tree.build_tree();
+    lli res = work_result();
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<h3 id="source-code">Source Code</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">300100</span>;
+
+<span class="dt">int</span> n;
+lli res_bin[<span class="dv">32</span>];
+lli arr[maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;arr[i]);
+    <span class="co">// Calculating, using greedy</span>
+    <span class="dt">int</span> top = n;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">31</span>; i &gt;= <span class="dv">0</span>; i--) {
+        <span class="dt">int</span> cnt = <span class="dv">0</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= top; j++)
+            <span class="kw">if</span> (arr[j] &amp; (<span class="dv">1</span> &lt;&lt; i))
+                cnt++;
+        <span class="co">// Either there be no 1, either there be 1 one, all affecting none</span>
+        <span class="co">// of the results</span>
+        <span class="kw">if</span> (cnt &lt;= <span class="dv">1</span>)
+            <span class="kw">continue</span>;
+        res_bin[i] = <span class="dv">1</span>;
+        <span class="co">// Flushing data to grid</span>
+        <span class="dt">int</span> stk = <span class="dv">0</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= top; j++)
+            <span class="kw">if</span> (arr[j] &amp; (<span class="dv">1</span> &lt;&lt; i))
+                arr[++stk] = arr[j];
+        top = stk;
+        <span class="kw">continue</span>;
+    }
+    lli res = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">31</span>; i &gt;= <span class="dv">0</span>; i--)
+        res ^= (res_bin[i] &lt;&lt; i);
+        <span class="co">// cout &lt;&lt; res_bin[i] &lt;&lt; ' ';</span>
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/noipemu31and/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/noipemu31and/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/noipemu31and/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/noipemu31and/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="noipemu31and">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

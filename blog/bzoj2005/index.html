@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj2005: [Noi2010]能量采集&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj2005: [Noi2010]能量采集
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOI2010" target="_self">
+            <i class="fa fa-tag"></i> NOI2010
+          </a>
+          <a class="tag" href="/blog/archive/?q=Number Theory" target="_self">
+            <i class="fa fa-tag"></i> Number Theory
+          </a>
+        </span>
+        <span class="date" title="01:18:19 | 31 January, 2017">
+          31 January, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>栋栋有一块长方形的地, 他在地上种了一种能量植物, 这种植物可以采集太阳光的能量. 在这些植物采集能量后, 栋栋再使用一个能量汇集机器把这些植物采集到的能量汇集到一起. 栋栋的植物种得非常整齐, 一共有 <span class="math inline">\(n\)</span> 列, 每列有 <span class="math inline">\(m\)</span> 棵, 植物的横竖间距都一样, 因此 对于每一棵植物, 栋栋可以用一个坐标 <span class="math inline">\((x, y)\)</span> 来表示, 其中 <span class="math inline">\(x\)</span> 的范围是 <span class="math inline">\(1\)</span> 至 <span class="math inline">\(n\)</span>, 表示是在第 <span class="math inline">\(x\)</span> 列,<span class="math inline">\(y\)</span> 的范围是 <span class="math inline">\(1\)</span> 至 <span class="math inline">\(m\)</span>, 表示是在第 <span class="math inline">\(x\)</span> 列的第 <span class="math inline">\(y\)</span> 棵. 由于 能量汇集机器较大, 不便移动, 栋栋将它放在了一个角上, 坐标正好是 <span class="math inline">\((0, 0)\)</span>. 能量 汇集机器在汇集的过程中有一定的能量损失. 如果一棵植物与能量汇集机器连接而成的线段 上有 <span class="math inline">\(k\)</span> 棵植物, 则能量的损失为 <span class="math inline">\(2k + 1\)</span>. 例如, 当能量汇集机器收集坐标为 <span class="math inline">\((2, 4)\)</span> 的植物时, 由于连接线段上存在一棵植物 <span class="math inline">\((1, 2)\)</span>, 会产生 <span class="math inline">\(3\)</span> 的能量损失. 注意, 如果 一棵植物与能量汇集机器连接的线段上没有植物, 则能量损失为 <span class="math inline">\(1\)</span>. 现在要计算总的能量损失. 下面给出了一个能量采集的例子, 其中 <span class="math inline">\(n = 5, m = 4\)</span>, 一共有 <span class="math inline">\(20\)</span> 棵植物, 在每棵植物上标明了能量汇集机器收集它的能量时产生的能量损失. 在这个例子中, 总共产生 了 <span class="math inline">\(36\)</span> 的能量损失.</p>
+<h2 id="input">Input</h2>
+<p>仅包含一行, 为两个整数 <span class="math inline">\(n\)</span> 和 <span class="math inline">\(m\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>仅包含一个整数, 表示总共产生的能量损失.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>5 4</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>36</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于 10% 的数据:<span class="math inline">\(1 \leq n, m \leq 10\)</span>;</p>
+<p>对于 50% 的数据:<span class="math inline">\(1 \leq n, m \leq 100\)</span>;</p>
+<p>对于 80% 的数据:<span class="math inline">\(1 \leq n, m \leq 1000\)</span>;</p>
+<p>对于 90% 的数据:<span class="math inline">\(1 \leq n, m \leq 10^4\)</span>;</p>
+<p>对于 100% 的数据:<span class="math inline">\(1 \leq n, m \leq 10^5\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<p>这道题一看就是数论都不对~ 然后不会做 QwQ</p>
+<p>首先 <span class="math inline">\(O(n^3)\)</span> 的做法很好想, 直接每个点不停打标记标号就可以了, 然后直接骗到 50 分.</p>
+<p>然后突然发现, 每个点的 <span class="math inline">\(k\)</span> 不就是 <span class="math inline">\(gcd(n, m)\)</span> 么...... 所以预处理出来就是接近 <span class="math inline">\(O(n^2 \log n)\)</span> 的做法了, 然后就妥妥骗到 80 分...... =w=</p>
+<p>当然如果是在 NOI 赛场上我就不会往下去想了 (我能不能去 NOI 赛场到现在还是个未知数), 但是这是 hustoj, 是要 100% 的数据的, 于是只能膜题解了:</p>
+<p>原文地址:<a href="">http://blog.csdn.net/Clove_unique/article/details/51089272</a></p>
+<p><span class="math display">\[\sum_{i=1}^{n} \sum_{j=1}^{m} (2 \times gcd(i, j) - 1) = 2 \times \sum_{i=1}^{n} \sum_{j=1}^{m} gcd(i, j) - n \cdot m\]</span></p>
+<p>那么我们就可以直接求右边那个看起来十分整齐的式子了, 具体如下 (我不会):</p>
+<p><span class="math display">\[\sum_{i=1}^{n} \sum_{j=1}^{m} gcd(i, j)\]</span></p>
+<p><span class="math display">\[ = \sum_{i=1}^{n} \sum_{j=1}^{m} \sum_{d | gcd(i, j)} \phi(d)\]</span></p>
+<p><span class="math display">\[ = \sum_{i=1}^{n} \sum_{j=1}^{m} \sum_{d=1}^{n} [d | i] [d | j] \phi(d)\]</span></p>
+<p><span class="math display">\[ = \sum_{d=1}^{n} \sum_{i=1}^{n} [d | i] \sum_{j=1}^{m} [d | j] \phi(d)\]</span></p>
+<p><span class="math display">\[ = \sum_{d=1}^{n} \lfloor \frac{n}{d} \rfloor \lfloor \frac{m}{d} \rfloor \phi(d)\]</span></p>
+<p>可以用分块来求.</p>
+<p>需要预处理 <span class="math inline">\(\phi\)</span> 的前缀和.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">100100</span>;
+
+lli n, m;
+lli vis[maxn], primes[maxn], phi[maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%lld%lld</span><span class="st">"</span>, &amp;n, &amp;m);
+    <span class="kw">if</span> (n &gt; m)
+        swap(n, m);
+    <span class="co">// At this breakpoint we generate the phi function results.</span>
+    phi[<span class="dv">1</span>] = <span class="dv">1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>; i &lt;= n; i++) {
+        <span class="kw">if</span> (!vis[i]) {
+            primes[++primes[<span class="dv">0</span>]] = i;
+            phi[i] = i - <span class="dv">1</span>;
+        }
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= primes[<span class="dv">0</span>] &amp;&amp; i * primes[j] &lt;= n; j++) {
+            lli dup = i * primes[j];
+            vis[dup] = <span class="dv">1</span>;
+            <span class="kw">if</span> (i % primes[j] == <span class="dv">0</span>) {
+                phi[dup] = phi[i] * primes[j];
+                <span class="kw">break</span>;
+            } <span class="kw">else</span> {
+                phi[dup] = phi[i] * (primes[j] - <span class="dv">1</span>);
+            }
+        }
+        phi[i] += phi[i - <span class="dv">1</span>];
+    }
+    <span class="co">// Finished generation of phi functions.</span>
+    <span class="co">// Applying calculations to this problem.</span>
+    lli res = <span class="dv">0</span>;
+    <span class="kw">for</span> (lli i = <span class="dv">1</span>, j; i &lt;= n; i = j + <span class="dv">1</span>) {
+        j = min(n / (n / i), m / (m / i));
+        res += (lli)(phi[j] - phi[i - <span class="dv">1</span>]) * (n / i) * (m / i);
+    }
+    res = res * <span class="dv">2</span> - n * m;
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj2005/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj2005/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj2005/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj2005/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj2005">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj2879: [Noi2012]美食节&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj2879: [Noi2012]美食节
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOI2012" target="_self">
+            <i class="fa fa-tag"></i> NOI2012
+          </a>
+          <a class="tag" href="/blog/archive/?q=Network Flow" target="_self">
+            <i class="fa fa-tag"></i> Network Flow
+          </a>
+          <a class="tag" href="/blog/archive/?q=Maximum Flow Minimum Cost" target="_self">
+            <i class="fa fa-tag"></i> Maximum Flow Minimum Cost
+          </a>
+          <a class="tag" href="/blog/archive/?q=SPFA" target="_self">
+            <i class="fa fa-tag"></i> SPFA
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Graph Creation" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Graph Creation
+          </a>
+        </span>
+        <span class="date" title="02:45:29 | 4 February, 2017">
+          4 February, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>CZ 市为了欢迎全国各地的同学, 特地举办了一场盛大的美食节. 作为一个喜欢尝鲜的美食客, 小 M 自然不愿意错过这场盛宴. 他很快就尝遍了美食节所有的美食. 然而, 尝鲜的欲望是难以 满足的. 尽管所有的菜品都很可口, 厨师做菜的速度也很快, 小 M 仍然觉得自己桌上没有已经 摆在别人餐桌上的美食是一件无法忍受的事情. 于是小 M 开始研究起了做菜顺序的问题, 即安排一个做菜的顺序使得同学们的等待时间最短. 小 M 发现, 美食节共有 <span class="math inline">\(n\)</span> 种不同的菜品. 每次点餐, 每个同学可以选择其中的一个菜品. 总共有 <span class="math inline">\(m\)</span> 个厨师来制作这些菜品. 当所有的同学点餐结束后, 菜品的制作任务就会分配给每个厨师. 然后每个厨师就会同时开始做菜. 厨师们会按照要求的顺序进行制作, 并且每次只能制作一人份. 此外, 小 M 还发现了另一件有意思的事情: 虽然这 <span class="math inline">\(m\)</span> 个厨师都会制作全部的 <span class="math inline">\(n\)</span> 种菜品, 但对于同一菜品, 不同 厨师的制作时间未必相同. 他将菜品用 <span class="math inline">\(1, 2, \ldots, n\)</span> 依次编号, 厨师用 <span class="math inline">\(1, 2, \ldots, m\)</span> 依次编号, 将第 <span class="math inline">\(j\)</span> 个厨师制作第 <span class="math inline">\(i\)</span> 种菜品的时间记为 <span class="math inline">\(t_{i,j}\)</span>. 小 M 认为: 每个 同学的等待时间为所有厨师开始做菜起, 到自己那份菜品完成为止的时间总长度. 换句话说, 如果一个同学点的菜是某个厨师做的第 <span class="math inline">\(k\)</span> 道菜, 则他的等待时间就是这个厨师制作前 <span class="math inline">\(k\)</span> 道菜的时间之和. 而总等待时间为所有同学的等待时间之和. 现在, 小 M 找到了所有同学的 点菜信息: 有 <span class="math inline">\(p_i\)</span> 个同学点了第 <span class="math inline">\(i\)</span> 种菜品 (<span class="math inline">\(1 \leq i \leq n\)</span>) . 他想知道的是 最小的总等待时间是多少.</p>
+<h2 id="input">Input</h2>
+<p>输入文件的第 <span class="math inline">\(1\)</span> 行包含两个正整数 <span class="math inline">\(n\)</span> 和 <span class="math inline">\(m\)</span>, 表示菜品的种数和厨师的数量.</p>
+<p>第 <span class="math inline">\(2\)</span> 行包含 <span class="math inline">\(n\)</span> 个正整数, 其中第 <span class="math inline">\(i\)</span> 个数为 <span class="math inline">\(p_i\)</span>, 表示点第 <span class="math inline">\(i\)</span> 种菜品的人数.</p>
+<p>接下来有 <span class="math inline">\(n\)</span> 行, 每行包含 <span class="math inline">\(m\)</span> 个非负整数, 这 <span class="math inline">\(n\)</span> 行中的第 <span class="math inline">\(i\)</span> 行的第 <span class="math inline">\(j\)</span> 个数为 <span class="math inline">\(t_{i,j}\)</span>, 表示第 <span class="math inline">\(j\)</span> 个厨师制作第 <span class="math inline">\(i\)</span> 种菜品所需的时间.</p>
+<p>输入文件中每行相邻的两个数之间均由一个空格隔开, 行末均没有多余空格.</p>
+<h2 id="output">Output</h2>
+<p>输出仅一行包含一个整数, 为总等待时间的最小值.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>3 2
+3 1 1
+5 7
+3 6
+8 9</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>47</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于 100% 的数据,<span class="math inline">\(n \leq 40, m \leq 100, p \leq 800, t_{i,j} \leq 1000\)</span>, (其中 <span class="math inline">\(p = \sum p_i\)</span>, 即点菜同学的总人数).</p>
+<p>每组数据的 <span class="math inline">\(n, m, p\)</span> 值如下:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">ID</th>
+<th style="text-align: left;"><span class="math inline">\(n\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(m\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(p\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(5\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(5\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(10\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(40\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(400\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(3\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(40\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(300\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(4\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(40\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(40\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(40\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(5\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(5\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(40\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(100\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(6\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(10\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(50\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(200\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(7\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(20\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(60\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(400\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(8\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(40\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(80\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(600\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(9\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(40\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(100\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(800\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(10\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(40\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(100\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(800\)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="explanation">Explanation</h2>
+<p>对于打算要正解分的人给他骗分算法他也不看, 不打算全要分的人给他正解也不看, 就是 这么套路==</p>
+<p>现在想这个问题, 没有做过 SCOI2007 修车 (bzoj1070, 无传送门) 的请出门右转先去做那道题, 不然这道没法做 QwQ</p>
+<p>会了那道题这道题还是做不出来 QwQ</p>
+<p>其实是动态加边, 因为之前有些边根本用不上, 还在 SPFA 里面白跑吃时间......</p>
+<p>但是动态加边有技巧, 比如我看了一种 (hzwer) 很正常的动态加边, 而且很好理解, 并且 十分的 OOP, 但是以我的巨大常数写出来就是个噩梦~</p>
+<p>开了 <code>-O2</code> 用了 STL 队列比 hzwer 慢一倍, 用了自己写的队列还是比他慢上 10% 左右, 而且还是在开优化的情况下, 这样明显交不过, 魔改了好几次以后无限 TLE, 终于失去了信心.</p>
+<p>后来发现另外一种动态加边的方式: 他把源汇的方向反过来 (这样似乎可以减小搜索深度, 所以虽然复杂度一样但是实际是要快上四倍左右的), 然后就是一些奇怪的加边方法, 不明觉厉.</p>
+<p>讲真我的代码里为了更 OOP 写上 <code>callback(...)</code> 这类的函数真的好吗=n=</p>
+<p>还是需要思考一下的. 如果想用哪种更慢的方式, 就把 <code>#define USE_FAST_APPROACH</code> 注释 掉, 然后加上一行 <code>#define USE_GENERAL_APPROACH</code> 就可以了 (我觉得诸位大神应该能 看懂吧 orz)</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="ot">#define SWTAPI inline</span>
+<span class="ot">#define USE_FAST_APPROACH</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">100100</span>, maxm = <span class="dv">3000100</span>, maxN = <span class="dv">110</span>;
+<span class="dt">const</span> lli infinit = <span class="bn">0x3f3f3f3f</span>;
+
+<span class="kw">inline</span> lli read(<span class="dt">void</span>)
+{
+    lli x = <span class="dv">0</span>, f = <span class="dv">1</span>; <span class="dt">char</span> ch=getchar();
+    <span class="kw">while</span> (ch &lt; <span class="st">'0'</span> || ch &gt; <span class="st">'9'</span>) {
+        <span class="kw">if</span> (ch == <span class="st">'-'</span>) f = <span class="dv">-1</span>; ch = getchar(); }
+    <span class="kw">while</span> (ch &gt;= <span class="st">'0'</span> &amp;&amp; ch &lt;= <span class="st">'9'</span>) {
+        x = x * <span class="dv">10</span> + ch - <span class="st">'0'</span>; ch = getchar(); }
+    <span class="kw">return</span> x * f;
+}
+
+<span class="kw">template</span> &lt;<span class="kw">typename</span> _Type&gt;
+<span class="kw">class</span> fast_queue
+{
+<span class="kw">public</span>:
+    _Type arr[maxn];
+    <span class="dt">int</span> beg, end;
+    SWTAPI _Type front(<span class="dt">void</span>) {
+        <span class="kw">return</span> arr[beg]; }
+    SWTAPI <span class="dt">void</span> push(<span class="dt">const</span> _Type&amp; val) {
+        arr[end++] = val;
+        <span class="kw">if</span> (end &gt;= maxn) end = <span class="dv">0</span>;
+        <span class="kw">return</span> ; }
+    SWTAPI <span class="dt">void</span> pop(<span class="dt">void</span>) {
+        beg += <span class="dv">1</span>;
+        <span class="kw">if</span> (beg &gt;= maxn) beg = <span class="dv">0</span>;
+        <span class="kw">return</span> ; }
+    SWTAPI <span class="dt">bool</span> empty(<span class="dt">void</span>) {
+        <span class="kw">return</span> beg == end; }
+    fast_queue(<span class="dt">void</span>) {
+        beg = end = <span class="dv">0</span>;
+        <span class="kw">return</span> ;
+    }
+};
+
+<span class="kw">class</span> SpfaMaxFlow
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v;
+        lli flow, cost;
+        edge *next, *rev;
+    };
+    <span class="dt">int</span> n, s, t, ecnt;
+    edge *edges[maxn], *from[maxn], epool[maxm];
+    SWTAPI <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v, lli flow, lli cost)
+    {
+        edge *p = &amp;epool[++ecnt],
+             *q = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;flow = flow; p-&gt;cost = cost;
+        p-&gt;next = edges[u]; edges[u] = p; p-&gt;rev = q;
+        q-&gt;u = v; q-&gt;v = u; q-&gt;flow = <span class="dv">0</span>; q-&gt;cost = -cost;
+        q-&gt;next = edges[v]; edges[v] = q; q-&gt;rev = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> inque[maxn];
+    lli dist[maxn];
+    SWTAPI <span class="dt">bool</span> bfs(<span class="dt">void</span>)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++)
+            dist[i] = infinit, inque[i] = <span class="kw">false</span>, from[i] = NULL;
+        <span class="dt">static</span> fast_queue&lt;<span class="dt">int</span>&gt; que;
+        que.push(s);
+        inque[s] = <span class="kw">true</span>;
+        dist[s] = <span class="dv">0</span>;
+        <span class="co">// Emulating a queue, manually</span>
+        <span class="kw">while</span> (!que.empty()) {
+            <span class="dt">int</span> p = que.front();
+            que.pop();
+            <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+                <span class="kw">if</span> (ep-&gt;flow &amp;&amp; dist[p] + ep-&gt;cost &lt; dist[ep-&gt;v]) {
+                    dist[ep-&gt;v] = dist[p] + ep-&gt;cost;
+                    <span class="kw">if</span> (!inque[ep-&gt;v]) {
+                        que.push(ep-&gt;v);
+                        inque[ep-&gt;v] = <span class="kw">true</span>;
+                    }
+                    from[ep-&gt;v] = ep;
+                }
+            inque[p] = <span class="kw">false</span>;
+        }
+        <span class="kw">if</span> (dist[t] &lt; infinit)
+            <span class="kw">return</span> <span class="kw">true</span>;
+        <span class="kw">return</span> <span class="kw">false</span>;
+    }
+    SWTAPI lli spfa(<span class="dt">void</span>(&amp;callback)(<span class="dt">int</span>))
+    {
+        lli res = <span class="dv">0</span>;
+        <span class="kw">while</span> (bfs()) {
+            lli flow = infinit;
+            <span class="dt">int</span> targ = <span class="dv">0</span>;
+            <span class="kw">for</span> (edge *ep = from[t]; ep; ep = from[ep-&gt;u]) {
+                flow = min(flow, ep-&gt;flow);
+                <span class="kw">if</span> (!ep-&gt;u) targ = ep-&gt;v;
+            }
+            <span class="kw">for</span> (edge *ep = from[t]; ep; ep = from[ep-&gt;u]) {
+                ep-&gt;flow -= flow;
+                ep-&gt;rev-&gt;flow += flow;
+            }
+            res += dist[t] * flow;
+            callback(targ);
+        }
+        <span class="kw">return</span> res;
+    }
+} graph;
+
+<span class="dt">int</span> m, n;
+lli c[maxN], C, t[maxN][maxN];
+<span class="dt">int</span> num[maxN], pos[maxN];
+
+SWTAPI <span class="dt">void</span> build_dynamic(<span class="dt">int</span> y)
+{
+    <span class="ot">#ifdef USE_GENERAL_APPROACH</span>
+    <span class="dt">int</span> a = (y<span class="dv">-1</span>) / C + <span class="dv">1</span>,
+        b = y % C + <span class="dv">1</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+        graph.add_edge((a<span class="dv">-1</span>)*C+b, n*C+i, <span class="dv">1</span>, b*t[i][a]);
+    <span class="ot">#endif</span>
+    <span class="ot">#ifdef USE_FAST_APPROACH</span>
+    <span class="dt">static</span> <span class="dt">int</span> tot = m+n;
+    <span class="dt">int</span> j = <span class="dv">1</span>;
+    <span class="kw">for</span> (; j &lt;= n &amp;&amp; graph.epool[pos[j]].flow &lt;= <span class="dv">0</span>; j++);
+    num[j] += <span class="dv">1</span>, tot += <span class="dv">1</span>;
+    graph.add_edge(tot, graph.t, <span class="dv">1</span>, <span class="dv">0</span>);
+    pos[j] = graph.ecnt;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+        graph.add_edge(i, tot, <span class="dv">1</span>, num[j] * t[i][j]);
+    <span class="ot">#endif</span>
+    <span class="kw">return</span> ;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;m, &amp;n);
+    C = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        c[i] = read();
+        C += c[i];
+    }
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++)
+            t[i][j] = read();
+    <span class="co">// Creating graph (static part)</span>
+    <span class="ot">#ifdef USE_GENERAL_APPROACH</span>
+    graph.n = n*C + m + <span class="dv">1</span>;
+    graph.s = <span class="dv">0</span>;
+    graph.t = graph.n;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n*C; i++)
+        graph.add_edge(graph.s, i, <span class="dv">1</span>, <span class="dv">0</span>);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+        graph.add_edge(n*C + i, graph.t, c[i], <span class="dv">0</span>);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= m; j++)
+            graph.add_edge((i<span class="dv">-1</span>)*C<span class="dv">+1</span>, n*C+j, <span class="dv">1</span>, t[j][i]);
+    <span class="ot">#endif</span>
+    <span class="ot">#ifdef USE_FAST_APPROACH</span>
+    graph.n = m+n+C<span class="dv">+2</span>;
+    graph.s = graph.n - <span class="dv">1</span>;
+    graph.t = graph.n;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+        graph.add_edge(graph.s, i, c[i], <span class="dv">0</span>);
+    <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++) {
+        graph.add_edge(m+j, graph.t, <span class="dv">1</span>, <span class="dv">0</span>);
+        num[j] = <span class="dv">1</span>, pos[j] = graph.ecnt;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)
+            graph.add_edge(i, m+j, <span class="dv">1</span>, t[i][j]);
+    }
+    <span class="ot">#endif</span>
+    <span class="co">// Running maximum flow and dynamically creating edges</span>
+    lli res = graph.spfa(build_dynamic);
+    <span class="co">// Retrieved result</span>
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj2879/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj2879/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj2879/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj2879/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj2879">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

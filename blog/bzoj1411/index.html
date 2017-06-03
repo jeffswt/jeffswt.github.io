@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1411: [ZJOI2009]硬币游戏&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1411: [ZJOI2009]硬币游戏
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=ZJOI2009" target="_self">
+            <i class="fa fa-tag"></i> ZJOI2009
+          </a>
+          <a class="tag" href="/blog/archive/?q=Mathematics" target="_self">
+            <i class="fa fa-tag"></i> Mathematics
+          </a>
+          <a class="tag" href="/blog/archive/?q=Implementation" target="_self">
+            <i class="fa fa-tag"></i> Implementation
+          </a>
+          <a class="tag" href="/blog/archive/?q=Patterns" target="_self">
+            <i class="fa fa-tag"></i> Patterns
+          </a>
+        </span>
+        <span class="date" title="20:33:32 | 5 December, 2016">
+          5 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>Orez 很喜欢玩游戏, 他最近发明了一款硬币游戏. 他在桌子的边缘上划分出 <span class="math inline">\(2n\)</span> 个位置并 按顺时针把它们标号为 <span class="math inline">\(1, 2, ..., 2n\)</span>, 然后把 <span class="math inline">\(n\)</span> 个硬币放在标号为奇数的位置上. 接下来每次按如下操作: 在任意两个硬币之间放上一个硬币, 然后将原来的硬币拿走; 所放 硬币的正反面由它两边的两个硬币决定, 若两个硬币均为正面朝上或反面朝上, 则所放硬币为正面朝上, 否则为反面朝上. 那么操作 <span class="math inline">\(T\)</span> 次之后桌子边缘上硬币的情况会是怎样的呢?</p>
+<h2 id="input">Input</h2>
+<p>文件的第一行包含两个整数 <span class="math inline">\(n\)</span> 和 <span class="math inline">\(T\)</span>. 接下的一行包含 <span class="math inline">\(n\)</span> 个整数, 表示最开始桌面边缘的硬币摆放情况, 第 <span class="math inline">\(i\)</span> 个整数 <span class="math inline">\(a_i\)</span> 表示第 <span class="math inline">\(i\)</span> 个硬币摆放在 <span class="math inline">\(2i - 1\)</span> 个位置上,<span class="math inline">\(a_i = 1\)</span> 表示正面朝上,<span class="math inline">\(a_i = 2\)</span> 表示反面朝上.</p>
+<h2 id="output">Output</h2>
+<p>文件仅包含一行, 为 <span class="math inline">\(2n\)</span> 个整数, 其中第 <span class="math inline">\(i\)</span> 个整数 <span class="math inline">\(b_i\)</span> 桌面边缘的第 <span class="math inline">\(i\)</span> 个位置上硬币的情况,<span class="math inline">\(b_i = 1\)</span> 表示正面朝上,<span class="math inline">\(b_i = 2\)</span> 表示反面朝上,<span class="math inline">\(b_i = 0\)</span> 表示 没有硬币.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>10 5
+2 2 2 1 1 1 1 1 1 2</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>0 1 0 1 0 1 0 1 0 2 0 1 0 2 0 1 0 1 0 1</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于 30% 的数据,<span class="math inline">\(n \leq 1000, T \leq 1000\)</span></p>
+<p>对于 100% 的数据,<span class="math inline">\(n \leq 10^5, T \leq 2^{60}\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>其实本题是这样的一道题 (题目中可能没有说清楚, 让我第一感觉和第二感觉...... 第 n 感觉 都认为这道题一定出错了): 每一次操作对于所有的硬币都在中间放一个. 不然完全随机 的事件怎么可能是可解的呢?</p>
+<p>还有这是一圈硬币 (直接看数据并不能看出来, 看了好久也没有搞懂 233)</p>
+<p>然后当然就应该去找规律了呵呵 (如果你强行暴力时间复杂度是 <span class="math inline">\(O(n T)\)</span> 的)</p>
+<p>突然发现我这里的值会在 <span class="math inline">\(2^k\)</span> 个单位时间之后被距离 <span class="math inline">\(k\)</span> 的点亦或到, 然后直接处理 一下 <span class="math inline">\(T\)</span> 就可以在 <span class="math inline">\(O(n \log T)\)</span> 时间复杂度内处理出这个结果了.</p>
+<p>最后特判一下奇偶性, 如果是奇数再进行一轮 (记得考虑是一圈硬币)</p>
+<p>顺便说一下三次提交记录: 第一次发现是个 PE, 然后最后一行需要以换行结尾而且最尾部 不能有多余的空格; 第二次交上去 TLE 实在搞不懂, 突然发现处理 <span class="math inline">\(T\)</span> 的时候用的是 32 位整形而不是 64 位整数就尴尬了; 第三次 AC 妥妥的~</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="ot">#define rep(_var,_begin,_end) for(int _var=_begin;_var&lt;=_end;_var++)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxm = <span class="dv">200100</span>;
+
+lli n, m, work_pos;
+<span class="dt">int</span> dp_arr[<span class="dv">2</span>][maxm], res[maxm];
+<span class="ot">#define dp_cur dp_arr[work_pos &amp; 1]</span>
+<span class="ot">#define dp_last dp_arr[!(work_pos &amp; 1)]</span>
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%lld%lld</span><span class="st">"</span>, &amp;n, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, x; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;x);
+        dp_arr[<span class="dv">0</span>][i] = x - <span class="dv">1</span>;
+    }
+    <span class="co">// Finished reading data.</span>
+    <span class="co">// According to the general properties we found in this problem, we split</span>
+    <span class="co">// the digits of m in the following way, in binary.</span>
+    <span class="kw">for</span> (lli j = <span class="dv">2</span>; j &lt;= m; j &lt;&lt;= <span class="dv">1</span>) <span class="kw">if</span> (m &amp; j) {
+        work_pos++;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+            <span class="dt">int</span> left = (i + (j&gt;&gt;<span class="dv">1</span>) % n + n - <span class="dv">1</span>) % n + <span class="dv">1</span>,
+                right = (i - (j&gt;&gt;<span class="dv">1</span>) % n + n - <span class="dv">1</span>) % n + <span class="dv">1</span>;
+            dp_cur[i] = dp_last[left] ^ dp_last[right];
+        }
+    }
+    rep(i, <span class="dv">1</span>, n) res[i + i - <span class="dv">1</span>] = dp_cur[i];
+    <span class="co">// Checking speacial occasions, onwhich data must be shifted.</span>
+    <span class="kw">if</span> (m &amp; <span class="dv">1</span>) { <span class="co">// Odd cases</span>
+        rep(i, <span class="dv">1</span>, n) res[i + i] = res[i + i - <span class="dv">1</span>] ^ res[i &gt;= n ? <span class="dv">1</span> : i + i + <span class="dv">1</span>];
+        rep(i, <span class="dv">1</span>, n) res[i + i - <span class="dv">1</span>] = <span class="dv">-1</span>;
+    } <span class="kw">else</span> {
+        rep(i, <span class="dv">1</span>, n) res[i + i] = <span class="dv">-1</span>;
+    }
+    <span class="co">// A peculiar and obscured output...</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt; <span class="dv">2</span> * n; i++)
+        printf(<span class="st">"</span><span class="ch">%d</span><span class="st"> "</span>, res[i] + <span class="dv">1</span>);
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res[<span class="dv">2</span> * n] + <span class="dv">1</span>);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1411/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1411/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1411/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1411/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1411">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

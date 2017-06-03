@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Painting in xmpaint&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="en">
+      <div class="post-header">
+        <h1 class="title">
+          Painting in xmpaint
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Tutorials" target="_self">
+            <i class="fa fa-tag"></i> Tutorials
+          </a>
+        </span>
+        <span class="date" title="01:16:37 | 18 July, 2016">
+          18 July, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="introduction">Introduction</h2>
+<p>Thanks to <span class="citation" data-cites="xmcp"> @xmcp</span> ‘s <a href="https://github.com/xmcp/xmpaint">xmpaint</a>, we are now able to solve connected graph problems in a visual way.</p>
+<p>We would be giving some advices on creating visually compelling logos and figures through xmpaint.</p>
+<!-- More -->
+<p>xmpaint is an application, fully designed to comply to the writing and programming standards of oiers, who describe vertices and edges in their special ways. This would not be a problem to oiers, though.</p>
+<ul>
+<li>Connected graphs from U to V with no weight is written as <code>U V</code></li>
+<li>Bi-connected graphs connecting U and V is written as two connected edges from U to V and from V to U.</li>
+<li>Connected graphs from U to V with weight W is written as <code>U V W</code></li>
+<li>Similarly, bi-connected graphs with weight is described similarly.</li>
+</ul>
+<h2 id="tricks">Tricks</h2>
+<p>To create strange but aesthetically acceptable logos, we might attempt to use the following tricks:</p>
+<ul>
+<li>Repetition</li>
+<li>Randomization</li>
+<li>Emphasis</li>
+</ul>
+<p>As of repetition, repeating edge connection between two edges may eventually form a circle. Under different renderers, this may vary.</p>
+<p>As of randomization, I shall provide an example code in Python, which can directly generate data from the sample.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> random
+f <span class="op">=</span> <span class="bu">open</span>(<span class="st">'out.txt'</span>, <span class="st">'w'</span>, encoding <span class="op">=</span> <span class="st">'utf-8'</span>)
+u <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">60</span>)
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">1000</span>):
+  j <span class="op">=</span> random.choice(u)
+  k <span class="op">=</span> random.choice(u)
+  w <span class="op">=</span> random.choice(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">1300</span>))
+  f.write(<span class="st">'</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> (j, k, w))
+f.close()</code></pre></div>
+<p>Emphasis can be achieved by highlighting the specific edges or specific vertexes. Vertexes are highlighted green, and edges are highlighted red. No other colour options are provided, which is not necessary for the originally desired purposes of this program.</p>
+<h2 id="samples">Samples</h2>
+<p>Some samples done when being sleepless.</p>
+<figure>
+<img class="thumb" data-small="/blog/painting_xmpaint/xmpaint_1-small.jpg" data-src="/blog/painting_xmpaint/xmpaint_1.png" data-thumb="/blog/painting_xmpaint/xmpaint_1-thumb.jpg" src="/blog/painting_xmpaint/xmpaint_1-thumb.jpg" title="" width="1100px"/>
+<figcaption>
+</figcaption>
+</figure>
+<figure>
+<img class="thumb" data-small="/blog/painting_xmpaint/xmpaint_2-small.jpg" data-src="/blog/painting_xmpaint/xmpaint_2.png" data-thumb="/blog/painting_xmpaint/xmpaint_2-thumb.jpg" src="/blog/painting_xmpaint/xmpaint_2-thumb.jpg" title="" width="2098px"/>
+<figcaption>
+</figcaption>
+</figure>
+<figure>
+<img class="thumb" data-small="/blog/painting_xmpaint/xmpaint_3-small.jpg" data-src="/blog/painting_xmpaint/xmpaint_3.png" data-thumb="/blog/painting_xmpaint/xmpaint_3-thumb.jpg" src="/blog/painting_xmpaint/xmpaint_3-thumb.jpg" title="" width="916px"/>
+<figcaption>
+</figcaption>
+</figure>
+<p>I strongly suggest <strong>oiers</strong> not to do this when solving problems. This is quite obscure and time-compelling, which may lead you to burst zeroes.</p>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/painting_xmpaint/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/painting_xmpaint/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/painting_xmpaint/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/painting_xmpaint/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="painting_xmpaint">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

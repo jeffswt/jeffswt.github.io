@@ -1,0 +1,301 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj4514: [Sdoi2016]数字配对&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj4514: [Sdoi2016]数字配对
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=SDOI2016" target="_self">
+            <i class="fa fa-tag"></i> SDOI2016
+          </a>
+          <a class="tag" href="/blog/archive/?q=Network Flow" target="_self">
+            <i class="fa fa-tag"></i> Network Flow
+          </a>
+          <a class="tag" href="/blog/archive/?q=Maximum Flow Minimum Cost" target="_self">
+            <i class="fa fa-tag"></i> Maximum Flow Minimum Cost
+          </a>
+          <a class="tag" href="/blog/archive/?q=SPFA" target="_self">
+            <i class="fa fa-tag"></i> SPFA
+          </a>
+        </span>
+        <span class="date" title="00:57:19 | 28 December, 2016">
+          28 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>有 <span class="math inline">\(n\)</span> 种数字, 第 <span class="math inline">\(i\)</span> 种数字是 <span class="math inline">\(a_i\)</span>, 有 <span class="math inline">\(b_i\)</span> 个, 权值是 <span class="math inline">\(c_i\)</span>.</p>
+<p>若两个数字 <span class="math inline">\(a_i, a_j\)</span> 满足,<span class="math inline">\(a_i\)</span> 是 <span class="math inline">\(a_j\)</span> 的倍数, 且 <span class="math inline">\(\frac{a_i}{a_j}\)</span> 是一个质数, 那么这两个数字可以配对, 并获得 <span class="math inline">\(c_i \cdot c_j\)</span> 的价值.</p>
+<p>一个数字只能参与一次配对, 可以不参与配对.</p>
+<p>在获得的价值总和不小于 <span class="math inline">\(0\)</span> 的前提下, 求最多进行多少次配对.</p>
+<h2 id="input">Input</h2>
+<p>第一行一个整数 n.</p>
+<p>第二行 <span class="math inline">\(n\)</span> 个整数 <span class="math inline">\(a_1, a_2, \ldots, a_n\)</span>.</p>
+<p>第三行 <span class="math inline">\(n\)</span> 个整数 <span class="math inline">\(b_1, b_2, \ldots, b_n\)</span>.</p>
+<p>第四行 <span class="math inline">\(n\)</span> 个整数 <span class="math inline">\(c_1, c_2, \ldots, c_n\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>一行一个数, 最多进行多少次配对</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>3
+2 4 8
+2 200 7
+-1 -2 1</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>4</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p><span class="math inline">\(n \leq 200, a_i \leq 10^9, b_i \leq 10^5, |c_i| \leq 10^5\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>费用流, 最大或最小随意, 看你给费用的符号, 建图的话是把数分成两部分, 分别是奇数个 质因子和偶数个质因子, 然后通过题目给出的关系连边 (分部分的原因是形成二分图, 从而 分别向源点和汇点连边), 费用为 <span class="math inline">\(c_i \cdot c_j\)</span>, 流量正无穷, 然后两部分分别向源点 汇点连边, 费用 <span class="math inline">\(0\)</span>, 流量为 <span class="math inline">\(b_i\)</span>.</p>
+<p>但是这道题毒性比较大...... 首先调了差不多一个半小时的 printf (因为不停 SIGSEGV, 所以 就去用 GDB), 结果发现在 printf 里崩溃, 横横竖竖找了好久, 发现直接用 printf 也会 出错, cout 同理, 结果把输出到处乱移结果发现数组越界...... 看来 Cygwin 和 MINGW 毕竟 没有 LXSS 靠谱.</p>
+<p>随之而来的是大量的调试, 不停 WA 之后发现其实建图的时候就把费用的正负号写反了~ 看了这么多眼是不是眼花了所以才做不对的......</p>
+<p>但是就只能这样了. 最后还 RE+WA 了两次, 原来是正无穷开的不够大~</p>
+<p>明显这道题不是 1A TAT</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">500</span>, maxm = <span class="dv">50010</span>, maxp = <span class="dv">32010</span>;
+<span class="dt">const</span> lli infinit = <span class="bn">0x007f7f7f7f7f7f7fll</span>;
+<span class="co">// const lli infinit = 0x7f7f7f7f;</span>
+
+<span class="kw">class</span> SpfaMaxFlow
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v;
+        lli flow, cost;
+        edge *next, *rev;
+    };
+    <span class="dt">int</span> n, s, t, ecnt;
+    edge *edges[maxn], epool[maxm], *from[maxn];
+    lli dist[maxn];
+    <span class="dt">bool</span> inque[maxn];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v, lli flow, lli cost)
+    {
+        edge *p = &amp;epool[++ecnt],
+             *q = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;flow = flow; p-&gt;cost = cost;
+        p-&gt;next = edges[u]; edges[u] = p; p-&gt;rev = q;
+        q-&gt;u = v; q-&gt;v = u; q-&gt;flow = <span class="dv">0</span>; q-&gt;cost = -cost;
+        q-&gt;next = edges[v]; edges[v] = q; q-&gt;rev = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> spfa(<span class="dt">void</span>)
+    {
+        queue&lt;<span class="dt">int</span>&gt; que;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+            dist[i] = infinit, inque[i] = <span class="kw">false</span>, from[i] = NULL;
+        que.push(s);
+        dist[s] = <span class="dv">0</span>; inque[s] = <span class="kw">true</span>;
+        <span class="dt">bool</span> found = <span class="kw">false</span>;
+        <span class="kw">while</span> (!que.empty()) {
+            <span class="dt">int</span> p = que.front();
+            que.pop();
+            <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next) {
+                <span class="kw">if</span> (ep-&gt;flow &amp;&amp; dist[ep-&gt;v] &gt; dist[p] + ep-&gt;cost) {
+                    dist[ep-&gt;v] = dist[p] + ep-&gt;cost;
+                    from[ep-&gt;v] = ep;
+                    <span class="kw">if</span> (!inque[ep-&gt;v]) {
+                        que.push(ep-&gt;v);
+                        inque[ep-&gt;v] = <span class="kw">true</span>;
+                    }
+                }
+            }
+            <span class="kw">if</span> (p == t)
+                found = <span class="kw">true</span>;
+            inque[p] = <span class="kw">false</span>;
+        }
+        <span class="kw">return</span> found;
+    }
+    lli max_flow, min_cost;
+    <span class="dt">void</span> eval(<span class="dt">void</span>)
+    {
+        lli flow, cost;
+        max_flow = <span class="dv">0</span>;
+        min_cost = <span class="dv">0</span>;
+        <span class="kw">while</span> (spfa()) {
+            flow = infinit;
+            <span class="kw">for</span> (edge *ep = from[t]; ep; ep = from[ep-&gt;u])
+                flow = min(flow, ep-&gt;flow);
+            cost = dist[t];
+            <span class="co">// If cost is too small, we need to ensure there's a valid flow</span>
+            <span class="kw">if</span> (min_cost + cost * flow &lt;= <span class="dv">0</span>) {
+                <span class="kw">for</span> (edge *ep = from[t]; ep; ep = from[ep-&gt;u])
+                    ep-&gt;flow -= flow,
+                    ep-&gt;rev-&gt;flow += flow;
+                max_flow += flow;
+                min_cost += cost * flow;
+            } <span class="kw">else</span> {
+                max_flow -= min_cost / cost;
+                <span class="kw">break</span>;
+            }
+            <span class="kw">continue</span>;
+        }
+        <span class="kw">return</span> ;
+    }
+} graph;
+
+<span class="dt">int</span> n;
+lli a[maxn], b[maxn], c[maxn];
+
+<span class="dt">int</span> prime_cnt;
+lli prime[maxp];
+<span class="dt">bool</span> prime_flag[maxp];
+lli solo[maxp], duo[maxp];
+
+<span class="dt">void</span> init_prime(<span class="dt">void</span>)
+{
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>; i &lt;= <span class="dv">32000</span>; i++) {
+        <span class="kw">if</span> (!prime_flag[i])
+            prime[++prime_cnt] = i;
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= prime_cnt; j++) {
+            lli val = i * prime[j];
+            <span class="kw">if</span> (val &gt; <span class="dv">32000</span>)
+                <span class="kw">break</span>;
+            prime_flag[val] = <span class="kw">true</span>;
+            <span class="kw">if</span> (i % prime[j] == <span class="dv">0</span>)
+                <span class="kw">break</span>;
+        }
+    }
+    <span class="kw">return</span> ;
+}
+
+<span class="dt">bool</span> judge(<span class="dt">int</span> i, <span class="dt">int</span> j)
+{
+    <span class="co">// Not a relation of proportional multiples</span>
+    <span class="kw">if</span> (!a[i] || !a[j] || (a[i] % a[j] &amp;&amp; a[j] % a[i]))
+        <span class="kw">return</span> <span class="kw">false</span>;
+    <span class="dt">int</span> p = max(a[i] / a[j], a[j] / a[i]);
+    <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= prime_cnt; k++) {
+        <span class="kw">if</span> (prime[k] &gt;= p)
+            <span class="kw">break</span>;
+        <span class="kw">if</span> (p % prime[k] == <span class="dv">0</span>)
+            <span class="kw">return</span> <span class="kw">false</span>;
+    }
+    <span class="kw">return</span> <span class="kw">true</span>;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;a[i]);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;b[i]);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%lld</span><span class="st">"</span>, &amp;c[i]);
+    <span class="co">// Preprocessing numbers</span>
+    init_prime();
+    solo[<span class="dv">0</span>] = duo[<span class="dv">0</span>] = <span class="dv">0</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        <span class="dt">int</span> cnt = <span class="dv">0</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= prime_cnt; j++) {
+            lli x = a[i];
+            <span class="kw">while</span> (x % prime[j] == <span class="dv">0</span>)
+                x /= prime[j], cnt++;
+        }
+        <span class="kw">if</span> (cnt &amp; <span class="dv">1</span>)
+            solo[++solo[<span class="dv">0</span>]] = i;
+        <span class="kw">else</span>
+            duo[++duo[<span class="dv">0</span>]] = i;
+    }
+    <span class="co">// Building graph</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= solo[<span class="dv">0</span>]; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= duo[<span class="dv">0</span>]; j++)
+            <span class="kw">if</span> (judge(solo[i], duo[j]))
+                graph.add_edge(solo[i], duo[j], infinit, - c[solo[i]] * c[duo[j]]);
+    graph.n = n + <span class="dv">2</span>;
+    graph.s = n + <span class="dv">1</span>;
+    graph.t = graph.n;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= solo[<span class="dv">0</span>]; i++)
+        graph.add_edge(graph.s, solo[i], b[solo[i]], <span class="dv">0</span>);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= duo[<span class="dv">0</span>]; i++)
+        graph.add_edge(duo[i], graph.t, b[duo[i]], <span class="dv">0</span>);
+    <span class="co">// Evaluation</span>
+    graph.eval();
+    lli res = graph.max_flow;
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj4514/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj4514/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj4514/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj4514/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj4514">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NOIP2015-message 信息传递&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          NOIP2015-message 信息传递
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOIP2015" target="_self">
+            <i class="fa fa-tag"></i> NOIP2015
+          </a>
+          <a class="tag" href="/blog/archive/?q=Graph Theory" target="_self">
+            <i class="fa fa-tag"></i> Graph Theory
+          </a>
+          <a class="tag" href="/blog/archive/?q=Implementation" target="_self">
+            <i class="fa fa-tag"></i> Implementation
+          </a>
+        </span>
+        <span class="date" title="08:47:41 | 8 November, 2016">
+          8 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h3 id="题目描述">题目描述</h3>
+<p>有 n 个同学 (编号为 1 到 n) 正在玩一个信息传递的游戏. 在游戏里每人都有一个固定的信息传递对象, 其中, 编号为 i 的同学的信息传递对象是编号为 Ti 同学.</p>
+<p>游戏开始时, 每人都只知道自己的生日. 之后每一轮中, 所有人会同时将自己当前所知的生日信息告诉各自的信息传递对象 (注意: 可能有人可以从若干人那里获取信息, 但是每人只会把信息告诉一个人, 即自己的信息传递对象). 当有人从别人口中得知自己的生日时, 游戏结束. 请问该游戏一共可以进行几轮?</p>
+<h3 id="输入格式">输入格式</h3>
+<p>输入共 2 行.</p>
+<p>第 1 行包含 1 个正整数 n 表示 n 个人.</p>
+<p>第 2 行包含 n 个用空格隔开的正整数 T1, T2, ……, Tn 其中第 i 个整数 Ti 示编号为 i 的同学的信息传递对象是编号为 Ti 的同学, Ti≤n 且 Ti≠i</p>
+<p>数据保证游戏一定会结束.</p>
+<h3 id="输出格式">输出格式</h3>
+<p>输出共 1 行, 包含 1 个整数, 表示游戏一共可以进行多少轮.</p>
+<!-- More -->
+<h3 id="输入样例">输入样例</h3>
+<pre><code>5
+2 4 2 3 1</code></pre>
+<h3 id="输出样例">输出样例</h3>
+<pre><code>3</code></pre>
+<h3 id="说明">说明</h3>
+<figure>
+<img class="thumb" data-small="/blog/noip15message/message-small.jpg" data-src="/blog/noip15message/message.png" data-thumb="/blog/noip15message/message-thumb.jpg" src="/blog/noip15message/message-thumb.jpg" title="" width="656px"/>
+<figcaption>
+</figcaption>
+</figure>
+<p>游戏的流程如图所示. 当进行完第 3 轮游戏后, 4 号玩家会听到 2 号玩家告诉他自己的生日, 所以答案为 3. 当然, 第 3 轮游戏后, 2 号玩家、3 号玩家都能从自己的消息来源得知自己的生日, 同样符合游戏结束的条件.</p>
+<p>对于 30% 的数据,<span class="math inline">\(n \leq 200\)</span>;</p>
+<p>对于 60% 的数据,<span class="math inline">\(n \leq 2500\)</span>;</p>
+<p>对于 100% 的数据,<span class="math inline">\(n \leq 200000\)</span>.</p>
+<h3 id="explanation">Explanation</h3>
+<p>就是说一条单向图 (类树型). 然后环只能进, 不能出. 所以在上面打一个标记就可以了.</p>
+<h3 id="source-code">Source Code</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">200100</span>;
+<span class="dt">const</span> <span class="dt">int</span> infinit = <span class="bn">0x007f7f7f</span>;
+
+<span class="dt">int</span> n;
+<span class="dt">int</span> to[maxn];
+<span class="dt">int</span> flag[maxn]; <span class="co">// Whose?</span>
+<span class="dt">int</span> depth[maxn]; <span class="co">// The depth of the ring iteration.</span>
+<span class="dt">int</span> res = infinit;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;to[i]);
+    <span class="co">// Deep-first searching...</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        <span class="kw">if</span> (flag[i])
+            <span class="kw">continue</span>;
+        <span class="co">// This means this is a new node...</span>
+        queue&lt;<span class="dt">int</span>&gt; que;
+        que.push(i);
+        depth[i] = <span class="dv">1</span>;
+        <span class="kw">while</span> (!que.empty()) {
+            <span class="dt">int</span> p = que.front();
+            que.pop();
+            flag[p] = i;
+            <span class="co">// If this has been reached before...</span>
+            <span class="kw">if</span> (flag[to[p]] &lt; i &amp;&amp; flag[to[p]] &gt; <span class="dv">0</span>) {
+                <span class="kw">break</span>;
+            } <span class="kw">else</span> <span class="kw">if</span> (flag[to[p]] == i) {
+                res = min(res, depth[p] - depth[to[p]] + <span class="dv">1</span>);
+                <span class="kw">break</span>;
+            }
+            depth[to[p]] = depth[p] + <span class="dv">1</span>;
+            que.push(to[p]);
+            <span class="co">// printf("dfsing %d @ %d -&gt; %d\n", i, p, to[p]);</span>
+        }
+    }
+    printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/noip15message/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/noip15message/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/noip15message/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/noip15message/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="noip15message">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

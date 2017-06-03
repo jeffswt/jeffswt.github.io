@@ -1,0 +1,373 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1058: [ZJOI2007]报表统计&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1058: [ZJOI2007]报表统计
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=ZJOI2007" target="_self">
+            <i class="fa fa-tag"></i> ZJOI2007
+          </a>
+          <a class="tag" href="/blog/archive/?q=Balanced Tree" target="_self">
+            <i class="fa fa-tag"></i> Balanced Tree
+          </a>
+          <a class="tag" href="/blog/archive/?q=STL" target="_self">
+            <i class="fa fa-tag"></i> STL
+          </a>
+        </span>
+        <span class="date" title="12:57:06 | 11 December, 2016">
+          11 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>小 Q 的妈妈是一个出纳, 经常需要做一些统计报表的工作. 今天是妈妈的生日, 小 Q 希望可以 帮妈妈分担一些工作, 作为她的生日礼物之一. 经过仔细观察, 小 Q 发现统计一张报表实际上是维护一个可能为负数的整数数列, 并且进行一些查询操作. 在最开始的时候, 有一个长度为 <span class="math inline">\(n\)</span> 的整数序列, 并且有以下三种操作:</p>
+<ol type="1">
+<li><code>INSERT i k</code> 在原数列的第 <span class="math inline">\(i\)</span> 个元素后面添加一个新元素 <span class="math inline">\(k\)</span>; 如果原数列的 第 <span class="math inline">\(i\)</span> 个元素已经添加了若干元素, 则添加在这些元素的最后 (见下面的例子)</li>
+<li><code>MIN_GAP</code> 查询相邻两个元素的之间差值 (绝对值) 的最小值</li>
+<li><code>MIN_SORT_GAP</code> 查询所有元素中最接近的两个元素的差值 (绝对值)</li>
+</ol>
+<p>例如一开始的序列为 <code>5 3 1</code>:</p>
+<ol type="1">
+<li>执行操作 <code>INSERT 2 9</code> 将得到:<code>5 3 9 1</code>. 此时 <code>MIN_GAP</code> 为 <span class="math inline">\(2\)</span>,<code>MIN_SORT_GAP</code> 为 <span class="math inline">\(2\)</span>.</li>
+<li>再执行操作 <code>INSERT 2 6</code> 将得到:<code>5 3 9 6 1</code>. 注意这个时候原序列的第 <span class="math inline">\(2\)</span> 个元素后面已经添加了一个 <span class="math inline">\(9\)</span>, 此时添加的 <span class="math inline">\(6\)</span> 应加在 <span class="math inline">\(9\)</span> 的后面. 这个时候 <code>MIN_GAP</code> 为 <span class="math inline">\(2\)</span>,<code>MIN_SORT_GAP</code> 为 <span class="math inline">\(1\)</span>.</li>
+</ol>
+<p>于是小 Q 写了一个程序, 使得程序可以自动完成这些操作, 但是他发现对于一些大的报表他 的程序运行得很慢, 你能帮助他改进程序么?</p>
+<h2 id="input">Input</h2>
+<p>第一行包含两个整数 <span class="math inline">\(n, m\)</span>, 分别表示原数列的长度以及操作的次数. 第二行为 <span class="math inline">\(n\)</span> 个整数, 为初始序列. 接下来的 <span class="math inline">\(m\)</span> 行每行一个操作, 即 <code>INSERT i k</code>,<code>MIN_GAP</code>,<code>MIN_SORT_GAP</code> 中的一种 (无多余空格或者空行).</p>
+<h2 id="output">Output</h2>
+<p>对于每一个 <code>MIN_GAP</code> 和 <code>MIN_SORT_GAP</code> 命令, 输出一行答案即可.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>3 5
+5 3 1
+INSERT 2 9
+MIN_SORT_GAP
+INSERT 2 6
+MIN_GAP
+MIN_SORT_GAP</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>2
+2
+1</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有的数据,<span class="math inline">\(n, m \leq 500000\)</span>, 且序列内的整数不超过 <span class="math inline">\(5 \times 10^8\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<p>一看就可以用 STL map, set 来水的一道题 (但是如果你看错那就是你的问题了)</p>
+<p>一开始还认为是在整个序列里进行插入, 然后果断写了个 Splay. 发现调了好久都是 WA 之后突然惊呆地看了一下题面, 发现是原来的序列中的位置...... 结果为了防止 Splay 浪费 掉又加了好多特判来维护 Splay...... 终于把答案搞正确以后交上去居然 TLE (TAT)</p>
+<p>所以就只能膜了~ 最后写了个 STL 直接水, 没有 Splay 什么事. 事实上可能如果用 Splay 来代替 STL 红黑树会更快一些, 但是我没测.</p>
+<p>附带一发 TLE (也有可能 WA) 的 Splay 代码:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;map&gt;</span>
+<span class="ot">#include &lt;set&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="ot">#define min_3(__x,__y,__z) min(min(__x,__y),__z)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">1001000</span>;
+<span class="dt">const</span> <span class="dt">int</span> infinit = <span class="dv">1000000000</span>;
+
+<span class="kw">class</span> SplayTree
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> n, root, ncnt;
+    <span class="dt">int</span> ch[maxn][<span class="dv">2</span>], par[maxn];
+    <span class="dt">int</span> val[maxn], size[maxn];
+    <span class="ot">#define lc(__x) ch[__x][0]</span>
+    <span class="ot">#define rc(__x) ch[__x][1]</span>
+    <span class="dt">int</span> make_node(<span class="dt">int</span> v)
+    {
+        <span class="dt">int</span> p = ++ncnt;
+        val[p] = v;
+        lc(p) = rc(p) = par[p] = <span class="dv">0</span>;
+        size[p] = <span class="dv">1</span>;
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">void</span> rotate(<span class="dt">int</span> p)
+    {
+        <span class="dt">int</span> q = par[p], g = par[q];
+        <span class="dt">int</span> x = p == rc(q), y = q == rc(g);
+        ch[q][x] = ch[p][!x]; <span class="kw">if</span> (ch[q][x]) par[ch[q][x]] = q;
+        ch[p][!x] = q; par[q] = p;
+        <span class="kw">if</span> (g) ch[g][y] = p; par[p] = g;
+        <span class="co">// Updating data</span>
+        size[q] = size[lc(q)] + size[rc(q)] + <span class="dv">1</span>;
+        size[p] = size[lc(p)] + size[rc(p)] + <span class="dv">1</span>;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> splay(<span class="dt">int</span> p, <span class="dt">int</span> t)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> q = <span class="dv">0</span>; (q = par[p]) &amp;&amp; q != t; rotate(p))
+            <span class="kw">if</span> (par[q] &amp;&amp; par[q] != t)
+                rotate((p == lc(q)) == (q == lc(par[q])) ? q : p);
+        <span class="kw">if</span> (t == <span class="dv">0</span>) root = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> suc(<span class="dt">int</span> p)
+    {
+        <span class="kw">if</span> (!rc(p)) { <span class="kw">while</span> (p &amp;&amp; p == rc(par[p])) p = par[p]; p = par[p]; }
+        <span class="kw">else</span> { p = rc(p); <span class="kw">while</span> (p &amp;&amp; lc(p)) p = lc(p); }
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">int</span> pre(<span class="dt">int</span> p)
+    {
+        <span class="kw">if</span> (!lc(p)) { <span class="kw">while</span> (p &amp;&amp; p == lc(par[p])) p = par[p]; p = par[p]; }
+        <span class="kw">else</span> { p = lc(p); <span class="kw">while</span> (p &amp;&amp; rc(p)) p = rc(p); }
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">int</span> find(<span class="dt">int</span> sz)
+    {
+        sz += <span class="dv">1</span>; <span class="co">// Hot-fix.</span>
+        <span class="dt">int</span> p = root;
+        <span class="kw">while</span> (p != <span class="dv">0</span>) {
+            <span class="kw">if</span> (sz &lt;= size[lc(p)]) {
+                p = lc(p);
+                <span class="kw">continue</span>;
+            } sz -= size[lc(p)];
+            <span class="kw">if</span> (sz &lt;= <span class="dv">1</span>) <span class="kw">return</span> p;
+            sz -= <span class="dv">1</span>; p = rc(p);
+        }
+        splay(p, <span class="dv">0</span>);
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">void</span> insert(<span class="dt">int</span> lp, <span class="dt">int</span> rp, <span class="dt">int</span> v)
+    {
+        splay(lp, <span class="dv">0</span>);
+        splay(rp, root);
+        <span class="co">// Lazy insertion</span>
+        <span class="dt">int</span> q = make_node(v);
+        par[q] = rp;
+        lc(rp) = q;
+        size[lp]++, size[rp]++;
+        splay(q, <span class="dv">0</span>);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> insert(<span class="dt">int</span> pos, <span class="dt">int</span> v)
+    {
+        <span class="dt">int</span> lp = find(pos),
+            rp = suc(lp);
+        insert(lp, rp, v);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> init(<span class="dt">void</span>)
+    {
+        root = make_node(-infinit);
+        rc(root) = make_node(infinit);
+        par[rc(root)] = root;
+        size[root] = <span class="dv">2</span>;
+        <span class="kw">return</span> ;
+    }
+} st;
+
+<span class="dt">char</span> str[<span class="dv">100</span>];
+<span class="dt">int</span> n, m;
+<span class="dt">int</span> arr[maxn];
+map&lt;<span class="dt">int</span>, <span class="dt">int</span>&gt; mg; <span class="co">// MIN_GAP</span>
+set&lt;<span class="dt">int</span>&gt; msgi; <span class="co">// MIN_SORT_GAP index</span>
+<span class="dt">int</span> msg; <span class="co">// MIN_SORT_GAP value, only decreases (PROVEN)</span>
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    st.init();
+    msgi.insert(-infinit);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;arr[i]);
+        st.insert(i - <span class="dv">1</span>, arr[i]);
+        <span class="co">// Update MIN_GAP</span>
+        <span class="kw">if</span> (i &gt; <span class="dv">1</span>) mg[abs(arr[i] - arr[i - <span class="dv">1</span>])]++;
+        <span class="co">// Update MIN_SORT_GAP</span>
+        msgi.insert(arr[i]);
+    }
+    st.insert(n, infinit);
+    <span class="co">// st.insert(n, 0); // Don't know why.</span>
+    <span class="co">// mg[abs(arr[1] - 0)]++;</span>
+    <span class="co">// mg[abs(0 - arr[n])]++;</span>
+    <span class="co">// Initializing msgi.</span>
+    sort(arr + <span class="dv">1</span>, arr + <span class="dv">1</span> + n);
+    msg = infinit;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>; i &lt;= n; i++)
+        msg = min(msg, arr[i] - arr[i - <span class="dv">1</span>]);
+    <span class="co">// Preparing queries</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str + <span class="dv">1</span>);
+        <span class="kw">if</span> (str[<span class="dv">1</span>] == <span class="st">'I'</span>) { <span class="co">// INSERT</span>
+            <span class="dt">int</span> pos, val;
+            scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;pos, &amp;val);
+            <span class="co">// Removing from MIN_GAP</span>
+            <span class="co">// YOU GOT IT WRONG!</span>
+            <span class="co">// int lp = st.val[st.find(pos)],</span>
+            <span class="co">//     rp = st.val[st.find(pos + 1)];</span>
+            <span class="dt">int</span> rp_p = pos<span class="dv">+1</span> + <span class="dv">2</span>, rp = st.val[rp_p],
+                lp_p = st.pre(rp_p), lp = st.val[lp_p];
+            mg[abs(rp - lp)]--;
+            <span class="kw">if</span> (!mg[abs(rp - lp)])
+                mg.erase(mg.find(abs(rp - lp)));
+            <span class="co">// Adding into MIN_GAP</span>
+            mg[abs(rp - val)]++;
+            mg[abs(val - lp)]++;
+            <span class="co">// Modifying MIN_SORT_GAP</span>
+            lp = *--msgi.upper_bound(val),
+            rp = *msgi.upper_bound(val);
+            <span class="co">// printf("%d %d %d\n", val, lp, rp);</span>
+            msg = min_3(msg, abs(val - lp), abs(rp - val));
+            msgi.insert(val);
+            <span class="co">// Inserting into splay tree</span>
+            <span class="co">// st.insert(pos, val);</span>
+            st.insert(lp_p, rp_p, val);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">1</span>] == <span class="st">'M'</span> &amp;&amp; str[<span class="dv">5</span>] == <span class="st">'G'</span>) { <span class="co">// MIN_GAP</span>
+            printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, mg.begin()-&gt;first);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">1</span>] == <span class="st">'M'</span> &amp;&amp; str[<span class="dv">5</span>] == <span class="st">'S'</span>) { <span class="co">// MIN_SORT_GAP</span>
+            printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, msg);
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;set&gt;</span>
+<span class="ot">#include &lt;map&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">500100</span>;
+<span class="dt">const</span> <span class="dt">int</span> infinit = <span class="dv">600000000</span>;
+
+<span class="dt">int</span> n, m;
+<span class="dt">int</span> begin[maxn], end[maxn]; <span class="co">// Array begin &amp; ends</span>
+<span class="dt">char</span> str[<span class="dv">64</span>];
+
+map&lt;<span class="dt">int</span>, <span class="dt">int</span>&gt; mg_idx; <span class="co">// MIN_GAP indexer</span>
+multiset&lt;<span class="dt">int</span>&gt; msg_srt; <span class="co">// MIN_GAP sorter, MIN_SORT_GAP sorter</span>
+priority_queue&lt;<span class="dt">int</span>, vector&lt;<span class="dt">int</span>&gt;, greater&lt;<span class="dt">int</span>&gt; &gt; msg_res; <span class="co">// MIN_SORT_GAP data retriever</span>
+
+<span class="dt">void</span> insert_min_sort_gap(<span class="dt">int</span> v)
+{
+    <span class="dt">int</span> l = *--msg_srt.lower_bound(v),
+        r = *msg_srt.lower_bound(v);
+    msg_res.push(min(abs(r - v), abs(v - l)));
+    msg_srt.insert(v);
+    <span class="kw">return</span> ;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    msg_srt.insert(-infinit);
+    msg_srt.insert(infinit);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, x; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;x);
+        <span class="co">// Updating array data</span>
+        begin[i] = end[i] = x;
+        <span class="co">// Updating MIN_SORT_GAP data</span>
+        insert_min_sort_gap(x);
+        <span class="co">// Updating MIN_GAP data</span>
+        <span class="kw">if</span> (i &gt;= <span class="dv">2</span>)
+            mg_idx[abs(begin[i] - begin[i - <span class="dv">1</span>])]++;
+    }
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str + <span class="dv">1</span>);
+        <span class="kw">if</span> (str[<span class="dv">1</span>] == <span class="st">'I'</span>) { <span class="co">// INSERT</span>
+            <span class="dt">int</span> pos, val;
+            scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;pos, &amp;val);
+            <span class="kw">if</span> (pos != n) {
+                <span class="dt">int</span> dist = abs(begin[pos + <span class="dv">1</span>] - end[pos]);
+                mg_idx[dist]--;
+                <span class="kw">if</span> (!mg_idx[dist])
+                    mg_idx.erase(mg_idx.find(dist));
+            }
+            mg_idx[abs(val - end[pos])]++;
+            mg_idx[abs(begin[pos + <span class="dv">1</span>] - val)]++;
+            end[pos] = val;
+            insert_min_sort_gap(val);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">1</span>] == <span class="st">'M'</span> &amp;&amp; str[<span class="dv">5</span>] == <span class="st">'G'</span>) { <span class="co">// MIN_GAP</span>
+            printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, mg_idx.begin()-&gt;first);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">1</span>] == <span class="st">'M'</span> &amp;&amp; str[<span class="dv">5</span>] == <span class="st">'S'</span>) { <span class="co">// MIN_SORT_GAP</span>
+            printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, msg_res.top());
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1058/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1058/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1058/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1058/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1058">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

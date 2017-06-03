@@ -1,0 +1,929 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NOIP2016 滚粗记&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          NOIP2016 滚粗记
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Anecdotes" target="_self">
+            <i class="fa fa-tag"></i> Anecdotes
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOIP2016" target="_self">
+            <i class="fa fa-tag"></i> NOIP2016
+          </a>
+        </span>
+        <span class="date" title="21:50:19 | 8 December, 2016">
+          8 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <p>现在 NOIP2016 已经结束了, 但是这一赛季离结束还有差不多 8 个月左右. 这次比赛简直就是 坐了过山车直上直下, 实在是太 Exciting 了~ 我就大概说一下这些事情吧, 凑合也就看看 就可以了. 因为本来是打算两三个星期之前就写这个东西的, 但是一直拖到现在, 结果来了 个 360 度 (雾) 大逆转......</p>
+<h3 id="noip2016-day1-2016-11-19">NOIP2016 Day1 (2016-11-19)</h3>
+<p>一天早上开开心心地坐着车来到八十中......<span class="citation" data-cites="MisakiHanayo"> @MisakiHanayo</span> 拿到准考证之后赶紧收起来, 因为他说一时没有照片就传了一个二次元花阳到 CCF 上假装是证件照了 233</p>
+<p>到了考场还很 High 地复习 Tarjan 但是似乎没有什么用, 然后就开始考试做题了. 第一道题公然上黑框眼镜和 mogician 这不是公然膜蛤是什么 (当时就笑喷了). 这道题倒是很 正常地写完了~</p>
+<p>然后是 T2 但是 T2 似乎很难的样子. 一看到 LCA 就知道应该上树链剖分, 但是如何在数列上维护等差数列我就不知道了 (结果正解是不存等差数列, 反正公差都是 1, 瞎搞一下 存两棵线段树就可以了), 所以这道题水了 20 分做法 (因为是最后 10 分钟写的所以后面 的特判都没有去管)</p>
+<p>结果 T3 发现是一个 dp, 但是 dp 方程推了半天都是错的 (都是你害的!) , 然后苦 * 去写 暴力. 暴力虽然写对了但是没有特判 233</p>
+<p>出了考场就有一位可爱的同学哭了 (这是一位不愿意透露姓名的同学), 说题好难自己都不会做, 只会写暴力</p>
+<!-- More -->
+<h3 id="noip2016-day2-2016-11-20">NOIP2016 Day2 (2016-11-20)</h3>
+<p>抱着 Day2 要 AK 的决心来到了考场结果当场看到题就懵了......</p>
+<p>第一题看起来很简单的样子, 随便瞎搞记一下阶乘然后 <span class="math inline">\(O(mn)\)</span> 维护一下就可以水过.</p>
+<p>第二题可以用一个 priority_queue 来维护一下序列, 然后每一次入队、出队一下. 直接 暴力每一次求解的复杂度似乎是很大的, 但是如果在外面存一个 lazy 就可以把时间复杂度降到 <span class="math inline">\(O(m \log (n+m))\)</span> 然后可以过 90 分 (神 TM 90 分)</p>
+<p>第三题写了一个很可爱的解二次函数+贪心+状压最短路, 然后特判一下为了防止内存 崩掉然后特判到第 14 个点 (后来听监考老师说可以过到第 18 个点, 如果写的快的话), 然后时间复杂度是 <span class="math inline">\(O(n^2 \cdot 2^n)\)</span>. 不过后来 <span class="citation" data-cites="moorhsum"> @moorhsum</span> 说还有一个略微优化过的算法避免卡常把时间复杂度调成 <span class="math inline">\(O(n \cdot 2^n)\)</span>, 就是不要每次判断所有射程.</p>
+<p>回来以后好开心, 说自己可以考到 260, 然后总分可以上差不多 460......</p>
+<p>结果到了学校刷了一场 Game01, 刷完了突然 <span class="citation" data-cites="xmcp"> @xmcp</span> 来了一句: 你们 T4 都有没有分解 质因数啊~</p>
+<p>突然听到这个我就懵掉了 [Facepalm]. ...... 发现对拍的时候把所有 <span class="math inline">\({2, 3, 5, 7, ..., 71}\)</span> 的质数 <span class="math inline">\(k\)</span> 都拍了一遍没有一点问题, 唯独没有拍到一个合数结果一道近似 100 分做法直接被卡成 40 分</p>
+<p>然后估分就被降成 400 分 2333333......</p>
+<h3 id="洛谷民间数据-2016-11-22">洛谷: 民间数据 (2016-11-22)</h3>
+<p>周二研学课上简单讨论了一下题目以后开始水开题报告.</p>
+<p>水完了开题报告以后发现周二没有统练 (是个好消息), 然后果断准备和 <span class="citation" data-cites="JerrySkywalker"> @JerrySkywalker</span> 一起回家. 下楼的过程中突然听到老叶说洛谷上出民间数据了, 然后终于可以测试了.</p>
+<p>赶紧跑到 NC1, 开始从 <a href="">http://oi.student.gov.cn/</a> 上下 自己的代码然后跑测试. 捂着眼睛然后让 <span class="citation" data-cites="JerrySkywalker"> @JerrySkywalker</span> 告诉我考了多少分 (他自己表示不想自测也不想让别人告诉他考了多少分), 结果最后出来分数差不多有个 325</p>
+<blockquote>
+<p>回家的路上我情不自禁</p>
+<p>摩擦摩擦</p>
+</blockquote>
+<p>这就是滚粗 2=的节奏了 [Facepalm]</p>
+<h3 id="真官方民间数据-2016-11-24">真 · 官方民间数据 (2016-11-24)</h3>
+<p>周四的集训的时候老叶突然拿着手机进来 (看到老叶那种神秘的笑容就知道没有好事), 说 TSU 的民间数据出来了, 然后有的人闲的没事把所有人的分都测了一遍, 把成绩发上来了</p>
+<p>结果看到成绩当场就<del>瘫倒了</del>, 说滚粗 2=是必然的事情了 (这次没有立 flag)</p>
+<p>直接成绩接近 293 (或者是什么, 也记不清了, 但是应该差不多), 民间数据都奇怪, 因为 T2 本来只应该拿 20 分的但是洛谷上居然测得 40 分~</p>
+<p>所以情绪一直掉到最低点......</p>
+<h3 id="ccf-官方数据-2016-11-29">CCF 官方数据 (2016-11-29)</h3>
+<p>差不多周二的时候看到真实成绩了.</p>
+<p>拿了 268 分. 这次真的要滚粗 2=没商量了 (本来还抱着民间数据有问题的希望想最后 提高一点分数).</p>
+<p>其实 T6 被卡成 45 分不知道为什么. 然后之后就再也不管这些事情了, 然后安安静静地到 bzoj 上刷题了.</p>
+<h3 id="真官方一等奖分数线-2016-12-08">真 · 官方一等奖分数线 (2016-12-08)</h3>
+<p>官方已经公布了一等奖的分数线了, 是 265 分, 卡着 1=分数线居然 (...... )</p>
+<p>晚上的集训实在是太开心, 又写了两道 <strong>bzoj 水题</strong>......</p>
+<p>话说老叶表示不服, 为什么省一有 80 多个人好水啊 (我很菜, 求大神勿喷)</p>
+<p>顺便把 BJ 的获奖名单贴出来吧, 然后膜一发 TDL 大神的 AK 记录:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">证书编号</th>
+<th style="text-align: left;">准考证号</th>
+<th style="text-align: left;">姓名</th>
+<th style="text-align: left;">性别</th>
+<th style="text-align: left;">总分</th>
+<th style="text-align: left;">学校</th>
+<th style="text-align: left;">年级</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0120</td>
+<td style="text-align: left;">BJ-0263</td>
+<td style="text-align: left;">张子禾</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">600</td>
+<td style="text-align: left;">中国人民大学附属中学</td>
+<td style="text-align: left;">高三</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0121</td>
+<td style="text-align: left;">BJ-0198</td>
+<td style="text-align: left;">王子健</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">578</td>
+<td style="text-align: left;">首都师范大学附属中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0122</td>
+<td style="text-align: left;">BJ-0225</td>
+<td style="text-align: left;">徐明宽</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">570</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高三</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0123</td>
+<td style="text-align: left;">BJ-0261</td>
+<td style="text-align: left;">张宇博</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">561</td>
+<td style="text-align: left;">北京市第八十中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0124</td>
+<td style="text-align: left;">BJ-0275</td>
+<td style="text-align: left;">赵晟宇</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">560</td>
+<td style="text-align: left;">中国人民大学附属中学</td>
+<td style="text-align: left;">高三</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0125</td>
+<td style="text-align: left;">BJ-0014</td>
+<td style="text-align: left;">陈通</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">525</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0126</td>
+<td style="text-align: left;">BJ-0056</td>
+<td style="text-align: left;">何中天</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">515</td>
+<td style="text-align: left;">北京市第八十中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0127</td>
+<td style="text-align: left;">BJ-0212</td>
+<td style="text-align: left;">吴一非</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">490</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高三</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0128</td>
+<td style="text-align: left;">BJ-0169</td>
+<td style="text-align: left;">汤昊华</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">485</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高三</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0129</td>
+<td style="text-align: left;">BJ-0232</td>
+<td style="text-align: left;">颜珅</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">480</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高三</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0130</td>
+<td style="text-align: left;">BJ-0015</td>
+<td style="text-align: left;">陈伟哲</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">468</td>
+<td style="text-align: left;">北京师范大学实验二龙路中学</td>
+<td style="text-align: left;">高三</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0131</td>
+<td style="text-align: left;">BJ-0025</td>
+<td style="text-align: left;">邓明扬</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">468</td>
+<td style="text-align: left;">中国人民大学附属中学</td>
+<td style="text-align: left;">初二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0132</td>
+<td style="text-align: left;">BJ-0183</td>
+<td style="text-align: left;">王靖涵</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">464</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0133</td>
+<td style="text-align: left;">BJ-0065</td>
+<td style="text-align: left;">黄思</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">458</td>
+<td style="text-align: left;">中国人民大学附属中学</td>
+<td style="text-align: left;">高一</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0134</td>
+<td style="text-align: left;">BJ-0185</td>
+<td style="text-align: left;">王瑞康</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">455</td>
+<td style="text-align: left;">中国人民大学附属中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0135</td>
+<td style="text-align: left;">BJ-0002</td>
+<td style="text-align: left;">白行健</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">441</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">初三</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0136</td>
+<td style="text-align: left;">BJ-0117</td>
+<td style="text-align: left;">刘明君</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">433</td>
+<td style="text-align: left;">中国人民大学附属中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0137</td>
+<td style="text-align: left;">BJ-0129</td>
+<td style="text-align: left;">吕紫剑</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">419</td>
+<td style="text-align: left;">首都师范大学附属中学</td>
+<td style="text-align: left;">高一</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0138</td>
+<td style="text-align: left;">BJ-0081</td>
+<td style="text-align: left;">金岳圻</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">415</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高三</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0139</td>
+<td style="text-align: left;">BJ-0101</td>
+<td style="text-align: left;">李元鹏</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">415</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0140</td>
+<td style="text-align: left;">BJ-0167</td>
+<td style="text-align: left;">汤博文</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">410</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0141</td>
+<td style="text-align: left;">BJ-0222</td>
+<td style="text-align: left;">幸京睿</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">410</td>
+<td style="text-align: left;">首都师范大学附属中学</td>
+<td style="text-align: left;">高一</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0142</td>
+<td style="text-align: left;">BJ-0009</td>
+<td style="text-align: left;">陈纪源</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">409</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高一</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0143</td>
+<td style="text-align: left;">BJ-0103</td>
+<td style="text-align: left;">李子恒</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">409</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0144</td>
+<td style="text-align: left;">BJ-0287</td>
+<td style="text-align: left;">朱子健</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">403</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高一</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0145</td>
+<td style="text-align: left;">BJ-0164</td>
+<td style="text-align: left;">孙司宇</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">397</td>
+<td style="text-align: left;">北京师范大学实验二龙路中学</td>
+<td style="text-align: left;">高三</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0146</td>
+<td style="text-align: left;">BJ-0086</td>
+<td style="text-align: left;">兰慧心</td>
+<td style="text-align: left;">女</td>
+<td style="text-align: left;">389</td>
+<td style="text-align: left;">北京师范大学附属中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0147</td>
+<td style="text-align: left;">BJ-0253</td>
+<td style="text-align: left;">张启晗</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">389</td>
+<td style="text-align: left;">北京市第一 0 一中学</td>
+<td style="text-align: left;">高三</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0148</td>
+<td style="text-align: left;">BJ-0156</td>
+<td style="text-align: left;">任奕舟</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">384</td>
+<td style="text-align: left;">北京市第四中学</td>
+<td style="text-align: left;">高三</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0149</td>
+<td style="text-align: left;">BJ-0115</td>
+<td style="text-align: left;">刘祎钒</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">380</td>
+<td style="text-align: left;">北京市第一五九中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0150</td>
+<td style="text-align: left;">BJ-0059</td>
+<td style="text-align: left;">胡嘉铭</td>
+<td style="text-align: left;">女</td>
+<td style="text-align: left;">379</td>
+<td style="text-align: left;">北京市第四中学</td>
+<td style="text-align: left;">高一</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0151</td>
+<td style="text-align: left;">BJ-0062</td>
+<td style="text-align: left;">胡雨轩</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">370</td>
+<td style="text-align: left;">北京师范大学第三附属中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0152</td>
+<td style="text-align: left;">BJ-0201</td>
+<td style="text-align: left;">王瀚邦</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">365</td>
+<td style="text-align: left;">北京师范大学实验二龙路中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0153</td>
+<td style="text-align: left;">BJ-0230</td>
+<td style="text-align: left;">薛司旸</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">362</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0154</td>
+<td style="text-align: left;">BJ-0121</td>
+<td style="text-align: left;">刘晓义</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">360</td>
+<td style="text-align: left;">清华大学附属中学</td>
+<td style="text-align: left;">高三</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0155</td>
+<td style="text-align: left;">BJ-0107</td>
+<td style="text-align: left;">梁元成</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">359</td>
+<td style="text-align: left;">中国人民大学附属中学</td>
+<td style="text-align: left;">初三</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0156</td>
+<td style="text-align: left;">BJ-0112</td>
+<td style="text-align: left;">林晖</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">357</td>
+<td style="text-align: left;">北京市第五中学</td>
+<td style="text-align: left;">高三</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0157</td>
+<td style="text-align: left;">BJ-0257</td>
+<td style="text-align: left;">张辛宁</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">354</td>
+<td style="text-align: left;">北京市第八十中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0158</td>
+<td style="text-align: left;">BJ-0228</td>
+<td style="text-align: left;">许益冰</td>
+<td style="text-align: left;">女</td>
+<td style="text-align: left;">353</td>
+<td style="text-align: left;">中国人民大学附属中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0159</td>
+<td style="text-align: left;">BJ-0022</td>
+<td style="text-align: left;">崔轶锴</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">351</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高一</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0160</td>
+<td style="text-align: left;">BJ-0282</td>
+<td style="text-align: left;">周昱衡</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">351</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高一</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0161</td>
+<td style="text-align: left;">BJ-0023</td>
+<td style="text-align: left;">单浩轩</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">345</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0162</td>
+<td style="text-align: left;">BJ-0285</td>
+<td style="text-align: left;">朱恩佐</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">331</td>
+<td style="text-align: left;">中国人民大学附属中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0163</td>
+<td style="text-align: left;">BJ-0050</td>
+<td style="text-align: left;">韩百洋</td>
+<td style="text-align: left;">女</td>
+<td style="text-align: left;">325</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0164</td>
+<td style="text-align: left;">BJ-0274</td>
+<td style="text-align: left;">赵昕曈</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">325</td>
+<td style="text-align: left;">北京市第四中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0165</td>
+<td style="text-align: left;">BJ-0218</td>
+<td style="text-align: left;">肖元安</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">322</td>
+<td style="text-align: left;">中国人民大学附属中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0166</td>
+<td style="text-align: left;">BJ-0079</td>
+<td style="text-align: left;">蒋林</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">321</td>
+<td style="text-align: left;">北京师范大学实验二龙路中学</td>
+<td style="text-align: left;">高三</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0167</td>
+<td style="text-align: left;">BJ-0150</td>
+<td style="text-align: left;">秦一飞</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">320</td>
+<td style="text-align: left;">北京市第八十中学</td>
+<td style="text-align: left;">初二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0168</td>
+<td style="text-align: left;">BJ-0157</td>
+<td style="text-align: left;">任憬羿</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">320</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">初三</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0169</td>
+<td style="text-align: left;">BJ-0063</td>
+<td style="text-align: left;">胡智晟</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">319</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0170</td>
+<td style="text-align: left;">BJ-0159</td>
+<td style="text-align: left;">盛翊伦</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">315</td>
+<td style="text-align: left;">中国人民大学附属中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0171</td>
+<td style="text-align: left;">BJ-0028</td>
+<td style="text-align: left;">董滨瑞</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">314</td>
+<td style="text-align: left;">北京市第四中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0172</td>
+<td style="text-align: left;">BJ-0104</td>
+<td style="text-align: left;">李琦煜</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">313</td>
+<td style="text-align: left;">首都师范大学附属中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0173</td>
+<td style="text-align: left;">BJ-0134</td>
+<td style="text-align: left;">毛宇翔</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">312</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0174</td>
+<td style="text-align: left;">BJ-0004</td>
+<td style="text-align: left;">曹鼎原</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">308</td>
+<td style="text-align: left;">北京师范大学第二附属中学</td>
+<td style="text-align: left;">高三</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0175</td>
+<td style="text-align: left;">BJ-0283</td>
+<td style="text-align: left;">朱玥华</td>
+<td style="text-align: left;">女</td>
+<td style="text-align: left;">305</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0176</td>
+<td style="text-align: left;">BJ-0072</td>
+<td style="text-align: left;">黄子宽</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">300</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">初二</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0177</td>
+<td style="text-align: left;">BJ-0091</td>
+<td style="text-align: left;">李经纬</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">300</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0178</td>
+<td style="text-align: left;">BJ-0102</td>
+<td style="text-align: left;">李元恺</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">300</td>
+<td style="text-align: left;">北京师范大学实验二龙路中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0179</td>
+<td style="text-align: left;">BJ-0108</td>
+<td style="text-align: left;">梁昊骞</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">298</td>
+<td style="text-align: left;">北京十一学校</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0180</td>
+<td style="text-align: left;">BJ-0179</td>
+<td style="text-align: left;">王丹羽</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">298</td>
+<td style="text-align: left;">清华大学附属中学</td>
+<td style="text-align: left;">高三</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0181</td>
+<td style="text-align: left;">BJ-0057</td>
+<td style="text-align: left;">何岱岚</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">292</td>
+<td style="text-align: left;">北京师范大学第二附属中学</td>
+<td style="text-align: left;">高三</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0182</td>
+<td style="text-align: left;">BJ-0018</td>
+<td style="text-align: left;">陈驭祺</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">291</td>
+<td style="text-align: left;">中国人民大学附属中学</td>
+<td style="text-align: left;">初二</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0183</td>
+<td style="text-align: left;">BJ-0170</td>
+<td style="text-align: left;">唐嘉辰</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">290</td>
+<td style="text-align: left;">中国人民大学附属中学</td>
+<td style="text-align: left;">高一</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0184</td>
+<td style="text-align: left;">BJ-0216</td>
+<td style="text-align: left;">武钰淞</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">289</td>
+<td style="text-align: left;">清华大学附属中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0185</td>
+<td style="text-align: left;">BJ-0049</td>
+<td style="text-align: left;">郭翔宇</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">286</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0186</td>
+<td style="text-align: left;">BJ-0272</td>
+<td style="text-align: left;">赵奕</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">286</td>
+<td style="text-align: left;">中国人民大学附属中学</td>
+<td style="text-align: left;">高三</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0187</td>
+<td style="text-align: left;">BJ-0227</td>
+<td style="text-align: left;">徐逸飞</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">285</td>
+<td style="text-align: left;">北京市第四中学</td>
+<td style="text-align: left;">高一</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0188</td>
+<td style="text-align: left;">BJ-0144</td>
+<td style="text-align: left;">齐思恺</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">284</td>
+<td style="text-align: left;">中国人民大学附属中学</td>
+<td style="text-align: left;">初三</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0189</td>
+<td style="text-align: left;">BJ-0138</td>
+<td style="text-align: left;">农钧翔</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">280</td>
+<td style="text-align: left;">中国人民大学附属中学</td>
+<td style="text-align: left;">高一</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0190</td>
+<td style="text-align: left;">BJ-0143</td>
+<td style="text-align: left;">彭相龙</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">280</td>
+<td style="text-align: left;">北京市第五中学</td>
+<td style="text-align: left;">高三</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0191</td>
+<td style="text-align: left;">BJ-0248</td>
+<td style="text-align: left;">张博鑫</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">280</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">初三</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0192</td>
+<td style="text-align: left;">BJ-0160</td>
+<td style="text-align: left;">时屿轩</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">278</td>
+<td style="text-align: left;">北京市第一 0 一中学</td>
+<td style="text-align: left;">高一</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0193</td>
+<td style="text-align: left;">BJ-0173</td>
+<td style="text-align: left;">陶吟翔</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">276</td>
+<td style="text-align: left;">北京十一学校</td>
+<td style="text-align: left;">高一</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0194</td>
+<td style="text-align: left;">BJ-0194</td>
+<td style="text-align: left;">王宇辰</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">276</td>
+<td style="text-align: left;">北京市第四中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0195</td>
+<td style="text-align: left;">BJ-0055</td>
+<td style="text-align: left;">何佳优</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">275</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">初三</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0196</td>
+<td style="text-align: left;">BJ-0280</td>
+<td style="text-align: left;">周宜晖</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">275</td>
+<td style="text-align: left;">北京市第一 0 一中学</td>
+<td style="text-align: left;">高一</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0197</td>
+<td style="text-align: left;">BJ-0186</td>
+<td style="text-align: left;">王思清</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">270</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">初三</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0198</td>
+<td style="text-align: left;">BJ-0247</td>
+<td style="text-align: left;">章志宇</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">269</td>
+<td style="text-align: left;">北京师范大学实验二龙路中学</td>
+<td style="text-align: left;">高三</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0199</td>
+<td style="text-align: left;">BJ-0288</td>
+<td style="text-align: left;">朱梓同</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">269</td>
+<td style="text-align: left;">中国人民大学附属中学</td>
+<td style="text-align: left;">初三</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0200</td>
+<td style="text-align: left;">BJ-0036</td>
+<td style="text-align: left;">冯淩嵩</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">268</td>
+<td style="text-align: left;">北京市第一 0 一中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0201</td>
+<td style="text-align: left;">BJ-0171</td>
+<td style="text-align: left;">唐泓煊</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">268</td>
+<td style="text-align: left;">中国人民大学附属中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0202</td>
+<td style="text-align: left;">BJ-0021</td>
+<td style="text-align: left;">崔家瑞</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">267</td>
+<td style="text-align: left;">北京市第八十中学</td>
+<td style="text-align: left;">初三</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0203</td>
+<td style="text-align: left;">BJ-0265</td>
+<td style="text-align: left;">张灏</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">267</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0204</td>
+<td style="text-align: left;">BJ-0277</td>
+<td style="text-align: left;">郑乔</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">266</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CCF-NOIP2016-0205</td>
+<td style="text-align: left;">BJ-0239</td>
+<td style="text-align: left;">杨昊宸</td>
+<td style="text-align: left;">男</td>
+<td style="text-align: left;">265</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">高二</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CCF-NOIP2016-0206</td>
+<td style="text-align: left;">BJ-0260</td>
+<td style="text-align: left;">张雨溪</td>
+<td style="text-align: left;">女</td>
+<td style="text-align: left;">265</td>
+<td style="text-align: left;">北京师范大学附属实验中学</td>
+<td style="text-align: left;">初三</td>
+</tr>
+</tbody>
+</table>
+<h3 id="结语">结语</h3>
+<p>我是一个只会做 bzoj 的蒟蒻, 求大神勿喷</p>
+<p>本次 NOIP2016 滚粗踩线 1=好菜啊~</p>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/noip2016/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/noip2016/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/noip2016/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/noip2016/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="noip2016">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

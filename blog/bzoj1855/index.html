@@ -1,0 +1,200 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1855: [Scoi2010]股票交易&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1855: [Scoi2010]股票交易
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=SCOI2010" target="_self">
+            <i class="fa fa-tag"></i> SCOI2010
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+          <a class="tag" href="/blog/archive/?q=Optimized DP" target="_self">
+            <i class="fa fa-tag"></i> Optimized DP
+          </a>
+        </span>
+        <span class="date" title="00:01:10 | 18 December, 2016">
+          18 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>最近 lxhgww 又迷上了投资股票, 通过一段时间的观察和学习, 他总结出了股票行情的一些 规律. 通过一段时间的观察, lxhgww 预测到了未来 <span class="math inline">\(T\)</span> 天内某只股票的走势, 第 <span class="math inline">\(i\)</span> 天的 股票买入价为每股 <span class="math inline">\(APi\)</span>, 第 <span class="math inline">\(i\)</span> 天的股票卖出价为每股 <span class="math inline">\(BP_i\)</span> (数据保证对于每个 <span class="math inline">\(i\)</span>, 都有 <span class="math inline">\(AP_i \geq BP_i\)</span>) , 但是每天不能无限制地交易, 于是股票交易所规定第 <span class="math inline">\(i\)</span> 天的 一次买入至多只能购买 <span class="math inline">\(AS_i\)</span> 股, 一次卖出至多只能卖出 <span class="math inline">\(BS_i\)</span> 股. 另外, 股票交易所还制定了两个规定. 为了避免大家疯狂交易, 股票交易所规定在两次交易 (某一天的买入 或者卖出均算是一次交易) 之间, 至少要间隔 <span class="math inline">\(W\)</span> 天, 也就是说如果在第 <span class="math inline">\(i\)</span> 天发生了 交易, 那么从第 <span class="math inline">\(i+1\)</span> 天到第 <span class="math inline">\(i+W\)</span> 天, 均不能发生交易. 同时, 为了避免垄断, 股票 交易所还规定在任何时间, 一个人的手里的股票数不能超过 <span class="math inline">\(MaxP\)</span>. 在第 <span class="math inline">\(1\)</span> 天之前, lxhgww 手里有一大笔钱 (可以认为钱的数目无限), 但是没有任何股票, 当然,<span class="math inline">\(T\)</span> 天以后, lxhgww 想要赚到最多的钱, 聪明的程序员们, 你们能帮助他吗?</p>
+<h2 id="input">Input</h2>
+<p>输入数据第一行包括 <span class="math inline">\(3\)</span> 个整数, 分别是 <span class="math inline">\(T, MaxP, W\)</span>. 接下来 <span class="math inline">\(T\)</span> 行, 第 <span class="math inline">\(i\)</span> 行代表第 <span class="math inline">\(i-1\)</span> 天的股票走势, 每行 <span class="math inline">\(4\)</span> 个整数, 分别表示 <span class="math inline">\(AP_i, BP_i, AS_i, BS_I\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>输出数据为一行, 包括 <span class="math inline">\(1\)</span> 个数字, 表示 lxhgww 能赚到的最多的钱数.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>5 2 0
+2 1 1 1
+2 1 1 1
+3 2 1 1
+4 3 1 1
+5 4 1 1</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>3</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于 30% 的数据,<span class="math inline">\(0 \leq W \lt T \leq 50, 1 \leq MaxP \leq 50\)</span></p>
+<p>对于 50% 的数据,<span class="math inline">\(0 \leq W \lt T \leq 2000, 1 \leq MaxP \leq 50\)</span></p>
+<p>对于 100% 的数据,<span class="math inline">\(0 \leq W \lt T \leq 2000, 1 \leq MaxP \leq 2000\)</span></p>
+<p>对于所有的数据,<span class="math inline">\(1 \leq BP_i \leq AP_i \leq 1000, 1 \leq AS_i, BS_i \leq MaxP\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>膜巨神题解:<a href="">http://blog.csdn.net/qpswwww/article/details/44489417</a></p>
+<p>很显然是个 DP 题, 比较容易想到下面的 DP 做法:</p>
+<p>用 <span class="math inline">\(f[i][j]\)</span> 表示第 <span class="math inline">\(i\)</span> 天, 手上有 <span class="math inline">\(j\)</span> 个股票的最大获利. 显然最终的答案为 <span class="math inline">\(max\{f[i][0]\}\)</span> (显然以某天交易结束后收手不干, 肯定是手上没有股票是最优的), DP 初始化如下:</p>
+<p><span class="math display">\[f(x) = \left\{ \begin{aligned}
+    f[i][j] = max\{f[i - 1][j], - a_{pj}\}, j \leq a_s(第i天没买或全是这天买的)\\
+    f[i][j] = f[i - 1][j], j \gt a_s (手上股票超出了一次购买的限制，只能是第i天没买)\\
+\end{aligned} \right.\]</span></p>
+<p>而 DP 方程则为 (以转移情况为购入股票举例)</p>
+<p><span class="math display">\[f[i][j] = max\{f[i - w - 1][k] + a_p \cdot (j - k)\}\]</span></p>
+<p>这样做的正确性是显然的,<span class="math inline">\(f[i][j]\)</span> 一定是前 <span class="math inline">\(i\)</span> 天里手持 <span class="math inline">\(j\)</span> 股的最优解, 这样一来 我们就节省了一维时间复杂度, 但是还是会 TLE.</p>
+<p>变化一下这个 DP 方程:</p>
+<p><span class="math display">\[f[i][j] = max\{f[i - w - 1][k] - a_{pk} + a_{pj}\}\]</span></p>
+<p>一般可以用单调队列优化的 DP 都能满足形如 <span class="math inline">\(f[x]=max(min){f[k]}+g[x]\)</span> 的形式, 那么 我们可以把这里的 <span class="math inline">\(f[i-w-1][k]\)</span> 看作是上面的 <span class="math inline">\(f[k]\)</span>,<span class="math inline">\(AP_j\)</span> 看作是上面的 <span class="math inline">\(g[x]\)</span>, 于是就可以从小到大枚举 <span class="math inline">\(j\)</span>, 并用单调队列维护二元组 <span class="math inline">\((k,f[i-w-1][k])\)</span>, 并保证队首的 <span class="math inline">\(f[i-w-1][k]\)</span> 是最大的, DP 到某个 <span class="math inline">\(j\)</span> 时, 先把队首所有不合法的 <span class="math inline">\(f[i-w-1][k]\)</span> 全部弹出, 然后用第一个合法的队首去更新 <span class="math inline">\(f[i][j]\)</span>, 然后将这时的 <span class="math inline">\(f[i-w-1][j]\)</span> 放入队尾, 并同时维护队列单调性.</p>
+<p>而卖出的做法也非常相似, 在这里就不再赘述了</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="ot">#define maximize(__x,__y) __x=max(__x,__y)</span>
+<span class="ot">#define rep(_var,_begin,_end) for(int _var=_begin;_var&lt;=_end;_var++)</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">2100</span>;
+<span class="dt">const</span> lli infinit = <span class="bn">0x007f7f7f7f7f7f7fll</span>;
+
+<span class="dt">int</span> n, maxP, w;
+lli dp[maxn][maxn];
+pair&lt;<span class="dt">int</span>, lli&gt; que[maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    lli res = -infinit;
+    rep(i, <span class="dv">0</span>, maxn - <span class="dv">1</span>) rep(j, <span class="dv">0</span>, maxn - <span class="dv">1</span>)
+        dp[i][j] = -infinit;
+    scanf(<span class="st">"</span><span class="ch">%d%d%d</span><span class="st">"</span>, &amp;n, &amp;maxP, &amp;w);
+    <span class="co">// Process dynamic programming while reading data</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        <span class="dt">int</span> ap, bp, as, bs;
+        scanf(<span class="st">"</span><span class="ch">%d%d%d%d</span><span class="st">"</span>, &amp;ap, &amp;bp, &amp;as, &amp;bs);
+        <span class="co">// Only selling shares at this day.</span>
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">0</span>; j &lt;= as; j++)
+            dp[i][j] = - ap * j;
+        <span class="co">// Selling / purchasing nothing on this day (copying data)</span>
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">0</span>; j &lt;= maxP; j++)
+            maximize(dp[i][j], dp[i - <span class="dv">1</span>][j]);
+        <span class="co">// The last operation that allows this operation</span>
+        <span class="dt">int</span> k = i - w - <span class="dv">1</span>;
+        <span class="kw">if</span> (k &gt;= <span class="dv">0</span>) {
+            <span class="co">// Dual-directional queue / deque</span>
+            <span class="dt">int</span> front = <span class="dv">0</span>, end = <span class="dv">0</span>;
+            <span class="co">// Purchasing shares.</span>
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">0</span>; j &lt;= maxP; j++) {
+                <span class="kw">while</span> (front &lt; end &amp;&amp; que[front].first &lt; j - as)
+                    front += <span class="dv">1</span>;
+                <span class="kw">while</span> (front &lt; end &amp;&amp; que[end - <span class="dv">1</span>].second &lt;= dp[k][j] + ap * j)
+                    end -= <span class="dv">1</span>;
+                <span class="co">// Enqueue and update data</span>
+                que[end++] = make_pair(j, dp[k][j] + ap * j);
+                <span class="kw">if</span> (front &lt; end)
+                    maximize(dp[i][j], que[front].second - ap * j);
+            }
+            front = <span class="dv">0</span>, end = <span class="dv">0</span>;
+            <span class="co">// Selling shares.</span>
+            <span class="kw">for</span> (<span class="dt">int</span> j = maxP; j &gt;= <span class="dv">0</span>; j--) {
+                <span class="kw">while</span> (front &lt; end &amp;&amp; que[front].first &gt; j + bs)
+                    front += <span class="dv">1</span>;
+                <span class="kw">while</span> (front &lt; end &amp;&amp; que[end - <span class="dv">1</span>].second &lt;= dp[k][j] + bp * j)
+                    end -= <span class="dv">1</span>;
+                que[end++] = make_pair(j, dp[k][j] + bp * j);
+                <span class="kw">if</span> (front &lt; end)
+                    maximize(dp[i][j], que[front].second - bp * j);
+            }
+        }
+        <span class="co">// Update final value</span>
+        maximize(res, dp[i][<span class="dv">0</span>]);
+    }
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1855/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1855/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1855/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1855/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1855">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

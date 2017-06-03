@@ -1,0 +1,287 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1823: [JSOI2010]满汉全席&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1823: [JSOI2010]满汉全席
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=JSOI2010" target="_self">
+            <i class="fa fa-tag"></i> JSOI2010
+          </a>
+          <a class="tag" href="/blog/archive/?q=Strongly Connected Components" target="_self">
+            <i class="fa fa-tag"></i> Strongly Connected Components
+          </a>
+        </span>
+        <span class="date" title="22:05:16 | 20 April, 2017">
+          20 April, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>满汉全席是中国最丰盛的宴客菜肴, 有许多种不同的材料透过满族或是汉族的料理方式, 呈现在數量繁多的菜色之中. 由于菜色众多而繁杂, 只有极少數博学多闻技艺高超的厨师能够做出满汉全席, 而能够烹饪出经过专家认证的满汉全席, 也是中国厨师最大的荣誉之一. 世界满汉全席协会是由能够料理满汉全席的专家厨师们所组成, 而他们之间还细分为许多不同等级的厨师. 为了招收新进的厨师进入世界满汉全席协会, 将于近日举办满汉全席大赛, 协会派遣许多会员当作评审员, 为的就是要在參赛的厨师之中, 找到满汉料理界的明日之星.</p>
+<p>大会的规则如下: 每位參赛的选手可以得到 <span class="math inline">\(n\)</span> 种材料, 选手可以自由选择用满式或是汉式料理将材料当成菜肴. 大会的评审制度是: 共有 <span class="math inline">\(m\)</span> 位评审员分别把关. 每一位评审员对于满汉全席有各自独特的見解, 但基本见解是, 要有兩样菜色作为满汉全席的标志. 如某评审认为, 如果没有汉式东坡肉跟满式的涮羊肉锅, 就不能算是满汉全席. 但避免过于有主見的审核, 大会规定一个评审员除非是在认为必备的两样菜色都没有做出來的狀况下, 才能淘汰一位选手, 否则不能淘汰一位參赛者. 换句话說, 只要參赛者能在这兩种材料的做法中, 其中一个符合评审的喜好即可通过该评审的审查. 如材料有猪肉, 羊肉和牛肉时, 有四位评审员的喜好如下表:</p>
+<table>
+<thead>
+<tr class="header">
+<th>评审一</th>
+<th>评审二</th>
+<th>评审三</th>
+<th>评审四</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>满式牛肉</td>
+<td>满式猪肉</td>
+<td>汉式牛肉</td>
+<td>汉式牛肉</td>
+</tr>
+<tr class="even">
+<td>汉式猪肉</td>
+<td>满式羊肉</td>
+<td>汉式猪肉</td>
+<td>满式羊肉</td>
+</tr>
+</tbody>
+</table>
+<p>如參赛者甲做出满式猪肉, 满式羊肉和满式牛肉料理, 他将无法满足评审三的要求, 无法通过评审. 而參赛者乙做出汉式猪肉, 满式羊肉和满式牛肉料理, 就可以满足所有评审的要求. 但大会后來发现, 在这样的制度下如果材料选择跟派出的评审员没有特别安排好的话, 所有的參赛者最多只能通过部分评审员的审查而不是全部, 所以可能会发生没有人通过考核的情形.</p>
+<p>如有四个评审员喜好如下表时, 则不論參赛者采取什么样的做法, 都不可能通过所有评审的考核:</p>
+<table>
+<thead>
+<tr class="header">
+<th>评审一</th>
+<th>评审二</th>
+<th>评审三</th>
+<th>评审四</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>满式羊肉</td>
+<td>满式猪肉</td>
+<td>汉式羊肉</td>
+<td>汉式羊肉</td>
+</tr>
+<tr class="even">
+<td>汉式猪肉</td>
+<td>满式羊肉</td>
+<td>汉式猪肉</td>
+<td>满式猪肉</td>
+</tr>
+</tbody>
+</table>
+<p>所以大会希望有人能写一个程序判断, 所选出的 <span class="math inline">\(m\)</span> 位评审, 会不会发生没有人能通过考核的窘境, 以便协会组织合适的评审团.</p>
+<h2 id="input">Input</h2>
+<p>第一行包含一个数字 <span class="math inline">\(k\)</span>, 代表测试文件包含了 <span class="math inline">\(k\)</span> 组资料.</p>
+<p>每一组测试资料的第一行包含兩个数字 <span class="math inline">\(n, m\)</span>, 代表有 <span class="math inline">\(n\)</span> 种材料,<span class="math inline">\(m\)</span> 位评审员. 为方便起見, 材料舍弃中文名称而给予编号, 编号分别从 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span>.</p>
+<p>接下來的 <span class="math inline">\(m\)</span> 行, 每行都代表对应的评审员所拥有的兩个喜好, 每个喜好由一个英文字母跟一个数字代表, 如 <span class="math inline">\(m1\)</span> 代表这个评审喜欢第 <span class="math inline">\(1\)</span> 个材料透过满式料理做出來的菜, 而 <span class="math inline">\(h2\)</span> 代表这个评审员喜欢第 <span class="math inline">\(2\)</span> 个材料透过汉式料理做出來的菜.</p>
+<h2 id="output">Output</h2>
+<p>每组测试资料输出一行, 如果不会发生没有人能通过考核的窘境, 输出 <code>GOOD</code>; 否则输出 <code>BAD</code>.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>2
+3 4
+m3 h1
+m1 m2
+h1 h3
+h3 m2
+2 4
+h1 m2
+m2 m1
+h1 h2
+m1 h2
+</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>GOOD
+BAD
+</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有的数据, 满足:<span class="math inline">\(k \leq 50, 1 \leq n \leq 100, 1 \leq m \leq 1000\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<p>首先这个 <code>scanf</code> 实在无力吐嘈----读字符是最烦人的......</p>
+<p>对于一个评审员, 其要求的两种食材分别为 <span class="math inline">\(a, b\)</span>, 对应地满汉式分别为 <span class="math inline">\(x, y\)</span>, 其中 <span class="math inline">\(0 \leq x, y \leq 1\)</span>. 考虑将每一种食材拆点, 为 <span class="math inline">\(2a - 1, 2a\)</span>, 然后两种菜肴如果被一个评审员同时要求, 则连一条双向边.</p>
+<p>最后跑一个强连通分量缩点. 如果一种食材的两种菜肴在一个强连通分量中, 则这个评审员方案是不好的.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;stack&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">10010</span>, maxm = <span class="dv">50010</span>;
+
+<span class="kw">class</span> Tarjan
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v;
+        edge *next;
+    };
+    <span class="dt">int</span> n, ecnt, dcnt, bcnt;
+    edge *edges[maxn], epool[maxm];
+    <span class="dt">int</span> low[maxn], dfn[maxn], belong[maxn];
+    <span class="dt">bool</span> instk[maxn];
+    stack&lt;<span class="dt">int</span>&gt; stk;
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v)
+    {
+        edge *p = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v;
+        p-&gt;next = edges[u]; edges[u] = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> dfs(<span class="dt">int</span> p)
+    {
+        low[p] = dfn[p] = ++dcnt;
+        stk.push(p); instk[p] = <span class="kw">true</span>;
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next) {
+            <span class="dt">int</span> q = ep-&gt;v;
+            <span class="kw">if</span> (!dfn[q]) {
+                dfs(q);
+                <span class="kw">if</span> (low[q] &lt; low[p])
+                    low[p] = low[q];
+            } <span class="kw">else</span> {
+                <span class="kw">if</span> (instk[q] &amp;&amp; dfn[q] &lt; low[p])
+                    low[p] = dfn[q];
+            }
+        }
+        <span class="kw">if</span> (low[p] == dfn[p]) {
+            <span class="dt">int</span> q = <span class="dv">0</span>;
+            bcnt += <span class="dv">1</span>;
+            <span class="kw">do</span> {
+                q = stk.top();
+                stk.pop(); instk[q] = <span class="kw">false</span>;
+                belong[q] = bcnt;
+            } <span class="kw">while</span> (q != p);
+        }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> clear(<span class="dt">void</span>)
+    {
+        n = ecnt = dcnt = bcnt = <span class="dv">0</span>;
+        memset(edges, <span class="dv">0</span>, <span class="kw">sizeof</span>(edges));
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> eval(<span class="dt">void</span>)
+    {
+        memset(dfn, <span class="dv">0</span>, <span class="kw">sizeof</span>(dfn));
+        memset(instk, <span class="dv">0</span>, <span class="kw">sizeof</span>(instk));
+        <span class="kw">while</span> (!stk.empty())
+            stk.pop();
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>; i &lt;= n; i++)
+            <span class="kw">if</span> (!dfn[i])
+                dfs(i);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> judge(<span class="dt">void</span>)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>; i &lt;= n; i += <span class="dv">2</span>)
+            <span class="kw">if</span> (belong[i] == belong[i + <span class="dv">1</span>])
+                <span class="kw">return</span> <span class="kw">false</span>;
+        <span class="kw">return</span> <span class="kw">true</span>;
+    }
+} graph;
+
+<span class="dt">int</span> T, n, m;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;T);
+    <span class="kw">for</span> (<span class="dt">int</span> idx = <span class="dv">1</span>; idx &lt;= T; idx++) {
+        <span class="co">// Downvote this input</span>
+        scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+        <span class="dt">char</span> ch1, ch2;
+        graph.clear();
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, a, b; i &lt;= m; i++) {
+            scanf(<span class="st">"</span><span class="ch">\n%c%d</span><span class="st"> </span><span class="ch">%c%d</span><span class="st">"</span>, &amp;ch1, &amp;a, &amp;ch2, &amp;b);
+            <span class="dt">int</span> p1 = <span class="dv">2</span> * a + (ch1 == <span class="st">'h'</span>),
+                p2 = <span class="dv">2</span> * b + (ch2 == <span class="st">'h'</span>);
+            graph.add_edge(p1^<span class="dv">1</span>, p2);
+            graph.add_edge(p2^<span class="dv">1</span>, p1);
+        }
+        <span class="co">// Get the result done</span>
+        graph.n = <span class="dv">2</span> * n + <span class="dv">1</span>;
+        graph.eval();
+        <span class="co">// Judge this</span>
+        printf(<span class="st">"</span><span class="ch">%s\n</span><span class="st">"</span>, graph.judge() ? <span class="st">"GOOD"</span> : <span class="st">"BAD"</span>);
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1823/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1823/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1823/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1823/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1823">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

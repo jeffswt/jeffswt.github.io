@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj4237: 稻草人&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj4237: 稻草人
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+          <a class="tag" href="/blog/archive/?q=Optimized DP" target="_self">
+            <i class="fa fa-tag"></i> Optimized DP
+          </a>
+          <a class="tag" href="/blog/archive/?q=CDQ Divide and Conquer" target="_self">
+            <i class="fa fa-tag"></i> CDQ Divide and Conquer
+          </a>
+        </span>
+        <span class="date" title="23:57:25 | 8 February, 2017">
+          8 February, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>JOI 村有一片荒地, 上面竖着 <span class="math inline">\(n\)</span> 个稻草人, 村民们每年多次在稻草人们的周围举行祭典.</p>
+<p>有一次, JOI 村的村长听到了稻草人们的启示, 计划在荒地中开垦一片田地. 和启示中的一样, 田地需要满足以下条件:</p>
+<ol type="1">
+<li>田地的形状是边平行于坐标轴的长方形;</li>
+<li>左下角和右上角各有一个稻草人;</li>
+<li>田地的内部 (不包括边界) 没有稻草人.</li>
+</ol>
+<p>给出每个稻草人的坐标, 请你求出有多少遵从启示的田地的个数.</p>
+<h2 id="input">Input</h2>
+<p>第一行一个正整数 <span class="math inline">\(n\)</span>, 代表稻草人的个数;</p>
+<p>接下来 <span class="math inline">\(n\)</span> 行, 第 <span class="math inline">\(i\)</span> 行 <span class="math inline">\((1 \leq i \leq n)\)</span> 包含 <span class="math inline">\(2\)</span> 个由空格分隔的整数 <span class="math inline">\(x_i, y_i\)</span>, 表示第 <span class="math inline">\(i\)</span> 个稻草人的坐标.</p>
+<h2 id="output">Output</h2>
+<p>输出一行一个正整数, 代表遵从启示的田地的个数.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>4
+0 0
+2 2
+3 4
+4 3</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>3</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有数据, 满足:<span class="math inline">\(1 \leq n \leq 2 \times 10^5, 0 \leq x_i, y_i \leq 10^9\)</span>, 且 <span class="math inline">\(x_i\)</span> 互不相同,<span class="math inline">\(y_i\)</span> 互不相同.</p>
+<h2 id="explanation">Explanation</h2>
+<p>感觉好奇怪, 明明 CDQ 分治就是归并 DP......</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">200100</span>;
+<span class="dt">const</span> <span class="dt">int</span> infinit = <span class="bn">0x7fffffff</span>;
+
+<span class="kw">struct</span> point {
+    <span class="dt">int</span> x, y; };
+<span class="dt">bool</span> cmp_x(point a, point b) {
+    <span class="kw">return</span> a.x &lt; b.x; }
+<span class="dt">bool</span> cmp_y(point a, point b) {
+    <span class="kw">return</span> a.y &gt; b.y; }
+
+<span class="dt">int</span> n;
+point p[maxn], stk1[maxn], stk2[maxn];
+
+<span class="dt">int</span> find(<span class="dt">int</span> val, <span class="dt">int</span> limit)
+{
+    <span class="dt">int</span> l = <span class="dv">1</span>, r = limit;
+    <span class="kw">while</span> (l &lt;= r) {
+        <span class="dt">int</span> mid = (l + r) / <span class="dv">2</span>;
+        <span class="kw">if</span> (stk1[mid].y &lt;= val)
+            r = mid - <span class="dv">1</span>;
+        <span class="kw">else</span>
+            l = mid + <span class="dv">1</span>;
+    }
+    <span class="kw">return</span> r;
+}
+
+lli solve(<span class="dt">int</span> l, <span class="dt">int</span> r)
+{
+    <span class="kw">if</span> (l &gt;= r)
+        <span class="kw">return</span> <span class="dv">0</span>;
+    <span class="co">// Splitting left and right</span>
+    <span class="dt">int</span> mid = (l + r) / <span class="dv">2</span>;
+    lli res = <span class="dv">0</span>;
+    <span class="co">// Conquering left part</span>
+    res += solve(l, mid);
+    <span class="co">// Reasoning with the joining of two sections</span>
+    sort(p + l, p + mid + <span class="dv">1</span>, cmp_y);
+    sort(p + mid + <span class="dv">1</span>, p + r + <span class="dv">1</span>, cmp_y);
+    <span class="dt">int</span> top1 = <span class="dv">0</span>, top2 = <span class="dv">0</span>;
+    stk1[<span class="dv">0</span>].y = stk2[<span class="dv">0</span>].y = infinit;
+    <span class="kw">for</span> (<span class="dt">int</span> i = l, j = mid<span class="dv">+1</span>; i &lt;= mid; i++) {
+        <span class="kw">while</span> (j &lt;= r &amp;&amp; p[j].y &gt; p[i].y) {
+            <span class="kw">while</span> (top1 &gt; <span class="dv">0</span> &amp;&amp; p[j].x &lt; stk1[top1].x)
+                top1 -= <span class="dv">1</span>; <span class="co">// stk1.pop();</span>
+            stk1[++top1] = p[j++]; <span class="co">// stk1.push(p[j++]);</span>
+        }
+        <span class="kw">while</span> (top2 &gt; <span class="dv">0</span> &amp;&amp; p[i].x &gt; stk2[top2].x)
+            top2 -= <span class="dv">1</span>; <span class="co">// stk2.pop();</span>
+        stk2[++top2] = p[i];
+        <span class="dt">int</span> l_f = find(stk2[top2<span class="dv">-1</span>].y, top1) + <span class="dv">1</span>,
+            r_f = find(stk2[top2].y, top1);
+        <span class="kw">if</span> (l_f &lt;= r_f)
+            res += r_f - l_f + <span class="dv">1</span>;
+    }
+    sort(p + l, p + mid + <span class="dv">1</span>, cmp_x);
+    sort(p + mid + <span class="dv">1</span>, p + r + <span class="dv">1</span>, cmp_x);
+    <span class="co">// Conquering right part</span>
+    res += solve(mid + <span class="dv">1</span>, r);
+    <span class="co">// Finalizing output</span>
+    <span class="kw">return</span> res;
+}
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;p[i].x, &amp;p[i].y);
+    sort(p + <span class="dv">1</span>, p + n + <span class="dv">1</span>, cmp_x);
+    lli res = solve(<span class="dv">1</span>, n);
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj4237/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj4237/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj4237/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj4237/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj4237">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

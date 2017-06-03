@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj3932: [CQOI2015]任务查询系统&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj3932: [CQOI2015]任务查询系统
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=CQOI2015" target="_self">
+            <i class="fa fa-tag"></i> CQOI2015
+          </a>
+          <a class="tag" href="/blog/archive/?q=Retroactive Data Structures" target="_self">
+            <i class="fa fa-tag"></i> Retroactive Data Structures
+          </a>
+          <a class="tag" href="/blog/archive/?q=Segment Tree" target="_self">
+            <i class="fa fa-tag"></i> Segment Tree
+          </a>
+          <a class="tag" href="/blog/archive/?q=Retroactive Segment Tree" target="_self">
+            <i class="fa fa-tag"></i> Retroactive Segment Tree
+          </a>
+        </span>
+        <span class="date" title="12:35:56 | 27 November, 2016">
+          27 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>最近实验室正在为其管理的超级计算机编制一套任务管理系统, 而你被安排完成其中的查询部分. 超级计算机中的任务用三元组 (Si, Ei, Pi) 描述, (Si, Ei, Pi) 表示任务从第 Si 秒开始, 在第 Ei 秒后结束 (第 Si 秒和 Ei 秒任务也在运行), 其优先级为 Pi. 同一时间可能有多个任务同时执行, 它们的优先级可能相同, 也可能不同. 调度系统会经常向 查询系统询问, 第 Xi 秒正在运行的任务中, 优先级最小的 Ki 个任务 (即将任务按照优先级从小到大排序后取前 Ki 个) 的优先级之和是多少. 特别的, 如果 Ki 大于第 Xi 秒正在运行的任务总数, 则直接回答第 Xi 秒正在运行的任务优先 级之和. 上述所有参数均为整数, 时间的范围在 1 到 n 之间 (包含 1 和 n).</p>
+<h2 id="input">Input</h2>
+<p>输入文件第一行包含两个空格分开的正整数 m 和 n, 分别表示任务总数和时间范围. 接下来 m 行, 每行包含三个空格 分开的正整数 Si、Ei 和 Pi (Si≤Ei), 描述一个任务. 接下来 n 行, 每行包含四个空格分开的整数 Xi、Ai、Bi 和 Ci, 描述一次查询. 查询的参数 Ki 需要由公式 Ki=1+(Ai*Pre+Bi) mod Ci 计算得到. 其中 Pre 表示上一次查询的结果, 对于第一次查询, Pre=1.</p>
+<h2 id="output">Output</h2>
+<p>输出共 n 行, 每行一个整数, 表示查询结果.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>4 3
+1 2 6
+2 3 3
+1 3 2
+3 3 4
+3 1 3 2
+1 1 3 4
+2 2 4 3</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>2
+8
+11</code></pre>
+<h2 id="sample-explanation">Sample Explanation</h2>
+<p>K1=(1*1+3)% 2+1=1</p>
+<p>K2=(1*2+3)% 4+1=2</p>
+<p>K3=(2*8+4)% 3+1=3</p>
+<h2 id="data-range">Data Range</h2>
+<p>对于 100% 的数据, 1≤m, n, Si, Ei, Ci≤100000, 0≤Ai, Bi≤100000, 1≤Pi≤10000000, Xi 为 1 到 n 的一个排列</p>
+<h2 id="solution">Solution</h2>
+<p>一道裸的可持久化线段树, 直接树状数组套一棵线段树 (内存 <span class="math inline">\(O(n \cdot log(n))\)</span>, 不用问了).</p>
+<p>但是套树状数组需要多一个 log......</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">100005</span>, maxm = <span class="dv">20000005</span>;
+<span class="ot">#define lowest_digit(__x) ((__x)&amp;(-__x))</span>
+
+<span class="dt">int</span> n, m;
+
+<span class="kw">class</span> RetroactiveSegmentTree
+{
+<span class="kw">public</span>:
+    <span class="dt">int</span> cnt, mx;
+    <span class="co">// Vector-like random access container</span>
+    <span class="dt">int</span> vec[maxn], top;
+    <span class="co">// Tree structure operations</span>
+    <span class="dt">int</span> root[maxn], size[maxm], ch[maxm][<span class="dv">2</span>], value[maxn];
+    lli sum[maxm];
+    <span class="dt">int</span> insert(<span class="dt">int</span> x, <span class="dt">int</span> val, <span class="dt">int</span> combo)
+    {
+        <span class="co">// Creating new node at #x.</span>
+        <span class="kw">if</span> (!x) x = ++cnt;
+        size[x] += combo;
+        sum[x] += combo * value[val];
+        <span class="dt">int</span> tmp = x;
+        <span class="co">// Creating subtrees</span>
+        <span class="dt">int</span> l = <span class="dv">1</span>, r = <span class="dv">2</span> * m;
+        <span class="kw">while</span> (l != r) {
+            <span class="dt">int</span> mid = (l + r) / <span class="dv">2</span>, t = <span class="dv">0</span>;
+            <span class="kw">if</span> (val &gt; mid) t ^= <span class="dv">1</span>, l = mid + <span class="dv">1</span>;
+            <span class="kw">else</span> r = mid;
+            <span class="kw">if</span> (!ch[x][t]) ch[x][t] = ++cnt;
+            x = ch[x][t]; size[x] += combo;
+            sum[x] += combo * value[val];
+        }
+        <span class="kw">return</span> tmp;
+    }
+    <span class="dt">void</span> update(<span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">int</span> pos)
+    {
+        <span class="kw">for</span> (<span class="dt">int</span> i = l; i &lt;= n; i += lowest_digit(i))
+            root[i] = insert(root[i], pos, <span class="dv">1</span>);
+        <span class="kw">for</span> (<span class="dt">int</span> i = r + <span class="dv">1</span>; i &lt;= n; i += lowest_digit(i))
+            root[i] = insert(root[i], pos, <span class="dv">-1</span>);
+        <span class="kw">return</span> ;
+    }
+    lli query(<span class="dt">int</span> x, <span class="dt">int</span> K)
+    {
+        lli res = <span class="dv">0</span>, nd_cnt = <span class="dv">0</span>; <span class="co">// Result and node count</span>
+        top = <span class="dv">0</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = x; i != <span class="dv">0</span>; i -= lowest_digit(i)) {
+            vec[++top] = root[i];
+            nd_cnt += size[root[i]];
+            res += sum[root[i]];
+        }
+        <span class="co">// That's a preliminary check if K....</span>
+        <span class="kw">if</span> (K &gt; nd_cnt)
+            <span class="kw">return</span> res;
+        <span class="kw">else</span> res = <span class="dv">0</span>;
+        <span class="co">// Iterating through all possible / affected sub-segment-trees</span>
+        <span class="dt">int</span> l = <span class="dv">1</span>, r = <span class="dv">2</span> * m;
+        <span class="kw">while</span> (l != r) {
+            <span class="dt">int</span> mid = (l + r) / <span class="dv">2</span>, t, tmp = <span class="dv">0</span>;
+            <span class="co">// Actual children in possession</span>
+            <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= top; i++)
+                tmp += size[ch[vec[i]][<span class="dv">0</span>]];
+            <span class="co">// Determine whether to traverse to left / right child</span>
+            <span class="kw">if</span> (tmp &lt; K) {
+                <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= top; i++)
+                    res += sum[ch[vec[i]][<span class="dv">0</span>]];
+                t = <span class="dv">1</span>;
+                K -= tmp; l = mid + <span class="dv">1</span>;
+            } <span class="kw">else</span> {
+                t = <span class="dv">0</span>;
+                r = mid;
+            }
+            <span class="co">// Batch manipulating children pointer locations</span>
+            <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= top; i++)
+                vec[i] = ch[vec[i]][t];
+        }
+        res += <span class="dv">1</span> * K * value[l];
+        <span class="kw">return</span> res;
+    }
+} st;
+
+lli S[maxn], E[maxn], P[maxn];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;m, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        scanf(<span class="st">"</span><span class="ch">%lld%lld%lld</span><span class="st">"</span>, &amp;S[i], &amp;E[i], &amp;P[i]);
+        st.value[i] = P[i];
+    }
+    sort(st.value + <span class="dv">1</span>, st.value + m + <span class="dv">1</span>);
+    <span class="co">// Preprocessing data.</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        <span class="co">// Get the position of p...</span>
+        P[i] = lower_bound(st.value + <span class="dv">1</span>, st.value + m + <span class="dv">1</span>, P[i]) - st.value;
+        st.update(S[i], E[i], P[i]);
+    }
+    lli pre = <span class="dv">1</span>, X, A, B, C, K;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%lld%lld%lld%lld</span><span class="st">"</span>, &amp;X, &amp;A, &amp;B, &amp;C);
+        K = <span class="dv">1</span> + (A * pre + B) % C;
+        pre = st.query(X, K);
+        printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, pre);
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj3932/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj3932/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj3932/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj3932/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj3932">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

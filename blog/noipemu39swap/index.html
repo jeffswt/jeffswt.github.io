@@ -1,0 +1,222 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NOIP-EMU-141104-swap 交换&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          NOIP-EMU-141104-swap 交换
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=NOIP Emulation" target="_self">
+            <i class="fa fa-tag"></i> NOIP Emulation
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+        </span>
+        <span class="date" title="07:23:19 | 10 November, 2016">
+          10 November, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="交换">交换</h2>
+<h3 id="题目描述">题目描述</h3>
+<p>给定一个 <span class="math inline">\({0, 1, 2, 3, … , n - 1}\)</span> 的排列 p. 一个 <span class="math inline">\({0, 1, 2 , … , n - 2}\)</span> 的排列 q 被认为是优美的排列, 当且仅当 q 满足下列条件:</p>
+<p>对排列 <span class="math inline">\(s = {0, 1, 2, 3, ..., n - 1}\)</span> 进行 <span class="math inline">\(n – 1\)</span> 次交换.</p>
+<ol type="1">
+<li>交换 <span class="math inline">\(s[q_0], s[q_0 + 1]\)</span></li>
+<li>交换 <span class="math inline">\(s[q_1], s[q_1 + 1]\)</span></li>
+<li>......</li>
+</ol>
+<p>最后能使得排列 <span class="math inline">\(s = p\)</span>.</p>
+<p>问有多少个优美的排列, 答案对 <span class="math inline">\(10^9 + 7\)</span> 取模.</p>
+<h3 id="输入格式">输入格式</h3>
+<p>第一行一个正整数 <span class="math inline">\(n\)</span>.</p>
+<p>第二行 <span class="math inline">\(n\)</span> 个整数代表排列 <span class="math inline">\(p\)</span>.</p>
+<h3 id="输出格式">输出格式</h3>
+<p>仅一行表示答案.</p>
+<!-- More -->
+<h3 id="样例输入">样例输入</h3>
+<pre><code>3
+1 2 0</code></pre>
+<h3 id="样例输出">样例输出</h3>
+<pre><code>1</code></pre>
+<h3 id="样例解释">样例解释</h3>
+<p><span class="math inline">\(q = {0,1}\)</span><span class="math inline">\({0,1,2}\)</span>-&gt; <span class="math inline">\({1,0,2}\)</span>-&gt; <span class="math inline">\({1, 2, 0}\)</span></p>
+<p><span class="math inline">\(q = {1,0}\)</span><span class="math inline">\({0,1,2}\)</span>-&gt; <span class="math inline">\({0,2,1}\)</span>-&gt; <span class="math inline">\({2, 0, 1}\)</span></p>
+<h3 id="数据范围">数据范围</h3>
+<p>30%:<span class="math inline">\(n \leq 10\)</span></p>
+<p>100%:<span class="math inline">\(n \leq 50\)</span></p>
+<h3 id="explanation">Explanation</h3>
+<p><strong>以下是官方题解:</strong></p>
+<p>考虑倒着处理, 比如交换 <span class="math inline">\((i, i + 1)\)</span>, 那么前面的所有数不管怎么交换都无法到后面去 (下标恒小于等于 <span class="math inline">\(i\)</span>) , 后面的数也是一样到不了前面. 说明这最后一次交换前, 就要求对于所有的 <span class="math inline">\(x \leq i, y \gt i，px \lt py\)</span>. 所以交换前左边的数是连续的, 右边也是 连续的. 由于交换前, 前面和后面的数是互相不干涉的, 所以就归结成了两个子问题. 于是 我们可以用记忆化搜索来解决这个问题.</p>
+<p>设 <span class="math inline">\(dp[n][low]\)</span> 代表长度为 <span class="math inline">\(n\)</span>,<span class="math inline">\(H\)</span> 是 <span class="math inline">\({low, low + 1,...,low + n - 1}\)</span> 的排列, 且 <span class="math inline">\(H\)</span> 是 <span class="math inline">\(p\)</span> 的子序列, 在 <span class="math inline">\(H\)</span> 上优美序列的个数.</p>
+<p>我们枚举交换哪两个相邻元素 <span class="math inline">\((k, k + 1)\)</span>, 然后判断 <span class="math inline">\(k\)</span> 前面的所有数是否都小于后面的所有数, 如果是则进行转移 <span class="math inline">\(dp[n][low] += dp[k][low] \cdot dp[n – k][low + k] \cdot C_{n – 2}^{n – 1 - k}\)</span>. 即前面的 k 个元素与后面的 <span class="math inline">\(n - k\)</span> 个元素是两个独立的子问题, 前面是 <span class="math inline">\({low ... low + k - 1}\)</span> 的排列, 后面是 <span class="math inline">\({low + k ... low + n - 1}\)</span> 的排 列,<span class="math inline">\(C_{n - 2}^{n - 1 - k}\)</span> 代表的是在交换 <span class="math inline">\((k, k + 1)\)</span> 前左右两边还分别要进 行<span class="math inline">\(n - 2\)</span> 次交换, 而每次交换左边与交换右边是不同方案, 这相当于 <span class="math inline">\(n - 2\)</span> 个位置选择 <span class="math inline">\(n - 1 - k\)</span> 个位置填入, 故还需要乘上 $C_ {n-2} ^ {n-1-k}. 时间复杂度为 <span class="math inline">\(O(n^4)\)</span>.</p>
+<h3 id="source-code">Source Code</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">52</span>;
+<span class="dt">const</span> lli modr = <span class="dv">1000000007</span>;
+
+<span class="dt">int</span> n, arr[maxn];
+lli dp[maxn][maxn];
+lli C[maxn][maxn]; <span class="co">// The C in combinatorics</span>
+
+<span class="co">// This "judge" function should not be used~</span>
+<span class="dt">bool</span> judge(<span class="dt">int</span> pos_a_l, <span class="dt">int</span> pos_a_r, <span class="dt">int</span> pos_b_l, <span class="dt">int</span> pos_b_r)
+{
+    <span class="dt">int</span> max_a = <span class="dv">0</span>, min_a = n,
+        max_b = <span class="dv">0</span>, min_b = n;
+    <span class="co">// That is something we can optimize to O(1)</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = pos_a_l; i &lt;= pos_a_r; i++)
+        max_a = max(max_a, arr[i]),
+        min_a = min(min_a, arr[i]);
+    <span class="kw">for</span> (<span class="dt">int</span> i = pos_b_l; i &lt;= pos_b_r; i++)
+        max_b = max(max_b, arr[i]),
+        min_b = min(min_b, arr[i]);
+    <span class="co">// Now retrieved sufficient information, judging</span>
+    <span class="kw">return</span> max_a &lt; min_b;
+}
+
+lli dfs(<span class="dt">int</span> len, <span class="dt">int</span> beg)
+{
+    <span class="co">// Already stored data in storage</span>
+    <span class="kw">if</span> (dp[len][beg] != <span class="dv">-1</span>)
+        <span class="kw">return</span> dp[len][beg];
+    <span class="co">// Single-status data, optimized instantly</span>
+    <span class="kw">if</span> (len == <span class="dv">1</span>)
+        <span class="kw">return</span> dp[len][beg] = <span class="dv">1</span>;
+    <span class="co">// Setting up reference for ease of coding</span>
+    lli &amp;res = dp[len][beg];
+    res = <span class="dv">0</span>;
+    <span class="dt">int</span> t[maxn], m = <span class="dv">0</span>; <span class="co">// New array.</span>
+    <span class="co">// Copying and cloneing for new array</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        <span class="kw">if</span> (arr[i] &gt;= beg &amp;&amp; arr[i] &lt;= beg + len - <span class="dv">1</span>)
+            t[++m] = arr[i];
+    <span class="co">// Swapping either two elements</span>
+    <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= m - <span class="dv">1</span>; k++) {
+        swap(t[k], t[k + <span class="dv">1</span>]);
+        <span class="dt">int</span> l = <span class="dv">0</span>, r = <span class="dv">0</span>;
+        <span class="co">// Finding left &amp; right boundaries</span>
+        <span class="kw">for</span> (l = <span class="dv">1</span>; l &lt;= k; l++)
+            <span class="kw">if</span> (t[l] &gt;= beg + k)
+                <span class="kw">break</span>;
+        <span class="kw">for</span> (r = k + <span class="dv">1</span>; r &lt;= m; r++)
+            <span class="kw">if</span> (t[r] &lt; beg + k)
+                <span class="kw">break</span>;
+        <span class="co">// Test</span>
+        <span class="kw">if</span> (l &gt; k &amp;&amp; r &gt; m) {
+            lli tmp = dfs(k, beg) * dfs(m - k, beg + k) % modr;
+            tmp = tmp * C[m - <span class="dv">2</span>][k - <span class="dv">1</span>] % modr;
+            res += tmp;
+        }
+        swap(t[k], t[k + <span class="dv">1</span>]); <span class="co">// Unswapping</span>
+    }
+    res %= modr;
+    <span class="kw">return</span> res;
+}
+
+<span class="dt">void</span> generate_combinatory_numbers(<span class="dt">void</span>)
+{
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++) {
+        C[i][<span class="dv">0</span>] = <span class="dv">1</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= i; j++)
+            C[i][j] = (C[i - <span class="dv">1</span>][j - <span class="dv">1</span>] + C[i - <span class="dv">1</span>][j]) % modr;
+    }
+    <span class="kw">return</span> ;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;arr[i]);
+        <span class="co">// arr[i]++; // For ease of demonstration</span>
+    }
+    <span class="co">// That was a simple case of reading data.</span>
+    <span class="co">// Now we are going to dynamic programming procedure.</span>
+    generate_combinatory_numbers();
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt;= n; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">0</span>; j &lt;= n; j++)
+            dp[i][j] = <span class="dv">-1</span>;
+    dfs(n, <span class="dv">0</span>);
+    lli res = dp[n][<span class="dv">0</span>] % modr;
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/noipemu39swap/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/noipemu39swap/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/noipemu39swap/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/noipemu39swap/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="noipemu39swap">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,432 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj2243: [SDOI2011]染色&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj2243: [SDOI2011]染色
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=SDOI2011" target="_self">
+            <i class="fa fa-tag"></i> SDOI2011
+          </a>
+          <a class="tag" href="/blog/archive/?q=Heavy Light Decomposition" target="_self">
+            <i class="fa fa-tag"></i> Heavy Light Decomposition
+          </a>
+          <a class="tag" href="/blog/archive/?q=Segment Tree" target="_self">
+            <i class="fa fa-tag"></i> Segment Tree
+          </a>
+        </span>
+        <span class="date" title="20:20:39 | 31 March, 2017">
+          31 March, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>给定一棵有 <span class="math inline">\(n\)</span> 个节点的无根树和 <span class="math inline">\(m\)</span> 个操作, 操作有 2 类:</p>
+<ol type="1">
+<li>将节点 <span class="math inline">\(a\)</span> 到节点 <span class="math inline">\(b\)</span> 路径上所有点都染成颜色 <span class="math inline">\(c\)</span>;</li>
+<li>询问节点 <span class="math inline">\(a\)</span> 到节点 <span class="math inline">\(b\)</span> 路径上的颜色段数量 (连续相同颜色被认为是同一段), 如 <code>112221</code> 由 3 段组成:<code>11</code>,<code>222</code>,<code>1</code>.</li>
+</ol>
+<p>请你写一个程序依次完成这 <span class="math inline">\(m\)</span> 个操作.</p>
+<h2 id="input">Input</h2>
+<p>第一行包含 <span class="math inline">\(2\)</span> 个整数 <span class="math inline">\(n\)</span> 和 <span class="math inline">\(m\)</span>, 分别表示节点数和操作数;</p>
+<p>第二行包含 <span class="math inline">\(n\)</span> 个正整数表示 <span class="math inline">\(n\)</span> 个节点的初始颜色;</p>
+<p>接下来 <span class="math inline">\(n-1\)</span> 行每行包含两个整数 <span class="math inline">\(x\)</span> 和 <span class="math inline">\(y\)</span>, 表示 <span class="math inline">\(x\)</span> 和 <span class="math inline">\(y\)</span> 之间有一条无向边.</p>
+<p>下面 <span class="math inline">\(m\)</span> 行每行描述一个操作:</p>
+<ul>
+<li><code>C a b c</code> 表示这是一个染色操作, 把节点 <span class="math inline">\(a\)</span> 到节点 <span class="math inline">\(b\)</span> 路径上所有点 (包括 <span class="math inline">\(a\)</span> 和 <span class="math inline">\(b\)</span>) 都染成颜色 <span class="math inline">\(c\)</span>;</li>
+<li><code>Q a b</code> 表示这是一个询问操作, 询问节点 <span class="math inline">\(a\)</span> 到节点 <span class="math inline">\(b\)</span> (包括 <span class="math inline">\(a\)</span> 和 <span class="math inline">\(b\)</span>) 路径 上的颜色段数量.</li>
+</ul>
+<h2 id="output">Output</h2>
+<p>对于每个询问操作, 输出一行答案.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>6 5
+2 2 1 2 1 1
+1 2
+1 3
+2 4
+2 5
+2 6
+Q 3 5
+C 2 1 1
+Q 3 5
+C 5 1 2
+Q 3 5</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>3
+1
+2</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有数据, 保证:<span class="math inline">\(n \leq 10^5, m \leq 10^5\)</span>, 所有的颜色 <span class="math inline">\(c\)</span> 为整数且在 <span class="math inline">\([0, 10^9]\)</span> 之间.</p>
+<h2 id="explanation">Explanation</h2>
+<p>可以用树链剖分来维护这棵树, 在树链剖分上套一棵线段树.</p>
+<p>线段树维护区间中颜色的数量, 左端颜色和右端颜色.</p>
+<p>最后的总时间复杂度为 <span class="math inline">\(O(n \log^2 n)\)</span>, 可能需要倍增 LCA.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">100100</span>, maxm = <span class="dv">400100</span>, maxlog = <span class="dv">17</span>;
+
+<span class="kw">struct</span> interval {
+    <span class="dt">int</span> lc, rc; <span class="co">// Left and right (boundary) colours</span>
+    <span class="dt">int</span> cols; <span class="co">// Total consecutive colours</span>
+    <span class="dt">void</span> set_colour(<span class="dt">int</span> col) {
+        lc = rc = col;
+        cols = <span class="dv">1</span>;
+        <span class="kw">return</span> ; }
+    interval(<span class="dt">void</span>) {
+        <span class="kw">this</span>-&gt;set_colour(<span class="dv">0</span>); }
+    interval(<span class="dt">int</span> col) {
+        <span class="kw">this</span>-&gt;set_colour(col); }
+    interval(<span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">int</span> col) {
+        lc = l, rc = r, cols = col;
+        <span class="kw">return</span> ; }
+}; interval join(interval a, interval b) {
+    <span class="dt">int</span> cols = a.cols + b.cols;
+    <span class="kw">if</span> (a.rc == b.lc) cols -= <span class="dv">1</span>;
+    <span class="kw">return</span> interval(a.lc, b.rc, cols);
+}
+
+<span class="kw">class</span> SegmentTree
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> node
+    {
+        node *lc, *rc;
+        <span class="dt">int</span> lb, mb, rb, lazy;
+        interval val;
+    } *root, npool[maxn&lt;&lt;<span class="dv">1</span>];
+    <span class="dt">int</span> n, ncnt;
+    node* make_node(<span class="dt">void</span>)
+    {
+        node *p = &amp;npool[++ncnt];
+        p-&gt;lc = p-&gt;rc = NULL;
+        p-&gt;lb = p-&gt;mb = p-&gt;rb = <span class="dv">0</span>;
+        p-&gt;lazy = <span class="dv">-1</span>;
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">void</span> dispatch_lazy(node *p)
+    {
+        <span class="kw">if</span> (p-&gt;lazy &lt; <span class="dv">0</span> || p-&gt;lb == p-&gt;rb)
+            <span class="kw">return</span> ;
+        p-&gt;lc-&gt;lazy = p-&gt;rc-&gt;lazy = p-&gt;lazy;
+        p-&gt;lc-&gt;val.set_colour(p-&gt;lazy);
+        p-&gt;rc-&gt;val.set_colour(p-&gt;lazy);
+        p-&gt;lazy = <span class="dv">-1</span>;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> change(node *p, <span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">int</span> col)
+    {
+        <span class="kw">if</span> (p-&gt;lb == l &amp;&amp; p-&gt;rb == r) {
+            p-&gt;lazy = col;
+            p-&gt;val.set_colour(col);
+            <span class="kw">return</span> ;
+        }
+        dispatch_lazy(p);
+        <span class="kw">if</span> (r &lt;= p-&gt;mb) {
+            change(p-&gt;lc, l, r, col);
+        } <span class="kw">else</span> <span class="kw">if</span> (l &gt; p-&gt;mb) {
+            change(p-&gt;rc, l, r, col);
+        } <span class="kw">else</span> {
+            change(p-&gt;lc, l, p-&gt;mb, col);
+            change(p-&gt;rc, p-&gt;mb + <span class="dv">1</span>, r, col);
+        }
+        p-&gt;val = join(p-&gt;lc-&gt;val, p-&gt;rc-&gt;val);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> change(<span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">int</span> col)
+    {
+        <span class="kw">return</span> <span class="kw">this</span>-&gt;change(root, l, r, col);
+    }
+    interval query(node *p, <span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="kw">if</span> (p-&gt;lb == l &amp;&amp; p-&gt;rb == r) {
+            <span class="kw">return</span> p-&gt;val;
+        }
+        dispatch_lazy(p);
+        <span class="kw">if</span> (r &lt;= p-&gt;mb) {
+            <span class="kw">return</span> query(p-&gt;lc, l, r);
+        } <span class="kw">else</span> <span class="kw">if</span> (l &gt; p-&gt;mb) {
+            <span class="kw">return</span> query(p-&gt;rc, l, r);
+        } <span class="kw">else</span> {
+            <span class="kw">return</span> join(query(p-&gt;lc, l, p-&gt;mb),
+                query(p-&gt;rc, p-&gt;mb + <span class="dv">1</span>, r));
+        }
+        <span class="kw">return</span> interval();
+    }
+    interval query(<span class="dt">int</span> l, <span class="dt">int</span> r)
+    {
+        <span class="kw">return</span> <span class="kw">this</span>-&gt;query(root, l, r);
+    }
+    <span class="dt">int</span> query(<span class="dt">int</span> pos)
+    {
+        node *p = root;
+        <span class="kw">while</span> (p-&gt;lb &lt; p-&gt;rb) {
+            dispatch_lazy(p);
+            <span class="kw">if</span> (pos &lt;= p-&gt;mb)
+                p = p-&gt;lc;
+            <span class="kw">else</span>
+                p = p-&gt;rc;
+        }
+        <span class="kw">return</span> p-&gt;val.lc;
+    }
+    node* build_tree(<span class="dt">int</span> l, <span class="dt">int</span> r, <span class="dt">int</span> arr[])
+    {
+        node *p = make_node();
+        <span class="dt">int</span> mid = (l + r) &gt;&gt; <span class="dv">1</span>;
+        p-&gt;lb = l; p-&gt;rb = r; p-&gt;mb = mid;
+        <span class="kw">if</span> (p-&gt;lb == p-&gt;rb) {
+            p-&gt;val = interval(arr[mid]);
+        } <span class="kw">else</span> {
+            p-&gt;lc = build_tree(l, mid, arr);
+            p-&gt;rc = build_tree(mid + <span class="dv">1</span>, r, arr);
+            p-&gt;val = join(p-&gt;lc-&gt;val, p-&gt;rc-&gt;val);
+        }
+        <span class="kw">return</span> p;
+    }
+    <span class="dt">void</span> build(<span class="dt">int</span> n, <span class="dt">int</span> arr[])
+    {
+        root = build_tree(<span class="dv">1</span>, n, arr);
+        <span class="kw">return</span> ;
+    }
+} st;
+
+<span class="kw">class</span> TreeChainPartition
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v;
+        edge *next;
+    };
+    <span class="dt">int</span> n, root, ecnt, dcnt;
+    <span class="dt">int</span> alt_arr[maxn];
+    edge *edges[maxn], epool[maxm];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v)
+    {
+        edge *p = &amp;epool[++ecnt],
+             *q = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v;
+        q-&gt;u = v; q-&gt;v = u;
+        p-&gt;next = edges[u]; edges[u] = p;
+        q-&gt;next = edges[v]; edges[v] = q;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> size[maxn], par[maxn], depth[maxn];
+    <span class="dt">int</span> maxch[maxn], ctop[maxn], dfn[maxn];
+    <span class="dt">int</span> jump[maxn][maxlog<span class="dv">+1</span>]; <span class="co">// Reserved for LCA</span>
+    <span class="dt">void</span> dfs1(<span class="dt">int</span> p)
+    {
+        size[p] = <span class="dv">1</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt; maxlog; i++) {
+            <span class="kw">if</span> (depth[p] &lt; (<span class="dv">1</span>&lt;&lt;i))
+                <span class="kw">break</span>;
+            jump[p][i] = jump[jump[p][i<span class="dv">-1</span>]][i<span class="dv">-1</span>];
+        }
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+            <span class="kw">if</span> (ep-&gt;v != par[p]) {
+                par[ep-&gt;v] = p;
+                depth[ep-&gt;v] = depth[p] + <span class="dv">1</span>;
+                jump[ep-&gt;v][<span class="dv">0</span>] = p;
+                dfs1(ep-&gt;v);
+                size[p] += size[ep-&gt;v];
+                <span class="kw">if</span> (size[ep-&gt;v] &gt; size[maxch[p]])
+                    maxch[p] = ep-&gt;v;
+            }
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> dfs2(<span class="dt">int</span> p, <span class="dt">int</span> chaintop)
+    {
+        dfn[p] = ++dcnt;
+        ctop[p] = chaintop;
+        <span class="kw">if</span> (maxch[p])
+            dfs2(maxch[p], chaintop);
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+            <span class="kw">if</span> (depth[ep-&gt;v] == depth[p] + <span class="dv">1</span> &amp;&amp; ep-&gt;v != maxch[p])
+                dfs2(ep-&gt;v, ep-&gt;v);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> lca(<span class="dt">int</span> x, <span class="dt">int</span> y)
+    {
+        <span class="kw">if</span> (depth[x] &lt; depth[y])
+            swap(x, y);
+        <span class="co">// Ensured that x is deeper than y</span>
+        <span class="dt">int</span> dist = depth[x] - depth[y];
+        <span class="co">// Letting x reach the depth par y</span>
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; maxlog; i++)
+            <span class="kw">if</span> (dist &amp; (<span class="dv">1</span>&lt;&lt;i))
+                x = jump[x][i];
+        <span class="co">// Syncing ancestors</span>
+        <span class="kw">for</span> (<span class="dt">int</span> i = maxlog - <span class="dv">1</span>; i &gt;= <span class="dv">0</span>; i--)
+            <span class="kw">if</span> (jump[x][i] != jump[y][i])
+                x = jump[x][i],
+                y = jump[y][i];
+        <span class="kw">if</span> (x == y)
+            <span class="kw">return</span> x;
+        <span class="kw">return</span> jump[x][<span class="dv">0</span>];
+    }
+    <span class="dt">void</span> __change(<span class="dt">int</span> x, <span class="dt">int</span> y, <span class="dt">int</span> colour)
+    {
+        <span class="kw">while</span> (ctop[x] != ctop[y]) {
+            st.change(dfn[ctop[x]], dfn[x], colour);
+            x = jump[ctop[x]][<span class="dv">0</span>];
+        }
+        st.change(dfn[y], dfn[x], colour);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> __query(<span class="dt">int</span> x, <span class="dt">int</span> y)
+    {
+        <span class="dt">int</span> res = <span class="dv">0</span>;
+        <span class="kw">while</span> (ctop[x] != ctop[y]) {
+            <span class="dt">int</span> tmp = st.query(dfn[ctop[x]], dfn[x]).cols;
+            res += tmp;
+            <span class="kw">if</span> (st.query(dfn[jump[ctop[x]][<span class="dv">0</span>]]) == st.query(dfn[ctop[x]]))
+                res -= <span class="dv">1</span>;
+            x = jump[ctop[x]][<span class="dv">0</span>];
+        }
+        <span class="dt">int</span> tmp = st.query(dfn[y], dfn[x]).cols;
+        res += tmp;
+        <span class="kw">return</span> res;
+    }
+    <span class="dt">void</span> change(<span class="dt">int</span> x, <span class="dt">int</span> y, <span class="dt">int</span> colour)
+    {
+        <span class="dt">int</span> z = lca(x, y);
+        __change(x, z, colour);
+        __change(y, z, colour);
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> query(<span class="dt">int</span> x, <span class="dt">int</span> y)
+    {
+        <span class="dt">int</span> z = lca(x, y);
+        <span class="dt">int</span> res = __query(x, z)
+            + __query(y, z) - <span class="dv">1</span>;
+        <span class="kw">return</span> res;
+    }
+    <span class="dt">void</span> init(<span class="dt">int</span> n, <span class="dt">int</span> arr[])
+    {
+        <span class="kw">this</span>-&gt;n = n;
+        dcnt = <span class="dv">0</span>;
+        <span class="kw">this</span>-&gt;root = <span class="dv">1</span>;
+        <span class="co">// Generating DFS sequences</span>
+        depth[root] = <span class="dv">1</span>;
+        dfs1(root);
+        dfs2(root, root);
+        <span class="co">// Building segment tree, with minor modifications</span>
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+            alt_arr[dfn[i]] = arr[i];
+        st.build(n, alt_arr);
+        <span class="kw">return</span> ;
+    }
+} graph;
+
+<span class="dt">int</span> n, m;
+<span class="dt">int</span> arr[maxn];
+<span class="dt">char</span> str[<span class="dv">64</span>];
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;arr[i]);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, a, b; i &lt;= n - <span class="dv">1</span>; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;a, &amp;b);
+        graph.add_edge(a, b);
+    }
+    <span class="co">// Building graph with integrated functions</span>
+    graph.init(n, arr);
+    <span class="co">// Answering queries</span>
+    <span class="kw">for</span> (<span class="dt">int</span> idx = <span class="dv">1</span>; idx &lt;= m; idx++) {
+        scanf(<span class="st">"</span><span class="ch">%s</span><span class="st">"</span>, str);
+        <span class="dt">int</span> a, b, c;
+        <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'C'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d%d%d</span><span class="st">"</span>, &amp;a, &amp;b, &amp;c);
+            graph.change(a, b, c);
+        } <span class="kw">else</span> <span class="kw">if</span> (str[<span class="dv">0</span>] == <span class="st">'Q'</span>) {
+            scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;a, &amp;b);
+            <span class="dt">int</span> res = graph.query(a, b);
+            printf(<span class="st">"</span><span class="ch">%d\n</span><span class="st">"</span>, res);
+        }
+    }
+    <span class="co">// Finished</span>
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj2243/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj2243/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj2243/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj2243/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj2243">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj3130: [Sdoi2013]费用流&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj3130: [Sdoi2013]费用流
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=SDOI2013" target="_self">
+            <i class="fa fa-tag"></i> SDOI2013
+          </a>
+          <a class="tag" href="/blog/archive/?q=Network Flow" target="_self">
+            <i class="fa fa-tag"></i> Network Flow
+          </a>
+          <a class="tag" href="/blog/archive/?q=Binary Search" target="_self">
+            <i class="fa fa-tag"></i> Binary Search
+          </a>
+          <a class="tag" href="/blog/archive/?q=Analysis" target="_self">
+            <i class="fa fa-tag"></i> Analysis
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dinic" target="_self">
+            <i class="fa fa-tag"></i> Dinic
+          </a>
+        </span>
+        <span class="date" title="23:15:01 | 28 December, 2016">
+          28 December, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>Alice 和 Bob 在图论课程上学习了最大流和最小费用最大流的相关知识.</p>
+<p>最大流问题: 给定一张有向图表示运输网络, 一个源点 <span class="math inline">\(S\)</span> 和一个汇点 <span class="math inline">\(T\)</span>, 每条边都有最大流量. 一个合法的网络流方案必须满足:</p>
+<ol type="1">
+<li>每条边的实际流量都不超过其最大流量且非负;</li>
+<li>除了源点 <span class="math inline">\(S\)</span> 和汇点 <span class="math inline">\(T\)</span> 之外, 对于其余所有点, 都满足该点总流入流量等于该点 总流出流量; 而 <span class="math inline">\(S\)</span> 点的净流出流量等于 <span class="math inline">\(T\)</span> 点的净流入流量, 这个值也即该网络流方案的总运输量.</li>
+</ol>
+<p>最大流问题就是对于给定的运输网络, 求总运输量最大的网络流方案.</p>
+<p>上图表示了一个最大流问题. 对于每条边, 右边的数代表该边的最大流量, 左边的数代表在最优解中, 该边的实际流量. 需要注意到, 一个最大流问题的解可能不是唯一的.</p>
+<p>对于一张给定的运输网络, Alice 先确定一个最大流, 如果有多种解, Alice 可以任选一种; 之后 Bob 在每条边上分配单位花费 (单位花费必须是非负实数), 要求所有边的单位花费之和 等于 <span class="math inline">\(P\)</span>. 总费用等于每一条边的实际流量乘以该边的单位花费. 需要注意到, Bob 在分配单位花费之前, 已经知道 Alice 所给出的最大流方案.</p>
+<p>现茌 Alice 希望总费用尽量小, 而 Bob 希望总费用尽量大. 我们想知道, 如果两个人都执行 最优策略, 最大流的值和总费用分别为多少.</p>
+<h2 id="input">Input</h2>
+<p>第一行三个整数 <span class="math inline">\(n, m, p\)</span>.<span class="math inline">\(n\)</span> 表示给定运输网络中节点的数量,<span class="math inline">\(m\)</span> 表示有向边的数量,<span class="math inline">\(p\)</span> 的含义见问题描述部分. 为了简化问题, 我们假设源点 <span class="math inline">\(S\)</span> 是点 <span class="math inline">\(1\)</span>, 汇点 <span class="math inline">\(T\)</span> 是点 <span class="math inline">\(N\)</span>.</p>
+<p>接下来 <span class="math inline">\(m\)</span> 行, 每行三个整数 <span class="math inline">\(a, b, c\)</span>, 表示有一条从点 <span class="math inline">\(a\)</span> 到点 <span class="math inline">\(b\)</span> 的有向边, 其最大流量是 <span class="math inline">\(c\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>第一行一个整数, 表示最大流的值.</p>
+<p>第二行一个实数, 表示总费用. 建议选手输出四位以上小数.</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>3 2 1
+1 2 10
+2 3 15</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>10
+10.0000</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于 20% 的测试数据: 所有有向边的最大流量都是 1.</p>
+<p>对于 100% 的测试数据:<span class="math inline">\(n \leq 100, m \leq 1000\)</span>.</p>
+<p>对于 100% 的测试数据: 所有点的编号在 <span class="math inline">\([1, n]\)</span> 范围内.<span class="math inline">\(1 \leq 每条边的最大流量 \leq 50000\)</span>.<span class="math inline">\(1 \leq p \leq 10\)</span>. 给定运输网络中不会有起点和终点相同的边.</p>
+<h2 id="explanation">Explanation</h2>
+<p>这道题太奇怪了~</p>
+<p>首先分析一下题目, 其实是一道类似贪心的问题. 就是说 Bob 如果想要获得做大的花费, 那么他肯定会选择那条流量最大的边把权值调成 <span class="math inline">\(p\)</span>.</p>
+<p>也就是说 Alice 要干的事就是把最大流量边流量最小化.</p>
+<p>二分一下最大流量的边的流量然后判断一下是否可以跑出原来的最大流就可以了. 但是一个 奇怪的问题就来了:</p>
+<p>本来我是写的整数版本的 (就是把所有边权统一乘上 <span class="math inline">\(10^6\)</span>, 然后输出时再转回来), 结果 不停地 WA 也没法发现错在哪里. 然后找到网上一个版本的是用的小数加 epsilon 的做法, 调了半个小时调出来了结果交上去 TLE......</p>
+<p>就在审阅代码的时候发现新写的代码里第二组输出乘上了 <span class="math inline">\(p\)</span>, 然后把这个 <span class="math inline">\(p\)</span> 加回到原来的程序里就 AC 了~</p>
+<del>
+样例数据实在太坑人
+</del>
+<p>下面附带的是那个 TLE 的代码:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cmath&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="kw">typedef</span> <span class="dt">double</span> llf;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">300</span>, maxm = <span class="dv">2100</span>;
+<span class="dt">const</span> llf infinit = <span class="fl">1e15</span>;
+<span class="dt">const</span> llf epsilon = <span class="fl">1e-6</span>;
+
+<span class="kw">class</span> FiddledDinic
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v;
+        llf flow, init_flow;
+        edge *next, *rev;
+    };
+    <span class="dt">int</span> n, s, t, ecnt;
+    edge *edges[maxn], epool[maxm];
+    <span class="dt">int</span> level[maxn];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v, lli flow)
+    {
+        edge *p = &amp;epool[++ecnt],
+             *q = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;flow = p-&gt;init_flow = flow;
+        p-&gt;next = edges[u]; edges[u] = p; p-&gt;rev = q;
+        q-&gt;u = v; q-&gt;v = u; q-&gt;flow = q-&gt;init_flow = <span class="fl">0.0</span>;
+        q-&gt;next = edges[v]; edges[v] = q; q-&gt;rev = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> make_level(<span class="dt">void</span>)
+    {
+        memset(level, <span class="dv">0</span>, <span class="kw">sizeof</span>(level));
+        queue&lt;<span class="dt">int</span>&gt; que;
+        que.push(s);
+        level[s] = <span class="dv">1</span>;
+        <span class="kw">while</span> (!que.empty()) {
+            <span class="dt">int</span> p = que.front();
+            que.pop();
+            <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+                <span class="kw">if</span> (ep-&gt;flow &gt; epsilon &amp;&amp; !level[ep-&gt;v]) {
+                    level[ep-&gt;v] = level[p] + <span class="dv">1</span>;
+                    que.push(ep-&gt;v);
+                }
+        }
+        <span class="kw">if</span> (level[t] &gt; <span class="dv">0</span>)
+            <span class="kw">return</span> <span class="kw">true</span>;
+        <span class="kw">return</span> <span class="kw">false</span>;
+    }
+    llf find(<span class="dt">int</span> p, llf mn)
+    {
+        <span class="kw">if</span> (p == t)
+            <span class="kw">return</span> mn;
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+            <span class="kw">if</span> (ep-&gt;flow &gt; epsilon &amp;&amp; level[ep-&gt;v] == level[p] + <span class="dv">1</span>) {
+                llf tmp = find(ep-&gt;v, min(mn, ep-&gt;flow));
+                <span class="kw">if</span> (tmp &gt; epsilon) {
+                    ep-&gt;flow -= tmp;
+                    ep-&gt;rev-&gt;flow += tmp;
+                    <span class="kw">return</span> tmp;
+                }
+            }
+        <span class="kw">return</span> <span class="fl">0.0</span>;
+    }
+    llf eval_mf(llf max_allowed)
+    {
+        <span class="co">// Resetting edges' stati</span>
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= ecnt; i++)
+            epool[i].flow = min(epool[i].init_flow, max_allowed);
+        <span class="co">// Really evaluating maximum flow</span>
+        llf max_flow = <span class="fl">0.0</span>;
+        <span class="kw">while</span> (make_level()) {
+            llf tmp = infinit;
+            <span class="kw">do</span> {
+                tmp = find(s, max_allowed);
+                max_flow += tmp;
+            } <span class="kw">while</span> (tmp &gt; epsilon);
+        }
+        <span class="kw">return</span> max_flow;
+    }
+    llf eval(llf required_mf)
+    {
+        llf l = <span class="fl">0.0</span>, r = infinit;
+        llf res = <span class="fl">0.0</span>;
+        <span class="kw">while</span> (r - l &gt; epsilon) {
+            llf mid = (l + r) / <span class="dv">2</span>;
+            llf max_flow = eval_mf(mid);
+            <span class="kw">if</span> (fabs(required_mf - max_flow) &lt; epsilon)
+                r = mid;
+            <span class="kw">else</span>
+                l = mid;
+        }
+        <span class="kw">return</span> l;
+    }
+} graph;
+
+<span class="dt">int</span> n, m;
+llf P;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d%lf</span><span class="st">"</span>, &amp;n, &amp;m, &amp;P);
+    graph.n = n;
+    graph.s = <span class="dv">1</span>;
+    graph.t = n;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        <span class="dt">int</span> a, b; lli c;
+        scanf(<span class="st">"</span><span class="ch">%d%d%lld</span><span class="st">"</span>, &amp;a, &amp;b, &amp;c);
+        graph.add_edge(a, b, c);
+    }
+    llf mf = graph.eval_mf(infinit);
+    printf(<span class="st">"</span><span class="ch">%lf\n</span><span class="st">"</span>, mf);
+    llf fn_res = graph.eval(mf) * P;
+    printf(<span class="st">"</span><span class="ch">%.4lf\n</span><span class="st">"</span>, fn_res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="kw">typedef</span> <span class="dt">double</span> llf;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">300</span>, maxm = <span class="dv">2100</span>;
+<span class="dt">const</span> lli infinit = <span class="bn">0x007f7f7f7f7f7f7fll</span>;
+<span class="dt">const</span> llf epsilon = <span class="fl">1e6</span>;
+
+<span class="kw">class</span> FiddledDinic
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> u, v;
+        lli flow, init_flow;
+        edge *next, *rev;
+    };
+    <span class="dt">int</span> n, s, t, ecnt;
+    edge *edges[maxn], epool[maxm];
+    <span class="dt">int</span> level[maxn];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v, lli flow)
+    {
+        edge *p = &amp;epool[++ecnt],
+             *q = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;flow = p-&gt;init_flow = flow;
+        p-&gt;next = edges[u]; edges[u] = p; p-&gt;rev = q;
+        q-&gt;u = v; q-&gt;v = u; q-&gt;flow = q-&gt;init_flow = <span class="dv">0</span>;
+        q-&gt;next = edges[v]; edges[v] = q; q-&gt;rev = p;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">bool</span> make_level(<span class="dt">void</span>)
+    {
+        memset(level, <span class="dv">0</span>, <span class="kw">sizeof</span>(level));
+        queue&lt;<span class="dt">int</span>&gt; que;
+        que.push(s);
+        level[s] = <span class="dv">1</span>;
+        <span class="kw">while</span> (!que.empty()) {
+            <span class="dt">int</span> p = que.front();
+            que.pop();
+            <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+                <span class="kw">if</span> (ep-&gt;flow &amp;&amp; !level[ep-&gt;v]) {
+                    level[ep-&gt;v] = level[p] + <span class="dv">1</span>;
+                    que.push(ep-&gt;v);
+                }
+        }
+        <span class="kw">if</span> (level[t] &gt; <span class="dv">0</span>)
+            <span class="kw">return</span> <span class="kw">true</span>;
+        <span class="kw">return</span> <span class="kw">false</span>;
+    }
+    lli find(<span class="dt">int</span> p, lli mn)
+    {
+        <span class="kw">if</span> (p == t)
+            <span class="kw">return</span> mn;
+        lli sum = <span class="dv">0</span>;
+        <span class="kw">for</span> (edge *ep = edges[p]; ep &amp;&amp; sum &lt; mn; ep = ep-&gt;next)
+            <span class="kw">if</span> (ep-&gt;flow &amp;&amp; level[ep-&gt;v] == level[p] + <span class="dv">1</span>) {
+                lli tmp = find(ep-&gt;v, min(ep-&gt;flow, mn - sum));
+                <span class="kw">if</span> (tmp &gt; <span class="dv">0</span>) {
+                    sum += tmp;
+                    ep-&gt;flow -= tmp;
+                    ep-&gt;rev-&gt;flow += tmp;
+                }
+            }
+        <span class="kw">if</span> (sum &lt;= <span class="dv">0</span>)
+            level[p] = <span class="dv">0</span>;
+        <span class="kw">return</span> sum;
+    }
+    lli eval_mf(lli max_allowed)
+    {
+        <span class="co">// Resetting edge stati</span>
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= ecnt; i++)
+            epool[i].flow = min(epool[i].init_flow, max_allowed);
+        <span class="co">// Really evaluating maximum flow</span>
+        lli max_flow = <span class="dv">0</span>;
+        <span class="kw">while</span> (make_level()) {
+            lli tmp = find(s, max_allowed);
+            <span class="kw">if</span> (tmp &lt;= <span class="dv">0</span>)
+                <span class="kw">break</span>;
+            max_flow += tmp;
+        }
+        <span class="kw">return</span> max_flow;
+    }
+    lli eval(lli required_mf)
+    {
+        lli l = <span class="dv">1</span>, r = infinit;
+        lli res = <span class="dv">0</span>;
+        <span class="kw">while</span> (l &lt;= r) {
+            lli mid = (l + r) / <span class="dv">2</span>;
+            lli max_flow = eval_mf(mid);
+            <span class="kw">if</span> (max_flow &gt;= required_mf)
+                res = mid, r = mid - <span class="dv">1</span>;
+            <span class="kw">else</span>
+                l = mid + <span class="dv">1</span>;
+        }
+        <span class="kw">return</span> res;
+    }
+} graph;
+
+<span class="dt">int</span> n, m;
+lli P;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d%lld</span><span class="st">"</span>, &amp;n, &amp;m, &amp;P);
+    graph.n = n;
+    graph.s = <span class="dv">1</span>;
+    graph.t = n;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++) {
+        <span class="dt">int</span> a, b; lli c;
+        scanf(<span class="st">"</span><span class="ch">%d%d%lld</span><span class="st">"</span>, &amp;a, &amp;b, &amp;c);
+        graph.add_edge(a, b, c*epsilon);
+    }
+    lli mf = graph.eval_mf(infinit);
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, mf / (lli)epsilon);
+    lli fn_res_l = graph.eval(mf);
+    llf fn_res = (llf)fn_res_l * P / epsilon;
+    printf(<span class="st">"</span><span class="ch">%.4lf\n</span><span class="st">"</span>, fn_res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj3130/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj3130/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj3130/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj3130/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj3130">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

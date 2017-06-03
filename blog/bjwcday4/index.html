@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>BJOI-WC-Day4 总结&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          BJOI-WC-Day4 总结
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=BJOI" target="_self">
+            <i class="fa fa-tag"></i> BJOI
+          </a>
+          <a class="tag" href="/blog/archive/?q=Winter Camp" target="_self">
+            <i class="fa fa-tag"></i> Winter Camp
+          </a>
+          <a class="tag" href="/blog/archive/?q=Computational Geometry" target="_self">
+            <i class="fa fa-tag"></i> Computational Geometry
+          </a>
+        </span>
+        <span class="date" title="21:18:13 | 17 January, 2017">
+          17 January, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <p>今天上午去了物理会考, 所以九点半才能离开考场. 自己觉得会考考的很好, 但是实际情况 可能连我自己也不清楚. 我们差不多十点半左右才到达实验, 然后人其实也很少. 我和 <span class="citation" data-cites="Burst_Zero"> @Burst_Zero</span> 在隔壁的机房里看了一眼题, 然后觉得很没有意思, 就打起了 Game01.</p>
+<p>发觉第一题可能是模拟退火, 然后就没写. 其实原来是这样的: 我们都强力要求 <span class="citation" data-cites="hshs595"> @hshs595</span> 同学在拿到题以后第一时间转发到 ezs 上面, 结果他今天没有发. 后来到了实验他才说题 在清橙上 (<code>= =</code>) . 但是后来也发现题没什么可做的.</p>
+<figure>
+<img class="thumb" data-small="/blog/bjwcday4/task0117-small.jpg" data-src="/blog/bjwcday4/task0117.png" data-thumb="/blog/bjwcday4/task0117-thumb.jpg" src="/blog/bjwcday4/task0117-thumb.jpg" title="" width="1248px"/>
+<figcaption>
+</figcaption>
+</figure>
+<p>最后当然是全场挂菜, 没有一个上 100 的 (被范神嘲讽了一番)</p>
+<!-- More -->
+<p>题目描述大概是这样的三道题:</p>
+<hr/>
+<h2 id="两元求交">两元求交</h2>
+<h3 id="问题描述">问题描述</h3>
+<p>给平面上 <span class="math inline">\(n\)</span> 圆. 你要寻找一个过原点的圆, 使得它与最多的圆相交.</p>
+<p>这 <span class="math inline">\(n\)</span> 个圆之前两两无公共点. 并且, 原点在所有的这 <span class="math inline">\(n\)</span> 个圆之外.</p>
+<h3 id="输入格式">输入格式</h3>
+<p>第一行一个数 <span class="math inline">\(n\)</span>.</p>
+<p>下面 <span class="math inline">\(n\)</span> 行, 每行三个数 <span class="math inline">\(x, y, r\)</span>, 表示一个圆的圆心与半径.</p>
+<h3 id="输出格式">输出格式</h3>
+<p>输出一个数, 表示最多与几个圆相交.</p>
+<h3 id="数据规模">数据规模</h3>
+<p>对于 60% 的数据,<span class="math inline">\(n \leq 100\)</span>.</p>
+<p>对于 100% 的数据,<span class="math inline">\(n \leq 1000\)</span>.</p>
+<p>坐标都是绝对值不超过 <span class="math inline">\(1000\)</span> 的整数.</p>
+<h3 id="样例输入">样例输入</h3>
+<pre><code>3
+1 3 2
+-4 2 2
+2 0 1</code></pre>
+<h3 id="样例输出">样例输出</h3>
+<pre><code>3</code></pre>
+<h2 id="数凸包">数凸包</h2>
+<h3 id="问题描述-1">问题描述</h3>
+<p>给 <span class="math inline">\(n\)</span> 个平面上的点. 它的所有的子集的凸包中有多少个本质不同的?</p>
+<p>两个凸包本质不同当且仅当平面上存在一个点在且只在其中一个凸包内.</p>
+<h3 id="输入格式-1">输入格式</h3>
+<p>第一行一个数 <span class="math inline">\(n\)</span>, 表示点的个数.</p>
+<p>下面 <span class="math inline">\(n\)</span> 行, 每行三个数, 表示点的坐标.</p>
+<h3 id="输出格式-1">输出格式</h3>
+<p>一个数, 表示本质不同的凸包的个数.</p>
+<h3 id="数据规模和约定">数据规模和约定</h3>
+<p>对于所有的数据,<span class="math inline">\(n \leq 100\)</span></p>
+<p>所有的点的坐标都是 <span class="math inline">\(-1000\)</span> 到 <span class="math inline">\(1000\)</span> 之间的整数.</p>
+<p>点与点之间可能重合.</p>
+<p>答案不超过 <span class="math inline">\(2^{63}-1\)</span>.</p>
+<h3 id="样例输入-1">样例输入</h3>
+<pre><code>5
+0 0
+0 1
+1 0
+1 1
+2 0</code></pre>
+<h3 id="样例输出-1">样例输出</h3>
+<pre><code>28</code></pre>
+<h3 id="样例说明">样例说明</h3>
+<p>这些凸包中, 有一个是空集, 5 个是包含单个点的, 10 个是线段, 9 个是三角形, 3 个四边形.</p>
+<h2 id="计算体积">计算体积</h2>
+<h3 id="问题描述-2">问题描述</h3>
+<p>CSG 是一个描述三维体积的方式. 在这种方式中, 一个物体可以由如下几种方式定义:</p>
+<ol type="1">
+<li>某种 “原子性” 的物体, 例如球或者长方体</li>
+<li>某两个物体的并</li>
+<li>某两个物体的交</li>
+<li>某个物体 “减去” 另一个物体, 即, 某个物体不在另外一个物体中的部分</li>
+</ol>
+<p>我们考虑一种简单的 CSG 系统. 它包含了这几种指令:</p>
+<ol type="1">
+<li><code>makeBall x y z r</code> 创建一个球心在 <span class="math inline">\((x, y, z)\)</span>, 半径为 <span class="math inline">\(r\)</span> 的球.</li>
+<li><code>makeCuboid x1 x2 y1 y2 z1 z2</code> 创建一个边与坐标轴平行的长方体, 它在 <span class="math inline">\(x\)</span> 轴上 的范围是 <span class="math inline">\([x_1, x_2]\)</span>,<span class="math inline">\(y\)</span> 轴上的范围是 <span class="math inline">\([y_1, y_2]\)</span>,<span class="math inline">\(z\)</span> 轴上的范围是 <span class="math inline">\([z_1, z_2]\)</span>. 保证 <span class="math inline">\(x_1 \leq x_2, y_1 \leq y_2, z_1 \leq z_2\)</span>.</li>
+<li><code>makeUnion p1 p2</code> 创建一个新的物体, 它是之前创建的第 <span class="math inline">\(p_1\)</span> 个物体和第 <span class="math inline">\(p_2\)</span> 个物体的并.</li>
+<li><code>makeIntersection p1 p2</code> 创建一个新的物体, 它是之前创建的第 <span class="math inline">\(p_1\)</span> 个物体和第 <span class="math inline">\(p_1\)</span> 个物体的交.</li>
+<li><code>makeDifference p1 p2</code> 创建一个新的物体, 它是之前创建的第 <span class="math inline">\(p_1\)</span> 个物体减去第 <span class="math inline">\(p_2\)</span> 个物体.</li>
+</ol>
+<p>例如, 下面的这串指令:</p>
+<pre><code>makeCuboid 0 1 0 1 0 1
+makeBall 0 0 0 0.5
+makeBall 1 1 1 1
+makeUnion 1 2
+makeDifference 4 3</code></pre>
+<p>创建了一个在一角多了一块, 同时在另一角被 “啃” 了一口的立方体.</p>
+<p>可以计算出它的体积是 <span class="math inline">\(1 - \frac{\pi}{48} \approx 0.934550\)</span></p>
+<p>你的工作是, 给定一串指令, 计算每一步得到的物体的体积.</p>
+<h3 id="输入格式-2">输入格式</h3>
+<p>第一行是一个数 <span class="math inline">\(n\)</span>, 表示指令的条数</p>
+<p>后面 <span class="math inline">\(n\)</span> 条指令, 格式如题目所述.</p>
+<h3 id="输出格式-2">输出格式</h3>
+<p>输出 <span class="math inline">\(n\)</span> 个数, 表示每个指令得到的物体的体积, 保留 3 位小数. 你的答案和标准答案之间的偏差不超过 <span class="math inline">\(0.005\)</span> 即可.</p>
+<h3 id="数据规模和约定-1">数据规模和约定</h3>
+<p>对于所有数据, 满足 <span class="math inline">\(n \leq 50\)</span></p>
+<p>所有物体中的所有点的坐标的绝对值都不超过 <span class="math inline">\(2\)</span>.</p>
+<h3 id="样例输入-2">样例输入</h3>
+<pre><code>5
+makeCuboid 0 1 0 1 0 1
+makeBall 0 0 0 0.5
+makeBall 1 1 1 1
+makeUnion 1 2
+makeDifference 4 3</code></pre>
+<h3 id="样例输出-2">样例输出</h3>
+<pre><code>1.000
+0.524
+4.189
+1.458
+0.935</code></pre>
+<hr/>
+<p>第一道题我看了一眼, 以为是模拟退火, 就没怎么去写 (再加上没时间). 其实正解是这样子的: 暴力枚举两个点, 计算如果需要中间的那个圆与这两个相交, 其弧度应该在哪个区间 内. 然后判断就可以了.</p>
+<p>但是徐明宽大神说直接上辛普森积分也可以, 直接反演.</p>
+<p>第二道题本质上就是求有多少个凸多边形, 所以我也不细说了.</p>
+<p>第三道题看起来比较简单 (雾), 有这么几种做法:</p>
+<ol type="1">
+<li>骗分, 要求并就把两个体积加在一起, 求差就是体积相减, 这个做法可以骗到 10 分.</li>
+<li>用撒点的方法, 再一个图形内大量产生随机点, 然后统计随机点的数量, 并用随机点来求交求差等等. 这个取决于实现, 通常可以拿到 30 分.</li>
+<li>将物体拟合成多面体, 并用三角形来表示. 这种做法可能实现的复杂度很高, 但是 球体拟合成的多面体大概只需要一百到一千个面即可达到精度. 如果实现的好, 并且 使用了数据结构来维护三角形, 可能能拿到 100 分.</li>
+<li>这个在精度上有问题, 需要用正方体来拟合球体. 我们会发现其实需要约数十万正方体 才能拟合一个球体, 并且精度会随即降低. 用八分三位线段树能够维护该结构, 但是 由于精度问题只能达到 10 分左右.</li>
+<li>结合第一种撒点的方法和第四种八分树, 可以拿到满分, 即正解.</li>
+</ol>
+<p>所以说计算几何通常被用来卡满分, 而且总是范神出题......</p>
+<p><strong>求大神帮续实力啊...... orz</strong></p>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bjwcday4/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bjwcday4/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bjwcday4/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bjwcday4/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bjwcday4">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

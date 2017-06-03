@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj2152: 聪聪可可&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj2152: 聪聪可可
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dynamic Programming" target="_self">
+            <i class="fa fa-tag"></i> Dynamic Programming
+          </a>
+          <a class="tag" href="/blog/archive/?q=Tree DP" target="_self">
+            <i class="fa fa-tag"></i> Tree DP
+          </a>
+        </span>
+        <span class="date" title="23:29:23 | 1 February, 2017">
+          1 February, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<p>聪聪和可可是兄弟俩, 他们俩经常为了一些琐事打起来, 例如家中只剩下最后一根冰棍而 两人都想吃、两个人都想玩儿电脑 (可是他们家只有一台电脑). ...... 遇到这种问题, 一般情况下石头剪刀布就好了, 可是他们已经玩儿腻了这种低智商的游戏. 他们的爸爸快被他们的争吵烦死了, 所以他发明了一个新游戏: 由爸爸在纸上画 <span class="math inline">\(n\)</span> 个点, 并用 <span class="math inline">\(n-1\)</span> 条边把这 <span class="math inline">\(n\)</span> 个点恰好连通 (其实这就是一棵树). 并且每条边上都有一个数. 接下来由聪聪 和可可分别随即选一个点 (当然他们选点时是看不到这棵树的), 如果两个点之间所有边上数的和加起来恰好是 <span class="math inline">\(3\)</span> 的倍数, 则判聪聪赢, 否则可可赢. 聪聪非常爱思考问题, 在每次游戏后都会仔细研究这棵树, 希望知道对于这张图自己的获胜概率是多少. 现请你帮忙求出这个值以验证聪聪的答案是否正确.</p>
+<h2 id="input">Input</h2>
+<p>输入的第 <span class="math inline">\(1\)</span> 行包含 <span class="math inline">\(1\)</span> 个正整数 <span class="math inline">\(n\)</span>. 后面 <span class="math inline">\(n-1\)</span> 行, 每行 <span class="math inline">\(3\)</span> 个整数 <span class="math inline">\(x, y, w\)</span>, 表示 <span class="math inline">\(x\)</span> 号点和 <span class="math inline">\(y\)</span> 号点之间有一条边, 上面的数是 <span class="math inline">\(w\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>以即约分数形式输出这个概率 (即 <code>a/b</code> 的形式, 其中 <span class="math inline">\(a\)</span> 和 <span class="math inline">\(b\)</span> 必须互质. 如果概率为 <span class="math inline">\(1\)</span>, 输出 <code>1/1</code>) .</p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>5
+1 2 1
+1 3 2
+1 4 1
+2 5 3</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>13/25</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于 100% 的数据, 满足 <span class="math inline">\(n \leq 20000\)</span>.</p>
+<h2 id="explanation">Explanation</h2>
+<p>首先一看就知道有这样一个性质:</p>
+<p>子树不会影响父节点上面的数据...... 就是说, 可以只统计出每棵子树下边权为 <span class="math inline">\(0, 1, 2\)</span> 的情况各有多少种, 然后再把整个东西乘上一个系数 (因为总的方案数为 <span class="math inline">\(\frac{n(n-1)}{2}\)</span>) . 最后得到的约分一下就得到了那个所求的即约分数.</p>
+<p>顺便说一下 <code>#include &lt;algorithm&gt;</code> 里面似乎有一个函数叫 <code>__gcd(a, b)</code>, 自带欧几里得 辗转相除法简直良心......</p>
+<p>不过网上那些搞树分治的都有点过分了吧...... 毕竟这个是 <span class="math inline">\(O(n)\)</span> 的做法=w=</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">20010</span>, maxm = <span class="dv">40010</span>;
+
+<span class="kw">class</span> TreeDP
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge {
+        <span class="dt">int</span> u, v, len;
+        edge *next;
+    };
+    <span class="dt">int</span> n, ecnt;
+    edge *edges[maxn], epool[maxm];
+    <span class="dt">void</span> add_edge(<span class="dt">int</span> u, <span class="dt">int</span> v, <span class="dt">int</span> len)
+    {
+        edge *p = &amp;epool[++ecnt],
+             *q = &amp;epool[++ecnt];
+        p-&gt;u = u; p-&gt;v = v; p-&gt;len = len % <span class="dv">3</span>;
+        p-&gt;next = edges[u]; edges[u] = p;
+        q-&gt;u = v; q-&gt;v = u; q-&gt;len = len % <span class="dv">3</span>;
+        q-&gt;next = edges[v]; edges[v] = q;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">int</span> par[maxn];
+    <span class="dt">int</span> dp[maxn][<span class="dv">3</span>];
+    <span class="dt">void</span> dfs(<span class="dt">int</span> p, lli&amp; res)
+    {
+        dp[p][<span class="dv">0</span>] = <span class="dv">1</span>;
+        dp[p][<span class="dv">1</span>] = <span class="dv">0</span>;
+        dp[p][<span class="dv">2</span>] = <span class="dv">0</span>;
+        <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+            <span class="kw">if</span> (ep-&gt;v != par[p]) {
+                par[ep-&gt;v] = p;
+                dfs(ep-&gt;v, res);
+                <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= ep-&gt;len; i++) {
+                    swap(dp[ep-&gt;v][<span class="dv">0</span>], dp[ep-&gt;v][<span class="dv">1</span>]);
+                    swap(dp[ep-&gt;v][<span class="dv">0</span>], dp[ep-&gt;v][<span class="dv">2</span>]);
+                } <span class="co">// Equivalent to left shifting (rotating)</span>
+                res += dp[p][<span class="dv">0</span>] * dp[ep-&gt;v][<span class="dv">0</span>]
+                    + dp[p][<span class="dv">1</span>] * dp[ep-&gt;v][<span class="dv">2</span>]
+                    + dp[p][<span class="dv">2</span>] * dp[ep-&gt;v][<span class="dv">1</span>];
+                <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">3</span>; i++)
+                    dp[p][i] += dp[ep-&gt;v][i];
+            }
+        <span class="kw">return</span> ;
+    }
+    lli eval(<span class="dt">void</span>)
+    {
+        par[<span class="dv">1</span>] = <span class="dv">0</span>;
+        lli res = <span class="dv">0</span>;
+        dfs(<span class="dv">1</span>, res);
+        <span class="kw">return</span> res;
+    }
+} tdp;
+
+<span class="dt">int</span> n;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;n);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, a, b, c; i &lt; n; i++) {
+        scanf(<span class="st">"</span><span class="ch">%d%d%d</span><span class="st">"</span>, &amp;a, &amp;b, &amp;c);
+        tdp.add_edge(a, b, c);
+    }
+    lli res = tdp.eval() * <span class="dv">2</span> + n;
+    lli _g = __gcd(res, (lli)n*n);
+    lli __a = res / _g, __b = n*n / _g;
+    printf(<span class="st">"</span><span class="ch">%lld</span><span class="st">/</span><span class="ch">%lld\n</span><span class="st">"</span>, __a, __b);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj2152/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj2152/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj2152/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj2152/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj2152">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

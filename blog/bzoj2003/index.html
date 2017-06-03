@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj2003: [Hnoi2010]Matrix 矩阵&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj2003: [Hnoi2010]Matrix 矩阵
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=HNOI2010" target="_self">
+            <i class="fa fa-tag"></i> HNOI2010
+          </a>
+          <a class="tag" href="/blog/archive/?q=Brute Force Search" target="_self">
+            <i class="fa fa-tag"></i> Brute Force Search
+          </a>
+        </span>
+        <span class="date" title="20:44:33 | 31 January, 2017">
+          31 January, 2017
+        </span>
+      </div>
+      <div class="post-content">
+        <h2 id="description">Description</h2>
+<figure>
+<img class="thumb" data-small="/blog/bzoj2003/bzoj2003-small.jpg" data-src="/blog/bzoj2003/bzoj2003.png" data-thumb="/blog/bzoj2003/bzoj2003-thumb.jpg" src="/blog/bzoj2003/bzoj2003-thumb.jpg" title="" width="598px"/>
+<figcaption>
+</figcaption>
+</figure>
+<h2 id="input">Input</h2>
+<p>第一行包含三个正整数 <span class="math inline">\(n, m, p\)</span>, 表示矩阵的行数列数以及每个数的范围, 接下来 <span class="math inline">\(n\)</span> 行每行包含 <span class="math inline">\(m\)</span> 个非负整数, 其中第 <span class="math inline">\(i\)</span> 行第 <span class="math inline">\(j\)</span> 个数表示以格子 <span class="math inline">\((i, j)\)</span> 为右下角的 <span class="math inline">\(2 \times 2\)</span> 子矩阵中的数的和. 保证第一行与第一列的数均为 <span class="math inline">\(0\)</span>, 且每个和都不超过 <span class="math inline">\(4(p-1)\)</span>.</p>
+<h2 id="output">Output</h2>
+<p>包含 <span class="math inline">\(n\)</span> 行, 每行 <span class="math inline">\(m\)</span> 个整数, 描述你求出的矩阵, 相邻的整数用空格分开.<strong> (行末不要有多余空格)</strong></p>
+<!-- More -->
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>3 3 3
+0 0 0
+0 4 5
+0 5 3</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>0 0 2
+2 2 1
+1 0 0</code></pre>
+<h2 id="data-range">Data Range</h2>
+<p>对于所有数据, 满足:<span class="math inline">\(1 \leq n, m \leq 200, 1 \lt p \leq 10\)</span></p>
+<h2 id="explanation">Explanation</h2>
+<p>不停地出矩阵瞎搞而且连标题都没有变是要怎样......</p>
+<p>而且行尾不要输出多余空格!! !</p>
+<p>然而这道题并不会做, 看上去以为是一道瞎搞搜索, 结果一看题解果然是神搜索. 然而那种 奇怪的推断函数并没有弄明白, 所以就直接贴题解 (然而最后的复杂度分析我也是醉了):</p>
+<p>原文链接:<a href="">http://www.cnblogs.com/yangjiyuan/p/5321082.html</a></p>
+<p>首先可以知道, 如果已知第一行和第一列的数, 那么可以很容易的计算出其余的数. 进一步的, 如果笔算将每个数的表达式写出可以得出如下结论:</p>
+<p>第 <span class="math inline">\(i\)</span> 行的第 <span class="math inline">\(j\)</span> 个数 (<span class="math inline">\(i \gt 1, j \gt 1\)</span>) 只与 <span class="math inline">\((1, 1), (i, 1), (1, j)\)</span> 有关</p>
+<p>更数学化地说, 设输入矩阵为 <span class="math inline">\(S\)</span>, 定义 <span class="math inline">\(C\)</span> 如下:</p>
+<p><span class="math display">\[C_{i,j} = \begin{cases}
+0 &amp; i = 1\ \text{or}\ j = 1\\
+S_{i,j}  - C_{i,j-1} - C_{i-1,j} - C_{i-1,j-1} &amp; \text{else}
+\end{cases}\]</span></p>
+<p>则原矩阵 <span class="math inline">\(A\)</span> 的第 <span class="math inline">\(i\)</span> 行的第 <span class="math inline">\(j\)</span> 个数可按下式确定:</p>
+<p><span class="math display">\[A_{i,j} = f(i) \cdot A_{i,1} + f(j) \cdot A_{1,j} - f(i) \cdot f(j) \cdot A_{1,1} + C_{i,j} (i \gt 1\ \text{and}\ j \gt 1)\]</span></p>
+<p><span class="math display">\[f(x) = \begin{cases}
+1 &amp; (x \bmod 2 = 1)\\
+-1 &amp; (x \bmod 2 = -1)
+\end{cases}\]</span></p>
+<p><strong>算法一:</strong></p>
+<p>直接利用该结论, 枚举第一行和第一列的每个数, 从而求出剩下所有数, 并判断是否符合要求. 时间复杂度 <span class="math inline">\(O(n \cdot m \cdot p^{n+m-1})\)</span>, 较好的实现可以通过 30% 的数据.</p>
+<p><strong>算法二:</strong></p>
+<p>考虑 <span class="math inline">\(p=2\)</span> 的情况, 每个格子只有两种取值 0/1. 首先枚举 <span class="math inline">\((1,1)\)</span>, 那么第一行某个格子 <span class="math inline">\((1,j)\)</span> 与第一列某个格子 <span class="math inline">\((i,1)\)</span> 唯一确定了格子 <span class="math inline">\((i,j)\)</span>, 若 <span class="math inline">\((1,j)=x\)</span> 且 <span class="math inline">\((i,1)=y\)</span> 时 <span class="math inline">\((i,j)\)</span> 的取值不合法, 则 <span class="math inline">\((1,j)\)</span> 取 <span class="math inline">\(x\)</span> 和 <span class="math inline">\((i,1)\)</span> 取 <span class="math inline">\(y\)</span> 不能同时发生.</p>
+<p>这是经典的 2-SAT 模型, 虽然使用拓扑排序可以在 <span class="math inline">\(O(n \cdot m)\)</span> 的时间内求出一个可行解, 但无法求出字典序最小解. 这里应使用枚举算法, 按字典序的优先级判断每一个点, 若该点的取值未确定, 先尝试放 <span class="math inline">\(0\)</span>, 看是否产生矛盾, 无矛盾则确定为 <span class="math inline">\(0\)</span> 否则改为 <span class="math inline">\(1\)</span>. 该算法的时间复杂度为 <span class="math inline">\(O((n+m) \cdot n \cdot m)\)</span>, 较好的实现可以通过 30% 的数据.</p>
+<p><strong>算法三:</strong></p>
+<p>结合算法一与算法二可以通过 60% 的数据.</p>
+<p><strong>算法四:</strong></p>
+<p>对于一般的情况, 2-SAT 模型并不适用, 但可以尝试将算法二稍做修改. 即每次从 <span class="math inline">\(0\)</span> 到 <span class="math inline">\(p-1\)</span> 枚举取值, 找到最小的且不与前面产生矛盾的确定为该格的值. 遗憾的是, 该算法是 <strong>错误的</strong>, 很多时候这样做甚至会丢失可行解! 为了避免这种情况, 可以使用 DFS 算法.</p>
+<p>具体来说, 依次枚举第一行每个格子的取值, 每次枚举后判断第一列每个格子是否均有可行的取值, 若没有则退出, 否则继续枚举下一个格子. 若第一行的格子均已确定, 则第一列的每个格子直接取可行取值中最小的即可.</p>
+<p>由于数据保证有解, 对于矩阵较大的情况, 解很多, 限制很多, 搜索树的宽度很小, 而矩阵较小时搜索树深度很小, 均可以较快的得出答案. 更进一步的, 在矩阵较大时, 基本上不会有回溯的情况, 即时间复杂度约等于 <span class="math inline">\(O(n \cdot m \cdot p^2)\)</span>, 可以通过所有测试数据.</p>
+<h2 id="source-code">Source Code</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> lli;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">210</span>;
+
+<span class="dt">int</span> even(<span class="dt">int</span> in) {
+    <span class="kw">return</span> (in &amp; <span class="dv">1</span>) ? <span class="dv">-1</span> : <span class="dv">1</span>; }
+<span class="dt">int</span> odd(<span class="dt">int</span> in) {
+    <span class="kw">return</span> (in &amp; <span class="dv">1</span>) ? <span class="dv">1</span> : <span class="dv">-1</span>; }
+
+<span class="dt">int</span> n, m, p;
+<span class="dt">int</span> arr[maxn][maxn], <span class="co">// Initial array, read-only</span>
+    comp[maxn][maxn], <span class="co">// Values need to be added to this location</span>
+    vmn[maxn][maxn], <span class="co">// Minimum allowed value at location</span>
+    vmx[maxn][maxn], <span class="co">// Maximum allowed value at location</span>
+    res[maxn][maxn]; <span class="co">// Final result</span>
+
+<span class="dt">bool</span> dfs(<span class="dt">int</span> j)
+{
+    <span class="co">// Construction complete.</span>
+    <span class="kw">if</span> (j &gt; m)
+        <span class="kw">return</span> <span class="kw">true</span>;
+    <span class="co">// Leftmost value in this row.</span>
+    <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">0</span>; k &lt; p; k++) {
+        <span class="dt">bool</span> satisfy = <span class="kw">true</span>;
+        res[<span class="dv">1</span>][j] = k;
+        <span class="co">// Checking for satisfaction at this row.</span>
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>; i &lt;= n; i++) {
+            <span class="dt">int</span> tmp_1 = (comp[i][j] + res[<span class="dv">1</span>][<span class="dv">1</span>] * even(i+j<span class="dv">+1</span>) + res[<span class="dv">1</span>][j] *
+                    odd(i)) * even(j),
+                tmp_2 = (comp[i][j] + res[<span class="dv">1</span>][<span class="dv">1</span>] * even(i+j<span class="dv">+1</span>) + res[<span class="dv">1</span>][j] *
+                    odd(i) - p + <span class="dv">1</span>) * even(j);
+            <span class="kw">if</span> (tmp_1 &gt; tmp_2)
+                swap(tmp_1, tmp_2);
+            vmn[i][j] = max(vmn[i][j<span class="dv">-1</span>], tmp_1);
+            vmx[i][j] = min(vmx[i][j<span class="dv">-1</span>], tmp_2);
+            <span class="kw">if</span> (vmn[i][j] &gt; vmx[i][j]) {
+                satisfy = <span class="kw">false</span>;
+                <span class="kw">break</span>;
+            }
+        }
+        <span class="kw">if</span> (satisfy &amp;&amp; dfs(j<span class="dv">+1</span>))
+            <span class="kw">return</span> <span class="kw">true</span>;
+    }
+    <span class="kw">return</span> <span class="kw">false</span>;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d%d</span><span class="st">"</span>, &amp;n, &amp;m, &amp;p);
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= m; j++) {
+            scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;arr[i][j]);
+            vmx[i][j] = p - <span class="dv">1</span>;
+        }
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>; i &lt;= n; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">2</span>; j &lt;= m; j++)
+            comp[i][j] = arr[i][j] - (comp[i<span class="dv">-1</span>][j<span class="dv">-1</span>] + comp[i<span class="dv">-1</span>][j] + comp[i][j<span class="dv">-1</span>]);
+    <span class="co">// Attempting to create first level, by searching</span>
+    <span class="co">// and iterate the rest with searching, no cuts</span>
+    <span class="kw">for</span> (<span class="dt">int</span> init_val = <span class="dv">0</span>; init_val &lt; p; init_val++) {
+        res[<span class="dv">1</span>][<span class="dv">1</span>] = init_val;
+        <span class="co">// Given the case that search completes, save the results</span>
+        <span class="kw">if</span> (dfs(<span class="dv">2</span>)) {
+            <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>; i &lt;= n; i++)
+                res[i][<span class="dv">1</span>] = vmn[i][m];
+            <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">2</span>; i &lt;= n; i++)
+                <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">2</span>; j &lt;= m; j++)
+                    res[i][j] = comp[i][j] + odd(j) * res[i][<span class="dv">1</span>] + odd(i) *
+                        res[<span class="dv">1</span>][j] + even(i+j<span class="dv">+1</span>) * res[<span class="dv">1</span>][<span class="dv">1</span>];
+            <span class="kw">break</span>;
+        }
+    }
+    <span class="co">// Output result, and such a result is guranteed</span>
+    <span class="co">// And the format is really devastating</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= m; j++)
+            printf(<span class="st">"</span><span class="ch">%d%s</span><span class="st">"</span>, res[i][j], j == m ? <span class="st">"</span><span class="ch">\n</span><span class="st">"</span> : <span class="st">" "</span>);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj2003/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj2003/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj2003/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj2003/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj2003">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

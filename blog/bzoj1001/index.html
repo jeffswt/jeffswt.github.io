@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>bzoj1001: [BeiJing2006]狼抓兔子&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          bzoj1001: [BeiJing2006]狼抓兔子
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Problems" target="_self">
+            <i class="fa fa-tag"></i> Problems
+          </a>
+          <a class="tag" href="/blog/archive/?q=BZOJ" target="_self">
+            <i class="fa fa-tag"></i> BZOJ
+          </a>
+          <a class="tag" href="/blog/archive/?q=BJOI2006" target="_self">
+            <i class="fa fa-tag"></i> BJOI2006
+          </a>
+          <a class="tag" href="/blog/archive/?q=Shortest Path" target="_self">
+            <i class="fa fa-tag"></i> Shortest Path
+          </a>
+          <a class="tag" href="/blog/archive/?q=Network Flow" target="_self">
+            <i class="fa fa-tag"></i> Network Flow
+          </a>
+          <a class="tag" href="/blog/archive/?q=Dual Graph" target="_self">
+            <i class="fa fa-tag"></i> Dual Graph
+          </a>
+        </span>
+        <span class="date" title="16:47:59 | 19 July, 2016">
+          19 July, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Problem Specification</th>
+<th style="text-align: left;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Time Limit</td>
+<td style="text-align: left;">15 Sec</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Memory Limit</td>
+<td style="text-align: left;">162 MB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Submit</td>
+<td style="text-align: left;">17131</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Solved</td>
+<td style="text-align: left;">4191</td>
+</tr>
+</tbody>
+</table>
+<h2 id="description">Description</h2>
+<p>现在小朋友们最喜欢的 “喜羊羊与灰太狼”, 话说灰太狼抓羊不到, 但抓兔子还是比较在行的, 而且现在的兔子还比较笨, 它们只有两个窝, 现在你做为狼王, 面对下面这样一个网格的地形:</p>
+<figure>
+<img class="thumb" data-small="/blog/bzoj1001/bzoj1001_1-small.jpg" data-src="/blog/bzoj1001/bzoj1001_1.jpg" data-thumb="/blog/bzoj1001/bzoj1001_1-thumb.jpg" src="/blog/bzoj1001/bzoj1001_1-thumb.jpg" title="" width="461px"/>
+<figcaption>
+</figcaption>
+</figure>
+<p>左上角点为 (1, 1), 右下角点为 (N, M) (上图中 N=4, M=5). 有以下三种类型的道路</p>
+<ol type="1">
+<li>(x, y) &lt;==&gt; (x+1, y)</li>
+<li>(x, y) &lt;==&gt; (x, y+1)</li>
+<li>(x, y) &lt;==&gt; (x+1, y+1)</li>
+</ol>
+<p>道路上的权值表示这条路上最多能够通过的兔子数, 道路是无向的. 左上角和右下角为兔子的两个窝, 开始时所有的兔子都聚集在左上角 (1, 1) 的窝里, 现在它们要跑到右下解 (N, M) 的窝中去, 狼王开始伏击 这些兔子. 当然为了保险起见, 如果一条道路上最多通过的兔子数为 K, 狼王需要安排同样数量的 K 只狼, 才能完全封锁这条道路, 你需要帮助狼王安排一个伏击方案, 使得在将兔子一网打尽的前提下, 参与的狼的数量要最小. 因为狼还要去找喜羊羊麻烦.</p>
+<!-- More -->
+<h2 id="input">Input</h2>
+<p>第一行为 N, M. 表示网格的大小, N, M 均小于等于 1000.</p>
+<p>接下来分三部分</p>
+<ul>
+<li>第一部分共 N 行, 每行 M-1 个数, 表示横向道路的权值.</li>
+<li>第二部分共 N-1 行, 每行 M 个数, 表示纵向道路的权值.</li>
+<li>第三部分共 N-1 行, 每行 M-1 个数, 表示斜向道路的权值.</li>
+</ul>
+<p>输入文件保证不超过 10M</p>
+<h2 id="output">Output</h2>
+<p>输出一个整数, 表示参与伏击的狼的最小数量.</p>
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>3 4
+5 6 4
+4 3 1
+7 5 3
+5 6 7 8
+8 7 6 5
+5 5 5
+6 6 6</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>14</code></pre>
+<h2 id="hint">HINT</h2>
+<p>2015. 4. 16 新加数据一组, 可能会卡掉从前可以过的程序.</p>
+<h2 id="source">Source</h2>
+<hr/>
+<p>实质上是一道网络流题, 同时具有最小割的性质. 我们也可以用最短路来做这道题 (也就是对偶图). 这一条最短路代表了一个规则图形从左下到右上的过程. 其实是很明显的. 但是我并未能用 Dinic AC 这道题~</p>
+<p>最后用的 SPFA 水过, 内存 121MB~</p>
+<p>说一句题外话: 我为了这道题专门编了一个对拍用的 Python 框架, 就叫 pyDataGen.</p>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode c++"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;cstdlib&gt;</span>
+<span class="ot">#include &lt;cstring&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;queue&gt;</span>
+
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="dt">const</span> <span class="dt">int</span> maxn = <span class="dv">2000100</span>, maxm = <span class="dv">6000100</span>;
+<span class="dt">const</span> <span class="dt">long</span> <span class="dt">long</span> infinit = <span class="bn">0x0f3f3f3f3f3f3f3fll</span>;
+
+<span class="kw">class</span> Spfa
+{
+<span class="kw">public</span>:
+    <span class="kw">struct</span> edge
+    {
+        <span class="dt">int</span> v;
+        <span class="dt">long</span> <span class="dt">long</span> len;
+        edge *next;
+    };
+    edge *edges[maxn], epool[maxm];
+    <span class="dt">int</span> n, s, t, cnt, inque[maxn];
+    <span class="dt">long</span> <span class="dt">long</span> dist[maxn];
+    <span class="dt">void</span> addedge(<span class="dt">int</span> u, <span class="dt">int</span> v, <span class="dt">long</span> <span class="dt">long</span> len)
+    {
+        edge *p = &amp;epool[cnt++], *q = &amp;epool[cnt++];
+        p-&gt;v = v; p-&gt;len = len; p-&gt;next = edges[u]; edges[u] = p;
+        q-&gt;v = u; q-&gt;len = len; q-&gt;next = edges[v]; edges[v] = q;
+        <span class="kw">return</span> ;
+    }
+    <span class="dt">void</span> spfa(<span class="dt">void</span>)
+    {
+        queue&lt;<span class="dt">int</span>&gt; que;
+        memset(inque, <span class="dv">0</span>, <span class="kw">sizeof</span>(inque));
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++) dist[i] = infinit;
+        que.push(s); dist[s] = <span class="dv">0</span>; inque[s] = <span class="dv">1</span>;
+        <span class="kw">while</span> (!que.empty()) {
+            <span class="dt">int</span> p = que.front(); que.pop(); inque[p] = <span class="dv">0</span>;
+            <span class="kw">for</span> (edge *ep = edges[p]; ep; ep = ep-&gt;next)
+                <span class="kw">if</span> (dist[ep-&gt;v] &gt; dist[p] + ep-&gt;len) {
+                    dist[ep-&gt;v] = dist[p] + ep-&gt;len;
+                    <span class="kw">if</span> (!inque[ep-&gt;v]) {
+                        que.push(ep-&gt;v);
+                        inque[ep-&gt;v] = <span class="dv">1</span>;
+                    }
+                }
+        }
+        <span class="kw">return</span> ;
+    }
+} graph;
+
+<span class="dt">int</span> n, m;
+<span class="dt">long</span> <span class="dt">long</span> res = <span class="dv">0</span>;
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)
+{
+    scanf(<span class="st">"</span><span class="ch">%d%d</span><span class="st">"</span>, &amp;n, &amp;m);
+    <span class="kw">if</span> (n &gt; <span class="dv">1</span> &amp;&amp; m &gt; <span class="dv">1</span>) {
+        graph.n = <span class="dv">2</span> * (n - <span class="dv">1</span>) * (m - <span class="dv">1</span>) + <span class="dv">2</span>;
+        graph.s = graph.n - <span class="dv">1</span>;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= n; i++)
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>, k; j &lt; m; j++) {
+                scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;k);
+                <span class="kw">if</span> (i == <span class="dv">1</span>) graph.addedge((<span class="dv">2</span> * i - <span class="dv">2</span>) * (m - <span class="dv">1</span>) + j, graph.n, k);
+                <span class="kw">else</span> <span class="kw">if</span> (i == n) graph.addedge(graph.n - <span class="dv">1</span>, (<span class="dv">2</span> * i - <span class="dv">3</span>) * (m - <span class="dv">1</span>) + j, k);
+                <span class="kw">else</span> graph.addedge((<span class="dv">2</span> * i - <span class="dv">2</span>) * (m - <span class="dv">1</span>) + j, (<span class="dv">2</span> * i - <span class="dv">3</span>) * (m - <span class="dv">1</span>) + j, k);
+            }
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt; n; i++)
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>, k; j &lt;= m; j++) {
+                scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;k);
+                <span class="kw">if</span> (j == <span class="dv">1</span>) graph.addedge(graph.n - <span class="dv">1</span>, (<span class="dv">2</span> * i - <span class="dv">1</span>) * (m - <span class="dv">1</span>) + j, k);
+                <span class="kw">else</span> <span class="kw">if</span> (j == m) graph.addedge((<span class="dv">2</span> * i - <span class="dv">2</span>) * (m - <span class="dv">1</span>) + j - <span class="dv">1</span>, graph.n, k);
+                <span class="kw">else</span> graph.addedge((<span class="dv">2</span> * i - <span class="dv">1</span>) * (m - <span class="dv">1</span>) + j, (<span class="dv">2</span> * i - <span class="dv">2</span>) * (m - <span class="dv">1</span>) + j - <span class="dv">1</span>, k);
+            }
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt; n; i++)
+            <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>, k; j &lt; m; j++) {
+                scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;k);
+                graph.addedge((<span class="dv">2</span> * i - <span class="dv">1</span>) * (m - <span class="dv">1</span>) + j, (<span class="dv">2</span> * i - <span class="dv">2</span>) * (m - <span class="dv">1</span>) + j, k);
+            }
+        graph.spfa();
+        res = graph.dist[graph.n];
+    } <span class="kw">else</span> <span class="kw">if</span> (n == <span class="dv">1</span> &amp;&amp; m == <span class="dv">1</span>) {
+        res = <span class="dv">0</span>;
+    } <span class="kw">else</span> {
+        res = infinit;
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>, k; i &lt;= max(n, m); i++) {
+            scanf(<span class="st">"</span><span class="ch">%d</span><span class="st">"</span>, &amp;k);
+            res = min(res, (<span class="dt">long</span> <span class="dt">long</span>)k);
+        }
+    }
+    printf(<span class="st">"</span><span class="ch">%lld\n</span><span class="st">"</span>, res);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<hr/>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> pydatagen <span class="im">import</span> <span class="op">*</span>
+n <span class="op">=</span> randrange(<span class="dv">1</span>, <span class="dv">1000</span>)
+m <span class="op">=</span> randrange(<span class="dv">1</span>, <span class="dv">1000</span>)
+rg <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">2147483647</span>)
+printf(<span class="st">'</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="ch">\n</span><span class="st">'</span> <span class="op">%</span> (n, m))
+print_oi(randlist2d(n, m <span class="op">-</span> <span class="dv">1</span>, rg))
+print_oi(randlist2d(n <span class="op">-</span> <span class="dv">1</span>, m, rg))
+print_oi(randlist2d(n <span class="op">-</span> <span class="dv">1</span>, m <span class="op">-</span> <span class="dv">1</span>, rg))
+fclose()</code></pre></div>
+<hr/>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/bzoj1001/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/bzoj1001/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/bzoj1001/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/bzoj1001/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="bzoj1001">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>
