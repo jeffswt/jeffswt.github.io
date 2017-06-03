@@ -297,17 +297,17 @@ img {
   max-width: 100%;
   height: auto;
 }
-.figure > img {
+figure > img {
   transition: all 0.5s ease;
   filter: grayscale(0%) blur(0px) drop-shadow(8px 8px 14px rgb(59,59,59));
 }
-.figure > img.thumb {
+figure > img.thumb {
   filter: grayscale(0%) blur(16px) drop-shadow(8px 8px 12px rgb(167,167,167));
 }
-.figure > img.small {
+figure > img.small {
   filter: grayscale(0%) blur(0px) drop-shadow(8px 8px 12px rgb(167,167,167));
 }
-.figure > img.preload-src {
+figure > img.preload-src {
   filter: grayscale(100%) blur(4px) drop-shadow(8px 8px 12px rgb(167,167,167));
 }
 

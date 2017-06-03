@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>UnicodeEncodeError gbk codec can't encode character illegal multibyte sequence&nbsp;&nbsp;|&nbsp;&nbsp;jeffswt: the ac moments</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/font-awesome.css">
+  <link rel="stylesheet" href="/assets/katex/katex.css">
+  <link rel="stylesheet" href="/assets/gitment/gitment.css">
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="bar">
+      <span class="avatar-icon"><svg version="1.1" height="40px" version="1.1" viewBox="0 0 48 48" width="40px">
+        <polygon points="-0.5,16 -0.5,37 0.5,34 0.5,32 1.5,28.8 1.5,24 1.5,21 2.5,17.6 2.5,16 1,14.9 "/>
+        <polygon points="44,0.5 45,0.5 46.1,1.1 46.9,1.9 47.2,2.8 47.5,4.8 47.5,7 48,43.8 47.6,45.8 46.4,47.6
+        	44.8,48.5 38,48.5 36.8,47.2 36.1,46.1 34.2,44.7 32.6,43.5 31.1,40.8 29.5,38.8 27.8,35.9 26.9,35.4 29.5,35.3 32.7,28.4
+        	31.4,27.8 28.7,33.8 26.9,34.1 25.7,33.3 23.5,33.4 21,32.8 19.3,32.2 18.3,30.4 17.3,27.3 19.3,27.9 20.8,26.6 20.4,25.3 21.3,24
+        	22.2,23 20.3,21.3 17.8,20.8 16.2,21.5 15.5,23 15.5,25 14.4,26 12.8,26.6 11.2,29.2 10.6,31.1 11.2,34.3 10.9,37.7 11,39.5
+        	11.8,42.3 9.5,39.6 8.6,37 7.8,35.1 7.1,33.4 6.6,31 6,28.1 5.6,23.5 6.2,21.8 5.6,19.3 6.3,18.1 8.4,17 10.8,14.5 13,14.5
+        	15.8,16.5 19,16.5 22.2,14.3 24,15 25.4,13.5 29,13.5 32.3,12.3 34.5,11.3 36,10.5 36.4,9 39.3,8.8 40.1,7.5 42,7.5 43.6,6.9
+        	44,5.3 44.8,3.9 45.2,2.7 "/>
+        <polygon points="17.5,34 17.5,37 18.2,37.5 22.8,35.4 21.1,34.7 17.9,34 "/>
+        <polygon points="19,43.1 20.6,42.4 22.1,41.4 24,39.5 25,39.5 26.8,41.3 29.3,44.6 24,43.3 "/>
+      </svg></span>
+      <span class="site-title"><a class="site-title-href" href="/blog/">
+        jeffswt: the ac moments
+      </a></span>
+    </div>
+  </div>
+  <div class="site-content">
+    <div class="blog-post" lang="zh">
+      <div class="post-header">
+        <h1 class="title">
+          UnicodeEncodeError gbk codec can't encode character illegal multibyte sequence
+        </h1>
+        <span class="tags">
+          <a class="tag" href="/blog/archive/?q=Tutorials" target="_self">
+            <i class="fa fa-tag"></i> Tutorials
+          </a>
+        </span>
+        <span class="date" title="10:00:00 | 30 May, 2016">
+          30 May, 2016
+        </span>
+      </div>
+      <div class="post-content">
+        <h3 id="问题">问题</h3>
+<p>python 中已获取网页: http: //blog. csdn. net/hfahe/article/details/5494895 的 html 源码, 其时 UTF-8 编码的.</p>
+<p>提取出其标题部分:</p>
+<pre><code>&lt;span class="link_title"&gt;&lt;a href="/hfahe/article/details/5494895"&gt;
+在2008 Beijing Perl 大会的演讲-使用Mason开发高性能的Web站点‎
+&lt;/a&gt;&lt;/span&gt;</code></pre>
+<p>中的标题文字: 在 2008 Beijing Perl 大会的演讲-使用 Mason 开发高性能的 Web 站点</p>
+<p>然后用:</p>
+<pre><code>titleUni = unicode(titleHtml, “UTF-8”);</code></pre>
+<p>或</p>
+<pre><code>titleUni = titleHtml.decode(“UTF-8”);</code></pre>
+<p>将其解码成 Unicode, 但是却会出错:</p>
+<pre><code>UnicodeEncodeError: ‘gbk’ codec can’t encode character u’\u200e’ in position 43: illegal multibyte sequence</code></pre>
+<!-- More -->
+<h3 id="解决过程">解决过程</h3>
+<ol type="1">
+<li>Python 的编码问题, GB18030, UTF-8, Unicode 等问题, 之前遇到过很多次了, 也就解决了. 此处很奇怪的是,</li>
+</ol>
+<p>类似的其他的网页, 比如:</p>
+<p>http: //blog. csdn. net/v_july_v/article/details/6543438</p>
+<p>http: //blog. csdn. net/v_july_v/article/details/5934051</p>
+<p>等, 对应提取出来的内容, 都是可以正常解码为 Unicode 的.</p>
+<p>因为本身其编码的确是 Utf-8 的.</p>
+<ol start="2" type="1">
+<li><p>去试了试用 chardet. detect 分析其真正编码的, 得到的结果是:</p>
+<pre><code>encInfo= {‘confidence’: 0.99, ‘encoding’: ‘utf-8’}</code></pre></li>
+</ol>
+<p>也是和其他网页内容得到的结果是一样的.</p>
+<ol start="3" type="1">
+<li><p>此问题觉得很诡异的是, 本身调用 UTF-8 去 decode, 但是解码出错却提示的是 GBK 的, 而不是 UTF-8 相关解码出错.</p></li>
+<li><p>找了些其他帖子:</p></li>
+</ol>
+<pre><code>Python UnicodeEncodeError:illegal multibyte sequence</code></pre>
+<p>但是讨论的都是关于从 Unicode 编码为 GBK 或 GB2312, 然后出错的.</p>
+<p>而我这里的错误是, 本身内容是 UTF-8 的, 然后想要还原为 Unicode, 结果却提示 GBK 解码错误的......</p>
+<p>5. 这里: 探索 UTF-8 中文编码的 BOM 标记问题提到了, 可能是由于 UTF-8 的 BOM 造成的不能正常解码, 所以试着去将返回的 html 导出为 html 文件, 然后用 Notepad++查看, 结果还是没看出是否有 BOM, 反正是文字内容, 都可以查看到的.</p>
+<p>然后也试了类似代码:</p>
+<pre><code>titleUni = titleHtml[1:].decode(“UTF-8”);
+
+titleUni = titleHtml[2:].decode(“UTF-8”);</code></pre>
+<p>但是都还是不行.</p>
+<p>后来在这里也看到了, 关于 UTF-8 的 BOM 的问题的解释, 但同样不是我要的.</p>
+<ol start="6" type="1">
+<li><p>在这里: Python Unicode 与中文处理 (文摘), 看到了:</p>
+<pre><code>s.decode(‘gbk’, ‘ignore’).encode(‘utf-8′)</code></pre>
+<p>然后才想起来, 之前是看到过类似的解释, 即添加 ignore 来忽略非法的字符, 然后又参考:</p></li>
+</ol>
+<p><strong>python 字符串 decode 中遇到非法字符的问题</strong></p>
+<p>然后去找了对应语法:</p>
+<pre><code>str.decode([encoding[, errors]])
+
+Decodes the string using the codec registered for encoding. encoding defaults to
+the default string encoding. errors may be given to set a different error
+handling scheme. The default is 'strict', meaning that encoding errors raise
+UnicodeError. Other possible values are 'ignore', 'replace' and any other name
+registered via codecs.register_error(), see section Codec Base Classes.
+
+New in version 2.2.
+
+Changed in version 2.3: Support for other error handling schemes added.
+
+Changed in version 2.7: Support for keyword arguments added.</code></pre>
+<p>试了:<code>titleUni = titleHtml.decode(“UTF-8”, ‘ignore’);</code> 和:<code>titleUni = titleHtml.decode(“UTF-8”, ‘replace’);</code> 但是结果仍是:<code>print “titleUni=”,titleUni;</code> 会出现上述 “‘gbk’ codec can ‘t encode” 的错误.</p>
+<p>但是后来无意间发现, 在打印 titleUni 之前, 添加了一行调试代码:<code>print “len(titleUni)=”,len(titleUni);</code> 却是可以正常打印的, 这就说明, 此处的 titleUni 变量, 正常解码为 Unicode 的值了, 即上述 decode 是正常的.</p>
+<p>然后又重新试了试, 之前的:<code>titleUni = titleHtml.decode(“UTF-8”);</code> 结果也是一样的, 即 print “len (titleUni)=”, len (titleUni); 也是可以正常输出的.</p>
+<p>然后此时才明白, 原来出现’ gbk ‘codec can’ t encode “的错误的根本原因是, 对于前面的, 不论是用</p>
+<pre class="titlehtml.decode(“utf-8”);"><code></code></pre>
+<p>还是</p>
+<p><code>titleHtml.decode(“UTF-8”, ‘ignore’);</code> 还是</p>
+<p><code>titleHtml.decode(“UTF-8”, ‘replace’);</code> 都是可以得到正常的 titleUni 的 Unicode 字符的, 然后对于此 Unicode 的字符, 需要 print 出来的话, 由于本地系统是 Win7 中的 cmd, 默认 codepage 是 CP936, 即 GBK 的编码, 所以需要先将上述的 Unicode 的 titleUni 先编码为 GBK, 然后再在 cmd 中显示出来, 然后由于 titleUni 中包含一些 GBK 中无法显示的字符, 导致此时提示” ‘gbk’ codec can ‘t encode “的错误的.</p>
+<h3 id="总结">总结</h3>
+<p>对于此 (类) 问题:</p>
+<ol type="1">
+<li><p>出现 UnicodeEncodeError –&gt; 说明是 Unicode 编码时候的问题;</p></li>
+<li><p>’ gbk ‘codec can’ t encode character –&gt; 说明是将 Unicode 字符编码为 GBK 时候出现的问题;</p></li>
+</ol>
+<p>此时, 往往最大的可能就是, 本身 Unicode 类型的字符中, 包含了一些无法转换为 GBK 编码的一些字符.</p>
+<p>解决办法是:</p>
+<h4 id="方案1">方案 1</h4>
+<p>在对 unicode 字符编码时, 添加 ignore 参数, 忽略无法无法编码的字符, 这样就可以正常编码为 GBK 了.</p>
+<p>对应代码为:<code>gbkTypeStr = unicodeTypeStr.encode(“GBK“, ‘ignore’);</code></p>
+<h4 id="方案2">方案 2</h4>
+<p>或者, 将其转换为 GBK 编码的超集 GB18030 (即, GBK 是 GB18030 的子集):<code>gb18030TypeStr = unicodeTypeStr.encode(“GB18030“);</code> 对应的得到的字符是 GB18030 的编码.</p>
+<h4 id="题外话">题外话</h4>
+<p>对于上述中, 将原先的 utf-8 的字符转换为 Unicode 的时候, 其实更加安全的做法, 也可以将:</p>
+<p><code>titleUni = titleHtml.decode(“UTF-8”);</code> 替换为:</p>
+<p><code>titleUni = titleHtml.decode(“UTF-8”, ‘ignore’);</code> 这样可以实现, 即使对于那些, 相对来说是无关紧要的一些特殊字符, 也可以成功编码, 避免编码出错, 提高程序的健壮性.</p>
+
+      </div>
+      <div class="post-footer">
+        <span class="share">
+          <i class="fa fa-share-alt"></i>share to:
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeffswt.tk//blog/python_unicode_error/"><i class="fa fa-facebook"></i>facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=https://jeffswt.tk//blog/python_unicode_error/"><i class="fa fa-twitter"></i>twitter</a>
+          <a href="https://plus.google.com/share?url=https://jeffswt.tk//blog/python_unicode_error/"><i class="fa fa-google-plus"></i>google+</a>
+          <a href="https://www.reddit.com/submit?url=https://jeffswt.tk//blog/python_unicode_error/"><i class="fa fa-reddit"></i>reddit</a>
+        </span>
+        <hr />
+      </div>
+    </div>
+    <div id="comments-section" data-id="python_unicode_error">
+    </div>
+  </div>
+  <div class="page-footer">
+    <center><span class="copyright">
+      &copy; 2017 jeffswt, all rights reserved.
+    </span></center>
+  </div>
+
+  <script type="text/javascript" src="/assets/katex/katex.js"></script>
+  <script type="text/javascript" src="/assets/katex/contrib/auto-render.js"></script>
+  <script type="text/javascript" src="/assets/gitment/gitment.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <div hidden="hidden">
+    <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+  </div>
+</body>
+</html>

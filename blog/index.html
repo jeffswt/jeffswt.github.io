@@ -46,6 +46,88 @@
   </div>
   <div class="site-content site-content-high">
     <div class="blog-index">
+      <div class="blog-brief" lang="zh">
+        <div class="brief-header">
+          <h1 class="title"><a href="/blog/jr1_math_contest/" target="_blank">
+            2016高一数学竞赛
+          </a></h1>
+          <span class="tags">
+            <a class="tag" href="/blog/archive/?q=Contests" target="_self">
+              <i class="fa fa-tag"></i> Contests
+            </a>
+            <a class="tag" href="/blog/archive/?q=Mathematics" target="_self">
+              <i class="fa fa-tag"></i> Mathematics
+            </a>
+          </span>
+          <span class="date" title="11:00:00 | 13 June, 2016">
+            13 June, 2016
+          </span>
+        </div>
+        <div class="brief-content">
+          <p>随便到网上看了看这次比赛的结果, 其实 <strong>大神</strong>还是很多的. 首先要 ORZ YHS 大神, 似乎 是一个妥妥的 AK. 只搞到了一等奖的名单, 其他的为了节省篇幅和时间, 就不说了.</p>
+
+        </div>
+      </div>
+      <div class="blog-brief" lang="zh">
+        <div class="brief-header">
+          <h1 class="title"><a href="/blog/python_unicode_error/" target="_blank">
+            UnicodeEncodeError gbk codec can't encode character illegal multibyte sequence
+          </a></h1>
+          <span class="tags">
+            <a class="tag" href="/blog/archive/?q=Tutorials" target="_self">
+              <i class="fa fa-tag"></i> Tutorials
+            </a>
+          </span>
+          <span class="date" title="10:00:00 | 30 May, 2016">
+            30 May, 2016
+          </span>
+        </div>
+        <div class="brief-content">
+          <h3 id="问题">问题</h3>
+<p>python 中已获取网页: http: //blog. csdn. net/hfahe/article/details/5494895 的 html 源码, 其时 UTF-8 编码的.</p>
+<p>提取出其标题部分:</p>
+<pre><code>&lt;span class="link_title"&gt;&lt;a href="/hfahe/article/details/5494895"&gt;
+在2008 Beijing Perl 大会的演讲-使用Mason开发高性能的Web站点‎
+&lt;/a&gt;&lt;/span&gt;</code></pre>
+<p>中的标题文字: 在 2008 Beijing Perl 大会的演讲-使用 Mason 开发高性能的 Web 站点</p>
+<p>然后用:</p>
+<pre><code>titleUni = unicode(titleHtml, “UTF-8”);</code></pre>
+<p>或</p>
+<pre><code>titleUni = titleHtml.decode(“UTF-8”);</code></pre>
+<p>将其解码成 Unicode, 但是却会出错:</p>
+<pre><code>UnicodeEncodeError: ‘gbk’ codec can’t encode character u’\u200e’ in position 43: illegal multibyte sequence</code></pre>
+
+        </div>
+      </div>
+      <div class="blog-brief" lang="zh">
+        <div class="brief-header">
+          <h1 class="title"><a href="/blog/building_jekyll/" target="_blank">
+            在Github上搭建Jekyll博客和创建主题
+          </a></h1>
+          <span class="tags">
+            <a class="tag" href="/blog/archive/?q=Tutorials" target="_self">
+              <i class="fa fa-tag"></i> Tutorials
+            </a>
+          </span>
+          <span class="date" title="05:10:00 | 29 May, 2016">
+            29 May, 2016
+          </span>
+        </div>
+        <div class="brief-content">
+          <p>原文地址:<a href="">http://blog.csdn.net/on_1y/article/details/19259435</a></p>
+<p>GitHub 是一个代码托管网站, 现在很多开源项目都放在 GitHub 上. 利用 GitHub, 可以让全球各地的程序员们一起协作开发. GitHub 提供了一种功能, 叫 GitHub Pages, 利用这个功能, 我们可以为项目建立网站, 当然, 这也意味着我们可以通过 GitHub Pages 建立自己的网站.</p>
+<p>Jekyll 是一个简单的, 针对博客设计的静态网站生成器. 使用 GitHub 和 Jekyll, 我们可以打造自己的独立博客, 你可以自由地定制网站的风格, 并且这一切都是免费的.</p>
+<p>这是我在 GitHub 上自己建立的博客 及源代码 (两个分支), 在下文的讲解中, 你可以随时查看博客的源代码, 以便有直观的认识.</p>
+网站截图：
+<figure>
+<img class="thumb" data-small="/blog/building_jekyll/southeast-small.jpg" data-src="/blog/building_jekyll/southeast.png" data-thumb="/blog/building_jekyll/southeast-thumb.jpg" src="/blog/building_jekyll/southeast-thumb.jpg" title="Screenshot" width="1597px"/>
+<figcaption>
+Screenshot
+</figcaption>
+</figure>
+
+        </div>
+      </div>
       <hr />
       <center><a class="archive-link" href="/blog/archive/">
         more articles
