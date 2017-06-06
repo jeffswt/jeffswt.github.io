@@ -2939,6 +2939,7 @@ function renderComments(_ref2, instance) {
     var commentItem = document.createElement('li');
     commentItem.className = 'gitment-comment';
     commentItem.innerHTML = '\n      <a class="gitment-comment-avatar" href="' + comment.user.html_url + '" target="_blank">\n        <img class="gitment-comment-avatar-img" src="' + comment.user.avatar_url + '"/>\n      </a>\n      <div class="gitment-comment-main">\n        <div class="gitment-comment-header">\n          <a class="gitment-comment-name" href="' + comment.user.html_url + '" target="_blank">\n            ' + comment.user.login + '\n          </a>\n          commented on\n          <span title="' + createDate + '">' + createDate.toDateString() + '</span>\n          ' + (createDate.toString() !== updateDate.toString() ? ' \u2022 <span title="comment was edited at ' + updateDate + '">edited</span>' : '') + '\n          <div class="gitment-comment-like-btn">' + _icons.heart + ' ' + (comment.reactions.heart || '') + '</div>\n        </div>\n        <div class="gitment-comment-body gitment-markdown">' + comment.body_html + '</div>\n      </div>\n    ';
+    processMathInGitmentElement(commentItem.querySelector('.gitment-comment-body'));
     var likeButton = commentItem.querySelector('.gitment-comment-like-btn');
     var likedReaction = commentReactions[comment.id] && commentReactions[comment.id].find(function (reaction) {
       return reaction.content === 'heart' && reaction.user.login === user.login;
@@ -3089,7 +3090,9 @@ function renderEditor(_ref3, instance) {
 
     preview.innerText = 'Loading preview...';
     instance.markdown(content).then(function (html) {
-      return preview.innerHTML = html;
+      preview.innerHTML = html;
+      processMathInGitmentElement(preview);
+      return preview.innerHTML;
     });
   };
 

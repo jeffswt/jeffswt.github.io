@@ -181,6 +181,7 @@ class PkjellBlog
                 client_id: '229c3aeefc021dc7d5f9',
                 client_secret: 'd9e10656f57f44acd81abedd7c578d10e344d5fd',
             },
+            perPage: 1024, // say goodbye to paginations
         });
         gitment.render(elem);
         return ;
