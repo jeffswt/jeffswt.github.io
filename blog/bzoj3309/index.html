@@ -87,8 +87,8 @@
 <h2 id="explanation">Explanation</h2>
 <p>不说话, 直接上公式:<span class="math display">\[
 \begin{aligned}
-&amp; \sum_{i=1}^{n} \sum_{j=1}^{m} f(gcd(i, j))
-= &amp; \sum_{d=1}^{min(a, b)} f(d) \sum_{k=1}^{min(\left \lfloor \frac{a}{d} \right \rfloor \cdot \left \lfloor \frac{b}{d} \right \rfloor)} \mu(k) \left \lfloor \frac{a}{kd} \right \rfloor \left \lfloor \frac{b}{kd} \right \rfloor
+&amp; \sum_{i=1}^{n} \sum_{j=1}^{m} f(gcd(i, j))\\
+= &amp; \sum_{d=1}^{min(a, b)} f(d) \sum_{k=1}^{min(\left \lfloor \frac{a}{d} \right \rfloor \cdot \left \lfloor \frac{b}{d} \right \rfloor)} \mu(k) \left \lfloor \frac{a}{kd} \right \rfloor \left \lfloor \frac{b}{kd} \right \rfloor\\
 = &amp; \sum_{T=1}^{min(a, b)} \left \lfloor \frac{a}{T} \right \rfloor \left \lfloor \frac{b}{T} \right \rfloor \sum_{d|T} f(d) \cdot \mu(\frac{T}{d})
 \end{aligned}
 \]</span> 线性筛预处理.</p>
