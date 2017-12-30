@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>装备强化概率计算工具</title>
+</head>
+<body style="font-family: 黑体;">
+<center>
+<h3>装备强化概率计算工具 by <a href="https://jeffswt.org/" style="color: #66f; text-decoration: none;">@jeffswt</a></h3>
+<table>
+    <thead>
+        <th>等级</th>
+        <th>预设成功率 (100%)</th>
+    </thead>
+    <tbody>
+        <tr><th>1</th><th><input id="scr-lv-1" type="text" value="50.0" /></th></tr>
+        <tr><th>2</th><th><input id="scr-lv-2" type="text" value="40.0" /></th></tr>
+        <tr><th>3</th><th><input id="scr-lv-3" type="text" value="30.0" /></th></tr>
+        <tr><th>4</th><th><input id="scr-lv-4" type="text" value="20.0" /></th></tr>
+        <tr><th>5</th><th><input id="scr-lv-5" type="text" value="12.0" /></th></tr>
+        <tr><th>6</th><th><input id="scr-lv-6" type="text" value="10.0" /></th></tr>
+        <tr><th>7</th><th><input id="scr-lv-7" type="text" value="8.0" /></th></tr>
+        <tr><th>8</th><th><input id="scr-lv-8" type="text" value="5.0" /></th></tr>
+        <tr><th>9</th><th><input id="scr-lv-9" type="text" value="3.0" /></th></tr>
+        <tr><th>10</th><th><input id="scr-lv-10" type="text" value="2.0" /></th></tr>
+    </tbody>
+</table>
+<p>初始等级：<input id="init-lv" type="text" value="0" /></p>
+<p>目标等级：<input id="targ-lv" type="text" value="1" /></p>
+<p>强化次数：<input id="rif-cnt" type="text" value="1" /></p>
+<table>
+    <thead>
+        <th>等级</th>
+        <th>成功率 (100%)</th>
+    </thead>
+    <tbody>
+        <tr><th>0</th><th><input id="res-lv-0" type="text" value="0.0" /></th></tr>
+        <tr><th>1</th><th><input id="res-lv-1" type="text" value="0.0" /></th></tr>
+        <tr><th>2</th><th><input id="res-lv-2" type="text" value="0.0" /></th></tr>
+        <tr><th>3</th><th><input id="res-lv-3" type="text" value="0.0" /></th></tr>
+        <tr><th>4</th><th><input id="res-lv-4" type="text" value="0.0" /></th></tr>
+        <tr><th>5</th><th><input id="res-lv-5" type="text" value="0.0" /></th></tr>
+        <tr><th>6</th><th><input id="res-lv-6" type="text" value="0.0" /></th></tr>
+        <tr><th>7</th><th><input id="res-lv-7" type="text" value="0.0" /></th></tr>
+        <tr><th>8</th><th><input id="res-lv-8" type="text" value="0.0" /></th></tr>
+        <tr><th>9</th><th><input id="res-lv-9" type="text" value="0.0" /></th></tr>
+        <tr><th>10</th><th><input id="res-lv-10" type="text" value="0.0" /></th></tr>
+    </tbody>
+</table>
+</center>
+<script>
+var get_data = function()
+{
+    var urate = [0];
+    for (var i = 1; i <= 10; i++) {
+        urate[i] = parseFloat(document.getElementById('scr-lv-' + i).value);
+        if (!(urate[i] >= 0 && urate[i] <= 100))
+            urate[i] = 0;
+        urate[i] /= 100.0;
+    }
+    urate[0] = 0.0
+    urate[11] = 0.0;
+    var init_lvl = parseInt(document.getElementById('init-lv').value);
+    if (!(init_lvl >= 0 && init_lvl <= 10))
+        init_lvl = 0;
+    var targ_lvl = parseInt(document.getElementById('targ-lv').value);
+    if (!(targ_lvl >= 0 && targ_lvl <= 10))
+        targ_lvl = 0;
+    var cnt = parseInt(document.getElementById('rif-cnt').value);
+    if (!(cnt >= 0 && cnt <= 5000000))
+        cnt = 0;
+    // calculation
+    var prob = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    prob[init_lvl] = 1.0;
+    var fprob = 0.0;
+    for (var i = 1; i <= cnt; i++) {
+        var nprob = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        for (var j = 0; j <= 10; j++) {
+            if (j - 1 >= 0)
+                nprob[j - 1] += prob[j] * (1.0 - urate[j + 1]);
+            else
+                nprob[j] += prob[j] * (1.0 - urate[j + 1]);
+            if (j + 1 <= 10)
+                nprob[j + 1] += prob[j] * urate[j + 1];
+            else
+                nprob[j] += prob[j] * urate[j + 1];
+        }
+        for (var j = 0; j <= 10; j++) {
+            if (j != targ_lvl)
+                prob[j] = nprob[j];
+            else
+                fprob += nprob[j];
+        }
+    }
+    prob[targ_lvl] = fprob;
+    // final output
+    for (var i = 0; i <= 10; i++)
+        document.getElementById('res-lv-' + i).value = prob[i] * 100.0;
+    console.log("hhhh")
+    return prob;
+}
+var set_listeners = function()
+{
+    p = ['init-lv', 'targ-lv', 'rif-cnt'];
+    for (var i = 1; i <= 10; i++)
+        p = p.concat('scr-lv-' + i);
+    for (var i = 0; i < p.length; i++)
+        document.getElementById(p[i]).addEventListener('input', get_data);
+    return ;
+}
+set_listeners();
+get_data();
+</script>
+</body>
+</html>
