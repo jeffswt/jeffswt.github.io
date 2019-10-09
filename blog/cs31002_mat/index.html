@@ -158,17 +158,20 @@ elem.append(nelem);
 var sth = document.getElementsByClassName('site-title-href')[0];
 sth.innerText = '计算机科学与技术学院';
 sth.href = 'http://cst.hitwh.edu.cn/';
-// hide footer
-document.getElementsByClassName('post-footer')[0].hidden = true;
-document.getElementById('comments-section').hidden = true;
-// change copyright
-document.getElementsByClassName('copyright')[0].innerHTML = 'Powered by <a href="https://github.com/jeffswt/pkjell">pkjell</a>.';
-// disable tags
-var tags = document.getElementsByClassName('tags')[0];
-for (var i = 0; i < tags.children.length; i++)
-    tags.children[i].href = '#';
-// debug
-console.log('Page modification completed.');
+// delayed modification
+setTimeout(function() {
+    // disable tags
+    var tags = document.getElementsByClassName('tags')[0];
+    for (var i = 0; i < tags.children.length; i++)
+        tags.children[i].href = '#';
+    // hide footer
+    document.getElementsByClassName('post-footer')[0].hidden = true;
+    document.getElementById('comments-section').hidden = true;
+    // change copyright
+    document.getElementsByClassName('copyright')[0].innerHTML = 'Powered by <a href="https://github.com/jeffswt/pkjell">pkjell</a>.';
+    // debug
+    console.log('Page modification completed.');
+}, 30);
 </script>
 
       </div>
