@@ -54,9 +54,11 @@
         </span>
       </div>
       <div class="post-content">
-        <p>本页面链接有效期至<strong> 2019 年 12 月 31 日</strong>, 期间可能会在本页面通知页面地址变更.</p>
+        <p><strong>上课时间 / 地点: H451, 周二 18: 40, 周四 18: 40</strong></p>
+<p>本页面链接有效期至<strong> 2019 年 12 月 31 日</strong>, 期间可能会在本页面通知页面地址变更.</p>
+<p>推荐使用 Chrome, Firefox, Safari, Edge 浏览器打开本页, 不推荐使用 QQ 内置浏览器打开.</p>
 <p>课堂材料可从本文内下载, 或由学委转载至班群.</p>
-<p>更新时间为每周三 24: 00 前和每周五 24: 00 前 (绝赞持续更新中).</p>
+<p>更新时间为每周三 21: 00 前和每周五 21: 00 前 (绝赞持续更新中).</p>
 <!-- More -->
 <h2 id="第6周">第 6 周</h2>
 <p>课堂材料:</p>
@@ -65,6 +67,7 @@
 <li><a class="uri" href="Lecture-6-1.pdf">Lecture-6-1.pdf</a></li>
 <li><a class="uri" href="Lecture-6-1-ICPC.pdf">Lecture-6-1-ICPC.pdf</a></li>
 </ul>
+<p>建议本周四携带电脑来课堂.</p>
 <div id="hidden-content" style="display: none">
 <p>从本周四开始将会引入随堂练习, 但暂时不计入平时成绩</p>
 <h2 id="随堂练习使用说明">随堂练习使用说明</h2>
@@ -155,23 +158,28 @@ nelem.src = 'https://www.hitwh.edu.cn/_upload/tpl/00/e7/231/template231/images/l
 nelem.style['height'] = '40px';
 elem.append(nelem);
 // change title
+document.title = '高级语言程序设计I 课堂材料  |  计算机科学与技术学院';
 var sth = document.getElementsByClassName('site-title-href')[0];
-sth.innerText = '计算机科学与技术学院';
+sth.innerText = 'CS31002';
 sth.href = 'http://cst.hitwh.edu.cn/';
-// delayed modification
+// disable tags
 setTimeout(function() {
-    // disable tags
     var tags = document.getElementsByClassName('tags')[0];
     for (var i = 0; i < tags.children.length; i++)
         tags.children[i].href = '#';
-    // hide footer
+  console.log('disabled tags href');
+}, 45);
+// hide footer
+setTimeout(function() {
     document.getElementsByClassName('post-footer')[0].hidden = true;
     document.getElementById('comments-section').hidden = true;
-    // change copyright
+  console.log('hidden footer');
+}, 45);
+// change copyright
+setTimeout(function() {
     document.getElementsByClassName('copyright')[0].innerHTML = 'Powered by <a href="https://github.com/jeffswt/pkjell">pkjell</a>.';
-    // debug
-    console.log('Page modification completed.');
-}, 30);
+  console.log('modified copyright');
+}, 45);
 </script>
 
       </div>
