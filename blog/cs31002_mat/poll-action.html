@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#292d35">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>投票</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+</head>
+
+<body>
+  <center>
+  <br /><br /><br /><br /><br /><br />
+  <span style="font-size: 220%; font-family: monospace;">submitting...</span>
+  </center>
+  <div id="action-stat">
+    <div hidden="hidden">
+      <script type="text/javascript" src="https://s11.cnzz.com/z_stat.php?id=1261583208&web_id=1261583208"></script>
+    </div>
+  </div>
+  <script>
+  var status_count = 0;
+  var status_notifier = function() {
+      var elem = document.getElementById('action-stat');
+      if (elem.children.length == 1 && elem.tagName == 'A') {
+          setTimeout(function() {
+              alert('投票成功！');
+              window.close();
+          }, 500);
+          return ;
+      }
+      console.log('waiting...', elem);
+      status_count += 1;
+      if (status_count >= 5 * 10) {
+          alert('投票失败。');
+          window.close();
+          return ;
+      }
+      setTimeout(status_notifier, 200);
+      return ;
+  };
+  status_notifier();
+  </script>
+</body>
+</html>
