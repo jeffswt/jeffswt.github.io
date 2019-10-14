@@ -24,7 +24,7 @@
   var status_count = 0;
   var status_notifier = function() {
       var elem = document.getElementById('action-stat');
-      if (elem.children.length == 1 && elem.tagName == 'A') {
+      if ((elem.children.length == 1 && elem.tagName == 'A') || elem.children.length == 0) {
           setTimeout(function() {
               alert('投票成功！');
               window.close();

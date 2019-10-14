@@ -60,19 +60,6 @@
 <p>课堂材料可从本文内下载, 或由学委转载至班群.</p>
 <p>更新时间为每周三 21: 00 前和每周五 21: 00 前 (绝赞持续更新中).</p>
 <!-- More -->
-<div class="hidden-content" style="display: none;">
-<h2 id="投票">投票</h2>
-<p>你觉得课程的进度怎么样 (多选, 匿名投票)?</p>
-<ul>
-<li><a href="./poll-action.html?value=e79bb52e" target="_blank">讲太快了</a></li>
-<li><a href="./poll-action.html?value=77d8e0fd" target="_blank">应该多介绍一些编程内容</a></li>
-<li><a href="./poll-action.html?value=a6d9ab74" target="_blank">无关的东西太多了</a></li>
-<li><a href="./poll-action.html?value=6dbad489" target="_blank">加一些考试 (笔试) 题讲解</a></li>
-<li><a href="./poll-action.html?value=f7048d9d" target="_blank">配合具体代码讲解</a></li>
-<li><a href="./poll-action.html?value=5f6d88cb" target="_blank">进度太慢了</a></li>
-<li><a href="./poll-action.html?value=ca46d72e" target="_blank">其他</a></li>
-</ul>
-</div>
 <h2 id="第6周">第 6 周</h2>
 <p>周二课堂材料:</p>
 <ul>
@@ -83,8 +70,31 @@
 <p>建议本周四携带电脑来课堂.</p>
 <p>周四课堂材料:</p>
 <ul>
-<li>待填坑 (</li>
+<li><a class="uri" href="Lecture-6-2.pptx">Lecture-6-2.pptx</a></li>
+<li><a class="uri" href="Lecture-6-2.pdf">Lecture-6-2.pdf</a></li>
 </ul>
+<h2 id="第7周">第 7 周</h2>
+<p>本周加入 <a href="https://vjudge.net/contest/334775">分支结构练习题</a>. 有关多组数据的处理方式, 见下例:</p>
+<blockquote>
+<p>输入有多组数据, 每行两个数 <span class="math inline">\(n, m\)</span>, 输出 <span class="math inline">\(n + m\)</span></p>
+</blockquote>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" data-line-number="1" id="cb1-1"><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></a>
+<a class="sourceLine" data-line-number="2" id="cb1-2"><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></a>
+<a class="sourceLine" data-line-number="3" id="cb1-3"></a>
+<a class="sourceLine" data-line-number="4" id="cb1-4"><span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv)</a>
+<a class="sourceLine" data-line-number="5" id="cb1-5">{</a>
+<a class="sourceLine" data-line-number="6" id="cb1-6">    <span class="dt">int</span> n, m;</a>
+<a class="sourceLine" data-line-number="7" id="cb1-7">    <span class="cf">while</span> (scanf(<span class="st">"</span><span class="sc">%d%d</span><span class="st">"</span>, &amp;n, &amp;m) != EOF) {</a>
+<a class="sourceLine" data-line-number="8" id="cb1-8">        <span class="dt">int</span> res = n + m;</a>
+<a class="sourceLine" data-line-number="9" id="cb1-9">        printf(<span class="st">"</span><span class="sc">%d\n</span><span class="st">"</span>, res);</a>
+<a class="sourceLine" data-line-number="10" id="cb1-10">    }</a>
+<a class="sourceLine" data-line-number="11" id="cb1-11">    <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" data-line-number="12" id="cb1-12">}</a></code></pre></div>
+<p>周二课堂材料:</p>
+<ul>
+<li>待填坑</li>
+</ul>
+<hr/>
 <h2 id="随堂练习使用说明">随堂练习使用说明</h2>
 <p>本课程将采用 <a href="https://vjudge.net/">vjudge</a> 作为随堂练习的托管平台, 你可以在浏览器中输入网址 <a class="uri" href="https://vjudge.net/">https://vjudge.net/</a> 访问 vjudge 主页, 或者在 <a href="https://cn.bing.com/search">必应</a> 中 <a href="https://cn.bing.com/search?q=vjudge">搜索 <code>vjudge</code></a>.<del> 我们不推荐使用百度. (逃</del></p>
 <figure>

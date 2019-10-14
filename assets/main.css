@@ -242,6 +242,14 @@ pre code {
   color: rgb(203, 210, 217);
 }
 
+a.sourceLine {
+  color: rgb(203, 210, 217);
+} a.sourceLine :hover {
+  color: rgb(203, 210, 217);
+} a.sourceLine :focus {
+  color: rgb(203, 210, 217);
+}
+
 /* General.Comment */
 .sourceCode .co {
   font-style: italic;
